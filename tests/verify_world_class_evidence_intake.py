@@ -1,0 +1,139 @@
+#!/usr/bin/env python3
+import json
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+SCRIPT = ROOT / "scripts" / "render_world_class_evidence_intake.py"
+TMP = ROOT / "tests" / "tmp_world_class_evidence_intake"
+
+
+def run_intake(*extra: str) -> dict:
+    proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(ROOT),
+            "--generated-at",
+            "2026-06-14",
+            *extra,
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return json.loads(proc.stdout)
+
+
+def provider_submission(*, valid: bool) -> dict:
+    return {
+        "schema_version": "1.0",
+        "evidence_key": "provider-holdout",
+        "template_only": False,
+        "category": "external",
+        "source_type": "provider-output-eval",
+        "submitted_by": "Yao provider operator",
+        "submitted_at": "2026-06-14",
+        "summary": "Aggregate provider-backed holdout evidence for ledger review.",
+        "artifact_refs": [
+            {
+                "path": "reports/output_execution_runs.json",
+                "kind": "aggregate-report",
+                "contains_raw_content": not valid,
+                "sha256": "example-only",
+            }
+        ],
+        "provenance": {
+            "provider": "openai",
+            "model": "gpt-4.1-mini",
+            "credential_material_committed": False,
+        },
+        "privacy": {
+            "raw_user_content_included": False,
+            "raw_provider_prompt_included": False,
+            "credentials_included": False,
+            "secrets_included": False,
+        },
+        "anti_overclaim": {
+            "planned_work_counts_as_evidence": False,
+            "metadata_fallback_counts_as_native_enforcement": False,
+            "pending_review_counts_as_human_decision": False,
+            "local_command_runner_counts_as_provider_model": False,
+        },
+        "attestation": {
+            "real_external_or_human_evidence": valid,
+            "reviewer_or_operator_identity_present": valid,
+            "artifact_refs_reviewed": valid,
+            "privacy_contract_satisfied": valid,
+        },
+    }
+
+
+def main() -> None:
+    shutil.rmtree(TMP, ignore_errors=True)
+    TMP.mkdir(parents=True, exist_ok=True)
+    default_json = TMP / "world_class_evidence_intake.json"
+    default_md = TMP / "world_class_evidence_intake.md"
+    payload = run_intake("--output-json", str(default_json), "--output-md", str(default_md))
+    assert payload["schema_version"] == "1.0", payload
+    assert payload["ok"] is True, payload
+    summary = payload["summary"]
+    assert summary["decision"] == "awaiting-submissions", summary
+    assert summary["schema_present"] is True, summary
+    assert summary["ledger_entry_count"] == 4, summary
+    assert summary["template_count"] == 4, summary
+    assert summary["template_pass_count"] == 4, summary
+    assert summary["submission_count"] == 0, summary
+    assert summary["valid_submission_count"] == 0, summary
+    assert summary["invalid_submission_count"] == 0, summary
+    assert summary["ready_for_external_collection"] is True, summary
+    assert summary["ready_for_ledger_review"] is False, summary
+    assert summary["ready_to_claim_world_class"] is False, summary
+    assert summary["overclaim_guard_active"] is True, summary
+    assert {item["evidence_key"] for item in payload["templates"]} == {
+        "provider-holdout",
+        "human-adjudication",
+        "native-permission-enforcement",
+        "native-client-telemetry",
+    }, payload["templates"]
+    assert all(item["status"] == "pass" and item["template_only"] is True for item in payload["templates"]), payload["templates"]
+    markdown = default_md.read_text(encoding="utf-8")
+    assert "World-Class Evidence Intake" in markdown, markdown
+    assert "ready to claim world-class: `false`" in markdown, markdown
+    assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
+
+    valid_dir = TMP / "valid_submissions"
+    valid_dir.mkdir()
+    (valid_dir / "provider-holdout.json").write_text(
+        json.dumps(provider_submission(valid=True), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    valid_payload = run_intake("--submissions-dir", str(valid_dir))
+    assert valid_payload["ok"] is True, valid_payload
+    assert valid_payload["summary"]["decision"] == "intake-ready-for-ledger-review", valid_payload["summary"]
+    assert valid_payload["summary"]["valid_submission_count"] == 1, valid_payload["summary"]
+    assert valid_payload["summary"]["ready_for_ledger_review"] is True, valid_payload["summary"]
+    assert valid_payload["summary"]["ready_to_claim_world_class"] is False, valid_payload["summary"]
+    assert valid_payload["submissions"][0]["status"] == "pass", valid_payload["submissions"]
+
+    invalid_dir = TMP / "invalid_submissions"
+    invalid_dir.mkdir()
+    (invalid_dir / "provider-holdout.json").write_text(
+        json.dumps(provider_submission(valid=False), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    invalid_payload = run_intake("--submissions-dir", str(invalid_dir))
+    assert invalid_payload["ok"] is False, invalid_payload
+    assert invalid_payload["summary"]["decision"] == "fix-intake", invalid_payload["summary"]
+    assert invalid_payload["summary"]["invalid_submission_count"] == 1, invalid_payload["summary"]
+    assert any("raw content" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
+    assert any("attestation.real_external_or_human_evidence" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
+    print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

@@ -436,7 +436,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 79
+        "file_count": 80
       },
       {
         "path": "evals",
@@ -448,10 +448,10 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 187
+        "file_count": 189
       }
     ],
-    "file_count": 330,
+    "file_count": 333,
     "folder_count": 4,
     "distribution": [
       {
@@ -476,7 +476,7 @@
       },
       {
         "label": "scripts",
-        "value": 79
+        "value": 80
       },
       {
         "label": "evals",
@@ -484,7 +484,7 @@
       },
       {
         "label": "reports",
-        "value": 187
+        "value": 189
       }
     ]
   },
@@ -605,7 +605,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 79
+      "file_count": 80
     },
     {
       "path": "evals",
@@ -617,7 +617,7 @@
       "path": "reports",
       "label": "Generated evidence and overview artifacts",
       "kind": "folder",
-      "file_count": 187
+      "file_count": 189
     }
   ],
   "strengths": [
@@ -889,11 +889,11 @@
     "summary": {
       "reproducibility_ready": true,
       "methodology_complete": true,
-      "required_artifact_count": 17,
+      "required_artifact_count": 18,
       "missing_artifact_count": 0,
       "output_case_count": 5,
       "failure_disclosure_count": 3,
-      "command_count": 16,
+      "command_count": 17,
       "command_executed_count": 10,
       "timing_observed_count": 10,
       "model_executed_count": 0,
@@ -905,9 +905,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 43
+      "changed_file_count": 56
     },
-    "commit": "95a91bcb265051612ac3f80d70ab2ac611a2252c",
+    "commit": "60995ed569b1c99aa6f6ae2b4406e04327202beb",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -982,8 +982,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 163,
-    "script_count": 79,
+    "scanned_files": 164,
+    "script_count": 80,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -992,18 +992,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 56,
+    "file_write_script_count": 57,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 69,
+    "help_smoke_checked_count": 70,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 163,
-    "package_sha256": "a39f0ebbe3ba954cdc7770a8b585bdac18e9146fc3c468b8df7d5931fdafdc17"
+    "package_hash_file_count": 164,
+    "package_sha256": "9bbb47aaed8b2b003c68176ab3a8a4c3926493ded7c80be004881254cc113ee1"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1041,8 +1041,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "a39f0ebbe3ba954cdc7770a8b585bdac18e9146fc3c468b8df7d5931fdafdc17",
-        "archive_sha256": "a7496dc032de56d1df3a51489223d46cecf753460cd52f1a724b2c8c3c8374be"
+        "package_sha256": "9bbb47aaed8b2b003c68176ab3a8a4c3926493ded7c80be004881254cc113ee1",
+        "archive_sha256": "b68dd2aaecfa1f585fb5b380d89a04adde672e7996b7750b3ecceb8ba2e3d094"
       },
       "compatibility": {
         "openai": "pass",
@@ -1073,7 +1073,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "a7496dc032de56d1df3a51489223d46cecf753460cd52f1a724b2c8c3c8374be",
+        "archive_sha256": "b68dd2aaecfa1f585fb5b380d89a04adde672e7996b7750b3ecceb8ba2e3d094",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1089,8 +1089,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "a7496dc032de56d1df3a51489223d46cecf753460cd52f1a724b2c8c3c8374be",
-      "archive_entry_count": 529,
+      "archive_sha256": "b68dd2aaecfa1f585fb5b380d89a04adde672e7996b7750b3ecceb8ba2e3d094",
+      "archive_entry_count": 539,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1101,7 +1101,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 529,
+      "archive_entry_count": 539,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1168,12 +1168,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "a7496dc032de56d1df3a51489223d46cecf753460cd52f1a724b2c8c3c8374be"
+          "to": "b68dd2aaecfa1f585fb5b380d89a04adde672e7996b7750b3ecceb8ba2e3d094"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "a39f0ebbe3ba954cdc7770a8b585bdac18e9146fc3c468b8df7d5931fdafdc17"
+          "to": "9bbb47aaed8b2b003c68176ab3a8a4c3926493ded7c80be004881254cc113ee1"
         }
       ]
     },
@@ -1308,7 +1308,9 @@
         "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
         "runbook": [
           "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
-          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+          "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake ."
         ],
         "success_checks": [
           "reports/output_execution_runs.json summary.model_executed_count > 0",
@@ -1319,7 +1321,11 @@
         "evidence_artifacts": [
           "reports/output_execution_runs.json",
           "reports/output_execution_runs.md",
-          "reports/skill_os2_audit.json"
+          "reports/skill_os2_audit.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/provider-holdout.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Do not commit provider credentials or environment dumps.",
@@ -1340,7 +1346,9 @@
           "Open reports/output_blind_review_pack.md and choose A or B for each pair without opening the answer key.",
           "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
           "python3 scripts/yao.py output-review",
-          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+          "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake ."
         ],
         "success_checks": [
           "reports/output_review_adjudication.json summary.pending_count == 0",
@@ -1352,7 +1360,11 @@
           "reports/output_blind_review_pack.md",
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
-          "reports/output_review_adjudication.md"
+          "reports/output_review_adjudication.md",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/human-adjudication.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Reviewer decisions should not include raw user data or private customer detail.",
@@ -1373,7 +1385,9 @@
           "Update the generated target adapter only when the guard is actually enforced by that target.",
           "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip",
           "python3 scripts/yao.py runtime-permissions . --package-dir dist",
-          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+          "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake ."
         ],
         "success_checks": [
           "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
@@ -1384,7 +1398,11 @@
           "dist/targets/*/adapter.json",
           "reports/runtime_permission_probes.json",
           "reports/runtime_permission_probes.md",
-          "security/permission_policy.json"
+          "security/permission_policy.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-permission-enforcement.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Do not mark native_enforcement true for metadata-only fallbacks.",
@@ -1405,7 +1423,9 @@
           "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
           "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl",
           "python3 scripts/yao.py skill-atlas --workspace-root .",
-          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>"
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+          "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake ."
         ],
         "success_checks": [
           "reports/adoption_drift_report.json summary.source_types.external > 0",
@@ -1416,7 +1436,11 @@
           "reports/adoption_drift_report.json",
           "reports/adoption_drift_report.md",
           "reports/telemetry_hook_recipes.json",
-          "scripts/telemetry_native_host.py"
+          "scripts/telemetry_native_host.py",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-client-telemetry.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Telemetry must remain metadata-only and local-first.",
@@ -1467,7 +1491,11 @@
         "evidence_artifacts": [
           "reports/output_execution_runs.json",
           "reports/output_execution_runs.md",
-          "reports/skill_os2_audit.json"
+          "reports/skill_os2_audit.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/provider-holdout.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Do not commit provider credentials or environment dumps.",
@@ -1511,7 +1539,11 @@
           "reports/output_blind_review_pack.md",
           "reports/output_review_decisions.json",
           "reports/output_review_adjudication.json",
-          "reports/output_review_adjudication.md"
+          "reports/output_review_adjudication.md",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/human-adjudication.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Reviewer decisions should not include raw user data or private customer detail.",
@@ -1556,7 +1588,11 @@
           "dist/targets/*/adapter.json",
           "reports/runtime_permission_probes.json",
           "reports/runtime_permission_probes.md",
-          "security/permission_policy.json"
+          "security/permission_policy.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-permission-enforcement.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Do not mark native_enforcement true for metadata-only fallbacks.",
@@ -1600,7 +1636,11 @@
           "reports/adoption_drift_report.json",
           "reports/adoption_drift_report.md",
           "reports/telemetry_hook_recipes.json",
-          "scripts/telemetry_native_host.py"
+          "scripts/telemetry_native_host.py",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-client-telemetry.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
         ],
         "privacy_contract": [
           "Telemetry must remain metadata-only and local-first.",

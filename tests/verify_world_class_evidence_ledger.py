@@ -44,6 +44,7 @@ def main() -> None:
     assert summary["external_pending_count"] == 3, summary
     assert summary["overclaim_guard_active"] is True, summary
     assert summary["ready_to_claim_world_class"] is False, summary
+    assert payload["artifacts"]["intake"] == "reports/world_class_evidence_intake.md", payload
     entries = {entry["key"]: entry for entry in payload["entries"]}
     assert set(entries) == {
         "provider-holdout",

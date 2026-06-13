@@ -172,6 +172,17 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_ledger_cmd.add_argument("--generated-at")
     world_class_ledger_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_ledger"))
 
+    world_class_intake_cmd = subparsers.add_parser(
+        "world-class-intake",
+        help="Validate world-class human and external evidence intake packets.",
+    )
+    world_class_intake_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_intake_cmd.add_argument("--submissions-dir")
+    world_class_intake_cmd.add_argument("--output-json")
+    world_class_intake_cmd.add_argument("--output-md")
+    world_class_intake_cmd.add_argument("--generated-at")
+    world_class_intake_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_intake"))
+
     benchmark_reproducibility_cmd = subparsers.add_parser(
         "benchmark-reproducibility",
         help="Render benchmark methodology, artifact, failure-disclosure, and reproduction-command evidence.",

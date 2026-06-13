@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-14",
+  "skill_dir": ".",
+  "summary": {
+    "schema_present": true,
+    "ledger_entry_count": 4,
+    "template_count": 4,
+    "template_pass_count": 4,
+    "submission_count": 0,
+    "valid_submission_count": 0,
+    "invalid_submission_count": 0,
+    "ready_for_external_collection": true,
+    "ready_for_ledger_review": false,
+    "ready_to_claim_world_class": false,
+    "overclaim_guard_active": true,
+    "decision": "awaiting-submissions"
+  },
+  "schema": "evidence/world_class/intake.schema.json",
+  "templates": [
+    {
+      "path": "evidence/world_class/templates/provider-holdout.intake.json",
+      "evidence_key": "provider-holdout",
+      "status": "pass",
+      "template_only": true,
+      "errors": []
+    },
+    {
+      "path": "evidence/world_class/templates/human-adjudication.intake.json",
+      "evidence_key": "human-adjudication",
+      "status": "pass",
+      "template_only": true,
+      "errors": []
+    },
+    {
+      "path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
+      "evidence_key": "native-permission-enforcement",
+      "status": "pass",
+      "template_only": true,
+      "errors": []
+    },
+    {
+      "path": "evidence/world_class/templates/native-client-telemetry.intake.json",
+      "evidence_key": "native-client-telemetry",
+      "status": "pass",
+      "template_only": true,
+      "errors": []
+    }
+  ],
+  "submissions": [],
+  "source_ledger": {
+    "json": "reports/world_class_evidence_ledger.json",
+    "markdown": "reports/world_class_evidence_ledger.md",
+    "pending_count": 4
+  },
+  "artifacts": {
+    "json": "reports/world_class_evidence_intake.json",
+    "markdown": "reports/world_class_evidence_intake.md"
+  }
+}

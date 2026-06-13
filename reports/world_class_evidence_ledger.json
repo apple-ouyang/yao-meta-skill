@@ -37,7 +37,11 @@
       "evidence_artifacts": [
         "reports/output_execution_runs.json",
         "reports/output_execution_runs.md",
-        "reports/skill_os2_audit.json"
+        "reports/skill_os2_audit.json",
+        "evidence/world_class/intake.schema.json",
+        "evidence/world_class/templates/provider-holdout.intake.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_evidence_intake.md"
       ],
       "privacy_contract": [
         "Do not commit provider credentials or environment dumps.",
@@ -81,7 +85,11 @@
         "reports/output_blind_review_pack.md",
         "reports/output_review_decisions.json",
         "reports/output_review_adjudication.json",
-        "reports/output_review_adjudication.md"
+        "reports/output_review_adjudication.md",
+        "evidence/world_class/intake.schema.json",
+        "evidence/world_class/templates/human-adjudication.intake.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_evidence_intake.md"
       ],
       "privacy_contract": [
         "Reviewer decisions should not include raw user data or private customer detail.",
@@ -126,7 +134,11 @@
         "dist/targets/*/adapter.json",
         "reports/runtime_permission_probes.json",
         "reports/runtime_permission_probes.md",
-        "security/permission_policy.json"
+        "security/permission_policy.json",
+        "evidence/world_class/intake.schema.json",
+        "evidence/world_class/templates/native-permission-enforcement.intake.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_evidence_intake.md"
       ],
       "privacy_contract": [
         "Do not mark native_enforcement true for metadata-only fallbacks.",
@@ -170,7 +182,11 @@
         "reports/adoption_drift_report.json",
         "reports/adoption_drift_report.md",
         "reports/telemetry_hook_recipes.json",
-        "scripts/telemetry_native_host.py"
+        "scripts/telemetry_native_host.py",
+        "evidence/world_class/intake.schema.json",
+        "evidence/world_class/templates/native-client-telemetry.intake.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_evidence_intake.md"
       ],
       "privacy_contract": [
         "Telemetry must remain metadata-only and local-first.",
@@ -199,6 +215,7 @@
   },
   "artifacts": {
     "json": "reports/world_class_evidence_ledger.json",
-    "markdown": "reports/world_class_evidence_ledger.md"
+    "markdown": "reports/world_class_evidence_ledger.md",
+    "intake": "reports/world_class_evidence_intake.md"
   }
 }

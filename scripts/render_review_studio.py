@@ -137,6 +137,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "review_annotations": "reports/review_annotations.md",
         "world_class_evidence_plan": "reports/world_class_evidence_plan.md",
         "world_class_evidence_ledger": "reports/world_class_evidence_ledger.md",
+        "world_class_evidence_intake": "reports/world_class_evidence_intake.md",
         "registry_audit": "reports/registry_audit.md",
         "package_verification": "reports/package_verification.md",
         "install_simulation": "reports/install_simulation.md",
@@ -170,6 +171,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "review_waivers": load_json(reports / "review_waivers.json"),
         "review_annotations": load_json(reports / "review_annotations.json"),
         "world_class_evidence_ledger": load_json(reports / "world_class_evidence_ledger.json"),
+        "world_class_evidence_intake": load_json(reports / "world_class_evidence_intake.json"),
         "registry": load_json(reports / "registry_audit.json"),
         "package_verification": load_json(reports / "package_verification.json"),
         "install_simulation": load_json(reports / "install_simulation.json"),
@@ -195,6 +197,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     adoption = data["adoption_drift"].get("summary", {})
     waivers = data["review_waivers"].get("summary", {})
     annotations = data["review_annotations"].get("summary", {})
+    intake = data["world_class_evidence_intake"].get("summary", {})
     registry = data["registry"].get("package", {})
     package_verification = data["package_verification"].get("summary", {})
     install_simulation = data["install_simulation"].get("summary", {})
@@ -268,6 +271,14 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Waivers",
             "value": str(waivers.get("active_count", 0)),
             "detail": f"{waivers.get('covered_gate_count', 0)} gates covered; human risk decisions",
+        },
+        {
+            "label": "Intake",
+            "value": f"{intake.get('template_pass_count', 0)}/{intake.get('template_count', 0)}",
+            "detail": (
+                f"{intake.get('valid_submission_count', 0)} valid submissions; "
+                f"{intake.get('invalid_submission_count', 0)} invalid"
+            ),
         },
         {
             "label": "Notes",
@@ -469,10 +480,14 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
     "world-class-evidence": {
         "summary": "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据，或明确本次发布不声明 world-class 完成。",
         "why": "世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。",
-        "source_fix": "reports/world_class_evidence_ledger.md + reports/world_class_evidence_plan.md",
+        "source_fix": "reports/world_class_evidence_ledger.md + reports/world_class_evidence_plan.md + reports/world_class_evidence_intake.md",
         "source_paths": [
             {"path": "reports/world_class_evidence_ledger.md", "label": "world-class evidence ledger", "kind": "report", "patterns": ["# World-Class Evidence Ledger"]},
             {"path": "reports/world_class_evidence_plan.md", "label": "world-class evidence plan", "kind": "report", "patterns": ["# World-Class Evidence Plan"]},
+            {"path": "reports/world_class_evidence_intake.md", "label": "world-class evidence intake", "kind": "report", "patterns": ["# World-Class Evidence Intake"]},
+            {"path": "evidence/world_class/intake.schema.json", "label": "evidence intake schema", "kind": "schema", "patterns": ["Yao World-Class Evidence Intake"]},
+            {"path": "evidence/world_class/templates/provider-holdout.intake.json", "label": "provider intake template", "kind": "template", "patterns": ["provider-holdout"]},
+            {"path": "evidence/world_class/templates/human-adjudication.intake.json", "label": "human intake template", "kind": "template", "patterns": ["human-adjudication"]},
             {"path": "reports/skill_os2_audit.md", "label": "Skill OS 2.0 audit", "kind": "report", "patterns": ["# Skill OS"]},
             {"path": "reports/output_review_decisions.json", "label": "human review decisions", "kind": "report", "patterns": ["winner_variant"]},
             {"path": "reports/runtime_permission_probes.md", "label": "runtime permission probes", "kind": "report", "patterns": ["# Runtime"]},
@@ -694,6 +709,7 @@ def render_html(report: dict[str, Any]) -> str:
     waiver_summary = report["data"]["review_waivers"].get("summary", {})
     world_class_ledger = report["data"].get("world_class_evidence_ledger", {})
     world_class_summary = world_class_ledger.get("summary", {})
+    world_class_intake_summary = report["data"].get("world_class_evidence_intake", {}).get("summary", {})
     world_class_entries_html = render_world_class_evidence_entries(world_class_ledger)
     annotation_summary = report["data"]["review_annotations"].get("summary", {})
     annotation_caption = (
@@ -812,6 +828,21 @@ def render_html(report: dict[str, Any]) -> str:
             "ready_to_claim_world_class",
         ],
         "world-class evidence ledger missing",
+    )
+    world_class_intake_panel = render_kv_grid(
+        world_class_intake_summary,
+        [
+            "schema_present",
+            "template_count",
+            "template_pass_count",
+            "submission_count",
+            "valid_submission_count",
+            "invalid_submission_count",
+            "ready_for_external_collection",
+            "ready_for_ledger_review",
+            "ready_to_claim_world_class",
+        ],
+        "world-class evidence intake missing",
     )
     registry_panel = render_kv_grid(
         registry_package_summary(registry_package),
@@ -994,6 +1025,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section class="twocol">
       <div class="panel"><h2>世界证据</h2><p>{html.escape(gate_details.get('world-class-evidence', 'world-class evidence ledger missing'))}</p></div>
       <div class="panel"><h2>证据台账</h2>{world_class_panel}</div>
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>证据入口</h2>{world_class_intake_panel}</div>
+      <div class="panel"><h2>入口边界</h2><p>intake 只校验证据包格式、来源、隐私和反过度声明；只有 ledger 看到真实 provider、真人、原生权限或真实客户端结果后，world-class 才能进入完成审计。</p></div>
     </section>
 
     <section id="registry" class="twocol">

@@ -141,6 +141,16 @@ def build_task(item: dict[str, Any]) -> dict[str, Any]:
             "privacy_contract": ["Do not add raw private user content to release evidence."],
         },
     )
+    intake_runbook = [
+        f"Copy evidence/world_class/templates/{item['key']}.intake.json to evidence/world_class/submissions/{item['key']}.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake .",
+    ]
+    intake_artifacts = [
+        "evidence/world_class/intake.schema.json",
+        f"evidence/world_class/templates/{item['key']}.intake.json",
+        "reports/world_class_evidence_intake.json",
+        "reports/world_class_evidence_intake.md",
+    ]
     return {
         "key": item["key"],
         "label": item["label"],
@@ -149,9 +159,9 @@ def build_task(item: dict[str, Any]) -> dict[str, Any]:
         "owner": template["owner"],
         "current": item["current"],
         "objective": template["objective"],
-        "runbook": template["runbook"],
+        "runbook": [*template["runbook"], *intake_runbook],
         "success_checks": template["success_checks"],
-        "evidence_artifacts": template["evidence_artifacts"],
+        "evidence_artifacts": [*template["evidence_artifacts"], *intake_artifacts],
         "privacy_contract": template["privacy_contract"],
         "audit_next_action": item["next_action"],
     }
@@ -189,6 +199,7 @@ def build_plan(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "json": "reports/world_class_evidence_plan.json",
             "markdown": "reports/world_class_evidence_plan.md",
             "ledger": "reports/world_class_evidence_ledger.md",
+            "intake": "reports/world_class_evidence_intake.md",
         },
     }
 

@@ -42,6 +42,7 @@ def main() -> None:
     assert payload["summary"]["human_task_count"] == 1, payload
     assert payload["summary"]["external_task_count"] == 3, payload
     assert payload["artifacts"]["ledger"] == "reports/world_class_evidence_ledger.md", payload
+    assert payload["artifacts"]["intake"] == "reports/world_class_evidence_intake.md", payload
     tasks = {item["key"]: item for item in payload["tasks"]}
     assert set(tasks) == {
         "provider-holdout",
@@ -50,6 +51,8 @@ def main() -> None:
         "native-client-telemetry",
     }, tasks
     assert any("--provider-runner openai" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
+    assert any("world-class-intake" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
+    assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("output_review_decisions.json" in command for command in tasks["human-adjudication"]["runbook"]), tasks["human-adjudication"]
     assert any("runtime-permissions" in command for command in tasks["native-permission-enforcement"]["runbook"]), tasks["native-permission-enforcement"]
     assert any("summary.failure_count == 0" in check for check in tasks["native-permission-enforcement"]["success_checks"]), tasks["native-permission-enforcement"]
@@ -57,6 +60,7 @@ def main() -> None:
     for task in tasks.values():
         assert task["success_checks"], task
         assert task["evidence_artifacts"], task
+        assert "reports/world_class_evidence_intake.json" in task["evidence_artifacts"], task
         assert task["privacy_contract"], task
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Evidence Plan" in markdown, markdown

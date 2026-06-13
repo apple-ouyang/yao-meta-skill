@@ -77,6 +77,7 @@ def main() -> None:
     assert "skill-os2-coverage" in parser_help, parser_help
     assert "world-class-evidence" in parser_help, parser_help
     assert "world-class-ledger" in parser_help, parser_help
+    assert "world-class-intake" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
@@ -208,6 +209,21 @@ def main() -> None:
     )
     assert world_class_ledger_result["ok"], world_class_ledger_result
     assert world_class_ledger_result["payload"]["summary"]["pending_count"] == 4, world_class_ledger_result
+
+    world_class_intake_result = run(
+        "world-class-intake",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "world_class_evidence_intake.json"),
+        "--output-md",
+        str(tmp_root / "world_class_evidence_intake.md"),
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert world_class_intake_result["ok"], world_class_intake_result
+    assert world_class_intake_result["payload"]["summary"]["decision"] == "awaiting-submissions", world_class_intake_result
+    assert world_class_intake_result["payload"]["summary"]["template_pass_count"] == 4, world_class_intake_result
+    assert world_class_intake_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_intake_result
     assert world_class_ledger_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_ledger_result
 
     benchmark_reproducibility_result = run(
@@ -633,6 +649,7 @@ def main() -> None:
     assert "review_annotations" in report_result["payload"]["artifacts"], report_result
     assert "world_class_evidence_plan" in report_result["payload"]["artifacts"], report_result
     assert "world_class_evidence_ledger" in report_result["payload"]["artifacts"], report_result
+    assert "world_class_evidence_intake" in report_result["payload"]["artifacts"], report_result
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))

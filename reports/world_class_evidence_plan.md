@@ -31,6 +31,8 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 - `YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake .`
 
 ### Success Checks
 
@@ -44,6 +46,10 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `reports/output_execution_runs.json`
 - `reports/output_execution_runs.md`
 - `reports/skill_os2_audit.json`
+- `evidence/world_class/intake.schema.json`
+- `evidence/world_class/templates/provider-holdout.intake.json`
+- `reports/world_class_evidence_intake.json`
+- `reports/world_class_evidence_intake.md`
 
 ### Privacy Contract
 
@@ -62,6 +68,8 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.
 - `python3 scripts/yao.py output-review`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake .`
 
 ### Success Checks
 
@@ -76,6 +84,10 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `reports/output_review_decisions.json`
 - `reports/output_review_adjudication.json`
 - `reports/output_review_adjudication.md`
+- `evidence/world_class/intake.schema.json`
+- `evidence/world_class/templates/human-adjudication.intake.json`
+- `reports/world_class_evidence_intake.json`
+- `reports/world_class_evidence_intake.md`
 
 ### Privacy Contract
 
@@ -94,6 +106,8 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip`
 - `python3 scripts/yao.py runtime-permissions . --package-dir dist`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake .`
 
 ### Success Checks
 
@@ -107,6 +121,10 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `reports/runtime_permission_probes.json`
 - `reports/runtime_permission_probes.md`
 - `security/permission_policy.json`
+- `evidence/world_class/intake.schema.json`
+- `evidence/world_class/templates/native-permission-enforcement.intake.json`
+- `reports/world_class_evidence_intake.json`
+- `reports/world_class_evidence_intake.md`
 
 ### Privacy Contract
 
@@ -125,6 +143,8 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl`
 - `python3 scripts/yao.py skill-atlas --workspace-root .`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake .`
 
 ### Success Checks
 
@@ -138,6 +158,10 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `reports/adoption_drift_report.md`
 - `reports/telemetry_hook_recipes.json`
 - `scripts/telemetry_native_host.py`
+- `evidence/world_class/intake.schema.json`
+- `evidence/world_class/templates/native-client-telemetry.intake.json`
+- `reports/world_class_evidence_intake.json`
+- `reports/world_class_evidence_intake.md`
 
 ### Privacy Contract
 

@@ -39,6 +39,7 @@ REQUIRED_ARTIFACTS = [
     ("skill_os2_audit", "reports/skill_os2_audit.json"),
     ("world_class_evidence_plan", "reports/world_class_evidence_plan.json"),
     ("world_class_evidence_ledger", "reports/world_class_evidence_ledger.json"),
+    ("world_class_evidence_intake", "reports/world_class_evidence_intake.json"),
 ]
 
 REPRODUCTION_COMMANDS = [
@@ -116,6 +117,11 @@ REPRODUCTION_COMMANDS = [
         "label": "world-class evidence ledger",
         "command": "python3 scripts/yao.py world-class-ledger .",
         "evidence": "reports/world_class_evidence_ledger.json",
+    },
+    {
+        "label": "world-class evidence intake",
+        "command": "python3 scripts/yao.py world-class-intake .",
+        "evidence": "reports/world_class_evidence_intake.json",
     },
     {
         "label": "full ci",

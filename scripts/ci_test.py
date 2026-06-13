@@ -52,6 +52,7 @@ DEFAULT_TARGETS = [
     "skill-os2-coverage-check",
     "world-class-evidence-check",
     "world-class-ledger-check",
+    "world-class-intake-check",
     "benchmark-reproducibility-check",
     "feedback-check",
     "adoption-drift-check",

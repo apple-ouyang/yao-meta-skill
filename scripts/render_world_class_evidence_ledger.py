@@ -164,6 +164,7 @@ def build_ledger(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "artifacts": {
             "json": "reports/world_class_evidence_ledger.json",
             "markdown": "reports/world_class_evidence_ledger.md",
+            "intake": "reports/world_class_evidence_intake.md",
         },
     }
 
