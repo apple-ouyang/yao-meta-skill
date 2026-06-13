@@ -4,8 +4,8 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "item_count": 14,
-    "pass_count": 10,
+    "item_count": 15,
+    "pass_count": 11,
     "warn_count": 0,
     "human_required_count": 1,
     "external_required_count": 3,
@@ -16,7 +16,7 @@
     "decision": "continue-iteration"
   },
   "status_counts": {
-    "pass": 10,
+    "pass": 11,
     "warn": 0,
     "human_required": 1,
     "external_required": 3,
@@ -142,6 +142,36 @@
       "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
     },
     {
+      "key": "benchmark-reproducibility",
+      "label": "Benchmark Reproducibility",
+      "status": "pass",
+      "current": "artifacts 16; missing 0; failures 3",
+      "target": "Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable",
+      "evidence": [
+        {
+          "path": "reports/benchmark_methodology.md",
+          "exists": true
+        },
+        {
+          "path": "reports/benchmark_reproducibility.json",
+          "exists": true
+        },
+        {
+          "path": "reports/benchmark_reproducibility.md",
+          "exists": true
+        },
+        {
+          "path": "evals/failure-cases.md",
+          "exists": true
+        },
+        {
+          "path": "tests/verify_benchmark_reproducibility.py",
+          "exists": true
+        }
+      ],
+      "next_action": "Keep the manifest current with every benchmark, package, and release evidence change."
+    },
+    {
       "key": "runtime-conformance",
       "label": "Runtime Conformance",
       "status": "pass",
@@ -167,7 +197,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 76; help failures 0",
+      "current": "secrets 0; scripts 77; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -251,7 +281,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 513; install failures 0; permission failures 0",
+      "current": "zip entries 517; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {

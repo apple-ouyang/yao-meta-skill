@@ -124,6 +124,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "output_blind_review": "reports/output_blind_review_pack.md",
         "output_review_decisions": "reports/output_review_decisions.json",
         "output_review_adjudication": "reports/output_review_adjudication.md",
+        "benchmark_reproducibility": "reports/benchmark_reproducibility.md",
         "runtime_conformance": "reports/conformance_matrix.md",
         "trust_report": "reports/security_trust_report.md",
         "permission_policy": "security/permission_policy.md",

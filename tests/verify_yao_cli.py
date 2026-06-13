@@ -75,6 +75,7 @@ def main() -> None:
     assert "review-studio" in parser_help, parser_help
     assert "skill-os2-audit" in parser_help, parser_help
     assert "world-class-evidence" in parser_help, parser_help
+    assert "benchmark-reproducibility" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
     assert "telemetry-hooks" in parser_help, parser_help
@@ -178,6 +179,20 @@ def main() -> None:
     assert world_class_evidence_result["ok"], world_class_evidence_result
     assert world_class_evidence_result["payload"]["summary"]["decision"] == "collect-external-evidence", world_class_evidence_result
     assert world_class_evidence_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_evidence_result
+
+    benchmark_reproducibility_result = run(
+        "benchmark-reproducibility",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "benchmark_reproducibility.json"),
+        "--output-md",
+        str(tmp_root / "benchmark_reproducibility.md"),
+        "--generated-at",
+        "2026-06-13",
+    )
+    assert benchmark_reproducibility_result["ok"], benchmark_reproducibility_result
+    assert benchmark_reproducibility_result["payload"]["summary"]["reproducibility_ready"] is True, benchmark_reproducibility_result
+    assert benchmark_reproducibility_result["payload"]["summary"]["world_class_ready"] is False, benchmark_reproducibility_result
 
     quickstart_result = run(
         "quickstart",

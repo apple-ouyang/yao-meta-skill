@@ -77,6 +77,7 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     output_quality = load_json(reports / "output_quality_scorecard.json")
     output_execution = load_json(reports / "output_execution_runs.json")
     output_review = load_json(reports / "output_review_adjudication.json")
+    benchmark_reproducibility = load_json(reports / "benchmark_reproducibility.json")
     conformance = load_json(reports / "conformance_matrix.json")
     trust = load_json(reports / "security_trust_report.json")
     runtime_permissions = load_json(reports / "runtime_permission_probes.json")
@@ -92,6 +93,7 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     output_summary = output_quality.get("summary", {})
     execution_summary = output_execution.get("summary", {})
     review_summary = output_review.get("summary", {})
+    benchmark_summary = benchmark_reproducibility.get("summary", {})
     conformance_summary = conformance.get("summary", {})
     trust_summary = trust.get("summary", {})
     permission_summary = runtime_permissions.get("summary", {})
@@ -170,6 +172,31 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "Real reviewer decisions recorded before claiming output review completion",
             evidence(skill_dir, "reports/output_review_decisions.json", "reports/output_review_adjudication.json", "scripts/adjudicate_output_review.py"),
             "Record real A/B choices in the decision template, then regenerate adjudication.",
+        ),
+        audit_item(
+            "benchmark-reproducibility",
+            "Benchmark Reproducibility",
+            status_from(
+                benchmark_reproducibility.get("ok") is True
+                and benchmark_summary.get("reproducibility_ready") is True
+                and benchmark_summary.get("failure_disclosure_count", 0) > 0
+                and benchmark_summary.get("missing_artifact_count", 1) == 0
+            ),
+            (
+                f"artifacts {benchmark_summary.get('required_artifact_count', 0)}; "
+                f"missing {benchmark_summary.get('missing_artifact_count', 'n/a')}; "
+                f"failures {benchmark_summary.get('failure_disclosure_count', 0)}"
+            ),
+            "Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable",
+            evidence(
+                skill_dir,
+                "reports/benchmark_methodology.md",
+                "reports/benchmark_reproducibility.json",
+                "reports/benchmark_reproducibility.md",
+                "evals/failure-cases.md",
+                "tests/verify_benchmark_reproducibility.py",
+            ),
+            "Keep the manifest current with every benchmark, package, and release evidence change.",
         ),
         audit_item(
             "runtime-conformance",

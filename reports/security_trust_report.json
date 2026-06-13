@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 160,
-    "script_count": 76,
+    "scanned_files": 161,
+    "script_count": 77,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 53,
+    "file_write_script_count": 54,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 66,
+    "help_smoke_checked_count": 67,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 160,
-    "package_sha256": "14948119733df8546f5c30e0131428ea95c4866a3bdc8151a3e1ab9c7a4f1726"
+    "package_hash_file_count": 161,
+    "package_sha256": "fcc89390653cca0e31cb56be360951474028409c160fb0d975b361aad557e96c"
   },
   "failures": [],
   "warnings": [],
@@ -431,6 +431,20 @@
       "uses_network": false,
       "uses_file_write": true,
       "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/render_benchmark_reproducibility.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Renders a release-facing benchmark reproducibility manifest and Markdown report.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": true,
       "network_urls": [],
       "network_hosts": []
     },
@@ -1141,9 +1155,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 66,
-    "checked_count": 66,
-    "passed_count": 66,
+    "candidate_count": 67,
+    "checked_count": 67,
+    "passed_count": 67,
     "failed_count": 0,
     "skipped_count": 10,
     "failed_scripts": [],
@@ -1426,6 +1440,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: render_baseline_compare.py [-h] --entry ENTRY\n                                  [--output-json OUTPUT_JSON]\n                                  [--output-md OUTPUT_MD]\n\nRender a baseline comparison report from description optimization ",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/render_benchmark_reproducibility.py",
+        "command": "python3 scripts/render_benchmark_reproducibility.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: render_benchmark_reproducibility.py [-h] [--output-json OUTPUT_JSON]\n                                           [--output-md OUTPUT_MD]\n                                           [--generated-at GENERATED_AT]\n                        ",
         "stderr_excerpt": ""
       },
       {
@@ -1924,6 +1948,7 @@
           "scripts/render_adoption_drift_report.py",
           "scripts/render_artifact_design_profile.py",
           "scripts/render_baseline_compare.py",
+          "scripts/render_benchmark_reproducibility.py",
           "scripts/render_context_reports.py",
           "scripts/render_description_drift_history.py",
           "scripts/render_eval_dashboard.py",
@@ -1980,6 +2005,7 @@
         "status": "approved",
         "scripts": [
           "scripts/ci_test.py",
+          "scripts/render_benchmark_reproducibility.py",
           "scripts/render_eval_dashboard.py",
           "scripts/run_eval_suite.py",
           "scripts/run_output_execution.py",

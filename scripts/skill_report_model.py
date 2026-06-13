@@ -476,6 +476,7 @@ def build_report_model(skill_dir: Path) -> dict:
     output_execution = load_json(skill_dir / "reports" / "output_execution_runs.json")
     output_blind_review = load_json(skill_dir / "reports" / "output_blind_review_pack.json")
     output_review_adjudication = load_json(skill_dir / "reports" / "output_review_adjudication.json")
+    benchmark_reproducibility = load_json(skill_dir / "reports" / "benchmark_reproducibility.json")
     conformance = load_json(skill_dir / "reports" / "conformance_matrix.json")
     runtime_permissions = load_json(skill_dir / "reports" / "runtime_permission_probes.json")
     trust_report = load_json(skill_dir / "reports" / "security_trust_report.json")
@@ -551,6 +552,9 @@ def build_report_model(skill_dir: Path) -> dict:
     if (skill_dir / "reports" / "output_review_adjudication.md").exists():
         insert_after = deliverables.index("reports/output_blind_answer_key.json") + 1 if "reports/output_blind_answer_key.json" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
         deliverables.insert(insert_after, "reports/output_review_adjudication.md")
+    if (skill_dir / "reports" / "benchmark_reproducibility.md").exists():
+        insert_after = deliverables.index("reports/output_review_adjudication.md") + 1 if "reports/output_review_adjudication.md" in deliverables else deliverables.index("reports/output_quality_scorecard.md") + 1
+        deliverables.insert(insert_after, "reports/benchmark_reproducibility.md")
     if (skill_dir / "reports" / "world_class_evidence_plan.md").exists():
         insert_after = deliverables.index("reports/review_waivers.md") + 1
         deliverables.insert(insert_after, "reports/world_class_evidence_plan.md")
@@ -674,6 +678,13 @@ def build_report_model(skill_dir: Path) -> dict:
             "reviewer": output_review_adjudication.get("reviewer", ""),
             "reviewed_at": output_review_adjudication.get("reviewed_at", ""),
             "failures": output_review_adjudication.get("failures", []),
+        },
+        "benchmark_reproducibility": {
+            "ok": benchmark_reproducibility.get("ok", False),
+            "summary": benchmark_reproducibility.get("summary", {}),
+            "commit": benchmark_reproducibility.get("commit", ""),
+            "missing_artifacts": benchmark_reproducibility.get("missing_artifacts", []),
+            "limitations": benchmark_reproducibility.get("limitations", []),
         },
         "runtime_conformance": conformance.get("summary", {}),
         "runtime_permissions": {

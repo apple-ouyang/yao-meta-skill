@@ -152,6 +152,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_evidence_cmd.add_argument("--generated-at")
     world_class_evidence_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_evidence"))
 
+    benchmark_reproducibility_cmd = subparsers.add_parser(
+        "benchmark-reproducibility",
+        help="Render benchmark methodology, artifact, failure-disclosure, and reproduction-command evidence.",
+    )
+    benchmark_reproducibility_cmd.add_argument("skill_dir", nargs="?", default=".")
+    benchmark_reproducibility_cmd.add_argument("--output-json")
+    benchmark_reproducibility_cmd.add_argument("--output-md")
+    benchmark_reproducibility_cmd.add_argument("--generated-at")
+    benchmark_reproducibility_cmd.set_defaults(func=_handler(command_handlers, "command_benchmark_reproducibility"))
+
     reference_scan_cmd = subparsers.add_parser(
         "reference-scan",
         help="Render a controlled benchmark scan report for a skill package.",

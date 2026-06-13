@@ -303,6 +303,8 @@ def main() -> None:
     assert full_payload["evidence_paths"]["output_blind_review"] == "reports/output_blind_review_pack.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_review_decisions"] == "reports/output_review_decisions.json", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_review_adjudication"] == "reports/output_review_adjudication.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "benchmark_reproducibility.md").exists():
+        assert full_payload["evidence_paths"]["benchmark_reproducibility"] == "reports/benchmark_reproducibility.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["review_annotations"] == "reports/review_annotations.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_plan.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_plan"] == "reports/world_class_evidence_plan.md", full_payload["evidence_paths"]

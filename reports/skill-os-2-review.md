@@ -15,6 +15,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Bilingual Skill Overview v2 that includes these evidence surfaces.
 - Skill OS 2.0 Audit v0 for requirement-by-requirement evidence mapping, with explicit separation between local evidence, human-required review, and external-required provider/client integrations.
 - World-Class Evidence Plan v0 that turns the remaining provider holdout, human adjudication, native permission enforcement, and native client telemetry gaps into executable runbooks with success checks and privacy contracts.
+- Benchmark Reproducibility v0 that turns public benchmark methodology, required artifacts, failure disclosure, and reproduction commands into machine-checkable release evidence.
 - Review Studio 2.0 v0 for one-page blocker, warning, evidence-path, review-action, and release-gate review.
 - Review Studio Source Refs v0 so every non-pass review action can expose structured relative source/report links with best-effort line numbers.
 - Target Compiler v0 so Skill IR compiles into OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot target contracts before packaging, including target-specific permission contracts and native behavior contracts.
@@ -50,6 +51,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 | Target Compiler | `scripts/compile_skill.py`, `reports/compiled_targets.md`, `tests/verify_compile_skill.py` | v0 landed |
 | Output Eval Lab | `evals/output/cases.jsonl`, `scripts/run_output_eval.py`, `scripts/run_output_execution.py`, `scripts/local_output_eval_runner.py`, `scripts/provider_output_eval_runner.py`, `scripts/adjudicate_output_review.py`, `reports/output_quality_scorecard.md`, `reports/output_execution_runs.md`, `reports/output_blind_review_pack.md`, `reports/output_blind_answer_key.json`, `reports/output_review_decisions.json`, `reports/output_review_adjudication.md` | v0 landed |
 | Benchmark methodology | `reports/benchmark_methodology.md` | v0 landed |
+| Benchmark Reproducibility | `scripts/render_benchmark_reproducibility.py`, `reports/benchmark_reproducibility.md`, `tests/verify_benchmark_reproducibility.py` | v0 landed |
 | Skill OS 2.0 Audit | `scripts/render_skill_os2_audit.py`, `reports/skill_os2_audit.md`, `tests/verify_skill_os2_audit.py` | v0 landed |
 | World-Class Evidence Plan | `scripts/render_world_class_evidence_plan.py`, `reports/world_class_evidence_plan.md`, `tests/verify_world_class_evidence_plan.py` | v0 landed |
 | Runtime Conformance | `scripts/run_conformance_suite.py`, `reports/conformance_matrix.md` | v0 landed |
@@ -110,24 +112,25 @@ Next move: add real client or installer permission enforcement integration.
 | Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, `0 / 5` reviewer decisions pending, `0` answer keys revealed, and `5` pending answers hidden |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
-| Trust | `0` secret findings, `1` pinned dependency file, `10` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `66 / 66` CLI help smoke checks passing across `76` scripts, source-contract hash scope explicit |
+| Trust | `0` secret findings, `1` pinned dependency file, `10` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `67 / 67` CLI help smoke checks passing across `77` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `513` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `513` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `517` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `517` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
 | Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0 |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
 | Review Studio | decision `review`, world-class score `92`, `13` gates, `0` blockers, `2` warnings, `2` review actions, `0` open annotation blockers |
-| Skill OS 2.0 Audit | `14` audited areas, with local foundation evidence separated from human-required and external-required gaps |
+| Skill OS 2.0 Audit | `15` audited areas, with local foundation evidence separated from human-required and external-required gaps |
 | World-Class Evidence Plan | `4` remaining evidence tasks: `1` human-required and `3` external-required, all with runbooks, success checks, and privacy contracts |
+| Benchmark Reproducibility | local reproducibility ready with `16` required artifacts, `0` missing artifacts, `15` reproduction commands, and `3` disclosed failure cases; provider and human evidence remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
 | Context Budget | initial load `944/1000`, under the production budget |
-| CI | `make ci-test` target count is `62` after the World-Class Evidence Plan gate update |
+| CI | `make ci-test` target count is `63` after the Benchmark Reproducibility gate update |
 
 ## Next Highest-Leverage Moves
 

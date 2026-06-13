@@ -1,0 +1,98 @@
+# Benchmark Reproducibility
+
+Generated at: `2026-06-13`
+Commit: `c2507af5267e3c1eb6802449f74236c5ab649742`
+Working tree dirty at generation: `true`
+
+## Summary
+
+- reproducibility ready: `true`
+- methodology complete: `true`
+- required artifacts: `16`
+- missing artifacts: `0`
+- output cases: `5`
+- disclosed failure cases: `3`
+- reproduction commands: `15`
+- provider evidence complete: `false`
+- human review complete: `false`
+- world-class ready: `false`
+- changed files at generation: `43`
+
+This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.
+
+## Methodology Sections
+
+| Section | Status |
+| --- | --- |
+| `## Benchmark Types` | present |
+| `## Sample Sources` | present |
+| `## Evaluation Dimensions` | present |
+| `## Weighting Rule` | present |
+| `## Failure Disclosure` | present |
+| `## Reproduction` | present |
+
+## Required Artifacts
+
+| Label | Path | Status | SHA256 |
+| --- | --- | --- | --- |
+| methodology | `reports/benchmark_methodology.md` | present | `57025e0123ce` |
+| failure_disclosure | `evals/failure-cases.md` | present | `28833c0d4a21` |
+| output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
+| output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
+| output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
+| output_execution | `reports/output_execution_runs.json` | present | `b3fecad2a0c3` |
+| blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
+| review_adjudication | `reports/output_review_adjudication.json` | present | `ddd9af90d42e` |
+| trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
+| runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
+| trust_report | `reports/security_trust_report.json` | present | `b3513361608f` |
+| registry_audit | `reports/registry_audit.json` | present | `f1ec4e2f7e8c` |
+| package_verification | `reports/package_verification.json` | present | `3183e66db7e3` |
+| install_simulation | `reports/install_simulation.json` | present | `0befebd76310` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `7e17b3a890f9` |
+| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `f8b28a7b02b7` |
+
+## Reproduction Commands
+
+- `git rev-parse HEAD`
+  - evidence: `git commit hash`
+- `make eval-suite`
+  - evidence: `reports/eval_suite.json`
+- `python3 scripts/yao.py output-eval`
+  - evidence: `reports/output_quality_scorecard.json`
+- `python3 scripts/yao.py output-exec --runner-command '["python3","scripts/local_output_eval_runner.py"]'`
+  - evidence: `reports/output_execution_runs.json`
+- `python3 scripts/yao.py output-review`
+  - evidence: `reports/output_review_adjudication.json`
+- `python3 scripts/yao.py skill-ir . --output-json skill-ir/examples/yao-meta-skill.json`
+  - evidence: `skill-ir/examples/yao-meta-skill.json`
+- `python3 scripts/yao.py conformance .`
+  - evidence: `reports/conformance_matrix.json`
+- `python3 scripts/yao.py trust .`
+  - evidence: `reports/security_trust_report.json`
+- `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --expectations evals/packaging_expectations.json --output-dir dist --zip`
+  - evidence: `dist/yao-meta-skill.zip`
+- `python3 scripts/yao.py package-verify . --package-dir dist --require-zip`
+  - evidence: `reports/package_verification.json`
+- `python3 scripts/yao.py install-simulate . --package-dir dist`
+  - evidence: `reports/install_simulation.json`
+- `python3 scripts/yao.py registry-audit .`
+  - evidence: `reports/registry_audit.json`
+- `python3 scripts/yao.py skill-os2-audit .`
+  - evidence: `reports/skill_os2_audit.json`
+- `python3 scripts/yao.py world-class-evidence .`
+  - evidence: `reports/world_class_evidence_plan.json`
+- `make ci-test`
+  - evidence: `CI target output`
+
+## Failure Disclosure
+
+- path: `evals/failure-cases.md`
+- disclosed cases: `3`
+- policy: Keep representative failures visible and tied to regression checks.
+
+## Limits
+
+- Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.
+- Pending blind-review decisions are visible but do not count as human adjudication.
+- World-class readiness remains false until external and human evidence gaps close.
