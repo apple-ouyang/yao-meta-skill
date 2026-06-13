@@ -253,6 +253,77 @@ def review_studio_css() -> str:
       margin: 0;
       padding-left: 18px;
     }
+    .world-intake-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .world-intake-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+    .world-intake-card.awaiting-submission,
+    .world-intake-card.fix-submission,
+    .world-intake-card.fix-template { border-left: 4px solid var(--warn); }
+    .world-intake-card.ready-for-ledger-review,
+    .world-intake-card.accepted { border-left: 4px solid var(--pass); }
+    .world-intake-card span,
+    .world-intake-card p,
+    .world-intake-card dd,
+    .world-intake-card li {
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .world-intake-card dl {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+    }
+    .world-intake-card dt { color: var(--ink); font-size: 14px; }
+    .world-intake-card dd { margin: 0; min-width: 0; }
+    .world-intake-steps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .world-intake-steps h4 {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .world-intake-steps ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .world-intake-commands {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .world-intake-commands li {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      padding: 8px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .world-intake-commands code {
+      overflow-wrap: anywhere;
+      white-space: normal;
+      display: block;
+    }
     .action-card span,
     .annotation-card span,
     .action-card small,
@@ -302,7 +373,7 @@ def review_studio_css() -> str:
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .world-evidence-grid, .world-evidence-columns, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .world-evidence-grid, .world-evidence-columns, .world-intake-grid, .world-intake-steps, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }

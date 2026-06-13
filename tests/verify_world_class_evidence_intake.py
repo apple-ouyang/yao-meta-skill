@@ -90,6 +90,8 @@ def main() -> None:
     assert summary["submission_count"] == 0, summary
     assert summary["valid_submission_count"] == 0, summary
     assert summary["invalid_submission_count"] == 0, summary
+    assert summary["operator_checklist_count"] == 4, summary
+    assert summary["operator_checklist_ready_count"] == 0, summary
     assert summary["ready_for_external_collection"] is True, summary
     assert summary["ready_for_ledger_review"] is False, summary
     assert summary["ready_to_claim_world_class"] is False, summary
@@ -101,9 +103,28 @@ def main() -> None:
         "native-client-telemetry",
     }, payload["templates"]
     assert all(item["status"] == "pass" and item["template_only"] is True for item in payload["templates"]), payload["templates"]
+    checklist = {item["evidence_key"]: item for item in payload["operator_checklist"]}
+    assert set(checklist) == {
+        "provider-holdout",
+        "human-adjudication",
+        "native-permission-enforcement",
+        "native-client-telemetry",
+    }, checklist
+    assert checklist["provider-holdout"]["readiness"] == "awaiting-submission", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["template_path"] == "evidence/world_class/templates/provider-holdout.intake.json", checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", checklist["provider-holdout"]
+    assert "cp evidence/world_class/templates/provider-holdout.intake.json" in checklist["provider-holdout"]["commands"]["prepare_submission"], checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
+    assert "provider-backed model run" in checklist["provider-holdout"]["must_collect"]["provenance_requirements"], checklist["provider-holdout"]
+    assert "reports/output_execution_runs.json summary.model_executed_count > 0" in checklist["provider-holdout"]["must_collect"]["success_checks"], checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["anti_overclaim"]["local_command_runner_counts_as_provider_model"] is False, checklist["provider-holdout"]
     markdown = default_md.read_text(encoding="utf-8")
     assert "World-Class Evidence Intake" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
+    assert "Operator Checklist" in markdown, markdown
+    assert "operator checklist: `0` ready / `4` total" in markdown, markdown
+    assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
+    assert "`python3 scripts/yao.py world-class-ledger .`" in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
 
     valid_dir = TMP / "valid_submissions"
@@ -116,9 +137,14 @@ def main() -> None:
     assert valid_payload["ok"] is True, valid_payload
     assert valid_payload["summary"]["decision"] == "intake-ready-for-ledger-review", valid_payload["summary"]
     assert valid_payload["summary"]["valid_submission_count"] == 1, valid_payload["summary"]
+    assert valid_payload["summary"]["operator_checklist_ready_count"] == 1, valid_payload["summary"]
     assert valid_payload["summary"]["ready_for_ledger_review"] is True, valid_payload["summary"]
     assert valid_payload["summary"]["ready_to_claim_world_class"] is False, valid_payload["summary"]
     assert valid_payload["submissions"][0]["status"] == "pass", valid_payload["submissions"]
+    valid_checklist = {item["evidence_key"]: item for item in valid_payload["operator_checklist"]}
+    assert valid_checklist["provider-holdout"]["readiness"] == "ready-for-ledger-review", valid_checklist["provider-holdout"]
+    assert valid_checklist["provider-holdout"]["submission_path"].endswith("tests/tmp_world_class_evidence_intake/valid_submissions/provider-holdout.json"), valid_checklist["provider-holdout"]
+    assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["validate_intake"], valid_checklist["provider-holdout"]
 
     invalid_dir = TMP / "invalid_submissions"
     invalid_dir.mkdir()
@@ -130,8 +156,11 @@ def main() -> None:
     assert invalid_payload["ok"] is False, invalid_payload
     assert invalid_payload["summary"]["decision"] == "fix-intake", invalid_payload["summary"]
     assert invalid_payload["summary"]["invalid_submission_count"] == 1, invalid_payload["summary"]
+    assert invalid_payload["summary"]["operator_checklist_ready_count"] == 0, invalid_payload["summary"]
     assert any("raw content" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
     assert any("attestation.real_external_or_human_evidence" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
+    invalid_checklist = {item["evidence_key"]: item for item in invalid_payload["operator_checklist"]}
+    assert invalid_checklist["provider-holdout"]["readiness"] == "fix-submission", invalid_checklist["provider-holdout"]
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

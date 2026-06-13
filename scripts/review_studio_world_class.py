@@ -50,3 +50,57 @@ def render_world_class_evidence_entries(ledger: dict[str, Any]) -> str:
             "</article>"
         )
     return "<div class='world-evidence-grid'>" + "".join(cards) + "</div>"
+
+
+def render_command_list(commands: dict[str, Any]) -> str:
+    if not commands:
+        return "<p class='muted'>暂无命令。</p>"
+    items = []
+    for label, command in commands.items():
+        if not command:
+            continue
+        items.append(
+            "<li>"
+            f"<span>{html.escape(str(label))}</span>"
+            f"<code>{html.escape(str(command))}</code>"
+            "</li>"
+        )
+    return "<ul class='world-intake-commands'>" + "".join(items) + "</ul>" if items else "<p class='muted'>暂无命令。</p>"
+
+
+def render_world_class_intake_checklist(intake: dict[str, Any]) -> str:
+    items = intake.get("operator_checklist", []) if isinstance(intake, dict) else []
+    if not items:
+        return "<p class='muted'>当前没有 world-class 证据操作清单。</p>"
+    cards = []
+    for item in items:
+        readiness = str(item.get("readiness", "awaiting-submission"))
+        must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
+        cards.append(
+            "<article class='world-intake-card "
+            + html.escape(readiness)
+            + "'>"
+            f"<div><span>{html.escape(readiness)} · {html.escape(str(item.get('category', '')))}</span>"
+            f"<h3>{html.escape(str(item.get('label', item.get('evidence_key', 'evidence'))))}</h3></div>"
+            f"<p>{html.escape(str(item.get('blocking_reason', '')))}</p>"
+            f"<dl><dt>负责人</dt><dd>{html.escape(str(item.get('owner', '')))}</dd>"
+            f"<dt>模板</dt><dd><code>{html.escape(str(item.get('template_path', '')))}</code></dd>"
+            f"<dt>提交</dt><dd><code>{html.escape(str(item.get('submission_path', '')))}</code></dd>"
+            f"<dt>下一步</dt><dd>{html.escape(str(item.get('next_action', '')))}</dd></dl>"
+            "<div class='world-intake-steps'>"
+            "<div><h4>操作命令</h4>"
+            + render_command_list(item.get("commands", {}) if isinstance(item.get("commands", {}), dict) else {})
+            + "</div>"
+            "<div><h4>收集要求</h4>"
+            + render_inline_list(must_collect.get("provenance_requirements", []), "暂无来源要求。")
+            + "</div>"
+            "<div><h4>通过条件</h4>"
+            + render_inline_list(must_collect.get("success_checks", []), "暂无通过条件。")
+            + "</div>"
+            "<div><h4>隐私边界</h4>"
+            + render_inline_list(must_collect.get("privacy_contract", []), "暂无隐私边界。")
+            + "</div>"
+            "</div>"
+            "</article>"
+        )
+    return "<div class='world-intake-grid'>" + "".join(cards) + "</div>"

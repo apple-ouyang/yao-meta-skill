@@ -261,7 +261,14 @@ def main() -> None:
     assert world_class_intake_result["ok"], world_class_intake_result
     assert world_class_intake_result["payload"]["summary"]["decision"] == "awaiting-submissions", world_class_intake_result
     assert world_class_intake_result["payload"]["summary"]["template_pass_count"] == 4, world_class_intake_result
+    assert world_class_intake_result["payload"]["summary"]["operator_checklist_count"] == 4, world_class_intake_result
+    assert world_class_intake_result["payload"]["summary"]["operator_checklist_ready_count"] == 0, world_class_intake_result
     assert world_class_intake_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_intake_result
+    provider_checklist = next(
+        item for item in world_class_intake_result["payload"]["operator_checklist"] if item["evidence_key"] == "provider-holdout"
+    )
+    assert provider_checklist["readiness"] == "awaiting-submission", provider_checklist
+    assert "cp evidence/world_class/templates/provider-holdout.intake.json" in provider_checklist["commands"]["prepare_submission"], provider_checklist
     assert world_class_ledger_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_ledger_result
 
     world_class_claim_guard_result = run(

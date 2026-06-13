@@ -12,7 +12,7 @@
     "command_handler_count": 33,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 887,
+    "largest_file_lines": 895,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -20,10 +20,17 @@
   "largest_files": [
     {
       "path": "scripts/render_review_studio.py",
-      "lines": 887,
+      "lines": 895,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 845,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/yao.py",
@@ -31,13 +38,6 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-    },
-    {
-      "path": "tests/verify_yao_cli.py",
-      "lines": 838,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/skill_report_model.py",

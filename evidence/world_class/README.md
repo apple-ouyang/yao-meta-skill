@@ -18,4 +18,6 @@ The intake validator checks:
 - credentials, secrets, raw user content, and raw provider prompts are explicitly excluded
 - planned work, local command-only output, and metadata fallback are not claimed as completion evidence
 
+The generated intake report also includes an `operator_checklist` for each pending evidence item. Use it to find the template path, target submission path, preparation command, validation command, required provenance, success checks, and privacy boundary before asking a reviewer or external operator to submit evidence.
+
 Accepted intake means "ready for ledger review", not "world-class complete". The ledger remains the source of truth for `ready_to_claim_world_class`.

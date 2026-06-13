@@ -10,7 +10,7 @@ from review_studio_data import evidence_paths, insight_cards, load_review_data
 from review_studio_formatting import registry_package_summary, render_kv_grid
 from review_studio_gates import add_blockers_from_gate, build_gates, status_label, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
-from review_studio_world_class import render_world_class_evidence_entries
+from review_studio_world_class import render_world_class_evidence_entries, render_world_class_intake_checklist
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -452,9 +452,11 @@ def render_html(report: dict[str, Any]) -> str:
     waiver_summary = report["data"]["review_waivers"].get("summary", {})
     world_class_ledger = report["data"].get("world_class_evidence_ledger", {})
     world_class_summary = world_class_ledger.get("summary", {})
-    world_class_intake_summary = report["data"].get("world_class_evidence_intake", {}).get("summary", {})
+    world_class_intake = report["data"].get("world_class_evidence_intake", {})
+    world_class_intake_summary = world_class_intake.get("summary", {})
     world_class_claim_summary = report["data"].get("world_class_claim_guard", {}).get("summary", {})
     world_class_entries_html = render_world_class_evidence_entries(world_class_ledger)
+    world_class_intake_checklist_html = render_world_class_intake_checklist(world_class_intake)
     annotation_summary = report["data"]["review_annotations"].get("summary", {})
     annotation_caption = (
         f"{annotation_summary.get('annotation_count', 0)} 条批注；"
@@ -780,6 +782,12 @@ def render_html(report: dict[str, Any]) -> str:
       <h2>世界证据</h2>
       <p class="muted">这里列出每个 world-class 证据项的当前状态、完成定义、证据来源、隐私约束和下一步；计划、metadata fallback、待评审和本地命令不会被当成完成证据。</p>
       {world_class_entries_html}
+    </section>
+
+    <section>
+      <h2>提交清单</h2>
+      <p class="muted">每张卡片给出模板、提交文件、准备命令、校验命令、收集要求、通过条件和隐私边界；只有真实 provider、真人、原生权限或真实客户端证据通过 intake 后，才进入 ledger review。</p>
+      {world_class_intake_checklist_html}
     </section>
 
     <section class="twocol">

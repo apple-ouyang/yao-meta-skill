@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import shlex
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -188,6 +189,87 @@ def find_entry(entries: list[dict[str, Any]], key: str) -> dict[str, Any] | None
     return None
 
 
+def first_by_key(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    by_key: dict[str, dict[str, Any]] = {}
+    for item in items:
+        key = str(item.get("evidence_key", ""))
+        if key and key not in by_key:
+            by_key[key] = item
+    return by_key
+
+
+def shell_path(path: Path, root: Path) -> str:
+    return shlex.quote(rel_path(path, root))
+
+
+def checklist_readiness(
+    entry: dict[str, Any],
+    template_result: dict[str, Any] | None,
+    submission_result: dict[str, Any] | None,
+) -> tuple[str, str]:
+    if entry.get("status") == "accepted":
+        return "accepted", "Ledger already accepts this evidence item."
+    if template_result is None or template_result.get("status") != "pass":
+        return "fix-template", "The intake template is missing or invalid."
+    if submission_result is None:
+        return "awaiting-submission", "No real evidence submission has been provided yet."
+    if submission_result.get("status") == "pass":
+        return "ready-for-ledger-review", "Submission passes intake validation and is ready for ledger review."
+    return "fix-submission", "Submission exists but failed intake validation."
+
+
+def build_operator_checklist(
+    skill_dir: Path,
+    ledger: dict[str, Any],
+    template_results: list[dict[str, Any]],
+    submission_results: list[dict[str, Any]],
+    submissions_dir: Path,
+) -> list[dict[str, Any]]:
+    templates_by_key = first_by_key(template_results)
+    submissions_by_key = first_by_key(submission_results)
+    checklist = []
+    for entry in ledger.get("entries", []):
+        key = str(entry.get("key", ""))
+        template_path = skill_dir / "evidence" / "world_class" / "templates" / f"{key}.intake.json"
+        submission_path = submissions_dir / f"{key}.json"
+        template_result = templates_by_key.get(key)
+        submission_result = submissions_by_key.get(key)
+        readiness, blocking_reason = checklist_readiness(entry, template_result, submission_result)
+        submissions_dir_arg = shell_path(submissions_dir, skill_dir)
+        checklist.append(
+            {
+                "evidence_key": key,
+                "label": entry.get("label", key),
+                "category": entry.get("category", "external"),
+                "owner": entry.get("owner", "release reviewer"),
+                "readiness": readiness,
+                "blocking_reason": blocking_reason,
+                "template_status": template_result.get("status", "missing") if template_result else "missing",
+                "submission_status": submission_result.get("status", "missing") if submission_result else "missing",
+                "template_path": rel_path(template_path, skill_dir),
+                "submission_path": rel_path(submission_path, skill_dir),
+                "commands": {
+                    "prepare_submission": (
+                        f"mkdir -p {shell_path(submission_path.parent, skill_dir)} && "
+                        f"cp {shell_path(template_path, skill_dir)} {shell_path(submission_path, skill_dir)}"
+                    ),
+                    "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {submissions_dir_arg}",
+                    "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+                    "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
+                },
+                "must_collect": {
+                    "provenance_requirements": entry.get("provenance_requirements", []),
+                    "success_checks": entry.get("success_checks", []),
+                    "evidence_artifacts": entry.get("evidence_artifacts", []),
+                    "privacy_contract": entry.get("privacy_contract", []),
+                },
+                "anti_overclaim": entry.get("anti_overclaim", {}),
+                "next_action": entry.get("next_action", ""),
+            }
+        )
+    return checklist
+
+
 def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | None = None) -> dict[str, Any]:
     ledger = build_ledger(skill_dir, generated_at)
     entries = ledger.get("entries", [])
@@ -234,6 +316,8 @@ def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
     invalid_submission_count = sum(1 for item in submission_results if item["status"] == "fail")
     schema_exists = schema_path.exists()
     intake_ready = schema_exists and template_pass_count == len(keys) and invalid_submission_count == 0
+    operator_checklist = build_operator_checklist(skill_dir, ledger, template_results, submission_results, submissions_dir)
+    ready_checklist_count = sum(1 for item in operator_checklist if item["readiness"] in {"accepted", "ready-for-ledger-review"})
     return {
         "schema_version": "1.0",
         "ok": intake_ready,
@@ -247,6 +331,8 @@ def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
             "submission_count": len(submission_results),
             "valid_submission_count": valid_submission_count,
             "invalid_submission_count": invalid_submission_count,
+            "operator_checklist_count": len(operator_checklist),
+            "operator_checklist_ready_count": ready_checklist_count,
             "ready_for_external_collection": intake_ready,
             "ready_for_ledger_review": valid_submission_count > 0 and invalid_submission_count == 0,
             "ready_to_claim_world_class": ledger.get("summary", {}).get("ready_to_claim_world_class") is True,
@@ -260,6 +346,7 @@ def build_intake(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
         "schema": rel_path(schema_path, skill_dir),
         "templates": template_results,
         "submissions": submission_results,
+        "operator_checklist": operator_checklist,
         "source_ledger": {
             "json": "reports/world_class_evidence_ledger.json",
             "markdown": "reports/world_class_evidence_ledger.md",
@@ -284,6 +371,41 @@ def render_table(items: list[dict[str, Any]]) -> list[str]:
     return lines
 
 
+def render_operator_checklist(items: list[dict[str, Any]]) -> list[str]:
+    lines = [
+        "| Evidence | Readiness | Submission | Next action |",
+        "| --- | --- | --- | --- |",
+    ]
+    if not items:
+        lines.append("| `none` | `accepted` | none | none |")
+        return lines
+    for item in items:
+        action = str(item.get("next_action", "")).replace("|", "\\|")
+        lines.append(
+            f"| `{item['evidence_key']}` | `{item['readiness']}` | `{item['submission_status']}` | {action} |"
+        )
+    for item in items:
+        lines.extend(["", f"### {item['label']}", ""])
+        lines.append(f"- readiness: `{item['readiness']}`")
+        lines.append(f"- blocking reason: {item['blocking_reason']}")
+        lines.append(f"- owner: {item['owner']}")
+        lines.append(f"- template: `{item['template_path']}`")
+        lines.append(f"- submission: `{item['submission_path']}`")
+        lines.extend(["", "#### Commands", ""])
+        commands = item.get("commands", {})
+        for label in ["prepare_submission", "validate_intake", "refresh_ledger", "guard_claim"]:
+            if commands.get(label):
+                lines.append(f"- {label}: `{commands[label]}`")
+        must_collect = item.get("must_collect", {})
+        lines.extend(["", "#### Must Collect", ""])
+        for label in ["provenance_requirements", "success_checks", "evidence_artifacts", "privacy_contract"]:
+            values = must_collect.get(label, [])
+            if values:
+                lines.append(f"- {label}:")
+                lines.extend(f"  - {value}" for value in values)
+    return lines
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     summary = report["summary"]
     lines = [
@@ -298,6 +420,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- templates: `{summary['template_pass_count']}` / `{summary['template_count']}`",
         f"- submissions: `{summary['valid_submission_count']}` valid / `{summary['submission_count']}` total",
         f"- invalid submissions: `{summary['invalid_submission_count']}`",
+        f"- operator checklist: `{summary['operator_checklist_ready_count']}` ready / `{summary['operator_checklist_count']}` total",
         f"- ready for external collection: `{str(summary['ready_for_external_collection']).lower()}`",
         f"- ready for ledger review: `{str(summary['ready_for_ledger_review']).lower()}`",
         f"- ready to claim world-class: `{str(summary['ready_to_claim_world_class']).lower()}`",
@@ -312,6 +435,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         "## Submissions",
         "",
         *render_table(report["submissions"]),
+        "",
+        "## Operator Checklist",
+        "",
+        *render_operator_checklist(report["operator_checklist"]),
         "",
         "## Boundary",
         "",

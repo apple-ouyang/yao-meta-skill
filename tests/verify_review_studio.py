@@ -410,7 +410,16 @@ def main() -> None:
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["template_pass_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
+    assert full_payload["data"]["world_class_evidence_intake"]["summary"]["operator_checklist_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
+    assert full_payload["data"]["world_class_evidence_intake"]["summary"]["operator_checklist_ready_count"] == 0, full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["ready_to_claim_world_class"] is False, full_payload["data"]["world_class_evidence_intake"]
+    intake_checklist = full_payload["data"]["world_class_evidence_intake"]["operator_checklist"]
+    assert len(intake_checklist) == 4, intake_checklist
+    provider_checklist = next(item for item in intake_checklist if item["evidence_key"] == "provider-holdout")
+    assert provider_checklist["readiness"] == "awaiting-submission", provider_checklist
+    assert provider_checklist["submission_path"] == "evidence/world_class/submissions/provider-holdout.json", provider_checklist
+    assert provider_checklist["commands"]["validate_intake"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions", provider_checklist
+    assert "provider-backed model run" in provider_checklist["must_collect"]["provenance_requirements"], provider_checklist
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["decision"] == "claim-guard-pass-evidence-pending", full_payload["data"]["world_class_claim_guard"]
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["violation_count"] == 0, full_payload["data"]["world_class_claim_guard"]
     assert full_payload["data"]["world_class_claim_guard"]["summary"]["ledger_pending_count"] == 4, full_payload["data"]["world_class_claim_guard"]
@@ -478,6 +487,13 @@ def main() -> None:
     assert "入口边界" in html, html
     assert "声明守卫" in html, html
     assert "声明边界" in html, html
+    assert "提交清单" in html, html
+    assert "world-intake-grid" in html, html
+    assert "操作命令" in html, html
+    assert "收集要求" in html, html
+    assert "通过条件" in html, html
+    assert "evidence/world_class/submissions/provider-holdout.json" in html, html
+    assert "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions" in html, html
     assert "intake 只校验证据包格式、来源、隐私和反过度声明" in html, html
     assert "reports/world_class_evidence_intake.md" in html, html
     assert "reports/world_class_claim_guard.md" in html, html
