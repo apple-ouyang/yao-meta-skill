@@ -437,7 +437,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 89
+          "file_count": 90
         },
         {
           "path": "evals",
@@ -452,7 +452,7 @@
           "file_count": 195
         }
       ],
-      "file_count": 348,
+      "file_count": 349,
       "folder_count": 4,
       "distribution": [
         {
@@ -477,7 +477,7 @@
         },
         {
           "label": "scripts",
-          "value": 89
+          "value": 90
         },
         {
           "label": "evals",
@@ -606,7 +606,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 89
+        "file_count": 90
       },
       {
         "path": "evals",
@@ -879,7 +879,11 @@
         "pending_answer_hidden_count": 5,
         "agreement_rate": null,
         "needs_review": true,
-        "failure_count": 0
+        "failure_count": 0,
+        "reviewer_checklist_count": 5,
+        "reviewer_checklist_pending_count": 5,
+        "reviewer_checklist_invalid_count": 0,
+        "reviewer_checklist_ready_count": 0
       },
       "reviewer": "",
       "reviewed_at": "",
@@ -906,9 +910,9 @@
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "working_tree_dirty": true,
-        "changed_file_count": 31
+        "changed_file_count": 42
       },
-      "commit": "088904f519e04981f30c5c8c225de90a4aee2682",
+      "commit": "810885d70e6ed0fa6b19cd5a0edf971057215f9d",
       "missing_artifacts": [],
       "limitations": [
         "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -983,9 +987,9 @@
       "failures": []
     },
     "trust_security": {
-      "scanned_files": 173,
-      "script_count": 89,
-      "internal_module_count": 16,
+      "scanned_files": 174,
+      "script_count": 90,
+      "internal_module_count": 17,
       "secret_findings": 0,
       "dependency_files": [
         "requirements-ci.txt"
@@ -1003,8 +1007,8 @@
       "help_smoke_failed_count": 0,
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
-      "package_hash_file_count": 173,
-      "package_sha256": "f34bc1b155763d5269ae0ae904de35383fd4d0000006af8ad7a6c85ab7ce4b20"
+      "package_hash_file_count": 174,
+      "package_sha256": "60817db29dd8d235751c67311b180e889b1c79577968883e3cf2df07dcb1875c"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1042,8 +1046,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "f34bc1b155763d5269ae0ae904de35383fd4d0000006af8ad7a6c85ab7ce4b20",
-          "archive_sha256": "2c2f2d3a4fffe1dfc54e282c1058efc1d3476b7de588f8e9167b26a7428a63d2"
+          "package_sha256": "60817db29dd8d235751c67311b180e889b1c79577968883e3cf2df07dcb1875c",
+          "archive_sha256": "5d160bd148b5febdf20537e481703a695dab8d8f8a2cfe21cc1ee101e375546a"
         },
         "compatibility": {
           "openai": "pass",
@@ -1074,7 +1078,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "2c2f2d3a4fffe1dfc54e282c1058efc1d3476b7de588f8e9167b26a7428a63d2",
+          "archive_sha256": "5d160bd148b5febdf20537e481703a695dab8d8f8a2cfe21cc1ee101e375546a",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1090,8 +1094,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "2c2f2d3a4fffe1dfc54e282c1058efc1d3476b7de588f8e9167b26a7428a63d2",
-        "archive_entry_count": 557,
+        "archive_sha256": "5d160bd148b5febdf20537e481703a695dab8d8f8a2cfe21cc1ee101e375546a",
+        "archive_entry_count": 558,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -1102,7 +1106,7 @@
       "ok": true,
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 557,
+        "archive_entry_count": 558,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -1169,12 +1173,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "2c2f2d3a4fffe1dfc54e282c1058efc1d3476b7de588f8e9167b26a7428a63d2"
+            "to": "5d160bd148b5febdf20537e481703a695dab8d8f8a2cfe21cc1ee101e375546a"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "f34bc1b155763d5269ae0ae904de35383fd4d0000006af8ad7a6c85ab7ce4b20"
+            "to": "60817db29dd8d235751c67311b180e889b1c79577968883e3cf2df07dcb1875c"
           }
         ]
       },

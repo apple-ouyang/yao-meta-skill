@@ -77,11 +77,24 @@ def main() -> None:
     assert pending_payload["summary"]["needs_review"], pending_payload
     assert pending_payload["summary"]["answer_revealed_count"] == 0, pending_payload
     assert pending_payload["summary"]["pending_answer_hidden_count"] == 5, pending_payload
+    assert pending_payload["summary"]["reviewer_checklist_count"] == 5, pending_payload
+    assert pending_payload["summary"]["reviewer_checklist_pending_count"] == 5, pending_payload
+    assert pending_payload["summary"]["reviewer_checklist_ready_count"] == 0, pending_payload
+    assert pending_payload["summary"]["reviewer_checklist_invalid_count"] == 0, pending_payload
     assert all(not item["expected_winner_variant"] and not item["expected_revealed"] for item in pending_payload["pairs"]), pending_payload
+    checklist = {item["case_id"]: item for item in pending_payload["reviewer_checklist"]}
+    assert checklist["skill-package-contract"]["readiness"] == "awaiting-decision", checklist["skill-package-contract"]
+    assert checklist["skill-package-contract"]["answer_key_visible"] is False, checklist["skill-package-contract"]
+    assert checklist["skill-package-contract"]["decisions_path"].endswith("tests/tmp_output_review_adjudication/missing_decisions.json"), checklist["skill-package-contract"]
+    assert checklist["skill-package-contract"]["commands"]["write_template"] == "python3 scripts/adjudicate_output_review.py --write-template", checklist["skill-package-contract"]
+    assert checklist["skill-package-contract"]["required_fields"]["winner_variant"].startswith("A or B"), checklist["skill-package-contract"]
     assert "No reviewer decisions recorded yet" in pending_md.read_text(encoding="utf-8"), pending_md
     pending_text = pending_md.read_text(encoding="utf-8")
     assert "| skill-package-contract | pending | hidden | pending |" in pending_text, pending_text
     assert "| skill-package-contract | pending | A | pending |" not in pending_text, pending_text
+    assert "Reviewer Checklist" in pending_text, pending_text
+    assert "Reviewer checklist: `0` ready / `5` total" in pending_text, pending_text
+    assert "answer key visible: `false`" in pending_text, pending_text
 
     template_path = tmp_root / "output_review_decisions.json"
     template_proc = run(
@@ -147,8 +160,12 @@ def main() -> None:
     assert filled_payload["summary"]["agreement_rate"] == 100.0, filled_payload
     assert filled_payload["summary"]["answer_revealed_count"] == 5, filled_payload
     assert filled_payload["summary"]["pending_answer_hidden_count"] == 0, filled_payload
+    assert filled_payload["summary"]["reviewer_checklist_ready_count"] == 5, filled_payload
+    assert filled_payload["summary"]["reviewer_checklist_pending_count"] == 0, filled_payload
     assert all(item["status"] == "match" for item in filled_payload["pairs"]), filled_payload
     assert all(item["expected_winner_variant"] in {"A", "B"} and item["expected_revealed"] for item in filled_payload["pairs"]), filled_payload
+    filled_checklist = {item["case_id"]: item for item in filled_payload["reviewer_checklist"]}
+    assert all(item["readiness"] == "adjudicated" and item["answer_key_visible"] for item in filled_checklist.values()), filled_checklist
 
     invalid = {
         "schema_version": "1.0",
@@ -186,8 +203,12 @@ def main() -> None:
     assert not invalid_payload["ok"], invalid_payload
     assert invalid_payload["summary"]["invalid_decision_count"] == 1, invalid_payload
     assert invalid_payload["summary"]["answer_revealed_count"] == 0, invalid_payload
+    assert invalid_payload["summary"]["reviewer_checklist_invalid_count"] == 1, invalid_payload
     assert invalid_payload["pairs"][0]["expected_winner_variant"] == "", invalid_payload
     assert invalid_payload["pairs"][0]["expected_revealed"] is False, invalid_payload
+    invalid_checklist = {item["case_id"]: item for item in invalid_payload["reviewer_checklist"]}
+    assert invalid_checklist[answer_key["answers"][0]["case_id"]]["readiness"] == "fix-decision", invalid_checklist
+    assert invalid_checklist[answer_key["answers"][0]["case_id"]]["answer_key_visible"] is False, invalid_checklist
     assert invalid_payload["failures"], invalid_payload
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))

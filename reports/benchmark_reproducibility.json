@@ -3,13 +3,12 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "088904f519e04981f30c5c8c225de90a4aee2682",
+  "commit": "810885d70e6ed0fa6b19cd5a0edf971057215f9d",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 31,
+    "changed_file_count": 42,
     "sample": [
-      " M evidence/world_class/README.md",
       " M registry/index.json",
       " M registry/packages/yao-meta-skill.json",
       " M reports/adoption_drift_report.json",
@@ -17,10 +16,11 @@
       " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
+      " M reports/compiled_targets.json",
       " M reports/context_budget.json",
+      " M reports/install_simulation.json",
       " M reports/output_execution_runs.json",
-      " M reports/output_execution_runs.md",
-      " M reports/package_verification.json"
+      " M reports/output_execution_runs.md"
     ]
   },
   "summary": {
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 31
+    "changed_file_count": 42
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -115,8 +115,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7966,
-      "sha256": "9bc795936ec9610a8a6f81e692c8839b9dcac917c9839e1b99c5460ba8919061"
+      "bytes": 7967,
+      "sha256": "c85fa48112afba2e022d3cf25f57e3062299b273bfa378777aaef11b1c84dc5d"
     },
     {
       "label": "blind_review",
@@ -129,8 +129,8 @@
       "label": "review_adjudication",
       "path": "reports/output_review_adjudication.json",
       "exists": true,
-      "bytes": 2431,
-      "sha256": "ddd9af90d42e2858d629ebe3f1d7505a675f7d95517fcd9a965c80102a63158d"
+      "bytes": 9125,
+      "sha256": "5765254c430947c7e2b05883831d7db0b886d607b59f9a8a2602dcfa925f400b"
     },
     {
       "label": "trigger_scorecard",
@@ -150,43 +150,43 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 91959,
-      "sha256": "29451ca6127d5d049f04978928110e97935e100a0e12f125ef7b4d4aae129271"
+      "bytes": 92549,
+      "sha256": "408b3a7c09218f486a29059a28a0aec12016299453ab256d61874e986389cf09"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 19297,
-      "sha256": "f65de3392609ef1e9e2b9dde7991ba0d84b3803b128bd0a1277b2453eb05b41c"
+      "bytes": 19427,
+      "sha256": "809d07d66de33719b160b1a20d3bc86c546b3a69051cc662c840e5d16e10f5b8"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "6f2179a1a51a05a1e4455ed113fa2499e62d643a046aab2735fb516d6f2fad35"
+      "sha256": "2a086d4698852ccd6f99e954f5aebd0fea6e4aad1b5428d5c21fee3a222a56bc"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "69864577d09542dc4b20c4976516c7a6f20bdb95d76dd38e8fcc4f88691bceba"
+      "sha256": "9a48d94965ccaffd9021c0d58f6cdb1542dd0e3472adcc5e8495d3535b75c1a5"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8557,
-      "sha256": "11985a19c3bcbe02fbe0146f57eb11992b3f298e99bad77149f0039787a96f18"
+      "sha256": "5e6e501706588c0eb431d71af38c4789c40991acca4531f667acb6a0610a70c3"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 13946,
-      "sha256": "0fcd7f82c65f1fd85323919e573e3b4910738684440acaf29ed2c6ebe26bd611"
+      "sha256": "ed1be043898a5550be37c93b3d8723dbaf2d537af3005a8a6476ec6d0d266318"
     },
     {
       "label": "world_class_evidence_plan",

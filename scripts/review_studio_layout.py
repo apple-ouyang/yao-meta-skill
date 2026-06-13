@@ -253,6 +253,77 @@ def review_studio_css() -> str:
       margin: 0;
       padding-left: 18px;
     }
+    .output-review-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .output-review-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+    .output-review-card.awaiting-decision,
+    .output-review-card.fix-decision { border-left: 4px solid var(--warn); }
+    .output-review-card.adjudicated { border-left: 4px solid var(--pass); }
+    .output-review-card span,
+    .output-review-card p,
+    .output-review-card dd,
+    .output-review-card li {
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .output-review-card dl {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+    }
+    .output-review-card dt { color: var(--ink); font-size: 14px; }
+    .output-review-card dd { margin: 0; min-width: 0; }
+    .output-review-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .output-review-steps h4 {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .output-review-steps ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .output-review-commands,
+    .output-review-fields {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .output-review-commands li,
+    .output-review-fields li {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      padding: 8px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .output-review-commands code {
+      overflow-wrap: anywhere;
+      white-space: normal;
+      display: block;
+    }
     .world-intake-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -373,7 +444,7 @@ def review_studio_css() -> str:
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .world-evidence-grid, .world-evidence-columns, .world-intake-grid, .world-intake-steps, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-intake-grid, .world-intake-steps, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }

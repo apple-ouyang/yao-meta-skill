@@ -383,7 +383,14 @@ def main() -> None:
     assert full_payload["data"]["output_review_adjudication"]["summary"]["pending_count"] == 5, full_payload["data"]["output_review_adjudication"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["answer_revealed_count"] == 0, full_payload["data"]["output_review_adjudication"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["pending_answer_hidden_count"] == 5, full_payload["data"]["output_review_adjudication"]
+    assert full_payload["data"]["output_review_adjudication"]["summary"]["reviewer_checklist_count"] == 5, full_payload["data"]["output_review_adjudication"]
+    assert full_payload["data"]["output_review_adjudication"]["summary"]["reviewer_checklist_pending_count"] == 5, full_payload["data"]["output_review_adjudication"]
+    assert full_payload["data"]["output_review_adjudication"]["summary"]["reviewer_checklist_ready_count"] == 0, full_payload["data"]["output_review_adjudication"]
     assert all(not item["expected_revealed"] for item in full_payload["data"]["output_review_adjudication"]["pairs"]), full_payload["data"]["output_review_adjudication"]
+    output_review_checklist = full_payload["data"]["output_review_adjudication"]["reviewer_checklist"]
+    assert len(output_review_checklist) == 5, output_review_checklist
+    assert all(not item["answer_key_visible"] for item in output_review_checklist), output_review_checklist
+    assert output_review_checklist[0]["commands"]["adjudicate"] == "python3 scripts/yao.py output-review", output_review_checklist[0]
     assert full_payload["data"]["review_annotations"]["summary"]["annotation_count"] == 0, full_payload["data"]["review_annotations"]
     assert full_payload["data"]["compiled_targets"]["summary"]["target_count"] >= 4, full_payload["data"]["compiled_targets"]
     assert full_payload["data"]["compiled_targets"]["summary"]["block_count"] == 0, full_payload["data"]["compiled_targets"]
@@ -515,6 +522,12 @@ def main() -> None:
     assert "执行证据" in html, html
     assert "盲评包" in html, html[:5000]
     assert "审定报告" in html, html
+    assert "评审清单" in html, html
+    assert "output-review-grid" in html, html
+    assert "awaiting-decision" in html, html
+    assert "答案隐藏" in html, html
+    assert "winner_variant" in html, html
+    assert "python3 scripts/yao.py output-review" in html, html
     assert "答案揭示" in html, html
     assert "答案隐藏" in html, html
     assert "注册审计" in html, html[:3000]

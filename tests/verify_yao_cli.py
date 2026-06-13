@@ -615,6 +615,9 @@ def main() -> None:
     assert output_review_result["ok"], output_review_result
     assert output_review_result["payload"]["summary"]["judgment_count"] == 0, output_review_result
     assert output_review_result["payload"]["summary"]["pending_count"] == 5, output_review_result
+    assert output_review_result["payload"]["summary"]["reviewer_checklist_count"] == 5, output_review_result
+    assert output_review_result["payload"]["summary"]["reviewer_checklist_pending_count"] == 5, output_review_result
+    assert all(not item["answer_key_visible"] for item in output_review_result["payload"]["reviewer_checklist"]), output_review_result
     assert (created / "reports" / "output_review_adjudication.md").exists(), output_review_result
 
     conformance_result = run("conformance", str(created))

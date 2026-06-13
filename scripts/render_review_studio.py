@@ -10,11 +10,11 @@ from review_studio_data import evidence_paths, insight_cards, load_review_data
 from review_studio_formatting import registry_package_summary, render_kv_grid
 from review_studio_gates import add_blockers_from_gate, build_gates, status_label, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
+from review_studio_output_review import render_output_review_section
 from review_studio_world_class import render_world_class_evidence_entries, render_world_class_intake_checklist
 
 
 ROOT = Path(__file__).resolve().parent.parent
-
 
 
 def display_path(skill_dir: Path, path: Path) -> str:
@@ -514,9 +514,12 @@ def render_html(report: dict[str, Any]) -> str:
             "invalid_decision_count",
             "answer_revealed_count",
             "pending_answer_hidden_count",
+            "reviewer_checklist_count",
+            "reviewer_checklist_pending_count",
         ],
         "review adjudication report missing",
     )
+    output_review_section_html = render_output_review_section(report["data"].get("output_review_adjudication", {}))
     blueprint_panel = render_kv_grid(
         blueprint_summary,
         [
@@ -723,6 +726,7 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="panel"><h2>审定报告</h2>{review_panel}</div>
     </section>
 
+    {output_review_section_html}
     <section class="twocol">
       <div class="panel"><h2>发布标准</h2><p>Governed 和 Library 至少需要 5 个 output eval cases，并覆盖 file-backed、near-neighbor、boundary case、execution evidence 和 blind A/B review pack。</p></div>
       <div class="panel"><h2>人工结论</h2><p>没有 reviewer 决策时只显示 pending；只有真实决策文件会进入一致率和分歧统计。</p></div>

@@ -5,13 +5,13 @@ Generated at: `2026-06-14`
 ## Summary
 
 - decision: `pass`
-- python files: `145`
-- scripts: `89`
+- python files: `146`
+- scripts: `90`
 - tests: `56`
-- internal modules: `18`
+- internal modules: `19`
 - CLI scripts: `72`
 - Yao CLI command handlers: `33`
-- largest file lines: `895`
+- largest file lines: `899`
 - hotspots: `0`
 - blockers: `0`
 
@@ -25,8 +25,8 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/render_review_studio.py` | `895` | `cli-script` | `pass` |
-| `tests/verify_yao_cli.py` | `845` | `test` | `pass` |
+| `scripts/render_review_studio.py` | `899` | `cli-script` | `pass` |
+| `tests/verify_yao_cli.py` | `848` | `test` | `pass` |
 | `scripts/yao.py` | `839` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `782` | `internal-module` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |

@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `173`
-- Scripts: `89`
-- Internal script modules: `16`
+- Scanned files: `174`
+- Scripts: `90`
+- Internal script modules: `17`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `173`
-- Package SHA256: `f34bc1b155763d5269ae0ae904de35383fd4d0000006af8ad7a6c85ab7ce4b20`
+- Package hash files: `174`
+- Package SHA256: `60817db29dd8d235751c67311b180e889b1c79577968883e3cf2df07dcb1875c`
 
 ## Failures
 
@@ -125,6 +125,7 @@
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
+| scripts/review_studio_output_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render output review checklist cards. |
 | scripts/review_studio_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render world-class evidence cards. |
 | scripts/review_viewer_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_viewer.py to assemble Review Viewer data before HTML rendering. |
 | scripts/run_conformance_suite.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

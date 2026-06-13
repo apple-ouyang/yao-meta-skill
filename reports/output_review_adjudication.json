@@ -12,7 +12,11 @@
     "pending_answer_hidden_count": 5,
     "agreement_rate": null,
     "needs_review": true,
-    "failure_count": 0
+    "failure_count": 0,
+    "reviewer_checklist_count": 5,
+    "reviewer_checklist_pending_count": 5,
+    "reviewer_checklist_invalid_count": 0,
+    "reviewer_checklist_ready_count": 0
   },
   "reviewer": "",
   "reviewed_at": "",
@@ -74,6 +78,138 @@
       "confidence": null,
       "reason": "",
       "prompt": "Turn the attached release brief source into a governed skill package."
+    }
+  ],
+  "reviewer_checklist": [
+    {
+      "case_id": "skill-package-contract",
+      "readiness": "awaiting-decision",
+      "blocking_reason": "Reviewer has not selected A or B yet; answer key remains hidden.",
+      "status": "pending",
+      "reviewer_winner_variant": "",
+      "answer_key_visible": false,
+      "prompt": "Turn this repeated workflow into a reusable team skill package.",
+      "blind_pack_path": "reports/output_blind_review_pack.json",
+      "decisions_path": "reports/output_review_decisions.json",
+      "commands": {
+        "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+        "adjudicate": "python3 scripts/yao.py output-review",
+        "refresh_review_studio": "python3 scripts/yao.py review-studio ."
+      },
+      "required_fields": {
+        "winner_variant": "A or B after reading only the blind review pack.",
+        "confidence": "Optional number from 0 to 1.",
+        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+      },
+      "privacy_contract": [
+        "Do not paste raw private user data into the decision reason.",
+        "Do not open the answer key before reviewer choices are recorded.",
+        "Leave winner_variant blank when the reviewer is not ready to decide."
+      ]
+    },
+    {
+      "case_id": "output-eval-expectation",
+      "readiness": "awaiting-decision",
+      "blocking_reason": "Reviewer has not selected A or B yet; answer key remains hidden.",
+      "status": "pending",
+      "reviewer_winner_variant": "",
+      "answer_key_visible": false,
+      "prompt": "Upgrade this production skill so we know whether the generated output is better than baseline.",
+      "blind_pack_path": "reports/output_blind_review_pack.json",
+      "decisions_path": "reports/output_review_decisions.json",
+      "commands": {
+        "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+        "adjudicate": "python3 scripts/yao.py output-review",
+        "refresh_review_studio": "python3 scripts/yao.py review-studio ."
+      },
+      "required_fields": {
+        "winner_variant": "A or B after reading only the blind review pack.",
+        "confidence": "Optional number from 0 to 1.",
+        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+      },
+      "privacy_contract": [
+        "Do not paste raw private user data into the decision reason.",
+        "Do not open the answer key before reviewer choices are recorded.",
+        "Leave winner_variant blank when the reviewer is not ready to decide."
+      ]
+    },
+    {
+      "case_id": "ir-before-packaging",
+      "readiness": "awaiting-decision",
+      "blocking_reason": "Reviewer has not selected A or B yet; answer key remains hidden.",
+      "status": "pending",
+      "reviewer_winner_variant": "",
+      "answer_key_visible": false,
+      "prompt": "Package this skill for OpenAI, Claude, Agent Skills, and generic targets.",
+      "blind_pack_path": "reports/output_blind_review_pack.json",
+      "decisions_path": "reports/output_review_decisions.json",
+      "commands": {
+        "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+        "adjudicate": "python3 scripts/yao.py output-review",
+        "refresh_review_studio": "python3 scripts/yao.py review-studio ."
+      },
+      "required_fields": {
+        "winner_variant": "A or B after reading only the blind review pack.",
+        "confidence": "Optional number from 0 to 1.",
+        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+      },
+      "privacy_contract": [
+        "Do not paste raw private user data into the decision reason.",
+        "Do not open the answer key before reviewer choices are recorded.",
+        "Leave winner_variant blank when the reviewer is not ready to decide."
+      ]
+    },
+    {
+      "case_id": "near-neighbor-boundary",
+      "readiness": "awaiting-decision",
+      "blocking_reason": "Reviewer has not selected A or B yet; answer key remains hidden.",
+      "status": "pending",
+      "reviewer_winner_variant": "",
+      "answer_key_visible": false,
+      "prompt": "I only need a one-off summary of these notes, not a reusable process.",
+      "blind_pack_path": "reports/output_blind_review_pack.json",
+      "decisions_path": "reports/output_review_decisions.json",
+      "commands": {
+        "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+        "adjudicate": "python3 scripts/yao.py output-review",
+        "refresh_review_studio": "python3 scripts/yao.py review-studio ."
+      },
+      "required_fields": {
+        "winner_variant": "A or B after reading only the blind review pack.",
+        "confidence": "Optional number from 0 to 1.",
+        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+      },
+      "privacy_contract": [
+        "Do not paste raw private user data into the decision reason.",
+        "Do not open the answer key before reviewer choices are recorded.",
+        "Leave winner_variant blank when the reviewer is not ready to decide."
+      ]
+    },
+    {
+      "case_id": "file-backed-governed-package",
+      "readiness": "awaiting-decision",
+      "blocking_reason": "Reviewer has not selected A or B yet; answer key remains hidden.",
+      "status": "pending",
+      "reviewer_winner_variant": "",
+      "answer_key_visible": false,
+      "prompt": "Turn the attached release brief source into a governed skill package.",
+      "blind_pack_path": "reports/output_blind_review_pack.json",
+      "decisions_path": "reports/output_review_decisions.json",
+      "commands": {
+        "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+        "adjudicate": "python3 scripts/yao.py output-review",
+        "refresh_review_studio": "python3 scripts/yao.py review-studio ."
+      },
+      "required_fields": {
+        "winner_variant": "A or B after reading only the blind review pack.",
+        "confidence": "Optional number from 0 to 1.",
+        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+      },
+      "privacy_contract": [
+        "Do not paste raw private user data into the decision reason.",
+        "Do not open the answer key before reviewer choices are recorded.",
+        "Leave winner_variant blank when the reviewer is not ready to decide."
+      ]
     }
   ],
   "failures": []

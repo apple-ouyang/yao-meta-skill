@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 173,
-    "script_count": 89,
-    "internal_module_count": 16,
+    "scanned_files": 174,
+    "script_count": 90,
+    "internal_module_count": 17,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 173,
-    "package_sha256": "f34bc1b155763d5269ae0ae904de35383fd4d0000006af8ad7a6c85ab7ce4b20"
+    "package_hash_file_count": 174,
+    "package_sha256": "60817db29dd8d235751c67311b180e889b1c79577968883e3cf2df07dcb1875c"
   },
   "failures": [],
   "warnings": [],
@@ -929,6 +929,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_studio_output_review.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_review_studio.py to render output review checklist cards.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/review_studio_world_class.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1327,7 +1341,7 @@
     "checked_count": 73,
     "passed_count": 73,
     "failed_count": 0,
-    "skipped_count": 16,
+    "skipped_count": 17,
     "failed_scripts": [],
     "results": [
       {
@@ -2076,6 +2090,10 @@
       },
       {
         "path": "scripts/review_studio_layout.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/review_studio_output_review.py",
         "reason": "internal module"
       },
       {

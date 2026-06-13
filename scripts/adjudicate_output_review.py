@@ -216,6 +216,96 @@ def build_summary(pairs: list[dict[str, Any]], failures: list[str]) -> dict[str,
     }
 
 
+def checklist_readiness(pair: dict[str, Any]) -> tuple[str, str]:
+    status = pair.get("status")
+    if status in {"match", "disagree"}:
+        return "adjudicated", "Reviewer decision is valid; answer key is revealed for this case."
+    if status == "invalid":
+        return "fix-decision", "Reviewer decision exists but failed validation; answer key remains hidden."
+    return "awaiting-decision", "Reviewer has not selected A or B yet; answer key remains hidden."
+
+
+def build_reviewer_checklist(
+    pairs: list[dict[str, Any]],
+    blind_pack_path: Path,
+    decisions_path: Path,
+) -> list[dict[str, Any]]:
+    checklist = []
+    for pair in pairs:
+        readiness, blocking_reason = checklist_readiness(pair)
+        checklist.append(
+            {
+                "case_id": pair.get("case_id", ""),
+                "readiness": readiness,
+                "blocking_reason": blocking_reason,
+                "status": pair.get("status", "pending"),
+                "reviewer_winner_variant": pair.get("reviewer_winner_variant", ""),
+                "answer_key_visible": bool(pair.get("expected_revealed")),
+                "prompt": pair.get("prompt", ""),
+                "blind_pack_path": display_path(blind_pack_path),
+                "decisions_path": display_path(decisions_path),
+                "commands": {
+                    "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
+                    "adjudicate": "python3 scripts/yao.py output-review",
+                    "refresh_review_studio": "python3 scripts/yao.py review-studio .",
+                },
+                "required_fields": {
+                    "winner_variant": "A or B after reading only the blind review pack.",
+                    "confidence": "Optional number from 0 to 1.",
+                    "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication.",
+                },
+                "privacy_contract": [
+                    "Do not paste raw private user data into the decision reason.",
+                    "Do not open the answer key before reviewer choices are recorded.",
+                    "Leave winner_variant blank when the reviewer is not ready to decide.",
+                ],
+            }
+        )
+    return checklist
+
+
+def add_checklist_summary(summary: dict[str, Any], checklist: list[dict[str, Any]]) -> dict[str, Any]:
+    enriched = dict(summary)
+    enriched["reviewer_checklist_count"] = len(checklist)
+    enriched["reviewer_checklist_pending_count"] = sum(1 for item in checklist if item["readiness"] == "awaiting-decision")
+    enriched["reviewer_checklist_invalid_count"] = sum(1 for item in checklist if item["readiness"] == "fix-decision")
+    enriched["reviewer_checklist_ready_count"] = sum(1 for item in checklist if item["readiness"] == "adjudicated")
+    return enriched
+
+
+def render_reviewer_checklist(checklist: list[dict[str, Any]]) -> list[str]:
+    lines = [
+        "## Reviewer Checklist",
+        "",
+        "| Case | Readiness | Answer key | Decision file |",
+        "| --- | --- | --- | --- |",
+    ]
+    if not checklist:
+        lines.append("| `none` | `adjudicated` | n/a | none |")
+        return lines
+    for item in checklist:
+        answer_key = "visible" if item.get("answer_key_visible") else "hidden"
+        lines.append(
+            f"| `{item['case_id']}` | `{item['readiness']}` | `{answer_key}` | `{item['decisions_path']}` |"
+        )
+    for item in checklist:
+        lines.extend(["", f"### {item['case_id']}", ""])
+        lines.append(f"- readiness: `{item['readiness']}`")
+        lines.append(f"- blocking reason: {item['blocking_reason']}")
+        lines.append(f"- answer key visible: `{str(item['answer_key_visible']).lower()}`")
+        lines.append(f"- blind pack: `{item['blind_pack_path']}`")
+        lines.append(f"- decisions: `{item['decisions_path']}`")
+        lines.extend(["", "#### Commands", ""])
+        for label, command in item.get("commands", {}).items():
+            lines.append(f"- {label}: `{command}`")
+        lines.extend(["", "#### Required Fields", ""])
+        for label, description in item.get("required_fields", {}).items():
+            lines.append(f"- {label}: {description}")
+        lines.extend(["", "#### Privacy Contract", ""])
+        lines.extend(f"- {contract}" for contract in item.get("privacy_contract", []))
+    return lines
+
+
 def render_markdown(payload: dict[str, Any]) -> str:
     summary = payload["summary"]
     lines = [
@@ -230,6 +320,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Invalid decisions: `{summary['invalid_decision_count']}`",
         f"- Answer keys revealed: `{summary['answer_revealed_count']}`",
         f"- Pending/invalid answers hidden: `{summary['pending_answer_hidden_count']}`",
+        f"- Reviewer checklist: `{summary['reviewer_checklist_ready_count']}` ready / `{summary['reviewer_checklist_count']}` total",
         "",
     ]
     if summary["judgment_count"] == 0:
@@ -262,6 +353,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         lines.extend(["", "## Failures", ""])
         for failure in payload["failures"]:
             lines.append(f"- {failure}")
+    lines.extend(["", *render_reviewer_checklist(payload.get("reviewer_checklist", []))])
     lines.extend(
         [
             "",
@@ -314,6 +406,8 @@ def adjudicate_output_review(
         failures.extend(pair_failures)
 
     summary = build_summary(adjudicated_pairs, failures)
+    reviewer_checklist = build_reviewer_checklist(adjudicated_pairs, blind_pack_path, decisions_path)
+    summary = add_checklist_summary(summary, reviewer_checklist)
     payload = {
         "schema_version": "1.0",
         "ok": not failures,
@@ -329,6 +423,7 @@ def adjudicate_output_review(
         },
         "template_written": template_written,
         "pairs": adjudicated_pairs,
+        "reviewer_checklist": reviewer_checklist,
         "failures": failures,
     }
     output_json.parent.mkdir(parents=True, exist_ok=True)
