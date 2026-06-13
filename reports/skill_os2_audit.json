@@ -219,8 +219,8 @@
       "key": "runtime-permission-metadata",
       "label": "Permission Metadata",
       "status": "pass",
-      "current": "4/4 target probes pass; metadata fallback 4",
-      "target": "Packaged adapters expose explicit permission metadata and residual risks",
+      "current": "4/4 target probes pass; metadata fallback 4; installer enforcement 4",
+      "target": "Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available",
       "evidence": [
         {
           "path": "scripts/probe_runtime_permissions.py",
@@ -237,7 +237,7 @@
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
-      "current": "native-enforced targets 0",
+      "current": "native-enforced targets 0; installer-enforced targets 4",
       "target": "At least one target/client enforces approved permissions at runtime",
       "evidence": [
         {
@@ -245,11 +245,15 @@
           "exists": true
         },
         {
+          "path": "reports/install_simulation.json",
+          "exists": true
+        },
+        {
           "path": "security/permission_policy.json",
           "exists": true
         }
       ],
-      "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+      "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
     },
     {
       "key": "skill-atlas",
@@ -281,7 +285,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 563; install failures 0; permission failures 0",
+      "current": "zip entries 567; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {
@@ -407,7 +411,7 @@
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
-      "current": "native-enforced targets 0",
+      "current": "native-enforced targets 0; installer-enforced targets 4",
       "target": "At least one target/client enforces approved permissions at runtime",
       "evidence": [
         {
@@ -415,11 +419,15 @@
           "exists": true
         },
         {
+          "path": "reports/install_simulation.json",
+          "exists": true
+        },
+        {
           "path": "security/permission_policy.json",
           "exists": true
         }
       ],
-      "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+      "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
     },
     {
       "key": "native-client-telemetry",

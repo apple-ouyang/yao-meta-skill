@@ -78,6 +78,9 @@ def permission_state(skill_dir: Path) -> dict[str, Any]:
     return {
         "native_enforcement_count": summary.get("native_enforcement_count", 0),
         "metadata_fallback_count": summary.get("metadata_fallback_count", 0),
+        "installer_enforcement_pass_count": summary.get("installer_enforcement_pass_count", 0),
+        "installer_permission_failure_count": summary.get("installer_permission_failure_count", 0),
+        "installer_enforcement_ready": summary.get("installer_enforcement_ready", False),
         "residual_risk_count": summary.get("residual_risk_count", 0),
         "failure_count": summary.get("failure_count", 0),
         "accepted": summary.get("native_enforcement_count", 0) > 0 and summary.get("failure_count", 0) == 0,
@@ -112,7 +115,7 @@ STATE_LOADERS = {
 PROVENANCE_REQUIREMENTS = {
     "provider-holdout": ["provider-backed model run", "observed timing", "observed token metadata"],
     "human-adjudication": ["real reviewer identity", "blind A/B decisions", "answer key unopened until decisions exist"],
-    "native-permission-enforcement": ["real target or installer guard", "native enforcement flag", "residual risk retained for fallback targets"],
+    "native-permission-enforcement": ["real target client or external installer runtime guard", "native enforcement flag or externally accepted guard proof", "residual risk retained for fallback targets"],
     "native-client-telemetry": ["real external client source", "metadata-only event", "local-first import path"],
 }
 

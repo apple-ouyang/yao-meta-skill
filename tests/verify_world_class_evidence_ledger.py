@@ -87,6 +87,7 @@ def main() -> None:
     assert entries["provider-holdout"]["submission_state"]["ledger_counts_as_completion"] is False, entries["provider-holdout"]
     assert entries["human-adjudication"]["observed_state"]["pending_count"] == 5, entries["human-adjudication"]
     assert entries["native-permission-enforcement"]["observed_state"]["native_enforcement_count"] == 0, entries["native-permission-enforcement"]
+    assert entries["native-permission-enforcement"]["observed_state"]["installer_enforcement_pass_count"] >= 0, entries["native-permission-enforcement"]
     assert any("summary.failure_count == 0" in check for check in entries["native-permission-enforcement"]["success_checks"]), entries["native-permission-enforcement"]
     assert entries["native-client-telemetry"]["observed_state"]["external_source_events"] == 0, entries["native-client-telemetry"]
     for entry in entries.values():

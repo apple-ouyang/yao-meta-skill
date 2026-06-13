@@ -55,7 +55,9 @@ def main() -> None:
     assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("output_review_decisions.json" in command for command in tasks["human-adjudication"]["runbook"]), tasks["human-adjudication"]
     assert any("runtime-permissions" in command for command in tasks["native-permission-enforcement"]["runbook"]), tasks["native-permission-enforcement"]
+    assert any("install-simulate" in command for command in tasks["native-permission-enforcement"]["runbook"]), tasks["native-permission-enforcement"]
     assert any("summary.failure_count == 0" in check for check in tasks["native-permission-enforcement"]["success_checks"]), tasks["native-permission-enforcement"]
+    assert any("installer_enforcement_pass_count" in check for check in tasks["native-permission-enforcement"]["success_checks"]), tasks["native-permission-enforcement"]
     assert any("telemetry_native_host.py" in command for command in tasks["native-client-telemetry"]["runbook"]), tasks["native-client-telemetry"]
     for task in tasks.values():
         assert task["success_checks"], task

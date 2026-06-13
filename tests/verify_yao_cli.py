@@ -821,20 +821,6 @@ def main() -> None:
     assert package_verify_result["payload"]["summary"]["adapter_count"] == 4, package_verify_result
     assert package_verify_result["payload"]["summary"]["archive_sha256"], package_verify_result
 
-    runtime_permissions_result = run(
-        "runtime-permissions",
-        ".",
-        "--package-dir",
-        str(package_zip_dir),
-        "--output-json",
-        str(tmp_root / "runtime_permission_probes.json"),
-        "--output-md",
-        str(tmp_root / "runtime_permission_probes.md"),
-    )
-    assert runtime_permissions_result["ok"], runtime_permissions_result
-    assert runtime_permissions_result["payload"]["summary"]["metadata_fallback_count"] == 4, runtime_permissions_result
-    assert runtime_permissions_result["payload"]["summary"]["native_enforcement_count"] == 0, runtime_permissions_result
-
     install_simulate_result = run(
         "install-simulate",
         ".",
@@ -852,6 +838,25 @@ def main() -> None:
     assert install_simulate_result["ok"], install_simulate_result
     assert install_simulate_result["payload"]["summary"]["archive_extracted"], install_simulate_result
     assert install_simulate_result["payload"]["summary"]["adapter_count"] == 4, install_simulate_result
+
+    runtime_permissions_result = run(
+        "runtime-permissions",
+        ".",
+        "--package-dir",
+        str(package_zip_dir),
+        "--install-simulation-json",
+        str(tmp_root / "install_simulation.json"),
+        "--output-json",
+        str(tmp_root / "runtime_permission_probes_with_install.json"),
+        "--output-md",
+        str(tmp_root / "runtime_permission_probes.md"),
+    )
+    assert runtime_permissions_result["ok"], runtime_permissions_result
+    runtime_install_summary = runtime_permissions_result["payload"]["summary"]
+    assert runtime_install_summary["metadata_fallback_count"] == 4, runtime_install_summary
+    assert runtime_install_summary["native_enforcement_count"] == 0, runtime_install_summary
+    assert runtime_install_summary["installer_enforcement_pass_count"] == 4, runtime_install_summary
+    assert runtime_install_summary["installer_permission_failure_count"] == 0, runtime_install_summary
 
     upgrade_result = run(
         "upgrade-check",

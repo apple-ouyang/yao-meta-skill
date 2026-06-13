@@ -560,6 +560,8 @@ def command_runtime_permissions(args: argparse.Namespace) -> int:
         cmd.extend(["--package-dir", args.package_dir])
     for target in args.target or []:
         cmd.extend(["--target", target])
+    if getattr(args, "install_simulation_json", None):
+        cmd.extend(["--install-simulation-json", args.install_simulation_json])
     if args.output_json:
         cmd.extend(["--output-json", args.output_json])
     if args.output_md:

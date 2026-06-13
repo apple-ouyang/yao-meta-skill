@@ -19,7 +19,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 | --- | --- | --- | --- | --- |
 | `provider-holdout` | `external_required` | `external` | operator with provider credentials | model-executed 0; token-observed 0 |
 | `human-adjudication` | `human_required` | `human` | human reviewer | 0/5 decisions; pending 5 |
-| `native-permission-enforcement` | `external_required` | `external` | target client or installer integrator | native-enforced targets 0 |
+| `native-permission-enforcement` | `external_required` | `external` | target client or installer integrator | native-enforced targets 0; installer-enforced targets 4 |
 | `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 1 |
 
 ## Provider Holdout
@@ -98,14 +98,15 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 ## Native Permission Enforcement
 
-- objective: Prove at least one target or installer enforces approved high-permission capabilities at runtime.
-- audit next action: Integrate a real client or installer runtime guard before claiming native permission enforcement.
+- objective: Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.
+- audit next action: Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.
 
 ### Runbook
 
-- Implement or connect a real target client/installer guard that blocks undeclared network, file_write, or subprocess capabilities.
+- Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.
 - Update the generated target adapter only when the guard is actually enforced by that target.
 - `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip`
+- `python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation`
 - `python3 scripts/yao.py runtime-permissions . --package-dir dist`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.
@@ -115,6 +116,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
 - reports/runtime_permission_probes.json summary.failure_count == 0
+- reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence
 - reports/skill_os2_audit.json item native-permission-enforcement status becomes pass
 
 ### Evidence Artifacts
@@ -122,6 +124,8 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `dist/targets/*/adapter.json`
 - `reports/runtime_permission_probes.json`
 - `reports/runtime_permission_probes.md`
+- `reports/install_simulation.json`
+- `reports/install_simulation.md`
 - `security/permission_policy.json`
 - `evidence/world_class/intake.schema.json`
 - `evidence/world_class/templates/native-permission-enforcement.intake.json`

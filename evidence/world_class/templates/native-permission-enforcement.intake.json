@@ -12,7 +12,13 @@
       "path": "reports/runtime_permission_probes.json",
       "kind": "runtime-probe-report",
       "contains_raw_content": false,
-      "note": "Must show native_enforcement_count > 0 and failure_count == 0."
+      "note": "Must show native_enforcement_count > 0 and failure_count == 0 for target-native completion; installer_enforcement_pass_count is supporting local evidence only."
+    },
+    {
+      "path": "reports/install_simulation.json",
+      "kind": "installer-enforcement-report",
+      "contains_raw_content": false,
+      "note": "Shows local package installer enforcement. This does not replace target-native or external runtime guard evidence."
     },
     {
       "path": "dist/targets/<target>/adapter.json",
@@ -24,7 +30,10 @@
   "provenance": {
     "target": "openai|claude|generic|vscode|other",
     "guard_location": "client or installer component",
-    "metadata_fallback_retained_for_other_targets": true
+    "guard_scope": "target-client-native",
+    "guard_blocks_undeclared_capability": true,
+    "metadata_fallback_retained_for_other_targets": true,
+    "notes": "Use target-client-native for client-enforced guards or external-installer-runtime-guard for a real external installer guard."
   },
   "privacy": {
     "raw_user_content_included": false,

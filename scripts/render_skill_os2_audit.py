@@ -229,8 +229,12 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "runtime-permission-metadata",
             "Permission Metadata",
             status_from(permission_summary.get("target_count", 0) >= 4 and permission_summary.get("fail_count", 1) == 0),
-            f"{permission_summary.get('pass_count', 0)}/{permission_summary.get('target_count', 0)} target probes pass; metadata fallback {permission_summary.get('metadata_fallback_count', 0)}",
-            "Packaged adapters expose explicit permission metadata and residual risks",
+            (
+                f"{permission_summary.get('pass_count', 0)}/{permission_summary.get('target_count', 0)} target probes pass; "
+                f"metadata fallback {permission_summary.get('metadata_fallback_count', 0)}; "
+                f"installer enforcement {permission_summary.get('installer_enforcement_pass_count', 0)}"
+            ),
+            "Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available",
             evidence(skill_dir, "scripts/probe_runtime_permissions.py", "reports/runtime_permission_probes.json"),
             "Preserve residual-risk notes until real native enforcement exists.",
         ),
@@ -238,10 +242,13 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "native-permission-enforcement",
             "Native Permission Enforcement",
             "pass" if permission_summary.get("native_enforcement_count", 0) > 0 else "external_required",
-            f"native-enforced targets {permission_summary.get('native_enforcement_count', 0)}",
+            (
+                f"native-enforced targets {permission_summary.get('native_enforcement_count', 0)}; "
+                f"installer-enforced targets {permission_summary.get('installer_enforcement_pass_count', 0)}"
+            ),
             "At least one target/client enforces approved permissions at runtime",
-            evidence(skill_dir, "reports/runtime_permission_probes.json", "security/permission_policy.json"),
-            "Integrate a real client or installer runtime guard before claiming native permission enforcement.",
+            evidence(skill_dir, "reports/runtime_permission_probes.json", "reports/install_simulation.json", "security/permission_policy.json"),
+            "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.",
         ),
         audit_item(
             "skill-atlas",

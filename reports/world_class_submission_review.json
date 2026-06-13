@@ -110,6 +110,9 @@
       "observed_state": {
         "native_enforcement_count": 0,
         "metadata_fallback_count": 4,
+        "installer_enforcement_pass_count": 4,
+        "installer_permission_failure_count": 0,
+        "installer_enforcement_ready": true,
         "residual_risk_count": 4,
         "failure_count": 0,
         "accepted": false
@@ -117,13 +120,14 @@
       "success_checks": [
         "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
         "reports/runtime_permission_probes.json summary.failure_count == 0",
+        "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
         "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass"
       ],
       "privacy_contract": [
         "Do not mark native_enforcement true for metadata-only fallbacks.",
         "Keep residual risks visible for targets that still rely on operator enforcement."
       ],
-      "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+      "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
     },
     {
       "evidence_key": "native-client-telemetry",

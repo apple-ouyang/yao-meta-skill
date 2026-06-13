@@ -24,7 +24,7 @@ This ledger records the current evidence state. It does not treat planned work, 
 | --- | --- | --- | --- | --- | --- |
 | `provider-holdout` | `pending` | `missing` | `external` | model-executed 0; token-observed 0 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `pending` | `missing` | `human` | 0/5 decisions; pending 5 | Record real A/B choices in the decision template, then regenerate adjudication. |
-| `native-permission-enforcement` | `pending` | `missing` | `external` | native-enforced targets 0 | Integrate a real client or installer runtime guard before claiming native permission enforcement. |
+| `native-permission-enforcement` | `pending` | `missing` | `external` | native-enforced targets 0; installer-enforced targets 4 | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 1 | Install a real client against the native host and import production metadata-only events. |
 
 ## Provider Holdout
@@ -79,21 +79,22 @@ This ledger records the current evidence state. It does not treat planned work, 
 
 ## Native Permission Enforcement
 
-- objective: Prove at least one target or installer enforces approved high-permission capabilities at runtime.
+- objective: Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.
 - source status: `external_required`
-- observed state: `{"native_enforcement_count": 0, "metadata_fallback_count": 4, "residual_risk_count": 4, "failure_count": 0, "accepted": false}`
+- observed state: `{"native_enforcement_count": 0, "metadata_fallback_count": 4, "installer_enforcement_pass_count": 4, "installer_permission_failure_count": 0, "installer_enforcement_ready": true, "residual_risk_count": 4, "failure_count": 0, "accepted": false}`
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-permission-enforcement.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
 
-- real target or installer guard
-- native enforcement flag
+- real target client or external installer runtime guard
+- native enforcement flag or externally accepted guard proof
 - residual risk retained for fallback targets
 
 ### Success Checks
 
 - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
 - reports/runtime_permission_probes.json summary.failure_count == 0
+- reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence
 - reports/skill_os2_audit.json item native-permission-enforcement status becomes pass
 
 ### Privacy Contract

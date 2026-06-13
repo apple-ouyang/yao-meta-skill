@@ -117,6 +117,17 @@ def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> No
         )
         add_error(
             errors,
+            str(provenance.get("guard_scope", "")).strip()
+            in {"target-client-native", "external-installer-runtime-guard"},
+            "native-permission-enforcement provenance.guard_scope must be target-client-native or external-installer-runtime-guard",
+        )
+        add_error(
+            errors,
+            provenance.get("guard_blocks_undeclared_capability") is True,
+            "native-permission-enforcement must attest guard_blocks_undeclared_capability is true",
+        )
+        add_error(
+            errors,
             provenance.get("metadata_fallback_retained_for_other_targets") is True,
             "native-permission-enforcement must retain metadata fallback for non-native targets",
         )

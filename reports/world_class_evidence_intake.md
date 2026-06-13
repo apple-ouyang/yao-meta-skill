@@ -38,7 +38,7 @@ This report validates the intake contract for human and external evidence. A val
 | --- | --- | --- | --- |
 | `provider-holdout` | `awaiting-submission` | `missing` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `awaiting-submission` | `missing` | Record real A/B choices in the decision template, then regenerate adjudication. |
-| `native-permission-enforcement` | `awaiting-submission` | `missing` | Integrate a real client or installer runtime guard before claiming native permission enforcement. |
+| `native-permission-enforcement` | `awaiting-submission` | `missing` | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `awaiting-submission` | `missing` | Install a real client against the native host and import production metadata-only events. |
 
 ### Provider Holdout
@@ -137,17 +137,20 @@ This report validates the intake contract for human and external evidence. A val
 #### Must Collect
 
 - provenance_requirements:
-  - real target or installer guard
-  - native enforcement flag
+  - real target client or external installer runtime guard
+  - native enforcement flag or externally accepted guard proof
   - residual risk retained for fallback targets
 - success_checks:
   - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
   - reports/runtime_permission_probes.json summary.failure_count == 0
+  - reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence
   - reports/skill_os2_audit.json item native-permission-enforcement status becomes pass
 - evidence_artifacts:
   - dist/targets/*/adapter.json
   - reports/runtime_permission_probes.json
   - reports/runtime_permission_probes.md
+  - reports/install_simulation.json
+  - reports/install_simulation.md
   - security/permission_policy.json
   - evidence/world_class/intake.schema.json
   - evidence/world_class/templates/native-permission-enforcement.intake.json

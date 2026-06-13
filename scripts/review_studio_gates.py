@@ -372,6 +372,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             f"{runtime_permissions_summary.get('pass_count', 0)}/{runtime_permissions_summary.get('target_count', 0)} targets probed; "
             f"native {runtime_permissions_summary.get('native_enforcement_count', 0)}; "
             f"metadata fallback {runtime_permissions_summary.get('metadata_fallback_count', 0)}; "
+            f"installer {runtime_permissions_summary.get('installer_enforcement_pass_count', 0)}; "
             f"residual risks {runtime_permissions_summary.get('residual_risk_count', 0)}"
         )
     gates.append(

@@ -31,7 +31,6 @@ def link_from(output_html: Path, target: Path) -> str:
     return os.path.relpath(target.resolve(), output_html.parent.resolve())
 
 
-
 def find_line(path: Path, patterns: list[str] | None = None) -> int | None:
     if not path.exists():
         return None
@@ -558,7 +557,10 @@ def render_html(report: dict[str, Any]) -> str:
     )
     runtime_boundary_panel = render_kv_grid(
         runtime_permissions_summary,
-        ["target_count", "pass_count", "native_enforcement_count", "metadata_fallback_count", "residual_risk_count", "failure_count"],
+        [
+            "target_count", "pass_count", "native_enforcement_count", "metadata_fallback_count",
+            "installer_enforcement_pass_count", "installer_permission_failure_count", "residual_risk_count", "failure_count",
+        ],
         "runtime permission probe summary missing",
     )
     adoption_panel = render_kv_grid(
@@ -892,7 +894,6 @@ def main() -> None:
     output_json = Path(args.output_json).resolve() if args.output_json else None
     payload = render_review_studio(Path(args.skill_dir), output_html=output_html, output_json=output_json)
     print(json.dumps(payload, ensure_ascii=False, indent=2))
-
 
 if __name__ == "__main__":
     main()

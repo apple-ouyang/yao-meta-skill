@@ -210,7 +210,10 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
         {
             "label": "Perm Probe",
             "value": f"{runtime_permissions.get('metadata_fallback_count', 0)}/{runtime_permissions.get('target_count', 0)}",
-            "detail": f"{runtime_permissions.get('native_enforcement_count', 0)} native enforcement targets",
+            "detail": (
+                f"{runtime_permissions.get('native_enforcement_count', 0)} native; "
+                f"{runtime_permissions.get('installer_enforcement_pass_count', 0)} installer-enforced"
+            ),
         },
         {
             "label": "Trust",

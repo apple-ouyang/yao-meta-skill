@@ -69,23 +69,27 @@ TASK_TEMPLATES: dict[str, dict[str, Any]] = {
     "native-permission-enforcement": {
         "category": "external",
         "owner": "target client or installer integrator",
-        "objective": "Prove at least one target or installer enforces approved high-permission capabilities at runtime.",
+        "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
         "runbook": [
-            "Implement or connect a real target client/installer guard that blocks undeclared network, file_write, or subprocess capabilities.",
+            "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
             "Update the generated target adapter only when the guard is actually enforced by that target.",
             "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip",
+            "python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation",
             "python3 scripts/yao.py runtime-permissions . --package-dir dist",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         ],
         "success_checks": [
             "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
             "reports/runtime_permission_probes.json summary.failure_count == 0",
+            "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
             "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass",
         ],
         "evidence_artifacts": [
             "dist/targets/*/adapter.json",
             "reports/runtime_permission_probes.json",
             "reports/runtime_permission_probes.md",
+            "reports/install_simulation.json",
+            "reports/install_simulation.md",
             "security/permission_policy.json",
         ],
         "privacy_contract": [

@@ -100,7 +100,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 350 个词/字，references 约 15394 个词/字。",
+        "入口约 350 个词/字，references 约 15431 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -204,7 +204,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 350 个词/字，references 约 15394 个词/字。"
+      "上下文成本需要补强：入口约 350 个词/字，references 约 15431 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -934,9 +934,9 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 59
+      "changed_file_count": 63
     },
-    "commit": "ecdb16dd90025bcca3051be4c6a1b5b723c7ec75",
+    "commit": "0cf7f32e32e2b5654a4d03cf91f025446e6d5b7b",
     "missing_artifacts": [],
     "limitations": [
       "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -959,7 +959,15 @@
       "metadata_fallback_count": 4,
       "residual_risk_count": 4,
       "required_capability_count": 3,
-      "failure_count": 0
+      "failure_count": 0,
+      "installer_enforcement_source_status": "present",
+      "installer_enforcement_target_count": 4,
+      "installer_enforcement_pass_count": 4,
+      "installer_permission_enforced_count": 12,
+      "installer_permission_failure_count": 0,
+      "installer_permission_capability_count": 3,
+      "world_class_native_evidence_ready": false,
+      "installer_enforcement_ready": true
     },
     "expected_capabilities": [
       "file_write",
@@ -1032,7 +1040,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 177,
-    "package_sha256": "7645bfc56829c3d6888e792b170b2e734d041c930c31f7f285c0d59e49d7de1b"
+    "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1070,8 +1078,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "7645bfc56829c3d6888e792b170b2e734d041c930c31f7f285c0d59e49d7de1b",
-        "archive_sha256": "cb1ac8c62bc5dee942a88f18eb5d71c93ae58f854ac19f3d912f9c9c3a4ec24e"
+        "package_sha256": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492",
+        "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
       },
       "compatibility": {
         "openai": "pass",
@@ -1102,12 +1110,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "cb1ac8c62bc5dee942a88f18eb5d71c93ae58f854ac19f3d912f9c9c3a4ec24e",
+        "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-13"
+      "generated_at": "2026-06-14"
     },
     "failures": [],
     "warnings": []
@@ -1118,8 +1126,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "cb1ac8c62bc5dee942a88f18eb5d71c93ae58f854ac19f3d912f9c9c3a4ec24e",
-      "archive_entry_count": 563,
+      "archive_sha256": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34",
+      "archive_entry_count": 567,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1197,12 +1205,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "cb1ac8c62bc5dee942a88f18eb5d71c93ae58f854ac19f3d912f9c9c3a4ec24e"
+          "to": "2fbe2e4a06aa71dacd59865cf34adb163940972d04316ebbeb479a83cb46bd34"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "7645bfc56829c3d6888e792b170b2e734d041c930c31f7f285c0d59e49d7de1b"
+          "to": "09013a0df3555b5f1ef58254c1bc78ebd2383f8efbfe67a7a9c1010a172fb492"
         }
       ]
     },
@@ -1412,12 +1420,13 @@
         "status": "external_required",
         "category": "external",
         "owner": "target client or installer integrator",
-        "current": "native-enforced targets 0",
-        "objective": "Prove at least one target or installer enforces approved high-permission capabilities at runtime.",
+        "current": "native-enforced targets 0; installer-enforced targets 4",
+        "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
         "runbook": [
-          "Implement or connect a real target client/installer guard that blocks undeclared network, file_write, or subprocess capabilities.",
+          "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
           "Update the generated target adapter only when the guard is actually enforced by that target.",
           "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip",
+          "python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation",
           "python3 scripts/yao.py runtime-permissions . --package-dir dist",
           "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
           "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
@@ -1426,12 +1435,15 @@
         "success_checks": [
           "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
           "reports/runtime_permission_probes.json summary.failure_count == 0",
+          "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
           "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass"
         ],
         "evidence_artifacts": [
           "dist/targets/*/adapter.json",
           "reports/runtime_permission_probes.json",
           "reports/runtime_permission_probes.md",
+          "reports/install_simulation.json",
+          "reports/install_simulation.md",
           "security/permission_policy.json",
           "evidence/world_class/intake.schema.json",
           "evidence/world_class/templates/native-permission-enforcement.intake.json",
@@ -1442,7 +1454,7 @@
           "Do not mark native_enforcement true for metadata-only fallbacks.",
           "Keep residual risks visible for targets that still rely on operator enforcement."
         ],
-        "audit_next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+        "audit_next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
       },
       {
         "key": "native-client-telemetry",
@@ -1627,22 +1639,25 @@
         "owner": "target client or installer integrator",
         "status": "pending",
         "source_status": "external_required",
-        "current": "native-enforced targets 0",
-        "objective": "Prove at least one target or installer enforces approved high-permission capabilities at runtime.",
+        "current": "native-enforced targets 0; installer-enforced targets 4",
+        "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
         "provenance_requirements": [
-          "real target or installer guard",
-          "native enforcement flag",
+          "real target client or external installer runtime guard",
+          "native enforcement flag or externally accepted guard proof",
           "residual risk retained for fallback targets"
         ],
         "success_checks": [
           "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
           "reports/runtime_permission_probes.json summary.failure_count == 0",
+          "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
           "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass"
         ],
         "evidence_artifacts": [
           "dist/targets/*/adapter.json",
           "reports/runtime_permission_probes.json",
           "reports/runtime_permission_probes.md",
+          "reports/install_simulation.json",
+          "reports/install_simulation.md",
           "security/permission_policy.json",
           "evidence/world_class/intake.schema.json",
           "evidence/world_class/templates/native-permission-enforcement.intake.json",
@@ -1656,6 +1671,9 @@
         "observed_state": {
           "native_enforcement_count": 0,
           "metadata_fallback_count": 4,
+          "installer_enforcement_pass_count": 4,
+          "installer_permission_failure_count": 0,
+          "installer_enforcement_ready": true,
           "residual_risk_count": 4,
           "failure_count": 0,
           "accepted": false
@@ -1674,7 +1692,7 @@
           "pending_review_counts_as_human_decision": false,
           "local_command_runner_counts_as_provider_model": false
         },
-        "next_action": "Integrate a real client or installer runtime guard before claiming native permission enforcement."
+        "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
       },
       {
         "key": "native-client-telemetry",

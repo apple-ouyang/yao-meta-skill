@@ -52,6 +52,7 @@ def main() -> None:
     assert items["provider-holdout"]["status"] == "external_required", items["provider-holdout"]
     assert items["human-adjudication"]["status"] == "human_required", items["human-adjudication"]
     assert items["native-permission-enforcement"]["status"] == "external_required", items["native-permission-enforcement"]
+    assert "installer-enforced targets" in items["native-permission-enforcement"]["current"], items["native-permission-enforcement"]
     assert items["native-client-telemetry"]["status"] == "external_required", items["native-client-telemetry"]
     assert any(entry["path"] == "scripts/provider_output_eval_runner.py" and entry["exists"] for entry in items["provider-holdout"]["evidence"])
     assert any(entry["path"] == "reports/benchmark_reproducibility.json" and entry["exists"] for entry in items["benchmark-reproducibility"]["evidence"])

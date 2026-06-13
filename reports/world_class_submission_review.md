@@ -23,7 +23,7 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 | --- | --- | --- | --- | --- | --- |
 | `provider-holdout` | `awaiting-submission` | `missing` | `false` | `missing` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
 | `human-adjudication` | `awaiting-submission` | `missing` | `false` | `missing` | Record real A/B choices in the decision template, then regenerate adjudication. |
-| `native-permission-enforcement` | `awaiting-submission` | `missing` | `false` | `missing` | Integrate a real client or installer runtime guard before claiming native permission enforcement. |
+| `native-permission-enforcement` | `awaiting-submission` | `missing` | `false` | `missing` | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `awaiting-submission` | `missing` | `false` | `missing` | Install a real client against the native host and import production metadata-only events. |
 
 ## Details
@@ -94,6 +94,7 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 
 - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
 - reports/runtime_permission_probes.json summary.failure_count == 0
+- reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence
 - reports/skill_os2_audit.json item native-permission-enforcement status becomes pass
 
 #### Intake Errors
