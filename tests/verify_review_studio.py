@@ -110,6 +110,27 @@ def main() -> None:
     subprocess.run(
         [
             sys.executable,
+            str(ROOT / "scripts" / "render_adoption_drift_report.py"),
+            str(ROOT),
+            "--events-jsonl",
+            str(tmp_root / "telemetry_events.jsonl"),
+            "--record-event",
+            "skill_activation",
+            "--activation-type",
+            "explicit",
+            "--outcome",
+            "accepted",
+            "--timestamp",
+            "2026-06-13T10:00:00Z",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    subprocess.run(
+        [
+            sys.executable,
             str(ROOT / "scripts" / "build_skill_atlas.py"),
             "--workspace-root",
             str(ROOT),
@@ -155,27 +176,6 @@ def main() -> None:
     (ROOT / "reports" / "upgrade_check.md").write_text(
         (tmp_root / "upgrade_check.md").read_text(encoding="utf-8"),
         encoding="utf-8",
-    )
-    subprocess.run(
-        [
-            sys.executable,
-            str(ROOT / "scripts" / "render_adoption_drift_report.py"),
-            str(ROOT),
-            "--events-jsonl",
-            str(tmp_root / "telemetry_events.jsonl"),
-            "--record-event",
-            "skill_activation",
-            "--activation-type",
-            "explicit",
-            "--outcome",
-            "accepted",
-            "--timestamp",
-            "2026-06-13T10:00:00Z",
-        ],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
     )
     subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "render_review_waivers.py"), str(ROOT), "--generated-at", "2026-06-13"],
