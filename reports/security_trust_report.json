@@ -2,15 +2,15 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 152,
-    "script_count": 68,
+    "scanned_files": 153,
+    "script_count": 69,
     "internal_module_count": 9,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
     ],
-    "network_script_count": 2,
-    "network_policy_covered_count": 2,
+    "network_script_count": 3,
+    "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
     "file_write_script_count": 47,
     "permission_required_count": 3,
@@ -18,12 +18,12 @@
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 59,
+    "help_smoke_checked_count": 60,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 152,
-    "package_sha256": "d3721906bd83d0eb632808bcebb95dc535ebe0476662ba7541e85e9febb6f6b0"
+    "package_hash_file_count": 153,
+    "package_sha256": "2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368"
   },
   "failures": [],
   "warnings": [],
@@ -331,6 +331,24 @@
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
+    },
+    {
+      "path": "scripts/provider_output_eval_runner.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": true,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [
+        "https://api.openai.com/v1/responses"
+      ],
+      "network_hosts": [
+        "api.openai.com"
+      ]
     },
     {
       "path": "scripts/registry_audit.py",
@@ -1008,10 +1026,11 @@
     "present": true,
     "path": "security/network_policy.json",
     "schema_version": "1.0",
-    "network_script_count": 2,
+    "network_script_count": 3,
     "covered_scripts": [
       "scripts/check_update.py",
-      "scripts/github_benchmark_scan.py"
+      "scripts/github_benchmark_scan.py",
+      "scripts/provider_output_eval_runner.py"
     ],
     "missing_scripts": [],
     "mismatches": [],
@@ -1024,9 +1043,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 59,
-    "checked_count": 59,
-    "passed_count": 59,
+    "candidate_count": 60,
+    "checked_count": 60,
+    "passed_count": 60,
     "failed_count": 0,
     "skipped_count": 9,
     "failed_scripts": [],
@@ -1239,6 +1258,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: promotion_checker.py [-h] [--optimization-suite OPTIMIZATION_SUITE]\n                            [--route-scorecard ROUTE_SCORECARD]\n                            [--output-json OUTPUT_JSON]\n                            [--output-md OUTP",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/provider_output_eval_runner.py",
+        "command": "python3 scripts/provider_output_eval_runner.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: provider_output_eval_runner.py [-h] [--provider PROVIDER]\n                                      [--base-url BASE_URL] [--model MODEL]\n                                      [--api-key-env API_KEY_ENV]\n                                 ",
         "stderr_excerpt": ""
       },
       {
@@ -1690,7 +1719,8 @@
         "status": "approved",
         "scripts": [
           "scripts/check_update.py",
-          "scripts/github_benchmark_scan.py"
+          "scripts/github_benchmark_scan.py",
+          "scripts/provider_output_eval_runner.py"
         ],
         "reviewer": "Yao Team",
         "scope": "Only scripts declared in security/network_policy.json may perform outbound requests.",

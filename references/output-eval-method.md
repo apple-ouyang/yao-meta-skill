@@ -69,6 +69,16 @@ python3 scripts/yao.py output-exec --runner-command '["python3","scripts/local_o
 
 This verifies the command-runner contract, timing capture, grading path, and failure handling. It must not be described as provider-backed model evidence.
 
+For provider-backed evidence, use the bundled provider runner with real credentials:
+
+```bash
+YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini \
+OPENAI_API_KEY=... \
+python3 scripts/yao.py output-exec --provider-runner openai
+```
+
+The provider runner calls an OpenAI Responses API compatible endpoint, reads input files relative to `evals/output/`, returns `execution_kind: "model"`, and records observed token usage when the provider returns usage fields. If the API key or model is missing, the runner must fail instead of falling back to fixtures or pretending model evidence exists. Use `--provider-base-url` only for reviewed compatible endpoints; non-default HTTPS hosts require `--allow-custom-base-url`, and plain HTTP is allowed only with `--allow-insecure-localhost` for local test servers.
+
 ## Blind A/B Review
 
 Every output eval run should also generate:

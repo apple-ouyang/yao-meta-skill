@@ -29,8 +29,9 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Review Annotations v0 for reviewer comments tied to Review Studio gates, source/report paths, and optional line numbers; open blocker annotations now block the Review Studio decision.
 - Review Studio now avoids over-claiming release readiness when blind A/B adjudication is still pending: the root Meta Skill is in `review` with score `92`, no blockers, two warnings, and explicit actions for Output Lab reviewer adjudication plus waiver handling.
 - Review Studio Output Lab actions now link directly to `reports/output_review_decisions.json`, so pending blind A/B reviewer decisions have a concrete template instead of only a general adjudication warning.
+- Provider Output Eval Runner v0 so `python3 scripts/yao.py output-exec --provider-runner openai` can collect real provider-backed model evidence through a reviewed OpenAI Responses API compatible runner instead of ad hoc shell glue.
 
-This is still not the final world-class state. Target-native behavior contracts are now explicit and local output-eval command execution is wired, and Review Studio now keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, provider-backed model-executed output eval, real human adjudication decisions, and native runtime permission enforcement remain open.
+This is still not the final world-class state. Target-native behavior contracts are now explicit, local output-eval command execution is wired, and a provider-backed output runner exists. Review Studio now keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
 
 ## Coverage Matrix
 
@@ -38,7 +39,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 | --- | --- | --- |
 | Skill IR | `skill-ir/schema.json`, `skill-ir/examples/yao-meta-skill.json`, `scripts/export_skill_ir.py` | v0 landed |
 | Target Compiler | `scripts/compile_skill.py`, `reports/compiled_targets.md`, `tests/verify_compile_skill.py` | v0 landed |
-| Output Eval Lab | `evals/output/cases.jsonl`, `scripts/run_output_eval.py`, `scripts/run_output_execution.py`, `scripts/local_output_eval_runner.py`, `scripts/adjudicate_output_review.py`, `reports/output_quality_scorecard.md`, `reports/output_execution_runs.md`, `reports/output_blind_review_pack.md`, `reports/output_blind_answer_key.json`, `reports/output_review_decisions.json`, `reports/output_review_adjudication.md` | v0 landed |
+| Output Eval Lab | `evals/output/cases.jsonl`, `scripts/run_output_eval.py`, `scripts/run_output_execution.py`, `scripts/local_output_eval_runner.py`, `scripts/provider_output_eval_runner.py`, `scripts/adjudicate_output_review.py`, `reports/output_quality_scorecard.md`, `reports/output_execution_runs.md`, `reports/output_blind_review_pack.md`, `reports/output_blind_answer_key.json`, `reports/output_review_decisions.json`, `reports/output_review_adjudication.md` | v0 landed |
 | Benchmark methodology | `reports/benchmark_methodology.md` | v0 landed |
 | Runtime Conformance | `scripts/run_conformance_suite.py`, `reports/conformance_matrix.md` | v0 landed |
 | Trust & Security | `scripts/trust_check.py`, `reports/security_trust_report.md`, `security/*.md` | v0 landed |
@@ -68,9 +69,9 @@ Next move: deepen provider-native execution transforms so OpenAI, Claude, VS Cod
 
 ### 2. Output eval now has command-runner evidence, but provider model execution is still open
 
-The v0 cases now cover five scenarios, including near-neighbor and file-backed governed package cases. Each run emits assertion grading, execution provenance, a blind A/B review pack that hides baseline vs with-skill labels, a separate answer key, and an adjudication report from reviewer choices. The current root execution report now runs all `10` variants through `scripts/local_output_eval_runner.py`, so timing and command-runner behavior are observed instead of relying only on static recorded fixtures. It still intentionally reports `0` provider-backed model-executed runs and `10` estimated token counts, because the local runner verifies the harness contract without pretending to be a model provider. The current root adjudication report intentionally records `0 / 5` human judgments pending instead of pretending human review happened. The next gap is provider-backed model-executed holdout runs with real provider timing/tokens and real reviewer decision records.
+The v0 cases now cover five scenarios, including near-neighbor and file-backed governed package cases. Each run emits assertion grading, execution provenance, a blind A/B review pack that hides baseline vs with-skill labels, a separate answer key, and an adjudication report from reviewer choices. The current root execution report now runs all `10` variants through `scripts/local_output_eval_runner.py`, so timing and command-runner behavior are observed instead of relying only on static recorded fixtures. The new `scripts/provider_output_eval_runner.py` gives teams a reviewed OpenAI Responses API compatible path for real model execution. The root evidence still intentionally reports `0` provider-backed model-executed runs and `10` estimated token counts, because no real provider holdout run has been recorded in this release evidence. The current root adjudication report intentionally records `0 / 5` human judgments pending instead of pretending human review happened. The next gap is running provider-backed holdout cases with real provider timing/tokens and recording real reviewer decision records.
 
-Next move: add provider-backed model execution for holdout cases and one real multi-file fixture with actual reviewer decisions.
+Next move: run provider-backed holdout cases with real credentials and one real multi-file fixture, then record actual reviewer decisions.
 
 ### 3. Review Studio is unified and now has reviewer actions plus annotations
 
@@ -94,18 +95,18 @@ Next move: add real client or installer permission enforcement integration.
 
 | Gate | Current Result |
 | --- | --- |
-| Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs, `10` estimated token counts, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, and `0 / 5` reviewer decisions pending |
+| Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, and `0 / 5` reviewer decisions pending |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | compiled target contracts generated for OpenAI, Claude, generic, and Agent Skills compatible outputs, including target permission contracts and target-native behavior contracts |
-| Trust | `0` secret findings, `1` pinned dependency file, `3` declared internal modules, `2 / 2` network-capable scripts covered by bounded host policy, `59 / 59` CLI help smoke checks passing across `62` scripts, source-contract hash scope explicit |
+| Trust | `0` secret findings, `1` pinned dependency file, `9` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `60 / 60` CLI help smoke checks passing across `69` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `3 / 3` target adapters probed, `0` native-enforcement adapters, `3` explicit metadata fallbacks, `3` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `3 / 3` target adapters present, archive verified, `490` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `490` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `3` adapters readable, `0` failures, `0` warnings |
+| Package Verification | `3 / 3` target adapters present, archive verified, `492` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `492` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `3` adapters readable, `0` failures, `0` warnings |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
-| Adoption Drift | `1` metadata-only activation event, adoption `100`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
+| Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
 | Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0 |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
 | Review Studio | decision `review`, world-class score `92`, `13` gates, `0` blockers, `2` warnings, `2` review actions, `0` open annotation blockers |
@@ -117,6 +118,6 @@ Next move: add real client or installer permission enforcement integration.
 
 1. Deepen target-native behavior contracts into provider-native execution and installer integrations.
 2. Add native client or installer enforcement for approved high-permission capabilities.
-3. Expand Output Eval Lab from local command-runner evidence to provider-backed model holdout and real reviewer-adjudicated cases; record the current blind A/B decisions before claiming fully ready status.
+3. Run the new provider-backed output runner against holdout cases with real credentials, then record the current blind A/B decisions before claiming fully ready status.
 4. Add real reviewer annotation records during the next human review pass.
 5. Connect Skill Atlas with real client telemetry and drift history.

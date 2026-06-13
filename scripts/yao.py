@@ -16,6 +16,7 @@ from yao_cli_config import (
     discovery_summary,
     infer_archetype,
     local_output_runner_command,
+    provider_output_runner_command,
     recommendation_from_synthesis,
     reference_visibility,
     resolve_promotion_target,
@@ -839,7 +840,29 @@ def command_output_execution(args: argparse.Namespace) -> int:
         cmd.extend(["--output-json", args.output_json])
     if args.output_md:
         cmd.extend(["--output-md", args.output_md])
-    if args.runner_command:
+    if args.runner_command and args.provider_runner:
+        payload = {
+            "schema_version": "1.0",
+            "ok": False,
+            "failures": ["Use either --runner-command or --provider-runner, not both."],
+        }
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
+        return 2
+    if args.provider_runner:
+        cmd.extend(
+            [
+                "--runner-command",
+                provider_output_runner_command(
+                    args.provider_runner,
+                    model=args.provider_model,
+                    base_url=args.provider_base_url,
+                    api_key_env=args.api_key_env,
+                    allow_insecure_localhost=args.allow_insecure_localhost,
+                    allow_custom_base_url=args.allow_custom_base_url,
+                ),
+            ]
+        )
+    elif args.runner_command:
         cmd.extend(["--runner-command", args.runner_command])
     if args.timeout_seconds is not None:
         cmd.extend(["--timeout-seconds", str(args.timeout_seconds)])

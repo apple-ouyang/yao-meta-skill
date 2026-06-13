@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-13T11:30:09Z",
+  "generated_at": "2026-06-13T12:00:19Z",
   "skill_dir": ".",
   "privacy_contract": {
     "storage": "local-first",
@@ -25,6 +25,7 @@
   },
   "summary": {
     "event_count": 1,
+    "adoption_sample_count": 1,
     "activation_count": 1,
     "accepted_count": 1,
     "edited_count": 0,
@@ -48,6 +49,7 @@
     {
       "skill": "yao-meta-skill",
       "events": 1,
+      "adoption_events": 1,
       "accepted": 1,
       "edited": 0,
       "rejected": 0,

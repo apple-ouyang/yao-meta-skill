@@ -45,6 +45,8 @@ def main() -> None:
     assert yao_cli_config.infer_archetype("Standardize team review workflow.", "")[0] == "production"
     assert yao_cli_config.infer_archetype("Govern release policy.", "")[0] == "governed"
     assert "--entry" in yao_cli_config.baseline_compare_args()
+    assert "scripts/provider_output_eval_runner.py" in yao_cli_config.provider_output_runner_command("openai")
+    assert "--allow-custom-base-url" in yao_cli_config.provider_output_runner_command("openai", allow_custom_base_url=True)
     assert yao_cli_parser.SCRIPT_INTERFACE == "internal-module"
     parser_help = yao_cli_module.build_parser().format_help()
     assert "quickstart" in parser_help, parser_help
@@ -374,6 +376,16 @@ def main() -> None:
     assert output_exec_result["payload"]["summary"]["variant_run_count"] == 10, output_exec_result
     assert output_exec_result["payload"]["summary"]["recorded_fixture_count"] == 10, output_exec_result
     assert (created / "reports" / "output_execution_runs.md").exists(), output_exec_result
+
+    output_exec_conflict = run(
+        "output-exec",
+        "--runner-command",
+        json.dumps([sys.executable, str(ROOT / "scripts" / "local_output_eval_runner.py")]),
+        "--provider-runner",
+        "openai",
+    )
+    assert not output_exec_conflict["ok"], output_exec_conflict
+    assert "Use either --runner-command or --provider-runner" in output_exec_conflict["payload"]["failures"][0], output_exec_conflict
 
     output_review_result = run(
         "output-review",

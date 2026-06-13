@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `152`
-- Scripts: `68`
+- Scanned files: `153`
+- Scripts: `69`
 - Internal script modules: `9`
 - Secret findings: `0`
-- Network-capable scripts: `2`
-- Network policy covered scripts: `2`
+- Network-capable scripts: `3`
+- Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
 - File-write scripts: `47`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `59`
+- CLI help smoke checked: `60`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `152`
-- Package SHA256: `d3721906bd83d0eb632808bcebb95dc535ebe0476662ba7541e85e9febb6f6b0`
+- Package hash files: `153`
+- Package SHA256: `2984db5f8d02b147c86bf259679e247a10a6fa495d123032be46c2e7fdaf8368`
 
 ## Failures
 
@@ -36,7 +36,7 @@
 
 - Policy file: `security/network_policy.json`
 - Present: `True`
-- Covered scripts: `2`
+- Covered scripts: `3`
 - Missing scripts: `none`
 - Mismatches: `0`
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `59`
-- Passed scripts: `59`
+- Checked scripts: `60`
+- Passed scripts: `60`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -83,6 +83,7 @@
 | scripts/optimize_description.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/probe_runtime_permissions.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/promotion_checker.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/provider_output_eval_runner.py | cli | False | True | True | False | True | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/registry_audit.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_adoption_drift_report.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_artifact_design_profile.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 import json
+import os
 import shutil
 import subprocess
 import sys
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "run_output_execution.py"
 LOCAL_RUNNER = ROOT / "scripts" / "local_output_eval_runner.py"
+PROVIDER_RUNNER = ROOT / "scripts" / "provider_output_eval_runner.py"
 
 
 def main() -> None:
@@ -124,6 +128,210 @@ def main() -> None:
     assert command["summary"]["token_estimated_count"] == 0, command
     assert all(item["duration_ms"] is not None for item in command["runs"]), command
     assert all(item["model"] == "fixture-model" for item in command["runs"]), command
+
+    provider_request = {
+        "case_id": "provider-contract",
+        "variant": "with_skill",
+        "prompt": "Create a reusable skill package.",
+        "input_files": [],
+        "metadata": {},
+    }
+    missing_env = os.environ.copy()
+    missing_env.pop("OPENAI_API_KEY", None)
+    missing_env.pop("YAO_OUTPUT_EVAL_MODEL", None)
+    missing_provider_proc = subprocess.run(
+        [sys.executable, str(PROVIDER_RUNNER), "--model", "fixture-model"],
+        cwd=ROOT,
+        input=json.dumps(provider_request),
+        capture_output=True,
+        text=True,
+        env=missing_env,
+    )
+    assert missing_provider_proc.returncode == 2, missing_provider_proc.stdout
+    assert "missing API key env" in missing_provider_proc.stderr, missing_provider_proc.stderr
+
+    custom_env = os.environ.copy()
+    custom_env["OPENAI_API_KEY"] = "test-key"
+    custom_env["YAO_OUTPUT_EVAL_MODEL"] = "fixture-model"
+    custom_host_proc = subprocess.run(
+        [
+            sys.executable,
+            str(PROVIDER_RUNNER),
+            "--base-url",
+            "https://example.com/v1/responses",
+        ],
+        cwd=ROOT,
+        input=json.dumps(provider_request),
+        capture_output=True,
+        text=True,
+        env=custom_env,
+    )
+    assert custom_host_proc.returncode == 2, custom_host_proc.stdout
+    assert "custom provider host requires --allow-custom-base-url" in custom_host_proc.stderr, custom_host_proc.stderr
+
+    wrong_path_proc = subprocess.run(
+        [
+            sys.executable,
+            str(PROVIDER_RUNNER),
+            "--base-url",
+            "https://api.openai.com/v1/chat/completions",
+        ],
+        cwd=ROOT,
+        input=json.dumps(provider_request),
+        capture_output=True,
+        text=True,
+        env=custom_env,
+    )
+    assert wrong_path_proc.returncode == 2, wrong_path_proc.stdout
+    assert "provider endpoint path must start with /v1/responses" in wrong_path_proc.stderr, wrong_path_proc.stderr
+    empty_path_proc = subprocess.run(
+        [
+            sys.executable,
+            str(PROVIDER_RUNNER),
+            "--base-url",
+            "https://api.openai.com",
+        ],
+        cwd=ROOT,
+        input=json.dumps(provider_request),
+        capture_output=True,
+        text=True,
+        env=custom_env,
+    )
+    assert empty_path_proc.returncode == 2, empty_path_proc.stdout
+    assert "provider endpoint path must start with /v1/responses" in empty_path_proc.stderr, empty_path_proc.stderr
+
+    class ProviderHandler(BaseHTTPRequestHandler):
+        requests: list[dict] = []
+
+        def do_POST(self) -> None:  # noqa: N802
+            length = int(self.headers.get("Content-Length", "0"))
+            body = self.rfile.read(length).decode("utf-8")
+            ProviderHandler.requests.append(
+                {
+                    "path": self.path,
+                    "authorization": self.headers.get("Authorization", ""),
+                    "body": json.loads(body),
+                }
+            )
+            payload = {
+                "id": "resp_fixture",
+                "output": [
+                    {
+                        "content": [
+                            {
+                                "type": "output_text",
+                                "text": "Create SKILL.md and reports/skill-overview.html for this reusable package.",
+                            }
+                        ]
+                    }
+                ],
+                "usage": {"input_tokens": 21, "output_tokens": 9, "total_tokens": 30},
+            }
+            encoded = json.dumps(payload).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(encoded)))
+            self.end_headers()
+            self.wfile.write(encoded)
+
+        def log_message(self, format: str, *args: object) -> None:
+            return
+
+    server = HTTPServer(("127.0.0.1", 0), ProviderHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    provider_url = f"http://127.0.0.1:{server.server_port}/v1/responses"
+    provider_env = os.environ.copy()
+    provider_env["OPENAI_API_KEY"] = "test-key"
+    provider_env["YAO_OUTPUT_EVAL_MODEL"] = "fixture-model"
+    try:
+        direct_provider_proc = subprocess.run(
+            [
+                sys.executable,
+                str(PROVIDER_RUNNER),
+                "--base-url",
+                provider_url,
+                "--allow-insecure-localhost",
+            ],
+            cwd=ROOT,
+            input=json.dumps(provider_request),
+            capture_output=True,
+            text=True,
+            env=provider_env,
+            check=True,
+        )
+        direct_provider = json.loads(direct_provider_proc.stdout)
+        assert direct_provider["execution_kind"] == "model", direct_provider
+        assert direct_provider["provider"] == "openai", direct_provider
+        assert direct_provider["model"] == "fixture-model", direct_provider
+        assert direct_provider["usage"]["estimated"] is False, direct_provider
+        assert ProviderHandler.requests[-1]["path"] == "/v1/responses", ProviderHandler.requests[-1]
+        assert ProviderHandler.requests[-1]["authorization"] == "Bearer test-key", ProviderHandler.requests[-1]
+        assert ProviderHandler.requests[-1]["body"]["model"] == "fixture-model", ProviderHandler.requests[-1]
+        assert "Create a reusable skill package." in ProviderHandler.requests[-1]["body"]["input"], ProviderHandler.requests[-1]
+        assert "fixture_output" not in ProviderHandler.requests[-1]["body"]["input"], ProviderHandler.requests[-1]
+
+        provider_cases = tmp_root / "provider_cases.jsonl"
+        provider_cases.write_text(
+            json.dumps(
+                {
+                    "id": "provider-contract",
+                    "prompt": "Create a reusable skill package.",
+                    "baseline_output": "",
+                    "with_skill_output": "",
+                    "assertions": [
+                        {
+                            "id": "has-skill-entry",
+                            "description": "Provider output includes the skill entrypoint.",
+                            "required": ["SKILL.md"],
+                        }
+                    ],
+                },
+                ensure_ascii=False,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        provider_proc = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "--cases",
+                str(provider_cases),
+                "--output-json",
+                str(tmp_root / "provider.json"),
+                "--output-md",
+                str(tmp_root / "provider.md"),
+                "--runner-command",
+                json.dumps(
+                    [
+                        sys.executable,
+                        str(PROVIDER_RUNNER),
+                        "--base-url",
+                        provider_url,
+                        "--allow-insecure-localhost",
+                        "--model",
+                        "fixture-model",
+                    ]
+                ),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            env=provider_env,
+            check=True,
+        )
+        provider = json.loads(provider_proc.stdout)
+        assert provider["ok"], provider
+        assert provider["summary"]["variant_run_count"] == 2, provider
+        assert provider["summary"]["model_executed_count"] == 2, provider
+        assert provider["summary"]["token_observed_count"] == 2, provider
+        assert provider["summary"]["token_estimated_count"] == 0, provider
+        assert all(item["provider"] == "openai" for item in provider["runs"]), provider
+        assert all(item["model"] == "fixture-model" for item in provider["runs"]), provider
+    finally:
+        server.shutdown()
+        thread.join(timeout=2)
 
     bad_runner = tmp_root / "bad_runner.py"
     bad_runner.write_text("import sys\nsys.exit(3)\n", encoding="utf-8")

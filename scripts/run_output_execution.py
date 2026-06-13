@@ -247,7 +247,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
             [
                 "No model-executed runs are recorded yet.",
                 "",
-                "Use `--runner-command` with a provider-backed runner to replace recorded fixtures with real model output evidence.",
+                "Use `python3 scripts/yao.py output-exec --provider-runner openai` or `--runner-command` with a reviewed provider-backed runner to replace recorded fixtures with real model output evidence.",
                 "",
             ]
         )
@@ -285,7 +285,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "## Next Fixes",
             "",
             "- Keep recorded fixtures as reproducible baselines, but do not describe them as model-executed evidence.",
-            "- Add provider-backed command runners for holdout cases when release confidence depends on real generation behavior.",
+            "- Use `scripts/provider_output_eval_runner.py` for provider-backed holdout cases when release confidence depends on real generation behavior.",
             "- Compare timing, token cost, and assertion deltas before promoting a skill to governed reuse.",
         ]
     )

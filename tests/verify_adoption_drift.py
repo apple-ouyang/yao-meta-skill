@@ -109,7 +109,8 @@ def main() -> None:
     assert final["ok"], final
     summary = final["payload"]["summary"]
     assert summary["event_count"] == 5, summary
-    assert summary["adoption_rate"] == 40.0, summary
+    assert summary["adoption_sample_count"] == 4, summary
+    assert summary["adoption_rate"] == 50.0, summary
     assert summary["missed_trigger_count"] == 2, summary
     assert summary["bad_output_count"] == 1, summary
     assert summary["script_error_count"] == 1, summary

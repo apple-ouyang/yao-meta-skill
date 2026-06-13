@@ -15,7 +15,7 @@ This report records how output-eval variants were produced and whether timing or
 
 No model-executed runs are recorded yet.
 
-Use `--runner-command` with a provider-backed runner to replace recorded fixtures with real model output evidence.
+Use `python3 scripts/yao.py output-exec --provider-runner openai` or `--runner-command` with a reviewed provider-backed runner to replace recorded fixtures with real model output evidence.
 
 Command runner evidence is present. This proves the eval harness executed an external command, but it is not provider-backed model evidence unless the runner reports model metadata.
 
@@ -23,19 +23,19 @@ Command runner evidence is present. This proves the eval harness executed an ext
 
 | Case | Variant | Mode | Model | Duration ms | Tokens | Score | Status |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| skill-package-contract | baseline | command | local-output-eval-runner | 26.39 | 33 | 0.0 | pass |
-| skill-package-contract | with_skill | command | local-output-eval-runner | 26.11 | 73 | 100.0 | pass |
-| output-eval-expectation | baseline | command | local-output-eval-runner | 25.88 | 36 | 0.0 | pass |
-| output-eval-expectation | with_skill | command | local-output-eval-runner | 25.6 | 80 | 100.0 | pass |
-| ir-before-packaging | baseline | command | local-output-eval-runner | 25.9 | 33 | 0.0 | pass |
-| ir-before-packaging | with_skill | command | local-output-eval-runner | 26.04 | 80 | 100.0 | pass |
-| near-neighbor-boundary | baseline | command | local-output-eval-runner | 26.38 | 36 | 0.0 | pass |
-| near-neighbor-boundary | with_skill | command | local-output-eval-runner | 25.82 | 65 | 100.0 | pass |
-| file-backed-governed-package | baseline | command | local-output-eval-runner | 25.71 | 37 | 0.0 | pass |
-| file-backed-governed-package | with_skill | command | local-output-eval-runner | 25.81 | 98 | 100.0 | pass |
+| skill-package-contract | baseline | command | local-output-eval-runner | 30.0 | 33 | 0.0 | pass |
+| skill-package-contract | with_skill | command | local-output-eval-runner | 32.55 | 73 | 100.0 | pass |
+| output-eval-expectation | baseline | command | local-output-eval-runner | 32.87 | 36 | 0.0 | pass |
+| output-eval-expectation | with_skill | command | local-output-eval-runner | 32.72 | 80 | 100.0 | pass |
+| ir-before-packaging | baseline | command | local-output-eval-runner | 36.87 | 33 | 0.0 | pass |
+| ir-before-packaging | with_skill | command | local-output-eval-runner | 39.43 | 80 | 100.0 | pass |
+| near-neighbor-boundary | baseline | command | local-output-eval-runner | 38.79 | 36 | 0.0 | pass |
+| near-neighbor-boundary | with_skill | command | local-output-eval-runner | 38.95 | 65 | 100.0 | pass |
+| file-backed-governed-package | baseline | command | local-output-eval-runner | 37.28 | 37 | 0.0 | pass |
+| file-backed-governed-package | with_skill | command | local-output-eval-runner | 31.54 | 98 | 100.0 | pass |
 
 ## Next Fixes
 
 - Keep recorded fixtures as reproducible baselines, but do not describe them as model-executed evidence.
-- Add provider-backed command runners for holdout cases when release confidence depends on real generation behavior.
+- Use `scripts/provider_output_eval_runner.py` for provider-backed holdout cases when release confidence depends on real generation behavior.
 - Compare timing, token cost, and assertion deltas before promoting a skill to governed reuse.

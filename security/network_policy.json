@@ -32,6 +32,19 @@
       "custom_url_policy": "not supported",
       "timeout_seconds": 15,
       "auth": "optional GITHUB_TOKEN or GH_TOKEN for GitHub API rate limits"
+    },
+    "scripts/provider_output_eval_runner.py": {
+      "purpose": "Call a reviewed OpenAI Responses API compatible endpoint to collect provider-backed output-eval model evidence.",
+      "allowed_hosts": [
+        "api.openai.com"
+      ],
+      "allowed_path_prefixes": [
+        "/v1/responses"
+      ],
+      "requires_https": true,
+      "custom_url_policy": "only via --provider-base-url plus --allow-custom-base-url; plain HTTP is restricted to --allow-insecure-localhost for local test servers",
+      "timeout_seconds": 60,
+      "auth": "OPENAI_API_KEY by default, or a reviewed env var through --api-key-env"
     }
   }
 }

@@ -61,7 +61,7 @@ def main() -> None:
     assert payload["summary"]["package_hash_file_count"] == payload["summary"]["scanned_files"], payload
     assert payload["summary"]["package_sha256"], payload
     assert payload["summary"]["internal_module_count"] >= 3, payload
-    assert payload["summary"]["network_script_count"] == 2, payload
+    assert payload["summary"]["network_script_count"] == 3, payload
     assert payload["summary"]["network_policy_covered_count"] == payload["summary"]["network_script_count"], payload
     assert payload["summary"]["network_policy_missing_count"] == 0, payload
     assert payload["summary"]["permission_required_count"] >= 3, payload
@@ -85,6 +85,7 @@ def main() -> None:
     assert payload["permission_governance"]["expired_capabilities"] == [], payload["permission_governance"]
     assert "scripts/check_update.py" in payload["network_policy"]["covered_scripts"], payload["network_policy"]
     assert "scripts/github_benchmark_scan.py" in payload["network_policy"]["covered_scripts"], payload["network_policy"]
+    assert "scripts/provider_output_eval_runner.py" in payload["network_policy"]["covered_scripts"], payload["network_policy"]
     script_map = {item["path"]: item for item in payload["scripts"]}
     for internal_module in [
         "scripts/review_studio_formatting.py",

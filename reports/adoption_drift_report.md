@@ -5,6 +5,7 @@ Local-first, metadata-only telemetry for skill operations. Raw prompts, outputs,
 ## Summary
 
 - Events: `1`
+- Adoption samples: `1`
 - Activation events: `1`
 - Adoption rate: `100.0`
 - Missed trigger signals: `0`
@@ -22,9 +23,9 @@ Local-first, metadata-only telemetry for skill operations. Raw prompts, outputs,
 
 ## Adoption By Skill
 
-| Skill | Events | Accepted | Edited | Rejected | Missed | Adoption Rate |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `yao-meta-skill` | 1 | 1 | 0 | 0 | 0 | 100.0 |
+| Skill | Events | Adoption Samples | Accepted | Edited | Rejected | Missed | Adoption Rate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `yao-meta-skill` | 1 | 1 | 1 | 0 | 0 | 0 | 100.0 |
 
 ## Next Iteration Candidates
 

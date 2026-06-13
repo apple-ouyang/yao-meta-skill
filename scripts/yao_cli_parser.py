@@ -402,6 +402,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     output_execution_cmd.add_argument("--output-json")
     output_execution_cmd.add_argument("--output-md")
     output_execution_cmd.add_argument("--runner-command")
+    output_execution_cmd.add_argument(
+        "--provider-runner",
+        choices=["openai"],
+        help="Use the bundled provider-backed runner instead of a custom runner command.",
+    )
+    output_execution_cmd.add_argument("--provider-model", help="Model for --provider-runner; otherwise use YAO_OUTPUT_EVAL_MODEL.")
+    output_execution_cmd.add_argument("--provider-base-url", help="Override provider endpoint for compatible APIs.")
+    output_execution_cmd.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    output_execution_cmd.add_argument("--allow-insecure-localhost", action="store_true")
+    output_execution_cmd.add_argument("--allow-custom-base-url", action="store_true")
     output_execution_cmd.add_argument("--timeout-seconds", type=float)
     output_execution_cmd.set_defaults(func=_handler(command_handlers, "command_output_execution"))
 
@@ -509,5 +519,3 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     update_cmd.set_defaults(func=_handler(command_handlers, "command_check_update"))
 
     return parser
-
-

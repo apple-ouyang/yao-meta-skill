@@ -10,6 +10,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 
 ALLOWED_EVENTS = {"skill_activation", "skill_output", "script_run", "review_event"}
+ADOPTION_EVENTS = {"skill_activation", "skill_output"}
 ALLOWED_ACTIVATION_TYPES = {"implicit", "explicit", "manual", "unknown"}
 ALLOWED_OUTCOMES = {"accepted", "edited", "rejected", "missed", "failed", "reviewed", "unknown"}
 ALLOWED_FAILURE_TYPES = {
@@ -165,21 +166,27 @@ def append_event(path: Path, event: dict[str, str]) -> None:
 
 def adoption_by_skill(events: list[dict[str, str]]) -> list[dict[str, Any]]:
     grouped: dict[str, Counter[str]] = defaultdict(Counter)
+    adoption_grouped: dict[str, Counter[str]] = defaultdict(Counter)
     for event in events:
-        grouped[event["skill"]][event["outcome"]] += 1
+        skill = event["skill"]
+        grouped[skill]["events"] += 1
+        if event["event"] in ADOPTION_EVENTS:
+            adoption_grouped[skill][event["outcome"]] += 1
     rows = []
     for skill, counts in sorted(grouped.items()):
-        total = sum(counts.values())
-        adopted = counts["accepted"] + counts["edited"]
+        adoption_counts = adoption_grouped[skill]
+        adoption_total = sum(adoption_counts.values())
+        adopted = adoption_counts["accepted"] + adoption_counts["edited"]
         rows.append(
             {
                 "skill": skill,
-                "events": total,
-                "accepted": counts["accepted"],
-                "edited": counts["edited"],
-                "rejected": counts["rejected"],
-                "missed": counts["missed"],
-                "adoption_rate": round(adopted / total * 100, 1) if total else 0,
+                "events": counts["events"],
+                "adoption_events": adoption_total,
+                "accepted": adoption_counts["accepted"],
+                "edited": adoption_counts["edited"],
+                "rejected": adoption_counts["rejected"],
+                "missed": adoption_counts["missed"],
+                "adoption_rate": round(adopted / adoption_total * 100, 1) if adoption_total else 0,
             }
         )
     return rows
@@ -243,11 +250,13 @@ def next_candidates(summary: dict[str, Any]) -> list[dict[str, str]]:
 
 
 def summarize(events: list[dict[str, str]], review_overdue_count: int) -> dict[str, Any]:
-    outcomes = Counter(event["outcome"] for event in events)
+    adoption_events = [event for event in events if event["event"] in ADOPTION_EVENTS]
+    outcomes = Counter(event["outcome"] for event in adoption_events)
     failures = Counter(event["failure_type"] for event in events if event["failure_type"] != "none")
     event_types = Counter(event["event"] for event in events)
     adopted = outcomes["accepted"] + outcomes["edited"]
     event_count = len(events)
+    adoption_sample_count = len(adoption_events)
     missed_trigger = outcomes["missed"] + failures["under_trigger"]
     bad_output = failures["bad_output"]
     script_error = failures["script_error"]
@@ -263,13 +272,14 @@ def summarize(events: list[dict[str, str]], review_overdue_count: int) -> dict[s
             risk_band = "low"
     return {
         "event_count": event_count,
+        "adoption_sample_count": adoption_sample_count,
         "activation_count": event_types["skill_activation"],
         "accepted_count": outcomes["accepted"],
         "edited_count": outcomes["edited"],
         "rejected_count": outcomes["rejected"],
         "missed_count": outcomes["missed"],
         "failed_count": outcomes["failed"],
-        "adoption_rate": round(adopted / event_count * 100, 1) if event_count else 0,
+        "adoption_rate": round(adopted / adoption_sample_count * 100, 1) if adoption_sample_count else 0,
         "missed_trigger_count": missed_trigger,
         "wrong_trigger_count": wrong_trigger,
         "bad_output_count": bad_output,
@@ -292,6 +302,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "## Summary",
         "",
         f"- Events: `{summary['event_count']}`",
+        f"- Adoption samples: `{summary['adoption_sample_count']}`",
         f"- Activation events: `{summary['activation_count']}`",
         f"- Adoption rate: `{summary['adoption_rate']}`",
         f"- Missed trigger signals: `{summary['missed_trigger_count']}`",
@@ -309,16 +320,16 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "## Adoption By Skill",
         "",
-        "| Skill | Events | Accepted | Edited | Rejected | Missed | Adoption Rate |",
-        "| --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Skill | Events | Adoption Samples | Accepted | Edited | Rejected | Missed | Adoption Rate |",
+        "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
     for row in report["adoption_by_skill"]:
         lines.append(
-            f"| `{row['skill']}` | {row['events']} | {row['accepted']} | {row['edited']} | "
+            f"| `{row['skill']}` | {row['events']} | {row['adoption_events']} | {row['accepted']} | {row['edited']} | "
             f"{row['rejected']} | {row['missed']} | {row['adoption_rate']} |"
         )
     if not report["adoption_by_skill"]:
-        lines.append("| `none` | 0 | 0 | 0 | 0 | 0 | 0 |")
+        lines.append("| `none` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |")
     lines.extend(["", "## Next Iteration Candidates", ""])
     for item in report["next_iteration_candidates"]:
         lines.append(f"- `{item['signal']}`: {item['recommendation']}")

@@ -81,6 +81,7 @@
           "scripts/optimize_description.py",
           "scripts/probe_runtime_permissions.py",
           "scripts/promotion_checker.py",
+          "scripts/provider_output_eval_runner.py",
           "scripts/registry_audit.py",
           "scripts/render_adoption_drift_report.py",
           "scripts/render_artifact_design_profile.py",

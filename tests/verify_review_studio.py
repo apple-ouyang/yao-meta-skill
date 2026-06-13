@@ -258,7 +258,7 @@ def main() -> None:
     assert "reports/install_simulation.json" in registry_gate["evidence"], registry_gate
     trust_gate = next(item for item in payload["gates"] if item["key"] == "trust-report")
     assert trust_gate["status"] == "pass", trust_gate
-    assert "2 network-capable scripts" in trust_gate["detail"], trust_gate
+    assert "3 network-capable scripts" in trust_gate["detail"], trust_gate
     assert "0 help smoke failures" in trust_gate["detail"], trust_gate
     permission_gate = next(item for item in payload["gates"] if item["key"] == "permission-gates")
     assert permission_gate["status"] == "pass", permission_gate
