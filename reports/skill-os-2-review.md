@@ -29,9 +29,10 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Review Annotations v0 for reviewer comments tied to Review Studio gates, source/report paths, and optional line numbers; open blocker annotations now block the Review Studio decision.
 - Review Studio now avoids over-claiming release readiness when blind A/B adjudication is still pending: the root Meta Skill is in `review` with score `92`, no blockers, two warnings, and explicit actions for Output Lab reviewer adjudication plus waiver handling.
 - Review Studio Output Lab actions now link directly to `reports/output_review_decisions.json`, so pending blind A/B reviewer decisions have a concrete template instead of only a general adjudication warning.
+- Output Review Adjudication now preserves blind-review integrity by hiding expected winners for pending or invalid reviewer decisions; answer keys are revealed only after a valid A/B decision exists for that case.
 - Provider Output Eval Runner v0 so `python3 scripts/yao.py output-exec --provider-runner openai` can collect real provider-backed model evidence through a reviewed OpenAI Responses API compatible runner instead of ad hoc shell glue.
 
-This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, a provider-backed output runner exists, and Skill Atlas now consumes aggregate drift reports. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
+This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, blind-review answers remain hidden until valid decisions exist, a provider-backed output runner exists, and Skill Atlas now consumes aggregate drift reports. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
 
 ## Coverage Matrix
 
@@ -95,7 +96,7 @@ Next move: add real client or installer permission enforcement integration.
 
 | Gate | Current Result |
 | --- | --- |
-| Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, and `0 / 5` reviewer decisions pending |
+| Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, `0 / 5` reviewer decisions pending, `0` answer keys revealed, and `5` pending answers hidden |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
 | Trust | `0` secret findings, `1` pinned dependency file, `9` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `60 / 60` CLI help smoke checks passing across `69` scripts, source-contract hash scope explicit |

@@ -8,6 +8,8 @@
     "agreement_count": 0,
     "disagreement_count": 0,
     "invalid_decision_count": 0,
+    "answer_revealed_count": 0,
+    "pending_answer_hidden_count": 5,
     "agreement_rate": null,
     "needs_review": true,
     "failure_count": 0
@@ -26,7 +28,8 @@
     {
       "case_id": "skill-package-contract",
       "status": "pending",
-      "expected_winner_variant": "A",
+      "expected_winner_variant": "",
+      "expected_revealed": false,
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
@@ -35,7 +38,8 @@
     {
       "case_id": "output-eval-expectation",
       "status": "pending",
-      "expected_winner_variant": "A",
+      "expected_winner_variant": "",
+      "expected_revealed": false,
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
@@ -44,7 +48,8 @@
     {
       "case_id": "ir-before-packaging",
       "status": "pending",
-      "expected_winner_variant": "B",
+      "expected_winner_variant": "",
+      "expected_revealed": false,
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
@@ -53,7 +58,8 @@
     {
       "case_id": "near-neighbor-boundary",
       "status": "pending",
-      "expected_winner_variant": "B",
+      "expected_winner_variant": "",
+      "expected_revealed": false,
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",
@@ -62,7 +68,8 @@
     {
       "case_id": "file-backed-governed-package",
       "status": "pending",
-      "expected_winner_variant": "B",
+      "expected_winner_variant": "",
+      "expected_revealed": false,
       "reviewer_winner_variant": "",
       "confidence": null,
       "reason": "",

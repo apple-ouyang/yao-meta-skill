@@ -300,6 +300,9 @@ def main() -> None:
     assert full_payload["data"]["output_execution"]["summary"]["recorded_fixture_count"] == 0, full_payload["data"]["output_execution"]
     assert full_payload["data"]["output_execution"]["summary"]["model_executed_count"] == 0, full_payload["data"]["output_execution"]
     assert full_payload["data"]["output_review_adjudication"]["summary"]["pending_count"] == 5, full_payload["data"]["output_review_adjudication"]
+    assert full_payload["data"]["output_review_adjudication"]["summary"]["answer_revealed_count"] == 0, full_payload["data"]["output_review_adjudication"]
+    assert full_payload["data"]["output_review_adjudication"]["summary"]["pending_answer_hidden_count"] == 5, full_payload["data"]["output_review_adjudication"]
+    assert all(not item["expected_revealed"] for item in full_payload["data"]["output_review_adjudication"]["pairs"]), full_payload["data"]["output_review_adjudication"]
     assert full_payload["data"]["review_annotations"]["summary"]["annotation_count"] == 0, full_payload["data"]["review_annotations"]
     assert full_payload["data"]["compiled_targets"]["summary"]["target_count"] >= 4, full_payload["data"]["compiled_targets"]
     assert full_payload["data"]["compiled_targets"]["summary"]["block_count"] == 0, full_payload["data"]["compiled_targets"]
@@ -355,6 +358,8 @@ def main() -> None:
     assert "执行证据" in html, html
     assert "盲评包" in html, html[:5000]
     assert "审定报告" in html, html
+    assert "答案揭示" in html, html
+    assert "答案隐藏" in html, html
     assert "注册审计" in html, html[:3000]
     assert "包体验证" in html, html[:5000]
     assert "Upgrade" in html, html[:6000]

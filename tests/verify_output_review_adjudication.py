@@ -75,7 +75,13 @@ def main() -> None:
     assert pending_payload["summary"]["pending_count"] == 5, pending_payload
     assert pending_payload["summary"]["agreement_rate"] is None, pending_payload
     assert pending_payload["summary"]["needs_review"], pending_payload
+    assert pending_payload["summary"]["answer_revealed_count"] == 0, pending_payload
+    assert pending_payload["summary"]["pending_answer_hidden_count"] == 5, pending_payload
+    assert all(not item["expected_winner_variant"] and not item["expected_revealed"] for item in pending_payload["pairs"]), pending_payload
     assert "No reviewer decisions recorded yet" in pending_md.read_text(encoding="utf-8"), pending_md
+    pending_text = pending_md.read_text(encoding="utf-8")
+    assert "| skill-package-contract | pending | hidden | pending |" in pending_text, pending_text
+    assert "| skill-package-contract | pending | A | pending |" not in pending_text, pending_text
 
     template_path = tmp_root / "output_review_decisions.json"
     template_proc = run(
@@ -139,7 +145,10 @@ def main() -> None:
     assert filled_payload["summary"]["pending_count"] == 0, filled_payload
     assert filled_payload["summary"]["agreement_count"] == 5, filled_payload
     assert filled_payload["summary"]["agreement_rate"] == 100.0, filled_payload
+    assert filled_payload["summary"]["answer_revealed_count"] == 5, filled_payload
+    assert filled_payload["summary"]["pending_answer_hidden_count"] == 0, filled_payload
     assert all(item["status"] == "match" for item in filled_payload["pairs"]), filled_payload
+    assert all(item["expected_winner_variant"] in {"A", "B"} and item["expected_revealed"] for item in filled_payload["pairs"]), filled_payload
 
     invalid = {
         "schema_version": "1.0",
@@ -176,6 +185,9 @@ def main() -> None:
     invalid_payload = json.loads(invalid_proc.stdout)
     assert not invalid_payload["ok"], invalid_payload
     assert invalid_payload["summary"]["invalid_decision_count"] == 1, invalid_payload
+    assert invalid_payload["summary"]["answer_revealed_count"] == 0, invalid_payload
+    assert invalid_payload["pairs"][0]["expected_winner_variant"] == "", invalid_payload
+    assert invalid_payload["pairs"][0]["expected_revealed"] is False, invalid_payload
     assert invalid_payload["failures"], invalid_payload
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))

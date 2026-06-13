@@ -70,12 +70,12 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "23112632363494d9fcb52b0253bb23ffc9111e2dec2df0e9b06e3a49f304ff20"
+        "to": "a94b342c99204ed28626183e614c40bcdf7a1b8154fbb20256560258cd7910e6"
       },
       {
         "field": "package_sha256",
         "from": "0000000000000000000000000000000000000000000000000000000000000000",
-        "to": "ad55cf77f6b8faf7381b78372a93189c26e0e1833257bf7b508afd7ffdf0fbbb"
+        "to": "3eb57d2a31275058fdc10e5e26fb1c871dab2a2c72b532ddf4a990a530fdb131"
       }
     ]
   },
@@ -90,7 +90,7 @@
   "artifacts": {
     "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
     "current_package": "reports/registry_audit.json",
-    "json": "tests/tmp_review_studio/upgrade_check.json",
-    "markdown": "tests/tmp_review_studio/upgrade_check.md"
+    "json": "reports/upgrade_check.json",
+    "markdown": "reports/upgrade_check.md"
   }
 }

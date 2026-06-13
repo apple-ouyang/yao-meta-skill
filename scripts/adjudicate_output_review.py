@@ -137,7 +137,8 @@ def adjudicate_pair(
             {
                 "case_id": case_id,
                 "status": "pending",
-                "expected_winner_variant": expected,
+                "expected_winner_variant": "",
+                "expected_revealed": False,
                 "reviewer_winner_variant": "",
                 "confidence": None,
                 "reason": "",
@@ -156,7 +157,8 @@ def adjudicate_pair(
             {
                 "case_id": case_id,
                 "status": "pending",
-                "expected_winner_variant": expected,
+                "expected_winner_variant": "",
+                "expected_revealed": False,
                 "reviewer_winner_variant": "",
                 "confidence": confidence,
                 "reason": reason,
@@ -164,7 +166,9 @@ def adjudicate_pair(
             },
             failures,
         )
-    if reviewer not in {"A", "B"}:
+    if expected not in {"A", "B"}:
+        status = "invalid"
+    elif reviewer not in {"A", "B"}:
         failures.append(f"{case_id}: winner_variant must be A or B")
         status = "invalid"
     elif confidence_failure:
@@ -172,11 +176,13 @@ def adjudicate_pair(
         status = "invalid"
     else:
         status = "match" if reviewer == expected else "disagree"
+    expected_revealed = status in {"match", "disagree"}
     return (
         {
             "case_id": case_id,
             "status": status,
-            "expected_winner_variant": expected,
+            "expected_winner_variant": expected if expected_revealed else "",
+            "expected_revealed": expected_revealed,
             "reviewer_winner_variant": reviewer,
             "confidence": confidence,
             "reason": reason,
@@ -193,6 +199,7 @@ def build_summary(pairs: list[dict[str, Any]], failures: list[str]) -> dict[str,
     agreement_count = sum(1 for item in pairs if item["status"] == "match")
     disagreement_count = sum(1 for item in pairs if item["status"] == "disagree")
     invalid_decision_count = sum(1 for item in pairs if item["status"] == "invalid")
+    answer_revealed_count = sum(1 for item in pairs if item.get("expected_revealed"))
     agreement_rate = round(agreement_count / judgment_count * 100, 2) if judgment_count else None
     return {
         "pair_count": pair_count,
@@ -201,6 +208,8 @@ def build_summary(pairs: list[dict[str, Any]], failures: list[str]) -> dict[str,
         "agreement_count": agreement_count,
         "disagreement_count": disagreement_count,
         "invalid_decision_count": invalid_decision_count,
+        "answer_revealed_count": answer_revealed_count,
+        "pending_answer_hidden_count": sum(1 for item in pairs if item["status"] in {"pending", "invalid"} and not item.get("expected_revealed")),
         "agreement_rate": agreement_rate,
         "needs_review": pending_count > 0,
         "failure_count": len(failures),
@@ -219,6 +228,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Pending: `{summary['pending_count']}`",
         f"- Agreement rate: `{summary['agreement_rate'] if summary['agreement_rate'] is not None else 'n/a'}`",
         f"- Invalid decisions: `{summary['invalid_decision_count']}`",
+        f"- Answer keys revealed: `{summary['answer_revealed_count']}`",
+        f"- Pending/invalid answers hidden: `{summary['pending_answer_hidden_count']}`",
         "",
     ]
     if summary["judgment_count"] == 0:
@@ -227,6 +238,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
                 "No reviewer decisions recorded yet.",
                 "",
                 "Generate a template with `--write-template`, fill `winner_variant` with `A` or `B`, then rerun adjudication.",
+                "Expected winners stay hidden until a valid reviewer decision is recorded.",
                 "",
             ]
         )
@@ -241,9 +253,10 @@ def render_markdown(payload: dict[str, Any]) -> str:
     for item in payload["pairs"]:
         confidence = "" if item.get("confidence") is None else str(item["confidence"])
         reason = str(item.get("reason", "")).replace("|", "\\|") or ""
+        expected = item.get("expected_winner_variant", "") if item.get("expected_revealed") else "hidden"
         lines.append(
             f"| {item['case_id']} | {item.get('reviewer_winner_variant', '') or 'pending'} | "
-            f"{item.get('expected_winner_variant', '') or 'missing'} | {item['status']} | {confidence} | {reason} |"
+            f"{expected} | {item['status']} | {confidence} | {reason} |"
         )
     if payload.get("failures"):
         lines.extend(["", "## Failures", ""])

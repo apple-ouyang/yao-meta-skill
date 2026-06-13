@@ -106,6 +106,8 @@ The adjudication report writes:
 
 When no reviewer decisions exist, the report should say the cases are pending and Review Studio should link to the decisions template. Do not count pending cases as human agreement. Only a real `winner_variant` of `A` or `B` should contribute to agreement rate, disagreement count, and reviewer judgment count.
 
+The adjudication report must preserve blind-review integrity: pending and invalid decisions should show the expected winner as hidden. Only reveal `expected_winner_variant` after a valid reviewer decision exists for that case.
+
 ## Anti-Overfitting
 
 Keep a small public smoke set and a separate holdout set. Rotate real failures into the taxonomy instead of editing only the prompt that failed. Add near-neighbor cases whenever the output looks good but the boundary is still unclear.

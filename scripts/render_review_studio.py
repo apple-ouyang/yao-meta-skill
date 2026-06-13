@@ -665,7 +665,16 @@ def render_html(report: dict[str, Any]) -> str:
     )
     review_panel = render_kv_grid(
         output_review_summary,
-        ["pair_count", "judgment_count", "pending_count", "agreement_count", "disagreement_count", "invalid_decision_count"],
+        [
+            "pair_count",
+            "judgment_count",
+            "pending_count",
+            "agreement_count",
+            "disagreement_count",
+            "invalid_decision_count",
+            "answer_revealed_count",
+            "pending_answer_hidden_count",
+        ],
         "review adjudication report missing",
     )
     conformance_panel = render_kv_grid(
