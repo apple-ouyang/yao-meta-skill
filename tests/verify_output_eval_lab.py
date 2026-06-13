@@ -32,7 +32,10 @@ def main() -> None:
     )
     payload = json.loads(proc.stdout)
     assert payload["ok"], payload
-    assert payload["summary"]["case_count"] == 3, payload
+    assert payload["summary"]["case_count"] == 5, payload
+    assert payload["summary"]["file_backed_case_count"] == 1, payload
+    assert payload["summary"]["near_neighbor_case_count"] == 1, payload
+    assert payload["summary"]["boundary_case_count"] == 1, payload
     assert payload["summary"]["with_skill_pass_rate"] > payload["summary"]["baseline_pass_rate"], payload
     assert payload["summary"]["delta"] > 0, payload
     assert payload["summary"]["gate_pass"], payload

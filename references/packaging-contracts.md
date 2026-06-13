@@ -29,12 +29,20 @@ When `--expectations` is provided:
 
 ## Source Of Truth
 
-The neutral source remains:
+The platform-neutral semantic source is Skill IR when it exists:
+
+- `reports/skill-ir.json`
+- `skill-ir/examples/<skill-name>.json`
+
+The structural validation sources remain:
 
 - `SKILL.md`
 - `agents/interface.yaml`
 
-Target-specific metadata is generated at packaging time.
+Target-specific metadata is generated at packaging time. The adapter must carry
+`ir_source`, `ir_schema_version`, `job_to_be_done`, `semantic_contract`, and
+`semantic_parity` so reviewers can see whether the target preserved the core
+skill meaning or fell back to frontmatter-only metadata.
 
 ## Portability Model
 
@@ -44,5 +52,6 @@ The packaging layer now preserves four portable semantics from the neutral sourc
 - execution
 - trust
 - degradation
+- platform-neutral skill meaning from Skill IR
 
 This means portability is not just "can it export a file?" but also "does the exported target preserve the source package's activation and safety assumptions?"

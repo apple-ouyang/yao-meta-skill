@@ -34,17 +34,6 @@
       "format_guidance": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
     },
     {
-      "key": "teaching_guidance",
-      "label": "Teaching guidance",
-      "score": 1,
-      "matched_keywords": [
-        "teach"
-      ],
-      "role_guidance": "Use a teacher role that adapts to learner level and avoids overloading the first pass.",
-      "task_guidance": "Explain through progressive steps, examples, and visible success checks.",
-      "format_guidance": "Return learner-facing sections, worked examples, checkpoints, and common mistakes."
-    },
-    {
       "key": "prompt_engineering",
       "label": "Prompt engineering",
       "score": 1,
@@ -58,7 +47,7 @@
   ],
   "complexity": {
     "band": "complex",
-    "score": 6,
+    "score": 5,
     "reason": "multiple inputs, constraints, or task families require tradeoff handling"
   },
   "need_model": {

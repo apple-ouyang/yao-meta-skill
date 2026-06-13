@@ -36,11 +36,24 @@ def normalize(text: str) -> str:
     return str(text).casefold()
 
 
-def validate_case(case: dict[str, Any]) -> list[str]:
+def validate_case(case: dict[str, Any], cases_root: Path) -> list[str]:
     failures = []
     for key in ("id", "prompt", "baseline_output", "with_skill_output", "assertions"):
         if key not in case:
             failures.append(f"{case.get('id', '<unknown>')}: missing {key}")
+    for raw_path in case.get("input_files", []):
+        rel = Path(str(raw_path))
+        if rel.is_absolute():
+            failures.append(f"{case.get('id', '<unknown>')}: input_files must be relative: {raw_path}")
+            continue
+        target = (cases_root / rel).resolve()
+        try:
+            target.relative_to(cases_root.resolve())
+        except ValueError:
+            failures.append(f"{case.get('id', '<unknown>')}: input_file escapes eval folder: {raw_path}")
+            continue
+        if not target.exists():
+            failures.append(f"{case.get('id', '<unknown>')}: input_file is missing: {raw_path}")
     assertions = case.get("assertions", [])
     if not isinstance(assertions, list) or not assertions:
         failures.append(f"{case.get('id', '<unknown>')}: assertions must be a non-empty list")
@@ -92,6 +105,8 @@ def grade_case(case: dict[str, Any]) -> dict[str, Any]:
     return {
         "id": case["id"],
         "prompt": case["prompt"],
+        "input_files": case.get("input_files", []),
+        "metadata": case.get("metadata", {}),
         "baseline": baseline,
         "with_skill": with_skill,
         "delta": round(with_skill["score"] - baseline["score"], 2),
@@ -106,8 +121,14 @@ def build_summary(results: list[dict[str, Any]]) -> dict[str, Any]:
     with_skill_average = sum(item["with_skill"]["score"] for item in results) / case_count if case_count else 0
     regressions = [item for item in results if item["delta"] < 0]
     failures = sorted({failure for item in results for failure in item["failure_taxonomy"]})
+    file_backed = [item for item in results if item.get("input_files")]
+    near_neighbors = [item for item in results if item.get("metadata", {}).get("case_type") == "near_neighbor"]
+    boundary_cases = [item for item in results if item.get("metadata", {}).get("case_type") == "boundary"]
     return {
         "case_count": case_count,
+        "file_backed_case_count": len(file_backed),
+        "near_neighbor_case_count": len(near_neighbors),
+        "boundary_case_count": len(boundary_cases),
         "baseline_pass_rate": round(baseline_average, 2),
         "with_skill_pass_rate": round(with_skill_average, 2),
         "delta": round(with_skill_average - baseline_average, 2),
@@ -162,7 +183,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 def run_output_eval(cases_path: Path, output_json: Path, output_md: Path) -> dict[str, Any]:
     cases = load_cases(cases_path)
-    validation_failures = [failure for case in cases for failure in validate_case(case)]
+    validation_failures = [failure for case in cases for failure in validate_case(case, cases_path.parent)]
     if validation_failures:
         payload = {
             "ok": False,

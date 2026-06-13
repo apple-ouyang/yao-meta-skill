@@ -45,6 +45,8 @@ def main() -> None:
     assert (created / "reports" / "intent-dialogue.md").exists(), created
     assert (created / "reports" / "intent-confidence.md").exists(), created
     assert (created / "reports" / "skill-overview.html").exists(), created
+    assert (created / "reports" / "review-studio.html").exists(), created
+    assert (created / "reports" / "review-studio.json").exists(), created
     assert (created / "reports" / "review-viewer.html").exists(), created
     assert (created / "reports" / "reference-scan.md").exists(), created
     assert (created / "reports" / "reference-synthesis.md").exists(), created
@@ -58,7 +60,10 @@ def main() -> None:
     init_report_view = init_result["payload"]["report_view"]
     assert init_report_view["html_report"].endswith("reports/skill-overview.html"), init_report_view
     assert Path(init_report_view["html_report"]).exists(), init_report_view
+    assert init_report_view["review_studio"].endswith("reports/review-studio.html"), init_report_view
+    assert Path(init_report_view["review_studio"]).exists(), init_report_view
     assert "Skill 已创建完成" in init_report_view["message"], init_report_view
+    assert "Review Studio 2.0" in init_report_view["message"], init_report_view
     assert "概述、指标、原理、触发边界、输入输出、质量评估、风险治理、包体资产和升级路线" in init_report_view["message"], init_report_view
     assert "默认使用中文简体" in init_report_view["message"], init_report_view
     assert "切换英文版" in init_report_view["message"], init_report_view
@@ -90,6 +95,7 @@ def main() -> None:
     assert quickstart_result["ok"], quickstart_result
     quickstart_root = Path(quickstart_result["payload"]["root"])
     assert (quickstart_root / "reports" / "review-viewer.html").exists(), quickstart_root
+    assert (quickstart_root / "reports" / "review-studio.html").exists(), quickstart_root
     assert (quickstart_root / "reports" / "github-benchmark-scan.md").exists(), quickstart_root
     assert (quickstart_root / "reports" / "intent-confidence.md").exists(), quickstart_root
     assert (quickstart_root / "reports" / "reference-synthesis.md").exists(), quickstart_root
@@ -105,9 +111,11 @@ def main() -> None:
     quickstart_report_view = quickstart_result["payload"]["report_view"]
     assert quickstart_report_view["html_report"].endswith("reports/skill-overview.html"), quickstart_report_view
     assert Path(quickstart_report_view["html_report"]).exists(), quickstart_report_view
+    assert Path(quickstart_report_view["review_studio"]).exists(), quickstart_report_view
     assert "Skill 已创建完成" in quickstart_report_view["message"], quickstart_report_view
     assert "默认使用中文简体" in quickstart_report_view["message"], quickstart_report_view
     assert quickstart_result["payload"]["guidance"]["next_steps"][0].startswith("Open reports/skill-overview.html"), quickstart_result
+    assert "reports/review-studio.html" in quickstart_result["payload"]["guidance"]["next_steps"][2], quickstart_result
     assert "audit report" in quickstart_result["payload"]["guidance"]["next_steps"][0], quickstart_result
     assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["reference_synthesis"].endswith(
         "reports/reference-synthesis.md"
@@ -117,6 +125,9 @@ def main() -> None:
     ), quickstart_result
     assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["system_model"].endswith(
         "reports/system-model.md"
+    ), quickstart_result
+    assert quickstart_result["payload"]["reviewer_evidence"]["artifacts"]["review_studio"].endswith(
+        "reports/review-studio.html"
     ), quickstart_result
     assert "uncertainty_or_conflict" not in quickstart_result["payload"], quickstart_result
     quickstart_manifest = json.loads((quickstart_root / "manifest.json").read_text(encoding="utf-8"))
@@ -161,6 +172,11 @@ def main() -> None:
     review_viewer_result = run("review-viewer", str(created))
     assert review_viewer_result["ok"], review_viewer_result
     assert review_viewer_result["payload"]["artifacts"]["html"].endswith("reports/review-viewer.html"), review_viewer_result
+
+    review_studio_result = run("review-studio", str(created))
+    assert review_studio_result["ok"], review_studio_result
+    assert review_studio_result["payload"]["artifacts"]["html"].endswith("reports/review-studio.html"), review_studio_result
+    assert review_studio_result["payload"]["summary"]["gate_count"] == 8, review_studio_result
 
     reference_scan_result = run(
         "reference-scan",

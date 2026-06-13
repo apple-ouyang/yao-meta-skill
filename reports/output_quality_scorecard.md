@@ -2,7 +2,7 @@
 
 This v0 scorecard compares static without-skill and with-skill outputs using assertion grading.
 
-- Cases: `3`
+- Cases: `5`
 - Baseline pass rate: `0.0`
 - With-skill pass rate: `100.0`
 - Delta: `100.0`
@@ -16,6 +16,8 @@ This v0 scorecard compares static without-skill and with-skill outputs using ass
 | skill-package-contract | 0.0 | 100.0 | 100.0 | with_skill | None |
 | output-eval-expectation | 0.0 | 100.0 | 100.0 | with_skill | None |
 | ir-before-packaging | 0.0 | 100.0 | 100.0 | with_skill | None |
+| near-neighbor-boundary | 0.0 | 100.0 | 100.0 | with_skill | None |
+| file-backed-governed-package | 0.0 | 100.0 | 100.0 | with_skill | None |
 
 ## Failure Taxonomy
 

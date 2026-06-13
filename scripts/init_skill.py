@@ -15,6 +15,7 @@ from render_output_risk_profile import render_output_risk_profile
 from render_prompt_quality_profile import render_prompt_quality_profile
 from render_reference_scan import parse_reference, render_reference_scan
 from render_reference_synthesis import render_reference_synthesis
+from render_review_studio import render_review_studio
 from render_review_viewer import render_review_viewer
 from render_skill_overview import render_skill_overview
 from render_system_model import render_system_model
@@ -69,13 +70,14 @@ README_TEMPLATE = """# {title}
 5. Open `reports/reference-synthesis.md` to see the GitHub benchmarks plus curated official, research, and principle tracks in one place.
 6. Follow the workflow steps in `SKILL.md`.
 7. Check `reports/skill-overview.html` for the generated bilingual HTML skill audit report: overview, metrics, capability profile, principle, contract, quality, risk, assets, and iteration roadmap. It defaults to Simplified Chinese and includes an English switch in the top right.
-8. Open `reports/review-viewer.html` for a compact visual review of the package.
-9. Check `reports/output-risk-profile.md` to see likely output mistakes and self-repair checks.
-10. Check `reports/artifact-design-profile.md` to see the intended artifact direction, layout patterns, visual quality gates, and anti-patterns.
-11. Check `reports/prompt-quality-profile.md` to see the need model, RTF-to-skill mapping, complexity, and prompt-facing quality matrix.
-12. Review `reports/skill-ir.json` for the platform-neutral Skill IR contract before platform-specific packaging.
-13. Review `reports/iteration-directions.md` for the three most valuable next moves.
-14. Review `reports/system-model.md` to understand the boundary, feedback loops, drift watch, failure map, and highest-leverage next changes.
+8. Open `reports/review-studio.html` for the one-page Review Studio 2.0 gate view.
+9. Open `reports/review-viewer.html` for a compact visual review of the package.
+10. Check `reports/output-risk-profile.md` to see likely output mistakes and self-repair checks.
+11. Check `reports/artifact-design-profile.md` to see the intended artifact direction, layout patterns, visual quality gates, and anti-patterns.
+12. Check `reports/prompt-quality-profile.md` to see the need model, RTF-to-skill mapping, complexity, and prompt-facing quality matrix.
+13. Review `reports/skill-ir.json` for the platform-neutral Skill IR contract before platform-specific packaging.
+14. Review `reports/iteration-directions.md` for the three most valuable next moves.
+15. Review `reports/system-model.md` to understand the boundary, feedback loops, drift watch, failure map, and highest-leverage next changes.
 
 ## Honest Boundaries
 
@@ -99,6 +101,7 @@ README_TEMPLATE = """# {title}
 - `reports/system-model.md`: systems-thinking model for boundary, feedback loops, drift, failure patterns, and leverage points
 - `reports/skill-ir.json`: platform-neutral 2.0 Skill IR contract for trigger, workflow, resources, evals, risk, and governance
 - `reports/skill-overview.html`: white-background bilingual HTML skill audit report with sticky four-character Chinese navigation, a top-right language switch, metrics, SVG charts, contract boundary, quality review, risk governance, assets, and iteration roadmap
+- `reports/review-studio.html`: Review Studio 2.0 gate page for intent, trigger, output eval, context, runtime conformance, trust, atlas, and release readiness
 - `reports/review-viewer.html`: compact review page for architecture, usage, feedback, and next steps
 - `reports/iteration-directions.md`: the top three next iteration directions
 """
@@ -211,14 +214,17 @@ def build_report_view(artifacts: dict) -> dict:
     html_report = artifacts.get("skill_overview_html", "")
     json_report = artifacts.get("skill_overview_json", "")
     system_model = artifacts.get("system_model_md", "")
+    review_studio = artifacts.get("review_studio_html", "")
     return {
         "title": "Skill 总结报告",
         "html_report": html_report,
         "json_report": json_report,
         "system_model": system_model,
+        "review_studio": review_studio,
         "message": (
             f"Skill 已创建完成。建议先打开总结报告：{html_report}。"
             "它会展示这个 Skill 的概述、指标、原理、触发边界、输入输出、质量评估、风险治理、包体资产和升级路线；"
+            f"然后打开 Review Studio 2.0：{review_studio}，检查意图、触发、输出评测、运行一致性、信任和发布闸门。"
             "报告默认使用中文简体，右上角可以切换英文版。"
         ),
         "next_action": "Open reports/skill-overview.html before editing more files.",
@@ -241,6 +247,11 @@ def render_skill_ir(root: Path) -> dict:
         },
         "failures": failures,
     }
+
+
+def absolute_skill_artifact(root: Path, value: str) -> str:
+    path = Path(value)
+    return str(path if path.is_absolute() else root / path)
 
 
 def dedupe_references(references: list[dict]) -> list[dict]:
@@ -328,6 +339,7 @@ def initialize_skill(
     iteration_directions = render_iteration_directions(root)
     overview = render_skill_overview(root)
     review_viewer = render_review_viewer(root)
+    review_studio = render_review_studio(root)
     artifacts = {
         "readme": str(root / "README.md"),
         "manifest": str(root / "manifest.json"),
@@ -355,6 +367,8 @@ def initialize_skill(
         "iteration_directions_json": iteration_directions["artifacts"]["json"],
         "review_viewer_html": review_viewer["artifacts"]["html"],
         "review_viewer_json": review_viewer["artifacts"]["json"],
+        "review_studio_html": absolute_skill_artifact(root, review_studio["artifacts"]["html"]),
+        "review_studio_json": absolute_skill_artifact(root, review_studio["artifacts"]["json"]),
     }
     if benchmark_scan is not None:
         artifacts["github_benchmark_scan_md"] = benchmark_scan["artifacts"]["markdown"]

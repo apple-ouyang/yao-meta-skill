@@ -53,6 +53,28 @@ def main() -> None:
         for field in snapshot.get("required_fields", []):
             if field not in adapter:
                 failures.append(f"{name}: missing required adapter field {field}")
+        if adapter.get("ir_source") != "skill-ir/examples/yao-meta-skill.json":
+            failures.append(f"{name}: adapter is not sourced from root Skill IR")
+        if adapter.get("ir_schema_version") != "2.0.0":
+            failures.append(f"{name}: missing Skill IR schema version")
+        contract = adapter.get("semantic_contract", {})
+        if contract.get("name") != "yao-meta-skill":
+            failures.append(f"{name}: semantic contract name mismatch")
+        if contract.get("trigger_description") != adapter.get("description"):
+            failures.append(f"{name}: trigger description is not adapter description")
+        if contract.get("job_to_be_done") != adapter.get("job_to_be_done"):
+            failures.append(f"{name}: job-to-be-done not carried into adapter")
+        if contract.get("resource_counts", {}).get("references", 0) <= 0:
+            failures.append(f"{name}: semantic contract does not include reference counts")
+        if contract.get("eval_counts", {}).get("output", 0) <= 0:
+            failures.append(f"{name}: semantic contract does not include output eval counts")
+        parity = adapter.get("semantic_parity", {})
+        if parity.get("source") != "skill-ir":
+            failures.append(f"{name}: semantic parity source is not skill-ir")
+        if parity.get("name_matches_ir") is not True:
+            failures.append(f"{name}: frontmatter name does not match Skill IR")
+        if parity.get("description_matches_ir") is not True:
+            failures.append(f"{name}: frontmatter description does not match Skill IR")
         if not (TMP / snapshot["required_generated_file"]).exists():
             failures.append(f"{name}: missing generated file {snapshot['required_generated_file']}")
         if name == "openai":

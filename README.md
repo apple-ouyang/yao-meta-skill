@@ -22,6 +22,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a front-loaded intent dialogue with an intent confidence gate, so the system keeps clarifying when the true job, outputs, exclusions, or standards are still fuzzy
 - a silent-by-default GitHub benchmark scan plus reference synthesis that studies top public repositories and world-class pattern tracks, then surfaces only real conflicts or uncertainty to the user
 - a generated visual HTML overview for each newly initialized skill
+- a Review Studio 2.0 HTML gate page that combines intent, trigger, output eval, context, runtime, trust, atlas, and release evidence
 - a side-by-side HTML review studio for first-pass human review
 - an artifact design profile that defines visual direction, layout patterns, and quality gates for reports, tutorials, dashboards, screenshots, and review pages
 - a prompt quality profile that abstracts need modeling, RTF mapping, complexity, and quality checks into reviewer-visible evidence instead of bloating `SKILL.md`
@@ -30,7 +31,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a lightweight feedback log that does not require a full promotion cycle
 - a baseline compare report for with-skill vs baseline review
 - a conversation-style, archetype-aware quickstart that steers new packages toward scaffold, production, library, or governed fits
-- neutral source metadata plus client-specific adapters
+- Skill IR as the platform-neutral semantic contract plus client-specific adapters
 - governance, promotion, and portability checks built into the default flow
 
 ## Architecture
@@ -84,7 +85,7 @@ Weighted score formula: `sum(score / 10 * weight)`.
 2. Start with a short, human intent dialogue so the real job, outputs, exclusions, constraints, and standards are explicit.
 3. Let `quickstart` clarify intent first, then run silent benchmark scan and reference synthesis; it only surfaces explicit questions when intent is still unclear or when there is a real design conflict.
 4. Use the archetype-aware `quickstart` or the full authoring flow to generate or improve the package in scaffold, production, library, or governed mode.
-5. Review the generated `reports/skill-overview.html` first for the bilingual HTML skill report. It defaults to Simplified Chinese and provides an English switch in the top right. Then inspect `reports/intent-dialogue.md`, `reports/intent-confidence.md`, `reports/reference-synthesis.md`, `reports/artifact-design-profile.md`, `reports/prompt-quality-profile.md`, `reports/system-model.md`, and `reports/iteration-directions.md` before adding more structure.
+5. Review the generated `reports/skill-overview.html` first for the bilingual HTML skill report. It defaults to Simplified Chinese and provides an English switch in the top right. Then open `reports/review-studio.html` to inspect release blockers and evidence paths in one page before adding more structure.
 
 Or use the unified authoring CLI:
 
@@ -96,6 +97,7 @@ python3 scripts/yao.py reference-scan my-skill \
   --user-reference "A product or repo I admire::taste::Learn the clarity and operating standard.::Do not copy wording." \
   --local-constraint "Current Library Naming::structure::Keep naming aligned with the local skill library.::Do not inherit private references."
 python3 scripts/yao.py review-viewer my-skill
+python3 scripts/yao.py review-studio my-skill
 python3 scripts/yao.py artifact-design-profile my-skill
 python3 scripts/yao.py prompt-quality-profile my-skill
 python3 scripts/yao.py system-model my-skill
@@ -223,7 +225,7 @@ The homepage panel below is generated from the current eval suite so the family-
 Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/family_summary.md](reports/family_summary.md)
 <!-- END:EVAL_RESULTS -->
 
-- packaging validation: `openai`, `claude`, and `generic` targets pass contract checks
+- packaging validation: `openai`, `claude`, and `generic` targets pass contract checks and carry IR provenance plus semantic parity metadata
 - portability score: `100/100` with neutral activation, execution, trust, and degradation metadata preserved across all exported targets
 - description optimization suite: root, team frontend review, and governed incident command pass blind and adversarial holdout gates; governed incident command still carries one visible holdout miss, and adversarial calibration plus family drift are now tracked separately
 - judge-backed blind eval: root, team frontend review, and governed incident command now pass an independent rubric judge on blind holdout prompts
@@ -241,6 +243,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - promotion decisions are published in [reports/promotion_decisions.md](reports/promotion_decisions.md)
 - candidate lifecycle states are published in [reports/candidate_registry.md](reports/candidate_registry.md)
 - lightweight with-skill vs baseline comparison is published in [reports/baseline-compare.md](reports/baseline-compare.md)
+- Review Studio 2.0 gate evidence is published in [reports/review-studio.html](reports/review-studio.html)
 - context budget summaries are tracked in [reports/context_budget.md](reports/context_budget.md)
 - portability status is tracked in [reports/portability_score.md](reports/portability_score.md)
 
@@ -359,7 +362,7 @@ Utility scripts that make the meta-skill operational:
 - `governance_check.py`: validates owner, review cadence, lifecycle stage, and maturity metadata
 - `render_context_reports.py`: generates root and example context-budget reports plus a shared context summary
 - `render_regression_history.py`: turns milestone snapshots into a readable regression history report
-- `cross_packager.py`: builds client-specific export artifacts with explicit platform contracts and validation
+- `cross_packager.py`: builds client-specific export artifacts from Skill IR plus neutral metadata, with explicit platform contracts and validation
 - `render_portability_report.py`: scores cross-environment portability from neutral metadata, degradation rules, and consumer validation coverage
 - `render_skill_overview.py`: generates the white-background bilingual HTML skill audit report with sticky four-character Chinese navigation, top-right language switch, v2 scorecard, inline SVG charts, contract boundary, quality review, risk governance, assets, and iteration roadmap
 - `export_skill_ir.py`: exports the 2.0 platform-neutral Skill IR contract from `SKILL.md`, manifest, interface metadata, evals, resources, and reports
@@ -434,7 +437,7 @@ The typical flow is:
 3. choose scaffold, production, or library mode
 4. generate the package
 5. run the sizing and trigger checks if needed
-6. export target-specific compatibility artifacts
+6. export target-specific compatibility artifacts from the Skill IR contract
 
 ### 3. Export compatibility artifacts
 

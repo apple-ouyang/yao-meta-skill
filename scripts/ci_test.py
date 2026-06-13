@@ -39,6 +39,7 @@ DEFAULT_TARGETS = [
     "trust-check",
     "skill-atlas-check",
     "review-viewer-check",
+    "review-studio-check",
     "feedback-check",
     "baseline-compare-check",
     "reference-scan-check",

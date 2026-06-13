@@ -83,6 +83,7 @@ def main() -> None:
     assert "reports/conformance_matrix.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/security_trust_report.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/skill_atlas.html" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
+    assert "reports/review-studio.html" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert overview_json["skill_ir"]["schema_version"] in {"", "2.0.0"}, overview_json.get("skill_ir")
     assert "output_quality" in overview_json, overview_json.keys()
     assert "runtime_conformance" in overview_json, overview_json.keys()

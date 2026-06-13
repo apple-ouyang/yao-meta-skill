@@ -8,10 +8,12 @@
 - shell: `bash`
 - trust level: `local`
 - remote inline execution: `forbid`
+- Skill IR source: `skill-ir/examples/yao-meta-skill.json`
+- Skill IR schema: `2.0.0`
 
 | Component | Score |
 | --- | ---: |
-| `canonical_neutral_source` | 15 |
+| `platform_neutral_semantic_source` | 15 |
 | `adapter_target_coverage` | 15 |
 | `activation_metadata` | 10 |
 | `execution_metadata` | 10 |

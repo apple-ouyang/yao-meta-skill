@@ -1,12 +1,12 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `124`
-- Scripts: `49`
+- Scanned files: `127`
+- Scripts: `50`
 - Secret findings: `0`
 - Network-capable scripts: `2`
 - Interactive scripts: `0`
-- Package SHA256: `d70bd9083059198c4346c743131852b32038e59000d86ed11cae4399df6988ac`
+- Package SHA256: `18618ecee3683f7488ae4a65a9800c428ee15c6539bbcd367910c57d84ac77ad`
 
 ## Failures
 
@@ -59,6 +59,7 @@
 | scripts/render_reference_scan.py | True | True | False | False | False |
 | scripts/render_reference_synthesis.py | True | True | False | False | False |
 | scripts/render_regression_history.py | True | True | False | False | False |
+| scripts/render_review_studio.py | True | True | False | False | False |
 | scripts/render_review_viewer.py | True | True | False | False | False |
 | scripts/render_skill_overview.py | True | True | False | False | False |
 | scripts/render_social_preview.py | False | True | False | False | False |

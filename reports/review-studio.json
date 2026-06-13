@@ -1,0 +1,4780 @@
+{
+  "schema_version": "2.0",
+  "ok": true,
+  "skill_dir": ".",
+  "summary": {
+    "decision": "review",
+    "world_class_score": 87,
+    "gate_count": 8,
+    "blocker_count": 0,
+    "warning_count": 3
+  },
+  "gates": [
+    {
+      "key": "intent-canvas",
+      "label": "意图画布",
+      "status": "warn",
+      "detail": "intent confidence 30/100; Pause before deep authoring and close the highest-leverage gaps first.",
+      "evidence": "reports/intent-confidence.json",
+      "link": "intent-confidence.md"
+    },
+    {
+      "key": "trigger-lab",
+      "label": "触发实验",
+      "status": "pass",
+      "detail": "13 trigger cases; 0 misroutes; 0 ambiguous",
+      "evidence": "reports/route_scorecard.json",
+      "link": "route_scorecard.md"
+    },
+    {
+      "key": "output-lab",
+      "label": "输出实验",
+      "status": "pass",
+      "detail": "5/5 cases; with-skill 100.0; baseline 0.0; file-backed 1; near-neighbor 1",
+      "evidence": "reports/output_quality_scorecard.json",
+      "link": "output_quality_scorecard.md"
+    },
+    {
+      "key": "context-budget",
+      "label": "上下文",
+      "status": "pass",
+      "detail": "initial load 910/1000; quality density 142.9",
+      "evidence": "reports/context_budget.json",
+      "link": "context_budget.md"
+    },
+    {
+      "key": "runtime-matrix",
+      "label": "运行矩阵",
+      "status": "pass",
+      "detail": "5 / 5 targets pass",
+      "evidence": "reports/conformance_matrix.json",
+      "link": "conformance_matrix.md"
+    },
+    {
+      "key": "trust-report",
+      "label": "信任报告",
+      "status": "warn",
+      "detail": "0 secrets; 50 scripts; 2 network-capable scripts",
+      "evidence": "reports/security_trust_report.json",
+      "link": "security_trust_report.md"
+    },
+    {
+      "key": "skill-atlas",
+      "label": "组合治理",
+      "status": "warn",
+      "detail": "12 skills; 5 route collisions; 9 owner gaps; 10 stale",
+      "evidence": "reports/skill_atlas.json",
+      "link": "skill_atlas.html"
+    },
+    {
+      "key": "release-notes",
+      "label": "发布路线",
+      "status": "pass",
+      "detail": "0 promote; 3 keep current; 0 blocked",
+      "evidence": "reports/promotion_decisions.json + docs/migration-v2.md",
+      "link": "promotion_decisions.md"
+    }
+  ],
+  "blockers": [],
+  "warnings": [
+    {
+      "key": "intent-canvas",
+      "label": "意图画布",
+      "status": "warn",
+      "detail": "intent confidence 30/100; Pause before deep authoring and close the highest-leverage gaps first.",
+      "evidence": "reports/intent-confidence.json",
+      "link": "intent-confidence.md"
+    },
+    {
+      "key": "trust-report",
+      "label": "信任报告",
+      "status": "warn",
+      "detail": "0 secrets; 50 scripts; 2 network-capable scripts",
+      "evidence": "reports/security_trust_report.json",
+      "link": "security_trust_report.md"
+    },
+    {
+      "key": "skill-atlas",
+      "label": "组合治理",
+      "status": "warn",
+      "detail": "12 skills; 5 route collisions; 9 owner gaps; 10 stale",
+      "evidence": "reports/skill_atlas.json",
+      "link": "skill_atlas.html"
+    }
+  ],
+  "evidence_paths": {
+    "skill_overview": "reports/skill-overview.html",
+    "review_viewer": "reports/review-viewer.html",
+    "output_eval": "reports/output_quality_scorecard.md",
+    "runtime_conformance": "reports/conformance_matrix.md",
+    "trust_report": "reports/security_trust_report.md",
+    "skill_atlas": "reports/skill_atlas.html",
+    "migration": "docs/migration-v2.md"
+  },
+  "data": {
+    "overview": {
+      "skill_summary": {
+        "name": "yao-meta-skill",
+        "title": "Yao Meta Skill",
+        "display_name": "Yao Meta Skill",
+        "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+        "maturity": "governed",
+        "updated_at": "2026-03-31",
+        "core_value": "把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。",
+        "audience": "Skill 作者、复用团队和后续 reviewer。",
+        "deliverables": [
+          "SKILL.md",
+          "agents/interface.yaml",
+          "reports/skill-ir.json",
+          "reports/output_quality_scorecard.md",
+          "reports/conformance_matrix.md",
+          "reports/security_trust_report.md",
+          "reports/skill_atlas.html",
+          "reports/review-studio.html",
+          "reports/skill-overview.html"
+        ],
+        "flow": [
+          "输入材料",
+          "Skill 包体",
+          "可复用能力"
+        ]
+      },
+      "scorecard": {
+        "completeness_score": {
+          "label": "完整度",
+          "score": 100,
+          "reasons": [
+            "SKILL.md 已存在，是 Skill 的入口。",
+            "README.md 已存在，便于人工阅读。",
+            "agents/interface.yaml 已存在，便于跨平台适配。",
+            "manifest.json 已存在，生命周期信息可追踪。",
+            "reports/ 已存在，生成证据可以随包体迁移。"
+          ]
+        },
+        "trigger_score": {
+          "label": "触发清晰",
+          "score": 100,
+          "reasons": [
+            "frontmatter description 已存在，具备基础路由面。",
+            "description 有足够长度说明任务边界。",
+            "description 已包含使用场景或排除边界信号。",
+            "evals/ 已存在，可承载触发样例或质量检查。",
+            "intent-confidence 报告已生成，可辅助判断触发稳定性。"
+          ]
+        },
+        "evidence_score": {
+          "label": "证据充分",
+          "score": 100,
+          "reasons": [
+            "已生成 13 / 13 类报告证据。",
+            "skill-ir.json 已存在。",
+            "intent-dialogue.json 已存在。",
+            "intent-confidence.json 已存在。"
+          ]
+        },
+        "maintainability_score": {
+          "label": "可维护性",
+          "score": 100,
+          "reasons": [
+            "SKILL.md 约 346 个词/字。",
+            "入口文件保持克制，可维护性较好。",
+            "references/ 已承载扩展指导。",
+            "scripts/ 已承载确定性逻辑。",
+            "evals/ 已承载可迁移检查。"
+          ]
+        },
+        "portability_score": {
+          "label": "可迁移性",
+          "score": 100,
+          "reasons": [
+            "agents/interface.yaml 已存在。",
+            "manifest.json 已存在。",
+            "目标平台或 adapter target 已声明。",
+            "入口文件未发现明显私有绝对路径。"
+          ]
+        },
+        "context_cost": {
+          "label": "上下文成本",
+          "score": 42,
+          "reasons": [
+            "入口约 346 个词/字，references 约 11313 个词/字。",
+            "分数越高代表上下文成本越低。",
+            "上下文成本偏高，建议压缩入口或拆分 references。"
+          ]
+        }
+      },
+      "capability_profile": {
+        "archetype": "governed",
+        "task_family": "Dialogue interaction",
+        "maturity": "governed",
+        "trigger_strength": "手动触发 + description 路由",
+        "reuse_scope": "跨平台",
+        "matrix": {
+          "execution_certainty": 72,
+          "knowledge_density": 80
+        }
+      },
+      "principle_model": {
+        "nodes": [
+          {
+            "title": "意图澄清",
+            "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          },
+          {
+            "title": "边界路由",
+            "body": "用 frontmatter description 决定是否触发，并写明相邻非目标。"
+          },
+          {
+            "title": "资产分层",
+            "body": "把入口、参考、脚本、评估和报告拆到各自目录，避免 SKILL.md 膨胀。"
+          },
+          {
+            "title": "证据回路",
+            "body": "Ask only the highest-leverage clarification before adding package weight."
+          },
+          {
+            "title": "漂移观察",
+            "body": "Add near-neighbor exclusions and route evals before expanding workflow steps."
+          },
+          {
+            "title": "杠杆升级",
+            "body": "Ask one focused question and update intent context before adding assets."
+          }
+        ],
+        "layers": [
+          "入口层",
+          "参考层",
+          "脚本层",
+          "评估层",
+          "报告层"
+        ]
+      },
+      "contract_boundary": {
+        "trigger": {
+          "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+          "activation": "manual",
+          "execution": "inline",
+          "shell": "bash"
+        },
+        "inputs": [
+          "用户提供的工作流、提示词、文档、记录或散乱笔记",
+          "期望沉淀的复用场景、排除项、约束和质量标准"
+        ],
+        "outputs": [
+          "可路由的 SKILL.md",
+          "agents/interface.yaml 元数据",
+          "必要的 references、scripts、evals、reports 证据",
+          "结构化 Skill 目录，共 8 类关键资产。"
+        ],
+        "should_trigger": [
+          "把重复流程沉淀为可复用的 agent skill。",
+          "把分散提示词、对话记录或操作规范整理为稳定能力。",
+          "团队复用前，需要明确触发边界、质量证据和维护责任。"
+        ],
+        "should_not_trigger": [
+          "只需要一次性回答、没有复用价值的临时请求。",
+          "要求直接执行相邻任务，而不是沉淀或使用这个 Skill。",
+          "缺少必要事实且用户不允许澄清的场景。"
+        ],
+        "boundary_cards": [
+          {
+            "label": "Owned",
+            "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+          },
+          {
+            "label": "Adjacent",
+            "body": "相邻任务需要先确认是否应转为独立 Skill。"
+          },
+          {
+            "label": "Excluded",
+            "body": "不替代人工事实核查，也不静默扩大职责。"
+          }
+        ]
+      },
+      "quality_review": {
+        "strengths": [
+          "触发面保持精简，并锚定在 frontmatter description。",
+          "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+          "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+          "已生成 Runtime Conformance Matrix，可审查目标端消费能力。",
+          "已生成 Security Trust Report，可审查脚本、依赖、secret 和包完整性风险。",
+          "已生成 Skill Atlas，可审查多 Skill 组合中的路由冲突、过期资产和 owner 缺口。"
+        ],
+        "gaps": [
+          "上下文成本需要补强：入口约 346 个词/字，references 约 11313 个词/字。"
+        ],
+        "recommendations": [
+          "先改触发边界，再扩展工作流。",
+          "只把重复且稳定的步骤沉淀为脚本。",
+          "每次升级后重新生成报告并检查分数原因。"
+        ],
+        "artifact_design": {
+          "design_system": "review studio",
+          "highlights": [
+            "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
+            "Name the working directory and required inputs for commands.",
+            "Mark destructive, networked, or external side-effect operations.",
+            "Prefer the smallest runnable snippet over broad framework scaffolding."
+          ]
+        },
+        "prompt_quality": {
+          "overall_quality_score": 82.0,
+          "highlights": [
+            "Primary prompt task family: Dialogue interaction.",
+            "Complexity: complex — multiple inputs, constraints, or task families require tradeoff handling",
+            "Completeness: 80/100.",
+            "Clarity: 80/100."
+          ]
+        },
+        "system_model": {
+          "stability": {
+            "score": 86,
+            "band": "stable-first-pass"
+          },
+          "highlights": [
+            "Stability: stable-first-pass (86/100).",
+            "Owned job: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+            "Leverage: Clarify the real job boundary — Ask one focused question and update intent context before adding assets.",
+            "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language."
+          ]
+        }
+      },
+      "risk_governance": {
+        "risks": [
+          {
+            "name": "误触发风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "frontmatter description 已存在，具备基础路由面。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "输出漂移风险",
+            "impact": 2,
+            "probability": 1,
+            "signal": "已生成 13 / 13 类报告证据。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "证据不足风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "已生成 13 / 13 类报告证据。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "包体膨胀风险",
+            "impact": 2,
+            "probability": 1,
+            "signal": "SKILL.md 约 346 个词/字。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          },
+          {
+            "name": "跨平台迁移风险",
+            "impact": 3,
+            "probability": 1,
+            "signal": "agents/interface.yaml 已存在。",
+            "response": "先补证据和边界，再增加包体复杂度。"
+          }
+        ],
+        "risk_families": [
+          {
+            "key": "markdown_readability",
+            "label": "Markdown readability",
+            "matched_keywords": [
+              "md",
+              "report",
+              "doc"
+            ],
+            "score": 3,
+            "risks": [
+              "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+              "Long bullets can make the output look complete while hiding the actual decision logic.",
+              "Mixed heading levels can reduce scanability."
+            ],
+            "constraints": [
+              "Use tables only when comparison is the main job; otherwise prefer compact cards or grouped bullets.",
+              "Keep table cells short and move explanations below the table.",
+              "Use heading levels consistently and keep each section anchored to a user-facing outcome."
+            ],
+            "self_repair": [
+              "Preview whether each table still reads well when columns are narrow.",
+              "Convert any table with paragraph-length cells into bullets or cards."
+            ]
+          },
+          {
+            "key": "citation_clutter",
+            "label": "Citation and footnote clutter",
+            "matched_keywords": [
+              "source",
+              "reference"
+            ],
+            "score": 2,
+            "risks": [
+              "Footnote markers or dense citation notes can interrupt the reading flow.",
+              "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+              "Source notes may become more prominent than the tutorial itself."
+            ],
+            "constraints": [
+              "Attach citations only to claims that need evidence, not to every sentence.",
+              "Group source notes at the end of a section when inline markers would hurt readability.",
+              "Keep the main sentence readable without requiring the reader to chase a footnote."
+            ],
+            "self_repair": [
+              "Remove decorative citations that do not support a material claim.",
+              "Move repeated source explanations into one compact source note."
+            ]
+          },
+          {
+            "key": "visual_capture",
+            "label": "Screenshot and visual capture",
+            "matched_keywords": [
+              "capture"
+            ],
+            "score": 1,
+            "risks": [
+              "Screenshots can be captured from the wrong state, wrong viewport, or wrong crop.",
+              "Missing screenshots can cause the skill to invent visual references instead of declaring the gap.",
+              "Image descriptions can omit the action-relevant region."
+            ],
+            "constraints": [
+              "Never invent a screenshot; state when visual evidence is missing.",
+              "Record the source, viewport, and crop intent for any screenshot-dependent output.",
+              "Describe what the reader should inspect in the image, not just that an image exists."
+            ],
+            "self_repair": [
+              "Check that every screenshot reference points to a real provided or generated asset.",
+              "Reword any visual instruction that depends on an unseen screen state."
+            ]
+          },
+          {
+            "key": "code_or_command_safety",
+            "label": "Code and command safety",
+            "matched_keywords": [
+              "script"
+            ],
+            "score": 1,
+            "risks": [
+              "Commands can omit environment assumptions, working directory, or rollback notes.",
+              "Code snippets can look runnable while missing required inputs.",
+              "Error handling can be either absent or over-engineered."
+            ],
+            "constraints": [
+              "Name the working directory, required inputs, and expected output for each command.",
+              "Mark destructive or external side-effect operations explicitly.",
+              "Prefer the smallest runnable snippet over broad framework code."
+            ],
+            "self_repair": [
+              "Scan each command for cwd, input, output, and side-effect assumptions.",
+              "Remove speculative error handling that is not tied to a real failure mode."
+            ]
+          },
+          {
+            "key": "tone_and_specificity",
+            "label": "Tone and specificity",
+            "matched_keywords": [
+              "summary"
+            ],
+            "score": 1,
+            "risks": [
+              "Headings and summaries can drift into generic, interchangeable language.",
+              "The output can sound polished but lose the user's actual taste, audience, or scenario.",
+              "Strong claims can appear without examples or constraints."
+            ],
+            "constraints": [
+              "Anchor titles and summaries in the user's audience, object, and concrete outcome.",
+              "Avoid placeholder phrases such as comprehensive guide, ultimate solution, or key insights unless the source demands them.",
+              "Preserve one distinctive phrase, constraint, or standard from the user's input."
+            ],
+            "self_repair": [
+              "Replace generic title candidates with scenario-specific alternatives.",
+              "Delete any polished sentence that could fit almost any project unchanged."
+            ]
+          }
+        ],
+        "human_judgment_boundary": [
+          "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
+          "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
+          "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
+        ]
+      },
+      "package_assets": {
+        "entries": [
+          {
+            "path": "SKILL.md",
+            "label": "Skill entrypoint",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "README.md",
+            "label": "Human-readable usage guide",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "agents/interface.yaml",
+            "label": "Neutral interface metadata",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "manifest.json",
+            "label": "Lifecycle and portability metadata",
+            "kind": "file",
+            "file_count": 1
+          },
+          {
+            "path": "references",
+            "label": "Extended guidance and reusable notes",
+            "kind": "folder",
+            "file_count": 29
+          },
+          {
+            "path": "scripts",
+            "label": "Deterministic helpers or local tooling",
+            "kind": "folder",
+            "file_count": 50
+          },
+          {
+            "path": "evals",
+            "label": "Trigger and quality checks",
+            "kind": "folder",
+            "file_count": 28
+          },
+          {
+            "path": "reports",
+            "label": "Generated evidence and overview artifacts",
+            "kind": "folder",
+            "file_count": 144
+          }
+        ],
+        "file_count": 255,
+        "folder_count": 4,
+        "distribution": [
+          {
+            "label": "SKILL.md",
+            "value": 1
+          },
+          {
+            "label": "README.md",
+            "value": 1
+          },
+          {
+            "label": "agents/interface.yaml",
+            "value": 1
+          },
+          {
+            "label": "manifest.json",
+            "value": 1
+          },
+          {
+            "label": "references",
+            "value": 29
+          },
+          {
+            "label": "scripts",
+            "value": 50
+          },
+          {
+            "label": "evals",
+            "value": 28
+          },
+          {
+            "label": "reports",
+            "value": 144
+          }
+        ]
+      },
+      "iteration_roadmap": {
+        "items": [
+          {
+            "title": "Borrow one proven pattern on purpose",
+            "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
+            "actions": [
+              "Read the strongest pattern from obra/superpowers.",
+              "Decide whether to borrow method, structure, execution, or portability, but only one of them first.",
+              "Record what you will not borrow so the package stays light."
+            ],
+            "unlocks": "A cleaner package shape with less accidental over-design."
+          },
+          {
+            "title": "Harden portability semantics",
+            "why": "The skill already signals reuse across environments, so contract clarity matters early.",
+            "actions": [
+              "Confirm activation mode, execution context, and trust assumptions.",
+              "Add or review degradation strategy for non-native targets.",
+              "Package the skill once to verify adapter expectations."
+            ],
+            "unlocks": "Safer cross-environment reuse with less target drift."
+          },
+          {
+            "title": "Create an iteration evidence loop",
+            "why": "The package should show what changed and why after the first draft.",
+            "actions": [
+              "Generate the HTML skill report and keep it aligned with the package.",
+              "Record reference scan choices and non-goals.",
+              "Capture the next iteration choice explicitly before adding more files."
+            ],
+            "unlocks": "A clearer path for the next author or reviewer."
+          }
+        ]
+      },
+      "report_contract": {
+        "schema_version": "2.0",
+        "html_report": "reports/skill-overview.html",
+        "language": "zh-CN",
+        "default_language": "zh-CN",
+        "languages": [
+          "zh-CN",
+          "en"
+        ],
+        "layout": "kami-white-audit-v2",
+        "nav_labels": [
+          "技能概述",
+          "总览指标",
+          "能力画像",
+          "原理结构",
+          "契约边界",
+          "质量评估",
+          "风险治理",
+          "包体资产",
+          "迭代路线"
+        ],
+        "nav_labels_en": [
+          "Overview",
+          "Metrics",
+          "Profile",
+          "Principle",
+          "Contract",
+          "Quality",
+          "Risk",
+          "Assets",
+          "Roadmap"
+        ]
+      },
+      "name": "yao-meta-skill",
+      "title": "Yao Meta Skill",
+      "display_name": "Yao Meta Skill",
+      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "logic_steps": [
+        "Decide whether the request should become a skill and choose the lightest fit.",
+        "Capture job, output, exclusions, constraints, and standards.",
+        "Run reference scan: external benchmarks first, user references second, local fit third; surface only uncertainty or conflict.",
+        "Write the `description` early and test route quality before expanding the package.",
+        "Add output-risk, artifact-design, prompt-quality, and system-model reports only when they matter."
+      ],
+      "usage_steps": [
+        "Use $yao-meta-skill to turn my workflow or notes into a reusable skill with lean structure, clear triggering, and the right evals.",
+        "Use this skill when the request matches: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+      ],
+      "package_map": [
+        {
+          "path": "SKILL.md",
+          "label": "Skill entrypoint",
+          "kind": "file",
+          "file_count": 1
+        },
+        {
+          "path": "README.md",
+          "label": "Human-readable usage guide",
+          "kind": "file",
+          "file_count": 1
+        },
+        {
+          "path": "agents/interface.yaml",
+          "label": "Neutral interface metadata",
+          "kind": "file",
+          "file_count": 1
+        },
+        {
+          "path": "manifest.json",
+          "label": "Lifecycle and portability metadata",
+          "kind": "file",
+          "file_count": 1
+        },
+        {
+          "path": "references",
+          "label": "Extended guidance and reusable notes",
+          "kind": "folder",
+          "file_count": 29
+        },
+        {
+          "path": "scripts",
+          "label": "Deterministic helpers or local tooling",
+          "kind": "folder",
+          "file_count": 50
+        },
+        {
+          "path": "evals",
+          "label": "Trigger and quality checks",
+          "kind": "folder",
+          "file_count": 28
+        },
+        {
+          "path": "reports",
+          "label": "Generated evidence and overview artifacts",
+          "kind": "folder",
+          "file_count": 144
+        }
+      ],
+      "strengths": [
+        "触发面保持精简，并锚定在 frontmatter description。",
+        "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+        "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+        "已生成 Runtime Conformance Matrix，可审查目标端消费能力。",
+        "已生成 Security Trust Report，可审查脚本、依赖、secret 和包完整性风险。",
+        "已生成 Skill Atlas，可审查多 Skill 组合中的路由冲突、过期资产和 owner 缺口。"
+      ],
+      "scenarios": [
+        "把重复流程沉淀为可复用的 agent skill。",
+        "把分散提示词、对话记录或操作规范整理为稳定能力。",
+        "团队复用前，需要明确触发边界、质量证据和维护责任。",
+        "用户说出类似需求时：Use $yao-meta-skill to turn my workflow or notes into a reusable skill with lean structure, clear triggering, and the right evals."
+      ],
+      "trigger_contract": {
+        "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+        "activation": "manual",
+        "execution": "inline",
+        "shell": "bash"
+      },
+      "io_contract": {
+        "inputs": [
+          "用户提供的工作流、提示词、文档、记录或散乱笔记",
+          "期望沉淀的复用场景、排除项、约束和质量标准"
+        ],
+        "outputs": [
+          "可路由的 SKILL.md",
+          "agents/interface.yaml 元数据",
+          "必要的 references、scripts、evals、reports 证据",
+          "结构化 Skill 目录，共 8 类关键资产。"
+        ]
+      },
+      "principles": [
+        {
+          "title": "意图澄清",
+          "body": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse."
+        },
+        {
+          "title": "边界路由",
+          "body": "用 frontmatter description 决定是否触发，并写明相邻非目标。"
+        },
+        {
+          "title": "资产分层",
+          "body": "把入口、参考、脚本、评估和报告拆到各自目录，避免 SKILL.md 膨胀。"
+        },
+        {
+          "title": "证据回路",
+          "body": "Ask only the highest-leverage clarification before adding package weight."
+        },
+        {
+          "title": "漂移观察",
+          "body": "Add near-neighbor exclusions and route evals before expanding workflow steps."
+        },
+        {
+          "title": "杠杆升级",
+          "body": "Ask one focused question and update intent context before adding assets."
+        }
+      ],
+      "roadmap": [
+        {
+          "title": "Borrow one proven pattern on purpose",
+          "why": "You already have public benchmark objects. The next gain is to choose one pattern intentionally instead of absorbing everything loosely.",
+          "actions": [
+            "Read the strongest pattern from obra/superpowers.",
+            "Decide whether to borrow method, structure, execution, or portability, but only one of them first.",
+            "Record what you will not borrow so the package stays light."
+          ],
+          "unlocks": "A cleaner package shape with less accidental over-design."
+        },
+        {
+          "title": "Harden portability semantics",
+          "why": "The skill already signals reuse across environments, so contract clarity matters early.",
+          "actions": [
+            "Confirm activation mode, execution context, and trust assumptions.",
+            "Add or review degradation strategy for non-native targets.",
+            "Package the skill once to verify adapter expectations."
+          ],
+          "unlocks": "Safer cross-environment reuse with less target drift."
+        },
+        {
+          "title": "Create an iteration evidence loop",
+          "why": "The package should show what changed and why after the first draft.",
+          "actions": [
+            "Generate the HTML skill report and keep it aligned with the package.",
+            "Record reference scan choices and non-goals.",
+            "Capture the next iteration choice explicitly before adding more files."
+          ],
+          "unlocks": "A clearer path for the next author or reviewer."
+        }
+      ],
+      "cards": [],
+      "introduction": [
+        "这份报告用于快速理解新生成 Skill 的定位、原理、触发边界和交付内容。",
+        "先确认重复任务、真实输入形态和可交付输出，再决定是否继续加 references、scripts 或 evals。",
+        "如果需求仍然模糊，优先回到 intent dialogue 收紧边界，再扩展包体结构。"
+      ],
+      "benchmark_highlights": [],
+      "skill_ir": {
+        "schema_version": "2.0.0",
+        "target_count": 4,
+        "trigger_samples": 8,
+        "output_eval_cases": 3
+      },
+      "output_quality": {
+        "case_count": 5,
+        "file_backed_case_count": 1,
+        "near_neighbor_case_count": 1,
+        "boundary_case_count": 1,
+        "baseline_pass_rate": 0.0,
+        "with_skill_pass_rate": 100.0,
+        "delta": 100.0,
+        "regression_count": 0,
+        "gate_pass": true,
+        "failure_taxonomy": []
+      },
+      "runtime_conformance": {
+        "target_count": 5,
+        "pass_count": 5,
+        "fail_count": 0
+      },
+      "trust_security": {
+        "scanned_files": 127,
+        "script_count": 50,
+        "secret_findings": 0,
+        "dependency_files": [
+          "requirements-ci.txt"
+        ],
+        "network_script_count": 2,
+        "interactive_script_count": 0,
+        "package_sha256": "18618ecee3683f7488ae4a65a9800c428ee15c6539bbcd367910c57d84ac77ad"
+      },
+      "skill_atlas": {
+        "skill_count": 12,
+        "route_collision_count": 5,
+        "owner_gap_count": 9,
+        "stale_count": 10,
+        "shared_resource_count": 0,
+        "no_route_opportunity_count": 0
+      },
+      "synthesis_highlights": [
+        "Borrow a first-time operator flow that explains itself before it asks for more structure.",
+        "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.",
+        "Borrow the discipline of defining what the skill should not own before growing the package."
+      ],
+      "artifact_design": {
+        "design_system": "review studio",
+        "highlights": [
+          "Execution-focused technical artifact with environment assumptions, copyable commands, expected outputs, and side effects made explicit.",
+          "Name the working directory and required inputs for commands.",
+          "Mark destructive, networked, or external side-effect operations.",
+          "Prefer the smallest runnable snippet over broad framework scaffolding."
+        ]
+      },
+      "prompt_quality": {
+        "overall_quality_score": 82.0,
+        "highlights": [
+          "Primary prompt task family: Dialogue interaction.",
+          "Complexity: complex — multiple inputs, constraints, or task families require tradeoff handling",
+          "Completeness: 80/100.",
+          "Clarity: 80/100."
+        ]
+      },
+      "system_model": {
+        "stability": {
+          "score": 86,
+          "band": "stable-first-pass"
+        },
+        "highlights": [
+          "Stability: stable-first-pass (86/100).",
+          "Owned job: Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+          "Leverage: Clarify the real job boundary — Ask one focused question and update intent context before adding assets.",
+          "Leverage: Tune the frontmatter description — Name the recurring job, expected input, output, and strongest non-goal in compact language."
+        ]
+      },
+      "metadata": {
+        "canonical_format": "agent-skills",
+        "targets": [
+          "openai",
+          "claude",
+          "generic"
+        ],
+        "maturity_tier": "governed",
+        "skill_archetype": "governed",
+        "updated_at": "2026-03-31"
+      }
+    },
+    "intent_confidence": {
+      "score": 30,
+      "band": "low",
+      "gate_passed": false,
+      "strengths": [
+        "The recurring job is concrete enough to anchor the package."
+      ],
+      "gaps": [
+        {
+          "key": "real_inputs",
+          "label": "Real inputs are missing",
+          "reason": "Without real inputs, it is hard to choose assets, scripts, or examples.",
+          "severity": "high"
+        },
+        {
+          "key": "primary_output",
+          "label": "Primary output is missing",
+          "reason": "The package does not yet know what it must hand back.",
+          "severity": "high"
+        },
+        {
+          "key": "exclusions",
+          "label": "Near-neighbor exclusions are missing",
+          "reason": "The route may blur into nearby requests without an exclusion list.",
+          "severity": "high"
+        },
+        {
+          "key": "constraints",
+          "label": "Constraints are missing",
+          "reason": "The package does not yet know which tradeoffs matter most.",
+          "severity": "high"
+        },
+        {
+          "key": "standards",
+          "label": "Quality bar is implied, not explicit",
+          "reason": "The first evaluation target is still underspecified.",
+          "severity": "medium"
+        }
+      ],
+      "follow_up_questions": [
+        {
+          "slot": "real_inputs",
+          "question": "What material will people actually hand to this skill in practice?",
+          "why": "Real input shape decides whether references, scripts, or examples are needed.",
+          "list": true,
+          "label": "Real inputs are missing",
+          "severity": "high"
+        },
+        {
+          "slot": "primary_output",
+          "question": "What finished hand-back should this skill return so the next person can keep moving?",
+          "why": "The output is the anchor for package design and review.",
+          "list": false,
+          "label": "Primary output is missing",
+          "severity": "high"
+        },
+        {
+          "slot": "exclusions",
+          "question": "What nearby requests should this skill clearly leave out so the boundary stays clean?",
+          "why": "Exclusions are the fastest route to better trigger quality.",
+          "list": true,
+          "label": "Near-neighbor exclusions are missing",
+          "severity": "high"
+        }
+      ],
+      "anchor_sentence": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "recommended_action": "Pause before deep authoring and close the highest-leverage gaps first.",
+      "context": {
+        "job": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+        "real_inputs": [],
+        "primary_output": "",
+        "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+        "exclusions": [],
+        "constraints": [],
+        "standards": [],
+        "correction": "",
+        "user_references": []
+      }
+    },
+    "intent_dialogue": {
+      "skill_name": "yao-meta-skill",
+      "title": "Yao Meta Skill",
+      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "focus": "portability-and-contract",
+      "opening_frame": "Let's start from the real work, the result you care about, and the standards that matter here. We can make the structure clearer after that.",
+      "reference_note": "If you already have examples you admire, bring them in. We will learn the pattern, not copy the source.",
+      "conversation_path": [
+        "Start with the user's own words, not package vocabulary.",
+        "Reflect the job, output, and non-goals back in one clean sentence.",
+        "Only then offer a tiny scaffold if it would help the user move faster."
+      ],
+      "opening_styles": [
+        {
+          "label": "温柔陪伴型",
+          "best_when": "用户想法还散、还在试探，或者需要先被接住。",
+          "message": "我们先不急着把它说成一个很完整的 skill。你就像跟我聊天一样，先说说你最想让它以后稳稳接住哪类重复工作；如果它做得很理想，最后应该交回你一个什么结果。"
+        },
+        {
+          "label": "专业教练型",
+          "best_when": "用户目标比较明确，希望被高效带着走。",
+          "message": "我们先把这件事讲清楚，再决定 skill 怎么设计。你先告诉我三件事：它要接住的重复任务是什么，别人通常会给它什么材料，最后你希望它交付什么结果。"
+        },
+        {
+          "label": "共创伙伴型",
+          "best_when": "用户已经有一些想法，希望一起打磨，不想被填表。",
+          "message": "我们把这次当成一次共创。你先给我一个粗糙版本就行，我先帮你看它真正的核心任务是什么，再一起决定边界、结构和接下来最值的一步。"
+        }
+      ],
+      "optional_scaffold": [
+        "The repeated job it should reliably handle",
+        "The real inputs people will hand to it",
+        "The useful output it should hand back",
+        "What it should clearly refuse"
+      ],
+      "questions": [
+        {
+          "question": "If this skill worked beautifully, what recurring job would it reliably handle for the user every time?",
+          "why": "This reveals the real job-to-be-done and gives the package a humane center instead of a guessed prompt shape."
+        },
+        {
+          "question": "When someone reaches for this skill in the real world, what materials will they actually hand to it?",
+          "why": "Input shape decides whether references, scripts, or templates are needed."
+        },
+        {
+          "question": "What finished output should it hand back so the user can immediately keep moving?",
+          "why": "Outputs should drive the package structure before extra guidance is added."
+        },
+        {
+          "question": "Which nearby requests should this skill politely refuse so the boundary stays clean?",
+          "why": "The exclusion list is the fastest route to better trigger quality."
+        },
+        {
+          "question": "What matters most here: speed, consistency, auditability, portability, governance, or tone/style fit?",
+          "why": "Constraints decide how much structure, packaging, and review the skill actually needs."
+        },
+        {
+          "question": "Do you already have any references you want this skill to learn from, such as a repo, product, page, workflow, or prompt example?",
+          "why": "A good reference can raise the quality bar quickly, but the skill should only borrow patterns and standards, never copy wording or confidential material."
+        },
+        {
+          "question": "Which environments or clients must be able to consume this skill?",
+          "why": "This sets the minimum metadata and degradation strategy."
+        }
+      ],
+      "output": {
+        "capability_sentence": "Yao Meta Skill should turn a recurring request into a reliable reusable output without widening the boundary unnecessarily.",
+        "required_capture": [
+          "recurring job",
+          "real inputs",
+          "required outputs",
+          "exclusions",
+          "constraints",
+          "reference preferences",
+          "first evaluation target"
+        ],
+        "recommended_first_gate": "portability and contract"
+      }
+    },
+    "route_scorecard": {
+      "summary": {
+        "total_cases": 13,
+        "correct_cases": 13,
+        "accuracy": 1.0,
+        "ambiguous_case_count": 0,
+        "margin_warning_threshold": 0.08,
+        "misroute_count": 0,
+        "no_route_accuracy": 1.0
+      },
+      "route_stats": {
+        "yao-meta-skill": {
+          "expected_count": 3,
+          "predicted_count": 3,
+          "correct_count": 3,
+          "precision": 1.0,
+          "recall": 1.0,
+          "average_margin": 0.611
+        },
+        "team-frontend-review": {
+          "expected_count": 3,
+          "predicted_count": 3,
+          "correct_count": 3,
+          "precision": 1.0,
+          "recall": 1.0,
+          "average_margin": 0.805
+        },
+        "governed-incident-command": {
+          "expected_count": 3,
+          "predicted_count": 3,
+          "correct_count": 3,
+          "precision": 1.0,
+          "recall": 1.0,
+          "average_margin": 0.659
+        },
+        "no_route": {
+          "expected_count": 4,
+          "predicted_count": 4,
+          "correct_count": 4,
+          "precision": 1.0,
+          "recall": 1.0,
+          "average_margin": null
+        }
+      },
+      "confusion_matrix": {
+        "yao-meta-skill": {
+          "yao-meta-skill": 3,
+          "team-frontend-review": 0,
+          "governed-incident-command": 0,
+          "no_route": 0
+        },
+        "team-frontend-review": {
+          "yao-meta-skill": 0,
+          "team-frontend-review": 3,
+          "governed-incident-command": 0,
+          "no_route": 0
+        },
+        "governed-incident-command": {
+          "yao-meta-skill": 0,
+          "team-frontend-review": 0,
+          "governed-incident-command": 3,
+          "no_route": 0
+        },
+        "no_route": {
+          "yao-meta-skill": 0,
+          "team-frontend-review": 0,
+          "governed-incident-command": 0,
+          "no_route": 4
+        }
+      },
+      "ambiguous_cases": [],
+      "misroutes": [],
+      "cases": [
+        {
+          "family": "meta_create",
+          "prompt": "Create a reusable skill from this workflow and add evals before sharing it with the team.",
+          "expected_route": "yao-meta-skill",
+          "predicted_route": "yao-meta-skill",
+          "correct": true,
+          "margin": 0.741,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "yao-meta-skill",
+              "score": 0.741,
+              "passed_threshold": true,
+              "threshold": 0.33,
+              "matched_desired_concepts": [
+                "eval_optimize",
+                "iterate_existing_skill",
+                "reuse_package",
+                "team_operationalize",
+                "transform_workflow"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.01,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.01,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "meta_iterate",
+          "prompt": "Refactor this existing skill description, tighten the trigger boundary, and package it for reuse.",
+          "expected_route": "yao-meta-skill",
+          "predicted_route": "yao-meta-skill",
+          "correct": true,
+          "margin": 0.535,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "yao-meta-skill",
+              "score": 0.535,
+              "passed_threshold": true,
+              "threshold": 0.33,
+              "matched_desired_concepts": [
+                "eval_optimize",
+                "iterate_existing_skill",
+                "reuse_package"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.011,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.01,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "meta_operationalize",
+          "prompt": "Turn these prompts, notes, and transcripts into a maintained skill package with references and scripts.",
+          "expected_route": "yao-meta-skill",
+          "predicted_route": "yao-meta-skill",
+          "correct": true,
+          "margin": 0.558,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "yao-meta-skill",
+              "score": 0.558,
+              "passed_threshold": true,
+              "threshold": 0.33,
+              "matched_desired_concepts": [
+                "build_skill",
+                "reuse_package"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.269,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "governed_workflow"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.011,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "frontend_premerge",
+          "prompt": "Run a pre-merge frontend review for keyboard navigation issues and unsafe rendering.",
+          "expected_route": "team-frontend-review",
+          "predicted_route": "team-frontend-review",
+          "correct": true,
+          "margin": 0.893,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "team-frontend-review",
+              "score": 0.893,
+              "passed_threshold": true,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "accessibility",
+                "frontend_scope",
+                "review_frontend",
+                "ui_security",
+                "ux_regression"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.018,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.012,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "frontend_states",
+          "prompt": "Run a pre-merge frontend review on this React diff for missing empty states, form handling, and UX regressions.",
+          "expected_route": "team-frontend-review",
+          "predicted_route": "team-frontend-review",
+          "correct": true,
+          "margin": 0.704,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "team-frontend-review",
+              "score": 0.704,
+              "passed_threshold": true,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "frontend_scope",
+                "review_frontend",
+                "ui_security",
+                "ux_regression"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.013,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.008,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "frontend_a11y",
+          "prompt": "Review React components for a11y regressions, unsafe rendering, and UI behavior before merge.",
+          "expected_route": "team-frontend-review",
+          "predicted_route": "team-frontend-review",
+          "correct": true,
+          "margin": 0.819,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "team-frontend-review",
+              "score": 0.819,
+              "passed_threshold": true,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "accessibility",
+                "frontend_scope",
+                "review_frontend",
+                "ui_security"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.012,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.006,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "incident_packet",
+          "prompt": "Build a governed incident command packet from alerts, responder notes, incident communication needs, and severity findings.",
+          "expected_route": "governed-incident-command",
+          "predicted_route": "governed-incident-command",
+          "correct": true,
+          "margin": 1.0,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "governed-incident-command",
+              "score": 1.0,
+              "passed_threshold": true,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "comms_and_owners",
+                "governed_workflow",
+                "severity_assessment"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.021,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.011,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "incident_severity",
+          "prompt": "Run severity assessment and package incident communication from this outage review.",
+          "expected_route": "governed-incident-command",
+          "predicted_route": "governed-incident-command",
+          "correct": true,
+          "margin": 0.805,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "governed-incident-command",
+              "score": 0.805,
+              "passed_threshold": true,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "comms_and_owners",
+                "severity_assessment"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.189,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [
+                "reuse_package"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.022,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "incident_governed_workflow",
+          "prompt": "Standardize this incident review into a reusable governed workflow with owner actions.",
+          "expected_route": "governed-incident-command",
+          "predicted_route": "governed-incident-command",
+          "correct": true,
+          "margin": 0.172,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "governed-incident-command",
+              "score": 0.62,
+              "passed_threshold": true,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "comms_and_owners",
+                "governed_workflow"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.448,
+              "passed_threshold": true,
+              "threshold": 0.33,
+              "matched_desired_concepts": [
+                "reuse_package",
+                "team_operationalize",
+                "transform_workflow"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.013,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "no_route_explain",
+          "prompt": "Explain keyboard accessibility basics in plain English.",
+          "expected_route": "no_route",
+          "predicted_route": "no_route",
+          "correct": true,
+          "margin": null,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "team-frontend-review",
+              "score": 0.195,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "accessibility"
+              ],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.0,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": [
+                "explain_only"
+              ]
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.0,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "no_route_build",
+          "prompt": "Build a React form page with loading and empty states.",
+          "expected_route": "no_route",
+          "predicted_route": "no_route",
+          "correct": true,
+          "margin": null,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "yao-meta-skill",
+              "score": 0.016,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.008,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.0,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [
+                "frontend_scope"
+              ],
+              "matched_negative_concepts": [
+                "build_ui"
+              ]
+            }
+          ]
+        },
+        {
+          "family": "no_route_single_update",
+          "prompt": "Write one short outage update for customers from these notes.",
+          "expected_route": "no_route",
+          "predicted_route": "no_route",
+          "correct": true,
+          "margin": null,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "yao-meta-skill",
+              "score": 0.024,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.008,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "governed-incident-command",
+              "score": 0.0,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            }
+          ]
+        },
+        {
+          "family": "no_route_document_only",
+          "prompt": "Summarize this workflow and keep it as documentation only.",
+          "expected_route": "no_route",
+          "predicted_route": "no_route",
+          "correct": true,
+          "margin": null,
+          "ambiguous": false,
+          "ranked_routes": [
+            {
+              "name": "governed-incident-command",
+              "score": 0.01,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "team-frontend-review",
+              "score": 0.009,
+              "passed_threshold": false,
+              "threshold": 0.48,
+              "matched_desired_concepts": [],
+              "matched_negative_concepts": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "score": 0.0,
+              "passed_threshold": false,
+              "threshold": 0.33,
+              "matched_desired_concepts": [
+                "transform_workflow"
+              ],
+              "matched_negative_concepts": [
+                "no_build_directive",
+                "summarize_only"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "output_quality": {
+      "ok": true,
+      "cases": "evals/output/cases.jsonl",
+      "summary": {
+        "case_count": 5,
+        "file_backed_case_count": 1,
+        "near_neighbor_case_count": 1,
+        "boundary_case_count": 1,
+        "baseline_pass_rate": 0.0,
+        "with_skill_pass_rate": 100.0,
+        "delta": 100.0,
+        "regression_count": 0,
+        "gate_pass": true,
+        "failure_taxonomy": []
+      },
+      "results": [
+        {
+          "id": "skill-package-contract",
+          "prompt": "Turn this repeated workflow into a reusable team skill package.",
+          "input_files": [],
+          "metadata": {},
+          "baseline": {
+            "score": 0.0,
+            "passed_count": 0,
+            "failed_count": 4,
+            "checks": [
+              {
+                "id": "has-entrypoint",
+                "description": "Output names the routeable Skill entrypoint.",
+                "weight": 1.0,
+                "failure_type": "missing_entrypoint",
+                "passed": false,
+                "missing": [
+                  "SKILL.md"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-interface",
+                "description": "Output includes neutral interface metadata.",
+                "weight": 1.0,
+                "failure_type": "missing_interface",
+                "passed": false,
+                "missing": [
+                  "agents/interface.yaml"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-report",
+                "description": "Output points reviewer to generated overview report.",
+                "weight": 1.0,
+                "failure_type": "missing_review_artifact",
+                "passed": false,
+                "missing": [
+                  "reports/skill-overview.html"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-resource-boundary",
+                "description": "Output preserves entrypoint/resource separation.",
+                "weight": 1.0,
+                "failure_type": "resource_boundary",
+                "passed": false,
+                "missing": [
+                  "references/",
+                  "scripts/",
+                  "reports/"
+                ],
+                "present_forbidden": []
+              }
+            ],
+            "failed": [
+              {
+                "id": "has-entrypoint",
+                "description": "Output names the routeable Skill entrypoint.",
+                "weight": 1.0,
+                "failure_type": "missing_entrypoint",
+                "passed": false,
+                "missing": [
+                  "SKILL.md"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-interface",
+                "description": "Output includes neutral interface metadata.",
+                "weight": 1.0,
+                "failure_type": "missing_interface",
+                "passed": false,
+                "missing": [
+                  "agents/interface.yaml"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-report",
+                "description": "Output points reviewer to generated overview report.",
+                "weight": 1.0,
+                "failure_type": "missing_review_artifact",
+                "passed": false,
+                "missing": [
+                  "reports/skill-overview.html"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-resource-boundary",
+                "description": "Output preserves entrypoint/resource separation.",
+                "weight": 1.0,
+                "failure_type": "resource_boundary",
+                "passed": false,
+                "missing": [
+                  "references/",
+                  "scripts/",
+                  "reports/"
+                ],
+                "present_forbidden": []
+              }
+            ]
+          },
+          "with_skill": {
+            "score": 100.0,
+            "passed_count": 4,
+            "failed_count": 0,
+            "checks": [
+              {
+                "id": "has-entrypoint",
+                "description": "Output names the routeable Skill entrypoint.",
+                "weight": 1.0,
+                "failure_type": "missing_entrypoint",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-interface",
+                "description": "Output includes neutral interface metadata.",
+                "weight": 1.0,
+                "failure_type": "missing_interface",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-report",
+                "description": "Output points reviewer to generated overview report.",
+                "weight": 1.0,
+                "failure_type": "missing_review_artifact",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-resource-boundary",
+                "description": "Output preserves entrypoint/resource separation.",
+                "weight": 1.0,
+                "failure_type": "resource_boundary",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              }
+            ],
+            "failed": []
+          },
+          "delta": 100.0,
+          "winner": "with_skill",
+          "failure_taxonomy": []
+        },
+        {
+          "id": "output-eval-expectation",
+          "prompt": "Upgrade this production skill so we know whether the generated output is better than baseline.",
+          "input_files": [],
+          "metadata": {},
+          "baseline": {
+            "score": 0.0,
+            "passed_count": 0,
+            "failed_count": 4,
+            "checks": [
+              {
+                "id": "has-baseline-comparison",
+                "description": "Output explicitly compares with-skill and baseline outputs.",
+                "weight": 1.0,
+                "failure_type": "missing_baseline_delta",
+                "passed": false,
+                "missing": [
+                  "with-skill",
+                  "baseline"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-assertion-grading",
+                "description": "Output includes objective assertion grading.",
+                "weight": 1.0,
+                "failure_type": "missing_assertions",
+                "passed": false,
+                "missing": [
+                  "assertion grading"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-scorecard",
+                "description": "Output produces a scorecard report path.",
+                "weight": 1.0,
+                "failure_type": "missing_scorecard",
+                "passed": false,
+                "missing": [
+                  "reports/output_quality_scorecard.md"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-failure-taxonomy",
+                "description": "Output records failure taxonomy.",
+                "weight": 1.0,
+                "failure_type": "missing_failure_taxonomy",
+                "passed": false,
+                "missing": [
+                  "failure taxonomy"
+                ],
+                "present_forbidden": []
+              }
+            ],
+            "failed": [
+              {
+                "id": "has-baseline-comparison",
+                "description": "Output explicitly compares with-skill and baseline outputs.",
+                "weight": 1.0,
+                "failure_type": "missing_baseline_delta",
+                "passed": false,
+                "missing": [
+                  "with-skill",
+                  "baseline"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-assertion-grading",
+                "description": "Output includes objective assertion grading.",
+                "weight": 1.0,
+                "failure_type": "missing_assertions",
+                "passed": false,
+                "missing": [
+                  "assertion grading"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-scorecard",
+                "description": "Output produces a scorecard report path.",
+                "weight": 1.0,
+                "failure_type": "missing_scorecard",
+                "passed": false,
+                "missing": [
+                  "reports/output_quality_scorecard.md"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-failure-taxonomy",
+                "description": "Output records failure taxonomy.",
+                "weight": 1.0,
+                "failure_type": "missing_failure_taxonomy",
+                "passed": false,
+                "missing": [
+                  "failure taxonomy"
+                ],
+                "present_forbidden": []
+              }
+            ]
+          },
+          "with_skill": {
+            "score": 100.0,
+            "passed_count": 4,
+            "failed_count": 0,
+            "checks": [
+              {
+                "id": "has-baseline-comparison",
+                "description": "Output explicitly compares with-skill and baseline outputs.",
+                "weight": 1.0,
+                "failure_type": "missing_baseline_delta",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-assertion-grading",
+                "description": "Output includes objective assertion grading.",
+                "weight": 1.0,
+                "failure_type": "missing_assertions",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-scorecard",
+                "description": "Output produces a scorecard report path.",
+                "weight": 1.0,
+                "failure_type": "missing_scorecard",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-failure-taxonomy",
+                "description": "Output records failure taxonomy.",
+                "weight": 1.0,
+                "failure_type": "missing_failure_taxonomy",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              }
+            ],
+            "failed": []
+          },
+          "delta": 100.0,
+          "winner": "with_skill",
+          "failure_taxonomy": []
+        },
+        {
+          "id": "ir-before-packaging",
+          "prompt": "Package this skill for OpenAI, Claude, Agent Skills, and generic targets.",
+          "input_files": [],
+          "metadata": {},
+          "baseline": {
+            "score": 0.0,
+            "passed_count": 0,
+            "failed_count": 4,
+            "checks": [
+              {
+                "id": "has-ir-first",
+                "description": "Output requires Skill IR before packaging.",
+                "weight": 1.0,
+                "failure_type": "missing_ir",
+                "passed": false,
+                "missing": [
+                  "Skill IR first"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-core-ir-fields",
+                "description": "Output lists core IR contract fields.",
+                "weight": 1.0,
+                "failure_type": "incomplete_ir_contract",
+                "passed": false,
+                "missing": [
+                  "job_to_be_done",
+                  "trigger_surface",
+                  "eval_plan",
+                  "governance"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-targets",
+                "description": "Output names requested runtime targets.",
+                "weight": 1.0,
+                "failure_type": "missing_targets",
+                "passed": false,
+                "missing": [
+                  "OpenAI",
+                  "Claude",
+                  "Agent Skills",
+                  "generic"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-semantic-preservation",
+                "description": "Output says targets must preserve the capability contract.",
+                "weight": 1.0,
+                "failure_type": "semantic_drift",
+                "passed": false,
+                "missing": [
+                  "preserve the same capability contract"
+                ],
+                "present_forbidden": []
+              }
+            ],
+            "failed": [
+              {
+                "id": "has-ir-first",
+                "description": "Output requires Skill IR before packaging.",
+                "weight": 1.0,
+                "failure_type": "missing_ir",
+                "passed": false,
+                "missing": [
+                  "Skill IR first"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-core-ir-fields",
+                "description": "Output lists core IR contract fields.",
+                "weight": 1.0,
+                "failure_type": "incomplete_ir_contract",
+                "passed": false,
+                "missing": [
+                  "job_to_be_done",
+                  "trigger_surface",
+                  "eval_plan",
+                  "governance"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-targets",
+                "description": "Output names requested runtime targets.",
+                "weight": 1.0,
+                "failure_type": "missing_targets",
+                "passed": false,
+                "missing": [
+                  "OpenAI",
+                  "Claude",
+                  "Agent Skills",
+                  "generic"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-semantic-preservation",
+                "description": "Output says targets must preserve the capability contract.",
+                "weight": 1.0,
+                "failure_type": "semantic_drift",
+                "passed": false,
+                "missing": [
+                  "preserve the same capability contract"
+                ],
+                "present_forbidden": []
+              }
+            ]
+          },
+          "with_skill": {
+            "score": 100.0,
+            "passed_count": 4,
+            "failed_count": 0,
+            "checks": [
+              {
+                "id": "has-ir-first",
+                "description": "Output requires Skill IR before packaging.",
+                "weight": 1.0,
+                "failure_type": "missing_ir",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-core-ir-fields",
+                "description": "Output lists core IR contract fields.",
+                "weight": 1.0,
+                "failure_type": "incomplete_ir_contract",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-targets",
+                "description": "Output names requested runtime targets.",
+                "weight": 1.0,
+                "failure_type": "missing_targets",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-semantic-preservation",
+                "description": "Output says targets must preserve the capability contract.",
+                "weight": 1.0,
+                "failure_type": "semantic_drift",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              }
+            ],
+            "failed": []
+          },
+          "delta": 100.0,
+          "winner": "with_skill",
+          "failure_taxonomy": []
+        },
+        {
+          "id": "near-neighbor-boundary",
+          "prompt": "I only need a one-off summary of these notes, not a reusable process.",
+          "input_files": [],
+          "metadata": {
+            "case_type": "near_neighbor",
+            "tier": "production"
+          },
+          "baseline": {
+            "score": 0.0,
+            "passed_count": 0,
+            "failed_count": 3,
+            "checks": [
+              {
+                "id": "declines-skill",
+                "description": "Output refuses unnecessary skill creation for one-off work.",
+                "weight": 1.0,
+                "failure_type": "over_trigger",
+                "passed": false,
+                "missing": [
+                  "Do not create a skill"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "names-near-neighbor",
+                "description": "Output labels the request as near-neighbor instead of owned work.",
+                "weight": 1.0,
+                "failure_type": "missing_boundary_language",
+                "passed": false,
+                "missing": [
+                  "near-neighbor"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "requires-reuse-signal",
+                "description": "Output asks for repeat-use evidence before packaging.",
+                "weight": 1.0,
+                "failure_type": "missing_reuse_gate",
+                "passed": false,
+                "missing": [
+                  "repeated use",
+                  "reusable output contract"
+                ],
+                "present_forbidden": []
+              }
+            ],
+            "failed": [
+              {
+                "id": "declines-skill",
+                "description": "Output refuses unnecessary skill creation for one-off work.",
+                "weight": 1.0,
+                "failure_type": "over_trigger",
+                "passed": false,
+                "missing": [
+                  "Do not create a skill"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "names-near-neighbor",
+                "description": "Output labels the request as near-neighbor instead of owned work.",
+                "weight": 1.0,
+                "failure_type": "missing_boundary_language",
+                "passed": false,
+                "missing": [
+                  "near-neighbor"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "requires-reuse-signal",
+                "description": "Output asks for repeat-use evidence before packaging.",
+                "weight": 1.0,
+                "failure_type": "missing_reuse_gate",
+                "passed": false,
+                "missing": [
+                  "repeated use",
+                  "reusable output contract"
+                ],
+                "present_forbidden": []
+              }
+            ]
+          },
+          "with_skill": {
+            "score": 100.0,
+            "passed_count": 3,
+            "failed_count": 0,
+            "checks": [
+              {
+                "id": "declines-skill",
+                "description": "Output refuses unnecessary skill creation for one-off work.",
+                "weight": 1.0,
+                "failure_type": "over_trigger",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "names-near-neighbor",
+                "description": "Output labels the request as near-neighbor instead of owned work.",
+                "weight": 1.0,
+                "failure_type": "missing_boundary_language",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "requires-reuse-signal",
+                "description": "Output asks for repeat-use evidence before packaging.",
+                "weight": 1.0,
+                "failure_type": "missing_reuse_gate",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              }
+            ],
+            "failed": []
+          },
+          "delta": 100.0,
+          "winner": "with_skill",
+          "failure_taxonomy": []
+        },
+        {
+          "id": "file-backed-governed-package",
+          "prompt": "Turn the attached release brief source into a governed skill package.",
+          "input_files": [
+            "fixtures/release-brief-source.md"
+          ],
+          "metadata": {
+            "case_type": "boundary",
+            "tier": "governed"
+          },
+          "baseline": {
+            "score": 0.0,
+            "passed_count": 0,
+            "failed_count": 5,
+            "checks": [
+              {
+                "id": "uses-file-backed-evidence",
+                "description": "Output names file-backed source evidence.",
+                "weight": 1.0,
+                "failure_type": "missing_file_fixture",
+                "passed": false,
+                "missing": [
+                  "file-backed fixture",
+                  "input_files"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-governance",
+                "description": "Output preserves governed ownership metadata.",
+                "weight": 1.0,
+                "failure_type": "missing_governance",
+                "passed": false,
+                "missing": [
+                  "review cadence"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-output-contract",
+                "description": "Output preserves output and rollback boundaries.",
+                "weight": 1.0,
+                "failure_type": "missing_contract_boundary",
+                "passed": false,
+                "missing": [
+                  "output contract",
+                  "rollback boundary"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-trust-and-scorecard",
+                "description": "Output requires trust and output scorecard artifacts.",
+                "weight": 1.0,
+                "failure_type": "missing_release_evidence",
+                "passed": false,
+                "missing": [
+                  "trust report",
+                  "reports/output_quality_scorecard.md"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "does-not-invent-evidence",
+                "description": "Output forbids invented launch evidence.",
+                "weight": 1.0,
+                "failure_type": "invented_evidence",
+                "passed": false,
+                "missing": [
+                  "missing evidence"
+                ],
+                "present_forbidden": []
+              }
+            ],
+            "failed": [
+              {
+                "id": "uses-file-backed-evidence",
+                "description": "Output names file-backed source evidence.",
+                "weight": 1.0,
+                "failure_type": "missing_file_fixture",
+                "passed": false,
+                "missing": [
+                  "file-backed fixture",
+                  "input_files"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-governance",
+                "description": "Output preserves governed ownership metadata.",
+                "weight": 1.0,
+                "failure_type": "missing_governance",
+                "passed": false,
+                "missing": [
+                  "review cadence"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-output-contract",
+                "description": "Output preserves output and rollback boundaries.",
+                "weight": 1.0,
+                "failure_type": "missing_contract_boundary",
+                "passed": false,
+                "missing": [
+                  "output contract",
+                  "rollback boundary"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-trust-and-scorecard",
+                "description": "Output requires trust and output scorecard artifacts.",
+                "weight": 1.0,
+                "failure_type": "missing_release_evidence",
+                "passed": false,
+                "missing": [
+                  "trust report",
+                  "reports/output_quality_scorecard.md"
+                ],
+                "present_forbidden": []
+              },
+              {
+                "id": "does-not-invent-evidence",
+                "description": "Output forbids invented launch evidence.",
+                "weight": 1.0,
+                "failure_type": "invented_evidence",
+                "passed": false,
+                "missing": [
+                  "missing evidence"
+                ],
+                "present_forbidden": []
+              }
+            ]
+          },
+          "with_skill": {
+            "score": 100.0,
+            "passed_count": 5,
+            "failed_count": 0,
+            "checks": [
+              {
+                "id": "uses-file-backed-evidence",
+                "description": "Output names file-backed source evidence.",
+                "weight": 1.0,
+                "failure_type": "missing_file_fixture",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-governance",
+                "description": "Output preserves governed ownership metadata.",
+                "weight": 1.0,
+                "failure_type": "missing_governance",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-output-contract",
+                "description": "Output preserves output and rollback boundaries.",
+                "weight": 1.0,
+                "failure_type": "missing_contract_boundary",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "has-trust-and-scorecard",
+                "description": "Output requires trust and output scorecard artifacts.",
+                "weight": 1.0,
+                "failure_type": "missing_release_evidence",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              },
+              {
+                "id": "does-not-invent-evidence",
+                "description": "Output forbids invented launch evidence.",
+                "weight": 1.0,
+                "failure_type": "invented_evidence",
+                "passed": true,
+                "missing": [],
+                "present_forbidden": []
+              }
+            ],
+            "failed": []
+          },
+          "delta": 100.0,
+          "winner": "with_skill",
+          "failure_taxonomy": []
+        }
+      ],
+      "failures": [],
+      "artifacts": {
+        "json": "reports/output_quality_scorecard.json",
+        "markdown": "reports/output_quality_scorecard.md"
+      }
+    },
+    "conformance": {
+      "ok": true,
+      "skill": "yao-meta-skill",
+      "targets": [
+        {
+          "target": "openai",
+          "status": "pass",
+          "checks": [
+            "SKILL.md exists",
+            "frontmatter name exists",
+            "frontmatter description exists",
+            "description length <= 1024",
+            "name is runtime-safe",
+            "manifest.name exists",
+            "manifest.version exists",
+            "manifest.owner exists",
+            "manifest.status exists",
+            "manifest.maturity_tier exists",
+            "manifest.review_cadence exists",
+            "manifest declares openai",
+            "interface.display_name exists",
+            "interface.short_description exists",
+            "interface.default_prompt exists",
+            "adapter target declares openai",
+            "activation mode exists",
+            "execution context exists",
+            "execution shell exists",
+            "trust source tier exists",
+            "openai degradation note exists",
+            "Skill IR schema_version is 2.0.0",
+            "Skill IR name matches frontmatter",
+            "Skill IR description matches frontmatter",
+            "references resource resolves: references/artifact-design-doctrine.md",
+            "references resource resolves: references/authoring-discipline.md",
+            "references resource resolves: references/eval-playbook.md",
+            "references resource resolves: references/gate-selection.md",
+            "references resource resolves: references/governance.md",
+            "references resource resolves: references/human-review-template.md",
+            "references resource resolves: references/intent-dialogue.md",
+            "references resource resolves: references/iteration-philosophy.md",
+            "references resource resolves: references/non-skill-decision-tree.md",
+            "references resource resolves: references/operating-modes.md",
+            "references resource resolves: references/output-eval-method.md",
+            "references resource resolves: references/output-quality-risk.md"
+          ],
+          "failures": [],
+          "warnings": []
+        },
+        {
+          "target": "claude",
+          "status": "pass",
+          "checks": [
+            "SKILL.md exists",
+            "frontmatter name exists",
+            "frontmatter description exists",
+            "description length <= 1024",
+            "name is runtime-safe",
+            "manifest.name exists",
+            "manifest.version exists",
+            "manifest.owner exists",
+            "manifest.status exists",
+            "manifest.maturity_tier exists",
+            "manifest.review_cadence exists",
+            "manifest declares claude",
+            "interface.display_name exists",
+            "interface.short_description exists",
+            "interface.default_prompt exists",
+            "adapter target declares claude",
+            "activation mode exists",
+            "execution context exists",
+            "execution shell exists",
+            "trust source tier exists",
+            "claude degradation note exists",
+            "Skill IR schema_version is 2.0.0",
+            "Skill IR name matches frontmatter",
+            "Skill IR description matches frontmatter",
+            "references resource resolves: references/artifact-design-doctrine.md",
+            "references resource resolves: references/authoring-discipline.md",
+            "references resource resolves: references/eval-playbook.md",
+            "references resource resolves: references/gate-selection.md",
+            "references resource resolves: references/governance.md",
+            "references resource resolves: references/human-review-template.md",
+            "references resource resolves: references/intent-dialogue.md",
+            "references resource resolves: references/iteration-philosophy.md",
+            "references resource resolves: references/non-skill-decision-tree.md",
+            "references resource resolves: references/operating-modes.md",
+            "references resource resolves: references/output-eval-method.md",
+            "references resource resolves: references/output-quality-risk.md"
+          ],
+          "failures": [],
+          "warnings": []
+        },
+        {
+          "target": "agent-skills",
+          "status": "pass",
+          "checks": [
+            "SKILL.md exists",
+            "frontmatter name exists",
+            "frontmatter description exists",
+            "description length <= 1024",
+            "name is runtime-safe",
+            "directory name matches skill name",
+            "manifest.name exists",
+            "manifest.version exists",
+            "manifest.owner exists",
+            "manifest.status exists",
+            "manifest.maturity_tier exists",
+            "manifest.review_cadence exists",
+            "manifest declares agent-skills via agent-skills-compatible",
+            "interface.display_name exists",
+            "interface.short_description exists",
+            "interface.default_prompt exists",
+            "canonical format is agent-skills",
+            "activation mode exists",
+            "execution context exists",
+            "execution shell exists",
+            "trust source tier exists",
+            "Skill IR schema_version is 2.0.0",
+            "Skill IR name matches frontmatter",
+            "Skill IR description matches frontmatter",
+            "references resource resolves: references/artifact-design-doctrine.md",
+            "references resource resolves: references/authoring-discipline.md",
+            "references resource resolves: references/eval-playbook.md",
+            "references resource resolves: references/gate-selection.md",
+            "references resource resolves: references/governance.md",
+            "references resource resolves: references/human-review-template.md",
+            "references resource resolves: references/intent-dialogue.md",
+            "references resource resolves: references/iteration-philosophy.md",
+            "references resource resolves: references/non-skill-decision-tree.md",
+            "references resource resolves: references/operating-modes.md",
+            "references resource resolves: references/output-eval-method.md",
+            "references resource resolves: references/output-quality-risk.md"
+          ],
+          "failures": [],
+          "warnings": [
+            "agent-skills uses canonical Agent Skills metadata; runtime-specific behavior transforms are not implemented in v0."
+          ]
+        },
+        {
+          "target": "vscode",
+          "status": "pass",
+          "checks": [
+            "SKILL.md exists",
+            "frontmatter name exists",
+            "frontmatter description exists",
+            "description length <= 1024",
+            "name is runtime-safe",
+            "directory name matches skill name",
+            "manifest.name exists",
+            "manifest.version exists",
+            "manifest.owner exists",
+            "manifest.status exists",
+            "manifest.maturity_tier exists",
+            "manifest.review_cadence exists",
+            "manifest declares vscode via agent-skills-compatible",
+            "interface.display_name exists",
+            "interface.short_description exists",
+            "interface.default_prompt exists",
+            "canonical format is agent-skills",
+            "activation mode exists",
+            "execution context exists",
+            "execution shell exists",
+            "trust source tier exists",
+            "Skill IR schema_version is 2.0.0",
+            "Skill IR name matches frontmatter",
+            "Skill IR description matches frontmatter",
+            "references resource resolves: references/artifact-design-doctrine.md",
+            "references resource resolves: references/authoring-discipline.md",
+            "references resource resolves: references/eval-playbook.md",
+            "references resource resolves: references/gate-selection.md",
+            "references resource resolves: references/governance.md",
+            "references resource resolves: references/human-review-template.md",
+            "references resource resolves: references/intent-dialogue.md",
+            "references resource resolves: references/iteration-philosophy.md",
+            "references resource resolves: references/non-skill-decision-tree.md",
+            "references resource resolves: references/operating-modes.md",
+            "references resource resolves: references/output-eval-method.md",
+            "references resource resolves: references/output-quality-risk.md"
+          ],
+          "failures": [],
+          "warnings": [
+            "vscode uses canonical Agent Skills metadata; runtime-specific behavior transforms are not implemented in v0."
+          ]
+        },
+        {
+          "target": "generic",
+          "status": "pass",
+          "checks": [
+            "SKILL.md exists",
+            "frontmatter name exists",
+            "frontmatter description exists",
+            "description length <= 1024",
+            "name is runtime-safe",
+            "manifest.name exists",
+            "manifest.version exists",
+            "manifest.owner exists",
+            "manifest.status exists",
+            "manifest.maturity_tier exists",
+            "manifest.review_cadence exists",
+            "manifest declares generic",
+            "interface.display_name exists",
+            "interface.short_description exists",
+            "interface.default_prompt exists",
+            "adapter target declares generic",
+            "activation mode exists",
+            "execution context exists",
+            "execution shell exists",
+            "trust source tier exists",
+            "generic degradation note exists",
+            "Skill IR schema_version is 2.0.0",
+            "Skill IR name matches frontmatter",
+            "Skill IR description matches frontmatter",
+            "references resource resolves: references/artifact-design-doctrine.md",
+            "references resource resolves: references/authoring-discipline.md",
+            "references resource resolves: references/eval-playbook.md",
+            "references resource resolves: references/gate-selection.md",
+            "references resource resolves: references/governance.md",
+            "references resource resolves: references/human-review-template.md",
+            "references resource resolves: references/intent-dialogue.md",
+            "references resource resolves: references/iteration-philosophy.md",
+            "references resource resolves: references/non-skill-decision-tree.md",
+            "references resource resolves: references/operating-modes.md",
+            "references resource resolves: references/output-eval-method.md",
+            "references resource resolves: references/output-quality-risk.md"
+          ],
+          "failures": [],
+          "warnings": []
+        }
+      ],
+      "summary": {
+        "target_count": 5,
+        "pass_count": 5,
+        "fail_count": 0
+      },
+      "artifacts": {
+        "json": "reports/conformance_matrix.json",
+        "markdown": "reports/conformance_matrix.md"
+      }
+    },
+    "trust": {
+      "ok": true,
+      "skill_dir": ".",
+      "summary": {
+        "scanned_files": 127,
+        "script_count": 50,
+        "secret_findings": 0,
+        "dependency_files": [
+          "requirements-ci.txt"
+        ],
+        "network_script_count": 2,
+        "interactive_script_count": 0,
+        "package_sha256": "18618ecee3683f7488ae4a65a9800c428ee15c6539bbcd367910c57d84ac77ad"
+      },
+      "failures": [],
+      "warnings": [
+        "Scripts without argparse/help surface: scripts/render_context_reports.py, scripts/render_social_preview.py, scripts/skill_report_charts.py, scripts/skill_report_metrics.py, scripts/skill_report_model.py",
+        "Network-capable scripts require bounded host policy: scripts/check_update.py, scripts/github_benchmark_scan.py"
+      ],
+      "secrets": [],
+      "scripts": [
+        {
+          "path": "scripts/build_confusion_matrix.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/build_skill_atlas.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/check_update.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": true,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/ci_test.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": true
+        },
+        {
+          "path": "scripts/collect_feedback.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/context_sizer.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/create_iteration_snapshot.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/cross_packager.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/diff_eval.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/export_skill_ir.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/github_benchmark_scan.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": true,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/governance_check.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/init_skill.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/judge_blind_eval.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/lint_skill.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/optimize_description.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/promotion_checker.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_artifact_design_profile.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_baseline_compare.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_context_reports.py",
+          "has_argparse": false,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_description_drift_history.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_eval_dashboard.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": true
+        },
+        {
+          "path": "scripts/render_intent_confidence.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_intent_dialogue.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_iteration_directions.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_iteration_ledger.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_output_risk_profile.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_portability_report.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_prompt_quality_profile.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_reference_scan.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_reference_synthesis.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_regression_history.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_review_studio.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_review_viewer.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_skill_overview.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_social_preview.py",
+          "has_argparse": false,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/render_system_model.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/resource_boundary_check.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/run_conformance_suite.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/run_description_optimization_suite.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/run_eval_suite.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": true
+        },
+        {
+          "path": "scripts/run_output_eval.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/skill_report_charts.py",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/skill_report_metrics.py",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/skill_report_model.py",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/sync_local_install.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": true
+        },
+        {
+          "path": "scripts/trigger_eval.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/trust_check.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/validate_skill.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": false
+        },
+        {
+          "path": "scripts/yao.py",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_subprocess": true
+        }
+      ],
+      "dependencies": {
+        "present": [
+          "requirements-ci.txt"
+        ],
+        "pinned": [
+          "PyYAML==6.0.3"
+        ],
+        "unpinned": []
+      },
+      "trust_metadata": {
+        "source_tier": "local",
+        "remote_inline_execution": "forbid",
+        "remote_metadata_policy": "allow-metadata-only"
+      },
+      "artifacts": {
+        "json": "reports/security_trust_report.json",
+        "markdown": "reports/security_trust_report.md"
+      }
+    },
+    "context_budget": {
+      "ok": true,
+      "failures": [],
+      "warnings": [],
+      "stats": {
+        "context_budget_tier": "production",
+        "context_budget_limit": 1000,
+        "skill_body_tokens": 734,
+        "other_text_tokens": 606468,
+        "estimated_initial_load_tokens": 910,
+        "estimated_total_text_tokens": 607202,
+        "relevant_file_count": 241,
+        "unused_resource_dirs": [],
+        "quality_signal_points": 130,
+        "quality_density": 142.9
+      }
+    },
+    "promotion": {
+      "ok": true,
+      "summary": {
+        "promote": 0,
+        "keep_current": 3,
+        "blocked": 0
+      },
+      "targets": [
+        {
+          "name": "yao-meta-skill",
+          "winner_label": "Current",
+          "winner_description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+          "winner_tokens": 65,
+          "current_tokens": 65,
+          "winner_holdout_fp": 0,
+          "winner_holdout_fn": 0,
+          "current_holdout_fp": 0,
+          "current_holdout_fn": 0,
+          "baseline_holdout_fp": 0,
+          "baseline_holdout_fn": 0,
+          "winner_blind_holdout_fp": 0,
+          "winner_blind_holdout_fn": 0,
+          "current_blind_holdout_fp": 0,
+          "current_blind_holdout_fn": 0,
+          "baseline_blind_holdout_fp": 0,
+          "baseline_blind_holdout_fn": 0,
+          "winner_blind_holdout_total_errors": 0,
+          "winner_judge_blind_holdout_fp": 0,
+          "winner_judge_blind_holdout_fn": 0,
+          "current_judge_blind_holdout_fp": 0,
+          "current_judge_blind_holdout_fn": 0,
+          "baseline_judge_blind_holdout_fp": 0,
+          "baseline_judge_blind_holdout_fn": 0,
+          "winner_judge_blind_holdout_total_errors": 0,
+          "winner_adversarial_holdout_fp": 0,
+          "winner_adversarial_holdout_fn": 0,
+          "current_adversarial_holdout_fp": 0,
+          "current_adversarial_holdout_fn": 0,
+          "baseline_adversarial_holdout_fp": 0,
+          "baseline_adversarial_holdout_fn": 0,
+          "winner_adversarial_holdout_total_errors": 0,
+          "calibration": {
+            "holdout": {
+              "threshold": 0.33,
+              "mean_positive_score": 0.673,
+              "mean_non_trigger_score": 0.0,
+              "mean_near_neighbor_score": 0.0,
+              "min_positive_score": 0.468,
+              "max_non_trigger_score": 0.0,
+              "score_gap": 0.468,
+              "threshold_margin": 0.138,
+              "positive_threshold_buffer": 0.138,
+              "negative_threshold_buffer": 0.33,
+              "boundary_case_count": 0,
+              "boundary_case_rate": 0.0,
+              "risk_band": "healthy"
+            },
+            "blind_holdout": {
+              "threshold": 0.33,
+              "mean_positive_score": 0.399,
+              "mean_non_trigger_score": 0.013,
+              "mean_near_neighbor_score": 0.013,
+              "min_positive_score": 0.392,
+              "max_non_trigger_score": 0.028,
+              "score_gap": 0.364,
+              "threshold_margin": 0.062,
+              "positive_threshold_buffer": 0.062,
+              "negative_threshold_buffer": 0.302,
+              "boundary_case_count": 2,
+              "boundary_case_rate": 0.333,
+              "risk_band": "watch"
+            },
+            "adversarial_holdout": {
+              "threshold": 0.33,
+              "mean_positive_score": 0.838,
+              "mean_non_trigger_score": 0.0,
+              "mean_near_neighbor_score": 0.0,
+              "min_positive_score": 0.834,
+              "max_non_trigger_score": 0.0,
+              "score_gap": 0.834,
+              "threshold_margin": 0.33,
+              "positive_threshold_buffer": 0.504,
+              "negative_threshold_buffer": 0.33,
+              "boundary_case_count": 0,
+              "boundary_case_rate": 0.0,
+              "risk_band": "healthy"
+            }
+          },
+          "judge_blind": {
+            "winner": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.66,
+              "rubric_version": "blind-v1"
+            },
+            "current": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.66,
+              "rubric_version": "blind-v1"
+            },
+            "baseline": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.66,
+              "rubric_version": "blind-v1"
+            }
+          },
+          "family_health": {
+            "holdout": {
+              "family_count": 12,
+              "clean_family_count": 12,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "workflow_to_skill",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "blind_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "blind_operationalize",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "judge_blind_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "blind_operationalize",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "adversarial_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "adversarial_summary_translation_collision",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            }
+          },
+          "drift_note": "blind, judge-backed blind, adversarial, and calibration gates active",
+          "ok": true,
+          "promotion": {
+            "decision": "keep_current",
+            "winner_changed": false,
+            "all_gates_pass": true,
+            "route_clean": true,
+            "judge_agreement_ok": true,
+            "causes": [
+              "no_candidate_outperformed_current"
+            ],
+            "next_action": "Keep the current description and open a new candidate only when fresh route evidence appears.",
+            "gate_status": {
+              "visible_holdout_non_regression": true,
+              "blind_holdout_non_regression": true,
+              "judge_blind_non_regression": true,
+              "judge_blind_agreement": true,
+              "adversarial_non_regression": true,
+              "adversarial_risk_ok": true,
+              "route_confusion_clean": true,
+              "family_stability": true
+            },
+            "route_metrics": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "average_margin": 0.611,
+              "misroute_count": 0,
+              "ambiguous_case_count": 0
+            }
+          },
+          "registry": [
+            {
+              "name": "yao-meta-skill",
+              "role": "baseline",
+              "label": "Baseline",
+              "ranking_state": "reference",
+              "promotion_state": "reference",
+              "description": "Create and improve agent skills.",
+              "tokens": 8,
+              "dev_errors": 1,
+              "holdout_errors": 0
+            },
+            {
+              "name": "yao-meta-skill",
+              "role": "current",
+              "label": "Current",
+              "ranking_state": "selected_by_dev",
+              "promotion_state": "kept_current",
+              "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+              "tokens": 65,
+              "dev_errors": 0,
+              "holdout_errors": 0,
+              "reason_tags": []
+            },
+            {
+              "name": "yao-meta-skill",
+              "role": "candidate",
+              "label": "Minimal",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Create, refactor, evaluate, and package agent skills. Use when asked to create a skill, turn a repeated process into a reusable skill, or improve an existing skill.",
+              "tokens": 41,
+              "dev_errors": 2,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "weaker_dev_fit"
+              ]
+            },
+            {
+              "name": "yao-meta-skill",
+              "role": "candidate",
+              "label": "Guardrail",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, notes, 流程, 提示词, 对话记录, 文档, or 笔记. Do not use for summary-only requests, translation-only requests, or plain documentation tasks.",
+              "tokens": 56,
+              "dev_errors": 2,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "weaker_dev_fit"
+              ]
+            },
+            {
+              "name": "yao-meta-skill",
+              "role": "candidate",
+              "label": "Balanced",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, notes, 流程, 提示词, 对话记录, 文档, or 笔记. Use when asked to create a skill, turn a repeated process into a reusable skill, or improve an existing skill.",
+              "tokens": 60,
+              "dev_errors": 2,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "weaker_dev_fit"
+              ]
+            },
+            {
+              "name": "yao-meta-skill",
+              "role": "candidate",
+              "label": "Artifact Aware",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, notes, 流程, 提示词, 对话记录, 文档, or 笔记. Trigger when requests mention workflows, prompts, transcripts, or docs and the job is to create a skill, turn a repeated process into a reusable skill, or improve an existing skill.",
+              "tokens": 77,
+              "dev_errors": 2,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "weaker_dev_fit",
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "yao-meta-skill",
+              "role": "candidate",
+              "label": "Boundary",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, notes, 流程, 提示词, 对话记录, 文档, or 笔记. Use when asked to create a skill, turn a repeated process into a reusable skill, or improve an existing skill. Do not use for summary-only requests, translation-only requests, or plain documentation tasks.",
+              "tokens": 83,
+              "dev_errors": 2,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "weaker_dev_fit",
+                "longer_without_gain"
+              ]
+            }
+          ],
+          "decision": "keep_current"
+        },
+        {
+          "name": "team-frontend-review",
+          "winner_label": "Current",
+          "winner_description": "Review frontend code for accessibility, UI security, missing states, and UX regressions. Use when asked to review React components, run a pre-merge frontend review, or check a11y and unsafe rendering.",
+          "winner_tokens": 50,
+          "current_tokens": 50,
+          "winner_holdout_fp": 0,
+          "winner_holdout_fn": 0,
+          "current_holdout_fp": 0,
+          "current_holdout_fn": 0,
+          "baseline_holdout_fp": 0,
+          "baseline_holdout_fn": 0,
+          "winner_blind_holdout_fp": 0,
+          "winner_blind_holdout_fn": 0,
+          "current_blind_holdout_fp": 0,
+          "current_blind_holdout_fn": 0,
+          "baseline_blind_holdout_fp": 0,
+          "baseline_blind_holdout_fn": 0,
+          "winner_blind_holdout_total_errors": 0,
+          "winner_judge_blind_holdout_fp": 0,
+          "winner_judge_blind_holdout_fn": 0,
+          "current_judge_blind_holdout_fp": 0,
+          "current_judge_blind_holdout_fn": 0,
+          "baseline_judge_blind_holdout_fp": 0,
+          "baseline_judge_blind_holdout_fn": 0,
+          "winner_judge_blind_holdout_total_errors": 0,
+          "winner_adversarial_holdout_fp": 0,
+          "winner_adversarial_holdout_fn": 0,
+          "current_adversarial_holdout_fp": 0,
+          "current_adversarial_holdout_fn": 0,
+          "baseline_adversarial_holdout_fp": 0,
+          "baseline_adversarial_holdout_fn": 0,
+          "winner_adversarial_holdout_total_errors": 0,
+          "calibration": {
+            "holdout": {
+              "threshold": 0.48,
+              "mean_positive_score": 0.685,
+              "mean_non_trigger_score": 0.089,
+              "mean_near_neighbor_score": 0.045,
+              "min_positive_score": 0.496,
+              "max_non_trigger_score": 0.211,
+              "score_gap": 0.285,
+              "threshold_margin": 0.016,
+              "positive_threshold_buffer": 0.016,
+              "negative_threshold_buffer": 0.269,
+              "boundary_case_count": 1,
+              "boundary_case_rate": 0.167,
+              "risk_band": "tight"
+            },
+            "blind_holdout": {
+              "threshold": 0.48,
+              "mean_positive_score": 0.685,
+              "mean_non_trigger_score": 0.177,
+              "mean_near_neighbor_score": 0.226,
+              "min_positive_score": 0.504,
+              "max_non_trigger_score": 0.416,
+              "score_gap": 0.088,
+              "threshold_margin": 0.024,
+              "positive_threshold_buffer": 0.024,
+              "negative_threshold_buffer": 0.064,
+              "boundary_case_count": 2,
+              "boundary_case_rate": 0.333,
+              "risk_band": "tight"
+            },
+            "adversarial_holdout": {
+              "threshold": 0.34,
+              "mean_positive_score": 0.71,
+              "mean_non_trigger_score": 0.009,
+              "mean_near_neighbor_score": 0.018,
+              "min_positive_score": 0.544,
+              "max_non_trigger_score": 0.035,
+              "score_gap": 0.509,
+              "threshold_margin": 0.204,
+              "positive_threshold_buffer": 0.204,
+              "negative_threshold_buffer": 0.305,
+              "boundary_case_count": 0,
+              "boundary_case_rate": 0.0,
+              "risk_band": "healthy"
+            }
+          },
+          "judge_blind": {
+            "winner": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.703,
+              "rubric_version": "blind-v1"
+            },
+            "current": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.703,
+              "rubric_version": "blind-v1"
+            },
+            "baseline": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.703,
+              "rubric_version": "blind-v1"
+            }
+          },
+          "family_health": {
+            "holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "security_and_a11y",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "blind_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "blind_premerge",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "judge_blind_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "blind_premerge",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "adversarial_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "adversarial_quality_gate_review",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            }
+          },
+          "drift_note": "blind, judge-backed blind, adversarial, and calibration gates active",
+          "ok": true,
+          "promotion": {
+            "decision": "keep_current",
+            "winner_changed": false,
+            "all_gates_pass": true,
+            "route_clean": true,
+            "judge_agreement_ok": true,
+            "causes": [
+              "no_candidate_outperformed_current",
+              "current_holdout_risk"
+            ],
+            "next_action": "Keep the current description and open a new candidate only when fresh route evidence appears.",
+            "gate_status": {
+              "visible_holdout_non_regression": true,
+              "blind_holdout_non_regression": true,
+              "judge_blind_non_regression": true,
+              "judge_blind_agreement": true,
+              "adversarial_non_regression": true,
+              "adversarial_risk_ok": true,
+              "route_confusion_clean": true,
+              "family_stability": true
+            },
+            "route_metrics": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "average_margin": 0.805,
+              "misroute_count": 0,
+              "ambiguous_case_count": 0
+            }
+          },
+          "registry": [
+            {
+              "name": "team-frontend-review",
+              "role": "baseline",
+              "label": "Baseline",
+              "ranking_state": "reference",
+              "promotion_state": "reference",
+              "description": "Review frontend code for accessibility, risky UI security issues, missing states, and common UX regressions. Use when asked to review React, UI, frontend components, forms, a11y, or pre-merge frontend quality.",
+              "tokens": 52,
+              "dev_errors": 3,
+              "holdout_errors": 0
+            },
+            {
+              "name": "team-frontend-review",
+              "role": "current",
+              "label": "Current",
+              "ranking_state": "selected_by_dev",
+              "promotion_state": "kept_current",
+              "description": "Review frontend code for accessibility, UI security, missing states, and UX regressions. Use when asked to review React components, run a pre-merge frontend review, or check a11y and unsafe rendering.",
+              "tokens": 50,
+              "dev_errors": 3,
+              "holdout_errors": 0,
+              "reason_tags": []
+            },
+            {
+              "name": "team-frontend-review",
+              "role": "candidate",
+              "label": "Guardrail",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Review frontend code for accessibility, UI security, missing states, and UX regressions from React components, forms, frontend diffs, or UI code. Do not use for building a new page from scratch, backend-only review, or explaining frontend concepts.",
+              "tokens": 62,
+              "dev_errors": 3,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "team-frontend-review",
+              "role": "candidate",
+              "label": "Balanced",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Review frontend code for accessibility, UI security, missing states, and UX regressions from React components, forms, frontend diffs, or UI code. Use when asked to review React components, run a pre-merge frontend review, or check a11y and unsafe rendering.",
+              "tokens": 64,
+              "dev_errors": 3,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "team-frontend-review",
+              "role": "candidate",
+              "label": "Artifact Aware",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Review frontend code for accessibility, UI security, missing states, and UX regressions from React components, forms, frontend diffs, or UI code. Trigger when requests mention React components, forms, frontend diffs, or UI code and the job is to review React components, run a pre-merge frontend review, or check a11y and unsafe rendering.",
+              "tokens": 84,
+              "dev_errors": 3,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "team-frontend-review",
+              "role": "candidate",
+              "label": "Boundary",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Review frontend code for accessibility, UI security, missing states, and UX regressions from React components, forms, frontend diffs, or UI code. Use when asked to review React components, run a pre-merge frontend review, or check a11y and unsafe rendering. Do not use for building a new page from scratch, backend-only review, or explaining frontend concepts.",
+              "tokens": 90,
+              "dev_errors": 3,
+              "holdout_errors": 0,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            }
+          ],
+          "decision": "keep_current"
+        },
+        {
+          "name": "governed-incident-command",
+          "winner_label": "Current",
+          "winner_description": "Build governed incident command packets. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
+          "winner_tokens": 37,
+          "current_tokens": 37,
+          "winner_holdout_fp": 0,
+          "winner_holdout_fn": 1,
+          "current_holdout_fp": 0,
+          "current_holdout_fn": 1,
+          "baseline_holdout_fp": 0,
+          "baseline_holdout_fn": 2,
+          "winner_blind_holdout_fp": 0,
+          "winner_blind_holdout_fn": 0,
+          "current_blind_holdout_fp": 0,
+          "current_blind_holdout_fn": 0,
+          "baseline_blind_holdout_fp": 0,
+          "baseline_blind_holdout_fn": 1,
+          "winner_blind_holdout_total_errors": 0,
+          "winner_judge_blind_holdout_fp": 0,
+          "winner_judge_blind_holdout_fn": 0,
+          "current_judge_blind_holdout_fp": 0,
+          "current_judge_blind_holdout_fn": 0,
+          "baseline_judge_blind_holdout_fp": 0,
+          "baseline_judge_blind_holdout_fn": 0,
+          "winner_judge_blind_holdout_total_errors": 0,
+          "winner_adversarial_holdout_fp": 0,
+          "winner_adversarial_holdout_fn": 0,
+          "current_adversarial_holdout_fp": 0,
+          "current_adversarial_holdout_fn": 0,
+          "baseline_adversarial_holdout_fp": 0,
+          "baseline_adversarial_holdout_fn": 0,
+          "winner_adversarial_holdout_total_errors": 0,
+          "calibration": {
+            "holdout": {
+              "threshold": 0.48,
+              "mean_positive_score": 0.37,
+              "mean_non_trigger_score": 0.019,
+              "mean_near_neighbor_score": 0.037,
+              "min_positive_score": 0.08,
+              "max_non_trigger_score": 0.057,
+              "score_gap": 0.023,
+              "threshold_margin": -0.4,
+              "positive_threshold_buffer": -0.4,
+              "negative_threshold_buffer": 0.423,
+              "boundary_case_count": 0,
+              "boundary_case_rate": 0.0,
+              "risk_band": "overlap"
+            },
+            "blind_holdout": {
+              "threshold": 0.48,
+              "mean_positive_score": 0.902,
+              "mean_non_trigger_score": 0.168,
+              "mean_near_neighbor_score": 0.138,
+              "min_positive_score": 0.804,
+              "max_non_trigger_score": 0.386,
+              "score_gap": 0.418,
+              "threshold_margin": 0.094,
+              "positive_threshold_buffer": 0.324,
+              "negative_threshold_buffer": 0.094,
+              "boundary_case_count": 1,
+              "boundary_case_rate": 0.167,
+              "risk_band": "healthy"
+            },
+            "adversarial_holdout": {
+              "threshold": 0.34,
+              "mean_positive_score": 0.827,
+              "mean_non_trigger_score": 0.027,
+              "mean_near_neighbor_score": 0.011,
+              "min_positive_score": 0.654,
+              "max_non_trigger_score": 0.056,
+              "score_gap": 0.598,
+              "threshold_margin": 0.284,
+              "positive_threshold_buffer": 0.314,
+              "negative_threshold_buffer": 0.284,
+              "boundary_case_count": 0,
+              "boundary_case_rate": 0.0,
+              "risk_band": "healthy"
+            }
+          },
+          "judge_blind": {
+            "winner": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.657,
+              "rubric_version": "blind-v1"
+            },
+            "current": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.657,
+              "rubric_version": "blind-v1"
+            },
+            "baseline": {
+              "agreement_rate": 1.0,
+              "mean_confidence": 0.69,
+              "rubric_version": "blind-v1"
+            }
+          },
+          "family_health": {
+            "holdout": {
+              "family_count": 6,
+              "clean_family_count": 5,
+              "failing_families": [
+                {
+                  "family": "packet_assembly",
+                  "errors": 1,
+                  "pass_rate": 0.0
+                }
+              ],
+              "weakest_family": {
+                "family": "packet_assembly",
+                "pass_rate": 0.0,
+                "errors": 1
+              }
+            },
+            "blind_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "blind_summary_only",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "judge_blind_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "blind_summary_only",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            },
+            "adversarial_holdout": {
+              "family_count": 6,
+              "clean_family_count": 6,
+              "failing_families": [],
+              "weakest_family": {
+                "family": "adversarial_single_update_collision",
+                "pass_rate": 1.0,
+                "errors": 0
+              }
+            }
+          },
+          "drift_note": "blind, judge-backed blind, adversarial, and calibration gates active",
+          "ok": true,
+          "promotion": {
+            "decision": "keep_current",
+            "winner_changed": false,
+            "all_gates_pass": true,
+            "route_clean": true,
+            "judge_agreement_ok": true,
+            "causes": [
+              "no_candidate_outperformed_current",
+              "current_holdout_gap_present",
+              "current_holdout_risk"
+            ],
+            "next_action": "Keep the current description and open a new candidate only when fresh route evidence appears.",
+            "gate_status": {
+              "visible_holdout_non_regression": true,
+              "blind_holdout_non_regression": true,
+              "judge_blind_non_regression": true,
+              "judge_blind_agreement": true,
+              "adversarial_non_regression": true,
+              "adversarial_risk_ok": true,
+              "route_confusion_clean": true,
+              "family_stability": true
+            },
+            "route_metrics": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "average_margin": 0.659,
+              "misroute_count": 0,
+              "ambiguous_case_count": 0
+            }
+          },
+          "registry": [
+            {
+              "name": "governed-incident-command",
+              "role": "baseline",
+              "label": "Baseline",
+              "ranking_state": "reference",
+              "promotion_state": "reference",
+              "description": "Build governed incident command packets from alerts, incident notes, transcripts, and stakeholder requirements. Use when asked to standardize incident review, severity assessment, incident communication, or incident packet assembly into one reusable operational skill. Do not use for generic debugging, one-off incident explanations, or brainstorming possible response ideas.",
+              "tokens": 93,
+              "dev_errors": 1,
+              "holdout_errors": 2
+            },
+            {
+              "name": "governed-incident-command",
+              "role": "current",
+              "label": "Current",
+              "ranking_state": "selected_by_dev",
+              "promotion_state": "kept_current",
+              "description": "Build governed incident command packets. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
+              "tokens": 37,
+              "dev_errors": 1,
+              "holdout_errors": 1,
+              "reason_tags": []
+            },
+            {
+              "name": "governed-incident-command",
+              "role": "candidate",
+              "label": "Guardrail",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
+              "tokens": 51,
+              "dev_errors": 1,
+              "holdout_errors": 2,
+              "reason_tags": [
+                "visible_holdout_regression",
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "governed-incident-command",
+              "role": "candidate",
+              "label": "Balanced",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
+              "tokens": 54,
+              "dev_errors": 1,
+              "holdout_errors": 1,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "governed-incident-command",
+              "role": "candidate",
+              "label": "Boundary",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Use when asked to standardize incident review, run severity assessment, or assemble incident communication. Do not use for generic debugging, one-off incident explanations, or drafting a single update.",
+              "tokens": 78,
+              "dev_errors": 1,
+              "holdout_errors": 1,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            },
+            {
+              "name": "governed-incident-command",
+              "role": "candidate",
+              "label": "Artifact Aware",
+              "ranking_state": "not_selected",
+              "promotion_state": "blocked",
+              "description": "Build governed incident command packets from alerts, incident notes, transcripts, or stakeholder requirements. Trigger when requests mention alerts, incident notes, transcripts, or stakeholder requirements and the job is to standardize incident review, run severity assessment, or assemble incident communication.",
+              "tokens": 78,
+              "dev_errors": 1,
+              "holdout_errors": 1,
+              "reason_tags": [
+                "longer_without_gain"
+              ]
+            }
+          ],
+          "decision": "keep_current"
+        }
+      ]
+    },
+    "atlas": {
+      "ok": true,
+      "workspace_root": ".",
+      "summary": {
+        "skill_count": 12,
+        "route_collision_count": 5,
+        "owner_gap_count": 9,
+        "stale_count": 10,
+        "shared_resource_count": 0,
+        "no_route_opportunity_count": 0
+      },
+      "catalog": {
+        "workspace_root": ".",
+        "generated_at": "2026-06-13",
+        "skills": [
+          {
+            "name": "yao-meta-skill",
+            "path": ".",
+            "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+            "owner": "Yao Team",
+            "version": "1.1.0",
+            "status": "active",
+            "maturity": "governed",
+            "updated_at": "2026-03-31",
+            "review_cadence": "quarterly",
+            "targets": [
+              "openai",
+              "claude",
+              "generic",
+              "agent-skills-compatible"
+            ],
+            "resources": [
+              "scripts/build_confusion_matrix.py",
+              "scripts/build_skill_atlas.py",
+              "scripts/check_update.py",
+              "scripts/ci_test.py",
+              "scripts/collect_feedback.py",
+              "scripts/context_sizer.py",
+              "scripts/create_iteration_snapshot.py",
+              "scripts/cross_packager.py",
+              "scripts/diff_eval.py",
+              "scripts/export_skill_ir.py",
+              "scripts/github_benchmark_scan.py",
+              "scripts/governance_check.py",
+              "scripts/init_skill.py",
+              "scripts/judge_blind_eval.py",
+              "scripts/lint_skill.py",
+              "scripts/optimize_description.py",
+              "scripts/promotion_checker.py",
+              "scripts/render_artifact_design_profile.py",
+              "scripts/render_baseline_compare.py",
+              "scripts/render_context_reports.py",
+              "scripts/render_description_drift_history.py",
+              "scripts/render_eval_dashboard.py",
+              "scripts/render_intent_confidence.py",
+              "scripts/render_intent_dialogue.py",
+              "scripts/render_iteration_directions.py",
+              "scripts/render_iteration_ledger.py",
+              "scripts/render_output_risk_profile.py",
+              "scripts/render_portability_report.py",
+              "scripts/render_prompt_quality_profile.py",
+              "scripts/render_reference_scan.py",
+              "scripts/render_reference_synthesis.py",
+              "scripts/render_regression_history.py",
+              "scripts/render_review_studio.py",
+              "scripts/render_review_viewer.py",
+              "scripts/render_skill_overview.py",
+              "scripts/render_social_preview.py",
+              "scripts/render_system_model.py",
+              "scripts/resource_boundary_check.py",
+              "scripts/run_conformance_suite.py",
+              "scripts/run_description_optimization_suite.py",
+              "scripts/run_eval_suite.py",
+              "scripts/run_output_eval.py",
+              "scripts/skill_report_charts.py",
+              "scripts/skill_report_metrics.py",
+              "scripts/skill_report_model.py",
+              "scripts/sync_local_install.py",
+              "scripts/trigger_eval.py",
+              "scripts/trust_check.py",
+              "scripts/validate_skill.py",
+              "scripts/yao.py",
+              "references/artifact-design-doctrine.md",
+              "references/authoring-discipline.md",
+              "references/eval-playbook.md",
+              "references/gate-selection.md",
+              "references/governance.md",
+              "references/human-review-template.md",
+              "references/intent-dialogue.md",
+              "references/iteration-philosophy.md",
+              "references/non-skill-decision-tree.md",
+              "references/operating-modes.md",
+              "references/output-eval-method.md",
+              "references/output-quality-risk.md",
+              "references/output-visual-quality.md",
+              "references/packaging-contracts.md",
+              "references/pattern-extraction-doctrine.md",
+              "references/platform-capability-matrix.md",
+              "references/prompt-engineering-doctrine.md",
+              "references/qa-ladder.md",
+              "references/reference-scan.md",
+              "references/regression-cause-taxonomy.md",
+              "references/resource-boundaries.md",
+              "references/review-studio-method.md",
+              "references/runtime-conformance-method.md",
+              "references/skill-archetypes.md",
+              "references/skill-atlas-method.md",
+              "references/skill-engineering-method.md",
+              "references/skill-ir-method.md",
+              "references/systems-thinking-doctrine.md",
+              "references/trust-security-method.md",
+              "templates/basic_skill.md.j2",
+              "templates/complex_skill.md.j2"
+            ],
+            "token_set": [
+              "add",
+              "asked",
+              "docs",
+              "evals",
+              "evaluate",
+              "existing",
+              "improve",
+              "notes",
+              "or",
+              "package",
+              "process",
+              "prompts",
+              "refactor",
+              "repeated",
+              "reuse",
+              "team",
+              "transcripts",
+              "workflows"
+            ]
+          },
+          {
+            "name": "release-orchestrator",
+            "path": "examples/complex-release-orchestrator/generated-skill",
+            "description": "Coordinate software release preparation, rollout readiness, migration notes, rollback planning, stakeholder communication, and final go/no-go release packets. Use when asked to prepare a release packet, review release readiness, or turn scattered launch notes into one reusable release workflow. Do not use for generic project planning, one-off announcement drafting, or high-level release theory.",
+            "owner": "Yao Team",
+            "version": "1.0.0",
+            "status": "active",
+            "maturity": "production",
+            "updated_at": "2026-03-31",
+            "review_cadence": "quarterly",
+            "targets": [],
+            "resources": [
+              "scripts/build_release_packet.py",
+              "references/migration-template.md",
+              "references/release-checklist.md",
+              "references/risk-matrix.md",
+              "references/stakeholder-comms.md"
+            ],
+            "token_set": [
+              "announcement",
+              "asked",
+              "communication",
+              "coordinate",
+              "do",
+              "drafting",
+              "final",
+              "generic",
+              "go",
+              "high-level",
+              "launch",
+              "migration",
+              "no-go",
+              "not",
+              "notes",
+              "one",
+              "one-off",
+              "or",
+              "packet",
+              "packets",
+              "planning",
+              "preparation",
+              "prepare",
+              "project",
+              "readiness",
+              "release",
+              "review",
+              "rollback",
+              "rollout",
+              "scattered",
+              "software",
+              "stakeholder",
+              "theory",
+              "workflow"
+            ]
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/evolution-frontend-review/final",
+            "description": "Review frontend code for accessibility, risky UI security issues, missing states, and common UX regressions. Use when asked to review React, UI, frontend components, forms, a11y, or pre-merge frontend quality.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "a11y",
+              "accessibility",
+              "asked",
+              "code",
+              "common",
+              "components",
+              "forms",
+              "frontend",
+              "issues",
+              "missing",
+              "or",
+              "pre-merge",
+              "quality",
+              "react",
+              "regressions",
+              "review",
+              "risky",
+              "security",
+              "states",
+              "ui",
+              "ux"
+            ]
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/evolution-frontend-review/v0",
+            "description": "Review frontend code before merge.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "before",
+              "code",
+              "frontend",
+              "merge",
+              "review"
+            ]
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/evolution-frontend-review/v1",
+            "description": "Review frontend code for accessibility, risky UI security issues, missing loading and error states, and pre-merge regressions. Use when asked to review React, UI, forms, frontend components, or merge-readiness for the frontend.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "accessibility",
+              "asked",
+              "code",
+              "components",
+              "error",
+              "forms",
+              "frontend",
+              "issues",
+              "loading",
+              "merge-readiness",
+              "missing",
+              "or",
+              "pre-merge",
+              "react",
+              "regressions",
+              "review",
+              "risky",
+              "security",
+              "states",
+              "ui"
+            ]
+          },
+          {
+            "name": "incident-command-governor",
+            "path": "examples/governed-incident-command/generated-skill",
+            "description": "Build governed incident command packets. Use when asked to standardize incident review, run severity assessment, or assemble incident communication.",
+            "owner": "Incident Operations Team",
+            "version": "1.0.0",
+            "status": "active",
+            "maturity": "governed",
+            "updated_at": "2026-03-31",
+            "review_cadence": "monthly",
+            "targets": [
+              "openai",
+              "claude",
+              "generic"
+            ],
+            "resources": [
+              "scripts/build_incident_packet.py",
+              "references/comms-policy.md",
+              "references/review-policy.md",
+              "references/severity-matrix.md"
+            ],
+            "token_set": [
+              "asked",
+              "assemble",
+              "assessment",
+              "build",
+              "command",
+              "communication",
+              "governed",
+              "incident",
+              "or",
+              "packets",
+              "review",
+              "run",
+              "severity",
+              "standardize"
+            ]
+          },
+          {
+            "name": "note-cleanup",
+            "path": "examples/simple-note-cleanup/generated-skill",
+            "description": "Clean messy meeting notes into structured markdown summaries. Use when asked to organize meeting notes, extract action items, separate decisions from open questions, or turn rough notes into a clean recap.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "action",
+              "asked",
+              "clean",
+              "decisions",
+              "extract",
+              "items",
+              "markdown",
+              "meeting",
+              "messy",
+              "notes",
+              "open",
+              "or",
+              "organize",
+              "questions",
+              "recap",
+              "rough",
+              "separate",
+              "structured",
+              "summaries"
+            ]
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/team-frontend-review/generated-skill",
+            "description": "Review frontend code for accessibility, UI security, missing states, and UX regressions. Use when asked to review React components, run a pre-merge frontend review, or check a11y and unsafe rendering.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [
+              "references/checklist.md"
+            ],
+            "token_set": [
+              "a11y",
+              "accessibility",
+              "asked",
+              "check",
+              "code",
+              "components",
+              "frontend",
+              "missing",
+              "or",
+              "pre-merge",
+              "react",
+              "regressions",
+              "rendering",
+              "review",
+              "run",
+              "security",
+              "states",
+              "ui",
+              "unsafe",
+              "ux"
+            ]
+          },
+          {
+            "name": "geo-ranking-article-generator",
+            "path": "geo-ranking-article-generator",
+            "description": "Create GEO ranking-article packs from brand briefs. Use when asked to research a brand, find GEO or 生成式引擎优化 keywords and five competitors, generate timely titles, write five ~2000-character articles, and save them to a fixed knowledge-base folder with an HTML index. Do not use for generic SEO advice, one-off copy, or writing without competitor research.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [
+              "scripts/build_html_index.py",
+              "references/article-blueprint.md",
+              "references/feishu-benchmark-patterns.md",
+              "references/geo-research-playbook.md",
+              "templates/brand-brief-template.md"
+            ],
+            "token_set": [
+              "2000-character",
+              "advice",
+              "articles",
+              "asked",
+              "brand",
+              "briefs",
+              "competitor",
+              "competitors",
+              "copy",
+              "do",
+              "find",
+              "five",
+              "fixed",
+              "folder",
+              "generate",
+              "generic",
+              "geo",
+              "html",
+              "index",
+              "keywords",
+              "knowledge-base",
+              "not",
+              "one-off",
+              "or",
+              "packs",
+              "ranking-article",
+              "research",
+              "save",
+              "seo",
+              "them",
+              "timely",
+              "titles",
+              "without",
+              "write",
+              "writing",
+              "生成式引擎优化"
+            ]
+          },
+          {
+            "name": "invalid-governance-skill",
+            "path": "tests/fixtures/governance_invalid_manifest",
+            "description": "Test fixture for governance validation.",
+            "owner": "",
+            "version": "1.0.0",
+            "status": "frozen",
+            "maturity": "governed",
+            "updated_at": "2026/03/31",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "fixture",
+              "governance",
+              "test",
+              "validation"
+            ]
+          },
+          {
+            "name": "broken-yaml-skill",
+            "path": "tests/fixtures/package_invalid_yaml",
+            "description": "Broken YAML fixture for packager failure testing.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "broken",
+              "failure",
+              "fixture",
+              "packager",
+              "testing",
+              "yaml"
+            ]
+          },
+          {
+            "name": "broken-skill",
+            "path": "tests/fixtures/package_missing_interface_field",
+            "description": "Broken fixture for packager failure testing.",
+            "owner": "",
+            "version": "",
+            "status": "",
+            "maturity": "",
+            "updated_at": "",
+            "review_cadence": "",
+            "targets": [],
+            "resources": [],
+            "token_set": [
+              "broken",
+              "failure",
+              "fixture",
+              "packager",
+              "testing"
+            ]
+          }
+        ],
+        "summary": {
+          "skill_count": 12,
+          "route_collision_count": 5,
+          "owner_gap_count": 9,
+          "stale_count": 10,
+          "shared_resource_count": 0,
+          "no_route_opportunity_count": 0
+        }
+      },
+      "route_collisions": [
+        {
+          "skill_a": "frontend-review",
+          "skill_b": "frontend-review",
+          "path_a": "examples/evolution-frontend-review/final",
+          "path_b": "examples/evolution-frontend-review/v1",
+          "score": 0.708,
+          "status": "collision"
+        },
+        {
+          "skill_a": "frontend-review",
+          "skill_b": "frontend-review",
+          "path_a": "examples/evolution-frontend-review/final",
+          "path_b": "examples/team-frontend-review/generated-skill",
+          "score": 0.64,
+          "status": "collision"
+        },
+        {
+          "skill_a": "frontend-review",
+          "skill_b": "frontend-review",
+          "path_a": "examples/evolution-frontend-review/v1",
+          "path_b": "examples/team-frontend-review/generated-skill",
+          "score": 0.538,
+          "status": "collision"
+        },
+        {
+          "skill_a": "broken-yaml-skill",
+          "skill_b": "broken-skill",
+          "path_a": "tests/fixtures/package_invalid_yaml",
+          "path_b": "tests/fixtures/package_missing_interface_field",
+          "score": 0.833,
+          "status": "collision"
+        },
+        {
+          "skill_a": "frontend-review",
+          "skill_b": "frontend-review",
+          "path_a": "examples/evolution-frontend-review/final",
+          "path_b": "examples/evolution-frontend-review/v0",
+          "score": 1.0,
+          "status": "duplicate-name"
+        }
+      ],
+      "dependency_graph": {
+        "nodes": [
+          {
+            "name": "yao-meta-skill",
+            "path": "."
+          },
+          {
+            "name": "release-orchestrator",
+            "path": "examples/complex-release-orchestrator/generated-skill"
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/evolution-frontend-review/final"
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/evolution-frontend-review/v0"
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/evolution-frontend-review/v1"
+          },
+          {
+            "name": "incident-command-governor",
+            "path": "examples/governed-incident-command/generated-skill"
+          },
+          {
+            "name": "note-cleanup",
+            "path": "examples/simple-note-cleanup/generated-skill"
+          },
+          {
+            "name": "frontend-review",
+            "path": "examples/team-frontend-review/generated-skill"
+          },
+          {
+            "name": "geo-ranking-article-generator",
+            "path": "geo-ranking-article-generator"
+          },
+          {
+            "name": "invalid-governance-skill",
+            "path": "tests/fixtures/governance_invalid_manifest"
+          },
+          {
+            "name": "broken-yaml-skill",
+            "path": "tests/fixtures/package_invalid_yaml"
+          },
+          {
+            "name": "broken-skill",
+            "path": "tests/fixtures/package_missing_interface_field"
+          }
+        ],
+        "shared_resources": []
+      },
+      "stale_skills": [
+        {
+          "name": "frontend-review",
+          "path": "examples/evolution-frontend-review/final",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "frontend-review",
+          "path": "examples/evolution-frontend-review/v0",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "frontend-review",
+          "path": "examples/evolution-frontend-review/v1",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "incident-command-governor",
+          "path": "examples/governed-incident-command/generated-skill",
+          "reason": "review overdue by cadence monthly",
+          "age_days": 74,
+          "allowed_days": 31
+        },
+        {
+          "name": "note-cleanup",
+          "path": "examples/simple-note-cleanup/generated-skill",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "frontend-review",
+          "path": "examples/team-frontend-review/generated-skill",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "geo-ranking-article-generator",
+          "path": "geo-ranking-article-generator",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "invalid-governance-skill",
+          "path": "tests/fixtures/governance_invalid_manifest",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "broken-yaml-skill",
+          "path": "tests/fixtures/package_invalid_yaml",
+          "reason": "missing updated_at"
+        },
+        {
+          "name": "broken-skill",
+          "path": "tests/fixtures/package_missing_interface_field",
+          "reason": "missing updated_at"
+        }
+      ],
+      "owner_review_gaps": [
+        {
+          "name": "frontend-review",
+          "path": "examples/evolution-frontend-review/final",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "frontend-review",
+          "path": "examples/evolution-frontend-review/v0",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "frontend-review",
+          "path": "examples/evolution-frontend-review/v1",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "note-cleanup",
+          "path": "examples/simple-note-cleanup/generated-skill",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "frontend-review",
+          "path": "examples/team-frontend-review/generated-skill",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "geo-ranking-article-generator",
+          "path": "geo-ranking-article-generator",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "invalid-governance-skill",
+          "path": "tests/fixtures/governance_invalid_manifest",
+          "missing": [
+            "owner",
+            "review_cadence"
+          ]
+        },
+        {
+          "name": "broken-yaml-skill",
+          "path": "tests/fixtures/package_invalid_yaml",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        },
+        {
+          "name": "broken-skill",
+          "path": "tests/fixtures/package_missing_interface_field",
+          "missing": [
+            "owner",
+            "review_cadence",
+            "maturity"
+          ]
+        }
+      ],
+      "no_route_opportunities": [],
+      "artifacts": {
+        "catalog": "skill_atlas/catalog.json",
+        "route_overlap_matrix": "skill_atlas/route_overlap_matrix.csv",
+        "dependency_graph": "skill_atlas/dependency_graph.json",
+        "stale_skills": "skill_atlas/stale_skills.json",
+        "owner_review_gaps": "skill_atlas/owner_review_gaps.json",
+        "no_route_opportunities": "skill_atlas/no_route_opportunities.json",
+        "report_json": "reports/skill_atlas.json",
+        "report_html": "reports/skill_atlas.html"
+      }
+    },
+    "manifest": {
+      "name": "yao-meta-skill",
+      "version": "1.1.0",
+      "owner": "Yao Team",
+      "updated_at": "2026-03-31",
+      "status": "active",
+      "maturity_tier": "governed",
+      "lifecycle_stage": "library",
+      "context_budget_tier": "production",
+      "review_cadence": "quarterly",
+      "target_platforms": [
+        "openai",
+        "claude",
+        "generic",
+        "agent-skills-compatible"
+      ],
+      "factory_components": [
+        "templates",
+        "references",
+        "scripts",
+        "reports"
+      ]
+    },
+    "frontmatter": {
+      "name": "yao-meta-skill",
+      "description": "Create, refactor, evaluate, and package agent skills from workflows, prompts, transcripts, docs, or notes. Use when asked to create a skill, turn a repeated process into a reusable skill, improve an existing skill, add evals, or package a skill for team reuse.",
+      "metadata": {
+        "author": "Yao Team",
+        "philosophy": "structured design, evaluation loop, template ergonomics, operational packaging"
+      }
+    },
+    "interface": {
+      "interface": {
+        "display_name": "Yao Meta Skill",
+        "short_description": "Create trigger-aware agent skills",
+        "default_prompt": "Use $yao-meta-skill to turn my workflow or notes into a reusable skill with lean structure, clear triggering, and the right evals."
+      },
+      "compatibility": {
+        "canonical_format": "agent-skills",
+        "adapter_targets": [
+          "openai",
+          "claude",
+          "generic"
+        ],
+        "activation": {
+          "mode": "manual",
+          "paths": []
+        },
+        "execution": {
+          "context": "inline",
+          "shell": "bash"
+        },
+        "trust": {
+          "source_tier": "local",
+          "remote_inline_execution": "forbid",
+          "remote_metadata_policy": "allow-metadata-only"
+        },
+        "degradation": {
+          "openai": "metadata-adapter",
+          "claude": "neutral-source-plus-adapter",
+          "generic": "neutral-source"
+        }
+      }
+    }
+  },
+  "artifacts": {
+    "html": "reports/review-studio.html",
+    "json": "reports/review-studio.json"
+  }
+}

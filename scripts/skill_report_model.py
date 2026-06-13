@@ -202,6 +202,8 @@ def derive_strengths(skill_dir: Path, metadata: dict) -> list[str]:
         strengths.append("已生成 Security Trust Report，可审查脚本、依赖、secret 和包完整性风险。")
     if (skill_dir / "reports" / "skill_atlas.json").exists():
         strengths.append("已生成 Skill Atlas，可审查多 Skill 组合中的路由冲突、过期资产和 owner 缺口。")
+    if (skill_dir / "reports" / "review-studio.json").exists():
+        strengths.append("已生成 Review Studio 2.0，可在一页中查看 blocker、warning、证据路径和发布闸门。")
     if (skill_dir / "agents" / "interface.yaml").exists():
         strengths.append("已打包 agents/interface.yaml，便于后续做跨平台适配。")
     if (skill_dir / "references").exists() and any((skill_dir / "references").iterdir()):
@@ -500,6 +502,7 @@ def build_report_model(skill_dir: Path) -> dict:
             "reports/conformance_matrix.md",
             "reports/security_trust_report.md",
             "reports/skill_atlas.html",
+            "reports/review-studio.html",
             "reports/skill-overview.html",
         ],
         "flow": ["输入材料", "Skill 包体", "可复用能力"],

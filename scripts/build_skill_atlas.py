@@ -91,7 +91,9 @@ def should_skip(path: Path, root: Path) -> bool:
         rel = path.relative_to(root)
     except ValueError:
         return True
-    return any(part in IGNORE_PARTS for part in rel.parts)
+    if any(part in IGNORE_PARTS for part in rel.parts):
+        return True
+    return len(rel.parts) >= 2 and rel.parts[0] == "tests" and rel.parts[1].startswith("tmp")
 
 
 def find_skill_dirs(workspace_root: Path) -> list[Path]:
@@ -136,7 +138,8 @@ def resource_names(skill_dir: Path) -> list[str]:
         if not target.exists():
             continue
         for path in sorted(target.rglob("*")):
-            if any(part in IGNORE_PARTS for part in path.relative_to(skill_dir).parts):
+            rel = path.relative_to(skill_dir)
+            if any(part in IGNORE_PARTS for part in rel.parts):
                 continue
             if path.suffix in {".pyc", ".pyo"}:
                 continue

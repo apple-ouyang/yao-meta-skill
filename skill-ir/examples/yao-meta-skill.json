@@ -55,10 +55,9 @@
       "`Scaffold`: exploratory or personal.",
       "`Production`: team reuse.",
       "`Library`: shared infrastructure.",
-      "a working skill directory",
-      "a `SKILL.md`",
-      "aligned `agents/interface.yaml`",
-      "optional `references/`, `scripts/`, `evals/`, `reports/`, and `manifest.json` when justified"
+      "Ask one focused clarification when the real job, output, or exclusion boundary is unclear.",
+      "Escalate visible tradeoffs when benchmark patterns conflict with local privacy, naming, or governance constraints.",
+      "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
     ],
     "failure_modes": [
       "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
@@ -96,6 +95,7 @@
       "references/reference-scan.md",
       "references/regression-cause-taxonomy.md",
       "references/resource-boundaries.md",
+      "references/review-studio-method.md",
       "references/runtime-conformance-method.md",
       "references/skill-archetypes.md",
       "references/skill-atlas-method.md",
@@ -137,6 +137,7 @@
       "scripts/render_reference_scan.py",
       "scripts/render_reference_synthesis.py",
       "scripts/render_regression_history.py",
+      "scripts/render_review_studio.py",
       "scripts/render_review_viewer.py",
       "scripts/render_skill_overview.py",
       "scripts/render_social_preview.py",
@@ -213,6 +214,7 @@
       "evals/history/description_optimization/README.md",
       "evals/holdout/trigger_cases.json",
       "evals/output/cases.jsonl",
+      "evals/output/fixtures/release-brief-source.md",
       "evals/output/schema.json",
       "evals/packaging_expectations.json",
       "evals/promotion_policy.md",
@@ -222,6 +224,7 @@
     ],
     "output": [
       "evals/output/cases.jsonl",
+      "evals/output/fixtures/release-brief-source.md",
       "evals/output/schema.json"
     ],
     "adversarial": [

@@ -2,15 +2,15 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 124,
-    "script_count": 49,
+    "scanned_files": 127,
+    "script_count": 50,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
     ],
     "network_script_count": 2,
     "interactive_script_count": 0,
-    "package_sha256": "d70bd9083059198c4346c743131852b32038e59000d86ed11cae4399df6988ac"
+    "package_sha256": "18618ecee3683f7488ae4a65a9800c428ee15c6539bbcd367910c57d84ac77ad"
   },
   "failures": [],
   "warnings": [
@@ -269,6 +269,14 @@
     },
     {
       "path": "scripts/render_regression_history.py",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_subprocess": false
+    },
+    {
+      "path": "scripts/render_review_studio.py",
       "has_argparse": true,
       "has_main_guard": true,
       "uses_input": false,

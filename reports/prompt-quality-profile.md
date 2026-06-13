@@ -12,7 +12,7 @@ Overall quality score: `82.0/100`
 ## Complexity
 
 - Band: `complex`
-- Score: `6`
+- Score: `5`
 - Reason: multiple inputs, constraints, or task families require tradeoff handling
 
 ## Need Model
@@ -66,13 +66,6 @@ Overall quality score: `82.0/100`
 - Role: Use an operator role with explicit boundaries, inputs, outputs, and failure handling.
 - Task: Convert the job into ordered steps with validation checks and stop conditions.
 - Format: Return a runbook-like handoff with commands, checks, owners, and next actions when relevant.
-
-### Teaching guidance
-- Score: `1`
-- Keywords: teach
-- Role: Use a teacher role that adapts to learner level and avoids overloading the first pass.
-- Task: Explain through progressive steps, examples, and visible success checks.
-- Format: Return learner-facing sections, worked examples, checkpoints, and common mistakes.
 
 ### Prompt engineering
 - Score: `1`

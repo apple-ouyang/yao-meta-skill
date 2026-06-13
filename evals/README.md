@@ -15,8 +15,8 @@ Contents:
 - `improved_description.txt`: current stronger trigger description
 - `../reports/description_optimization*.{json,md}`: generated route-optimization reports for the root skill
 - `failure-cases.md`: current weak spots and regression targets
-- `packaging_expectations.json`: required packaging behaviors for supported targets
-- `output/`: Output Eval Lab cases and schema for with-skill vs baseline assertion grading
+- `packaging_expectations.json`: required packaging behaviors for supported targets, including IR provenance and semantic parity fields
+- `output/`: Output Eval Lab cases, fixtures, and schema for with-skill vs baseline assertion grading
 - `../reports/`: generated suite JSON plus the homepage-visible family summary panel source
 
 Use:
@@ -57,4 +57,4 @@ Regression scope now includes:
 - judge-backed blind-holdout verification that adds a rubric-based second opinion for blind prompts
 - calibration summaries that surface score gaps, threshold margins, and risk bands for each acceptance gate
 - family-level drift history that records which blind and adversarial families stay clean over time
-- output-quality scorecards that compare without-skill and with-skill artifacts through assertion grading
+- output-quality scorecards that compare without-skill and with-skill artifacts through assertion grading, including near-neighbor and file-backed governed cases

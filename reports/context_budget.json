@@ -5,13 +5,13 @@
   "stats": {
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
-    "skill_body_tokens": 810,
-    "other_text_tokens": 548453,
-    "estimated_initial_load_tokens": 986,
-    "estimated_total_text_tokens": 549263,
-    "relevant_file_count": 251,
+    "skill_body_tokens": 734,
+    "other_text_tokens": 606468,
+    "estimated_initial_load_tokens": 910,
+    "estimated_total_text_tokens": 607202,
+    "relevant_file_count": 241,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,
-    "quality_density": 131.8
+    "quality_density": 142.9
   }
 }

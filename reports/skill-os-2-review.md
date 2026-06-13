@@ -13,8 +13,10 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Trust/Security v0 for secret, dependency, script, trust metadata, and package-integrity checks.
 - Skill Atlas v0 for portfolio catalog, route overlap, stale ownership, dependency signals, and no-route opportunities.
 - Bilingual Skill Overview v2 that includes these evidence surfaces.
+- Review Studio 2.0 v0 for one-page blocker, warning, evidence-path, and release-gate review.
+- IR-first packaging v0 so adapters carry the platform-neutral semantic contract, parity checks, and IR provenance.
 
-This is still not the final world-class state. Registry, compiler refactor, telemetry, and Review Studio 2.0 remain open.
+This is still not the final world-class state. Registry, full target-specific compiler transforms, telemetry, and stricter governed trust gates remain open.
 
 ## Coverage Matrix
 
@@ -25,31 +27,31 @@ This is still not the final world-class state. Registry, compiler refactor, tele
 | Benchmark methodology | `reports/benchmark_methodology.md` | v0 landed |
 | Runtime Conformance | `scripts/run_conformance_suite.py`, `reports/conformance_matrix.md` | v0 landed |
 | Trust & Security | `scripts/trust_check.py`, `reports/security_trust_report.md`, `security/*.md` | v0 landed |
-| Review Studio 2.0 | Current `reports/skill-overview.html`, `reports/review-viewer.html`, and `reports/skill_atlas.html` are separate | partial |
+| Review Studio 2.0 | `scripts/render_review_studio.py`, `reports/review-studio.html`, `reports/review-studio.json` | v0 landed |
 | Skill Atlas | `scripts/build_skill_atlas.py`, `skill_atlas/catalog.json`, `skill_atlas/route_overlap_matrix.csv`, `reports/skill_atlas.html` | v0 landed |
-| Registry & Distribution | Existing packager, no registry audit/package schema yet | partial |
+| Registry & Distribution | IR-sourced packager, no registry audit/package schema yet | partial |
 | Telemetry & Drift | Regression history exists, no adoption or activation telemetry yet | partial |
-| Compiler from IR | Packager still reads source metadata directly | missing |
+| Compiler from IR | Packager consumes Skill IR for core semantic adapter fields and keeps frontmatter/interface parity checks | v0 landed |
 
 ## Top Findings
 
-### 1. Compiler path is not IR-first yet
+### 1. Compiler path is IR-first v0, but transforms are still shallow
 
-The new IR captures the capability contract, but `scripts/cross_packager.py` still builds target metadata directly from `SKILL.md` and `agents/interface.yaml`.
+The packager now reads Skill IR for core semantic fields and emits provenance, schema version, job-to-be-done, semantic contract counts, governance, risk, targets, and semantic parity in each adapter.
 
-Next move: add `scripts/compile_skill.py` or refactor packager to consume IR for core fields, then assert semantic parity.
+Next move: add `scripts/compile_skill.py` or split the packager into target-specific transforms so OpenAI, Claude, Agent Skills, VS Code/Copilot, and generic packages can preserve runtime semantics beyond metadata.
 
-### 2. Output eval is useful but too small
+### 2. Output eval now meets the governed v0 minimum, but is still static
 
-The v0 cases prove the runner and scorecard work, but the set is only three static cases. The 2.0 plan calls for library/governed coverage with at least five cases, including boundary, near-neighbor, and real file/output constraints.
+The v0 cases now cover five scenarios, including near-neighbor and file-backed governed package cases. The next gap is that they are still static text comparisons rather than model-executed holdout runs with timing, tokens, and reviewer adjudication.
 
-Next move: add holdout output cases and one file-backed fixture case.
+Next move: add model-executed output eval runs, blind A/B comparison, and one real multi-file fixture.
 
-### 3. Review Studio is still split
+### 3. Review Studio is unified, but needs reviewer actions
 
-The overview report is strong, but the reviewer still has to inspect multiple pages for output eval, conformance, trust, and release evidence.
+The new Review Studio page aggregates intent, trigger, output, context, runtime, trust, atlas, and release gates. It now exposes current warnings directly: low generic intent-confidence context, trust-script warnings, and portfolio-level Atlas gaps.
 
-Next move: add a Review Studio 2.0 section or page that aggregates trigger, output, conformance, trust, and release status into one blocking-issue surface.
+Next move: add reviewer annotations, waived-risk records, and links from each warning to the exact source fix.
 
 ### 4. Multi-skill operation now has v0 coverage, but no telemetry
 
@@ -67,17 +69,19 @@ Next move: add stricter governed-mode gates and package hash verification after 
 
 | Gate | Current Result |
 | --- | --- |
-| Output Eval | `3` cases, with-skill pass rate `100`, baseline pass rate `0` |
+| Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, and boundary coverage |
 | Runtime Conformance | `5 / 5` targets passing |
 | Trust | `0` secret findings, `1` pinned dependency file, `2` network-capable scripts flagged as warnings |
 | Skill Atlas | local workspace scan generated catalog, route-overlap matrix, dependency graph, stale report, owner gaps, and HTML overview |
-| Context Budget | initial load remains under the production budget |
+| Review Studio | `8` gates, `0` blockers, `3` warnings, world-class score `87/100` |
+| IR-first Packaging | `openai`, `claude`, and `generic` adapters include IR provenance and semantic parity checks |
+| Context Budget | initial load `910/1000`, under the production budget |
 | CI | `make ci-test` passed after adding v0 gates |
 
 ## Next Highest-Leverage Moves
 
-1. Refactor packaging toward IR-first compiler behavior.
-2. Add Review Studio 2.0 as a single reviewer surface.
-3. Expand Output Eval Lab from static smoke cases to holdout and file-backed cases.
+1. Split IR-first packaging into target-specific compiler transforms.
+2. Add reviewer annotation and waived-risk records to Review Studio.
+3. Expand Output Eval Lab from static cases to model-executed holdout and blind A/B cases.
 4. Add registry package schema, package hash, and upgrade audit.
 5. Connect Skill Atlas with telemetry and drift history.

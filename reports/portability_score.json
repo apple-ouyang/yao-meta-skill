@@ -10,10 +10,12 @@
     "trust_level": "local",
     "remote_inline_execution": "forbid",
     "degradation_coverage": 3,
-    "snapshot_count": 3
+    "snapshot_count": 3,
+    "ir_source": "skill-ir/examples/yao-meta-skill.json",
+    "ir_schema_version": "2.0.0"
   },
   "breakdown": {
-    "canonical_neutral_source": 15,
+    "platform_neutral_semantic_source": 15,
     "adapter_target_coverage": 15,
     "activation_metadata": 10,
     "execution_metadata": 10,

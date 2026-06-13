@@ -17,6 +17,17 @@ def load_yaml(path: Path) -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 
+def find_ir(root: Path) -> tuple[dict, str]:
+    candidates = [
+        root / "reports" / "skill-ir.json",
+        root / "skill-ir" / "examples" / f"{root.name}.json",
+    ]
+    for path in candidates:
+        if path.exists():
+            return load_json(path), str(path.relative_to(root))
+    return {}, "missing"
+
+
 def band_for(score: int) -> str:
     if score >= 97:
         return "world-class"
@@ -39,9 +50,12 @@ def build_report(root: Path) -> dict:
     contracts_doc = (root / "references" / "packaging-contracts.md").exists()
     matrix_doc = (root / "references" / "platform-capability-matrix.md").exists()
     snapshot_files = list((root / "tests" / "snapshots").glob("*_adapter.json"))
+    ir, ir_source = find_ir(root)
+    has_neutral_metadata = (root / "SKILL.md").exists() and (root / "agents" / "interface.yaml").exists()
+    has_skill_ir = ir.get("schema_version") == "2.0.0" and bool(ir.get("job_to_be_done"))
 
     breakdown = {
-        "canonical_neutral_source": 15 if (root / "SKILL.md").exists() and (root / "agents" / "interface.yaml").exists() else 0,
+        "platform_neutral_semantic_source": 15 if has_neutral_metadata and has_skill_ir else 8 if has_neutral_metadata else 0,
         "adapter_target_coverage": 15 if len(targets) >= 3 else 10 if len(targets) >= 2 else 5 if len(targets) >= 1 else 0,
         "activation_metadata": 10
         if activation.get("mode") and activation.get("paths") is not None
@@ -83,6 +97,8 @@ def build_report(root: Path) -> dict:
             "remote_inline_execution": trust.get("remote_inline_execution"),
             "degradation_coverage": sum(1 for target in targets if degradation.get(target)),
             "snapshot_count": len(snapshot_files),
+            "ir_source": ir_source,
+            "ir_schema_version": ir.get("schema_version", "missing"),
         },
         "breakdown": breakdown,
     }
@@ -100,6 +116,8 @@ def render_markdown(report: dict) -> str:
         f"- shell: `{report['summary']['shell']}`",
         f"- trust level: `{report['summary']['trust_level']}`",
         f"- remote inline execution: `{report['summary']['remote_inline_execution']}`",
+        f"- Skill IR source: `{report['summary']['ir_source']}`",
+        f"- Skill IR schema: `{report['summary']['ir_schema_version']}`",
         "",
         "| Component | Score |",
         "| --- | ---: |",

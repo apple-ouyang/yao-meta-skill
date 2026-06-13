@@ -509,6 +509,7 @@ def command_quickstart(args: argparse.Namespace) -> int:
     next_steps = [
         "Open reports/skill-overview.html to review the generated Skill audit report.",
         "Open reports/intent-dialogue.md and tighten the real job, outputs, and exclusions.",
+        "Open reports/review-studio.html to inspect the Review Studio 2.0 gate view before release.",
         "Open reports/review-viewer.html to explain the package to a first-time reviewer.",
         "Use reports/iteration-directions.md to choose only one high-value next move before adding more files.",
     ]
@@ -543,6 +544,7 @@ def command_quickstart(args: argparse.Namespace) -> int:
                 "artifact_design_profile": payload.get("artifacts", {}).get("artifact_design_profile_md"),
                 "prompt_quality_profile": payload.get("artifacts", {}).get("prompt_quality_profile_md"),
                 "system_model": payload.get("artifacts", {}).get("system_model_md"),
+                "review_studio": payload.get("artifacts", {}).get("review_studio_html"),
                 "review_viewer": payload.get("artifacts", {}).get("review_viewer_html"),
             },
         },
@@ -703,6 +705,18 @@ def command_review_viewer(args: argparse.Namespace) -> int:
     if args.output_json:
         cmd.extend(["--output-json", args.output_json])
     result = run_script("render_review_viewer.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
+def command_review_studio(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    if args.output_html:
+        cmd.extend(["--output-html", args.output_html])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    result = run_script("render_review_studio.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
 
@@ -1195,6 +1209,12 @@ def build_parser() -> argparse.ArgumentParser:
     review_viewer_cmd.add_argument("--output-html")
     review_viewer_cmd.add_argument("--output-json")
     review_viewer_cmd.set_defaults(func=command_review_viewer)
+
+    review_studio_cmd = subparsers.add_parser("review-studio", help="Render Review Studio 2.0 for a skill package.")
+    review_studio_cmd.add_argument("skill_dir", nargs="?", default=".")
+    review_studio_cmd.add_argument("--output-html")
+    review_studio_cmd.add_argument("--output-json")
+    review_studio_cmd.set_defaults(func=command_review_studio)
 
     reference_scan_cmd = subparsers.add_parser(
         "reference-scan",

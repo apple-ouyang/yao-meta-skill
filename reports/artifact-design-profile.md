@@ -1,7 +1,7 @@
 # Artifact Design Profile
 
 Skill: `yao-meta-skill`
-Design system: `evidence frame`
+Design system: `review studio`
 
 ## Primary Artifact Direction
 
@@ -20,6 +20,11 @@ Execution-focused technical artifact with environment assumptions, copyable comm
 - Matched keywords: report, summary
 - Score: `2`
 - Direction: High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.
+
+### Review viewer
+- Matched keywords: review
+- Score: `1`
+- Direction: Side-by-side reviewer studio with explicit tradeoffs, evidence readiness, and fast paths for approving, blocking, or requesting one focused fix.
 
 ### Screenshot or visual evidence
 - Matched keywords: screenshot
@@ -67,8 +72,8 @@ Execution-focused technical artifact with environment assumptions, copyable comm
 - Keep the first screen useful without requiring the reader to parse every detail.
 - Use tables only for comparisons; move explanations below the table.
 - Keep source notes readable without flooding the body with markers.
-- Never invent missing screenshots or visual states.
-- Record source, viewport, and crop intent.
+- Make differences visible instead of hiding them in prose.
+- Separate author-facing recommendations from reviewer-only evidence.
 
 ## Anti-Patterns
 
