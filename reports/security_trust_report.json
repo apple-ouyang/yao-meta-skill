@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 167,
-    "script_count": 83,
-    "internal_module_count": 10,
+    "scanned_files": 169,
+    "script_count": 85,
+    "internal_module_count": 12,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 167,
-    "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
+    "package_hash_file_count": 169,
+    "package_sha256": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e"
   },
   "failures": [],
   "warnings": [],
@@ -1195,6 +1195,34 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/yao_cli_report_commands.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to keep report and evidence command handlers out of the CLI orchestrator.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/yao_cli_runtime.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py and command modules for shared subprocess execution and JSON payload parsing.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": true,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/yao_cli_telemetry.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1243,7 +1271,7 @@
     "checked_count": 73,
     "passed_count": 73,
     "failed_count": 0,
-    "skipped_count": 10,
+    "skipped_count": 12,
     "failed_scripts": [],
     "results": [
       {
@@ -2015,6 +2043,14 @@
         "reason": "internal module"
       },
       {
+        "path": "scripts/yao_cli_report_commands.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_runtime.py",
+        "reason": "internal module"
+      },
+      {
         "path": "scripts/yao_cli_telemetry.py",
         "reason": "internal module"
       }
@@ -2161,7 +2197,8 @@
           "scripts/run_output_execution.py",
           "scripts/sync_local_install.py",
           "scripts/trust_check.py",
-          "scripts/yao.py"
+          "scripts/yao.py",
+          "scripts/yao_cli_runtime.py"
         ],
         "reviewer": "Yao Team",
         "scope": "Local deterministic validation, packaging, install simulation, and CI orchestration commands.",

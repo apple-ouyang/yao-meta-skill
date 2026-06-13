@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `167`
-- Scripts: `83`
-- Internal script modules: `10`
+- Scanned files: `169`
+- Scripts: `85`
+- Internal script modules: `12`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `167`
-- Package SHA256: `1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa`
+- Package hash files: `169`
+- Package SHA256: `18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e`
 
 ## Failures
 
@@ -144,4 +144,6 @@
 | scripts/yao.py | cli | False | True | True | False | False | False | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/yao_cli_config.py | internal-module | True | False | False | False | False | False | False | Imported by yao.py for CLI target maps and side-effect-free shaping helpers. |
 | scripts/yao_cli_parser.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep CLI parser declarations separate from command orchestration. |
+| scripts/yao_cli_report_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep report and evidence command handlers out of the CLI orchestrator. |
+| scripts/yao_cli_runtime.py | internal-module | True | False | False | False | False | False | True | Imported by yao.py and command modules for shared subprocess execution and JSON payload parsing. |
 | scripts/yao_cli_telemetry.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to record opt-in metadata-only CLI run telemetry. |

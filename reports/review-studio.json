@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 83 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 85 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -67,7 +67,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 142 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 144 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
     },
@@ -75,7 +75,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "warn",
-      "detail": "139 Python files; 3 hotspots; 0 blockers; largest 1438 lines; 55 CLI handlers",
+      "detail": "141 Python files; 3 hotspots; 0 blockers; largest 1196 lines; 35 CLI handlers",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -158,7 +158,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "warn",
-      "detail": "139 Python files; 3 hotspots; 0 blockers; largest 1438 lines; 55 CLI handlers",
+      "detail": "141 Python files; 3 hotspots; 0 blockers; largest 1196 lines; 35 CLI handlers",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -263,7 +263,7 @@
           "path": "scripts/yao.py",
           "label": "Yao CLI orchestrator",
           "kind": "source",
-          "line": 124,
+          "line": 111,
           "exists": true,
           "link": "../scripts/yao.py"
         },
@@ -891,7 +891,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 82
+            "file_count": 85
           },
           {
             "path": "evals",
@@ -903,10 +903,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 193
+            "file_count": 195
           }
         ],
-        "file_count": 339,
+        "file_count": 344,
         "folder_count": 4,
         "distribution": [
           {
@@ -931,7 +931,7 @@
           },
           {
             "label": "scripts",
-            "value": 82
+            "value": 85
           },
           {
             "label": "evals",
@@ -939,7 +939,7 @@
           },
           {
             "label": "reports",
-            "value": 193
+            "value": 195
           }
         ]
       },
@@ -1060,7 +1060,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 82
+          "file_count": 85
         },
         {
           "path": "evals",
@@ -1072,7 +1072,7 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 193
+          "file_count": 195
         }
       ],
       "strengths": [
@@ -1360,9 +1360,9 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "working_tree_dirty": true,
-          "changed_file_count": 35
+          "changed_file_count": 36
         },
-        "commit": "4737358f3c7acb6650d5463793e5f0e8f913aada",
+        "commit": "7afde5ebafd5b8cb0b00aaaac4943c037fc9dce4",
         "missing_artifacts": [],
         "limitations": [
           "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
@@ -1437,9 +1437,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 166,
-        "script_count": 82,
-        "internal_module_count": 10,
+        "scanned_files": 169,
+        "script_count": 85,
+        "internal_module_count": 12,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -1447,18 +1447,18 @@
         "network_script_count": 3,
         "network_policy_covered_count": 3,
         "network_policy_missing_count": 0,
-        "file_write_script_count": 59,
+        "file_write_script_count": 60,
         "permission_required_count": 3,
         "permission_approved_count": 3,
         "permission_missing_count": 0,
         "permission_invalid_count": 0,
         "permission_expired_count": 0,
-        "help_smoke_checked_count": 72,
+        "help_smoke_checked_count": 73,
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 166,
-        "package_sha256": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723"
+        "package_hash_file_count": 169,
+        "package_sha256": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1496,8 +1496,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723",
-            "archive_sha256": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2"
+            "package_sha256": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e",
+            "archive_sha256": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25"
           },
           "compatibility": {
             "openai": "pass",
@@ -1528,7 +1528,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2",
+            "archive_sha256": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1544,8 +1544,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2",
-          "archive_entry_count": 547,
+          "archive_sha256": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25",
+          "archive_entry_count": 553,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1556,7 +1556,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 547,
+          "archive_entry_count": 553,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1623,12 +1623,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2"
+              "to": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723"
+              "to": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e"
             }
           ]
         },
@@ -3745,7 +3745,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.92,
+          "duration_ms": 25.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3773,7 +3773,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.63,
+          "duration_ms": 25.73,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3824,7 +3824,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.26,
+          "duration_ms": 25.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3847,7 +3847,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.55,
+          "duration_ms": 25.92,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3875,7 +3875,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.51,
+          "duration_ms": 25.58,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3898,7 +3898,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.52,
+          "duration_ms": 25.69,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3925,7 +3925,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.37,
+          "duration_ms": 25.4,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3948,7 +3948,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.31,
+          "duration_ms": 25.48,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3977,7 +3977,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.01,
+          "duration_ms": 25.68,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4408,7 +4408,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "83 scripts; secrets 0; help failures 0",
+          "current": "85 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -4482,7 +4482,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 551; install failures 0",
+          "current": "archive entries 553; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -5352,7 +5352,7 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 8,
+                  "script_count": 9,
                   "scripts": [
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -5361,7 +5361,8 @@
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
-                    "scripts/yao.py"
+                    "scripts/yao.py",
+                    "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
                 },
@@ -5392,7 +5393,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 60,
-                "subprocess_script_count": 8,
+                "subprocess_script_count": 9,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -5414,7 +5415,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 60,
-                "subprocess": 8,
+                "subprocess": 9,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -5593,7 +5594,7 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 8,
+                "script_count": 9,
                 "scripts": [
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -5602,7 +5603,8 @@
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
-                  "scripts/yao.py"
+                  "scripts/yao.py",
+                  "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
               },
@@ -5633,7 +5635,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 60,
-              "subprocess_script_count": 8,
+              "subprocess_script_count": 9,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -5653,7 +5655,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 60,
-              "subprocess": 8,
+              "subprocess": 9,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -6191,7 +6193,7 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 8,
+                  "script_count": 9,
                   "scripts": [
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -6200,7 +6202,8 @@
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
-                    "scripts/yao.py"
+                    "scripts/yao.py",
+                    "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
                 },
@@ -6231,7 +6234,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 60,
-                "subprocess_script_count": 8,
+                "subprocess_script_count": 9,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -6253,7 +6256,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 60,
-                "subprocess": 8,
+                "subprocess": 9,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -6432,7 +6435,7 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 8,
+                "script_count": 9,
                 "scripts": [
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -6441,7 +6444,8 @@
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
-                  "scripts/yao.py"
+                  "scripts/yao.py",
+                  "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
               },
@@ -6472,7 +6476,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 60,
-              "subprocess_script_count": 8,
+              "subprocess_script_count": 9,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -6492,7 +6496,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 60,
-              "subprocess": 8,
+              "subprocess": 9,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -7030,7 +7034,7 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 8,
+                  "script_count": 9,
                   "scripts": [
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -7039,7 +7043,8 @@
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
-                    "scripts/yao.py"
+                    "scripts/yao.py",
+                    "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
                 },
@@ -7070,7 +7075,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 60,
-                "subprocess_script_count": 8,
+                "subprocess_script_count": 9,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -7092,7 +7097,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 60,
-                "subprocess": 8,
+                "subprocess": 9,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -7264,7 +7269,7 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 8,
+                "script_count": 9,
                 "scripts": [
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -7273,7 +7278,8 @@
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
-                  "scripts/yao.py"
+                  "scripts/yao.py",
+                  "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
               },
@@ -7304,7 +7310,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 60,
-              "subprocess_script_count": 8,
+              "subprocess_script_count": 9,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -7324,7 +7330,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 60,
-              "subprocess": 8,
+              "subprocess": 9,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -7853,7 +7859,7 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 8,
+                  "script_count": 9,
                   "scripts": [
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -7862,7 +7868,8 @@
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
-                    "scripts/yao.py"
+                    "scripts/yao.py",
+                    "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
                 },
@@ -7893,7 +7900,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 60,
-                "subprocess_script_count": 8,
+                "subprocess_script_count": 9,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -7915,7 +7922,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 60,
-                "subprocess": 8,
+                "subprocess": 9,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -8087,7 +8094,7 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 8,
+                "script_count": 9,
                 "scripts": [
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -8096,7 +8103,8 @@
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
-                  "scripts/yao.py"
+                  "scripts/yao.py",
+                  "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
               },
@@ -8127,7 +8135,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 60,
-              "subprocess_script_count": 8,
+              "subprocess_script_count": 9,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -8147,7 +8155,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 60,
-              "subprocess": 8,
+              "subprocess": 9,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -8676,7 +8684,7 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 8,
+                  "script_count": 9,
                   "scripts": [
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -8685,7 +8693,8 @@
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
                     "scripts/trust_check.py",
-                    "scripts/yao.py"
+                    "scripts/yao.py",
+                    "scripts/yao_cli_runtime.py"
                   ],
                   "review_reason": "Scripts spawn local commands and need operator review."
                 },
@@ -8716,7 +8725,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 60,
-                "subprocess_script_count": 8,
+                "subprocess_script_count": 9,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -8738,7 +8747,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 60,
-                "subprocess": 8,
+                "subprocess": 9,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -8914,7 +8923,7 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 8,
+                "script_count": 9,
                 "scripts": [
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -8923,7 +8932,8 @@
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
                   "scripts/trust_check.py",
-                  "scripts/yao.py"
+                  "scripts/yao.py",
+                  "scripts/yao_cli_runtime.py"
                 ],
                 "review_reason": "Scripts spawn local commands and need operator review."
               },
@@ -8954,7 +8964,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 60,
-              "subprocess_script_count": 8,
+              "subprocess_script_count": 9,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -8974,7 +8984,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 60,
-              "subprocess": 8,
+              "subprocess": 9,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -9645,9 +9655,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 167,
-        "script_count": 83,
-        "internal_module_count": 10,
+        "scanned_files": 169,
+        "script_count": 85,
+        "internal_module_count": 12,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -9665,8 +9675,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 167,
-        "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
+        "package_hash_file_count": 169,
+        "package_sha256": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e"
       },
       "failures": [],
       "warnings": [],
@@ -10838,6 +10848,34 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/yao_cli_report_commands.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by yao.py to keep report and evidence command handlers out of the CLI orchestrator.",
+          "has_argparse": true,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/yao_cli_runtime.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by yao.py and command modules for shared subprocess execution and JSON payload parsing.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": true,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/yao_cli_telemetry.py",
           "interface": "internal-module",
           "interface_declared": true,
@@ -10886,7 +10924,7 @@
         "checked_count": 73,
         "passed_count": 73,
         "failed_count": 0,
-        "skipped_count": 10,
+        "skipped_count": 12,
         "failed_scripts": [],
         "results": [
           {
@@ -11658,6 +11696,14 @@
             "reason": "internal module"
           },
           {
+            "path": "scripts/yao_cli_report_commands.py",
+            "reason": "internal module"
+          },
+          {
+            "path": "scripts/yao_cli_runtime.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/yao_cli_telemetry.py",
             "reason": "internal module"
           }
@@ -11804,7 +11850,8 @@
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
-              "scripts/yao.py"
+              "scripts/yao.py",
+              "scripts/yao_cli_runtime.py"
             ],
             "reviewer": "Yao Team",
             "scope": "Local deterministic validation, packaging, install simulation, and CI orchestration commands.",
@@ -11841,7 +11888,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 142,
+        "file_count": 144,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -12369,6 +12416,18 @@
           "issues": []
         },
         {
+          "path": "scripts/yao_cli_report_commands.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/yao_cli_runtime.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
           "path": "scripts/yao_cli_telemetry.py",
           "ok": true,
           "issue_count": 0,
@@ -12723,33 +12782,33 @@
       "generated_at": "2026-06-14",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 139,
-        "script_file_count": 83,
+        "python_file_count": 141,
+        "script_file_count": 85,
         "test_file_count": 56,
-        "internal_module_count": 12,
+        "internal_module_count": 14,
         "cli_script_count": 72,
-        "command_handler_count": 55,
+        "command_handler_count": 35,
         "warn_line_threshold": 900,
         "block_line_threshold": 1500,
-        "largest_file_lines": 1438,
+        "largest_file_lines": 1196,
         "hotspot_count": 3,
         "blocker_count": 0,
         "decision": "watch-maintainability-hotspots"
       },
       "largest_files": [
         {
-          "path": "scripts/yao.py",
-          "lines": 1438,
-          "kind": "cli-script",
-          "severity": "warn",
-          "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-        },
-        {
           "path": "scripts/render_review_studio.py",
           "lines": 1196,
           "kind": "cli-script",
           "severity": "warn",
           "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "scripts/yao.py",
+          "lines": 1159,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
         },
         {
           "path": "scripts/render_review_viewer.py",
@@ -12760,7 +12819,7 @@
         },
         {
           "path": "tests/verify_yao_cli.py",
-          "lines": 833,
+          "lines": 838,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -12824,18 +12883,18 @@
       ],
       "hotspots": [
         {
-          "path": "scripts/yao.py",
-          "lines": 1438,
-          "kind": "cli-script",
-          "severity": "warn",
-          "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-        },
-        {
           "path": "scripts/render_review_studio.py",
           "lines": 1196,
           "kind": "cli-script",
           "severity": "warn",
           "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "scripts/yao.py",
+          "lines": 1159,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
         },
         {
           "path": "scripts/render_review_viewer.py",
@@ -12847,14 +12906,14 @@
       ],
       "actions": [
         {
-          "path": "scripts/yao.py",
-          "severity": "warn",
-          "action": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
-        },
-        {
           "path": "scripts/render_review_studio.py",
           "severity": "warn",
           "action": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "scripts/yao.py",
+          "severity": "warn",
+          "action": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
         },
         {
           "path": "scripts/render_review_viewer.py",
@@ -12875,10 +12934,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1081013,
+        "other_text_tokens": 1083497,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1081764,
-        "relevant_file_count": 465,
+        "estimated_total_text_tokens": 1084248,
+        "relevant_file_count": 469,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 137.7
@@ -13824,6 +13883,8 @@
               "scripts/yao.py",
               "scripts/yao_cli_config.py",
               "scripts/yao_cli_parser.py",
+              "scripts/yao_cli_report_commands.py",
+              "scripts/yao_cli_runtime.py",
               "scripts/yao_cli_telemetry.py",
               "references/artifact-design-doctrine.md",
               "references/authoring-discipline.md",
@@ -14720,7 +14781,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T17:49:00Z",
+      "generated_at": "2026-06-13T18:04:28Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -15494,8 +15555,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa",
-          "archive_sha256": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7"
+          "package_sha256": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e",
+          "archive_sha256": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25"
         },
         "compatibility": {
           "openai": "pass",
@@ -15526,7 +15587,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7",
+          "archive_sha256": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -15551,7 +15612,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
+            "package_sha256": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e"
           }
         ]
       },
@@ -15574,8 +15635,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7",
-        "archive_entry_count": 551,
+        "archive_sha256": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25",
+        "archive_entry_count": 553,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -16240,7 +16301,7 @@
       "installed_skill_dir": "[temporary-install-root]/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 551,
+        "archive_entry_count": 553,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -16582,12 +16643,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7"
+            "to": "26e0362e174968f9eaeabb4f47304f641610791bc215f4e55d675d3367448b25"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
+            "to": "18e4ec6cd34d80c2fff0ce51a7a107f15c9dbaa5c6d4e54065aee15dbd0fb00e"
           }
         ]
       },

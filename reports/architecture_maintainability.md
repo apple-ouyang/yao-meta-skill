@@ -5,13 +5,13 @@ Generated at: `2026-06-14`
 ## Summary
 
 - decision: `watch-maintainability-hotspots`
-- python files: `139`
-- scripts: `83`
+- python files: `141`
+- scripts: `85`
 - tests: `56`
-- internal modules: `12`
+- internal modules: `14`
 - CLI scripts: `72`
-- Yao CLI command handlers: `55`
-- largest file lines: `1438`
+- Yao CLI command handlers: `35`
+- largest file lines: `1196`
 - hotspots: `3`
 - blockers: `0`
 
@@ -21,18 +21,18 @@ This report keeps maintainability risk visible before the Meta Skill grows more 
 
 | File | Lines | Kind | Severity | Recommended action |
 | --- | ---: | --- | --- | --- |
-| `scripts/yao.py` | `1438` | `cli-script` | `warn` | Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator. |
 | `scripts/render_review_studio.py` | `1196` | `cli-script` | `warn` | Move data loading and large section renderers into focused review_studio_* modules. |
+| `scripts/yao.py` | `1159` | `cli-script` | `warn` | Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator. |
 | `scripts/render_review_viewer.py` | `983` | `cli-script` | `warn` | Split viewer data assembly from HTML section rendering. |
 
 ## Largest Files
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/yao.py` | `1438` | `cli-script` | `warn` |
 | `scripts/render_review_studio.py` | `1196` | `cli-script` | `warn` |
+| `scripts/yao.py` | `1159` | `cli-script` | `warn` |
 | `scripts/render_review_viewer.py` | `983` | `cli-script` | `warn` |
-| `tests/verify_yao_cli.py` | `833` | `test` | `pass` |
+| `tests/verify_yao_cli.py` | `838` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `782` | `internal-module` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |

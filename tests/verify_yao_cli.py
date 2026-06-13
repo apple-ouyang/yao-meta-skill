@@ -13,6 +13,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import yao as yao_cli_module  # noqa: E402
 import yao_cli_config  # noqa: E402
 import yao_cli_parser  # noqa: E402
+import yao_cli_report_commands  # noqa: E402
+import yao_cli_runtime  # noqa: E402
 
 
 def run(*args: str, input_text: str | None = None) -> dict:
@@ -70,6 +72,9 @@ def main() -> None:
     assert "scripts/provider_output_eval_runner.py" in yao_cli_config.provider_output_runner_command("openai")
     assert "--allow-custom-base-url" in yao_cli_config.provider_output_runner_command("openai", allow_custom_base_url=True)
     assert yao_cli_parser.SCRIPT_INTERFACE == "internal-module"
+    assert yao_cli_runtime.SCRIPT_INTERFACE == "internal-module"
+    assert yao_cli_report_commands.SCRIPT_INTERFACE == "internal-module"
+    assert callable(yao_cli_module.command_review_studio)
     parser_help = yao_cli_module.build_parser().format_help()
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
@@ -214,7 +219,7 @@ def main() -> None:
     assert architecture_result["ok"], architecture_result
     assert architecture_result["payload"]["summary"]["hotspot_count"] >= 3, architecture_result
     assert architecture_result["payload"]["summary"]["blocker_count"] == 0, architecture_result
-    assert architecture_result["payload"]["summary"]["command_handler_count"] >= 50, architecture_result
+    assert 30 <= architecture_result["payload"]["summary"]["command_handler_count"] < 50, architecture_result
 
     world_class_evidence_result = run(
         "world-class-evidence",

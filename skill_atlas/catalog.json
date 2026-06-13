@@ -102,6 +102,8 @@
         "scripts/yao.py",
         "scripts/yao_cli_config.py",
         "scripts/yao_cli_parser.py",
+        "scripts/yao_cli_report_commands.py",
+        "scripts/yao_cli_runtime.py",
         "scripts/yao_cli_telemetry.py",
         "references/artifact-design-doctrine.md",
         "references/authoring-discipline.md",

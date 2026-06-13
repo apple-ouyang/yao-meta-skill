@@ -23,43 +23,30 @@ from yao_cli_config import (
     resolve_target,
 )
 from yao_cli_parser import build_parser as build_cli_parser
+from yao_cli_report_commands import (
+    command_artifact_design_profile,
+    command_benchmark_reproducibility,
+    command_github_benchmark_scan,
+    command_intent_confidence,
+    command_intent_dialogue,
+    command_iteration_directions,
+    command_output_risk_profile,
+    command_prompt_quality_profile,
+    command_reference_scan,
+    command_reference_synthesis,
+    command_review_studio,
+    command_review_viewer,
+    command_skill_os2_audit,
+    command_skill_os2_coverage,
+    command_skill_report,
+    command_system_model,
+    command_world_class_claim_guard,
+    command_world_class_evidence,
+    command_world_class_intake,
+    command_world_class_ledger,
+)
+from yao_cli_runtime import ROOT, run_script
 from yao_cli_telemetry import add_telemetry_args, maybe_record_cli_event
-
-
-ROOT = Path(__file__).resolve().parent.parent
-SCRIPTS = ROOT / "scripts"
-
-
-def script_path(name: str) -> str:
-    return str(SCRIPTS / name)
-
-
-def load_json_maybe(text: str) -> dict | None:
-    text = text.strip()
-    if not text:
-        return None
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        return None
-
-
-def run_script(name: str, args: list[str], cwd: Path | None = None) -> dict:
-    proc = subprocess.run(
-        [sys.executable, script_path(name), *args],
-        cwd=cwd or ROOT,
-        capture_output=True,
-        text=True,
-    )
-    payload = load_json_maybe(proc.stdout)
-    return {
-        "command": f"{name} {' '.join(args)}".strip(),
-        "returncode": proc.returncode,
-        "ok": proc.returncode == 0,
-        "stdout": proc.stdout,
-        "stderr": proc.stderr,
-        "payload": payload,
-    }
 
 
 def prompt_with_default(label: str, default: str) -> str:
@@ -547,272 +534,6 @@ def command_report(args: argparse.Namespace) -> int:
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
     return 0 if report["ok"] else 2
-
-
-def command_skill_report(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_html:
-        cmd.extend(["--output-html", args.output_html])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_skill_overview.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_review_viewer(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_html:
-        cmd.extend(["--output-html", args.output_html])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_review_viewer.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_review_studio(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_html:
-        cmd.extend(["--output-html", args.output_html])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_review_studio.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_skill_os2_audit(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_skill_os2_audit.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_skill_os2_coverage(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_skill_os2_coverage.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_world_class_evidence(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_world_class_evidence_plan.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_world_class_ledger(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_world_class_evidence_ledger.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_world_class_intake(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.submissions_dir:
-        cmd.extend(["--submissions-dir", args.submissions_dir])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_world_class_evidence_intake.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_world_class_claim_guard(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    for surface in args.claim_surface:
-        cmd.extend(["--claim-surface", surface])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_world_class_claim_guard.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_benchmark_reproducibility(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.generated_at:
-        cmd.extend(["--generated-at", args.generated_at])
-    result = run_script("render_benchmark_reproducibility.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_reference_scan(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    for reference in args.external_reference:
-        cmd.extend(["--external-reference", reference])
-    for reference in args.user_reference:
-        cmd.extend(["--user-reference", reference])
-    for constraint in args.local_constraint:
-        cmd.extend(["--local-constraint", constraint])
-    for reference in args.reference:
-        cmd.extend(["--reference", reference])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_reference_scan.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_github_benchmark_scan(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir, "--query", args.query, "--top-n", str(args.top_n)]
-    if args.fixture_dir:
-        cmd.extend(["--fixture-dir", args.fixture_dir])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("github_benchmark_scan.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_intent_confidence(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.context_json:
-        cmd.extend(["--context-json", args.context_json])
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_intent_confidence.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_intent_dialogue(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_intent_dialogue.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_reference_synthesis(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_reference_synthesis.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_output_risk_profile(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_output_risk_profile.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_artifact_design_profile(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_artifact_design_profile.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_prompt_quality_profile(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_prompt_quality_profile.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_system_model(args: argparse.Namespace) -> int:
-    cmd = [str(Path(args.skill_dir).resolve())]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_system_model.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
-
-
-def command_iteration_directions(args: argparse.Namespace) -> int:
-    skill_dir = str(Path(args.skill_dir).resolve())
-    cmd = [skill_dir]
-    if args.output_md:
-        cmd.extend(["--output-md", args.output_md])
-    if args.output_json:
-        cmd.extend(["--output-json", args.output_json])
-    result = run_script("render_iteration_directions.py", cmd)
-    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
-    return 0 if result["ok"] else 2
 
 
 def command_feedback(args: argparse.Namespace) -> int:

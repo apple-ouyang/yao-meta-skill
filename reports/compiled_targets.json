@@ -450,7 +450,7 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 8,
+              "script_count": 9,
               "scripts": [
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -459,7 +459,8 @@
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
                 "scripts/trust_check.py",
-                "scripts/yao.py"
+                "scripts/yao.py",
+                "scripts/yao_cli_runtime.py"
               ],
               "review_reason": "Scripts spawn local commands and need operator review."
             },
@@ -490,7 +491,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 60,
-            "subprocess_script_count": 8,
+            "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -512,7 +513,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 60,
-            "subprocess": 8,
+            "subprocess": 9,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -691,7 +692,7 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 8,
+            "script_count": 9,
             "scripts": [
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -700,7 +701,8 @@
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
-              "scripts/yao.py"
+              "scripts/yao.py",
+              "scripts/yao_cli_runtime.py"
             ],
             "review_reason": "Scripts spawn local commands and need operator review."
           },
@@ -731,7 +733,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 60,
-          "subprocess_script_count": 8,
+          "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -751,7 +753,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 60,
-          "subprocess": 8,
+          "subprocess": 9,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -1289,7 +1291,7 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 8,
+              "script_count": 9,
               "scripts": [
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -1298,7 +1300,8 @@
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
                 "scripts/trust_check.py",
-                "scripts/yao.py"
+                "scripts/yao.py",
+                "scripts/yao_cli_runtime.py"
               ],
               "review_reason": "Scripts spawn local commands and need operator review."
             },
@@ -1329,7 +1332,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 60,
-            "subprocess_script_count": 8,
+            "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -1351,7 +1354,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 60,
-            "subprocess": 8,
+            "subprocess": 9,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -1530,7 +1533,7 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 8,
+            "script_count": 9,
             "scripts": [
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -1539,7 +1542,8 @@
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
-              "scripts/yao.py"
+              "scripts/yao.py",
+              "scripts/yao_cli_runtime.py"
             ],
             "review_reason": "Scripts spawn local commands and need operator review."
           },
@@ -1570,7 +1574,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 60,
-          "subprocess_script_count": 8,
+          "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -1590,7 +1594,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 60,
-          "subprocess": 8,
+          "subprocess": 9,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2128,7 +2132,7 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 8,
+              "script_count": 9,
               "scripts": [
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -2137,7 +2141,8 @@
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
                 "scripts/trust_check.py",
-                "scripts/yao.py"
+                "scripts/yao.py",
+                "scripts/yao_cli_runtime.py"
               ],
               "review_reason": "Scripts spawn local commands and need operator review."
             },
@@ -2168,7 +2173,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 60,
-            "subprocess_script_count": 8,
+            "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -2190,7 +2195,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 60,
-            "subprocess": 8,
+            "subprocess": 9,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -2362,7 +2367,7 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 8,
+            "script_count": 9,
             "scripts": [
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -2371,7 +2376,8 @@
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
-              "scripts/yao.py"
+              "scripts/yao.py",
+              "scripts/yao_cli_runtime.py"
             ],
             "review_reason": "Scripts spawn local commands and need operator review."
           },
@@ -2402,7 +2408,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 60,
-          "subprocess_script_count": 8,
+          "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -2422,7 +2428,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 60,
-          "subprocess": 8,
+          "subprocess": 9,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2951,7 +2957,7 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 8,
+              "script_count": 9,
               "scripts": [
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -2960,7 +2966,8 @@
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
                 "scripts/trust_check.py",
-                "scripts/yao.py"
+                "scripts/yao.py",
+                "scripts/yao_cli_runtime.py"
               ],
               "review_reason": "Scripts spawn local commands and need operator review."
             },
@@ -2991,7 +2998,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 60,
-            "subprocess_script_count": 8,
+            "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -3013,7 +3020,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 60,
-            "subprocess": 8,
+            "subprocess": 9,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -3185,7 +3192,7 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 8,
+            "script_count": 9,
             "scripts": [
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -3194,7 +3201,8 @@
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
-              "scripts/yao.py"
+              "scripts/yao.py",
+              "scripts/yao_cli_runtime.py"
             ],
             "review_reason": "Scripts spawn local commands and need operator review."
           },
@@ -3225,7 +3233,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 60,
-          "subprocess_script_count": 8,
+          "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -3245,7 +3253,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 60,
-          "subprocess": 8,
+          "subprocess": 9,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -3774,7 +3782,7 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 8,
+              "script_count": 9,
               "scripts": [
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -3783,7 +3791,8 @@
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
                 "scripts/trust_check.py",
-                "scripts/yao.py"
+                "scripts/yao.py",
+                "scripts/yao_cli_runtime.py"
               ],
               "review_reason": "Scripts spawn local commands and need operator review."
             },
@@ -3814,7 +3823,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 60,
-            "subprocess_script_count": 8,
+            "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -3836,7 +3845,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 60,
-            "subprocess": 8,
+            "subprocess": 9,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -4012,7 +4021,7 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 8,
+            "script_count": 9,
             "scripts": [
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -4021,7 +4030,8 @@
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
               "scripts/trust_check.py",
-              "scripts/yao.py"
+              "scripts/yao.py",
+              "scripts/yao_cli_runtime.py"
             ],
             "review_reason": "Scripts spawn local commands and need operator review."
           },
@@ -4052,7 +4062,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 60,
-          "subprocess_script_count": 8,
+          "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -4072,7 +4082,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 60,
-          "subprocess": 8,
+          "subprocess": 9,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
