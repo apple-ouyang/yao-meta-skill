@@ -135,6 +135,7 @@
       "scripts/python_compat_check.py",
       "scripts/registry_audit.py",
       "scripts/render_adoption_drift_report.py",
+      "scripts/render_architecture_maintainability.py",
       "scripts/render_artifact_design_profile.py",
       "scripts/render_baseline_compare.py",
       "scripts/render_benchmark_reproducibility.py",
@@ -186,8 +187,7 @@
       "scripts/upgrade_check.py",
       "scripts/validate_skill.py",
       "scripts/verify_package.py",
-      "scripts/yao.py",
-      "scripts/yao_cli_config.py"
+      "scripts/yao.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",

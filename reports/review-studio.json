@@ -4,11 +4,11 @@
   "skill_dir": ".",
   "summary": {
     "decision": "review",
-    "world_class_score": 90,
-    "gate_count": 15,
+    "world_class_score": 89,
+    "gate_count": 16,
     "blocker_count": 0,
-    "warning_count": 3,
-    "action_count": 3,
+    "warning_count": 4,
+    "action_count": 4,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 82 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 83 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -67,9 +67,17 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 140 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 142 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
+    },
+    {
+      "key": "architecture-maintainability",
+      "label": "架构维护",
+      "status": "warn",
+      "detail": "139 Python files; 3 hotspots; 0 blockers; largest 1438 lines; 55 CLI handlers",
+      "evidence": "reports/architecture_maintainability.json",
+      "link": "architecture_maintainability.md"
     },
     {
       "key": "permission-gates",
@@ -107,7 +115,7 @@
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -147,10 +155,18 @@
       "link": "output_quality_scorecard.md"
     },
     {
+      "key": "architecture-maintainability",
+      "label": "架构维护",
+      "status": "warn",
+      "detail": "139 Python files; 3 hotspots; 0 blockers; largest 1438 lines; 55 CLI handlers",
+      "evidence": "reports/architecture_maintainability.json",
+      "link": "architecture_maintainability.md"
+    },
+    {
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -225,6 +241,52 @@
       "evidence": "reports/output_quality_scorecard.json",
       "evidence_link": "output_quality_scorecard.md",
       "verification_command": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review"
+    },
+    {
+      "gate_key": "architecture-maintainability",
+      "label": "架构维护",
+      "status": "warn",
+      "priority": "warning",
+      "summary": "处理大文件和 CLI command surface 的维护性热点，优先拆分稳定职责边界。",
+      "why": "Meta Skill 的门禁、报告和 CLI 会持续增长；如果不把架构债纳入审查，后续能力会越来越难验证和迁移。",
+      "source_fix": "reports/architecture_maintainability.md + scripts/yao.py + scripts/render_review_studio.py",
+      "source_refs": [
+        {
+          "path": "reports/architecture_maintainability.md",
+          "label": "architecture maintainability",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "architecture_maintainability.md"
+        },
+        {
+          "path": "scripts/yao.py",
+          "label": "Yao CLI orchestrator",
+          "kind": "source",
+          "line": 124,
+          "exists": true,
+          "link": "../scripts/yao.py"
+        },
+        {
+          "path": "scripts/render_review_studio.py",
+          "label": "Review Studio renderer",
+          "kind": "source",
+          "line": 387,
+          "exists": true,
+          "link": "../scripts/render_review_studio.py"
+        },
+        {
+          "path": "scripts/render_review_viewer.py",
+          "label": "review viewer renderer",
+          "kind": "source",
+          "line": 19,
+          "exists": true,
+          "link": "../scripts/render_review_viewer.py"
+        }
+      ],
+      "evidence": "reports/architecture_maintainability.json",
+      "evidence_link": "architecture_maintainability.md",
+      "verification_command": "python3 scripts/yao.py architecture-audit ."
     },
     {
       "gate_key": "review-waivers",
@@ -372,6 +434,7 @@
     "runtime_conformance": "reports/conformance_matrix.md",
     "trust_report": "reports/security_trust_report.md",
     "python_compatibility": "reports/python_compatibility.md",
+    "architecture_maintainability": "reports/architecture_maintainability.md",
     "permission_policy": "security/permission_policy.md",
     "runtime_permissions": "reports/runtime_permission_probes.md",
     "skill_atlas": "reports/skill_atlas.html",
@@ -3710,7 +3773,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.31,
+          "duration_ms": 25.63,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3733,7 +3796,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.31,
+          "duration_ms": 25.52,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3761,7 +3824,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.65,
+          "duration_ms": 27.26,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3784,7 +3847,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.46,
+          "duration_ms": 29.55,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3812,7 +3875,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.46,
+          "duration_ms": 29.51,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3835,7 +3898,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.63,
+          "duration_ms": 29.52,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3862,7 +3925,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.51,
+          "duration_ms": 29.37,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3885,7 +3948,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.72,
+          "duration_ms": 29.31,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3914,7 +3977,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.64,
+          "duration_ms": 29.01,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4345,7 +4408,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "82 scripts; secrets 0; help failures 0",
+          "current": "83 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -4419,7 +4482,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 547; install failures 0",
+          "current": "archive entries 551; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -4460,7 +4523,7 @@
           "label": "Review Studio",
           "status": "pass",
           "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-          "current": "15 gates; decision review; warnings 3",
+          "current": "16 gates; decision review; warnings 4",
           "command": "python3 scripts/yao.py review-studio .",
           "test": "python3 tests/verify_review_studio.py",
           "evidence": [
@@ -4778,7 +4841,7 @@
           "label": "Review Studio 2.0",
           "status": "pass",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-          "current": "15 review gates",
+          "current": "16 review gates",
           "command": "make ci-test",
           "test": "tests/verify_review_studio.py",
           "evidence": [
@@ -5011,6 +5074,7 @@
                 "scripts/python_compat_check.py",
                 "scripts/registry_audit.py",
                 "scripts/render_adoption_drift_report.py",
+                "scripts/render_architecture_maintainability.py",
                 "scripts/render_artifact_design_profile.py",
                 "scripts/render_baseline_compare.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -5062,8 +5126,7 @@
                 "scripts/upgrade_check.py",
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
-                "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -5222,7 +5285,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 59,
+                  "script_count": 60,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -5243,6 +5306,7 @@
                     "scripts/python_compat_check.py",
                     "scripts/registry_audit.py",
                     "scripts/render_adoption_drift_report.py",
+                    "scripts/render_architecture_maintainability.py",
                     "scripts/render_artifact_design_profile.py",
                     "scripts/render_baseline_compare.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -5320,14 +5384,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 72,
+                "checked_count": 73,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 59,
+                "file_write_script_count": 60,
                 "subprocess_script_count": 8,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -5349,7 +5413,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 59,
+                "file_write": 60,
                 "subprocess": 8,
                 "interactive": 0
               },
@@ -5462,7 +5526,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 59,
+                "script_count": 60,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -5483,6 +5547,7 @@
                   "scripts/python_compat_check.py",
                   "scripts/registry_audit.py",
                   "scripts/render_adoption_drift_report.py",
+                  "scripts/render_architecture_maintainability.py",
                   "scripts/render_artifact_design_profile.py",
                   "scripts/render_baseline_compare.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -5560,14 +5625,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 72,
+              "checked_count": 73,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 59,
+              "file_write_script_count": 60,
               "subprocess_script_count": 8,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -5587,7 +5652,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 59,
+              "file_write": 60,
               "subprocess": 8,
               "interactive": 0
             },
@@ -5848,6 +5913,7 @@
                 "scripts/python_compat_check.py",
                 "scripts/registry_audit.py",
                 "scripts/render_adoption_drift_report.py",
+                "scripts/render_architecture_maintainability.py",
                 "scripts/render_artifact_design_profile.py",
                 "scripts/render_baseline_compare.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -5899,8 +5965,7 @@
                 "scripts/upgrade_check.py",
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
-                "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -6059,7 +6124,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 59,
+                  "script_count": 60,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -6080,6 +6145,7 @@
                     "scripts/python_compat_check.py",
                     "scripts/registry_audit.py",
                     "scripts/render_adoption_drift_report.py",
+                    "scripts/render_architecture_maintainability.py",
                     "scripts/render_artifact_design_profile.py",
                     "scripts/render_baseline_compare.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -6157,14 +6223,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 72,
+                "checked_count": 73,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 59,
+                "file_write_script_count": 60,
                 "subprocess_script_count": 8,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -6186,7 +6252,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 59,
+                "file_write": 60,
                 "subprocess": 8,
                 "interactive": 0
               },
@@ -6299,7 +6365,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 59,
+                "script_count": 60,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -6320,6 +6386,7 @@
                   "scripts/python_compat_check.py",
                   "scripts/registry_audit.py",
                   "scripts/render_adoption_drift_report.py",
+                  "scripts/render_architecture_maintainability.py",
                   "scripts/render_artifact_design_profile.py",
                   "scripts/render_baseline_compare.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -6397,14 +6464,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 72,
+              "checked_count": 73,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 59,
+              "file_write_script_count": 60,
               "subprocess_script_count": 8,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -6424,7 +6491,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 59,
+              "file_write": 60,
               "subprocess": 8,
               "interactive": 0
             },
@@ -6685,6 +6752,7 @@
                 "scripts/python_compat_check.py",
                 "scripts/registry_audit.py",
                 "scripts/render_adoption_drift_report.py",
+                "scripts/render_architecture_maintainability.py",
                 "scripts/render_artifact_design_profile.py",
                 "scripts/render_baseline_compare.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -6736,8 +6804,7 @@
                 "scripts/upgrade_check.py",
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
-                "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -6896,7 +6963,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 59,
+                  "script_count": 60,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -6917,6 +6984,7 @@
                     "scripts/python_compat_check.py",
                     "scripts/registry_audit.py",
                     "scripts/render_adoption_drift_report.py",
+                    "scripts/render_architecture_maintainability.py",
                     "scripts/render_artifact_design_profile.py",
                     "scripts/render_baseline_compare.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -6994,14 +7062,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 72,
+                "checked_count": 73,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 59,
+                "file_write_script_count": 60,
                 "subprocess_script_count": 8,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -7023,7 +7091,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 59,
+                "file_write": 60,
                 "subprocess": 8,
                 "interactive": 0
               },
@@ -7129,7 +7197,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 59,
+                "script_count": 60,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -7150,6 +7218,7 @@
                   "scripts/python_compat_check.py",
                   "scripts/registry_audit.py",
                   "scripts/render_adoption_drift_report.py",
+                  "scripts/render_architecture_maintainability.py",
                   "scripts/render_artifact_design_profile.py",
                   "scripts/render_baseline_compare.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -7227,14 +7296,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 72,
+              "checked_count": 73,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 59,
+              "file_write_script_count": 60,
               "subprocess_script_count": 8,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -7254,7 +7323,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 59,
+              "file_write": 60,
               "subprocess": 8,
               "interactive": 0
             },
@@ -7506,6 +7575,7 @@
                 "scripts/python_compat_check.py",
                 "scripts/registry_audit.py",
                 "scripts/render_adoption_drift_report.py",
+                "scripts/render_architecture_maintainability.py",
                 "scripts/render_artifact_design_profile.py",
                 "scripts/render_baseline_compare.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -7557,8 +7627,7 @@
                 "scripts/upgrade_check.py",
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
-                "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -7717,7 +7786,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 59,
+                  "script_count": 60,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -7738,6 +7807,7 @@
                     "scripts/python_compat_check.py",
                     "scripts/registry_audit.py",
                     "scripts/render_adoption_drift_report.py",
+                    "scripts/render_architecture_maintainability.py",
                     "scripts/render_artifact_design_profile.py",
                     "scripts/render_baseline_compare.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -7815,14 +7885,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 72,
+                "checked_count": 73,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 59,
+                "file_write_script_count": 60,
                 "subprocess_script_count": 8,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -7844,7 +7914,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 59,
+                "file_write": 60,
                 "subprocess": 8,
                 "interactive": 0
               },
@@ -7950,7 +8020,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 59,
+                "script_count": 60,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -7971,6 +8041,7 @@
                   "scripts/python_compat_check.py",
                   "scripts/registry_audit.py",
                   "scripts/render_adoption_drift_report.py",
+                  "scripts/render_architecture_maintainability.py",
                   "scripts/render_artifact_design_profile.py",
                   "scripts/render_baseline_compare.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -8048,14 +8119,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 72,
+              "checked_count": 73,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 59,
+              "file_write_script_count": 60,
               "subprocess_script_count": 8,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -8075,7 +8146,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 59,
+              "file_write": 60,
               "subprocess": 8,
               "interactive": 0
             },
@@ -8327,6 +8398,7 @@
                 "scripts/python_compat_check.py",
                 "scripts/registry_audit.py",
                 "scripts/render_adoption_drift_report.py",
+                "scripts/render_architecture_maintainability.py",
                 "scripts/render_artifact_design_profile.py",
                 "scripts/render_baseline_compare.py",
                 "scripts/render_benchmark_reproducibility.py",
@@ -8378,8 +8450,7 @@
                 "scripts/upgrade_check.py",
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
-                "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -8538,7 +8609,7 @@
                 },
                 "file_write": {
                   "required": true,
-                  "script_count": 59,
+                  "script_count": 60,
                   "scripts": [
                     "scripts/adjudicate_output_review.py",
                     "scripts/build_confusion_matrix.py",
@@ -8559,6 +8630,7 @@
                     "scripts/python_compat_check.py",
                     "scripts/registry_audit.py",
                     "scripts/render_adoption_drift_report.py",
+                    "scripts/render_architecture_maintainability.py",
                     "scripts/render_artifact_design_profile.py",
                     "scripts/render_baseline_compare.py",
                     "scripts/render_benchmark_reproducibility.py",
@@ -8636,14 +8708,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 72,
+                "checked_count": 73,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 3,
-                "file_write_script_count": 59,
+                "file_write_script_count": 60,
                 "subprocess_script_count": 8,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -8665,7 +8737,7 @@
               ],
               "capability_counts": {
                 "network": 3,
-                "file_write": 59,
+                "file_write": 60,
                 "subprocess": 8,
                 "interactive": 0
               },
@@ -8775,7 +8847,7 @@
               },
               "file_write": {
                 "required": true,
-                "script_count": 59,
+                "script_count": 60,
                 "scripts": [
                   "scripts/adjudicate_output_review.py",
                   "scripts/build_confusion_matrix.py",
@@ -8796,6 +8868,7 @@
                   "scripts/python_compat_check.py",
                   "scripts/registry_audit.py",
                   "scripts/render_adoption_drift_report.py",
+                  "scripts/render_architecture_maintainability.py",
                   "scripts/render_artifact_design_profile.py",
                   "scripts/render_baseline_compare.py",
                   "scripts/render_benchmark_reproducibility.py",
@@ -8873,14 +8946,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 72,
+              "checked_count": 73,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 3,
-              "file_write_script_count": 59,
+              "file_write_script_count": 60,
               "subprocess_script_count": 8,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -8900,7 +8973,7 @@
             ],
             "capability_counts": {
               "network": 3,
-              "file_write": 59,
+              "file_write": 60,
               "subprocess": 8,
               "interactive": 0
             },
@@ -9572,8 +9645,8 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 166,
-        "script_count": 82,
+        "scanned_files": 167,
+        "script_count": 83,
         "internal_module_count": 10,
         "secret_findings": 0,
         "dependency_files": [
@@ -9582,18 +9655,18 @@
         "network_script_count": 3,
         "network_policy_covered_count": 3,
         "network_policy_missing_count": 0,
-        "file_write_script_count": 59,
+        "file_write_script_count": 60,
         "permission_required_count": 3,
         "permission_approved_count": 3,
         "permission_missing_count": 0,
         "permission_invalid_count": 0,
         "permission_expired_count": 0,
-        "help_smoke_checked_count": 72,
+        "help_smoke_checked_count": 73,
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 166,
-        "package_sha256": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723"
+        "package_hash_file_count": 167,
+        "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
       },
       "failures": [],
       "warnings": [],
@@ -9978,6 +10051,20 @@
         },
         {
           "path": "scripts/render_adoption_drift_report.py",
+          "interface": "cli",
+          "interface_declared": false,
+          "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": true,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/render_architecture_maintainability.py",
           "interface": "cli",
           "interface_declared": false,
           "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
@@ -10795,9 +10882,9 @@
       "help_smoke": {
         "enabled": true,
         "timeout_seconds": 5.0,
-        "candidate_count": 72,
-        "checked_count": 72,
-        "passed_count": 72,
+        "candidate_count": 73,
+        "checked_count": 73,
+        "passed_count": 73,
         "failed_count": 0,
         "skipped_count": 10,
         "failed_scripts": [],
@@ -11070,6 +11157,16 @@
             "passed": true,
             "has_help_text": true,
             "stdout_excerpt": "usage: render_adoption_drift_report.py [-h] [--events-jsonl EVENTS_JSONL]\n                                       [--output-json OUTPUT_JSON]\n                                       [--output-md OUTPUT_MD]\n                                    ",
+            "stderr_excerpt": ""
+          },
+          {
+            "path": "scripts/render_architecture_maintainability.py",
+            "command": "python3 scripts/render_architecture_maintainability.py --help",
+            "returncode": 0,
+            "timed_out": false,
+            "passed": true,
+            "has_help_text": true,
+            "stdout_excerpt": "usage: render_architecture_maintainability.py [-h] [--output-json OUTPUT_JSON]\n                                              [--output-md OUTPUT_MD]\n                                              [--warn-lines WARN_LINES]\n                   ",
             "stderr_excerpt": ""
           },
           {
@@ -11519,7 +11616,7 @@
             "timed_out": false,
             "passed": true,
             "has_help_text": true,
-            "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,python-compat,review,release-snapsho",
+            "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,python-compat,architecture-audit,rev",
             "stderr_excerpt": ""
           }
         ],
@@ -11637,6 +11734,7 @@
               "scripts/python_compat_check.py",
               "scripts/registry_audit.py",
               "scripts/render_adoption_drift_report.py",
+              "scripts/render_architecture_maintainability.py",
               "scripts/render_artifact_design_profile.py",
               "scripts/render_baseline_compare.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -11743,7 +11841,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 140,
+        "file_count": 142,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -11936,6 +12034,12 @@
         },
         {
           "path": "scripts/render_adoption_drift_report.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/render_architecture_maintainability.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -12283,6 +12387,12 @@
           "issues": []
         },
         {
+          "path": "tests/verify_architecture_maintainability.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
           "path": "tests/verify_artifact_design_profile.py",
           "ok": true,
           "issue_count": 0,
@@ -12607,6 +12717,156 @@
         "markdown": "reports/python_compatibility.md"
       }
     },
+    "architecture_maintainability": {
+      "schema_version": "1.0",
+      "ok": true,
+      "generated_at": "2026-06-14",
+      "skill_dir": ".",
+      "summary": {
+        "python_file_count": 139,
+        "script_file_count": 83,
+        "test_file_count": 56,
+        "internal_module_count": 12,
+        "cli_script_count": 72,
+        "command_handler_count": 55,
+        "warn_line_threshold": 900,
+        "block_line_threshold": 1500,
+        "largest_file_lines": 1438,
+        "hotspot_count": 3,
+        "blocker_count": 0,
+        "decision": "watch-maintainability-hotspots"
+      },
+      "largest_files": [
+        {
+          "path": "scripts/yao.py",
+          "lines": 1438,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
+        },
+        {
+          "path": "scripts/render_review_studio.py",
+          "lines": 1196,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "scripts/render_review_viewer.py",
+          "lines": 983,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Split viewer data assembly from HTML section rendering."
+        },
+        {
+          "path": "tests/verify_yao_cli.py",
+          "lines": 833,
+          "kind": "test",
+          "severity": "pass",
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "scripts/skill_report_model.py",
+          "lines": 782,
+          "kind": "internal-module",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/compile_skill.py",
+          "lines": 734,
+          "kind": "cli-script",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/optimize_description.py",
+          "lines": 723,
+          "kind": "cli-script",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/trust_check.py",
+          "lines": 714,
+          "kind": "internal-module",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/yao_cli_parser.py",
+          "lines": 691,
+          "kind": "internal-module",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/build_skill_atlas.py",
+          "lines": 674,
+          "kind": "cli-script",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/skill_report_layout.py",
+          "lines": 653,
+          "kind": "internal-module",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/render_reference_synthesis.py",
+          "lines": 644,
+          "kind": "cli-script",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        }
+      ],
+      "hotspots": [
+        {
+          "path": "scripts/yao.py",
+          "lines": 1438,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
+        },
+        {
+          "path": "scripts/render_review_studio.py",
+          "lines": 1196,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "scripts/render_review_viewer.py",
+          "lines": 983,
+          "kind": "cli-script",
+          "severity": "warn",
+          "recommendation": "Split viewer data assembly from HTML section rendering."
+        }
+      ],
+      "actions": [
+        {
+          "path": "scripts/yao.py",
+          "severity": "warn",
+          "action": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
+        },
+        {
+          "path": "scripts/render_review_studio.py",
+          "severity": "warn",
+          "action": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "scripts/render_review_viewer.py",
+          "severity": "warn",
+          "action": "Split viewer data assembly from HTML section rendering."
+        }
+      ],
+      "artifacts": {
+        "json": "reports/architecture_maintainability.json",
+        "markdown": "reports/architecture_maintainability.md"
+      }
+    },
     "context_budget": {
       "ok": true,
       "failures": [],
@@ -12615,10 +12875,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1073524,
+        "other_text_tokens": 1081013,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1074275,
-        "relevant_file_count": 461,
+        "estimated_total_text_tokens": 1081764,
+        "relevant_file_count": 465,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 137.7
@@ -13462,7 +13722,7 @@
       },
       "catalog": {
         "workspace_root": ".",
-        "generated_at": "2026-06-13",
+        "generated_at": "2026-06-14",
         "skills": [
           {
             "name": "yao-meta-skill",
@@ -13509,6 +13769,7 @@
               "scripts/python_compat_check.py",
               "scripts/registry_audit.py",
               "scripts/render_adoption_drift_report.py",
+              "scripts/render_architecture_maintainability.py",
               "scripts/render_artifact_design_profile.py",
               "scripts/render_baseline_compare.py",
               "scripts/render_benchmark_reproducibility.py",
@@ -13627,8 +13888,8 @@
               "report": "reports/adoption_drift_report.json",
               "risk_band": "low",
               "event_count": 1,
-              "adoption_sample_count": 1,
-              "adoption_rate": 100.0,
+              "adoption_sample_count": 0,
+              "adoption_rate": 0,
               "candidate_count": 0
             }
           },
@@ -14291,7 +14552,7 @@
           "name": "incident-command-governor",
           "path": "examples/governed-incident-command/generated-skill",
           "reason": "review overdue by cadence monthly",
-          "age_days": 74,
+          "age_days": 75,
           "allowed_days": 31,
           "actionable": false,
           "scope": "example"
@@ -14459,7 +14720,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T17:32:44Z",
+      "generated_at": "2026-06-13T17:49:00Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -14894,7 +15155,7 @@
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 67,
+        "claim_surface_count": 68,
         "violation_count": 0,
         "overclaim_guard_active": true,
         "decision": "claim-guard-pass-evidence-pending"
@@ -14957,6 +15218,10 @@
         },
         {
           "path": "reports/adoption_drift_report.md",
+          "violation_count": 0
+        },
+        {
+          "path": "reports/architecture_maintainability.md",
           "violation_count": 0
         },
         {
@@ -15229,8 +15494,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723",
-          "archive_sha256": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2"
+          "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa",
+          "archive_sha256": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7"
         },
         "compatibility": {
           "openai": "pass",
@@ -15261,7 +15526,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2",
+          "archive_sha256": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -15286,7 +15551,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723"
+            "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
           }
         ]
       },
@@ -15309,8 +15574,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2",
-        "archive_entry_count": 547,
+        "archive_sha256": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7",
+        "archive_entry_count": 551,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -15975,7 +16240,7 @@
       "installed_skill_dir": "[temporary-install-root]/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 547,
+        "archive_entry_count": 551,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -16317,12 +16582,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "d879a6c6c16f91854dae70c114fa6cea05aeb423d8d11918e2a3f87930ed1bf2"
+            "to": "b258a36c15b68045a4b420c49585ac446de6b013cb43fae25f3ba562ba06fab7"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723"
+            "to": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
           }
         ]
       },

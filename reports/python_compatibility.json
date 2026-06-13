@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 140,
+    "file_count": 142,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -198,6 +198,12 @@
     },
     {
       "path": "scripts/render_adoption_drift_report.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/render_architecture_maintainability.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -540,6 +546,12 @@
     },
     {
       "path": "tests/verify_adoption_drift.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_architecture_maintainability.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

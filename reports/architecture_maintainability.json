@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-14",
+  "skill_dir": ".",
+  "summary": {
+    "python_file_count": 139,
+    "script_file_count": 83,
+    "test_file_count": 56,
+    "internal_module_count": 12,
+    "cli_script_count": 72,
+    "command_handler_count": 55,
+    "warn_line_threshold": 900,
+    "block_line_threshold": 1500,
+    "largest_file_lines": 1438,
+    "hotspot_count": 3,
+    "blocker_count": 0,
+    "decision": "watch-maintainability-hotspots"
+  },
+  "largest_files": [
+    {
+      "path": "scripts/yao.py",
+      "lines": 1438,
+      "kind": "cli-script",
+      "severity": "warn",
+      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
+    },
+    {
+      "path": "scripts/render_review_studio.py",
+      "lines": 1196,
+      "kind": "cli-script",
+      "severity": "warn",
+      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
+      "path": "scripts/render_review_viewer.py",
+      "lines": 983,
+      "kind": "cli-script",
+      "severity": "warn",
+      "recommendation": "Split viewer data assembly from HTML section rendering."
+    },
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 833,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/skill_report_model.py",
+      "lines": 782,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/compile_skill.py",
+      "lines": 734,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/optimize_description.py",
+      "lines": 723,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/trust_check.py",
+      "lines": 714,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 691,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 674,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/skill_report_layout.py",
+      "lines": 653,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_reference_synthesis.py",
+      "lines": 644,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    }
+  ],
+  "hotspots": [
+    {
+      "path": "scripts/yao.py",
+      "lines": 1438,
+      "kind": "cli-script",
+      "severity": "warn",
+      "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
+    },
+    {
+      "path": "scripts/render_review_studio.py",
+      "lines": 1196,
+      "kind": "cli-script",
+      "severity": "warn",
+      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
+      "path": "scripts/render_review_viewer.py",
+      "lines": 983,
+      "kind": "cli-script",
+      "severity": "warn",
+      "recommendation": "Split viewer data assembly from HTML section rendering."
+    }
+  ],
+  "actions": [
+    {
+      "path": "scripts/yao.py",
+      "severity": "warn",
+      "action": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
+    },
+    {
+      "path": "scripts/render_review_studio.py",
+      "severity": "warn",
+      "action": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
+      "path": "scripts/render_review_viewer.py",
+      "severity": "warn",
+      "action": "Split viewer data assembly from HTML section rendering."
+    }
+  ],
+  "artifacts": {
+    "json": "reports/architecture_maintainability.json",
+    "markdown": "reports/architecture_maintainability.md"
+  }
+}

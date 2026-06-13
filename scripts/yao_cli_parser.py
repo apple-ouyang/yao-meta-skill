@@ -93,6 +93,18 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     python_compat_cmd.add_argument("--generated-at")
     python_compat_cmd.set_defaults(func=_handler(command_handlers, "command_python_compat"))
 
+    architecture_audit_cmd = subparsers.add_parser(
+        "architecture-audit",
+        help="Render maintainability evidence for large Python files and CLI command surface.",
+    )
+    architecture_audit_cmd.add_argument("skill_dir", nargs="?", default=".")
+    architecture_audit_cmd.add_argument("--output-json")
+    architecture_audit_cmd.add_argument("--output-md")
+    architecture_audit_cmd.add_argument("--warn-lines", type=int, default=900)
+    architecture_audit_cmd.add_argument("--block-lines", type=int, default=1500)
+    architecture_audit_cmd.add_argument("--generated-at")
+    architecture_audit_cmd.set_defaults(func=_handler(command_handlers, "command_architecture_audit"))
+
     review_cmd = subparsers.add_parser("review", help="Locate the current bundle and human review stub for a target.")
     review_cmd.add_argument(
         "--target",
@@ -448,10 +460,12 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     review_waivers_cmd.add_argument(
         "--gate-key",
         choices=[
+            "architecture-maintainability",
             "context-budget",
             "intent-canvas",
             "operations-loop",
             "output-lab",
+            "python-compat",
             "registry-audit",
             "release-notes",
             "runtime-matrix",
@@ -489,10 +503,12 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     review_annotations_cmd.add_argument(
         "--gate-key",
         choices=[
+            "architecture-maintainability",
             "context-budget",
             "intent-canvas",
             "operations-loop",
             "output-lab",
+            "python-compat",
             "registry-audit",
             "release-notes",
             "review-waivers",
@@ -500,6 +516,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
             "skill-atlas",
             "trigger-lab",
             "trust-report",
+            "world-class-evidence",
             "permission-gates",
             "permission-runtime",
         ],

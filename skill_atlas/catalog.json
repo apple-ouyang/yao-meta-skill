@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-14",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -47,6 +47,7 @@
         "scripts/python_compat_check.py",
         "scripts/registry_audit.py",
         "scripts/render_adoption_drift_report.py",
+        "scripts/render_architecture_maintainability.py",
         "scripts/render_artifact_design_profile.py",
         "scripts/render_baseline_compare.py",
         "scripts/render_benchmark_reproducibility.py",
@@ -165,8 +166,8 @@
         "report": "reports/adoption_drift_report.json",
         "risk_band": "low",
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "adoption_rate": 0,
         "candidate_count": 0
       }
     },

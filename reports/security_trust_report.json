@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 166,
-    "script_count": 82,
+    "scanned_files": 167,
+    "script_count": 83,
     "internal_module_count": 10,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 59,
+    "file_write_script_count": 60,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 72,
+    "help_smoke_checked_count": 73,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 166,
-    "package_sha256": "e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723"
+    "package_hash_file_count": 167,
+    "package_sha256": "1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa"
   },
   "failures": [],
   "warnings": [],
@@ -408,6 +408,20 @@
     },
     {
       "path": "scripts/render_adoption_drift_report.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/render_architecture_maintainability.py",
       "interface": "cli",
       "interface_declared": false,
       "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
@@ -1225,9 +1239,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 72,
-    "checked_count": 72,
-    "passed_count": 72,
+    "candidate_count": 73,
+    "checked_count": 73,
+    "passed_count": 73,
     "failed_count": 0,
     "skipped_count": 10,
     "failed_scripts": [],
@@ -1500,6 +1514,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: render_adoption_drift_report.py [-h] [--events-jsonl EVENTS_JSONL]\n                                       [--output-json OUTPUT_JSON]\n                                       [--output-md OUTPUT_MD]\n                                    ",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/render_architecture_maintainability.py",
+        "command": "python3 scripts/render_architecture_maintainability.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: render_architecture_maintainability.py [-h] [--output-json OUTPUT_JSON]\n                                              [--output-md OUTPUT_MD]\n                                              [--warn-lines WARN_LINES]\n                   ",
         "stderr_excerpt": ""
       },
       {
@@ -1949,7 +1973,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,python-compat,review,release-snapsho",
+        "stdout_excerpt": "usage: yao.py [-h] [--record-cli-telemetry] [--no-cli-telemetry]\n              [--telemetry-events-jsonl TELEMETRY_EVENTS_JSONL]\n              {init,quickstart,validate,optimize-description,promote-check,python-compat,architecture-audit,rev",
         "stderr_excerpt": ""
       }
     ],
@@ -2067,6 +2091,7 @@
           "scripts/python_compat_check.py",
           "scripts/registry_audit.py",
           "scripts/render_adoption_drift_report.py",
+          "scripts/render_architecture_maintainability.py",
           "scripts/render_artifact_design_profile.py",
           "scripts/render_baseline_compare.py",
           "scripts/render_benchmark_reproducibility.py",

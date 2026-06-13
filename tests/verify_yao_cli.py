@@ -74,6 +74,7 @@ def main() -> None:
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
     assert "python-compat" in parser_help, parser_help
+    assert "architecture-audit" in parser_help, parser_help
     assert "skill-os2-audit" in parser_help, parser_help
     assert "skill-os2-coverage" in parser_help, parser_help
     assert "world-class-evidence" in parser_help, parser_help
@@ -199,6 +200,21 @@ def main() -> None:
     assert python_compat_result["payload"]["summary"]["target_python"] == "3.11", python_compat_result
     assert python_compat_result["payload"]["summary"]["issue_count"] == 0, python_compat_result
     assert python_compat_result["payload"]["summary"]["file_count"] >= 50, python_compat_result
+
+    architecture_result = run(
+        "architecture-audit",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "architecture_maintainability.json"),
+        "--output-md",
+        str(tmp_root / "architecture_maintainability.md"),
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert architecture_result["ok"], architecture_result
+    assert architecture_result["payload"]["summary"]["hotspot_count"] >= 3, architecture_result
+    assert architecture_result["payload"]["summary"]["blocker_count"] == 0, architecture_result
+    assert architecture_result["payload"]["summary"]["command_handler_count"] >= 50, architecture_result
 
     world_class_evidence_result = run(
         "world-class-evidence",
@@ -382,10 +398,15 @@ def main() -> None:
     review_studio_result = run("review-studio", str(created))
     assert review_studio_result["ok"], review_studio_result
     assert review_studio_result["payload"]["artifacts"]["html"].endswith("reports/review-studio.html"), review_studio_result
-    assert review_studio_result["payload"]["summary"]["gate_count"] == 15, review_studio_result
+    assert review_studio_result["payload"]["summary"]["gate_count"] == 16, review_studio_result
     created_world_class_gate = next(item for item in review_studio_result["payload"]["gates"] if item["key"] == "world-class-evidence")
     assert created_world_class_gate["status"] == "pass", created_world_class_gate
     assert "optional" in created_world_class_gate["detail"], created_world_class_gate
+    created_architecture_gate = next(
+        item for item in review_studio_result["payload"]["gates"] if item["key"] == "architecture-maintainability"
+    )
+    assert created_architecture_gate["status"] == "pass", created_architecture_gate
+    assert "optional" in created_architecture_gate["detail"], created_architecture_gate
 
     review_waivers_result = run(
         "review-waivers",
@@ -673,6 +694,7 @@ def main() -> None:
     assert "iteration_ledger" in report_result["payload"]["artifacts"], report_result
     assert "portability_score" in report_result["payload"]["artifacts"], report_result
     assert "python_compatibility" in report_result["payload"]["artifacts"], report_result
+    assert "architecture_maintainability" in report_result["payload"]["artifacts"], report_result
     assert "artifact_design_profile" in report_result["payload"]["artifacts"], report_result
     assert "prompt_quality_profile" in report_result["payload"]["artifacts"], report_result
     assert "compiled_targets" in report_result["payload"]["artifacts"], report_result

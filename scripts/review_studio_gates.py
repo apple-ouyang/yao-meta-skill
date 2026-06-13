@@ -291,6 +291,37 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         )
     )
 
+    architecture = data["architecture_maintainability"]
+    architecture_summary = architecture.get("summary", {})
+    if not architecture:
+        if maturity in {"library", "governed"}:
+            architecture_status = "warn"
+            architecture_detail = "architecture maintainability report is missing for a reusable package"
+        else:
+            architecture_status = "pass"
+            architecture_detail = "architecture maintainability report is optional until code surface grows"
+    else:
+        hotspot_count = int(architecture_summary.get("hotspot_count", 0) or 0)
+        blocker_count = int(architecture_summary.get("blocker_count", 0) or 0)
+        architecture_status = "block" if not architecture.get("ok", True) or blocker_count else ("warn" if hotspot_count else "pass")
+        architecture_detail = (
+            f"{architecture_summary.get('python_file_count', 0)} Python files; "
+            f"{hotspot_count} hotspots; "
+            f"{blocker_count} blockers; "
+            f"largest {architecture_summary.get('largest_file_lines', 0)} lines; "
+            f"{architecture_summary.get('command_handler_count', 0)} CLI handlers"
+        )
+    gates.append(
+        gate(
+            "architecture-maintainability",
+            "架构维护",
+            architecture_status,
+            architecture_detail,
+            "reports/architecture_maintainability.json",
+            _report_link(output_html, skill_dir, "reports/architecture_maintainability.md"),
+        )
+    )
+
     permission_governance = trust.get("permission_governance", {}) if isinstance(trust.get("permission_governance", {}), dict) else {}
     if trust and not permission_governance:
         permission_governance = fallback_permission_governance(skill_dir)
@@ -566,6 +597,7 @@ def weighted_score(gates: list[dict[str, str]]) -> int:
         "runtime-matrix": 10,
         "trust-report": 10,
         "python-compat": 10,
+        "architecture-maintainability": 10,
         "permission-gates": 10,
         "permission-runtime": 10,
         "skill-atlas": 10,

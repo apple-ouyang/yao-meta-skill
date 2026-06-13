@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `166`
-- Scripts: `82`
+- Scanned files: `167`
+- Scripts: `83`
 - Internal script modules: `10`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `59`
+- File-write scripts: `60`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `72`
+- CLI help smoke checked: `73`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `166`
-- Package SHA256: `e377e8c99c14f87933224d1abebbe9d5d971fd852e1f3fe9b2a4a80861e90723`
+- Package hash files: `167`
+- Package SHA256: `1ce8a87e2393ee03818d16053afb68b2332cacbc2e3b400058b5bbf8c31266fa`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `72`
-- Passed scripts: `72`
+- Checked scripts: `73`
+- Passed scripts: `73`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -89,6 +89,7 @@
 | scripts/python_compat_check.py | cli | True | True | True | False | False | True | False | Checks repository Python source for syntax that can pass locally but fail on the supported CI interpreter. |
 | scripts/registry_audit.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_adoption_drift_report.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_architecture_maintainability.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_artifact_design_profile.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_baseline_compare.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_benchmark_reproducibility.py | cli | True | True | True | False | False | True | True | Renders a release-facing benchmark reproducibility manifest and Markdown report. |

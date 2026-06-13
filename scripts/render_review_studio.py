@@ -129,6 +129,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "runtime_conformance": "reports/conformance_matrix.md",
         "trust_report": "reports/security_trust_report.md",
         "python_compatibility": "reports/python_compatibility.md",
+        "architecture_maintainability": "reports/architecture_maintainability.md",
         "permission_policy": "security/permission_policy.md",
         "runtime_permissions": "reports/runtime_permission_probes.md",
         "skill_atlas": "reports/skill_atlas.html",
@@ -167,6 +168,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "runtime_permissions": load_json(reports / "runtime_permission_probes.json"),
         "trust": load_json(reports / "security_trust_report.json"),
         "python_compatibility": load_json(reports / "python_compatibility.json"),
+        "architecture_maintainability": load_json(reports / "architecture_maintainability.json"),
         "context_budget": load_json(reports / "context_budget.json"),
         "promotion": load_json(reports / "promotion_decisions.json"),
         "atlas": load_json(reports / "skill_atlas.json"),
@@ -198,6 +200,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     runtime_permissions = data["runtime_permissions"].get("summary", {})
     trust = data["trust"].get("summary", {})
     python_compat = data["python_compatibility"].get("summary", {})
+    architecture = data["architecture_maintainability"].get("summary", {})
     atlas = data["atlas"].get("summary", {})
     adoption = data["adoption_drift"].get("summary", {})
     waivers = data["review_waivers"].get("summary", {})
@@ -267,6 +270,14 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Py Compat",
             "value": str(python_compat.get("issue_count", 0)),
             "detail": f"{python_compat.get('file_count', 0)} files scanned for Python {python_compat.get('target_python', '3.11')}",
+        },
+        {
+            "label": "Arch Debt",
+            "value": str(architecture.get("hotspot_count", 0)),
+            "detail": (
+                f"{architecture.get('largest_file_lines', 0)} largest lines; "
+                f"{architecture.get('command_handler_count', 0)} CLI handlers"
+            ),
         },
         {
             "label": "Atlas",
@@ -450,6 +461,18 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
             {"path": ".github/workflows/test.yml", "label": "CI test workflow", "kind": "ci", "patterns": ["python"]},
         ],
         "verification": "python3 scripts/yao.py python-compat .",
+    },
+    "architecture-maintainability": {
+        "summary": "处理大文件和 CLI command surface 的维护性热点，优先拆分稳定职责边界。",
+        "why": "Meta Skill 的门禁、报告和 CLI 会持续增长；如果不把架构债纳入审查，后续能力会越来越难验证和迁移。",
+        "source_fix": "reports/architecture_maintainability.md + scripts/yao.py + scripts/render_review_studio.py",
+        "source_paths": [
+            {"path": "reports/architecture_maintainability.md", "label": "architecture maintainability", "kind": "report", "patterns": ["# Architecture"]},
+            {"path": "scripts/yao.py", "label": "Yao CLI orchestrator", "kind": "source", "patterns": ["def command_"]},
+            {"path": "scripts/render_review_studio.py", "label": "Review Studio renderer", "kind": "source", "patterns": ["ACTION_GUIDANCE"]},
+            {"path": "scripts/render_review_viewer.py", "label": "review viewer renderer", "kind": "source", "patterns": ["def "]},
+        ],
+        "verification": "python3 scripts/yao.py architecture-audit .",
     },
     "permission-gates": {
         "summary": "补齐高权限能力的 reviewer、scope、reason、expires_at 和目标端 enforcement 说明。",

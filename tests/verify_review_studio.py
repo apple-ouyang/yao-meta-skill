@@ -225,6 +225,19 @@ def main() -> None:
         capture_output=True,
         text=True,
     )
+    subprocess.run(
+        [
+            sys.executable,
+            str(ROOT / "scripts" / "render_architecture_maintainability.py"),
+            str(ROOT),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
     for script_name in [
         "render_skill_os2_audit.py",
         "render_world_class_evidence_plan.py",
@@ -262,17 +275,22 @@ def main() -> None:
     assert payload["ok"], payload
     assert payload["schema_version"] == "2.0", payload
     assert payload["summary"]["decision"] == "review", payload
-    assert payload["summary"]["gate_count"] == 15, payload
-    assert payload["summary"]["world_class_score"] == 90, payload
-    assert payload["summary"]["warning_count"] == 3, payload
+    assert payload["summary"]["gate_count"] == 16, payload
+    assert payload["summary"]["world_class_score"] == 89, payload
+    assert payload["summary"]["warning_count"] == 4, payload
     assert payload["summary"]["blocker_count"] == 0, payload
-    assert payload["summary"]["action_count"] == 3, payload
+    assert payload["summary"]["action_count"] == 4, payload
     assert payload["summary"]["annotation_count"] == 0, payload
     assert payload["summary"]["open_annotation_blocker_count"] == 0, payload
     assert payload["summary"]["action_count"] == payload["summary"]["warning_count"] + payload["summary"]["blocker_count"], payload
-    assert {item["gate_key"] for item in payload["review_actions"]} == {"output-lab", "review-waivers", "world-class-evidence"}, payload
+    assert {item["gate_key"] for item in payload["review_actions"]} == {
+        "output-lab",
+        "architecture-maintainability",
+        "review-waivers",
+        "world-class-evidence",
+    }, payload
     gate_keys = {item["key"] for item in payload["gates"]}
-    assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "python-compat", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "world-class-evidence", "registry-audit", "release-notes"} <= gate_keys, payload
+    assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "python-compat", "architecture-maintainability", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "world-class-evidence", "registry-audit", "release-notes"} <= gate_keys, payload
     output_gate = next(item for item in payload["gates"] if item["key"] == "output-lab")
     assert output_gate["status"] == "warn", output_gate
     assert "5/5 cases" in output_gate["detail"], output_gate
@@ -299,6 +317,12 @@ def main() -> None:
     assert "0 compatibility issues" in python_compat_gate["detail"], python_compat_gate
     assert "0 f-string 3.11 hazards" in python_compat_gate["detail"], python_compat_gate
     assert python_compat_gate["evidence"] == "reports/python_compatibility.json", python_compat_gate
+    architecture_gate = next(item for item in payload["gates"] if item["key"] == "architecture-maintainability")
+    assert architecture_gate["status"] == "warn", architecture_gate
+    assert "3 hotspots" in architecture_gate["detail"], architecture_gate
+    assert "0 blockers" in architecture_gate["detail"], architecture_gate
+    assert "CLI handlers" in architecture_gate["detail"], architecture_gate
+    assert architecture_gate["evidence"] == "reports/architecture_maintainability.json", architecture_gate
     permission_gate = next(item for item in payload["gates"] if item["key"] == "permission-gates")
     assert permission_gate["status"] == "pass", permission_gate
     assert "permissions approved" in permission_gate["detail"], permission_gate
@@ -321,7 +345,7 @@ def main() -> None:
     assert "reports/adoption_drift_report.json" in operations_gate["evidence"], operations_gate
     waivers_gate = next(item for item in payload["gates"] if item["key"] == "review-waivers")
     assert waivers_gate["status"] == "warn", waivers_gate
-    assert "warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
+    assert "2 warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
     assert "reports/review_waivers.json" in waivers_gate["evidence"], waivers_gate
     world_class_gate = next(item for item in payload["gates"] if item["key"] == "world-class-evidence")
     assert world_class_gate["status"] == "warn", world_class_gate
@@ -339,6 +363,7 @@ def main() -> None:
     assert full_payload["evidence_paths"]["output_review_decisions"] == "reports/output_review_decisions.json", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_review_adjudication"] == "reports/output_review_adjudication.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["python_compatibility"] == "reports/python_compatibility.md", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["architecture_maintainability"] == "reports/architecture_maintainability.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "benchmark_reproducibility.md").exists():
         assert full_payload["evidence_paths"]["benchmark_reproducibility"] == "reports/benchmark_reproducibility.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "skill_os2_coverage.md").exists():
@@ -367,8 +392,18 @@ def main() -> None:
     assert full_payload["evidence_paths"]["runtime_permissions"] == "reports/runtime_permission_probes.md", full_payload["evidence_paths"]
     assert full_payload["data"]["python_compatibility"]["summary"]["target_python"] == "3.11", full_payload["data"]["python_compatibility"]
     assert full_payload["data"]["python_compatibility"]["summary"]["issue_count"] == 0, full_payload["data"]["python_compatibility"]
+    assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] >= 3, full_payload["data"]["architecture_maintainability"]
+    assert full_payload["data"]["architecture_maintainability"]["summary"]["blocker_count"] == 0, full_payload["data"]["architecture_maintainability"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
-    assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
+    assert action_keys == {"output-lab", "architecture-maintainability", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
+    architecture_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "architecture-maintainability")
+    assert {item["path"] for item in architecture_action["source_refs"]} >= {
+        "reports/architecture_maintainability.md",
+        "scripts/yao.py",
+        "scripts/render_review_studio.py",
+        "scripts/render_review_viewer.py",
+    }, architecture_action
+    assert all(item["exists"] for item in architecture_action["source_refs"]), architecture_action
     world_class_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "world-class-evidence")
     assert {item["path"] for item in world_class_action["source_refs"]} >= {
         "reports/world_class_evidence_ledger.md",
@@ -489,6 +524,10 @@ def main() -> None:
     assert "Python 兼容" in html, html[:10000]
     assert "解释器边界" in html, html[:10000]
     assert "reports/python_compatibility.md" in html, html
+    assert "架构维护" in html, html
+    assert "Arch Debt" in html, html
+    assert "reports/architecture_maintainability.md" in html, html
+    assert "处理大文件和 CLI command surface 的维护性热点" in html, html
     assert "kv-grid" in html, html
     assert "案例数" in html, html
     assert "命令执行" in html, html
