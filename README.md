@@ -32,6 +32,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - three high-value next iteration directions after the first package is created
 - a lightweight feedback log that does not require a full promotion cycle
 - a local-first metadata-only adoption and drift report that turns real usage signals into next iteration candidates
+- a Skill Atlas drift layer that reads aggregate adoption reports and surfaces portfolio-level drift signals without packaging raw telemetry logs
 - a baseline compare report for with-skill vs baseline review
 - a conversation-style, archetype-aware quickstart that steers new packages toward scaffold, production, library, or governed fits
 - Skill IR as the platform-neutral semantic contract, plus compiler reports and client-specific adapters
@@ -406,7 +407,7 @@ Utility scripts that make the meta-skill operational:
 - `render_review_annotations.py`: records reviewer annotations tied to Review Studio gates, source/report paths, and optional line numbers, with open blocker annotations reflected in Review Studio decisions
 - `run_conformance_suite.py`: verifies runtime conformance for OpenAI, Claude, Agent Skills, VS Code/Copilot-style, and generic targets
 - `trust_check.py`: generates the trust/security report for scripts, dependencies, secret risk, bounded network host policy, execution-level `--help` smoke checks, permission inputs, trust metadata, and stable source-contract integrity
-- `build_skill_atlas.py`: builds the Skill Atlas catalog, route-overlap matrix, dependency graph, stale report, owner gaps, and HTML overview for a multi-skill workspace
+- `build_skill_atlas.py`: builds the Skill Atlas catalog, route-overlap matrix, dependency graph, stale report, owner gaps, aggregate drift signals, and HTML overview for a multi-skill workspace
 - `registry_audit.py`: builds registry package metadata and audits version, owner, license, checksum, Skill IR source, and compatibility matrix
 - `verify_package.py`: verifies generated package manifests, target adapters, zip archive safety, archive checksum, and registry parity
 - `simulate_install.py`: extracts a generated zip into a temporary skill root and verifies entrypoint, manifest, interface, reports, and adapters can be loaded

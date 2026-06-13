@@ -11,7 +11,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Output Eval Lab v0 for with-skill vs baseline assertion grading plus local command-runner execution evidence, blind A/B review pack, separate answer key evidence, and reviewer adjudication reporting.
 - Runtime Conformance v0 for target-consumption checks.
 - Trust/Security v0 for secret, dependency, script, bounded network host policy, execution-level CLI help smoke checks, trust metadata, and stable source-contract integrity checks.
-- Skill Atlas v0 for portfolio catalog, route overlap, stale ownership, dependency signals, and no-route opportunities.
+- Skill Atlas v0 for portfolio catalog, route overlap, stale ownership, dependency signals, aggregate drift signals, and no-route opportunities.
 - Bilingual Skill Overview v2 that includes these evidence surfaces.
 - Review Studio 2.0 v0 for one-page blocker, warning, evidence-path, review-action, and release-gate review.
 - Review Studio Source Refs v0 so every non-pass review action can expose structured relative source/report links with best-effort line numbers.
@@ -21,7 +21,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Package Verification v0 for generated manifest, target adapters, zip archive safety, archive checksum, and registry parity.
 - Install Simulation v0 for local extraction, entrypoint loading, interface loading, report presence, and adapter readability.
 - Upgrade Check v0 for registry package diffs, semver bump recommendations, breaking-change notes, and release evidence.
-- Adoption Drift v0 for local-first metadata-only telemetry, privacy-field blocking, usage-signal aggregation, and iteration candidate generation.
+- Adoption Drift v0 for local-first metadata-only telemetry, privacy-field blocking, usage-signal aggregation, iteration candidate generation, and Skill Atlas drift-signal input.
 - Review Waivers v0 for human warning acceptance with reviewer, reason, scope, expiry, and blocker-safe policy.
 - Governed Permission Gates v0 for reviewer-approved network, file-write, and subprocess capabilities with scope, reason, expiry, evidence, and target-enforcement mapping.
 - Runtime Permission Probes v0 for packaged target adapter checks, explicit native-enforcement flags, metadata fallback evidence, and residual permission risks.
@@ -31,7 +31,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Review Studio Output Lab actions now link directly to `reports/output_review_decisions.json`, so pending blind A/B reviewer decisions have a concrete template instead of only a general adjudication warning.
 - Provider Output Eval Runner v0 so `python3 scripts/yao.py output-exec --provider-runner openai` can collect real provider-backed model evidence through a reviewed OpenAI Responses API compatible runner instead of ad hoc shell glue.
 
-This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, and a provider-backed output runner exists. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
+This is still not the final world-class state. Target-native behavior contracts are now explicit, VS Code / Copilot package metadata is auditable, local output-eval command execution is wired, a provider-backed output runner exists, and Skill Atlas now consumes aggregate drift reports. Review Studio keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, real provider holdout runs, real human adjudication decisions, and native runtime permission enforcement remain open.
 
 ## Coverage Matrix
 
@@ -46,7 +46,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 | Review Studio 2.0 | `scripts/render_review_studio.py`, `reports/review-studio.html`, `reports/review-studio.json` with per-warning `review_actions` | v0 landed |
 | Review Studio Source Refs | `scripts/render_review_studio.py`, `tests/verify_review_studio.py`, `references/review-studio-method.md` | v0 landed |
 | Review Annotations | `scripts/render_review_annotations.py`, `reports/review_annotations.md`, `tests/verify_review_annotations.py`, Review Studio annotation panel and blocker decision hook | v0 landed |
-| Skill Atlas | `scripts/build_skill_atlas.py`, `skill_atlas/catalog.json`, `skill_atlas/route_overlap_matrix.csv`, `reports/skill_atlas.html` | v0 landed |
+| Skill Atlas | `scripts/build_skill_atlas.py`, `skill_atlas/catalog.json`, `skill_atlas/route_overlap_matrix.csv`, `skill_atlas/drift_signals.json`, `reports/skill_atlas.html` | v0 landed |
 | Registry & Distribution | `registry/*.schema.json`, `scripts/registry_audit.py`, `reports/registry_audit.md`, `registry/packages/yao-meta-skill.json` | v0 landed |
 | Package Verification | `scripts/verify_package.py`, `reports/package_verification.md`, `tests/verify_package_verification.py` | v0 landed |
 | Install Simulation | `scripts/simulate_install.py`, `reports/install_simulation.md`, `tests/verify_install_simulation.py` | v0 landed |
@@ -79,11 +79,11 @@ The Review Studio page aggregates intent, trigger, output, context, runtime, tru
 
 Next move: add richer source-line anchors inside generated reports and record real reviewer annotations during the next human review pass.
 
-### 4. Multi-skill operation now has v0 coverage, but needs real telemetry
+### 4. Multi-skill operation now links Atlas with drift, but needs real client capture
 
-The new Skill Atlas can scan a workspace and report catalog, route overlap, dependency graph, stale skill, missing owner/review metadata, and no-route opportunities. It now also supports `skill_atlas/policy.json` so release gates distinguish actionable library skills from examples and fixtures while keeping full visibility. Adoption Drift v0 can record metadata-only local events, block raw prompt/output fields, summarize missed-trigger, bad-output, script-error, and review-overdue signals, and feed next iteration candidates into Review Studio. It still needs real client-side capture instead of manual CLI event recording.
+The new Skill Atlas can scan a workspace and report catalog, route overlap, dependency graph, stale skill, missing owner/review metadata, aggregate drift signals, and no-route opportunities. It now also supports `skill_atlas/policy.json` so release gates distinguish actionable library skills from examples and fixtures while keeping full visibility. Adoption Drift v0 can record metadata-only local events, block raw prompt/output fields, summarize missed-trigger, bad-output, script-error, and review-overdue signals, feed next iteration candidates into Review Studio, and publish aggregate drift input for Atlas. It still needs real client-side capture instead of manual CLI event recording.
 
-Next move: connect client activations and failure history so Atlas can rank stale or conflicting skills by real usage impact.
+Next move: connect client activations and failure history so Atlas can rank stale, drifting, or conflicting skills by real usage impact.
 
 ### 5. Trust report is structural, not full security review
 
@@ -101,12 +101,12 @@ Next move: add real client or installer permission enforcement integration.
 | Trust | `0` secret findings, `1` pinned dependency file, `9` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `60 / 60` CLI help smoke checks passing across `69` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
-| Skill Atlas | `12` scanned skills, `1` actionable root skill, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `24` scoped non-actionable issue signals retained for visibility |
+| Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `493` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `493` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `494` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `494` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `0` failures, `0` warnings |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
-| Adoption Drift | `1` metadata-only activation event, `1` adoption sample, adoption `100.0`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
+| Adoption Drift | `1` metadata-only review event, `0` adoption samples, adoption `0`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
 | Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0 |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
 | Review Studio | decision `review`, world-class score `92`, `13` gates, `0` blockers, `2` warnings, `2` review actions, `0` open annotation blockers |
@@ -120,4 +120,4 @@ Next move: add real client or installer permission enforcement integration.
 2. Add native client or installer enforcement for approved high-permission capabilities.
 3. Run the new provider-backed output runner against holdout cases with real credentials, then record the current blind A/B decisions before claiming fully ready status.
 4. Add real reviewer annotation records during the next human review pass.
-5. Connect Skill Atlas with real client telemetry and drift history.
+5. Connect real client telemetry capture and failure history so Atlas drift signals are based on live usage, not manual samples.

@@ -12,6 +12,9 @@
     "actionable_stale_count": 0,
     "shared_resource_count": 0,
     "no_route_opportunity_count": 0,
+    "telemetry_report_count": 1,
+    "drift_signal_count": 0,
+    "actionable_drift_signal_count": 0,
     "non_actionable_issue_count": 24
   },
   "scope_policy": {
@@ -187,7 +190,16 @@
         ],
         "atlas_scope": "release",
         "actionable": true,
-        "scope_reason": "default release-actionable skill"
+        "scope_reason": "default release-actionable skill",
+        "telemetry": {
+          "report_present": true,
+          "report": "reports/adoption_drift_report.json",
+          "risk_band": "low",
+          "event_count": 1,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "release-orchestrator",
@@ -245,7 +257,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/complex-release-orchestrator/generated-skill/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "frontend-review",
@@ -284,7 +305,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/evolution-frontend-review/final/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "frontend-review",
@@ -307,7 +337,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/evolution-frontend-review/v0/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "frontend-review",
@@ -345,7 +384,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/evolution-frontend-review/v1/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "incident-command-governor",
@@ -386,7 +434,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/governed-incident-command/generated-skill/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "note-cleanup",
@@ -423,7 +480,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/simple-note-cleanup/generated-skill/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "frontend-review",
@@ -463,7 +529,16 @@
         ],
         "atlas_scope": "example",
         "actionable": false,
-        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package."
+        "scope_reason": "Generated examples and evolution snapshots are portfolio evidence, not release-actionable library skills for the root package.",
+        "telemetry": {
+          "report_present": false,
+          "report": "examples/team-frontend-review/generated-skill/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "geo-ranking-article-generator",
@@ -523,7 +598,16 @@
         ],
         "atlas_scope": "embedded-generated-skill",
         "actionable": false,
-        "scope_reason": "This nested generated skill is retained as local evidence and should not gate the root Meta Skill release."
+        "scope_reason": "This nested generated skill is retained as local evidence and should not gate the root Meta Skill release.",
+        "telemetry": {
+          "report_present": false,
+          "report": "geo-ranking-article-generator/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "invalid-governance-skill",
@@ -545,7 +629,16 @@
         ],
         "atlas_scope": "test-fixture",
         "actionable": false,
-        "scope_reason": "Fixtures intentionally include invalid or broken skills to verify validators and packagers."
+        "scope_reason": "Fixtures intentionally include invalid or broken skills to verify validators and packagers.",
+        "telemetry": {
+          "report_present": false,
+          "report": "tests/fixtures/governance_invalid_manifest/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "broken-yaml-skill",
@@ -569,7 +662,16 @@
         ],
         "atlas_scope": "test-fixture",
         "actionable": false,
-        "scope_reason": "Fixtures intentionally include invalid or broken skills to verify validators and packagers."
+        "scope_reason": "Fixtures intentionally include invalid or broken skills to verify validators and packagers.",
+        "telemetry": {
+          "report_present": false,
+          "report": "tests/fixtures/package_invalid_yaml/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       },
       {
         "name": "broken-skill",
@@ -592,7 +694,16 @@
         ],
         "atlas_scope": "test-fixture",
         "actionable": false,
-        "scope_reason": "Fixtures intentionally include invalid or broken skills to verify validators and packagers."
+        "scope_reason": "Fixtures intentionally include invalid or broken skills to verify validators and packagers.",
+        "telemetry": {
+          "report_present": false,
+          "report": "tests/fixtures/package_missing_interface_field/reports/adoption_drift_report.json",
+          "risk_band": "missing",
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
+          "candidate_count": 0
+        }
       }
     ],
     "summary": {
@@ -606,6 +717,9 @@
       "actionable_stale_count": 0,
       "shared_resource_count": 0,
       "no_route_opportunity_count": 0,
+      "telemetry_report_count": 1,
+      "drift_signal_count": 0,
+      "actionable_drift_signal_count": 0,
       "non_actionable_issue_count": 24
     }
   },
@@ -896,6 +1010,8 @@
     }
   ],
   "actionable_owner_review_gaps": [],
+  "drift_signals": [],
+  "actionable_drift_signals": [],
   "no_route_opportunities": [],
   "artifacts": {
     "catalog": "skill_atlas/catalog.json",
@@ -903,6 +1019,7 @@
     "dependency_graph": "skill_atlas/dependency_graph.json",
     "stale_skills": "skill_atlas/stale_skills.json",
     "owner_review_gaps": "skill_atlas/owner_review_gaps.json",
+    "drift_signals": "skill_atlas/drift_signals.json",
     "no_route_opportunities": "skill_atlas/no_route_opportunities.json",
     "report_json": "reports/skill_atlas.json",
     "report_html": "reports/skill_atlas.html"

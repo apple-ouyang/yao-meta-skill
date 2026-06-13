@@ -327,7 +327,8 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
     )
     actionable_owner_gaps = int(atlas_summary.get("actionable_owner_gap_count", atlas_summary.get("owner_gap_count", 0)) or 0)
     actionable_stale = int(atlas_summary.get("actionable_stale_count", atlas_summary.get("stale_count", 0)) or 0)
-    atlas_issues = actionable_route_collisions + actionable_owner_gaps + actionable_stale
+    actionable_drift = int(atlas_summary.get("actionable_drift_signal_count", atlas_summary.get("drift_signal_count", 0)) or 0)
+    atlas_issues = actionable_route_collisions + actionable_owner_gaps + actionable_stale + actionable_drift
     if not atlas:
         atlas_status = "warn"
         atlas_detail = "skill atlas is missing; portfolio-level conflicts are unknown"
@@ -339,6 +340,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             f"{actionable_route_collisions} actionable route collisions; "
             f"{actionable_owner_gaps} actionable owner gaps; "
             f"{actionable_stale} actionable stale; "
+            f"{actionable_drift} actionable drift; "
             f"{atlas_summary.get('non_actionable_issue_count', 0)} scoped non-actionable issues"
         )
     gates.append(

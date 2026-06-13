@@ -54,7 +54,12 @@ Package builders should exclude `reports/telemetry_events.jsonl`. The root repos
 4. Convert bad outputs into Output Eval assertions and failure taxonomy entries.
 5. Convert script errors into non-interactive smoke tests.
 6. Feed review-overdue signals back into Skill Atlas and owner review.
+7. Let Skill Atlas read only `reports/adoption_drift_report.json` and publish portfolio-level `skill_atlas/drift_signals.json`.
 
 ## Review Studio Role
 
 Review Studio should show the aggregate telemetry gate as an operating loop, not as raw logs. A blocker means the telemetry contract was violated. A warning means the evidence is absent or the drift signal needs a follow-up case.
+
+## Skill Atlas Role
+
+Skill Atlas uses aggregate adoption drift reports to rank portfolio work. It should surface no-data warnings for actionable production/library/governed skills, and drift warnings for missed triggers, wrong triggers, bad outputs, missing resources, script errors, and review-overdue counts. It must not inspect raw JSONL telemetry or use non-actionable example/fixture signals as release blockers.

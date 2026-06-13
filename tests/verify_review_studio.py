@@ -276,6 +276,7 @@ def main() -> None:
     atlas_gate = next(item for item in payload["gates"] if item["key"] == "skill-atlas")
     assert atlas_gate["status"] == "pass", atlas_gate
     assert "actionable route collisions" in atlas_gate["detail"], atlas_gate
+    assert "actionable drift" in atlas_gate["detail"], atlas_gate
     operations_gate = next(item for item in payload["gates"] if item["key"] == "operations-loop")
     assert operations_gate["status"] == "pass", operations_gate
     assert "metadata events" in operations_gate["detail"], operations_gate
@@ -307,6 +308,7 @@ def main() -> None:
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "review-waivers"}, full_payload["review_actions"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
+    assert full_payload["data"]["atlas"]["summary"]["actionable_drift_signal_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["non_actionable_issue_count"] >= 1, full_payload["data"]["atlas"]
     synthetic_actions = review_studio.build_review_actions(
         [
