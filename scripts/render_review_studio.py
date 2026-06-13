@@ -138,6 +138,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "world_class_evidence_plan": "reports/world_class_evidence_plan.md",
         "world_class_evidence_ledger": "reports/world_class_evidence_ledger.md",
         "world_class_evidence_intake": "reports/world_class_evidence_intake.md",
+        "world_class_claim_guard": "reports/world_class_claim_guard.md",
         "registry_audit": "reports/registry_audit.md",
         "package_verification": "reports/package_verification.md",
         "install_simulation": "reports/install_simulation.md",
@@ -172,6 +173,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "review_annotations": load_json(reports / "review_annotations.json"),
         "world_class_evidence_ledger": load_json(reports / "world_class_evidence_ledger.json"),
         "world_class_evidence_intake": load_json(reports / "world_class_evidence_intake.json"),
+        "world_class_claim_guard": load_json(reports / "world_class_claim_guard.json"),
         "registry": load_json(reports / "registry_audit.json"),
         "package_verification": load_json(reports / "package_verification.json"),
         "install_simulation": load_json(reports / "install_simulation.json"),
@@ -198,6 +200,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     waivers = data["review_waivers"].get("summary", {})
     annotations = data["review_annotations"].get("summary", {})
     intake = data["world_class_evidence_intake"].get("summary", {})
+    claim_guard = data["world_class_claim_guard"].get("summary", {})
     registry = data["registry"].get("package", {})
     package_verification = data["package_verification"].get("summary", {})
     install_simulation = data["install_simulation"].get("summary", {})
@@ -279,6 +282,11 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
                 f"{intake.get('valid_submission_count', 0)} valid submissions; "
                 f"{intake.get('invalid_submission_count', 0)} invalid"
             ),
+        },
+        {
+            "label": "Claim Guard",
+            "value": str(claim_guard.get("violation_count", 0)),
+            "detail": f"{claim_guard.get('claim_surface_count', 0)} public surfaces scanned",
         },
         {
             "label": "Notes",
@@ -485,6 +493,7 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
             {"path": "reports/world_class_evidence_ledger.md", "label": "world-class evidence ledger", "kind": "report", "patterns": ["# World-Class Evidence Ledger"]},
             {"path": "reports/world_class_evidence_plan.md", "label": "world-class evidence plan", "kind": "report", "patterns": ["# World-Class Evidence Plan"]},
             {"path": "reports/world_class_evidence_intake.md", "label": "world-class evidence intake", "kind": "report", "patterns": ["# World-Class Evidence Intake"]},
+            {"path": "reports/world_class_claim_guard.md", "label": "world-class claim guard", "kind": "report", "patterns": ["# World-Class Claim Guard"]},
             {"path": "evidence/world_class/intake.schema.json", "label": "evidence intake schema", "kind": "schema", "patterns": ["Yao World-Class Evidence Intake"]},
             {"path": "evidence/world_class/templates/provider-holdout.intake.json", "label": "provider intake template", "kind": "template", "patterns": ["provider-holdout"]},
             {"path": "evidence/world_class/templates/human-adjudication.intake.json", "label": "human intake template", "kind": "template", "patterns": ["human-adjudication"]},
@@ -710,6 +719,7 @@ def render_html(report: dict[str, Any]) -> str:
     world_class_ledger = report["data"].get("world_class_evidence_ledger", {})
     world_class_summary = world_class_ledger.get("summary", {})
     world_class_intake_summary = report["data"].get("world_class_evidence_intake", {}).get("summary", {})
+    world_class_claim_summary = report["data"].get("world_class_claim_guard", {}).get("summary", {})
     world_class_entries_html = render_world_class_evidence_entries(world_class_ledger)
     annotation_summary = report["data"]["review_annotations"].get("summary", {})
     annotation_caption = (
@@ -843,6 +853,17 @@ def render_html(report: dict[str, Any]) -> str:
             "ready_to_claim_world_class",
         ],
         "world-class evidence intake missing",
+    )
+    world_class_claim_panel = render_kv_grid(
+        world_class_claim_summary,
+        [
+            "ledger_ready_to_claim_world_class",
+            "ledger_pending_count",
+            "claim_surface_count",
+            "violation_count",
+            "overclaim_guard_active",
+        ],
+        "world-class claim guard missing",
     )
     registry_panel = render_kv_grid(
         registry_package_summary(registry_package),
@@ -1030,6 +1051,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section class="twocol">
       <div class="panel"><h2>证据入口</h2>{world_class_intake_panel}</div>
       <div class="panel"><h2>入口边界</h2><p>intake 只校验证据包格式、来源、隐私和反过度声明；只有 ledger 看到真实 provider、真人、原生权限或真实客户端结果后，world-class 才能进入完成审计。</p></div>
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>声明守卫</h2>{world_class_claim_panel}</div>
+      <div class="panel"><h2>声明边界</h2><p>claim guard 扫描 README、docs 和 reports 中的完成态表述；ledger 未 ready 时，任何英文完成断言、true 状态声明或中文完成态都会阻断发布审查。</p></div>
     </section>
 
     <section id="registry" class="twocol">

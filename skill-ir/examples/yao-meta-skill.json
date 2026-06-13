@@ -160,6 +160,7 @@
       "scripts/render_social_preview.py",
       "scripts/render_system_model.py",
       "scripts/render_telemetry_hook_recipes.py",
+      "scripts/render_world_class_claim_guard.py",
       "scripts/render_world_class_evidence_intake.py",
       "scripts/render_world_class_evidence_ledger.py",
       "scripts/render_world_class_evidence_plan.py",
@@ -186,8 +187,7 @@
       "scripts/verify_package.py",
       "scripts/yao.py",
       "scripts/yao_cli_config.py",
-      "scripts/yao_cli_parser.py",
-      "scripts/yao_cli_telemetry.py"
+      "scripts/yao_cli_parser.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",

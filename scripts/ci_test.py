@@ -53,6 +53,7 @@ DEFAULT_TARGETS = [
     "world-class-evidence-check",
     "world-class-ledger-check",
     "world-class-intake-check",
+    "world-class-claim-guard-check",
     "benchmark-reproducibility-check",
     "feedback-check",
     "adoption-drift-check",

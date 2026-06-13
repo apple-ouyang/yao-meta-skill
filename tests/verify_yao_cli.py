@@ -78,6 +78,7 @@ def main() -> None:
     assert "world-class-evidence" in parser_help, parser_help
     assert "world-class-ledger" in parser_help, parser_help
     assert "world-class-intake" in parser_help, parser_help
+    assert "world-class-claim-guard" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
     assert "telemetry-emit" in parser_help, parser_help
@@ -225,6 +226,21 @@ def main() -> None:
     assert world_class_intake_result["payload"]["summary"]["template_pass_count"] == 4, world_class_intake_result
     assert world_class_intake_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_intake_result
     assert world_class_ledger_result["payload"]["summary"]["ready_to_claim_world_class"] is False, world_class_ledger_result
+
+    world_class_claim_guard_result = run(
+        "world-class-claim-guard",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "world_class_claim_guard.json"),
+        "--output-md",
+        str(tmp_root / "world_class_claim_guard.md"),
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert world_class_claim_guard_result["ok"], world_class_claim_guard_result
+    assert world_class_claim_guard_result["payload"]["summary"]["decision"] == "claim-guard-pass-evidence-pending", world_class_claim_guard_result
+    assert world_class_claim_guard_result["payload"]["summary"]["violation_count"] == 0, world_class_claim_guard_result
+    assert world_class_claim_guard_result["payload"]["summary"]["ledger_pending_count"] == 4, world_class_claim_guard_result
 
     benchmark_reproducibility_result = run(
         "benchmark-reproducibility",
@@ -650,6 +666,7 @@ def main() -> None:
     assert "world_class_evidence_plan" in report_result["payload"]["artifacts"], report_result
     assert "world_class_evidence_ledger" in report_result["payload"]["artifacts"], report_result
     assert "world_class_evidence_intake" in report_result["payload"]["artifacts"], report_result
+    assert "world_class_claim_guard" in report_result["payload"]["artifacts"], report_result
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
     assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))

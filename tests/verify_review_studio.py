@@ -223,6 +223,7 @@ def main() -> None:
         "render_world_class_evidence_plan.py",
         "render_world_class_evidence_ledger.py",
         "render_world_class_evidence_intake.py",
+        "render_world_class_claim_guard.py",
         "render_skill_os2_coverage.py",
     ]:
         subprocess.run(
@@ -335,6 +336,8 @@ def main() -> None:
         assert full_payload["evidence_paths"]["world_class_evidence_ledger"] == "reports/world_class_evidence_ledger.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_intake.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_intake"] == "reports/world_class_evidence_intake.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_claim_guard.md").exists():
+        assert full_payload["evidence_paths"]["world_class_claim_guard"] == "reports/world_class_claim_guard.md", full_payload["evidence_paths"]
     assert full_payload["data"]["output_blind_review"]["summary"]["pair_count"] == 5, full_payload["data"]["output_blind_review"]
     assert full_payload["data"]["output_execution"]["summary"]["command_executed_count"] == 10, full_payload["data"]["output_execution"]
     assert full_payload["data"]["output_execution"]["summary"]["recorded_fixture_count"] == 0, full_payload["data"]["output_execution"]
@@ -355,6 +358,7 @@ def main() -> None:
         "reports/world_class_evidence_ledger.md",
         "reports/world_class_evidence_plan.md",
         "reports/world_class_evidence_intake.md",
+        "reports/world_class_claim_guard.md",
         "evidence/world_class/intake.schema.json",
         "evidence/world_class/templates/provider-holdout.intake.json",
         "evidence/world_class/templates/human-adjudication.intake.json",
@@ -365,6 +369,9 @@ def main() -> None:
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["template_pass_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["ready_to_claim_world_class"] is False, full_payload["data"]["world_class_evidence_intake"]
+    assert full_payload["data"]["world_class_claim_guard"]["summary"]["decision"] == "claim-guard-pass-evidence-pending", full_payload["data"]["world_class_claim_guard"]
+    assert full_payload["data"]["world_class_claim_guard"]["summary"]["violation_count"] == 0, full_payload["data"]["world_class_claim_guard"]
+    assert full_payload["data"]["world_class_claim_guard"]["summary"]["ledger_pending_count"] == 4, full_payload["data"]["world_class_claim_guard"]
     if full_payload["data"]["skill_os2_coverage"]:
         assert full_payload["data"]["skill_os2_coverage"]["summary"]["local_blueprint_ready"] is True, full_payload["data"]["skill_os2_coverage"]
         assert full_payload["data"]["skill_os2_coverage"]["summary"]["public_world_class_ready"] is False, full_payload["data"]["skill_os2_coverage"]
@@ -427,8 +434,12 @@ def main() -> None:
     assert "证据台账" in html, html
     assert "证据入口" in html, html
     assert "入口边界" in html, html
+    assert "声明守卫" in html, html
+    assert "声明边界" in html, html
     assert "intake 只校验证据包格式、来源、隐私和反过度声明" in html, html
     assert "reports/world_class_evidence_intake.md" in html, html
+    assert "reports/world_class_claim_guard.md" in html, html
+    assert "英文完成断言、true 状态声明或中文完成态" in html, html
     assert "world-evidence-grid" in html, html
     assert "Provider Holdout" in html, html
     assert "Native Permission Enforcement" in html, html

@@ -3,13 +3,12 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "60995ed569b1c99aa6f6ae2b4406e04327202beb",
+  "commit": "c1c85093d1ea67954d414789f96c87bbc3964868",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 56,
+    "changed_file_count": 42,
     "sample": [
-      " M .gitignore",
       " M Makefile",
       " M README.md",
       " M registry/index.json",
@@ -20,17 +19,18 @@
       " M reports/context_budget.json",
       " M reports/install_simulation.json",
       " M reports/output_execution_runs.json",
-      " M reports/output_execution_runs.md"
+      " M reports/output_execution_runs.md",
+      " M reports/package_verification.json"
     ]
   },
   "summary": {
     "reproducibility_ready": true,
     "methodology_complete": true,
-    "required_artifact_count": 18,
+    "required_artifact_count": 19,
     "missing_artifact_count": 0,
     "output_case_count": 5,
     "failure_disclosure_count": 3,
-    "command_count": 17,
+    "command_count": 18,
     "command_executed_count": 10,
     "timing_observed_count": 10,
     "model_executed_count": 0,
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 56
+    "changed_file_count": 42
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -115,8 +115,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7967,
-      "sha256": "8c40546b610c75ebb6dcee431cec4f603431c0c45ff49dcdc947473749c2f03e"
+      "bytes": 7966,
+      "sha256": "5a1eaa33c1cb916aa0962a9e826e97fc53fd9ca9bd6aa298ff91aa2068ff3415"
     },
     {
       "label": "blind_review",
@@ -150,36 +150,36 @@
       "label": "trust_report",
       "path": "reports/security_trust_report.json",
       "exists": true,
-      "bytes": 85082,
-      "sha256": "097f2a477efcc62b35ec8e94e2b800f7af6c207ad36fa096257972d0865a9dce"
+      "bytes": 86196,
+      "sha256": "1faacec874dd129b1d03cd53f93ee0abcb77fe6b5fbac7ab9726da23699ff4c1"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "5c606b5a3b54bbdc814dc67a331d1c66756a9be25d16791bc53dd21ef19e07ec"
+      "sha256": "c796a29122c32df656421f25eb2fa13726c7dffd85c676d9c9218673777cb18c"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "8dab6035e72ceda3756677d1ffa60aa7ad862c1af311899bb8a8dab198b750d7"
+      "sha256": "224f5f71478530766baac79902cf19da4abb800e256273168fbd9e51d763ff4d"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
       "bytes": 8557,
-      "sha256": "3b1456caa214bb0056943e110dbd0b2182faa5068b3a8fdb4272e9d8b38f759a"
+      "sha256": "ae7cccad47924b9f4e2572ae32a9f68209dead4741c982d81446d8ea8474b822"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 13946,
-      "sha256": "5b7c9427a3403d989651fad9cfe38e9dc2c859513fb6c3bd7a5574a7656883a2"
+      "sha256": "3f1c6fdf7b52a365d9f458797a444b70aa34acffe78f24b4c08b4a428db5e32b"
     },
     {
       "label": "world_class_evidence_plan",
@@ -201,6 +201,13 @@
       "exists": true,
       "bytes": 1775,
       "sha256": "124b9239d7f35022735090712aadf2bf1d4dfba28f6bcf18f956fa0a73fe4482"
+    },
+    {
+      "label": "world_class_claim_guard",
+      "path": "reports/world_class_claim_guard.json",
+      "exists": true,
+      "bytes": 7809,
+      "sha256": "7365f6cd85b89326816590cd2403b1210e9afba45f0bc3ca1af6b4a07299b9ad"
     }
   ],
   "missing_artifacts": [],
@@ -284,6 +291,11 @@
       "label": "world-class evidence intake",
       "command": "python3 scripts/yao.py world-class-intake .",
       "evidence": "reports/world_class_evidence_intake.json"
+    },
+    {
+      "label": "world-class claim guard",
+      "command": "python3 scripts/yao.py world-class-claim-guard .",
+      "evidence": "reports/world_class_claim_guard.json"
     },
     {
       "label": "full ci",

@@ -183,6 +183,17 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_intake_cmd.add_argument("--generated-at")
     world_class_intake_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_intake"))
 
+    world_class_claim_guard_cmd = subparsers.add_parser(
+        "world-class-claim-guard",
+        help="Scan public claim surfaces for premature world-class completion claims.",
+    )
+    world_class_claim_guard_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_claim_guard_cmd.add_argument("--claim-surface", action="append", default=[])
+    world_class_claim_guard_cmd.add_argument("--output-json")
+    world_class_claim_guard_cmd.add_argument("--output-md")
+    world_class_claim_guard_cmd.add_argument("--generated-at")
+    world_class_claim_guard_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_claim_guard"))
+
     benchmark_reproducibility_cmd = subparsers.add_parser(
         "benchmark-reproducibility",
         help="Render benchmark methodology, artifact, failure-disclosure, and reproduction-command evidence.",
