@@ -79,6 +79,7 @@
         "scripts/render_world_class_evidence_intake.py",
         "scripts/render_world_class_evidence_ledger.py",
         "scripts/render_world_class_evidence_plan.py",
+        "scripts/render_world_class_submission_review.py",
         "scripts/resource_boundary_check.py",
         "scripts/review_studio_data.py",
         "scripts/review_studio_formatting.py",

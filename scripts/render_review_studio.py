@@ -264,11 +264,12 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
     "world-class-evidence": {
         "summary": "补齐 provider、真人盲评、原生权限执行和真实客户端遥测证据，或明确本次发布不声明 world-class 完成。",
         "why": "世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。",
-        "source_fix": "reports/world_class_evidence_ledger.md + reports/world_class_evidence_plan.md + reports/world_class_evidence_intake.md",
+        "source_fix": "reports/world_class_evidence_ledger.md + reports/world_class_evidence_plan.md + reports/world_class_evidence_intake.md + reports/world_class_submission_review.md",
         "source_paths": [
             {"path": "reports/world_class_evidence_ledger.md", "label": "world-class evidence ledger", "kind": "report", "patterns": ["# World-Class Evidence Ledger"]},
             {"path": "reports/world_class_evidence_plan.md", "label": "world-class evidence plan", "kind": "report", "patterns": ["# World-Class Evidence Plan"]},
             {"path": "reports/world_class_evidence_intake.md", "label": "world-class evidence intake", "kind": "report", "patterns": ["# World-Class Evidence Intake"]},
+            {"path": "reports/world_class_submission_review.md", "label": "world-class submission review", "kind": "report", "patterns": ["# World-Class Submission Review"]},
             {"path": "reports/world_class_claim_guard.md", "label": "world-class claim guard", "kind": "report", "patterns": ["# World-Class Claim Guard"]},
             {"path": "evidence/world_class/intake.schema.json", "label": "evidence intake schema", "kind": "schema", "patterns": ["Yao World-Class Evidence Intake"]},
             {"path": "evidence/world_class/templates/provider-holdout.intake.json", "label": "provider intake template", "kind": "template", "patterns": ["provider-holdout"]},
@@ -278,7 +279,7 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
             {"path": "reports/runtime_permission_probes.md", "label": "runtime permission probes", "kind": "report", "patterns": ["# Runtime"]},
             {"path": "reports/adoption_drift_report.md", "label": "adoption drift", "kind": "report", "patterns": ["# Adoption"]},
         ],
-        "verification": "python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py review-studio .",
+        "verification": "python3 scripts/yao.py world-class-submission-review . && python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py review-studio .",
     },
     "registry-audit": {
         "summary": "补齐 registry package metadata、checksum、license、owner、review cadence 和 install evidence。",
@@ -887,11 +888,9 @@ def main() -> None:
     parser.add_argument("--output-html")
     parser.add_argument("--output-json")
     args = parser.parse_args()
-    payload = render_review_studio(
-        Path(args.skill_dir),
-        output_html=Path(args.output_html).resolve() if args.output_html else None,
-        output_json=Path(args.output_json).resolve() if args.output_json else None,
-    )
+    output_html = Path(args.output_html).resolve() if args.output_html else None
+    output_json = Path(args.output_json).resolve() if args.output_json else None
+    payload = render_review_studio(Path(args.skill_dir), output_html=output_html, output_json=output_json)
     print(json.dumps(payload, ensure_ascii=False, indent=2))
 
 

@@ -204,6 +204,7 @@
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
+            "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -223,8 +224,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/sync_local_install.py",
-            "scripts/telemetry_native_host.py",
-            "scripts/trigger_eval.py"
+            "scripts/telemetry_native_host.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -383,7 +383,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 61,
+              "script_count": 62,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -436,6 +436,7 @@
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
                 "scripts/render_world_class_evidence_plan.py",
+                "scripts/render_world_class_submission_review.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -484,14 +485,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 74,
+            "checked_count": 75,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 61,
+            "file_write_script_count": 62,
             "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -513,7 +514,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 61,
+            "file_write": 62,
             "subprocess": 9,
             "interactive": 0
           },
@@ -626,7 +627,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 61,
+            "script_count": 62,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -679,6 +680,7 @@
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
               "scripts/render_world_class_evidence_plan.py",
+              "scripts/render_world_class_submission_review.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -727,14 +729,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 74,
+          "checked_count": 75,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 61,
+          "file_write_script_count": 62,
           "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -754,7 +756,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 61,
+          "file_write": 62,
           "subprocess": 9,
           "interactive": 0
         },
@@ -1047,6 +1049,7 @@
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
+            "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -1066,8 +1069,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/sync_local_install.py",
-            "scripts/telemetry_native_host.py",
-            "scripts/trigger_eval.py"
+            "scripts/telemetry_native_host.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1226,7 +1228,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 61,
+              "script_count": 62,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -1279,6 +1281,7 @@
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
                 "scripts/render_world_class_evidence_plan.py",
+                "scripts/render_world_class_submission_review.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -1327,14 +1330,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 74,
+            "checked_count": 75,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 61,
+            "file_write_script_count": 62,
             "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -1356,7 +1359,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 61,
+            "file_write": 62,
             "subprocess": 9,
             "interactive": 0
           },
@@ -1469,7 +1472,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 61,
+            "script_count": 62,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -1522,6 +1525,7 @@
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
               "scripts/render_world_class_evidence_plan.py",
+              "scripts/render_world_class_submission_review.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -1570,14 +1574,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 74,
+          "checked_count": 75,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 61,
+          "file_write_script_count": 62,
           "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -1597,7 +1601,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 61,
+          "file_write": 62,
           "subprocess": 9,
           "interactive": 0
         },
@@ -1890,6 +1894,7 @@
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
+            "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -1909,8 +1914,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/sync_local_install.py",
-            "scripts/telemetry_native_host.py",
-            "scripts/trigger_eval.py"
+            "scripts/telemetry_native_host.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2069,7 +2073,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 61,
+              "script_count": 62,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -2122,6 +2126,7 @@
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
                 "scripts/render_world_class_evidence_plan.py",
+                "scripts/render_world_class_submission_review.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -2170,14 +2175,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 74,
+            "checked_count": 75,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 61,
+            "file_write_script_count": 62,
             "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -2199,7 +2204,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 61,
+            "file_write": 62,
             "subprocess": 9,
             "interactive": 0
           },
@@ -2305,7 +2310,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 61,
+            "script_count": 62,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -2358,6 +2363,7 @@
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
               "scripts/render_world_class_evidence_plan.py",
+              "scripts/render_world_class_submission_review.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -2406,14 +2412,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 74,
+          "checked_count": 75,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 61,
+          "file_write_script_count": 62,
           "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -2433,7 +2439,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 61,
+          "file_write": 62,
           "subprocess": 9,
           "interactive": 0
         },
@@ -2717,6 +2723,7 @@
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
+            "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -2736,8 +2743,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/sync_local_install.py",
-            "scripts/telemetry_native_host.py",
-            "scripts/trigger_eval.py"
+            "scripts/telemetry_native_host.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2896,7 +2902,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 61,
+              "script_count": 62,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -2949,6 +2955,7 @@
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
                 "scripts/render_world_class_evidence_plan.py",
+                "scripts/render_world_class_submission_review.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -2997,14 +3004,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 74,
+            "checked_count": 75,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 61,
+            "file_write_script_count": 62,
             "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -3026,7 +3033,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 61,
+            "file_write": 62,
             "subprocess": 9,
             "interactive": 0
           },
@@ -3132,7 +3139,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 61,
+            "script_count": 62,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -3185,6 +3192,7 @@
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
               "scripts/render_world_class_evidence_plan.py",
+              "scripts/render_world_class_submission_review.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -3233,14 +3241,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 74,
+          "checked_count": 75,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 61,
+          "file_write_script_count": 62,
           "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -3260,7 +3268,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 61,
+          "file_write": 62,
           "subprocess": 9,
           "interactive": 0
         },
@@ -3544,6 +3552,7 @@
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
+            "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_data.py",
             "scripts/review_studio_formatting.py",
@@ -3563,8 +3572,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/sync_local_install.py",
-            "scripts/telemetry_native_host.py",
-            "scripts/trigger_eval.py"
+            "scripts/telemetry_native_host.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -3723,7 +3731,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 61,
+              "script_count": 62,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/build_confusion_matrix.py",
@@ -3776,6 +3784,7 @@
                 "scripts/render_world_class_evidence_intake.py",
                 "scripts/render_world_class_evidence_ledger.py",
                 "scripts/render_world_class_evidence_plan.py",
+                "scripts/render_world_class_submission_review.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
                 "scripts/run_output_eval.py",
@@ -3824,14 +3833,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 74,
+            "checked_count": 75,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 61,
+            "file_write_script_count": 62,
             "subprocess_script_count": 9,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -3853,7 +3862,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 61,
+            "file_write": 62,
             "subprocess": 9,
             "interactive": 0
           },
@@ -3963,7 +3972,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 61,
+            "script_count": 62,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/build_confusion_matrix.py",
@@ -4016,6 +4025,7 @@
               "scripts/render_world_class_evidence_intake.py",
               "scripts/render_world_class_evidence_ledger.py",
               "scripts/render_world_class_evidence_plan.py",
+              "scripts/render_world_class_submission_review.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
               "scripts/run_output_eval.py",
@@ -4064,14 +4074,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 74,
+          "checked_count": 75,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 61,
+          "file_write_script_count": 62,
           "subprocess_script_count": 9,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -4091,7 +4101,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 61,
+          "file_write": 62,
           "subprocess": 9,
           "interactive": 0
         },

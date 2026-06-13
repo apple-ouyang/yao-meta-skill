@@ -243,6 +243,7 @@ def main() -> None:
         "render_world_class_evidence_plan.py",
         "render_world_class_evidence_ledger.py",
         "render_world_class_evidence_intake.py",
+        "render_world_class_submission_review.py",
         "render_world_class_claim_guard.py",
         "render_skill_os2_coverage.py",
     ]:
@@ -374,6 +375,8 @@ def main() -> None:
         assert full_payload["evidence_paths"]["world_class_evidence_ledger"] == "reports/world_class_evidence_ledger.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_intake.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_intake"] == "reports/world_class_evidence_intake.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "world_class_submission_review.md").exists():
+        assert full_payload["evidence_paths"]["world_class_submission_review"] == "reports/world_class_submission_review.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_claim_guard.md").exists():
         assert full_payload["evidence_paths"]["world_class_claim_guard"] == "reports/world_class_claim_guard.md", full_payload["evidence_paths"]
     assert full_payload["data"]["output_blind_review"]["summary"]["pair_count"] == 5, full_payload["data"]["output_blind_review"]
@@ -407,6 +410,7 @@ def main() -> None:
         "reports/world_class_evidence_ledger.md",
         "reports/world_class_evidence_plan.md",
         "reports/world_class_evidence_intake.md",
+        "reports/world_class_submission_review.md",
         "reports/world_class_claim_guard.md",
         "evidence/world_class/intake.schema.json",
         "evidence/world_class/templates/provider-holdout.intake.json",
@@ -414,8 +418,12 @@ def main() -> None:
         "reports/skill_os2_audit.md",
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
+    assert "world-class-submission-review" in world_class_action["verification_command"], world_class_action
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
+    assert full_payload["data"]["world_class_submission_review"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_submission_review"]
+    assert full_payload["data"]["world_class_submission_review"]["summary"]["review_counts_submission_as_completion"] is False, full_payload["data"]["world_class_submission_review"]
+    assert full_payload["data"]["world_class_submission_review"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["template_pass_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["operator_checklist_count"] == 4, full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["operator_checklist_ready_count"] == 0, full_payload["data"]["world_class_evidence_intake"]

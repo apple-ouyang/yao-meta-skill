@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `175`
-- Scripts: `91`
+- Scanned files: `176`
+- Scripts: `92`
 - Internal script modules: `17`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `61`
+- File-write scripts: `62`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `74`
+- CLI help smoke checked: `75`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `175`
-- Package SHA256: `4871c36233a53615c8e19c1c59449af60e732fff2d389742ca510422d7cbac75`
+- Package hash files: `176`
+- Package SHA256: `68a0228b56de8c9e9e94d64d7c1e386bf3dff55c0f6228b65f91e75d02525926`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `74`
-- Passed scripts: `74`
+- Checked scripts: `75`
+- Passed scripts: `75`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -121,6 +121,7 @@
 | scripts/render_world_class_evidence_intake.py | cli | True | True | True | False | False | True | False | Validates world-class human and external evidence intake packets before ledger review. |
 | scripts/render_world_class_evidence_ledger.py | cli | True | True | True | False | False | True | False | Renders a machine-checkable ledger for world-class external and human evidence gaps. |
 | scripts/render_world_class_evidence_plan.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_world_class_submission_review.py | cli | True | True | True | False | False | True | False | Renders a read-only review queue for world-class evidence submissions before ledger acceptance. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/review_studio_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to load Review Studio source reports and metric cards. |
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |

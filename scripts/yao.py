@@ -35,6 +35,7 @@ from yao_cli_report_commands import (
     command_world_class_intake,
     command_world_class_ledger,
     command_world_class_submission_kit,
+    command_world_class_submission_review,
 )
 from yao_cli_runtime import ROOT, run_script
 from yao_cli_telemetry import add_telemetry_args, maybe_record_cli_event

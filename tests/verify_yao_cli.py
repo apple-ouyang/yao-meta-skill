@@ -86,6 +86,7 @@ def main() -> None:
     assert "world-class-ledger" in parser_help, parser_help
     assert "world-class-intake" in parser_help, parser_help
     assert "world-class-submission-kit" in parser_help, parser_help
+    assert "world-class-submission-review" in parser_help, parser_help
     assert "world-class-claim-guard" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
     assert "telemetry-import" in parser_help, parser_help
@@ -293,6 +294,25 @@ def main() -> None:
     assert world_class_submission_kit_result["payload"]["summary"]["drafts_count_as_evidence"] is False, world_class_submission_kit_result
     assert (tmp_root / "world_class_submission_kit" / "provider-holdout.json").exists(), world_class_submission_kit_result
     assert (tmp_root / "world_class_submission_kit" / "submission_manifest.json").exists(), world_class_submission_kit_result
+
+    world_class_submission_review_result = run(
+        "world-class-submission-review",
+        str(ROOT),
+        "--submissions-dir",
+        str(tmp_root / "world_class_submission_kit"),
+        "--output-json",
+        str(tmp_root / "world_class_submission_review.json"),
+        "--output-md",
+        str(tmp_root / "world_class_submission_review.md"),
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert not world_class_submission_review_result["ok"], world_class_submission_review_result
+    assert world_class_submission_review_result["returncode"] == 2, world_class_submission_review_result
+    assert world_class_submission_review_result["payload"]["summary"]["decision"] == "fix-submissions", world_class_submission_review_result
+    assert world_class_submission_review_result["payload"]["summary"]["invalid_submission_count"] == 1, world_class_submission_review_result
+    assert world_class_submission_review_result["payload"]["items"][0]["review_state"] == "fix-submission", world_class_submission_review_result
+    assert (tmp_root / "world_class_submission_review.md").exists(), world_class_submission_review_result
 
     world_class_claim_guard_result = run(
         "world-class-claim-guard",
