@@ -705,6 +705,28 @@ def command_adoption_drift(args: argparse.Namespace) -> int:
     return 0 if result["ok"] else 2
 
 
+def command_telemetry_import(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir, "--input-jsonl", args.input_jsonl]
+    if args.events_jsonl:
+        cmd.extend(["--events-jsonl", args.events_jsonl])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    if args.source:
+        cmd.extend(["--source", args.source])
+    if args.telemetry_command:
+        cmd.extend(["--command", args.telemetry_command])
+    if args.dry_run:
+        cmd.append("--dry-run")
+    result = run_script("import_telemetry_events.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
 def command_review_waivers(args: argparse.Namespace) -> int:
     skill_dir = str(Path(args.skill_dir).resolve())
     cmd = [skill_dir]

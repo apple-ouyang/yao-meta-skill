@@ -284,6 +284,21 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     adoption_drift_cmd.add_argument("--version")
     adoption_drift_cmd.set_defaults(func=_handler(command_handlers, "command_adoption_drift"))
 
+    telemetry_import_cmd = subparsers.add_parser(
+        "telemetry-import",
+        help="Import external metadata-only telemetry JSONL and refresh the adoption drift report.",
+    )
+    telemetry_import_cmd.add_argument("skill_dir", nargs="?", default=".")
+    telemetry_import_cmd.add_argument("--input-jsonl", required=True)
+    telemetry_import_cmd.add_argument("--events-jsonl")
+    telemetry_import_cmd.add_argument("--output-json")
+    telemetry_import_cmd.add_argument("--output-md")
+    telemetry_import_cmd.add_argument("--generated-at")
+    telemetry_import_cmd.add_argument("--source", choices=["external", "manual", "unknown", "yao_cli"], default="external")
+    telemetry_import_cmd.add_argument("--command", dest="telemetry_command", default="external-client")
+    telemetry_import_cmd.add_argument("--dry-run", action="store_true")
+    telemetry_import_cmd.set_defaults(func=_handler(command_handlers, "command_telemetry_import"))
+
     review_waivers_cmd = subparsers.add_parser(
         "review-waivers",
         help="Render or update human reviewer waiver evidence for Review Studio.",

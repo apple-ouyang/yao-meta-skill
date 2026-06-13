@@ -50,6 +50,7 @@ DEFAULT_TARGETS = [
     "review-studio-check",
     "feedback-check",
     "adoption-drift-check",
+    "telemetry-import-check",
     "review-waivers-check",
     "review-annotations-check",
     "baseline-compare-check",

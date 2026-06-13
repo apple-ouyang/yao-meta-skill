@@ -61,6 +61,24 @@ python3 scripts/yao.py --no-cli-telemetry validate .
 
 Successful CLI runs record `event=script_run`, `source=yao_cli`, `outcome=accepted`, and `failure_type=none`. Failed CLI runs record `outcome=failed` and `failure_type=script_error`. The command name is normalized to the subcommand only; command arguments are never recorded.
 
+## External Client Import
+
+External clients, browser extensions, editor adapters, or wrapper scripts may hand off already-sanitized JSONL through `telemetry-import`:
+
+```bash
+python3 scripts/yao.py telemetry-import . \
+  --input-jsonl /tmp/external-client-events.jsonl \
+  --command browser-extension
+```
+
+The importer defaults missing `source` to `external` and missing `command` to `external-client`. It validates the entire JSONL file before writing anything. If any line includes a raw content field, unsupported source, unsupported outcome, unsupported failure type, unknown field, malformed JSON, or an unsafe command name, the whole import is rejected and the existing local event stream is left untouched.
+
+Use `--dry-run` to validate an external batch without writing `reports/telemetry_events.jsonl` or refreshing aggregate reports:
+
+```bash
+python3 scripts/yao.py telemetry-import . --input-jsonl /tmp/external-client-events.jsonl --dry-run
+```
+
 ## Privacy Rule
 
 The raw JSONL event log is local evidence and should not be distributed in skill packages. The distributable artifact is the aggregate report:
@@ -79,7 +97,7 @@ Package builders should exclude `reports/telemetry_events.jsonl`. The root repos
 
 ## Iteration Loop
 
-1. Capture metadata-only events locally, either manually with `adoption-drift --record-event` or automatically with opt-in `yao.py` CLI capture.
+1. Capture metadata-only events locally, either manually with `adoption-drift --record-event`, automatically with opt-in `yao.py` CLI capture, or through validated external JSONL import.
 2. Render `reports/adoption_drift_report.md`.
 3. Convert missed triggers into trigger eval cases.
 4. Convert bad outputs into Output Eval assertions and failure taxonomy entries.
