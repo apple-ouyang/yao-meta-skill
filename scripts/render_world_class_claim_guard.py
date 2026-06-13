@@ -111,6 +111,10 @@ def line_matches(path: Path, ledger_ready: bool) -> list[dict[str, Any]]:
     return violations
 
 
+def escape_markdown_table_cell(value: Any) -> str:
+    return str(value).replace("|", "\\|")
+
+
 def build_guard(skill_dir: Path, generated_at: str, claim_surfaces: list[Path] | None = None) -> dict[str, Any]:
     ledger = build_ledger(skill_dir, generated_at)
     ledger_ready = ledger.get("summary", {}).get("ready_to_claim_world_class") is True
@@ -197,7 +201,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         ]
     )
     for rule in report["rules"]:
-        lines.append(f"| `{rule['key']}` | {rule['reason'].replace('|', '\\|')} |")
+        reason = escape_markdown_table_cell(rule["reason"])
+        lines.append(f"| `{rule['key']}` | {reason} |")
     return "\n".join(lines).rstrip() + "\n"
 
 
