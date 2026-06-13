@@ -90,10 +90,11 @@ python3 scripts/yao.py output-review
 
 The adjudication report writes:
 
+- `reports/output_review_decisions.json`
 - `reports/output_review_adjudication.json`
 - `reports/output_review_adjudication.md`
 
-When no reviewer decisions exist, the report should say the cases are pending. Do not count pending cases as human agreement. Only a real `winner_variant` of `A` or `B` should contribute to agreement rate, disagreement count, and reviewer judgment count.
+When no reviewer decisions exist, the report should say the cases are pending and Review Studio should link to the decisions template. Do not count pending cases as human agreement. Only a real `winner_variant` of `A` or `B` should contribute to agreement rate, disagreement count, and reviewer judgment count.
 
 ## Anti-Overfitting
 

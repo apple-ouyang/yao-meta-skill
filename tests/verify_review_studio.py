@@ -289,6 +289,7 @@ def main() -> None:
     assert full_payload["evidence_paths"]["compiled_targets"] == "reports/compiled_targets.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_execution"] == "reports/output_execution_runs.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_blind_review"] == "reports/output_blind_review_pack.md", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["output_review_decisions"] == "reports/output_review_decisions.json", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_review_adjudication"] == "reports/output_review_adjudication.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["review_annotations"] == "reports/review_annotations.md", full_payload["evidence_paths"]
     assert full_payload["data"]["output_blind_review"]["summary"]["pair_count"] == 5, full_payload["data"]["output_blind_review"]
@@ -326,6 +327,7 @@ def main() -> None:
         "reports/output_quality_scorecard.md",
         "reports/output_execution_runs.md",
         "reports/output_blind_review_pack.md",
+        "reports/output_review_decisions.json",
         "reports/output_review_adjudication.md",
     }, synthetic_actions
     assert all(item["exists"] for item in synthetic_actions[0]["source_refs"]), synthetic_actions
@@ -340,6 +342,8 @@ def main() -> None:
     assert "审查闸门" in html, html[:1200]
     assert "修复动作" in html, html[:3000]
     assert "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。" in html, html[:9000]
+    assert "reports/output_review_decisions.json" in html, html[:9000]
+    assert "python3 scripts/adjudicate_output_review.py --write-template" in html, html[:9000]
     assert "对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。" in html, html[:9000]
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]

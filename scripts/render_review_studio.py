@@ -122,6 +122,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "output_eval": "reports/output_quality_scorecard.md",
         "output_execution": "reports/output_execution_runs.md",
         "output_blind_review": "reports/output_blind_review_pack.md",
+        "output_review_decisions": "reports/output_review_decisions.json",
         "output_review_adjudication": "reports/output_review_adjudication.md",
         "runtime_conformance": "reports/conformance_matrix.md",
         "trust_report": "reports/security_trust_report.md",
@@ -354,15 +355,16 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
     "output-lab": {
         "summary": "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。",
         "why": "没有输出质量和人工盲评证据时，Skill 只能证明会触发，不能证明输出真的更好且经得起审查。",
-        "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_adjudication.md",
+        "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_decisions.json + reports/output_review_adjudication.md",
         "source_paths": [
             {"path": "evals/output/cases.jsonl", "label": "output eval cases", "kind": "eval", "patterns": ["case_id"]},
             {"path": "reports/output_quality_scorecard.md", "label": "output scorecard", "kind": "report", "patterns": ["# Output"]},
             {"path": "reports/output_execution_runs.md", "label": "output execution runs", "kind": "report", "patterns": ["# Output Execution"]},
             {"path": "reports/output_blind_review_pack.md", "label": "blind A/B review pack", "kind": "report", "patterns": ["# Output Blind"]},
+            {"path": "reports/output_review_decisions.json", "label": "review decisions template", "kind": "report", "patterns": ["decision_contract", "winner_variant"]},
             {"path": "reports/output_review_adjudication.md", "label": "review adjudication", "kind": "report", "patterns": ["# Output Review"]},
         ],
-        "verification": "python3 scripts/run_output_execution.py",
+        "verification": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review",
     },
     "context-budget": {
         "summary": "压缩入口与高成本 references，保留最小可路由上下文。",

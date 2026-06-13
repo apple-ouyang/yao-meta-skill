@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "reviewer": "",
+  "reviewed_at": "",
+  "decision_contract": {
+    "winner_variant": "Use A or B after reading the blind review pack. Leave blank when pending.",
+    "confidence": "Optional number from 0 to 1.",
+    "reason": "Short reviewer rationale. Do not reveal baseline or with-skill labels before adjudication."
+  },
+  "decisions": [
+    {
+      "case_id": "skill-package-contract",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "output-eval-expectation",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "ir-before-packaging",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "near-neighbor-boundary",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "file-backed-governed-package",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    }
+  ]
+}
