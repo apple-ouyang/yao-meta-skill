@@ -11,6 +11,7 @@ SCRIPT = ROOT / "scripts" / "render_review_studio.py"
 sys.path.insert(0, str(ROOT / "scripts"))
 import render_review_studio as review_studio  # noqa: E402
 import review_studio_formatting as review_formatting  # noqa: E402
+import review_studio_gates as review_gates  # noqa: E402
 import review_studio_layout as review_layout  # noqa: E402
 
 
@@ -79,9 +80,9 @@ def main() -> None:
             "--install-root",
             str(tmp_root / "install-root"),
             "--output-json",
-            str(ROOT / "reports" / "install_simulation.json"),
+            str(tmp_root / "install_simulation.json"),
             "--output-md",
-            str(ROOT / "reports" / "install_simulation.md"),
+            str(tmp_root / "install_simulation.md"),
             "--generated-at",
             "2026-06-13",
         ],
@@ -374,6 +375,12 @@ def main() -> None:
     assert "案例数" in formatted, formatted
     assert "<code>abc123</code>" in formatted, formatted
     assert review_formatting.value_text({"case_count": 5}) == "案例数: 5"
+    assert review_gates.min_output_cases("scaffold") == 1
+    assert review_gates.min_output_cases("production") == 3
+    assert review_gates.min_output_cases("governed") == 5
+    assert review_gates.status_label("warn") == "关注"
+    assert review_gates.weighted_score([{"key": "output-lab", "status": "pass"}]) == 100
+    assert review_gates.weighted_score([{"key": "output-lab", "status": "warn"}]) == 60
     assert len(review_layout.REVIEW_STUDIO_NAV) == 15, review_layout.REVIEW_STUDIO_NAV
     assert "position: sticky" in review_layout.review_studio_css(), review_layout.review_studio_css()[:400]
     assert "#overview" in review_layout.render_review_nav(), review_layout.render_review_nav()

@@ -433,7 +433,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 66
+        "file_count": 68
       },
       {
         "path": "evals",
@@ -448,7 +448,7 @@
         "file_count": 170
       }
     ],
-    "file_count": 300,
+    "file_count": 302,
     "folder_count": 4,
     "distribution": [
       {
@@ -473,7 +473,7 @@
       },
       {
         "label": "scripts",
-        "value": 66
+        "value": 68
       },
       {
         "label": "evals",
@@ -602,7 +602,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 66
+      "file_count": 68
     },
     {
       "path": "evals",
@@ -920,9 +920,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 150,
-    "script_count": 66,
-    "internal_module_count": 7,
+    "scanned_files": 152,
+    "script_count": 68,
+    "internal_module_count": 9,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -940,8 +940,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 150,
-    "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+    "package_hash_file_count": 152,
+    "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -975,8 +975,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f",
-        "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9"
+        "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5",
+        "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
       },
       "compatibility": {
         "openai": "pass",
@@ -1007,7 +1007,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9",
+        "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1023,8 +1023,8 @@
       "target_count": 3,
       "adapter_count": 3,
       "archive_present": true,
-      "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9",
-      "archive_entry_count": 488,
+      "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+      "archive_entry_count": 490,
       "failure_count": 0,
       "warning_count": 0
     },
@@ -1035,7 +1035,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 488,
+      "archive_entry_count": 490,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1097,12 +1097,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9"
+          "to": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+          "to": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
         }
       ]
     },

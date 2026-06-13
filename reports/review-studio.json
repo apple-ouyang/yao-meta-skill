@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 66 scripts; 2 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 68 scripts; 2 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -581,7 +581,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 66
+            "file_count": 68
           },
           {
             "path": "evals",
@@ -596,7 +596,7 @@
             "file_count": 170
           }
         ],
-        "file_count": 300,
+        "file_count": 302,
         "folder_count": 4,
         "distribution": [
           {
@@ -621,7 +621,7 @@
           },
           {
             "label": "scripts",
-            "value": 66
+            "value": 68
           },
           {
             "label": "evals",
@@ -750,7 +750,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 66
+          "file_count": 68
         },
         {
           "path": "evals",
@@ -1068,9 +1068,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 150,
-        "script_count": 66,
-        "internal_module_count": 7,
+        "scanned_files": 152,
+        "script_count": 68,
+        "internal_module_count": 9,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -1088,8 +1088,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 150,
-        "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+        "package_hash_file_count": 152,
+        "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1123,8 +1123,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f",
-            "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9"
+            "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5",
+            "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
           },
           "compatibility": {
             "openai": "pass",
@@ -1155,7 +1155,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9",
+            "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1171,8 +1171,8 @@
           "target_count": 3,
           "adapter_count": 3,
           "archive_present": true,
-          "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9",
-          "archive_entry_count": 488,
+          "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+          "archive_entry_count": 490,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1183,7 +1183,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 488,
+          "archive_entry_count": 490,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1245,12 +1245,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9"
+              "to": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+              "to": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
             }
           ]
         },
@@ -2978,7 +2978,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.11,
+          "duration_ms": 23.49,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3006,7 +3006,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.56,
+          "duration_ms": 23.5,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3029,7 +3029,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 24.17,
+          "duration_ms": 22.7,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3057,7 +3057,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.84,
+          "duration_ms": 23.01,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3080,7 +3080,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.51,
+          "duration_ms": 22.98,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3108,7 +3108,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.03,
+          "duration_ms": 22.64,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3131,7 +3131,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.48,
+          "duration_ms": 22.61,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3158,7 +3158,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.17,
+          "duration_ms": 22.62,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3181,7 +3181,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.94,
+          "duration_ms": 23.24,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3210,7 +3210,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.69,
+          "duration_ms": 23.29,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3703,6 +3703,7 @@
                 "scripts/render_system_model.py",
                 "scripts/resource_boundary_check.py",
                 "scripts/review_studio_formatting.py",
+                "scripts/review_studio_gates.py",
                 "scripts/review_studio_layout.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
@@ -3721,7 +3722,8 @@
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
                 "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao_cli_config.py",
+                "scripts/yao_cli_parser.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -3772,7 +3774,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               }
@@ -4010,7 +4012,7 @@
                 "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
                 "counts": {
                   "references": 32,
-                  "scripts": 66,
+                  "scripts": 68,
                   "assets": 2,
                   "reports": 41
                 },
@@ -4021,7 +4023,7 @@
               },
               "scripts": {
                 "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-                "script_count": 66,
+                "script_count": 68,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -4233,7 +4235,7 @@
               "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               },
@@ -4244,7 +4246,7 @@
             },
             "scripts": {
               "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-              "script_count": 66,
+              "script_count": 68,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -4492,6 +4494,7 @@
                 "scripts/render_system_model.py",
                 "scripts/resource_boundary_check.py",
                 "scripts/review_studio_formatting.py",
+                "scripts/review_studio_gates.py",
                 "scripts/review_studio_layout.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
@@ -4510,7 +4513,8 @@
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
                 "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao_cli_config.py",
+                "scripts/yao_cli_parser.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -4561,7 +4565,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               }
@@ -4799,7 +4803,7 @@
                 "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
                 "counts": {
                   "references": 32,
-                  "scripts": 66,
+                  "scripts": 68,
                   "assets": 2,
                   "reports": 41
                 },
@@ -4810,7 +4814,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-                "script_count": 66,
+                "script_count": 68,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -5022,7 +5026,7 @@
               "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               },
@@ -5033,7 +5037,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-              "script_count": 66,
+              "script_count": 68,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -5281,6 +5285,7 @@
                 "scripts/render_system_model.py",
                 "scripts/resource_boundary_check.py",
                 "scripts/review_studio_formatting.py",
+                "scripts/review_studio_gates.py",
                 "scripts/review_studio_layout.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
@@ -5299,7 +5304,8 @@
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
                 "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao_cli_config.py",
+                "scripts/yao_cli_parser.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -5350,7 +5356,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               }
@@ -5588,7 +5594,7 @@
                 "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
                 "counts": {
                   "references": 32,
-                  "scripts": 66,
+                  "scripts": 68,
                   "assets": 2,
                   "reports": 41
                 },
@@ -5598,7 +5604,7 @@
               },
               "scripts": {
                 "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-                "script_count": 66,
+                "script_count": 68,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -5804,7 +5810,7 @@
               "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               },
@@ -5814,7 +5820,7 @@
             },
             "scripts": {
               "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-              "script_count": 66,
+              "script_count": 68,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -6054,6 +6060,7 @@
                 "scripts/render_system_model.py",
                 "scripts/resource_boundary_check.py",
                 "scripts/review_studio_formatting.py",
+                "scripts/review_studio_gates.py",
                 "scripts/review_studio_layout.py",
                 "scripts/run_conformance_suite.py",
                 "scripts/run_description_optimization_suite.py",
@@ -6072,7 +6079,8 @@
                 "scripts/validate_skill.py",
                 "scripts/verify_package.py",
                 "scripts/yao.py",
-                "scripts/yao_cli_config.py"
+                "scripts/yao_cli_config.py",
+                "scripts/yao_cli_parser.py"
               ],
               "assets": [
                 "templates/basic_skill.md.j2",
@@ -6123,7 +6131,7 @@
               ],
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               }
@@ -6361,7 +6369,7 @@
                 "strategy": "Keep optional directories as relative resources next to SKILL.md.",
                 "counts": {
                   "references": 32,
-                  "scripts": 66,
+                  "scripts": 68,
                   "assets": 2,
                   "reports": 41
                 },
@@ -6372,7 +6380,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-                "script_count": 66,
+                "script_count": 68,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -6577,7 +6585,7 @@
               "strategy": "Keep optional directories as relative resources next to SKILL.md.",
               "counts": {
                 "references": 32,
-                "scripts": 66,
+                "scripts": 68,
                 "assets": 2,
                 "reports": 41
               },
@@ -6588,7 +6596,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-              "script_count": 66,
+              "script_count": 68,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -7152,9 +7160,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 150,
-        "script_count": 66,
-        "internal_module_count": 7,
+        "scanned_files": 152,
+        "script_count": 68,
+        "internal_module_count": 9,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -7172,8 +7180,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 150,
-        "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+        "package_hash_file_count": 152,
+        "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
       },
       "failures": [],
       "warnings": [],
@@ -7851,6 +7859,20 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/review_studio_gates.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/review_studio_layout.py",
           "interface": "internal-module",
           "interface_declared": true,
@@ -8115,6 +8137,20 @@
           "uses_subprocess": false,
           "network_urls": [],
           "network_hosts": []
+        },
+        {
+          "path": "scripts/yao_cli_parser.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by yao.py to keep CLI parser declarations separate from command orchestration.",
+          "has_argparse": true,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
         }
       ],
       "dependencies": {
@@ -8150,7 +8186,7 @@
         "checked_count": 59,
         "passed_count": 59,
         "failed_count": 0,
-        "skipped_count": 7,
+        "skipped_count": 9,
         "failed_scripts": [],
         "results": [
           {
@@ -8750,6 +8786,10 @@
             "reason": "internal module"
           },
           {
+            "path": "scripts/review_studio_gates.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/review_studio_layout.py",
             "reason": "internal module"
           },
@@ -8771,6 +8811,10 @@
           },
           {
             "path": "scripts/yao_cli_config.py",
+            "reason": "internal module"
+          },
+          {
+            "path": "scripts/yao_cli_parser.py",
             "reason": "internal module"
           }
         ]
@@ -8936,10 +8980,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 811,
-        "other_text_tokens": 869504,
+        "other_text_tokens": 871465,
         "estimated_initial_load_tokens": 987,
-        "estimated_total_text_tokens": 870315,
-        "relevant_file_count": 327,
+        "estimated_total_text_tokens": 872276,
+        "relevant_file_count": 367,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.7
@@ -9846,6 +9890,7 @@
               "scripts/render_system_model.py",
               "scripts/resource_boundary_check.py",
               "scripts/review_studio_formatting.py",
+              "scripts/review_studio_gates.py",
               "scripts/review_studio_layout.py",
               "scripts/run_conformance_suite.py",
               "scripts/run_description_optimization_suite.py",
@@ -9865,6 +9910,7 @@
               "scripts/verify_package.py",
               "scripts/yao.py",
               "scripts/yao_cli_config.py",
+              "scripts/yao_cli_parser.py",
               "references/artifact-design-doctrine.md",
               "references/authoring-discipline.md",
               "references/distribution-registry-method.md",
@@ -10646,7 +10692,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T10:57:52Z",
+      "generated_at": "2026-06-13T11:10:15Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -10805,8 +10851,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f",
-          "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9"
+          "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5",
+          "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
         },
         "compatibility": {
           "openai": "pass",
@@ -10837,7 +10883,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9",
+          "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -10861,7 +10907,7 @@
               "agent-skills-compatible"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+            "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
           }
         ]
       },
@@ -10884,8 +10930,8 @@
         "target_count": 3,
         "adapter_count": 3,
         "archive_present": true,
-        "archive_sha256": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9",
-        "archive_entry_count": 488,
+        "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+        "archive_entry_count": 490,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -11400,7 +11446,7 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 488,
+        "archive_entry_count": 490,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -11581,12 +11627,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "7bc83805501d24cf8e5932ef76e0454100398d5a73652e7440be47984d0cf4a9"
+            "to": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+            "to": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
           }
         ]
       },

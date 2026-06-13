@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 150,
-    "script_count": 66,
-    "internal_module_count": 7,
+    "scanned_files": 152,
+    "script_count": 68,
+    "internal_module_count": 9,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 150,
-    "package_sha256": "742dc905b0d221c4f336e741d168861edaf7b75e97fe1e89f7d454c1cabf928f"
+    "package_hash_file_count": 152,
+    "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
   },
   "failures": [],
   "warnings": [],
@@ -701,6 +701,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_studio_gates.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/review_studio_layout.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -965,6 +979,20 @@
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
+    },
+    {
+      "path": "scripts/yao_cli_parser.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to keep CLI parser declarations separate from command orchestration.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
     }
   ],
   "dependencies": {
@@ -1000,7 +1028,7 @@
     "checked_count": 59,
     "passed_count": 59,
     "failed_count": 0,
-    "skipped_count": 7,
+    "skipped_count": 9,
     "failed_scripts": [],
     "results": [
       {
@@ -1600,6 +1628,10 @@
         "reason": "internal module"
       },
       {
+        "path": "scripts/review_studio_gates.py",
+        "reason": "internal module"
+      },
+      {
         "path": "scripts/review_studio_layout.py",
         "reason": "internal module"
       },
@@ -1621,6 +1653,10 @@
       },
       {
         "path": "scripts/yao_cli_config.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_parser.py",
         "reason": "internal module"
       }
     ]

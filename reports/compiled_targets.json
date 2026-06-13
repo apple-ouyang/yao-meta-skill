@@ -191,6 +191,7 @@
             "scripts/render_system_model.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
+            "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
@@ -209,7 +210,8 @@
             "scripts/validate_skill.py",
             "scripts/verify_package.py",
             "scripts/yao.py",
-            "scripts/yao_cli_config.py"
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_parser.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -260,7 +262,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           }
@@ -498,7 +500,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 32,
-              "scripts": 66,
+              "scripts": 68,
               "assets": 2,
               "reports": 41
             },
@@ -509,7 +511,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 66,
+            "script_count": 68,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -721,7 +723,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           },
@@ -732,7 +734,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 66,
+          "script_count": 68,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -980,6 +982,7 @@
             "scripts/render_system_model.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
+            "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
@@ -998,7 +1001,8 @@
             "scripts/validate_skill.py",
             "scripts/verify_package.py",
             "scripts/yao.py",
-            "scripts/yao_cli_config.py"
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_parser.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1049,7 +1053,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           }
@@ -1287,7 +1291,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 32,
-              "scripts": 66,
+              "scripts": 68,
               "assets": 2,
               "reports": 41
             },
@@ -1298,7 +1302,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 66,
+            "script_count": 68,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1510,7 +1514,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           },
@@ -1521,7 +1525,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 66,
+          "script_count": 68,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1769,6 +1773,7 @@
             "scripts/render_system_model.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
+            "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
@@ -1787,7 +1792,8 @@
             "scripts/validate_skill.py",
             "scripts/verify_package.py",
             "scripts/yao.py",
-            "scripts/yao_cli_config.py"
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_parser.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1838,7 +1844,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           }
@@ -2076,7 +2082,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 32,
-              "scripts": 66,
+              "scripts": 68,
               "assets": 2,
               "reports": 41
             },
@@ -2086,7 +2092,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 66,
+            "script_count": 68,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2292,7 +2298,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           },
@@ -2302,7 +2308,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 66,
+          "script_count": 68,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2542,6 +2548,7 @@
             "scripts/render_system_model.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_formatting.py",
+            "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
@@ -2560,7 +2567,8 @@
             "scripts/validate_skill.py",
             "scripts/verify_package.py",
             "scripts/yao.py",
-            "scripts/yao_cli_config.py"
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_parser.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2611,7 +2619,7 @@
           ],
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           }
@@ -2849,7 +2857,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 32,
-              "scripts": 66,
+              "scripts": 68,
               "assets": 2,
               "reports": 41
             },
@@ -2860,7 +2868,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 66,
+            "script_count": 68,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3065,7 +3073,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 32,
-            "scripts": 66,
+            "scripts": 68,
             "assets": 2,
             "reports": 41
           },
@@ -3076,7 +3084,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 66,
+          "script_count": 68,
           "help_smoke_failed_count": 0
         },
         "permissions": {
