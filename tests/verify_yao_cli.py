@@ -74,6 +74,7 @@ def main() -> None:
     assert "quickstart" in parser_help, parser_help
     assert "review-studio" in parser_help, parser_help
     assert "skill-os2-audit" in parser_help, parser_help
+    assert "skill-os2-coverage" in parser_help, parser_help
     assert "world-class-evidence" in parser_help, parser_help
     assert "world-class-ledger" in parser_help, parser_help
     assert "benchmark-reproducibility" in parser_help, parser_help
@@ -166,6 +167,20 @@ def main() -> None:
     assert skill_os2_audit_result["ok"], skill_os2_audit_result
     assert skill_os2_audit_result["payload"]["summary"]["decision"] == "continue-iteration", skill_os2_audit_result
     assert skill_os2_audit_result["payload"]["summary"]["world_class_ready"] is False, skill_os2_audit_result
+
+    skill_os2_coverage_result = run(
+        "skill-os2-coverage",
+        str(ROOT),
+        "--output-json",
+        str(tmp_root / "skill_os2_coverage.json"),
+        "--output-md",
+        str(tmp_root / "skill_os2_coverage.md"),
+        "--generated-at",
+        "2026-06-14",
+    )
+    assert skill_os2_coverage_result["ok"], skill_os2_coverage_result
+    assert skill_os2_coverage_result["payload"]["summary"]["local_blueprint_ready"] is True, skill_os2_coverage_result
+    assert skill_os2_coverage_result["payload"]["summary"]["public_world_class_ready"] is False, skill_os2_coverage_result
 
     world_class_evidence_result = run(
         "world-class-evidence",
@@ -619,6 +634,7 @@ def main() -> None:
     assert "world_class_evidence_plan" in report_result["payload"]["artifacts"], report_result
     assert "world_class_evidence_ledger" in report_result["payload"]["artifacts"], report_result
     assert "benchmark_reproducibility" in report_result["payload"]["artifacts"], report_result
+    assert "skill_os2_coverage" in report_result["payload"]["artifacts"], report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))
     assert report_output_execution["summary"]["command_executed_count"] == 10, report_output_execution
     assert report_output_execution["summary"]["recorded_fixture_count"] == 0, report_output_execution

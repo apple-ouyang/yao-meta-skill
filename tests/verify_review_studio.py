@@ -312,6 +312,8 @@ def main() -> None:
     assert full_payload["evidence_paths"]["output_review_adjudication"] == "reports/output_review_adjudication.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "benchmark_reproducibility.md").exists():
         assert full_payload["evidence_paths"]["benchmark_reproducibility"] == "reports/benchmark_reproducibility.md", full_payload["evidence_paths"]
+    if (ROOT / "reports" / "skill_os2_coverage.md").exists():
+        assert full_payload["evidence_paths"]["skill_os2_coverage"] == "reports/skill_os2_coverage.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["review_annotations"] == "reports/review_annotations.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_plan.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_plan"] == "reports/world_class_evidence_plan.md", full_payload["evidence_paths"]
@@ -340,6 +342,9 @@ def main() -> None:
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
+    if full_payload["data"]["skill_os2_coverage"]:
+        assert full_payload["data"]["skill_os2_coverage"]["summary"]["local_blueprint_ready"] is True, full_payload["data"]["skill_os2_coverage"]
+        assert full_payload["data"]["skill_os2_coverage"]["summary"]["public_world_class_ready"] is False, full_payload["data"]["skill_os2_coverage"]
     world_class_entries = full_payload["data"]["world_class_evidence_ledger"]["entries"]
     assert len(world_class_entries) == 4, world_class_entries
     assert {item["key"] for item in world_class_entries} == {
@@ -405,6 +410,9 @@ def main() -> None:
     assert "隐私约束" in html, html
     assert "reports/output_execution_runs.json summary.model_executed_count &gt; 0" in html, html
     assert "计划、metadata fallback、待评审和本地命令不会被当成完成证据" in html, html
+    assert "蓝图覆盖" in html, html
+    assert "本地蓝图" in html, html
+    assert "public world-class 仍以 world-class evidence ledger" in html, html
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]
     assert "输出实验" in html, html[:2000]

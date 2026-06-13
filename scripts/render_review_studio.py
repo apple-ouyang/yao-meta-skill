@@ -125,6 +125,7 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "output_review_decisions": "reports/output_review_decisions.json",
         "output_review_adjudication": "reports/output_review_adjudication.md",
         "benchmark_reproducibility": "reports/benchmark_reproducibility.md",
+        "skill_os2_coverage": "reports/skill_os2_coverage.md",
         "runtime_conformance": "reports/conformance_matrix.md",
         "trust_report": "reports/security_trust_report.md",
         "permission_policy": "security/permission_policy.md",
@@ -157,6 +158,7 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "output_execution": load_json(reports / "output_execution_runs.json"),
         "output_blind_review": load_json(reports / "output_blind_review_pack.json"),
         "output_review_adjudication": load_json(reports / "output_review_adjudication.json"),
+        "skill_os2_coverage": load_json(reports / "skill_os2_coverage.json"),
         "compiled_targets": load_json(reports / "compiled_targets.json"),
         "conformance": load_json(reports / "conformance_matrix.json"),
         "runtime_permissions": load_json(reports / "runtime_permission_probes.json"),
@@ -184,6 +186,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     output_execution = data["output_execution"].get("summary", {})
     output_blind = data["output_blind_review"].get("summary", {})
     output_review = data["output_review_adjudication"].get("summary", {})
+    blueprint = data["skill_os2_coverage"].get("summary", {})
     compiled = data["compiled_targets"].get("summary", {})
     conformance = data["conformance"].get("summary", {})
     runtime_permissions = data["runtime_permissions"].get("summary", {})
@@ -230,6 +233,11 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Review A/B",
             "value": f"{output_review.get('judgment_count', 0)}/{output_review.get('pair_count', 0)}",
             "detail": f"adjudication decisions; pending {output_review.get('pending_count', 0)}",
+        },
+        {
+            "label": "Blueprint",
+            "value": f"{blueprint.get('pass_count', 0)}/{blueprint.get('item_count', 0)}",
+            "detail": f"2.0 coverage; evidence pending {blueprint.get('world_class_evidence_pending_count', 0)}",
         },
         {
             "label": "Runtime",
@@ -676,6 +684,7 @@ def render_html(report: dict[str, Any]) -> str:
     output_execution_summary = report["data"]["output_execution"].get("summary", {})
     output_blind_summary = report["data"]["output_blind_review"].get("summary", {})
     output_review_summary = report["data"]["output_review_adjudication"].get("summary", {})
+    blueprint_summary = report["data"]["skill_os2_coverage"].get("summary", {})
     conformance_summary = report["data"]["conformance"].get("summary", {})
     compiled_summary = report["data"]["compiled_targets"].get("summary", {})
     trust_summary = report["data"]["trust"].get("summary", {})
@@ -745,6 +754,21 @@ def render_html(report: dict[str, Any]) -> str:
             "pending_answer_hidden_count",
         ],
         "review adjudication report missing",
+    )
+    blueprint_panel = render_kv_grid(
+        blueprint_summary,
+        [
+            "item_count",
+            "module_count",
+            "recommended_pr_count",
+            "pass_count",
+            "warn_count",
+            "missing_count",
+            "local_blueprint_ready",
+            "public_world_class_ready",
+            "world_class_evidence_pending_count",
+        ],
+        "Skill OS 2.0 blueprint coverage missing",
     )
     conformance_panel = render_kv_grid(
         conformance_summary,
@@ -960,6 +984,11 @@ def render_html(report: dict[str, Any]) -> str:
       <h2>世界证据</h2>
       <p class="muted">这里列出每个 world-class 证据项的当前状态、完成定义、证据来源、隐私约束和下一步；计划、metadata fallback、待评审和本地命令不会被当成完成证据。</p>
       {world_class_entries_html}
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>蓝图覆盖</h2>{blueprint_panel}</div>
+      <div class="panel"><h2>覆盖边界</h2><p>蓝图覆盖只证明 2.0 模块、建议 PR、脚本、报告和测试在本地闭环；public world-class 仍以 world-class evidence ledger 的真人和外部证据为准。</p></div>
     </section>
 
     <section class="twocol">

@@ -468,6 +468,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_world_class_evidence_plan.py", [str(ROOT)]),
             run_script("render_world_class_evidence_ledger.py", [str(ROOT)]),
             run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
+            run_script("render_skill_os2_coverage.py", [str(ROOT)]),
         ]
     )
     report = {
@@ -497,6 +498,7 @@ def command_report(args: argparse.Namespace) -> int:
             "world_class_evidence_plan": "reports/world_class_evidence_plan.json",
             "world_class_evidence_ledger": "reports/world_class_evidence_ledger.json",
             "benchmark_reproducibility": "reports/benchmark_reproducibility.json",
+            "skill_os2_coverage": "reports/skill_os2_coverage.json",
         },
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))
@@ -549,6 +551,20 @@ def command_skill_os2_audit(args: argparse.Namespace) -> int:
     if args.generated_at:
         cmd.extend(["--generated-at", args.generated_at])
     result = run_script("render_skill_os2_audit.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
+def command_skill_os2_coverage(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    result = run_script("render_skill_os2_coverage.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
 
@@ -1218,6 +1234,7 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
             {"phase": "report-refresh", "result": run_script("render_world_class_evidence_plan.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_world_class_evidence_ledger.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_benchmark_reproducibility.py", [str(ROOT)])},
+            {"phase": "report-refresh", "result": run_script("render_skill_os2_coverage.py", [str(ROOT)])},
         ]
     )
 

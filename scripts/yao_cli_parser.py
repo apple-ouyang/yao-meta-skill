@@ -142,6 +142,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     skill_os2_audit_cmd.add_argument("--generated-at")
     skill_os2_audit_cmd.set_defaults(func=_handler(command_handlers, "command_skill_os2_audit"))
 
+    skill_os2_coverage_cmd = subparsers.add_parser(
+        "skill-os2-coverage",
+        help="Render Skill OS 2.0 blueprint-to-evidence coverage.",
+    )
+    skill_os2_coverage_cmd.add_argument("skill_dir", nargs="?", default=".")
+    skill_os2_coverage_cmd.add_argument("--output-json")
+    skill_os2_coverage_cmd.add_argument("--output-md")
+    skill_os2_coverage_cmd.add_argument("--generated-at")
+    skill_os2_coverage_cmd.set_defaults(func=_handler(command_handlers, "command_skill_os2_coverage"))
+
     world_class_evidence_cmd = subparsers.add_parser(
         "world-class-evidence",
         help="Render the evidence collection plan for remaining world-class readiness gaps.",

@@ -24,6 +24,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a generated visual HTML overview for each newly initialized skill
 - a Review Studio 2.0 HTML gate page that combines intent, trigger, output eval, context, runtime, trust, atlas, adoption drift, reviewer waivers, reviewer annotations, release evidence, and per-warning fix actions
 - a Skill OS 2.0 audit that maps each world-class requirement to current evidence, human-required gaps, and external-required gaps
+- a Skill OS 2.0 blueprint coverage report that maps the upgrade plan's core modules and recommended PRs to concrete artifacts, commands, and tests
 - a world-class evidence plan that turns remaining provider, human, native-permission, and real-client telemetry gaps into executable evidence tasks
 - a world-class evidence ledger that records which external and human evidence is accepted or still pending without treating planned work as proof
 - a benchmark reproducibility manifest that checks methodology sections, required artifacts, failure disclosure, and reproduction commands
@@ -280,6 +281,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - lightweight with-skill vs baseline comparison is published in [reports/baseline-compare.md](reports/baseline-compare.md)
 - Review Studio 2.0 gate evidence is published in [reports/review-studio.html](reports/review-studio.html)
 - Review Studio fix actions are embedded in [reports/review-studio.json](reports/review-studio.json)
+- Skill OS 2.0 blueprint coverage is published in [reports/skill_os2_coverage.md](reports/skill_os2_coverage.md)
 - reviewer waiver evidence is published in [reports/review_waivers.md](reports/review_waivers.md)
 - remaining world-class evidence tasks are published in [reports/world_class_evidence_plan.md](reports/world_class_evidence_plan.md)
 - current world-class evidence acceptance state is published in [reports/world_class_evidence_ledger.md](reports/world_class_evidence_ledger.md)
@@ -399,7 +401,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, world-class-evidence, world-class-ledger, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -409,6 +411,7 @@ Utility scripts that make the meta-skill operational:
 - `render_context_reports.py`: generates root and example context-budget reports plus a shared context summary
 - `render_regression_history.py`: turns milestone snapshots into a readable regression history report
 - `render_skill_os2_audit.py`: renders a requirement-by-requirement Skill OS 2.0 audit that separates landed local evidence from human-required and external-required gaps
+- `render_skill_os2_coverage.py`: maps the Skill OS 2.0 upgrade blueprint to local artifacts, commands, tests, and remaining evidence boundaries
 - `render_world_class_evidence_plan.py`: renders executable evidence tasks for remaining world-class gaps without treating planned external work as completed evidence
 - `render_world_class_evidence_ledger.py`: renders a machine-checkable ledger for current world-class evidence acceptance, anti-overclaim guards, provenance requirements, and privacy contracts
 - `render_benchmark_reproducibility.py`: renders methodology, artifact, failure-disclosure, and reproduction-command evidence for public benchmark claims

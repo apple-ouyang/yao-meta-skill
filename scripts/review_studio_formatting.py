@@ -35,9 +35,13 @@ LABELS = {
     "install_simulated": "安装模拟",
     "installer_permission_enforced_count": "安装权限",
     "installer_permission_failure_count": "安装权限失败",
+    "item_count": "项目数",
     "license": "License",
+    "local_blueprint_ready": "本地蓝图",
     "metadata_fallback_count": "Metadata fallback",
     "missed_trigger_count": "漏触发",
+    "missing_count": "缺失数",
+    "module_count": "模块数",
     "model_executed_count": "模型执行",
     "name": "名称",
     "native_enforcement_count": "原生执行",
@@ -52,7 +56,9 @@ LABELS = {
     "pending_answer_hidden_count": "答案隐藏",
     "permission_capability_count": "权限能力",
     "permission_target_count": "权限目标",
+    "public_world_class_ready": "世界级",
     "recorded_fixture_count": "记录样本",
+    "recommended_pr_count": "建议 PR",
     "recommended_bump": "建议版本",
     "residual_risk_count": "残余风险",
     "risk_band": "风险带",
@@ -70,6 +76,7 @@ LABELS = {
     "version": "版本",
     "warning_count": "警告数",
     "with_skill_pass_rate": "With Skill",
+    "world_class_evidence_pending_count": "待补证据",
 }
 
 

@@ -49,6 +49,7 @@ DEFAULT_TARGETS = [
     "review-viewer-check",
     "review-studio-check",
     "skill-os2-audit-check",
+    "skill-os2-coverage-check",
     "world-class-evidence-check",
     "world-class-ledger-check",
     "benchmark-reproducibility-check",
