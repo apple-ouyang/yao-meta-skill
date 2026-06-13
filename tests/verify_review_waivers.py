@@ -32,6 +32,7 @@ def main() -> None:
     empty_payload = json.loads(empty.stdout)
     assert empty_payload["ok"], empty_payload
     assert empty_payload["summary"]["waiver_count"] == 0, empty_payload
+    assert empty_payload["summary"]["waiver_candidate_count"] == 0, empty_payload
     assert (skill / "reports" / "review_waivers.json").exists(), skill
     assert (skill / "reports" / "review_waivers.md").exists(), skill
 
@@ -93,6 +94,35 @@ def main() -> None:
     assert not invalid_payload["ok"], invalid_payload
     assert invalid_payload["summary"]["invalid_count"] == 1, invalid_payload
     assert invalid_payload["failures"], invalid_payload
+
+    root_report_json = tmp_root / "root_review_waivers.json"
+    root_report_md = tmp_root / "root_review_waivers.md"
+    root = run(
+        str(ROOT),
+        "--output-json",
+        str(root_report_json),
+        "--output-md",
+        str(root_report_md),
+        "--generated-at",
+        "2026-06-14",
+    )
+    root_payload = json.loads(root.stdout)
+    assert root_payload["ok"], root_payload
+    assert root_payload["summary"]["waiver_candidate_count"] == 2, root_payload
+    assert root_payload["summary"]["waiverable_open_count"] == 1, root_payload
+    assert root_payload["summary"]["non_waivable_count"] == 1, root_payload
+    candidates = {item["gate_key"]: item for item in root_payload["waiver_candidates"]}
+    assert candidates["output-lab"]["waiver_allowed"] is True, candidates
+    assert candidates["output-lab"]["status"] == "needs-reviewer-decision", candidates
+    assert "review pending" in candidates["output-lab"]["risk_summary"], candidates
+    assert "review-waivers . --add-waiver" in candidates["output-lab"]["suggested_command"], candidates
+    assert candidates["world-class-evidence"]["waiver_allowed"] is False, candidates
+    assert candidates["world-class-evidence"]["status"] == "cannot-waive", candidates
+    assert "Non-waivable completion boundary" in candidates["world-class-evidence"]["world_class_boundary"], candidates
+    root_markdown = root_report_md.read_text(encoding="utf-8")
+    assert "Candidate Actions" in root_markdown, root_markdown
+    assert "World-class evidence completion cannot be waived" in root_markdown, root_markdown
+    assert "`world-class-evidence` | `cannot-waive` | `false`" in root_markdown, root_markdown
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 

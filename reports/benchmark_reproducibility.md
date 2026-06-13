@@ -1,7 +1,7 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `810885d70e6ed0fa6b19cd5a0edf971057215f9d`
+Commit: `8af7d75347cdb883e4f3f73288977afe985cfbfc`
 Working tree dirty at generation: `true`
 
 ## Summary
@@ -16,7 +16,7 @@ Working tree dirty at generation: `true`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
-- changed files at generation: `42`
+- changed files at generation: `25`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.
 
@@ -40,15 +40,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `c85fa48112af` |
+| output_execution | `reports/output_execution_runs.json` | present | `136a13e37152` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `5765254c4309` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
-| trust_report | `reports/security_trust_report.json` | present | `408b3a7c0921` |
+| trust_report | `reports/security_trust_report.json` | present | `1db90c4a2c3f` |
 | python_compatibility | `reports/python_compatibility.json` | present | `809d07d66de3` |
-| registry_audit | `reports/registry_audit.json` | present | `2a086d469885` |
-| package_verification | `reports/package_verification.json` | present | `9a48d94965cc` |
+| registry_audit | `reports/registry_audit.json` | present | `5b43c1efe178` |
+| package_verification | `reports/package_verification.json` | present | `af2971f3d76a` |
 | install_simulation | `reports/install_simulation.json` | present | `5e6e50170658` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `ed1be043898a` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `ed1274b7c18c` |

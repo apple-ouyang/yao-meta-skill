@@ -55,3 +55,12 @@ python3 scripts/yao.py review-waivers . \
 For a non-governed release where `permission-gates` is only a warning, the same command can name `--gate-key permission-gates`. Governed releases must instead provide reviewer, scope, reason, expiry, evidence, and target-enforcement fields in `security/permission_policy.json`.
 
 Review Studio reads `reports/review_waivers.json` and links to `reports/review_waivers.md`.
+
+## Candidate Actions
+
+The waiver report also surfaces current candidate actions from local evidence:
+
+- waiverable warning candidates, such as an `output-lab` warning caused by pending reviewer decisions or missing provider-backed runs
+- non-waivable boundaries, especially `world-class-evidence`, where pending ledger evidence cannot be converted into completion by a waiver
+
+A waiver can make a bounded warning auditable for a release window. It cannot count as provider-backed evidence, human adjudication, native runtime enforcement, external telemetry, or public world-class readiness.
