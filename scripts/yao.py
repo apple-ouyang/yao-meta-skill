@@ -462,6 +462,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("run_output_execution.py", ["--runner-command", local_output_runner_command()]),
             run_script("adjudicate_output_review.py", []),
             run_script("render_adoption_drift_report.py", [str(ROOT)]),
+            run_script("render_telemetry_hook_recipes.py", [str(ROOT)]),
             run_script("render_review_waivers.py", [str(ROOT)]),
             run_script("render_review_annotations.py", [str(ROOT)]),
         ]
@@ -487,6 +488,7 @@ def command_report(args: argparse.Namespace) -> int:
             "output_execution": "reports/output_execution_runs.json",
             "output_review_adjudication": "reports/output_review_adjudication.json",
             "adoption_drift": "reports/adoption_drift_report.json",
+            "telemetry_hooks": "reports/telemetry_hook_recipes.json",
             "review_waivers": "reports/review_waivers.json",
             "review_annotations": "reports/review_annotations.json",
         },
@@ -755,6 +757,20 @@ def command_telemetry_emit(args: argparse.Namespace) -> int:
     if args.dry_run:
         cmd.append("--dry-run")
     result = run_script("emit_telemetry_event.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2
+
+
+def command_telemetry_hooks(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.output_jsonl:
+        cmd.extend(["--output-jsonl", args.output_jsonl])
+    result = run_script("render_telemetry_hook_recipes.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
 
@@ -1134,6 +1150,7 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
             {"phase": "report-refresh", "result": run_script("render_portability_report.py", [])},
             {"phase": "report-refresh", "result": run_script("compile_skill.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_adoption_drift_report.py", [str(ROOT)])},
+            {"phase": "report-refresh", "result": run_script("render_telemetry_hook_recipes.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_review_waivers.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_review_annotations.py", [str(ROOT)])},
         ]

@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `156`
-- Scripts: `72`
+- Scanned files: `157`
+- Scripts: `73`
 - Internal script modules: `10`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `49`
+- File-write scripts: `50`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `62`
+- CLI help smoke checked: `63`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `156`
-- Package SHA256: `195c77ccf18eb0dd72c429b4cbe6137de531a34c00a4ce4a97f9385b3a3b26f4`
+- Package hash files: `157`
+- Package SHA256: `25df24e0cb24e09a1a11819ca6c185b60c279a4f12851ef1ce9275e67a58d339`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `62`
-- Passed scripts: `62`
+- Checked scripts: `63`
+- Passed scripts: `63`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -110,6 +110,7 @@
 | scripts/render_skill_overview.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_social_preview.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_system_model.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_telemetry_hook_recipes.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |

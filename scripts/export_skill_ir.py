@@ -51,6 +51,8 @@ KEY_REPORTS = [
     "reports/security_trust_report.md",
     "reports/runtime_permission_probes.json",
     "reports/runtime_permission_probes.md",
+    "reports/telemetry_hook_recipes.json",
+    "reports/telemetry_hook_recipes.md",
     "reports/skill_atlas.json",
     "reports/skill_atlas.html",
     "reports/skill-os-2-review.md",

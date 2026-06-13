@@ -68,6 +68,7 @@
         "scripts/render_skill_overview.py",
         "scripts/render_social_preview.py",
         "scripts/render_system_model.py",
+        "scripts/render_telemetry_hook_recipes.py",
         "scripts/resource_boundary_check.py",
         "scripts/review_studio_formatting.py",
         "scripts/review_studio_gates.py",
@@ -155,8 +156,8 @@
         "report": "reports/adoption_drift_report.json",
         "risk_band": "low",
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "adoption_rate": 0,
         "candidate_count": 0
       }
     },

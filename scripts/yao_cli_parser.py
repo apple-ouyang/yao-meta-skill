@@ -341,6 +341,16 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     telemetry_emit_cmd.add_argument("--dry-run", action="store_true")
     telemetry_emit_cmd.set_defaults(func=_handler(command_handlers, "command_telemetry_emit"))
 
+    telemetry_hooks_cmd = subparsers.add_parser(
+        "telemetry-hooks",
+        help="Render metadata-only telemetry client hook recipes.",
+    )
+    telemetry_hooks_cmd.add_argument("skill_dir", nargs="?", default=".")
+    telemetry_hooks_cmd.add_argument("--output-json")
+    telemetry_hooks_cmd.add_argument("--output-md")
+    telemetry_hooks_cmd.add_argument("--output-jsonl")
+    telemetry_hooks_cmd.set_defaults(func=_handler(command_handlers, "command_telemetry_hooks"))
+
     review_waivers_cmd = subparsers.add_parser(
         "review-waivers",
         help="Render or update human reviewer waiver evidence for Review Studio.",

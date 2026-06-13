@@ -92,6 +92,21 @@ After a client finishes a batch, import the spool:
 python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl
 ```
 
+## Client Hook Recipes
+
+Use `telemetry-hooks` to generate auditable Browser, Chrome, VS Code, CLI wrapper, and provider-adapter hook recipes:
+
+```bash
+python3 scripts/yao.py telemetry-hooks .
+```
+
+The report is written to:
+
+- `reports/telemetry_hook_recipes.json`
+- `reports/telemetry_hook_recipes.md`
+
+Each recipe includes a dry-run command, an emit command, the target local spool, trigger points, and the privacy contract. The report intentionally sets `native_auto_capture=false`; it proves the local hook contract and metadata-only command shape, not that a host client is already natively integrated.
+
 ## External Client Import
 
 External clients, browser extensions, editor adapters, or wrapper scripts may hand off already-sanitized JSONL through `telemetry-import`:
@@ -128,7 +143,7 @@ Package builders should exclude `reports/telemetry_events.jsonl`. The root repos
 
 ## Iteration Loop
 
-1. Capture metadata-only events locally, either manually with `adoption-drift --record-event`, automatically with opt-in `yao.py` CLI capture, through `telemetry-emit` client hooks, or through validated external JSONL import.
+1. Capture metadata-only events locally, either manually with `adoption-drift --record-event`, automatically with opt-in `yao.py` CLI capture, through `telemetry-emit` client hooks, through generated `telemetry-hooks` client recipes, or through validated external JSONL import.
 2. Render `reports/adoption_drift_report.md`.
 3. Convert missed triggers into trigger eval cases.
 4. Convert bad outputs into Output Eval assertions and failure taxonomy entries.
