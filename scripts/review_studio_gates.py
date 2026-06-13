@@ -148,8 +148,11 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
     execution_recorded_count = int(output_execution_summary.get("recorded_fixture_count", 0) or 0)
     review_pair_count = int(output_review_summary.get("pair_count", 0) or 0)
     review_judgment_count = int(output_review_summary.get("judgment_count", 0) or 0)
+    review_pending_count = int(output_review_summary.get("pending_count", 0) or 0)
     review_invalid_count = int(output_review_summary.get("invalid_decision_count", 0) or 0)
     blind_missing = maturity in {"production", "library", "governed"} and (not output_blind or blind_pair_count < case_count)
+    review_missing = maturity in {"production", "library", "governed"} and case_count > 0 and not output_review
+    review_pending = maturity in {"production", "library", "governed"} and bool(output_review) and review_pending_count > 0
     execution_failed = bool(output_execution) and (not output_execution.get("ok", True) or int(output_execution_summary.get("failure_count", 0) or 0) > 0)
     review_invalid = bool(output_review) and (not output_review.get("ok", True) or review_invalid_count > 0)
     output_blocked = (
@@ -159,7 +162,7 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         or execution_failed
         or review_invalid
     )
-    output_warn = file_backed == 0 or near_neighbor == 0 or boundary == 0 or blind_missing
+    output_warn = file_backed == 0 or near_neighbor == 0 or boundary == 0 or blind_missing or review_missing or review_pending
     if not output:
         output_status = "warn"
         output_detail = "output eval scorecard is missing; generate it before production review"
@@ -176,6 +179,8 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
                 else ""
             )
             + (f"; reviewed {review_judgment_count}/{review_pair_count}" if output_review else "")
+            + (f"; review pending {review_pending_count}" if review_pending else "")
+            + ("; review adjudication missing" if review_missing else "")
         )
     gates.append(
         gate(
@@ -509,4 +514,3 @@ def weighted_score(gates: list[dict[str, str]]) -> int:
         elif item["status"] == "warn":
             earned += weight * 0.6
     return int(round(earned / total * 100)) if total else 0
-

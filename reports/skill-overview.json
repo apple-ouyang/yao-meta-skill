@@ -96,7 +96,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 365 个词/字，references 约 14247 个词/字。",
+        "入口约 365 个词/字，references 约 14278 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -200,7 +200,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 365 个词/字，references 约 14247 个词/字。"
+      "上下文成本需要补强：入口约 365 个词/字，references 约 14278 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -941,7 +941,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 152,
-    "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+    "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -975,8 +975,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5",
-        "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
+        "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068",
+        "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b"
       },
       "compatibility": {
         "openai": "pass",
@@ -1007,7 +1007,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+        "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1023,7 +1023,7 @@
       "target_count": 3,
       "adapter_count": 3,
       "archive_present": true,
-      "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+      "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b",
       "archive_entry_count": 490,
       "failure_count": 0,
       "warning_count": 0
@@ -1097,12 +1097,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
+          "to": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+          "to": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
         }
       ]
     },

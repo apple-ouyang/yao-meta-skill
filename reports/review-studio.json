@@ -3,12 +3,12 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "decision": "ready",
-    "world_class_score": 100,
+    "decision": "review",
+    "world_class_score": 92,
     "gate_count": 13,
     "blocker_count": 0,
-    "warning_count": 0,
-    "action_count": 0,
+    "warning_count": 2,
+    "action_count": 2,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -34,8 +34,8 @@
     {
       "key": "output-lab",
       "label": "输出实验",
-      "status": "pass",
-      "detail": "5/5 cases; with-skill 100.0; baseline 0.0; file-backed 1; near-neighbor 1; blind A/B 5; exec 10; command 10; model 0; recorded 0; reviewed 0/5",
+      "status": "warn",
+      "detail": "5/5 cases; with-skill 100.0; baseline 0.0; file-backed 1; near-neighbor 1; blind A/B 5; exec 10; command 10; model 0; recorded 0; reviewed 0/5; review pending 5",
       "evidence": "reports/output_quality_scorecard.json",
       "link": "output_quality_scorecard.md"
     },
@@ -98,8 +98,8 @@
     {
       "key": "review-waivers",
       "label": "人工批准",
-      "status": "pass",
-      "detail": "0 active waivers cover current warnings",
+      "status": "warn",
+      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -121,8 +121,110 @@
     }
   ],
   "blockers": [],
-  "warnings": [],
-  "review_actions": [],
+  "warnings": [
+    {
+      "key": "output-lab",
+      "label": "输出实验",
+      "status": "warn",
+      "detail": "5/5 cases; with-skill 100.0; baseline 0.0; file-backed 1; near-neighbor 1; blind A/B 5; exec 10; command 10; model 0; recorded 0; reviewed 0/5; review pending 5",
+      "evidence": "reports/output_quality_scorecard.json",
+      "link": "output_quality_scorecard.md"
+    },
+    {
+      "key": "review-waivers",
+      "label": "人工批准",
+      "status": "warn",
+      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
+      "evidence": "reports/review_waivers.json",
+      "link": "review_waivers.md"
+    }
+  ],
+  "review_actions": [
+    {
+      "gate_key": "output-lab",
+      "label": "输出实验",
+      "status": "warn",
+      "priority": "warning",
+      "summary": "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。",
+      "why": "没有输出质量和人工盲评证据时，Skill 只能证明会触发，不能证明输出真的更好且经得起审查。",
+      "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_adjudication.md",
+      "source_refs": [
+        {
+          "path": "evals/output/cases.jsonl",
+          "label": "output eval cases",
+          "kind": "eval",
+          "line": 1,
+          "exists": true,
+          "link": "../evals/output/cases.jsonl"
+        },
+        {
+          "path": "reports/output_quality_scorecard.md",
+          "label": "output scorecard",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "output_quality_scorecard.md"
+        },
+        {
+          "path": "reports/output_execution_runs.md",
+          "label": "output execution runs",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "output_execution_runs.md"
+        },
+        {
+          "path": "reports/output_blind_review_pack.md",
+          "label": "blind A/B review pack",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "output_blind_review_pack.md"
+        },
+        {
+          "path": "reports/output_review_adjudication.md",
+          "label": "review adjudication",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "output_review_adjudication.md"
+        }
+      ],
+      "evidence": "reports/output_quality_scorecard.json",
+      "evidence_link": "output_quality_scorecard.md",
+      "verification_command": "python3 scripts/run_output_execution.py"
+    },
+    {
+      "gate_key": "review-waivers",
+      "label": "人工批准",
+      "status": "warn",
+      "priority": "warning",
+      "summary": "对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。",
+      "why": "warning 可以被接受，但必须可审计、会过期，并且不能掩盖 blocker。",
+      "source_fix": "reports/review_waivers.md",
+      "source_refs": [
+        {
+          "path": "reports/review_waivers.md",
+          "label": "waiver ledger",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "review_waivers.md"
+        },
+        {
+          "path": "references/review-waiver-method.md",
+          "label": "waiver method",
+          "kind": "method",
+          "line": 1,
+          "exists": true,
+          "link": "../references/review-waiver-method.md"
+        }
+      ],
+      "evidence": "reports/review_waivers.json",
+      "evidence_link": "review_waivers.md",
+      "verification_command": "python3 scripts/render_review_waivers.py ."
+    }
+  ],
   "evidence_paths": {
     "skill_overview": "reports/skill-overview.html",
     "review_viewer": "reports/review-viewer.html",
@@ -244,7 +346,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 365 个词/字，references 约 14247 个词/字。",
+            "入口约 365 个词/字，references 约 14278 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -348,7 +450,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 365 个词/字，references 约 14247 个词/字。"
+          "上下文成本需要补强：入口约 365 个词/字，references 约 14278 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1089,7 +1191,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 152,
-        "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+        "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1123,8 +1225,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5",
-            "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
+            "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068",
+            "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b"
           },
           "compatibility": {
             "openai": "pass",
@@ -1155,7 +1257,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+            "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1171,7 +1273,7 @@
           "target_count": 3,
           "adapter_count": 3,
           "archive_present": true,
-          "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+          "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b",
           "archive_entry_count": 490,
           "failure_count": 0,
           "warning_count": 0
@@ -1245,12 +1347,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
+              "to": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+              "to": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
             }
           ]
         },
@@ -2978,7 +3080,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.49,
+          "duration_ms": 26.15,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3006,7 +3108,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.5,
+          "duration_ms": 25.94,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3029,7 +3131,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.7,
+          "duration_ms": 26.36,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3057,7 +3159,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.01,
+          "duration_ms": 26.19,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3080,7 +3182,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.98,
+          "duration_ms": 25.5,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3108,7 +3210,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.64,
+          "duration_ms": 25.91,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3131,7 +3233,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.61,
+          "duration_ms": 29.64,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3158,7 +3260,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 22.62,
+          "duration_ms": 30.73,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3181,7 +3283,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.24,
+          "duration_ms": 31.19,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3210,7 +3312,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 23.29,
+          "duration_ms": 33.98,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -7181,7 +7283,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 152,
-        "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+        "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
       },
       "failures": [],
       "warnings": [],
@@ -8980,10 +9082,10 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 811,
-        "other_text_tokens": 871465,
+        "other_text_tokens": 871624,
         "estimated_initial_load_tokens": 987,
-        "estimated_total_text_tokens": 872276,
-        "relevant_file_count": 367,
+        "estimated_total_text_tokens": 872435,
+        "relevant_file_count": 368,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.7
@@ -10692,7 +10794,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13T11:10:15Z",
+      "generated_at": "2026-06-13T11:22:45Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -10851,8 +10953,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5",
-          "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
+          "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068",
+          "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b"
         },
         "compatibility": {
           "openai": "pass",
@@ -10883,7 +10985,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+          "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -10907,7 +11009,7 @@
               "agent-skills-compatible"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+            "package_sha256": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
           }
         ]
       },
@@ -10930,7 +11032,7 @@
         "target_count": 3,
         "adapter_count": 3,
         "archive_present": true,
-        "archive_sha256": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451",
+        "archive_sha256": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b",
         "archive_entry_count": 490,
         "failure_count": 0,
         "warning_count": 0
@@ -11627,12 +11729,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "6972bb1d72746b6a16c7dbf1ec73f438252756dd850fe474bc3b75af8649d451"
+            "to": "9208791ccc286c01c0614f5de67ebcff69d90c5be8b09e19ad9617e4059d8d6b"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "d53de57f6593fca3dd937832f5923bd5381250e382631a6b6616e2405de748b5"
+            "to": "af6eab9b547a289ed5035eed9a9dd54cfdd01459acf1e2ba57d8ed3e2fbab068"
           }
         ]
       },

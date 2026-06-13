@@ -40,7 +40,7 @@ Production, library, and governed reviews should also show a blind A/B review pa
 
 When `reports/output_execution_runs.json` exists, Review Studio should show the number of variant runs, command-executed runs, model-executed runs, recorded fixtures, timing-observed runs, and token-estimated runs. Recorded fixtures are valid reproducibility evidence, but they must not be described as model-executed output evidence.
 
-When `reports/output_review_adjudication.json` exists, Review Studio should show reviewed pairs and pending pairs. Pending reviewer decisions are acceptable as an explicit state, but they must not be counted as agreement or human review evidence. Invalid adjudication records should block release because they make the blind review audit untrustworthy.
+When `reports/output_review_adjudication.json` exists, Review Studio should show reviewed pairs and pending pairs. Pending reviewer decisions are acceptable as an explicit state, but they must not be counted as agreement or human review evidence. For production, library, and governed packages, pending reviewer decisions should keep the Output Lab in `warn` until reviewer decisions are recorded or the warning is explicitly accepted in the waiver ledger. Invalid adjudication records should block release because they make the blind review audit untrustworthy.
 
 The Operations Loop must never display raw telemetry logs. It should link only to `reports/adoption_drift_report.md`; privacy or schema violations are blockers.
 

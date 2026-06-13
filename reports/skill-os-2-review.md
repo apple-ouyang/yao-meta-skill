@@ -27,9 +27,9 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Runtime Permission Probes v0 for packaged target adapter checks, explicit native-enforcement flags, metadata fallback evidence, and residual permission risks.
 - Atlas Scope Policy v0 so examples, evolution snapshots, embedded generated skills, and validator fixtures remain visible in the full portfolio report without polluting release-actionable gates.
 - Review Annotations v0 for reviewer comments tied to Review Studio gates, source/report paths, and optional line numbers; open blocker annotations now block the Review Studio decision.
-- Review Studio now reaches a clean `ready` decision for the root Meta Skill: `13 / 13` gates pass, world-class score `100`, no blockers, no warnings, and no review actions required.
+- Review Studio now avoids over-claiming release readiness when blind A/B adjudication is still pending: the root Meta Skill is in `review` with score `92`, no blockers, two warnings, and explicit actions for Output Lab reviewer adjudication plus waiver handling.
 
-This is still not the final world-class state. Target-native behavior contracts are now explicit and local output-eval command execution is wired, but deeper provider-native execution transforms, real client telemetry capture, installer integration, provider-backed model-executed output eval, real human adjudication decisions, and native runtime permission enforcement remain open.
+This is still not the final world-class state. Target-native behavior contracts are now explicit and local output-eval command execution is wired, and Review Studio now keeps pending human adjudication visible as a warning instead of treating it as a clean pass. Deeper provider-native execution transforms, real client telemetry capture, installer integration, provider-backed model-executed output eval, real human adjudication decisions, and native runtime permission enforcement remain open.
 
 ## Coverage Matrix
 
@@ -73,7 +73,7 @@ Next move: add provider-backed model execution for holdout cases and one real mu
 
 ### 3. Review Studio is unified and now has reviewer actions plus annotations
 
-The Review Studio page aggregates intent, trigger, output, context, runtime, trust, permission approvals, runtime permission probes, atlas, operations-loop, reviewer waiver, reviewer annotations, registry, and release gates. It exposes current warnings directly and emits `review_actions` for each non-pass gate with a source-fix location, structured `source_refs`, reason, evidence path, and verification command. It now also loads `reports/review_annotations.json`, renders reviewer comments tied to gates and source/report paths, and blocks the page decision when any open blocker annotation exists. After adding root intent context, Atlas scope policy, metadata-only telemetry evidence, runtime permission probe evidence, action source refs, and an empty annotation ledger, the current root report is clean: decision `ready`, score `100`, `13` gates, `0` gate blockers, `0` gate warnings, `0` actions, and `0` open annotation blockers.
+The Review Studio page aggregates intent, trigger, output, context, runtime, trust, permission approvals, runtime permission probes, atlas, operations-loop, reviewer waiver, reviewer annotations, registry, and release gates. It exposes current warnings directly and emits `review_actions` for each non-pass gate with a source-fix location, structured `source_refs`, reason, evidence path, and verification command. It now also loads `reports/review_annotations.json`, renders reviewer comments tied to gates and source/report paths, and blocks the page decision when any open blocker annotation exists. The current root report is intentionally not a clean pass: decision `review`, score `92`, `13` gates, `0` blockers, `2` warnings, `2` actions, and `0` open annotation blockers. The warnings are useful evidence: the automated Output Eval Lab is strong, but the blind A/B adjudication still has `5` pending reviewer decisions, so the package should not claim fully reviewed status.
 
 Next move: add richer source-line anchors inside generated reports and record real reviewer annotations during the next human review pass.
 
@@ -101,13 +101,13 @@ Next move: add real client or installer permission enforcement integration.
 | Runtime Permission Probes | `3 / 3` target adapters probed, `0` native-enforcement adapters, `3` explicit metadata fallbacks, `3` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `3 / 3` target adapters present, archive verified, `483` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `483` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `3` adapters readable, `0` failures, `0` warnings |
+| Package Verification | `3 / 3` target adapters present, archive verified, `490` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `490` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `3` adapters readable, `0` failures, `0` warnings |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only activation event, adoption `100`, risk band `low`; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
-| Review Waivers | ledger generated; current release has no warning gates to waive, blockers remain non-waivable in v0 |
+| Review Waivers | ledger generated; current release has `1` warning gate that still needs reviewer decision or a time-bounded waiver; blockers remain non-waivable in v0 |
 | Review Annotations | ledger generated; current release has `0` reviewer annotations and `0` open annotation blockers |
-| Review Studio | decision `ready`, world-class score `100`, `13` gates, `0` blockers, `0` warnings, `0` review actions, `0` open annotation blockers |
+| Review Studio | decision `review`, world-class score `92`, `13` gates, `0` blockers, `2` warnings, `2` review actions, `0` open annotation blockers |
 | IR-first Packaging | `openai`, `claude`, and `generic` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, and semantic parity checks |
 | Context Budget | initial load `987/1000`, under the production budget |
 | CI | `make ci-test` target count is now `56` after adding Review Annotations |
@@ -116,6 +116,6 @@ Next move: add real client or installer permission enforcement integration.
 
 1. Deepen target-native behavior contracts into provider-native execution and installer integrations.
 2. Add native client or installer enforcement for approved high-permission capabilities.
-3. Expand Output Eval Lab from local command-runner evidence to provider-backed model holdout and real reviewer-adjudicated cases.
+3. Expand Output Eval Lab from local command-runner evidence to provider-backed model holdout and real reviewer-adjudicated cases; record the current blind A/B decisions before claiming fully ready status.
 4. Add real reviewer annotation records during the next human review pass.
 5. Connect Skill Atlas with real client telemetry and drift history.

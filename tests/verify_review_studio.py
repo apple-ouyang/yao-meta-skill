@@ -229,26 +229,27 @@ def main() -> None:
     payload = json.loads(proc.stdout)
     assert payload["ok"], payload
     assert payload["schema_version"] == "2.0", payload
-    assert payload["summary"]["decision"] == "ready", payload
+    assert payload["summary"]["decision"] == "review", payload
     assert payload["summary"]["gate_count"] == 13, payload
-    assert payload["summary"]["world_class_score"] == 100, payload
-    assert payload["summary"]["warning_count"] == 0, payload
+    assert payload["summary"]["world_class_score"] == 92, payload
+    assert payload["summary"]["warning_count"] == 2, payload
     assert payload["summary"]["blocker_count"] == 0, payload
-    assert payload["summary"]["action_count"] == 0, payload
+    assert payload["summary"]["action_count"] == 2, payload
     assert payload["summary"]["annotation_count"] == 0, payload
     assert payload["summary"]["open_annotation_blocker_count"] == 0, payload
     assert payload["summary"]["action_count"] == payload["summary"]["warning_count"] + payload["summary"]["blocker_count"], payload
-    assert payload["review_actions"] == [], payload
+    assert {item["gate_key"] for item in payload["review_actions"]} == {"output-lab", "review-waivers"}, payload
     gate_keys = {item["key"] for item in payload["gates"]}
     assert {"intent-canvas", "trigger-lab", "output-lab", "runtime-matrix", "trust-report", "permission-gates", "permission-runtime", "skill-atlas", "operations-loop", "review-waivers", "registry-audit", "release-notes"} <= gate_keys, payload
     output_gate = next(item for item in payload["gates"] if item["key"] == "output-lab")
-    assert output_gate["status"] == "pass", output_gate
+    assert output_gate["status"] == "warn", output_gate
     assert "5/5 cases" in output_gate["detail"], output_gate
     assert "file-backed 1" in output_gate["detail"], output_gate
     assert "blind A/B 5" in output_gate["detail"], output_gate
     assert "exec 10" in output_gate["detail"], output_gate
     assert "model 0" in output_gate["detail"], output_gate
     assert "reviewed 0/5" in output_gate["detail"], output_gate
+    assert "review pending 5" in output_gate["detail"], output_gate
     release_gate = next(item for item in payload["gates"] if item["key"] == "release-notes")
     assert "upgrade minor declared / minor recommended" in release_gate["detail"], release_gate
     assert "reports/upgrade_check.json" in release_gate["evidence"], release_gate
@@ -279,8 +280,8 @@ def main() -> None:
     assert "risk low" in operations_gate["detail"], operations_gate
     assert "reports/adoption_drift_report.json" in operations_gate["evidence"], operations_gate
     waivers_gate = next(item for item in payload["gates"] if item["key"] == "review-waivers")
-    assert waivers_gate["status"] == "pass", waivers_gate
-    assert "cover current warnings" in waivers_gate["detail"], waivers_gate
+    assert waivers_gate["status"] == "warn", waivers_gate
+    assert "warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
     assert "reports/review_waivers.json" in waivers_gate["evidence"], waivers_gate
     assert output_html.exists(), output_html
     assert output_json.exists(), output_json
@@ -301,7 +302,7 @@ def main() -> None:
     assert full_payload["data"]["runtime_permissions"]["summary"]["metadata_fallback_count"] == 3, full_payload["data"]["runtime_permissions"]
     assert full_payload["evidence_paths"]["runtime_permissions"] == "reports/runtime_permission_probes.md", full_payload["evidence_paths"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
-    assert action_keys == set(), full_payload["review_actions"]
+    assert action_keys == {"output-lab", "review-waivers"}, full_payload["review_actions"]
     assert full_payload["data"]["atlas"]["summary"]["actionable_route_collision_count"] == 0, full_payload["data"]["atlas"]
     assert full_payload["data"]["atlas"]["summary"]["non_actionable_issue_count"] >= 1, full_payload["data"]["atlas"]
     synthetic_actions = review_studio.build_review_actions(
@@ -338,7 +339,8 @@ def main() -> None:
     assert "Review Studio 2.0" in html, html[:400]
     assert "审查闸门" in html, html[:1200]
     assert "修复动作" in html, html[:3000]
-    assert "当前没有 blocker 或 warning" in html, html[:9000]
+    assert "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。" in html, html[:9000]
+    assert "对保留的 warning 写入 reviewer、理由、范围和到期时间，或修掉 warning。" in html, html[:9000]
     assert "审查批注" in html, html[:9000]
     assert "当前没有 reviewer 批注" in html, html[:9000]
     assert "输出实验" in html, html[:2000]
