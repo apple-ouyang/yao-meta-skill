@@ -11,6 +11,7 @@ from review_studio_formatting import registry_package_summary, render_kv_grid
 from review_studio_gates import add_blockers_from_gate, build_gates, status_label, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
 from review_studio_output_review import render_output_review_section
+from review_studio_waivers import render_waiver_candidates_panel
 from review_studio_world_class import render_world_class_evidence_entries, render_world_class_intake_checklist
 
 
@@ -290,6 +291,7 @@ def render_html(report: dict[str, Any]) -> str:
         ["waiver_count", "active_count", "expired_count", "invalid_count", "covered_gate_count"],
         "no review waiver summary",
     )
+    waiver_candidates_panel = render_waiver_candidates_panel(report["data"].get("review_waivers", {}))
     world_class_panel = render_kv_grid(
         world_class_summary,
         [
@@ -497,9 +499,15 @@ def render_html(report: dict[str, Any]) -> str:
       <div class="panel"><h2>漂移信号</h2>{adoption_panel}</div>
     </section>
 
-    <section id="waivers" class="twocol">
-      <div class="panel"><h2>人工批准</h2><p>{html.escape(gate_details.get('review-waivers', 'review waiver ledger missing'))}</p></div>
-      <div class="panel"><h2>批准台账</h2>{waiver_panel}</div>
+    <section id="waivers">
+      <h2>人工批准</h2>
+      <p class="muted">warning 可以被有边界地接受，但必须写入 reviewer、理由、范围和到期时间；blocker 与 world-class 完成证据不能通过 waiver 变成通过。</p>
+      <div class="twocol waiver-summary">
+        <div class="panel"><h2>批准概况</h2><p>{html.escape(gate_details.get('review-waivers', 'review waiver ledger missing'))}</p></div>
+        <div class="panel"><h2>批准台账</h2>{waiver_panel}</div>
+      </div>
+      <h3 class="section-subtitle">批准候选</h3>
+      {waiver_candidates_panel}
     </section>
 
     <section id="world-class">

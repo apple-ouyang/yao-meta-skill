@@ -433,6 +433,20 @@ def main() -> None:
     assert all(not item["answer_key_visible"] for item in output_review_checklist), output_review_checklist
     assert output_review_checklist[0]["commands"]["adjudicate"] == "python3 scripts/yao.py output-review", output_review_checklist[0]
     assert full_payload["data"]["review_annotations"]["summary"]["annotation_count"] == 0, full_payload["data"]["review_annotations"]
+    waiver_summary = full_payload["data"]["review_waivers"]["summary"]
+    assert waiver_summary["waiver_candidate_count"] == 2, waiver_summary
+    assert waiver_summary["waiverable_open_count"] == 1, waiver_summary
+    assert waiver_summary["non_waivable_count"] == 1, waiver_summary
+    waiver_candidates = {item["gate_key"]: item for item in full_payload["data"]["review_waivers"]["waiver_candidates"]}
+    assert waiver_candidates["output-lab"]["waiver_allowed"] is True, waiver_candidates
+    assert waiver_candidates["output-lab"]["status"] == "needs-reviewer-decision", waiver_candidates
+    assert waiver_candidates["output-lab"]["risk_summary"] == "review pending 5; model-executed 0; output failures 0", waiver_candidates
+    assert "review-waivers . --add-waiver" in waiver_candidates["output-lab"]["suggested_command"], waiver_candidates
+    assert "Does not count as provider, human, or public world-class completion evidence" in waiver_candidates["output-lab"]["world_class_boundary"], waiver_candidates
+    assert waiver_candidates["world-class-evidence"]["waiver_allowed"] is False, waiver_candidates
+    assert waiver_candidates["world-class-evidence"]["status"] == "cannot-waive", waiver_candidates
+    assert waiver_candidates["world-class-evidence"]["risk_summary"] == "4 pending evidence entries; 1 human pending; 3 external pending", waiver_candidates
+    assert "Non-waivable completion boundary" in waiver_candidates["world-class-evidence"]["world_class_boundary"], waiver_candidates
     assert full_payload["data"]["compiled_targets"]["summary"]["target_count"] >= 4, full_payload["data"]["compiled_targets"]
     assert full_payload["data"]["compiled_targets"]["summary"]["block_count"] == 0, full_payload["data"]["compiled_targets"]
     assert full_payload["data"]["runtime_permissions"]["summary"]["metadata_fallback_count"] == 4, full_payload["data"]["runtime_permissions"]
@@ -600,6 +614,19 @@ def main() -> None:
     assert "Install" in html, html[:6500]
     assert "运营回路" in html, html[:7600]
     assert "人工批准" in html, html[:8200]
+    assert "warning 可以被有边界地接受" in html, html
+    assert "批准概况" in html, html
+    assert "批准候选" in html, html
+    assert "waiver-candidate-grid" in html, html
+    assert "可批准 · needs-reviewer-decision" in html, html
+    assert "不可批准 · cannot-waive" in html, html
+    assert "review pending 5; model-executed 0; output failures 0" in html, html
+    assert "4 pending evidence entries; 1 human pending; 3 external pending" in html, html
+    assert "Does not count as provider, human, or public world-class completion evidence" in html, html
+    assert "Non-waivable completion boundary" in html, html
+    assert "python3 scripts/yao.py review-waivers . --add-waiver" in html, html
+    assert "Reviewer confirms this release does not claim provider-backed or human-adjudicated output superiority" in html, html
+    assert "Do not use a waiver to claim public world-class readiness" in html, html
     assert "权限批准" in html, html[:9000]
     assert "权限探针" in html, html[:9500]
     assert "Python 兼容" in html, html[:10000]

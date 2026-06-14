@@ -395,6 +395,77 @@ def review_studio_css() -> str:
       white-space: normal;
       display: block;
     }
+    .section-subtitle {
+      margin-top: 22px;
+      margin-bottom: 12px;
+      color: var(--ink);
+    }
+    .waiver-summary { margin-top: 16px; }
+    .waiver-candidate-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+    .waiver-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff;
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+    .waiver-card.allowed { border-left: 4px solid var(--warn); }
+    .waiver-card.blocked { border-left: 4px solid var(--block); }
+    .waiver-card span,
+    .waiver-card p,
+    .waiver-card dd,
+    .waiver-card li {
+      color: var(--muted);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .waiver-card dl {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 6px 10px;
+      margin: 0;
+    }
+    .waiver-card dt {
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .waiver-card dd { margin: 0; min-width: 0; }
+    .waiver-review {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .waiver-review h4 {
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .waiver-review ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .waiver-command {
+      display: grid;
+      gap: 4px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    .waiver-command span {
+      color: var(--ink);
+      font-size: 14px;
+    }
+    .waiver-command code {
+      display: block;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
     .action-card span,
     .annotation-card span,
     .action-card small,
@@ -444,7 +515,7 @@ def review_studio_css() -> str:
       font-size: 13px;
     }
     @media (max-width: 980px) {
-      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-intake-grid, .world-intake-steps, .kv-grid { grid-template-columns: 1fr; }
+      .metrics, .gates, .twocol, .actions-grid, .annotations-grid, .output-review-grid, .output-review-steps, .world-evidence-grid, .world-evidence-columns, .world-intake-grid, .world-intake-steps, .waiver-candidate-grid, .waiver-card dl, .kv-grid { grid-template-columns: 1fr; }
       main { padding: 32px 18px 60px; }
       nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
       nav a { flex: 0 0 auto; }
