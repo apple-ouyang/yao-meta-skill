@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -318,7 +319,9 @@ def main() -> None:
     assert "review pending 5" in output_gate["detail"], output_gate
     context_gate = next(item for item in payload["gates"] if item["key"] == "context-budget")
     assert context_gate["status"] == "pass", context_gate
-    assert "initial load 944/1000" in context_gate["detail"], context_gate
+    initial_load = re.search(r"initial load (\d+)/1000", context_gate["detail"])
+    assert initial_load, context_gate
+    assert int(initial_load.group(1)) <= 1000, context_gate
     assert "deferred " in context_gate["detail"], context_gate
     assert "/120000" in context_gate["detail"], context_gate
     assert "top deferred scripts" in context_gate["detail"], context_gate

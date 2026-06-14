@@ -41,6 +41,7 @@ def main() -> None:
     assert payload["trigger_surface"]["edge_cases"], payload
     assert payload["workflow"]["steps"], payload
     assert payload["workflow"]["decision_points"], payload
+    assert any("`Governed`" in item for item in payload["workflow"]["decision_points"]), payload["workflow"]["decision_points"]
     assert payload["resources"]["references"], payload
     assert payload["resources"]["scripts"], payload
     assert payload["resources"]["reports"], payload

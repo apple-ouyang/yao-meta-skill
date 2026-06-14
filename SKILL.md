@@ -19,6 +19,7 @@ metadata:
 - `Scaffold`: exploratory or personal.
 - `Production`: team reuse.
 - `Library`: shared infrastructure.
+- `Governed`: high-trust, policy-sensitive, or release-critical.
 
 Mode rules: [Method](references/skill-engineering-method.md), [Operating Modes](references/operating-modes.md), [Resource Boundaries](references/resource-boundaries.md).
 
