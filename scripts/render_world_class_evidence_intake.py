@@ -93,6 +93,8 @@ def build_operator_checklist(
                 "blocking_reason": blocking_reason,
                 "template_status": template_result.get("status", "missing") if template_result else "missing",
                 "submission_status": submission_result.get("status", "missing") if submission_result else "missing",
+                "source_accepted": entry.get("source_accepted") is True,
+                "observed_state": entry.get("observed_state", {}),
                 "template_path": rel_path(template_path, skill_dir),
                 "submission_path": rel_path(submission_path, skill_dir),
                 "commands": {

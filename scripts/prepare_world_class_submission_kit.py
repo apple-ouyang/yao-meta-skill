@@ -197,6 +197,68 @@ def build_artifact_checklist(skill_dir: Path, items: list[dict[str, Any]]) -> li
     return rows
 
 
+SOURCE_CHECK_SPECS = {
+    "provider-holdout": [
+        ("Provider model run", "model_executed_count", ">0", "Run provider-backed output-exec with real credentials."),
+        ("Timing observed", "timing_observed_count", ">0", "Provider execution should record timing metadata."),
+        ("Token usage observed", "token_observed_count", ">0", "Provider execution should return non-estimated token usage."),
+    ],
+    "human-adjudication": [
+        ("Review pairs exist", "pair_count", ">0", "Generate the blind A/B review pack."),
+        ("No pending decisions", "pending_count", "==0", "Record a reviewer choice for every pair."),
+        ("Judgments complete", "judgment_count", "==pair_count", "Every pair needs one valid human judgment."),
+        ("No invalid decisions", "invalid_decision_count", "==0", "Fix malformed winner/confidence entries."),
+    ],
+    "native-permission-enforcement": [
+        ("Native enforcement", "native_enforcement_count", ">0", "Collect real target-client or external runtime guard proof."),
+        ("Probe failures", "failure_count", "==0", "Runtime permission probes must stay clean."),
+        ("Installer support", "installer_enforcement_ready", "true", "Installer enforcement is supporting evidence, not native proof."),
+    ],
+    "native-client-telemetry": [
+        ("External events", "external_source_events", ">0", "Import at least one metadata-only event from a real client."),
+        ("Adoption sample", "adoption_sample_count", ">0", "Telemetry must include adoption outcome evidence."),
+        ("Raw content blocked", "raw_content_allowed", "false", "Telemetry must stay metadata-only."),
+    ],
+}
+
+
+def source_check_passed(actual: Any, expected: str, observed_state: dict[str, Any]) -> bool:
+    if expected == ">0":
+        return isinstance(actual, (int, float)) and actual > 0
+    if expected == "==0":
+        return actual == 0
+    if expected == "true":
+        return actual is True
+    if expected == "false":
+        return actual is False
+    if expected == "==pair_count":
+        return actual == observed_state.get("pair_count") and isinstance(actual, (int, float)) and actual > 0
+    return False
+
+
+def build_source_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for item in items:
+        key = str(item.get("evidence_key", ""))
+        observed_state = item.get("observed_state", {}) if isinstance(item.get("observed_state", {}), dict) else {}
+        for label, field, expected, next_action in SOURCE_CHECK_SPECS.get(key, []):
+            actual = observed_state.get(field)
+            passed = source_check_passed(actual, expected, observed_state)
+            rows.append(
+                {
+                    "evidence_key": key,
+                    "label": label,
+                    "field": field,
+                    "expected": expected,
+                    "actual": actual,
+                    "status": "pass" if passed else "blocked",
+                    "source_accepted": item.get("source_accepted") is True,
+                    "next_action": next_action,
+                }
+            )
+    return rows
+
+
 def render_readme(report: dict[str, Any]) -> str:
     commands = report["commands"]
     lines = [
@@ -242,6 +304,21 @@ def render_readme(report: dict[str, Any]) -> str:
         digest = item.get("sha256") or "n/a"
         lines.append(
             f"| `{item['evidence_key']}` | `{item['path']}` | `{item['status']}` | `{digest}` |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Source Evidence Snapshot",
+            "",
+            "These checks explain why a draft is not ready for ledger acceptance yet. They mirror current aggregate reports and do not accept evidence by themselves.",
+            "",
+            "| Evidence | Check | Current | Expected | Status |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+    )
+    for item in report.get("source_checklist", []):
+        lines.append(
+            f"| `{item['evidence_key']}` | {item['label']} | `{item['actual']}` | `{item['expected']}` | `{item['status']}` |"
         )
     lines.extend(
         [
@@ -329,6 +406,36 @@ def render_html_artifact_checklist(items: list[dict[str, Any]]) -> str:
     )
 
 
+def render_html_source_checklist(items: list[dict[str, Any]]) -> str:
+    if not items:
+        return "<p class=\"muted\">No source checks were listed for the requested evidence.</p>"
+    return "".join(
+        """
+        <article class="source-card {status}">
+          <div>
+            <span>{key}</span>
+            <h3>{label}</h3>
+          </div>
+          <dl>
+            <dt>Field</dt><dd><code>{field}</code></dd>
+            <dt>Current</dt><dd><code>{actual}</code></dd>
+            <dt>Expected</dt><dd><code>{expected}</code></dd>
+            <dt>Action</dt><dd>{action}</dd>
+          </dl>
+        </article>
+        """.format(
+            status=html_text(item.get("status", "")),
+            key=html_text(item.get("evidence_key", "")),
+            label=html_text(item.get("label", "")),
+            field=html_text(item.get("field", "")),
+            actual=html_text(item.get("actual", "")),
+            expected=html_text(item.get("expected", "")),
+            action=html_text(item.get("next_action", "")),
+        )
+        for item in items
+    )
+
+
 def render_html_item(item: dict[str, Any]) -> str:
     must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
     return f"""
@@ -375,6 +482,7 @@ def render_html(report: dict[str, Any]) -> str:
     stat_html = "".join(f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>" for label, value in stats)
     evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
     artifact_html = render_html_artifact_checklist(report.get("artifact_checklist", []))
+    source_html = render_html_source_checklist(report.get("source_checklist", []))
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -407,12 +515,14 @@ def render_html(report: dict[str, Any]) -> str:
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .panel {{ padding:20px; }}
     .two-col {{ display:grid; grid-template-columns:minmax(0, .45fr) minmax(0, 1fr); gap:18px; align-items:start; }}
-    .draft-grid, .evidence-grid, .artifact-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
-    .draft-card, .evidence-card, .artifact-card {{ padding:18px; min-width:0; }}
+    .draft-grid, .evidence-grid, .artifact-grid, .source-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
+    .draft-card, .evidence-card, .artifact-card, .source-card {{ padding:18px; min-width:0; }}
     .draft-card.written, .draft-card.exists {{ border-left:4px solid var(--pass); }}
     .draft-card.skipped {{ border-left:4px solid var(--warn); }}
     .evidence-card.awaiting-submission, .evidence-card.fix-submission, .evidence-card.fix-template, .artifact-card.missing, .artifact-card.glob-no-match, .artifact-card.unsafe-path, .artifact-card.raw-content-disallowed {{ border-left:4px solid var(--warn); }}
     .artifact-card.ready {{ border-left:4px solid var(--pass); }}
+    .source-card.blocked {{ border-left:4px solid var(--warn); }}
+    .source-card.pass {{ border-left:4px solid var(--pass); }}
     dl {{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }}
     dt {{ color:var(--ink); }}
     dd {{ margin:0; min-width:0; overflow-wrap:anywhere; }}
@@ -426,11 +536,11 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid li, .notice li {{ overflow-wrap:anywhere; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     .errors {{ color:var(--warn); }}
-    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
-  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
   <main class="shell">
     <section class="hero">
       <span class="eyebrow">Evidence Intake</span>
@@ -444,6 +554,7 @@ def render_html(report: dict[str, Any]) -> str:
     </section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
     <section class="section" id="artifacts"><h2>Artifact Checklist</h2><p class="muted">Copy concrete paths and SHA-256 digests from here into artifact_refs after real evidence exists. Glob patterns are expanded for operator convenience only.</p><div class="artifact-grid">{artifact_html}</div></section>
+    <section class="section" id="source"><h2>Source Evidence Snapshot</h2><p class="muted">This section shows current aggregate source checks. It explains remaining blockers without changing the ledger.</p><div class="source-grid">{source_html}</div></section>
     <section class="section" id="evidence"><h2>Evidence Requirements</h2><div class="evidence-grid">{evidence_html}</div></section>
     <section class="section" id="safety"><h2>Safety Boundary</h2><div class="notice"><ul><li>Drafts never count as accepted ledger evidence.</li><li>Valid intake means ready for ledger review, not world-class completion.</li><li>Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content.</li></ul></div></section>
   </main>
@@ -467,6 +578,7 @@ def build_submission_kit(
     template_results = template_result_by_key(intake)
     files = [copy_template(skill_dir, output_dir, item, template_results, overwrite) for item in items]
     artifact_checklist = build_artifact_checklist(skill_dir, items)
+    source_checklist = build_source_checklist(items)
     manifest_path = output_dir / "submission_manifest.json"
     readme_path = output_dir / "README.md"
     output_html = output_html or (output_dir / "index.html")
@@ -476,6 +588,8 @@ def build_submission_kit(
     artifact_ready_count = sum(1 for item in artifact_checklist if item.get("artifact_ref_ready"))
     artifact_missing_count = sum(1 for item in artifact_checklist if not item.get("artifact_ref_ready"))
     artifact_glob_count = sum(1 for item in artifact_checklist if item.get("concrete_reference_required"))
+    source_pass_count = sum(1 for item in source_checklist if item.get("status") == "pass")
+    source_blocked_count = sum(1 for item in source_checklist if item.get("status") != "pass")
     ok = not unknown_keys and skipped_count == 0
     report = {
         "schema_version": "1.0",
@@ -494,6 +608,9 @@ def build_submission_kit(
             "artifact_ready_count": artifact_ready_count,
             "artifact_missing_count": artifact_missing_count,
             "artifact_glob_expansion_count": artifact_glob_count,
+            "source_check_count": len(source_checklist),
+            "source_pass_count": source_pass_count,
+            "source_blocked_count": source_blocked_count,
             "drafts_count_as_evidence": False,
             "ledger_counts_submission_as_completion": False,
             "decision": "submission-kit-ready" if ok else "fix-submission-kit",
@@ -501,6 +618,7 @@ def build_submission_kit(
         "unknown_evidence_keys": unknown_keys,
         "files": files,
         "artifact_checklist": artifact_checklist,
+        "source_checklist": source_checklist,
         "evidence_items": items,
         "commands": {
             "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {shell_path(output_dir, skill_dir)}",

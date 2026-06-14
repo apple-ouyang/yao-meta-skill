@@ -167,6 +167,9 @@ def main() -> None:
     assert "provider-backed model run" in checklist["provider-holdout"]["must_collect"]["provenance_requirements"], checklist["provider-holdout"]
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in checklist["provider-holdout"]["must_collect"]["success_checks"], checklist["provider-holdout"]
     assert checklist["provider-holdout"]["anti_overclaim"]["local_command_runner_counts_as_provider_model"] is False, checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["source_accepted"] is False, checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["observed_state"]["model_executed_count"] == 0, checklist["provider-holdout"]
+    assert checklist["provider-holdout"]["observed_state"]["timing_observed_count"] > 0, checklist["provider-holdout"]
     markdown = default_md.read_text(encoding="utf-8")
     assert "World-Class Evidence Intake" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
@@ -191,6 +194,9 @@ def main() -> None:
     assert kit_payload["summary"]["written_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["artifact_checklist_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["artifact_ready_count"] >= 1, kit_payload["summary"]
+    assert kit_payload["summary"]["source_check_count"] == 3, kit_payload["summary"]
+    assert kit_payload["summary"]["source_pass_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["source_blocked_count"] == 2, kit_payload["summary"]
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
     assert kit_payload["safety"]["template_only_drafts"] is True, kit_payload["safety"]
     assert kit_payload["safety"]["raw_content_allowed"] is False, kit_payload["safety"]
@@ -200,23 +206,32 @@ def main() -> None:
     assert artifact_rows["reports/output_execution_runs.json"]["artifact_ref_ready"] is True, artifact_rows
     assert len(artifact_rows["reports/output_execution_runs.json"]["sha256"]) == 64, artifact_rows
     assert artifact_rows["reports/output_execution_runs.json"]["contains_raw_content"] is False, artifact_rows
+    source_rows = {item["field"]: item for item in kit_payload["source_checklist"]}
+    assert source_rows["model_executed_count"]["status"] == "blocked", source_rows
+    assert source_rows["model_executed_count"]["actual"] == 0, source_rows
+    assert source_rows["timing_observed_count"]["status"] == "pass", source_rows
+    assert source_rows["token_observed_count"]["status"] == "blocked", source_rows
     kit_draft = json.loads((kit_dir / "provider-holdout.json").read_text(encoding="utf-8"))
     assert kit_draft["template_only"] is True, kit_draft
     assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
     kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
     assert kit_manifest["summary"]["ledger_counts_submission_as_completion"] is False, kit_manifest["summary"]
     assert kit_manifest["artifact_checklist"] == kit_payload["artifact_checklist"], kit_manifest["artifact_checklist"]
+    assert kit_manifest["source_checklist"] == kit_payload["source_checklist"], kit_manifest["source_checklist"]
     assert kit_manifest["artifacts"]["html"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/index.html"), kit_manifest["artifacts"]
     kit_readme = (kit_dir / "README.md").read_text(encoding="utf-8")
     assert "Drafts are not accepted evidence." in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
+    assert "Source Evidence Snapshot" in kit_readme, kit_readme
     assert "reports/output_execution_runs.json" in kit_readme, kit_readme
+    assert "Provider model run" in kit_readme, kit_readme
     kit_html = (kit_dir / "index.html").read_text(encoding="utf-8")
     assert "<title>World-Class Evidence Submission Kit</title>" in kit_html, kit_html
     assert "Drafts are not accepted evidence" in kit_html, kit_html
     assert "provider-holdout" in kit_html, kit_html
     assert "Artifact Checklist" in kit_html, kit_html
+    assert "Source Evidence Snapshot" in kit_html, kit_html
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
 
