@@ -59,7 +59,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 97 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 98 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -851,7 +851,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 97
+            "file_count": 98
           },
           {
             "path": "evals",
@@ -866,7 +866,7 @@
             "file_count": 203
           }
         ],
-        "file_count": 364,
+        "file_count": 365,
         "folder_count": 4,
         "distribution": [
           {
@@ -891,7 +891,7 @@
           },
           {
             "label": "scripts",
-            "value": 97
+            "value": 98
           },
           {
             "label": "evals",
@@ -1020,7 +1020,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 97
+          "file_count": 98
         },
         {
           "path": "evals",
@@ -1441,9 +1441,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 181,
-        "script_count": 97,
-        "internal_module_count": 20,
+        "scanned_files": 182,
+        "script_count": 98,
+        "internal_module_count": 21,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -1461,8 +1461,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 181,
-        "package_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5"
+        "package_hash_file_count": 182,
+        "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1500,8 +1500,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5",
-            "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc"
+            "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a",
+            "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e"
           },
           "compatibility": {
             "openai": "pass",
@@ -1532,7 +1532,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc",
+            "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1548,8 +1548,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc",
-          "archive_entry_count": 576,
+          "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
+          "archive_entry_count": 577,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -1560,7 +1560,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 576,
+          "archive_entry_count": 577,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -1627,12 +1627,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc"
+              "to": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5"
+              "to": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
             }
           ]
         },
@@ -3811,7 +3811,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.5,
+          "duration_ms": 26.18,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3839,7 +3839,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.91,
+          "duration_ms": 26.25,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3862,7 +3862,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.88,
+          "duration_ms": 27.99,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3890,7 +3890,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.4,
+          "duration_ms": 29.37,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3913,7 +3913,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.19,
+          "duration_ms": 29.88,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3941,7 +3941,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.57,
+          "duration_ms": 27.32,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3964,7 +3964,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.78,
+          "duration_ms": 26.55,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -3991,7 +3991,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.9,
+          "duration_ms": 26.19,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4014,7 +4014,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.33,
+          "duration_ms": 25.85,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4043,7 +4043,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.23,
+          "duration_ms": 26.14,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5272,7 +5272,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "97 scripts; secrets 0; help failures 0",
+          "current": "98 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -5346,7 +5346,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 576; install failures 0",
+          "current": "archive entries 577; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -10632,9 +10632,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 181,
-        "script_count": 97,
-        "internal_module_count": 20,
+        "scanned_files": 182,
+        "script_count": 98,
+        "internal_module_count": 21,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -10652,8 +10652,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 181,
-        "package_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5"
+        "package_hash_file_count": 182,
+        "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
       },
       "failures": [],
       "warnings": [],
@@ -11937,6 +11937,20 @@
           "network_hosts": []
         },
         {
+          "path": "scripts/world_class_source_checks.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by world-class evidence reports to keep source-evidence readiness checks consistent.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
           "path": "scripts/yao.py",
           "interface": "cli",
           "interface_declared": false,
@@ -12069,7 +12083,7 @@
         "checked_count": 77,
         "passed_count": 77,
         "failed_count": 0,
-        "skipped_count": 20,
+        "skipped_count": 21,
         "failed_scripts": [],
         "results": [
           {
@@ -12898,6 +12912,10 @@
           },
           {
             "path": "scripts/world_class_evidence_contract.py",
+            "reason": "internal module"
+          },
+          {
+            "path": "scripts/world_class_source_checks.py",
             "reason": "internal module"
           },
           {
@@ -16935,6 +16953,9 @@
         "fix_submission_count": 0,
         "unmatched_submission_count": 0,
         "invalid_submission_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "ready_to_claim_world_class": false,
         "review_counts_submission_as_completion": false,
         "decision": "awaiting-submissions"
@@ -16966,6 +16987,41 @@
             "token_observed_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Provider model run",
+              "field": "model_executed_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Run provider-backed output-exec with real credentials."
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Timing observed",
+              "field": "timing_observed_count",
+              "expected": ">0",
+              "actual": 10,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Provider execution should record timing metadata."
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Token usage observed",
+              "field": "token_observed_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Provider execution should return non-estimated token usage."
+            }
+          ],
+          "source_check_count": 3,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "success_checks": [
             "reports/output_execution_runs.json summary.model_executed_count > 0",
             "reports/output_execution_runs.json summary.timing_observed_count > 0",
@@ -17002,6 +17058,51 @@
             "answer_revealed_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Review pairs exist",
+              "field": "pair_count",
+              "expected": ">0",
+              "actual": 5,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Generate the blind A/B review pack."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "No pending decisions",
+              "field": "pending_count",
+              "expected": "==0",
+              "actual": 5,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record a reviewer choice for every pair."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Judgments complete",
+              "field": "judgment_count",
+              "expected": "==pair_count",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Every pair needs one valid human judgment."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "No invalid decisions",
+              "field": "invalid_decision_count",
+              "expected": "==0",
+              "actual": 0,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Fix malformed winner/confidence entries."
+            }
+          ],
+          "source_check_count": 4,
+          "source_pass_count": 2,
+          "source_blocked_count": 2,
           "success_checks": [
             "reports/output_review_adjudication.json summary.pending_count == 0",
             "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
@@ -17040,6 +17141,41 @@
             "failure_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Native enforcement",
+              "field": "native_enforcement_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Collect real target-client or external runtime guard proof."
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Probe failures",
+              "field": "failure_count",
+              "expected": "==0",
+              "actual": 0,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Runtime permission probes must stay clean."
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Installer support",
+              "field": "installer_enforcement_ready",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Installer enforcement is supporting evidence, not native proof."
+            }
+          ],
+          "source_check_count": 3,
+          "source_pass_count": 2,
+          "source_blocked_count": 1,
           "success_checks": [
             "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
             "reports/runtime_permission_probes.json summary.failure_count == 0",
@@ -17075,6 +17211,41 @@
             "risk_band": "low",
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "External events",
+              "field": "external_source_events",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Import at least one metadata-only event from a real client."
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "Adoption sample",
+              "field": "adoption_sample_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Telemetry must include adoption outcome evidence."
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "Raw content blocked",
+              "field": "raw_content_allowed",
+              "expected": "false",
+              "actual": false,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Telemetry must stay metadata-only."
+            }
+          ],
+          "source_check_count": 3,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "success_checks": [
             "reports/adoption_drift_report.json summary.source_types.external > 0",
             "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
@@ -17110,6 +17281,9 @@
         "ready_for_ledger_review_count": 0,
         "valid_packet_source_incomplete_count": 0,
         "invalid_submission_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "ready_to_claim_world_class": false,
         "runbook_counts_as_completion": false,
         "decision": "collect-evidence"
@@ -17172,6 +17346,38 @@
             "token_observed_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Provider model run",
+              "field": "model_executed_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Run provider-backed output-exec with real credentials."
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Timing observed",
+              "field": "timing_observed_count",
+              "expected": ">0",
+              "actual": 10,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Provider execution should record timing metadata."
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Token usage observed",
+              "field": "token_observed_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Provider execution should return non-estimated token usage."
+            }
+          ],
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/provider-holdout.json",
@@ -17244,6 +17450,48 @@
             "answer_revealed_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Review pairs exist",
+              "field": "pair_count",
+              "expected": ">0",
+              "actual": 5,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Generate the blind A/B review pack."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "No pending decisions",
+              "field": "pending_count",
+              "expected": "==0",
+              "actual": 5,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record a reviewer choice for every pair."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Judgments complete",
+              "field": "judgment_count",
+              "expected": "==pair_count",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Every pair needs one valid human judgment."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "No invalid decisions",
+              "field": "invalid_decision_count",
+              "expected": "==0",
+              "actual": 0,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Fix malformed winner/confidence entries."
+            }
+          ],
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/human-adjudication.json",
@@ -17319,6 +17567,38 @@
             "failure_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Native enforcement",
+              "field": "native_enforcement_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Collect real target-client or external runtime guard proof."
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Probe failures",
+              "field": "failure_count",
+              "expected": "==0",
+              "actual": 0,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Runtime permission probes must stay clean."
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Installer support",
+              "field": "installer_enforcement_ready",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Installer enforcement is supporting evidence, not native proof."
+            }
+          ],
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-permission-enforcement.json",
@@ -17388,6 +17668,38 @@
             "risk_band": "low",
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "External events",
+              "field": "external_source_events",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Import at least one metadata-only event from a real client."
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "Adoption sample",
+              "field": "adoption_sample_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Telemetry must include adoption outcome evidence."
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "Raw content blocked",
+              "field": "raw_content_allowed",
+              "expected": "false",
+              "actual": false,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Telemetry must stay metadata-only."
+            }
+          ],
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -17783,8 +18095,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5",
-          "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc"
+          "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a",
+          "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e"
         },
         "compatibility": {
           "openai": "pass",
@@ -17815,7 +18127,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc",
+          "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17840,7 +18152,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5"
+            "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
           }
         ]
       },
@@ -17863,8 +18175,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc",
-        "archive_entry_count": 576,
+        "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
+        "archive_entry_count": 577,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -18529,7 +18841,7 @@
       "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 576,
+        "archive_entry_count": 577,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -18871,12 +19183,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc"
+            "to": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5"
+            "to": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
           }
         ]
       },

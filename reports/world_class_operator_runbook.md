@@ -73,6 +73,14 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
 
+### Source Evidence Snapshot
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| Provider model run | `0` | `>0` | `blocked` |
+| Timing observed | `10` | `>0` | `pass` |
+| Token usage observed | `0` | `>0` | `blocked` |
+
 ## Human Adjudication
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
@@ -117,6 +125,15 @@ This runbook coordinates evidence collection only. It does not accept submission
 - evidence/world_class/templates/human-adjudication.intake.json
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
+
+### Source Evidence Snapshot
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| Review pairs exist | `5` | `>0` | `pass` |
+| No pending decisions | `5` | `==0` | `blocked` |
+| Judgments complete | `0` | `==pair_count` | `blocked` |
+| No invalid decisions | `0` | `==0` | `pass` |
 
 ## Native Permission Enforcement
 
@@ -164,6 +181,14 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
 
+### Source Evidence Snapshot
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| Native enforcement | `0` | `>0` | `blocked` |
+| Probe failures | `0` | `==0` | `pass` |
+| Installer support | `True` | `true` | `pass` |
+
 ## Native Client Telemetry
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
@@ -206,6 +231,14 @@ This runbook coordinates evidence collection only. It does not accept submission
 - evidence/world_class/templates/native-client-telemetry.intake.json
 - reports/world_class_evidence_intake.json
 - reports/world_class_evidence_intake.md
+
+### Source Evidence Snapshot
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| External events | `0` | `>0` | `blocked` |
+| Adoption sample | `0` | `>0` | `blocked` |
+| Raw content blocked | `False` | `false` | `pass` |
 
 ## Boundary
 

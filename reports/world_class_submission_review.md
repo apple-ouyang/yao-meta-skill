@@ -40,6 +40,12 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 
 #### Source Checks
 
+- Provider model run: 0 / >0 => blocked
+- Timing observed: 10 / >0 => pass
+- Token usage observed: 0 / >0 => blocked
+
+#### Completion Assertions
+
 - reports/output_execution_runs.json summary.model_executed_count > 0
 - reports/output_execution_runs.json summary.timing_observed_count > 0
 - reports/output_execution_runs.json summary.token_observed_count > 0
@@ -65,6 +71,13 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 - submission path: `evidence/world_class/submissions/human-adjudication.json`
 
 #### Source Checks
+
+- Review pairs exist: 5 / >0 => pass
+- No pending decisions: 5 / ==0 => blocked
+- Judgments complete: 0 / ==pair_count => blocked
+- No invalid decisions: 0 / ==0 => pass
+
+#### Completion Assertions
 
 - reports/output_review_adjudication.json summary.pending_count == 0
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
@@ -92,6 +105,12 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 
 #### Source Checks
 
+- Native enforcement: 0 / >0 => blocked
+- Probe failures: 0 / ==0 => pass
+- Installer support: True / true => pass
+
+#### Completion Assertions
+
 - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
 - reports/runtime_permission_probes.json summary.failure_count == 0
 - reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence
@@ -117,6 +136,12 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 - submission path: `evidence/world_class/submissions/native-client-telemetry.json`
 
 #### Source Checks
+
+- External events: 0 / >0 => blocked
+- Adoption sample: 0 / >0 => blocked
+- Raw content blocked: False / false => pass
+
+#### Completion Assertions
 
 - reports/adoption_drift_report.json summary.source_types.external > 0
 - reports/adoption_drift_report.json summary.adoption_sample_count > 0
