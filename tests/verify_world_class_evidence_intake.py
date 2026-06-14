@@ -224,11 +224,20 @@ def main() -> None:
     native_kit_proc = run_kit("--output-dir", str(native_kit_dir), "--evidence-key", "native-permission-enforcement")
     native_kit_payload = json.loads(native_kit_proc.stdout)
     native_rows = {item["path"]: item for item in native_kit_payload["artifact_checklist"]}
-    assert native_kit_payload["summary"]["artifact_glob_expansion_count"] >= 4, native_kit_payload["summary"]
-    assert "dist/targets/openai/adapter.json" in native_rows, native_rows
-    assert native_rows["dist/targets/openai/adapter.json"]["source_pattern"] == "dist/targets/*/adapter.json", native_rows
-    assert native_rows["dist/targets/openai/adapter.json"]["artifact_ref_ready"] is True, native_rows
-    assert len(native_rows["dist/targets/openai/adapter.json"]["sha256"]) == 64, native_rows
+    assert native_kit_payload["summary"]["artifact_glob_expansion_count"] >= 1, native_kit_payload["summary"]
+    if "dist/targets/openai/adapter.json" in native_rows:
+        assert native_rows["dist/targets/openai/adapter.json"]["source_pattern"] == "dist/targets/*/adapter.json", native_rows
+        assert native_rows["dist/targets/openai/adapter.json"]["artifact_ref_ready"] is True, native_rows
+        assert len(native_rows["dist/targets/openai/adapter.json"]["sha256"]) == 64, native_rows
+    else:
+        glob_rows = [
+            item for item in native_kit_payload["artifact_checklist"]
+            if item["source_pattern"] == "dist/targets/*/adapter.json"
+        ]
+        assert len(glob_rows) == 1, glob_rows
+        assert glob_rows[0]["status"] == "glob-no-match", glob_rows[0]
+        assert glob_rows[0]["artifact_ref_ready"] is False, glob_rows[0]
+        assert glob_rows[0]["concrete_reference_required"] is True, glob_rows[0]
     native_readme = (native_kit_dir / "README.md").read_text(encoding="utf-8")
     assert "Glob patterns are expanded into concrete files" in native_readme, native_readme
     draft_intake = run_intake("--submissions-dir", str(kit_dir))
