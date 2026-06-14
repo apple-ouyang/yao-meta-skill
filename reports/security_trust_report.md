@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `179`
-- Scripts: `95`
-- Internal script modules: `18`
+- Scanned files: `180`
+- Scripts: `96`
+- Internal script modules: `19`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `179`
-- Package SHA256: `2d237fe645ef197282d514782f3bd37025c00e4d7efda725145aa5c3af180ba5`
+- Package hash files: `180`
+- Package SHA256: `0bfa15bdf8bc3feff98ee0e66dcdac3f0bc9565aede9c6c0ca139e6a07a9d102`
 
 ## Failures
 
@@ -125,6 +125,7 @@
 | scripts/render_world_class_operator_runbook.py | cli | True | True | True | False | False | True | False | Renders an operator runbook for collecting pending world-class evidence without accepting evidence. |
 | scripts/render_world_class_submission_review.py | cli | True | True | True | False | False | True | False | Renders a read-only review queue for world-class evidence submissions before ledger acceptance. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/review_studio_actions.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio action guidance and source refs out of HTML rendering. |
 | scripts/review_studio_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to load Review Studio source reports and metric cards. |
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |

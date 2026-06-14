@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-31",
+  "generated_at": "2026-06-14",
   "targets": [
     {
       "label": "root",
@@ -8,19 +8,19 @@
       "budget_limit": 1000,
       "initial_tokens": 944,
       "skill_body_tokens": 751,
-      "deferred_resource_tokens": 381942,
+      "deferred_resource_tokens": 382073,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
-          "estimated_tokens": 334459,
-          "file_count": 95
+          "estimated_tokens": 334590,
+          "file_count": 96
         }
       ],
       "quality_density": 137.7,
       "unused_resource_dirs": [],
       "ok": true,
       "warnings": [
-        "Deferred resource footprint is high: 381942 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
+        "Deferred resource footprint is high: 382073 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
       ]
     },
     {

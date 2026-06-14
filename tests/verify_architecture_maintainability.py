@@ -42,11 +42,17 @@ def main() -> None:
     assert payload["summary"]["blocker_count"] == 0, payload["summary"]
     assert 30 <= payload["summary"]["command_handler_count"] < 50, payload["summary"]
     assert payload["summary"]["largest_file_lines"] < 900, payload["summary"]
-    assert payload["largest_files"][0]["path"] == "scripts/render_review_studio.py", payload["largest_files"][0]
-    assert payload["largest_files"][0]["severity"] == "pass", payload["largest_files"][0]
+    assert all(item["severity"] == "pass" for item in payload["largest_files"]), payload["largest_files"]
+    renderer_lines = len((ROOT / "scripts" / "render_review_studio.py").read_text(encoding="utf-8").splitlines())
+    action_module = (ROOT / "scripts" / "review_studio_actions.py").read_text(encoding="utf-8")
+    action_lines = len(action_module.splitlines())
+    assert renderer_lines < 650, renderer_lines
+    assert action_lines < 450, action_lines
+    assert 'SCRIPT_INTERFACE = "internal-module"' in action_module, action_module[:400]
     hotspot_paths = {item["path"] for item in payload["hotspots"]}
     assert "scripts/yao.py" not in hotspot_paths, hotspot_paths
     assert "scripts/render_review_studio.py" not in hotspot_paths, hotspot_paths
+    assert "scripts/review_studio_actions.py" not in hotspot_paths, hotspot_paths
     assert "scripts/render_review_viewer.py" not in hotspot_paths, hotspot_paths
     assert output_json.exists(), output_json
     markdown = output_md.read_text(encoding="utf-8")

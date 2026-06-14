@@ -1,30 +1,23 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-14",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 154,
-    "script_file_count": 95,
+    "python_file_count": 155,
+    "script_file_count": 96,
     "test_file_count": 59,
-    "internal_module_count": 20,
+    "internal_module_count": 22,
     "cli_script_count": 76,
     "command_handler_count": 34,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 899,
+    "largest_file_lines": 888,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
   },
   "largest_files": [
-    {
-      "path": "scripts/render_review_studio.py",
-      "lines": 899,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
-    },
     {
       "path": "tests/verify_yao_cli.py",
       "lines": 888,
@@ -98,6 +91,13 @@
     {
       "path": "scripts/render_reference_synthesis.py",
       "lines": 644,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/cross_packager.py",
+      "lines": 641,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
