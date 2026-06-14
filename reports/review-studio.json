@@ -1336,9 +1336,9 @@
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "f81d4dd5985eff30c70e3b4720c44a9d5b4984318463637b98645b526bfcbd6b",
+          "evidence_bundle_sha256": "d2af8e406c6fb43fd48bac179752e4050f5b214eef3baed9cc7920822c8e2e2e",
           "source_contract_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
-          "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
+          "archive_sha256": "587e2efa7dc1012628af57bf3e518f963f53d12d56acc74e7d772021cad8845a",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 21,
@@ -1357,7 +1357,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "ef0089170c1f57ab337e452a8948ceb3ae625ca1",
+        "commit": "a364f5766fd0dcb338ffea827d0d8f1058ad2ebc",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -4764,7 +4764,7 @@
       "ok": true,
       "generated_at": "2026-06-14",
       "skill_dir": ".",
-      "commit": "ef0089170c1f57ab337e452a8948ceb3ae625ca1",
+      "commit": "a364f5766fd0dcb338ffea827d0d8f1058ad2ebc",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -4778,9 +4778,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "f81d4dd5985eff30c70e3b4720c44a9d5b4984318463637b98645b526bfcbd6b",
+        "evidence_bundle_sha256": "d2af8e406c6fb43fd48bac179752e4050f5b214eef3baed9cc7920822c8e2e2e",
         "source_contract_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
-        "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
+        "archive_sha256": "587e2efa7dc1012628af57bf3e518f963f53d12d56acc74e7d772021cad8845a",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -4811,7 +4811,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "ef0089170c1f57ab337e452a8948ceb3ae625ca1",
+        "commit": "a364f5766fd0dcb338ffea827d0d8f1058ad2ebc",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -4821,7 +4821,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "f81d4dd5985eff30c70e3b4720c44a9d5b4984318463637b98645b526bfcbd6b"
+        "sha256": "d2af8e406c6fb43fd48bac179752e4050f5b214eef3baed9cc7920822c8e2e2e"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -4894,8 +4894,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7967,
-          "sha256": "46a65f5db66718f2f3443467c06445bee6a6269586555c307d124b03784c2d1c"
+          "bytes": 7966,
+          "sha256": "1e32e9c33626c2f5d8cfc4de0c47acbca23285e0d19f54d49a3a0027b4808953"
         },
         {
           "label": "blind_review",
@@ -4944,14 +4944,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "eba3fd128cb58de877f8e165a743192a65b5cc0c10a9086cf02fbf324a4e0fb7"
+          "sha256": "85bc616e7171da92f7c8060a43701810320417c23bc8ef07f8f50a281d2c1540"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19325,
-          "sha256": "f7382b0152d969ed99fec9e0063dde02cf598f4122c4d58ec1e88198a125410b"
+          "sha256": "e7a5905285c83aab965df96190f850d53a7173a09e8a277394c771232cf4c0ac"
         },
         {
           "label": "install_simulation",
