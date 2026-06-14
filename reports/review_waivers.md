@@ -35,7 +35,7 @@
 - waiver allowed: `true`
 - risk: review pending 5; model-executed 0; output failures 0
 - evidence: `reports/output_review_adjudication.md`
-- verification: `python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer "<reviewer>" --reason "Output Lab has pending human/provider evidence; accepted only for this bounded review scope." --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md`
+- verification: `python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer "<reviewer>" --reason "Output Lab has pending human/provider evidence; accepted only for this bounded review scope." --expires-at 2027-06-14 --evidence reports/output_review_adjudication.md`
 - world-class boundary: Does not count as provider, human, or public world-class completion evidence.
 
 #### Required Review
@@ -51,7 +51,7 @@
 - waiver allowed: `false`
 - risk: 4 pending evidence entries; 1 human pending; 3 external pending
 - evidence: `reports/world_class_evidence_ledger.md`
-- verification: `python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py world-class-claim-guard .`
+- verification: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions && python3 scripts/yao.py world-class-claim-guard .`
 - world-class boundary: Non-waivable completion boundary.
 
 #### Required Review

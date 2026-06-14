@@ -34,7 +34,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
-- `python3 scripts/yao.py world-class-intake .`
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 
 ### Success Checks
 
@@ -72,7 +72,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `python3 scripts/yao.py output-review`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
-- `python3 scripts/yao.py world-class-intake .`
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 
 ### Success Checks
 
@@ -112,7 +112,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `python3 scripts/yao.py runtime-permissions . --package-dir dist`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.
-- `python3 scripts/yao.py world-class-intake .`
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 
 ### Success Checks
 
@@ -152,7 +152,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 - `python3 scripts/yao.py skill-atlas --workspace-root .`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.
-- `python3 scripts/yao.py world-class-intake .`
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 
 ### Success Checks
 
