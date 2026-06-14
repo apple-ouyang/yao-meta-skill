@@ -918,13 +918,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "f54d5131bea27a3c055b8a2d7fd6d647f69148b293518eff57592eb35d5f6983",
+      "evidence_bundle_sha256": "a358b81f0d5418371d422da439958fa541a864e928a0be915be95c74bc55b48f",
       "source_contract_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
-      "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc",
+      "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 21,
@@ -939,11 +939,11 @@
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
-      "working_tree_dirty": true,
-      "changed_file_count": 33
+      "public_claim_blocker_count": 3,
+      "working_tree_dirty": false,
+      "changed_file_count": 0
     },
-    "commit": "c2d15206e25551022b02b86f36e7e6f0158888f2",
+    "commit": "ab58c97bce07ef00acefd499a6d4499041ebfa91",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
