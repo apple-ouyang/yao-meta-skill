@@ -1,22 +1,22 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `08347d5c2cae9528ae1fe3c50ad39bb3c773a6e1`
+Commit: `5d1d3bbd302aa9c6d0e5f5767c5bdc776b517a03`
 Working tree dirty at generation: `true`
 
 ## Summary
 
 - reproducibility ready: `true`
 - methodology complete: `true`
-- required artifacts: `20`
+- required artifacts: `24`
 - missing artifacts: `0`
 - output cases: `5`
 - disclosed failure cases: `3`
-- reproduction commands: `19`
+- reproduction commands: `21`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
-- changed files at generation: `61`
+- changed files at generation: `25`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete.
 
@@ -40,20 +40,24 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `99b2e3f03710` |
+| output_execution | `reports/output_execution_runs.json` | present | `e4b3b5bf45a3` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
-| trust_report | `reports/security_trust_report.json` | present | `252c580028df` |
-| python_compatibility | `reports/python_compatibility.json` | present | `a8d140878634` |
-| registry_audit | `reports/registry_audit.json` | present | `6527b723a4bc` |
-| package_verification | `reports/package_verification.json` | present | `6bf19c9e2980` |
-| install_simulation | `reports/install_simulation.json` | present | `270a28b82dc4` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `cad5296cd500` |
-| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `02e49b66159d` |
-| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `0b52d0d1528b` |
+| trust_report | `reports/security_trust_report.json` | present | `f518d733e79e` |
+| python_compatibility | `reports/python_compatibility.json` | present | `3698aad5388c` |
+| registry_audit | `reports/registry_audit.json` | present | `90137332142a` |
+| package_verification | `reports/package_verification.json` | present | `6c62c8999479` |
+| install_simulation | `reports/install_simulation.json` | present | `97055f63c699` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `9c7b86742ed4` |
+| world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `194d5a681920` |
+| world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `dc4cf8cf1889` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `5fbfcd35ac6a` |
+| world_class_submission_review | `reports/world_class_submission_review.json` | present | `185a8cab25e7` |
+| world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `3d643dc8170b` |
+| world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `f67ca3d0aa9c` |
+| world_class_operator_runbook_html | `reports/world_class_operator_runbook.html` | present | `963026f551dc` |
 | world_class_claim_guard | `reports/world_class_claim_guard.json` | present | `250d616b028c` |
 
 ## Reproduction Commands
@@ -92,6 +96,10 @@ This report proves local benchmark reproducibility only. It keeps external provi
   - evidence: `reports/world_class_evidence_ledger.json`
 - `python3 scripts/yao.py world-class-intake .`
   - evidence: `reports/world_class_evidence_intake.json`
+- `python3 scripts/yao.py world-class-submission-review .`
+  - evidence: `reports/world_class_submission_review.json`
+- `python3 scripts/yao.py world-class-runbook .`
+  - evidence: `reports/world_class_operator_runbook.json`
 - `python3 scripts/yao.py world-class-claim-guard .`
   - evidence: `reports/world_class_claim_guard.json`
 - `make ci-test`

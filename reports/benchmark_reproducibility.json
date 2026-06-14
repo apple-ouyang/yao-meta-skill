@@ -3,34 +3,34 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "08347d5c2cae9528ae1fe3c50ad39bb3c773a6e1",
+  "commit": "5d1d3bbd302aa9c6d0e5f5767c5bdc776b517a03",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 61,
+    "changed_file_count": 25,
     "sample": [
-      "M  AGENTS.md",
-      "M  Makefile",
-      "M  registry/index.json",
-      "M  registry/packages/yao-meta-skill.json",
-      "MM reports/adoption_drift_report.json",
-      " M reports/adoption_drift_report.md",
-      "MM reports/architecture_maintainability.json",
-      "MM reports/architecture_maintainability.md",
-      "MM reports/benchmark_reproducibility.json",
-      "MM reports/benchmark_reproducibility.md",
-      "MM reports/compiled_targets.json",
-      "MM reports/context_budget.json"
+      " M README.md",
+      " M registry/index.json",
+      " M registry/packages/yao-meta-skill.json",
+      " M reports/adoption_drift_report.json",
+      " M reports/benchmark_reproducibility.json",
+      " M reports/benchmark_reproducibility.md",
+      " M reports/context_budget.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md",
+      " M reports/package_verification.json",
+      " M reports/package_verification.md",
+      " M reports/registry_audit.json"
     ]
   },
   "summary": {
     "reproducibility_ready": true,
     "methodology_complete": true,
-    "required_artifact_count": 20,
+    "required_artifact_count": 24,
     "missing_artifact_count": 0,
     "output_case_count": 5,
     "failure_disclosure_count": 3,
-    "command_count": 19,
+    "command_count": 21,
     "command_executed_count": 10,
     "timing_observed_count": 10,
     "model_executed_count": 0,
@@ -42,7 +42,7 @@
     "world_class_task_count": 4,
     "world_class_ledger_pending_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 61
+    "changed_file_count": 25
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -116,7 +116,7 @@
       "path": "reports/output_execution_runs.json",
       "exists": true,
       "bytes": 7965,
-      "sha256": "99b2e3f03710fdcee8fe66a476bc589f4e22a379bfcc1cd5561de49c184286e8"
+      "sha256": "e4b3b5bf45a34ad8a616015289e968fdb13ec9a9ea1b15ff2ea94ef6cec40d7b"
     },
     {
       "label": "blind_review",
@@ -151,56 +151,56 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 97005,
-      "sha256": "252c580028df6ac2404b53cc10bb607fa82b98ef17965cb7354c4731f6c6b08e"
+      "sha256": "f518d733e79e26ea36136c1e38e22e36922481724bb6c004a7475c73bfa9fbb6"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
       "bytes": 20367,
-      "sha256": "a8d14087863459534fadac760a64c213c9474413e92046a9ac2e772d4174d347"
+      "sha256": "3698aad5388cad659840d1d31dbc9c694e0067b1de1e84423336a34e22df9625"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "6527b723a4bc367477e1090afbf7f1653f20d33fed0e0691725b7ee30896848b"
+      "sha256": "90137332142ac7ff036f1efd5eb1970c31baf60e8a5f8c541dc12aadc91492b6"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "6bf19c9e29803ad8668914489d22b9e306ad0ad092c91c179c3aaffe81eed2c6"
+      "sha256": "6c62c89994790f7034e115e349dd4627939e5c73361c36d5a56c887346405f90"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
-      "bytes": 8758,
-      "sha256": "270a28b82dc49d80ba9c5a82f912cc960e50a5ac42f022c6a2c345e4e84fbb36"
+      "bytes": 8604,
+      "sha256": "97055f63c699b2812bab1a0f05460f1065a6211164b4c22c9bebc8aab6ef012f"
     },
     {
       "label": "skill_os2_audit",
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 14309,
-      "sha256": "cad5296cd500a40cb0d83897d327b3542f31c1ce6bfe7eaa387ea2e88d229aa1"
+      "sha256": "9c7b86742ed4dd5c930fbc3572d943937a4817bbd465d89da12f0929911607d0"
     },
     {
       "label": "world_class_evidence_plan",
       "path": "reports/world_class_evidence_plan.json",
       "exists": true,
       "bytes": 10083,
-      "sha256": "02e49b66159d239309bd31be33f2119db23604b5506c4445ba6c6c84b6cdd1aa"
+      "sha256": "194d5a681920c3aca5e454d8839cdec551a076d54e360424831c5f312d1367b1"
     },
     {
       "label": "world_class_evidence_ledger",
       "path": "reports/world_class_evidence_ledger.json",
       "exists": true,
       "bytes": 11308,
-      "sha256": "0b52d0d1528ba95a0fa7bead97cb8224b5b189d35497a05d90956fc90512b651"
+      "sha256": "dc4cf8cf18899bdf10d32fe72bb8f306ee297106e6cc25fd041d56e36631af63"
     },
     {
       "label": "world_class_evidence_intake",
@@ -208,6 +208,34 @@
       "exists": true,
       "bytes": 12740,
       "sha256": "5fbfcd35ac6afd494c64845a7130520fd1cffbdb86e4efed2eaf2fa3d381f8b3"
+    },
+    {
+      "label": "world_class_submission_review",
+      "path": "reports/world_class_submission_review.json",
+      "exists": true,
+      "bytes": 7263,
+      "sha256": "185a8cab25e7155ebd80cb66049c0965e4dc2d7cc38991f17464946f87fd26f2"
+    },
+    {
+      "label": "world_class_operator_runbook",
+      "path": "reports/world_class_operator_runbook.json",
+      "exists": true,
+      "bytes": 15002,
+      "sha256": "3d643dc8170b50a37f91ffb190f69ad1e0d32f64914ebe2d731226728ac28cdc"
+    },
+    {
+      "label": "world_class_operator_runbook_markdown",
+      "path": "reports/world_class_operator_runbook.md",
+      "exists": true,
+      "bytes": 9206,
+      "sha256": "f67ca3d0aa9c02953e967d9657ca4cfe41ee883c73950bce16d6c25a1e206e10"
+    },
+    {
+      "label": "world_class_operator_runbook_html",
+      "path": "reports/world_class_operator_runbook.html",
+      "exists": true,
+      "bytes": 13191,
+      "sha256": "963026f551dc687ae53e7ba1df5003dd59292c259080543dcaf4b4343437fed6"
     },
     {
       "label": "world_class_claim_guard",
@@ -303,6 +331,16 @@
       "label": "world-class evidence intake",
       "command": "python3 scripts/yao.py world-class-intake .",
       "evidence": "reports/world_class_evidence_intake.json"
+    },
+    {
+      "label": "world-class submission review",
+      "command": "python3 scripts/yao.py world-class-submission-review .",
+      "evidence": "reports/world_class_submission_review.json"
+    },
+    {
+      "label": "world-class operator runbook",
+      "command": "python3 scripts/yao.py world-class-runbook .",
+      "evidence": "reports/world_class_operator_runbook.json"
     },
     {
       "label": "world-class claim guard",

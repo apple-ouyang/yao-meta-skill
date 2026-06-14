@@ -28,6 +28,8 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a world-class evidence plan that turns remaining provider, human, native-permission, and real-client telemetry gaps into executable evidence tasks
 - a world-class evidence ledger that records which external and human evidence is accepted or still pending without treating planned work as proof
 - a world-class evidence intake contract that validates external and human evidence packets for provenance, privacy, artifact refs, and anti-overclaim rules before ledger review
+- a world-class submission review queue that compares evidence packets, intake validation, source artifacts, and ledger state without accepting evidence
+- a world-class operator runbook that gives reviewers the exact commands, artifacts, and collection checklist needed to close remaining evidence gaps
 - a world-class claim guard that scans public claim surfaces and blocks premature completed/true claims while the evidence ledger still has pending external or human evidence
 - a benchmark reproducibility manifest that checks methodology sections, required artifacts, failure disclosure, and reproduction commands
 - Output Eval Lab evidence with assertion grading, execution/timing/token evidence, a blind A/B review pack, a separate answer key, and reviewer adjudication reports
@@ -147,6 +149,7 @@ python3 scripts/yao.py world-class-submission-kit . --output-dir /tmp/yao-world-
 python3 scripts/yao.py world-class-ledger .
 python3 scripts/yao.py world-class-intake .
 python3 scripts/yao.py world-class-submission-review .
+python3 scripts/yao.py world-class-runbook .
 python3 scripts/yao.py world-class-claim-guard .
 python3 scripts/yao.py benchmark-reproducibility .
 ```
@@ -298,6 +301,7 @@ Full reports: [reports/eval_suite.json](reports/eval_suite.json) and [reports/fa
 - current world-class evidence acceptance state is published in [reports/world_class_evidence_ledger.md](reports/world_class_evidence_ledger.md)
 - world-class evidence intake readiness is published in [reports/world_class_evidence_intake.md](reports/world_class_evidence_intake.md)
 - world-class submission review queue is published in [reports/world_class_submission_review.md](reports/world_class_submission_review.md)
+- world-class operator runbook is published in [reports/world_class_operator_runbook.md](reports/world_class_operator_runbook.md) and [reports/world_class_operator_runbook.html](reports/world_class_operator_runbook.html)
 - world-class public claim guard status is published in [reports/world_class_claim_guard.md](reports/world_class_claim_guard.md)
 - benchmark reproducibility evidence is published in [reports/benchmark_reproducibility.md](reports/benchmark_reproducibility.md)
 - target compiler evidence is published in [reports/compiled_targets.md](reports/compiled_targets.md)
@@ -416,7 +420,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-submission-kit, world-class-submission-review, world-class-claim-guard, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -431,6 +435,7 @@ Utility scripts that make the meta-skill operational:
 - `render_world_class_evidence_ledger.py`: renders a machine-checkable ledger for current world-class evidence acceptance, anti-overclaim guards, provenance requirements, and privacy contracts
 - `render_world_class_evidence_intake.py`: validates world-class external and human evidence packets against provenance, privacy, artifact, and anti-overclaim requirements before ledger review
 - `render_world_class_submission_review.py`: renders a read-only queue that compares submissions, intake validation, source evidence, and ledger state without accepting evidence
+- `render_world_class_operator_runbook.py`: renders an operator-facing checklist and command map for collecting pending world-class evidence without accepting evidence
 - `render_world_class_claim_guard.py`: scans README, docs, and reports for premature world-class completion claims while accepted evidence is still pending
 - `render_benchmark_reproducibility.py`: renders methodology, artifact, failure-disclosure, and reproduction-command evidence for public benchmark claims
 - `python_compat_check.py`: checks Python source for supported-runtime compatibility hazards such as Python 3.11 f-string expression backslashes

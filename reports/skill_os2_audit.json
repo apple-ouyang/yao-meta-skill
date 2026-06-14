@@ -145,7 +145,7 @@
       "key": "benchmark-reproducibility",
       "label": "Benchmark Reproducibility",
       "status": "pass",
-      "current": "artifacts 20; missing 0; failures 3",
+      "current": "artifacts 24; missing 0; failures 3",
       "target": "Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable",
       "evidence": [
         {

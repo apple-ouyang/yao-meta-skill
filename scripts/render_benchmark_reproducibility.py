@@ -41,6 +41,10 @@ REQUIRED_ARTIFACTS = [
     ("world_class_evidence_plan", "reports/world_class_evidence_plan.json"),
     ("world_class_evidence_ledger", "reports/world_class_evidence_ledger.json"),
     ("world_class_evidence_intake", "reports/world_class_evidence_intake.json"),
+    ("world_class_submission_review", "reports/world_class_submission_review.json"),
+    ("world_class_operator_runbook", "reports/world_class_operator_runbook.json"),
+    ("world_class_operator_runbook_markdown", "reports/world_class_operator_runbook.md"),
+    ("world_class_operator_runbook_html", "reports/world_class_operator_runbook.html"),
     ("world_class_claim_guard", "reports/world_class_claim_guard.json"),
 ]
 
@@ -129,6 +133,16 @@ REPRODUCTION_COMMANDS = [
         "label": "world-class evidence intake",
         "command": "python3 scripts/yao.py world-class-intake .",
         "evidence": "reports/world_class_evidence_intake.json",
+    },
+    {
+        "label": "world-class submission review",
+        "command": "python3 scripts/yao.py world-class-submission-review .",
+        "evidence": "reports/world_class_submission_review.json",
+    },
+    {
+        "label": "world-class operator runbook",
+        "command": "python3 scripts/yao.py world-class-runbook .",
+        "evidence": "reports/world_class_operator_runbook.json",
     },
     {
         "label": "world-class claim guard",
