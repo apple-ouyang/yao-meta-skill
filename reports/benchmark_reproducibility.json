@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "ab58c97bce07ef00acefd499a6d4499041ebfa91",
+  "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "a358b81f0d5418371d422da439958fa541a864e928a0be915be95c74bc55b48f",
-    "source_contract_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
-    "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+    "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
+    "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
+    "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 21,
@@ -50,7 +50,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "ab58c97bce07ef00acefd499a6d4499041ebfa91",
+    "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -60,7 +60,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "a358b81f0d5418371d422da439958fa541a864e928a0be915be95c74bc55b48f"
+    "sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -169,7 +169,7 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 98830,
-      "sha256": "dc06cc6e7c80726ba1158c214c660ef5e07d933d9783124ee114bfd3e2aaab49"
+      "sha256": "871eb9e4f88b0b91c211af94a66660f1c4e799907466362c15ebe63a9128bab1"
     },
     {
       "label": "python_compatibility",
@@ -183,14 +183,14 @@
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "9a288c41f8af0f5490c26662513695e8d8752600cbf2e7262471b8eec9932f92"
+      "sha256": "1b2feee7ce87257d042d6a2b9cb75bd2e495f4676ff20c21a7b3508c87aa6248"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "7ad16e1c57b7cb54832143d8d7f469c3c53771f053b27adbeaef9013e687c21a"
+      "sha256": "6e885151878efa803cb5e85d0636b493015729cbf598e22cafffb30b8df2936a"
     },
     {
       "label": "install_simulation",
@@ -224,8 +224,8 @@
       "label": "world_class_evidence_intake",
       "path": "reports/world_class_evidence_intake.json",
       "exists": true,
-      "bytes": 13743,
-      "sha256": "9f382cb3717160cff3eccf63312e20fc670183139e2ce86ce5096a59cc1b9110"
+      "bytes": 14499,
+      "sha256": "72af5fa06f5bd94cf6cc7bf30a61e7d9496ca5e2be6ae7a2d089017cddb9c606"
     },
     {
       "label": "world_class_submission_review",
@@ -238,22 +238,22 @@
       "label": "world_class_operator_runbook",
       "path": "reports/world_class_operator_runbook.json",
       "exists": true,
-      "bytes": 15002,
-      "sha256": "614742ea666c64cdb68e10fc77022c31e68abe82ed88325aea21acb2f277063e"
+      "bytes": 15206,
+      "sha256": "43492b169ade7202f4fcd5db989e314c3b04cb96d6178ec6854bb90788d7e586"
     },
     {
       "label": "world_class_operator_runbook_markdown",
       "path": "reports/world_class_operator_runbook.md",
       "exists": true,
-      "bytes": 9241,
-      "sha256": "302cfaa160ab7b50afda58a9e330e1219f47786b39b1e14d81ccc09c0ba10319"
+      "bytes": 9445,
+      "sha256": "cb05eec07f1ed0939fecbfc46b9101029498be6b8ebc03bb536fa3223e5846af"
     },
     {
       "label": "world_class_operator_runbook_html",
       "path": "reports/world_class_operator_runbook.html",
       "exists": true,
-      "bytes": 13226,
-      "sha256": "699da59fb4c5646a253e9688a35f24c692c9875083128220305d1d93a317f208"
+      "bytes": 13430,
+      "sha256": "68b45d5f6f88df6eb22ad23643846e60207ab41af11d9c85cb20d5fe3e0e7182"
     },
     {
       "label": "world_class_claim_guard",

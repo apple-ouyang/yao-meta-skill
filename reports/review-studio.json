@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 960/1000; deferred 388041/120000; top deferred scripts 340305; resource governance governed; quality density 135.4",
+      "detail": "initial load 960/1000; deferred 388115/120000; top deferred scripts 340379; resource governance governed; quality density 135.4",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -1336,9 +1336,9 @@
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "a358b81f0d5418371d422da439958fa541a864e928a0be915be95c74bc55b48f",
-          "source_contract_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
-          "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+          "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
+          "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
+          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 21,
@@ -1357,7 +1357,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "ab58c97bce07ef00acefd499a6d4499041ebfa91",
+        "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1462,7 +1462,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 181,
-        "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
+        "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1500,8 +1500,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
-            "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68"
+            "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
+            "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
           },
           "compatibility": {
             "openai": "pass",
@@ -1532,7 +1532,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+            "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -1548,7 +1548,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
           "archive_entry_count": 576,
           "failure_count": 0,
           "warning_count": 0
@@ -1627,12 +1627,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68"
+              "to": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
+              "to": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
             }
           ]
         },
@@ -4764,7 +4764,7 @@
       "ok": true,
       "generated_at": "2026-06-14",
       "skill_dir": ".",
-      "commit": "ab58c97bce07ef00acefd499a6d4499041ebfa91",
+      "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -4778,9 +4778,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "a358b81f0d5418371d422da439958fa541a864e928a0be915be95c74bc55b48f",
-        "source_contract_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
-        "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+        "evidence_bundle_sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef",
+        "source_contract_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
+        "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -4811,7 +4811,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "ab58c97bce07ef00acefd499a6d4499041ebfa91",
+        "commit": "07274b4c50068d4635583631c55e5a6e3fc00a7a",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -4821,7 +4821,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "a358b81f0d5418371d422da439958fa541a864e928a0be915be95c74bc55b48f"
+        "sha256": "69dfb6c9b80bc88d8043270714359b8f8074bfc60f5fb811d8a917a0da087aef"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -4930,7 +4930,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 98830,
-          "sha256": "dc06cc6e7c80726ba1158c214c660ef5e07d933d9783124ee114bfd3e2aaab49"
+          "sha256": "871eb9e4f88b0b91c211af94a66660f1c4e799907466362c15ebe63a9128bab1"
         },
         {
           "label": "python_compatibility",
@@ -4944,14 +4944,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "9a288c41f8af0f5490c26662513695e8d8752600cbf2e7262471b8eec9932f92"
+          "sha256": "1b2feee7ce87257d042d6a2b9cb75bd2e495f4676ff20c21a7b3508c87aa6248"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19325,
-          "sha256": "7ad16e1c57b7cb54832143d8d7f469c3c53771f053b27adbeaef9013e687c21a"
+          "sha256": "6e885151878efa803cb5e85d0636b493015729cbf598e22cafffb30b8df2936a"
         },
         {
           "label": "install_simulation",
@@ -4985,8 +4985,8 @@
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
-          "bytes": 13743,
-          "sha256": "9f382cb3717160cff3eccf63312e20fc670183139e2ce86ce5096a59cc1b9110"
+          "bytes": 14499,
+          "sha256": "72af5fa06f5bd94cf6cc7bf30a61e7d9496ca5e2be6ae7a2d089017cddb9c606"
         },
         {
           "label": "world_class_submission_review",
@@ -4999,22 +4999,22 @@
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 15002,
-          "sha256": "614742ea666c64cdb68e10fc77022c31e68abe82ed88325aea21acb2f277063e"
+          "bytes": 15206,
+          "sha256": "43492b169ade7202f4fcd5db989e314c3b04cb96d6178ec6854bb90788d7e586"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 9241,
-          "sha256": "302cfaa160ab7b50afda58a9e330e1219f47786b39b1e14d81ccc09c0ba10319"
+          "bytes": 9445,
+          "sha256": "cb05eec07f1ed0939fecbfc46b9101029498be6b8ebc03bb536fa3223e5846af"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 13226,
-          "sha256": "699da59fb4c5646a253e9688a35f24c692c9875083128220305d1d93a317f208"
+          "bytes": 13430,
+          "sha256": "68b45d5f6f88df6eb22ad23643846e60207ab41af11d9c85cb20d5fe3e0e7182"
         },
         {
           "label": "world_class_claim_guard",
@@ -10653,7 +10653,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 181,
-        "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
+        "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
       },
       "failures": [],
       "warnings": [],
@@ -14172,7 +14172,7 @@
         },
         {
           "path": "tests/verify_review_studio.py",
-          "lines": 677,
+          "lines": 679,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -14207,15 +14207,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1203081,
+        "other_text_tokens": 1203641,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1203848,
-        "deferred_resource_tokens": 388041,
+        "estimated_total_text_tokens": 1204408,
+        "deferred_resource_tokens": 388115,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 340305,
+            "estimated_tokens": 340379,
             "file_count": 97
           },
           {
@@ -14232,7 +14232,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 340305,
+            "estimated_tokens": 340379,
             "file_count": 97
           }
         ],
@@ -14255,14 +14255,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 340305,
+              "estimated_tokens": 340379,
               "file_count": 97,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 508,
+        "relevant_file_count": 509,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 135.4
@@ -16676,7 +16676,8 @@
           "commands": {
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -16727,7 +16728,8 @@
           "commands": {
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -16780,7 +16782,8 @@
           "commands": {
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -16834,7 +16837,8 @@
           "commands": {
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -17098,7 +17102,7 @@
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
             "review_queue": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -17166,7 +17170,7 @@
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
             "review_queue": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -17238,7 +17242,7 @@
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
             "review_queue": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -17313,7 +17317,7 @@
             "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions",
             "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
             "review_queue": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
-            "refresh_ledger": "python3 scripts/yao.py world-class-ledger .",
+            "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
           },
           "must_collect": {
@@ -17744,8 +17748,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7",
-          "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68"
+          "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5",
+          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
         },
         "compatibility": {
           "openai": "pass",
@@ -17776,7 +17780,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+          "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17801,7 +17805,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
+            "package_sha256": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
           }
         ]
       },
@@ -17824,7 +17828,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68",
+        "archive_sha256": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f",
         "archive_entry_count": 576,
         "failure_count": 0,
         "warning_count": 0
@@ -18832,12 +18836,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "9761608424bbab003651eb643921a13f86b51220de705a3255d7c201e267dc68"
+            "to": "7b0683ec4b2e6cf991a023ca137f5734612c64410a8a0b5fc2adae97595b470f"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "0de594f90374f72387eea382b32ad0dd220d0f1d6f809b8fdd39859a1f35d5b7"
+            "to": "f6672acad15cd131632032e808c09ee71ea1da1b4714cfedcf8dd35b0808fcf5"
           }
         ]
       },
