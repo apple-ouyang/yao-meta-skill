@@ -7,6 +7,7 @@ from typing import Any
 
 from render_world_class_evidence_plan import build_plan
 from world_class_evidence_contract import load_json, load_json_with_status, rel_path, validate_payload
+from world_class_source_checks import build_source_checklist, summarize_source_checklist
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -129,7 +130,9 @@ def submission_state(skill_dir: Path, task: dict[str, Any], submissions_dir: Pat
 def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) -> dict[str, Any]:
     state = STATE_LOADERS.get(task["key"], lambda _: {"accepted": task["status"] == "pass"})(skill_dir)
     submission = submission_state(skill_dir, task, submissions_dir)
-    source_accepted = bool(state.get("accepted"))
+    source_checklist = build_source_checklist([{"key": task["key"], "observed_state": state}])
+    source_summary = summarize_source_checklist(source_checklist)
+    source_accepted = bool(source_checklist) and source_summary["source_blocked_count"] == 0
     accepted = source_accepted and submission.get("status") == "submitted"
     return {
         "key": task["key"],
@@ -146,6 +149,8 @@ def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) ->
         "evidence_artifacts": task["evidence_artifacts"],
         "privacy_contract": task["privacy_contract"],
         "observed_state": state,
+        "source_checklist": source_checklist,
+        **source_summary,
         "submission_state": submission,
         "anti_overclaim": {
             "planned_work_counts_as_evidence": False,
@@ -162,6 +167,8 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
     submissions_dir = submissions_dir or (skill_dir / "evidence" / "world_class" / "submissions")
     evidence_requirements = plan.get("evidence_requirements") or plan.get("tasks", [])
     entries = [build_entry(skill_dir, task, submissions_dir) for task in evidence_requirements]
+    source_rows = [row for entry in entries for row in entry.get("source_checklist", [])]
+    source_summary = summarize_source_checklist(source_rows)
     source_accepted_count = sum(1 for entry in entries if entry.get("source_accepted") is True)
     accepted_count = sum(1 for entry in entries if entry["status"] == "accepted")
     pending_count = len(entries) - accepted_count
@@ -194,6 +201,7 @@ def build_ledger(skill_dir: Path, generated_at: str, submissions_dir: Path | Non
             "submitted_entry_count": submitted_entry_count,
             "missing_submission_count": missing_submission_count,
             "invalid_submission_count": invalid_submission_count,
+            **source_summary,
             "submitted_but_pending_count": submitted_but_pending_count,
             "source_accepted_without_valid_submission_count": source_accepted_without_valid_submission_count,
             "overclaim_guard_active": True,
@@ -233,6 +241,8 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         f"- ready to claim world-class: `{str(summary['ready_to_claim_world_class']).lower()}`",
         f"- entries: `{summary['ledger_entry_count']}`",
         f"- source accepted: `{summary.get('source_accepted_count', 0)}`",
+        f"- source checks: `{summary.get('source_pass_count', 0)}` pass / `{summary.get('source_check_count', 0)}` total",
+        f"- source blocked: `{summary.get('source_blocked_count', 0)}`",
         f"- accepted: `{summary['accepted_count']}`",
         f"- pending: `{summary['pending_count']}`",
         f"- human pending: `{summary['human_pending_count']}`",
@@ -262,10 +272,31 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         lines.append(f"- objective: {entry['objective']}")
         lines.append(f"- source status: `{entry['source_status']}`")
         lines.append(f"- observed state: `{json.dumps(entry['observed_state'], ensure_ascii=False)}`")
+        lines.append(
+            f"- source checks: `{entry.get('source_pass_count', 0)}` pass / "
+            f"`{entry.get('source_check_count', 0)}` total"
+        )
         lines.append(f"- submission state: `{json.dumps(entry.get('submission_state', {}), ensure_ascii=False)}`")
         lines.extend(["", "### Provenance Requirements", ""])
         lines.extend(f"- {item}" for item in entry["provenance_requirements"])
-        lines.extend(["", "### Success Checks", ""])
+        lines.extend(
+            [
+                "",
+                "### Source Evidence Checks",
+                "",
+                "| Check | Current | Expected | Status |",
+                "| --- | --- | --- | --- |",
+            ]
+        )
+        source_checks = entry.get("source_checklist", [])
+        if source_checks:
+            for row in source_checks:
+                lines.append(
+                    f"| {row['label']} | `{row['actual']}` | `{row['expected']}` | `{row['status']}` |"
+                )
+        else:
+            lines.append("| No source checks listed. | `n/a` | `n/a` | `n/a` |")
+        lines.extend(["", "### Completion Assertions", ""])
         lines.extend(f"- {item}" for item in entry["success_checks"])
         lines.extend(["", "### Privacy Contract", ""])
         lines.extend(f"- {item}" for item in entry["privacy_contract"])

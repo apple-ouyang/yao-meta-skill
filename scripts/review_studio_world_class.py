@@ -18,7 +18,9 @@ def render_inline_list(items: list[Any], empty_label: str) -> str:
 
 
 def render_source_checks(entry: dict[str, Any]) -> str:
-    rows = build_source_checklist([entry])
+    rows = entry.get("source_checklist")
+    if not isinstance(rows, list):
+        rows = build_source_checklist([entry])
     if not rows:
         return "<p class='muted'>暂无源证据检查。</p>"
     items = []

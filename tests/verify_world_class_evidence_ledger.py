@@ -98,6 +98,9 @@ def main() -> None:
     assert summary["submitted_entry_count"] == 0, summary
     assert summary["missing_submission_count"] == 4, summary
     assert summary["invalid_submission_count"] == 0, summary
+    assert summary["source_check_count"] >= 13, summary
+    assert summary["source_pass_count"] + summary["source_blocked_count"] == summary["source_check_count"], summary
+    assert summary["source_blocked_count"] >= 6, summary
     assert summary["submitted_but_pending_count"] == 0, summary
     assert summary["overclaim_guard_active"] is True, summary
     assert summary["ready_to_claim_world_class"] is False, summary
@@ -110,6 +113,10 @@ def main() -> None:
         "native-client-telemetry",
     }, entries
     assert entries["provider-holdout"]["observed_state"]["model_executed_count"] == 0, entries["provider-holdout"]
+    provider_source = {item["field"]: item for item in entries["provider-holdout"]["source_checklist"]}
+    assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
+    assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
+    assert provider_source["token_observed_count"]["status"] == "blocked", provider_source
     assert entries["provider-holdout"]["submission_state"]["status"] == "missing", entries["provider-holdout"]
     assert entries["provider-holdout"]["submission_state"]["ledger_counts_as_completion"] is False, entries["provider-holdout"]
     assert entries["human-adjudication"]["observed_state"]["pending_count"] == 5, entries["human-adjudication"]
@@ -128,6 +135,9 @@ def main() -> None:
     assert "World-Class Evidence Ledger" in markdown, markdown
     assert "overclaim guard active: `true`" in markdown, markdown
     assert "submitted entries: `0`" in markdown, markdown
+    assert "source checks:" in markdown, markdown
+    assert "Source Evidence Checks" in markdown, markdown
+    assert "| Provider model run | `0` | `>0` | `blocked` |" in markdown, markdown
     assert "`provider-holdout`" in markdown, markdown
 
     submissions = TMP / "submissions"
@@ -160,6 +170,7 @@ def main() -> None:
     assert submitted_summary["submitted_entry_count"] == 1, submitted_summary
     assert submitted_summary["submitted_but_pending_count"] == 1, submitted_summary
     assert submitted_summary["accepted_count"] == 0, submitted_summary
+    assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     submitted_provider = {entry["key"]: entry for entry in submitted_payload["entries"]}["provider-holdout"]
     assert submitted_provider["status"] == "pending", submitted_provider
     assert submitted_provider["submission_state"]["status"] == "submitted", submitted_provider
@@ -206,12 +217,14 @@ def main() -> None:
     assert accepted_source_summary["source_accepted_count"] == 1, accepted_source_summary
     assert accepted_source_summary["accepted_count"] == 0, accepted_source_summary
     assert accepted_source_summary["source_accepted_without_valid_submission_count"] == 1, accepted_source_summary
+    assert accepted_source_summary["source_check_count"] >= 13, accepted_source_summary
     accepted_source_provider = {
         entry["key"]: entry for entry in accepted_source_payload["entries"]
     }["provider-holdout"]
     assert accepted_source_provider["source_accepted"] is True, accepted_source_provider
     assert accepted_source_provider["status"] == "pending", accepted_source_provider
     assert accepted_source_provider["submission_state"]["status"] == "missing", accepted_source_provider
+    assert all(item["status"] == "pass" for item in accepted_source_provider["source_checklist"]), accepted_source_provider
 
     (accepted_source_skill / "reports" / "context_budget.json").write_text(
         json.dumps({"summary": {"unrelated": True}}, ensure_ascii=False, indent=2) + "\n",
