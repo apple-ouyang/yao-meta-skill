@@ -224,6 +224,16 @@ def render_readme(report: dict[str, Any]) -> str:
     ]
     for item in report["files"]:
         lines.append(f"| `{item['evidence_key']}` | `{item['output_path']}` | `{item['status']}` |")
+    lines.extend(["", "## Execution Runbook", ""])
+    for item in report.get("evidence_items", []):
+        must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
+        runbook = must_collect.get("runbook", [])
+        lines.extend(["", f"### {item.get('label', item.get('evidence_key', 'Evidence'))}", ""])
+        if runbook:
+            for step in runbook:
+                lines.append(f"- `{step}`" if str(step).startswith("python3 ") or "=" in str(step) else f"- {step}")
+        else:
+            lines.append("- No source runbook listed.")
     lines.extend(
         [
             "",
@@ -373,6 +383,7 @@ def render_html_source_checklist(items: list[dict[str, Any]]) -> str:
 
 def render_html_item(item: dict[str, Any]) -> str:
     must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
+    runbook = must_collect.get("runbook", [])
     return f"""
       <article class="evidence-card {html_text(item.get('readiness', ''))}">
         <header>
@@ -385,6 +396,10 @@ def render_html_item(item: dict[str, Any]) -> str:
           <dt>Evidence</dt><dd><code>{html_text(item.get('evidence_key', ''))}</code></dd>
           <dt>Submission</dt><dd><code>{html_text(item.get('submission_path', ''))}</code></dd>
         </dl>
+        <section class="runbook-panel">
+          <h4>Execution Runbook</h4>
+          <ul>{render_html_list(runbook, 'No source runbook listed.')}</ul>
+        </section>
         <div class="mini-grid">
           <section>
             <h4>Must Collect</h4>
@@ -467,8 +482,8 @@ def render_html(report: dict[str, Any]) -> str:
     .commands li {{ padding:12px; background:var(--soft); border-radius:8px; }}
     .commands span {{ display:block; color:var(--ink); font-weight:700; margin-bottom:4px; }}
     .mini-grid {{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin-top:14px; }}
-    .mini-grid section {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
-    .mini-grid li, .notice li {{ overflow-wrap:anywhere; }}
+    .mini-grid section, .runbook-panel {{ background:var(--soft); border-radius:8px; padding:14px; min-width:0; }}
+    .mini-grid li, .runbook-panel li, .notice li {{ overflow-wrap:anywhere; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     .errors {{ color:var(--warn); }}
     @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}

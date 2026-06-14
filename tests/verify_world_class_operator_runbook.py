@@ -121,6 +121,7 @@ def main() -> None:
     assert provider["review_state"] == "awaiting-submission", provider
     assert provider["source_accepted"] is False, provider
     assert provider["blocked_source_check_count"] == 2, provider
+    assert any("output-exec --provider-runner openai" in step for step in provider["execution_runbook"]), provider
     assert "Run provider-backed output-exec with real credentials." in provider["next_source_actions"], provider
     assert "Provider execution should return non-estimated token usage." in provider["next_source_actions"], provider
     assert provider["commands"]["prepare_submission"].startswith("python3 scripts/yao.py world-class-submission-kit"), provider
@@ -140,6 +141,8 @@ def main() -> None:
     assert "Valid intake means ready for submission review; ledger review still requires passing source evidence." in markdown, markdown
     assert "| Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |" in markdown, markdown
     assert "| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials." in markdown, markdown
+    assert "Source Runbook" in markdown, markdown
+    assert "output-exec --provider-runner openai" in markdown, markdown
     assert "### Next Source Actions" in markdown, markdown
     assert "- Provider execution should return non-estimated token usage." in markdown, markdown
     assert "Source Evidence Snapshot" in markdown, markdown
@@ -154,6 +157,8 @@ def main() -> None:
     assert f"<span>Blocked</span><strong>{summary['source_blocked_count']}</strong>" in html, html
     assert "<dt>Blocked</dt><dd><code>2</code></dd>" in html, html
     assert "Next Source Actions" in html, html
+    assert "Source Runbook" in html, html
+    assert "output-exec --provider-runner openai" in html, html
     assert "Source Evidence Snapshot" in html, html
     assert "model_executed_count" in html, html
     assert "model_executed_count: 0 / &gt;0" in html, html

@@ -111,6 +111,7 @@ def build_operator_checklist(
                 },
                 "must_collect": {
                     "provenance_requirements": entry.get("provenance_requirements", []),
+                    "runbook": entry.get("runbook", []),
                     "success_checks": entry.get("success_checks", []),
                     "evidence_artifacts": entry.get("evidence_artifacts", []),
                     "privacy_contract": entry.get("privacy_contract", []),
@@ -270,6 +271,10 @@ def render_operator_checklist(items: list[dict[str, Any]]) -> list[str]:
             if values:
                 lines.append(f"- {label}:")
                 lines.extend(f"  - {value}" for value in values)
+        runbook = must_collect.get("runbook", [])
+        if runbook:
+            lines.extend(["", "#### Source Runbook", ""])
+            lines.extend(f"- `{value}`" if str(value).startswith("python3 ") or "=" in str(value) else f"- {value}" for value in runbook)
     return lines
 
 

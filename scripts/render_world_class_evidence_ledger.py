@@ -144,6 +144,7 @@ def build_entry(skill_dir: Path, task: dict[str, Any], submissions_dir: Path) ->
         "source_accepted": source_accepted,
         "current": task["current"],
         "objective": task["objective"],
+        "runbook": task.get("runbook", []),
         "provenance_requirements": PROVENANCE_REQUIREMENTS.get(task["key"], ["release reviewer evidence"]),
         "success_checks": task["success_checks"],
         "evidence_artifacts": task["evidence_artifacts"],
@@ -279,6 +280,8 @@ def render_markdown(ledger: dict[str, Any]) -> str:
         lines.append(f"- submission state: `{json.dumps(entry.get('submission_state', {}), ensure_ascii=False)}`")
         lines.extend(["", "### Provenance Requirements", ""])
         lines.extend(f"- {item}" for item in entry["provenance_requirements"])
+        lines.extend(["", "### Source Runbook", ""])
+        lines.extend(f"- `{item}`" if str(item).startswith("python3 ") or "=" in str(item) else f"- {item}" for item in entry.get("runbook", []))
         lines.extend(
             [
                 "",

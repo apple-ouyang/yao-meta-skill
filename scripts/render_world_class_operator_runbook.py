@@ -61,6 +61,7 @@ def build_runbook_item(
         "source_accepted": review_item.get("source_accepted") is True,
         "objective": entry.get("objective", ""),
         "current": entry.get("current", ""),
+        "execution_runbook": entry.get("runbook", []),
         "blocking_reason": review_item.get("blocking_reason") or checklist.get("blocking_reason") or entry.get("next_action", ""),
         "submission_path": checklist.get("submission_path") or entry.get("submission_state", {}).get("path", ""),
         "template_path": checklist.get("template_path", ""),
@@ -193,6 +194,10 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- submission: `{item['submission_path'] or 'missing'}`",
                 f"- template: `{item['template_path'] or 'missing'}`",
                 "",
+                "### Source Runbook",
+                "",
+                *list_lines(item.get("execution_runbook", []), "No source runbook listed."),
+                "",
                 "### Commands",
                 "",
             ]
@@ -278,6 +283,7 @@ def render_html_item(item: dict[str, Any]) -> str:
           <dt>Blocked</dt><dd><code>{html_text(item.get('blocked_source_check_count', 0))}</code></dd>
           <dt>Submission</dt><dd><code>{html_text(item['submission_path'])}</code></dd>
         </dl>
+        <section class="source-panel"><h4>Source Runbook</h4><ul>{html_list(item.get('execution_runbook', []), 'No source runbook listed.')}</ul></section>
         <section><h4>Commands</h4><ul class="commands">{commands}</ul></section>
         <div class="mini-grid">
           <section><h4>Must Collect</h4><ul>{html_list(must_collect.get('provenance_requirements', []), 'No provenance requirements listed.')}</ul></section>

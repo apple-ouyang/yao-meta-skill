@@ -165,6 +165,7 @@ def main() -> None:
     assert checklist["provider-holdout"]["commands"]["submission_review"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
     assert checklist["provider-holdout"]["commands"]["refresh_ledger"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions", checklist["provider-holdout"]
     assert "provider-backed model run" in checklist["provider-holdout"]["must_collect"]["provenance_requirements"], checklist["provider-holdout"]
+    assert any("output-exec --provider-runner openai" in step for step in checklist["provider-holdout"]["must_collect"]["runbook"]), checklist["provider-holdout"]
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in checklist["provider-holdout"]["must_collect"]["success_checks"], checklist["provider-holdout"]
     assert checklist["provider-holdout"]["anti_overclaim"]["local_command_runner_counts_as_provider_model"] is False, checklist["provider-holdout"]
     assert checklist["provider-holdout"]["source_accepted"] is False, checklist["provider-holdout"]
@@ -181,6 +182,8 @@ def main() -> None:
     assert "`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
+    assert "Source Runbook" in markdown, markdown
+    assert "output-exec --provider-runner openai" in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
     assert "Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests." in markdown, markdown
     assert "Real submissions must replace template submitter, date, and provenance placeholders with concrete evidence metadata." in markdown, markdown
@@ -221,6 +224,8 @@ def main() -> None:
     assert kit_manifest["artifacts"]["html"].endswith("tests/tmp_world_class_evidence_intake/submission_kit/index.html"), kit_manifest["artifacts"]
     kit_readme = (kit_dir / "README.md").read_text(encoding="utf-8")
     assert "Drafts are not accepted evidence." in kit_readme, kit_readme
+    assert "Execution Runbook" in kit_readme, kit_readme
+    assert "output-exec --provider-runner openai" in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
     assert "Source Evidence Snapshot" in kit_readme, kit_readme
@@ -236,6 +241,8 @@ def main() -> None:
     assert "<dt>Current</dt><dd><code>0</code></dd>" in kit_html, kit_html
     assert "<dt>Expected</dt><dd><code>&gt;0</code></dd>" in kit_html, kit_html
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html
+    assert "Execution Runbook" in kit_html, kit_html
+    assert "output-exec --provider-runner openai" in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
 
     native_kit_dir = TMP / "native_permission_kit"
