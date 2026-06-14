@@ -90,6 +90,13 @@
       "blocking_reason": "No real evidence submission has been provided yet.",
       "template_status": "pass",
       "submission_status": "missing",
+      "source_accepted": false,
+      "observed_state": {
+        "model_executed_count": 0,
+        "timing_observed_count": 10,
+        "token_observed_count": 0,
+        "accepted": false
+      },
       "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
       "submission_path": "evidence/world_class/submissions/provider-holdout.json",
       "commands": {
@@ -142,6 +149,15 @@
       "blocking_reason": "No real evidence submission has been provided yet.",
       "template_status": "pass",
       "submission_status": "missing",
+      "source_accepted": false,
+      "observed_state": {
+        "pair_count": 5,
+        "judgment_count": 0,
+        "pending_count": 5,
+        "invalid_decision_count": 0,
+        "answer_revealed_count": 0,
+        "accepted": false
+      },
       "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
       "submission_path": "evidence/world_class/submissions/human-adjudication.json",
       "commands": {
@@ -196,6 +212,17 @@
       "blocking_reason": "No real evidence submission has been provided yet.",
       "template_status": "pass",
       "submission_status": "missing",
+      "source_accepted": false,
+      "observed_state": {
+        "native_enforcement_count": 0,
+        "metadata_fallback_count": 4,
+        "installer_enforcement_pass_count": 4,
+        "installer_permission_failure_count": 0,
+        "installer_enforcement_ready": true,
+        "residual_risk_count": 4,
+        "failure_count": 0,
+        "accepted": false
+      },
       "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
       "submission_path": "evidence/world_class/submissions/native-permission-enforcement.json",
       "commands": {
@@ -251,6 +278,14 @@
       "blocking_reason": "No real evidence submission has been provided yet.",
       "template_status": "pass",
       "submission_status": "missing",
+      "source_accepted": false,
+      "observed_state": {
+        "external_source_events": 0,
+        "adoption_sample_count": 0,
+        "raw_content_allowed": false,
+        "risk_band": "low",
+        "accepted": false
+      },
       "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
       "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
       "commands": {
