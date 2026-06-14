@@ -200,9 +200,18 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
         context_status = "warn" if context_status == "pass" else context_status
     if not context:
         context_status = "warn"
+    large_deferred_dirs = context_stats.get("large_deferred_resource_dirs", []) or []
+    top_deferred = "none"
+    if large_deferred_dirs:
+        first = large_deferred_dirs[0]
+        top_deferred = f"{first.get('path', 'resource')} {first.get('estimated_tokens', 'n/a')}"
     context_detail = (
         f"initial load {context_stats.get('estimated_initial_load_tokens', 'n/a')}/"
-        f"{context_stats.get('context_budget_limit', 'n/a')}; quality density {context_stats.get('quality_density', 'n/a')}"
+        f"{context_stats.get('context_budget_limit', 'n/a')}; "
+        f"deferred {context_stats.get('deferred_resource_tokens', 'n/a')}/"
+        f"{context_stats.get('deferred_resource_warn_threshold', 'n/a')}; "
+        f"top deferred {top_deferred}; "
+        f"quality density {context_stats.get('quality_density', 'n/a')}"
     )
     gates.append(
         gate(

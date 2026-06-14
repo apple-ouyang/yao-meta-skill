@@ -1,14 +1,42 @@
 {
   "ok": true,
   "failures": [],
-  "warnings": [],
+  "warnings": [
+    "Deferred resource footprint is high: 381942 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
+  ],
   "stats": {
     "context_budget_tier": "production",
     "context_budget_limit": 1000,
     "skill_body_tokens": 751,
-    "other_text_tokens": 1183524,
+    "other_text_tokens": 1187833,
     "estimated_initial_load_tokens": 944,
-    "estimated_total_text_tokens": 1184275,
+    "estimated_total_text_tokens": 1188584,
+    "deferred_resource_tokens": 381942,
+    "deferred_resource_warn_threshold": 120000,
+    "deferred_resource_dirs": [
+      {
+        "path": "scripts",
+        "estimated_tokens": 334459,
+        "file_count": 95
+      },
+      {
+        "path": "references",
+        "estimated_tokens": 25648,
+        "file_count": 32
+      },
+      {
+        "path": "evals",
+        "estimated_tokens": 21835,
+        "file_count": 27
+      }
+    ],
+    "large_deferred_resource_dirs": [
+      {
+        "path": "scripts",
+        "estimated_tokens": 334459,
+        "file_count": 95
+      }
+    ],
     "relevant_file_count": 500,
     "unused_resource_dirs": [],
     "quality_signal_points": 130,

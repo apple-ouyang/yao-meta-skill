@@ -8,10 +8,20 @@
       "budget_limit": 1000,
       "initial_tokens": 944,
       "skill_body_tokens": 751,
+      "deferred_resource_tokens": 381942,
+      "large_deferred_resource_dirs": [
+        {
+          "path": "scripts",
+          "estimated_tokens": 334459,
+          "file_count": 95
+        }
+      ],
       "quality_density": 137.7,
       "unused_resource_dirs": [],
       "ok": true,
-      "warnings": []
+      "warnings": [
+        "Deferred resource footprint is high: 381942 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
+      ]
     },
     {
       "label": "complex-release-orchestrator",
@@ -20,6 +30,8 @@
       "budget_limit": 1000,
       "initial_tokens": 790,
       "skill_body_tokens": 718,
+      "deferred_resource_tokens": 1657,
+      "large_deferred_resource_dirs": [],
       "quality_density": 164.6,
       "unused_resource_dirs": [],
       "ok": true,
@@ -32,6 +44,8 @@
       "budget_limit": 1000,
       "initial_tokens": 760,
       "skill_body_tokens": 658,
+      "deferred_resource_tokens": 1030,
+      "large_deferred_resource_dirs": [],
       "quality_density": 171.1,
       "unused_resource_dirs": [],
       "ok": true,

@@ -4,11 +4,11 @@
   "skill_dir": ".",
   "summary": {
     "decision": "review",
-    "world_class_score": 91,
+    "world_class_score": 89,
     "gate_count": 16,
     "blocker_count": 0,
-    "warning_count": 3,
-    "action_count": 3,
+    "warning_count": 4,
+    "action_count": 4,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -42,8 +42,8 @@
     {
       "key": "context-budget",
       "label": "上下文",
-      "status": "pass",
-      "detail": "initial load 944/1000; quality density 137.7",
+      "status": "warn",
+      "detail": "initial load 944/1000; deferred 381942/120000; top deferred scripts 334459; quality density 137.7",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -115,7 +115,7 @@
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -155,10 +155,18 @@
       "link": "output_quality_scorecard.md"
     },
     {
+      "key": "context-budget",
+      "label": "上下文",
+      "status": "warn",
+      "detail": "initial load 944/1000; deferred 381942/120000; top deferred scripts 334459; quality density 137.7",
+      "evidence": "reports/context_budget.json",
+      "link": "context_budget.md"
+    },
+    {
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 1 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md"
     },
@@ -233,6 +241,52 @@
       "evidence": "reports/output_quality_scorecard.json",
       "evidence_link": "output_quality_scorecard.md",
       "verification_command": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review"
+    },
+    {
+      "gate_key": "context-budget",
+      "label": "上下文",
+      "status": "warn",
+      "priority": "warning",
+      "summary": "压缩或拆分高成本 deferred resources，保留最小可路由上下文。",
+      "why": "初始加载可以安全，但后续 references、scripts、evals 体量过大时，reviewer 仍需要看到维护和读取成本。",
+      "source_fix": "SKILL.md + references/ + scripts/ + evals/",
+      "source_refs": [
+        {
+          "path": "SKILL.md",
+          "label": "entrypoint",
+          "kind": "source",
+          "line": 9,
+          "exists": true,
+          "link": "../SKILL.md"
+        },
+        {
+          "path": "reports/context_budget.md",
+          "label": "context budget",
+          "kind": "report",
+          "line": 1,
+          "exists": true,
+          "link": "context_budget.md"
+        },
+        {
+          "path": "scripts/resource_boundary_check.py",
+          "label": "resource boundary checker",
+          "kind": "source",
+          "line": 44,
+          "exists": true,
+          "link": "../scripts/resource_boundary_check.py"
+        },
+        {
+          "path": "references/skill-engineering-method.md",
+          "label": "skill engineering method",
+          "kind": "method",
+          "line": 208,
+          "exists": true,
+          "link": "../references/skill-engineering-method.md"
+        }
+      ],
+      "evidence": "reports/context_budget.json",
+      "evidence_link": "context_budget.md",
+      "verification_command": "python3 scripts/render_context_reports.py"
     },
     {
       "gate_key": "review-waivers",
@@ -4996,7 +5050,7 @@
           "label": "Review Studio",
           "status": "pass",
           "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-          "current": "16 gates; decision review; warnings 3",
+          "current": "16 gates; decision review; warnings 4",
           "command": "python3 scripts/yao.py review-studio .",
           "test": "python3 tests/verify_review_studio.py",
           "evidence": [
@@ -10257,7 +10311,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 179,
-        "package_sha256": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb"
+        "package_sha256": "2d237fe645ef197282d514782f3bd37025c00e4d7efda725145aa5c3af180ba5"
       },
       "failures": [],
       "warnings": [],
@@ -13646,7 +13700,7 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-14",
       "skill_dir": ".",
       "summary": {
         "python_file_count": 154,
@@ -13758,14 +13812,42 @@
     "context_budget": {
       "ok": true,
       "failures": [],
-      "warnings": [],
+      "warnings": [
+        "Deferred resource footprint is high: 381942 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
+      ],
       "stats": {
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 751,
-        "other_text_tokens": 1183524,
+        "other_text_tokens": 1187832,
         "estimated_initial_load_tokens": 944,
-        "estimated_total_text_tokens": 1184275,
+        "estimated_total_text_tokens": 1188583,
+        "deferred_resource_tokens": 381942,
+        "deferred_resource_warn_threshold": 120000,
+        "deferred_resource_dirs": [
+          {
+            "path": "scripts",
+            "estimated_tokens": 334459,
+            "file_count": 95
+          },
+          {
+            "path": "references",
+            "estimated_tokens": 25648,
+            "file_count": 32
+          },
+          {
+            "path": "evals",
+            "estimated_tokens": 21835,
+            "file_count": 27
+          }
+        ],
+        "large_deferred_resource_dirs": [
+          {
+            "path": "scripts",
+            "estimated_tokens": 334459,
+            "file_count": 95
+          }
+        ],
         "relevant_file_count": 500,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
@@ -17237,7 +17319,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb",
+          "package_sha256": "2d237fe645ef197282d514782f3bd37025c00e4d7efda725145aa5c3af180ba5",
           "archive_sha256": "76793bd367e9aaf6c25e6b11ac1139156950827bd87ba3dd8a1bdc883f7d70fe"
         },
         "compatibility": {
@@ -17294,7 +17376,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb"
+            "package_sha256": "2d237fe645ef197282d514782f3bd37025c00e4d7efda725145aa5c3af180ba5"
           }
         ]
       },
@@ -18330,7 +18412,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "c42643ea854dd90bb03ca607595f6a6b2c00118da64a78e8bdbb4392d7f204fb"
+            "to": "2d237fe645ef197282d514782f3bd37025c00e4d7efda725145aa5c3af180ba5"
           }
         ]
       },

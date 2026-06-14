@@ -154,12 +154,12 @@ ACTION_GUIDANCE: dict[str, dict[str, str]] = {
         "verification": "python3 scripts/adjudicate_output_review.py --write-template && python3 scripts/yao.py output-review",
     },
     "context-budget": {
-        "summary": "压缩入口与高成本 references，保留最小可路由上下文。",
-        "why": "上下文成本过高会降低加载稳定性，并挤压用户任务材料的预算。",
-        "source_fix": "SKILL.md + references/",
-        "source_paths": [
+        "summary": "压缩或拆分高成本 deferred resources，保留最小可路由上下文。", "why": "初始加载可以安全，但后续 references、scripts、evals 体量过大时，reviewer 仍需要看到维护和读取成本。",
+        "source_fix": "SKILL.md + references/ + scripts/ + evals/", "source_paths": [
             {"path": "SKILL.md", "label": "entrypoint", "kind": "source", "patterns": ["# Yao Meta Skill"]},
             {"path": "reports/context_budget.md", "label": "context budget", "kind": "report", "patterns": ["# Context"]},
+            {"path": "scripts/resource_boundary_check.py", "label": "resource boundary checker", "kind": "source", "patterns": ["DEFERRED_RESOURCE"]},
+            {"path": "references/skill-engineering-method.md", "label": "skill engineering method", "kind": "method", "patterns": ["Design Principle"]},
         ],
         "verification": "python3 scripts/render_context_reports.py",
     },

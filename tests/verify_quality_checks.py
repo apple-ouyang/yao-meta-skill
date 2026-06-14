@@ -44,16 +44,25 @@ def require_context_targets(case: dict, max_initial: int, min_density: float) ->
     stats = case.get("payload", {}).get("stats", {})
     initial = stats.get("estimated_initial_load_tokens")
     density = stats.get("quality_density")
+    deferred = stats.get("deferred_resource_tokens")
+    deferred_threshold = stats.get("deferred_resource_warn_threshold")
+    deferred_dirs = stats.get("deferred_resource_dirs", [])
     unused = stats.get("unused_resource_dirs", [])
     case["max_initial_load"] = max_initial
     case["observed_initial_load"] = initial
     case["minimum_quality_density"] = min_density
     case["observed_quality_density"] = density
+    case["observed_deferred_resource_tokens"] = deferred
+    case["deferred_resource_warn_threshold"] = deferred_threshold
+    case["deferred_resource_dir_count"] = len(deferred_dirs) if isinstance(deferred_dirs, list) else None
     case["unused_resource_dirs"] = unused
     case["passed"] = (
         case["passed"]
         and initial is not None
         and density is not None
+        and deferred is not None
+        and deferred_threshold is not None
+        and isinstance(deferred_dirs, list)
         and initial <= max_initial
         and density >= min_density
         and not unused

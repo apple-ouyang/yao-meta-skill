@@ -41,6 +41,9 @@ CONTEXT_BUDGETS = {
 }
 SKILL_BODY_BUFFER = 100
 SKILL_BODY_WARN_RATIO = 0.85
+DEFERRED_RESOURCE_DIRS = {"references", "scripts", "evals", "templates", "assets", "input", "outputs"}
+DEFERRED_RESOURCE_WARN_TOKENS = 120_000
+DEFERRED_RESOURCE_WARN_DIR_TOKENS = 80_000
 
 
 def has_files(path: Path) -> bool:
@@ -128,6 +131,8 @@ def analyze_skill(
     other_tokens = 0
     initial_load_tokens = 0
     total_text_tokens = 0
+    deferred_resource_tokens = 0
+    deferred_resource_dirs: dict[str, dict[str, int | str]] = {}
     for path in files:
         if path.suffix and path.suffix not in TEXT_EXTS and path.name != "SKILL.md":
             continue
@@ -135,6 +140,7 @@ def analyze_skill(
         tokens = estimate_tokens(text)
         total_text_tokens += tokens
         rel = path.relative_to(root)
+        top_dir = rel.parts[0] if rel.parts else str(rel)
         if rel == Path("SKILL.md"):
             skill_body_tokens += tokens
             initial_load_tokens += tokens
@@ -142,6 +148,14 @@ def analyze_skill(
             other_tokens += tokens
             if rel.parts[0] in {"agents"}:
                 initial_load_tokens += tokens
+            if top_dir in DEFERRED_RESOURCE_DIRS:
+                deferred_resource_tokens += tokens
+                current = deferred_resource_dirs.setdefault(
+                    top_dir,
+                    {"path": top_dir, "estimated_tokens": 0, "file_count": 0},
+                )
+                current["estimated_tokens"] = int(current["estimated_tokens"]) + tokens
+                current["file_count"] = int(current["file_count"]) + 1
 
     budget_tier = budget_tier_for(manifest)
     budget_limit = max_initial_tokens if max_initial_tokens is not None else CONTEXT_BUDGETS[budget_tier]
@@ -174,6 +188,22 @@ def analyze_skill(
     if other_tokens and skill_body_tokens / (skill_body_tokens + other_tokens) > 0.75:
         warnings.append("Most text still lives in SKILL.md; consider moving detail into references/ or scripts/.")
 
+    large_deferred_resource_dirs = [
+        item
+        for item in sorted(
+            deferred_resource_dirs.values(),
+            key=lambda payload: int(payload["estimated_tokens"]),
+            reverse=True,
+        )
+        if int(item["estimated_tokens"]) > DEFERRED_RESOURCE_WARN_DIR_TOKENS
+    ]
+    if deferred_resource_tokens > DEFERRED_RESOURCE_WARN_TOKENS:
+        warnings.append(
+            "Deferred resource footprint is high: "
+            f"{deferred_resource_tokens} estimated tokens across references/scripts/evals. "
+            "Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
+        )
+
     frontmatter = read_frontmatter(skill_md)
     governance_score, _ = compute_score(root, manifest, frontmatter, skill_text, bool(manifest))
     signal_points = quality_signal_points(root, manifest, governance_score)
@@ -190,6 +220,14 @@ def analyze_skill(
             "other_text_tokens": other_tokens,
             "estimated_initial_load_tokens": initial_load_tokens,
             "estimated_total_text_tokens": total_text_tokens,
+            "deferred_resource_tokens": deferred_resource_tokens,
+            "deferred_resource_warn_threshold": DEFERRED_RESOURCE_WARN_TOKENS,
+            "deferred_resource_dirs": sorted(
+                deferred_resource_dirs.values(),
+                key=lambda payload: int(payload["estimated_tokens"]),
+                reverse=True,
+            ),
+            "large_deferred_resource_dirs": large_deferred_resource_dirs,
             "relevant_file_count": len(files),
             "unused_resource_dirs": unused_resource_dirs,
             "quality_signal_points": signal_points,
