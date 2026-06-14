@@ -1049,7 +1049,7 @@
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
       "package_hash_file_count": 182,
-      "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
+      "package_sha256": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1087,8 +1087,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a",
-          "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e"
+          "package_sha256": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25",
+          "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23"
         },
         "compatibility": {
           "openai": "pass",
@@ -1119,7 +1119,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
+          "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1135,7 +1135,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
+        "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23",
         "archive_entry_count": 577,
         "failure_count": 0,
         "warning_count": 0
@@ -1214,12 +1214,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e"
+            "to": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a"
+            "to": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25"
           }
         ]
       },
@@ -1525,6 +1525,9 @@
         "submitted_entry_count": 0,
         "missing_submission_count": 4,
         "invalid_submission_count": 0,
+        "source_check_count": 13,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "submitted_but_pending_count": 0,
         "source_accepted_without_valid_submission_count": 0,
         "overclaim_guard_active": true,
@@ -1572,6 +1575,41 @@
             "token_observed_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Provider model run",
+              "field": "model_executed_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Run provider-backed output-exec with real credentials."
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Timing observed",
+              "field": "timing_observed_count",
+              "expected": ">0",
+              "actual": 10,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Provider execution should record timing metadata."
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "label": "Token usage observed",
+              "field": "token_observed_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Provider execution should return non-estimated token usage."
+            }
+          ],
+          "source_check_count": 3,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/provider-holdout.json",
@@ -1632,6 +1670,51 @@
             "answer_revealed_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Review pairs exist",
+              "field": "pair_count",
+              "expected": ">0",
+              "actual": 5,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Generate the blind A/B review pack."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "No pending decisions",
+              "field": "pending_count",
+              "expected": "==0",
+              "actual": 5,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record a reviewer choice for every pair."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Judgments complete",
+              "field": "judgment_count",
+              "expected": "==pair_count",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Every pair needs one valid human judgment."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "No invalid decisions",
+              "field": "invalid_decision_count",
+              "expected": "==0",
+              "actual": 0,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Fix malformed winner/confidence entries."
+            }
+          ],
+          "source_check_count": 4,
+          "source_pass_count": 2,
+          "source_blocked_count": 2,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/human-adjudication.json",
@@ -1695,6 +1778,41 @@
             "failure_count": 0,
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Native enforcement",
+              "field": "native_enforcement_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Collect real target-client or external runtime guard proof."
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Probe failures",
+              "field": "failure_count",
+              "expected": "==0",
+              "actual": 0,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Runtime permission probes must stay clean."
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "label": "Installer support",
+              "field": "installer_enforcement_ready",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Installer enforcement is supporting evidence, not native proof."
+            }
+          ],
+          "source_check_count": 3,
+          "source_pass_count": 2,
+          "source_blocked_count": 1,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-permission-enforcement.json",
@@ -1752,6 +1870,41 @@
             "risk_band": "low",
             "accepted": false
           },
+          "source_checklist": [
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "External events",
+              "field": "external_source_events",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Import at least one metadata-only event from a real client."
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "Adoption sample",
+              "field": "adoption_sample_count",
+              "expected": ">0",
+              "actual": 0,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Telemetry must include adoption outcome evidence."
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "label": "Raw content blocked",
+              "field": "raw_content_allowed",
+              "expected": "false",
+              "actual": false,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Telemetry must stay metadata-only."
+            }
+          ],
+          "source_check_count": 3,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-client-telemetry.json",

@@ -8,6 +8,8 @@ Generated at: `2026-06-14`
 - ready to claim world-class: `false`
 - entries: `4`
 - source accepted: `0`
+- source checks: `6` pass / `13` total
+- source blocked: `7`
 - accepted: `0`
 - pending: `4`
 - human pending: `1`
@@ -34,6 +36,7 @@ This ledger records the current evidence state. It requires both passing source 
 - objective: Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.
 - source status: `external_required`
 - observed state: `{"model_executed_count": 0, "timing_observed_count": 10, "token_observed_count": 0, "accepted": false}`
+- source checks: `1` pass / `3` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/provider-holdout.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -42,7 +45,15 @@ This ledger records the current evidence state. It requires both passing source 
 - observed timing
 - observed token metadata
 
-### Success Checks
+### Source Evidence Checks
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| Provider model run | `0` | `>0` | `blocked` |
+| Timing observed | `10` | `>0` | `pass` |
+| Token usage observed | `0` | `>0` | `blocked` |
+
+### Completion Assertions
 
 - reports/output_execution_runs.json summary.model_executed_count > 0
 - reports/output_execution_runs.json summary.timing_observed_count > 0
@@ -59,6 +70,7 @@ This ledger records the current evidence state. It requires both passing source 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - source status: `human_required`
 - observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "accepted": false}`
+- source checks: `2` pass / `4` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/human-adjudication.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -67,7 +79,16 @@ This ledger records the current evidence state. It requires both passing source 
 - blind A/B decisions
 - answer key unopened until decisions exist
 
-### Success Checks
+### Source Evidence Checks
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| Review pairs exist | `5` | `>0` | `pass` |
+| No pending decisions | `5` | `==0` | `blocked` |
+| Judgments complete | `0` | `==pair_count` | `blocked` |
+| No invalid decisions | `0` | `==0` | `pass` |
+
+### Completion Assertions
 
 - reports/output_review_adjudication.json summary.pending_count == 0
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
@@ -84,6 +105,7 @@ This ledger records the current evidence state. It requires both passing source 
 - objective: Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.
 - source status: `external_required`
 - observed state: `{"native_enforcement_count": 0, "metadata_fallback_count": 4, "installer_enforcement_pass_count": 4, "installer_permission_failure_count": 0, "installer_enforcement_ready": true, "residual_risk_count": 4, "failure_count": 0, "accepted": false}`
+- source checks: `2` pass / `3` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-permission-enforcement.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -92,7 +114,15 @@ This ledger records the current evidence state. It requires both passing source 
 - native enforcement flag or externally accepted guard proof
 - residual risk retained for fallback targets
 
-### Success Checks
+### Source Evidence Checks
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| Native enforcement | `0` | `>0` | `blocked` |
+| Probe failures | `0` | `==0` | `pass` |
+| Installer support | `True` | `true` | `pass` |
+
+### Completion Assertions
 
 - reports/runtime_permission_probes.json summary.native_enforcement_count > 0
 - reports/runtime_permission_probes.json summary.failure_count == 0
@@ -109,6 +139,7 @@ This ledger records the current evidence state. It requires both passing source 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - source status: `external_required`
 - observed state: `{"external_source_events": 0, "adoption_sample_count": 0, "raw_content_allowed": false, "risk_band": "low", "accepted": false}`
+- source checks: `1` pass / `3` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-client-telemetry.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -117,7 +148,15 @@ This ledger records the current evidence state. It requires both passing source 
 - metadata-only event
 - local-first import path
 
-### Success Checks
+### Source Evidence Checks
+
+| Check | Current | Expected | Status |
+| --- | --- | --- | --- |
+| External events | `0` | `>0` | `blocked` |
+| Adoption sample | `0` | `>0` | `blocked` |
+| Raw content blocked | `False` | `false` | `pass` |
+
+### Completion Assertions
 
 - reports/adoption_drift_report.json summary.source_types.external > 0
 - reports/adoption_drift_report.json summary.adoption_sample_count > 0
