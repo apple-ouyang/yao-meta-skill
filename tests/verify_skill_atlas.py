@@ -190,7 +190,7 @@ def main() -> None:
     assert summary["owner_gap_count"] >= 1, summary
     assert summary["stale_count"] >= 1, summary
     assert summary["shared_resource_count"] >= 1, summary
-    assert summary["no_route_opportunity_count"] >= 1, summary
+    assert summary["no_route_opportunity_count"] >= 2, summary
     assert summary["drift_signal_count"] == 2, summary
     assert summary["actionable_drift_signal_count"] == 1, summary
     assert summary["telemetry_report_count"] == 1, summary
@@ -200,13 +200,15 @@ def main() -> None:
     assert (output_dir / "stale_skills.json").exists(), output_dir
     assert (output_dir / "owner_review_gaps.json").exists(), output_dir
     assert (output_dir / "drift_signals.json").exists(), output_dir
-    assert (output_dir / "no_route_opportunities.json").exists(), output_dir
+    no_route_path = output_dir / "no_route_opportunities.json"
+    assert no_route_path.exists(), output_dir
     html = report_html.read_text(encoding="utf-8")
     assert "Skill Atlas" in html, html[:1000]
     assert "Route Collisions" in html, html[:3000]
     assert "Actionable Issues" in html, html[:3000]
     assert "Drift Signals" in html, html[:3000]
     assert "No-Route Opportunities" in html, html[:3000]
+    assert "Missed-trigger telemetry" in html, html
     catalog = json.loads((output_dir / "catalog.json").read_text(encoding="utf-8"))
     assert catalog["summary"]["skill_count"] == 3, catalog
     alpha_catalog = next(item for item in catalog["skills"] if item["name"] == alpha.name)
@@ -214,6 +216,15 @@ def main() -> None:
     drift = json.loads((output_dir / "drift_signals.json").read_text(encoding="utf-8"))
     assert any(item["name"] == alpha.name and item["signal_types"] == ["no telemetry"] for item in drift), drift
     assert any(item["name"] == beta.name and "bad output" in item["signal_types"] and not item["actionable"] for item in drift), drift
+    no_route = json.loads(no_route_path.read_text(encoding="utf-8"))
+    assert {item["source_type"] for item in no_route} >= {"failure-case", "telemetry"}, no_route
+    telemetry_opportunity = next(item for item in no_route if item["source_type"] == "telemetry")
+    assert telemetry_opportunity["skill"] == beta.name, telemetry_opportunity
+    assert telemetry_opportunity["signal"] == "missed trigger", telemetry_opportunity
+    assert telemetry_opportunity["missed_trigger_count"] == 1, telemetry_opportunity
+    assert telemetry_opportunity["actionable"] is False, telemetry_opportunity
+    assert "metadata-only telemetry" in telemetry_opportunity["privacy_contract"], telemetry_opportunity
+    assert "raw prompt" in telemetry_opportunity["privacy_contract"], telemetry_opportunity
     assert payload["scope_policy"]["present"], payload["scope_policy"]
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))

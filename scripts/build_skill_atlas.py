@@ -451,7 +451,7 @@ def owner_review_gaps(skills: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return gaps
 
 
-def no_route_opportunities(workspace_root: Path) -> list[dict[str, Any]]:
+def failure_case_no_route_opportunities(workspace_root: Path) -> list[dict[str, Any]]:
     opportunities = []
     for path in sorted(workspace_root.rglob("failure-cases.md")):
         if should_skip(path, workspace_root):
@@ -463,8 +463,49 @@ def no_route_opportunities(workspace_root: Path) -> list[dict[str, Any]]:
                 continue
             lowered = stripped.casefold()
             if "no_route" in lowered or "no route" in lowered or "missed" in lowered or "under-trigger" in lowered:
-                opportunities.append({"source": safe_rel(workspace_root, path), "note": stripped.lstrip("- ").strip()})
+                opportunities.append(
+                    {
+                        "source_type": "failure-case",
+                        "source": safe_rel(workspace_root, path),
+                        "note": stripped.lstrip("- ").strip(),
+                        "actionable": True,
+                        "privacy_contract": "source note only; raw prompts are not required",
+                    }
+                )
     return opportunities[:50]
+
+
+def telemetry_no_route_opportunities(drift_signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    opportunities = []
+    for signal in drift_signals:
+        signal_types = {str(item) for item in signal.get("signal_types", [])}
+        if not {"missed trigger", "under trigger"} & signal_types:
+            continue
+        summary = signal.get("summary", {}) if isinstance(signal.get("summary"), dict) else {}
+        opportunities.append(
+            {
+                "source_type": "telemetry",
+                "source": str(signal.get("source", "")),
+                "skill": str(signal.get("name", "")),
+                "path": str(signal.get("path", "")),
+                "signal": "missed trigger",
+                "missed_trigger_count": int(summary.get("missed_trigger_count") or 0),
+                "recommendation": str(
+                    signal.get("recommendation")
+                    or "Add missed prompts to trigger eval and evaluate whether a new skill route is needed."
+                ),
+                "actionable": bool(signal.get("actionable")),
+                "scope": str(signal.get("scope", "")),
+                "privacy_contract": "metadata-only telemetry; no raw prompt, output, transcript, or note is stored",
+            }
+        )
+    return opportunities
+
+
+def no_route_opportunities(workspace_root: Path, drift_signals: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    opportunities = failure_case_no_route_opportunities(workspace_root)
+    opportunities.extend(telemetry_no_route_opportunities(drift_signals))
+    return opportunities[:80]
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
@@ -501,6 +542,16 @@ def render_html(payload: dict[str, Any]) -> str:
     blocker_items = "".join(
         f"<li><strong>{html.escape(item.get('name', item.get('skill_a', 'issue')))}</strong> {html.escape(item.get('reason', item.get('status', ', '.join(item.get('missing', item.get('signal_types', []))))))}</li>"
         for item in blockers
+    )
+    opportunity_items = "".join(
+        (
+            "<li>"
+            f"<strong>{html.escape(item.get('skill') or item.get('source_type', 'opportunity'))}</strong> "
+            f"{html.escape(item.get('note') or item.get('recommendation') or item.get('signal', 'no-route opportunity'))}"
+            f"<br><small>{html.escape(item.get('source', ''))}</small>"
+            "</li>"
+        )
+        for item in payload["no_route_opportunities"][:20]
     )
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -541,6 +592,11 @@ def render_html(payload: dict[str, Any]) -> str:
       <ul>{blocker_items or '<li>No blocking portfolio issues detected.</li>'}</ul>
     </section>
     <section>
+      <h2>No-Route Opportunities</h2>
+      <p>Missed-trigger telemetry and explicit failure cases become candidate routing work without storing raw prompts or outputs.</p>
+      <ul>{opportunity_items or '<li>No no-route opportunities detected.</li>'}</ul>
+    </section>
+    <section>
       <h2>Full Portfolio Counts</h2>
       <p>All scanned skills remain visible: {summary['route_collision_count']} total route collisions, {summary['owner_gap_count']} total owner gaps, {summary['stale_count']} total stale signals, and {summary['drift_signal_count']} telemetry drift signals.</p>
     </section>
@@ -575,7 +631,7 @@ def build_atlas(workspace_root: Path, output_dir: Path, report_html: Path, repor
     graph = dependency_graph(skills)
     stale = stale_skills(skills, today)
     owner_gaps = owner_review_gaps(skills)
-    opportunities = no_route_opportunities(workspace_root)
+    opportunities = no_route_opportunities(workspace_root, drift_signals)
     actionable_skills = [skill for skill in skills if skill.get("actionable")]
     actionable_collisions = [item for item in collisions if item.get("actionable")]
     actionable_stale = [item for item in stale if item.get("actionable")]
