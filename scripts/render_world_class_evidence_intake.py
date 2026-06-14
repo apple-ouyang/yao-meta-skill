@@ -215,6 +215,7 @@ def render_table(items: list[dict[str, Any]]) -> list[str]:
         artifact_summary = (
             f"{integrity.get('artifact_existing_count', 0)} existing / "
             f"{integrity.get('artifact_sha256_verified_count', 0)} sha256 verified / "
+            f"{integrity.get('required_artifact_verified_count', 0)} required verified / "
             f"{integrity.get('artifact_ref_count', 0)} refs"
         )
         lines.append(
@@ -295,6 +296,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "## Boundary",
         "",
         "- Templates and planned work do not count as accepted evidence.",
+        "- Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests.",
         "- Local command-runner output does not count as provider-backed model evidence.",
         "- Metadata fallback does not count as native permission enforcement.",
         "- Pending reviewer work does not count as human adjudication.",

@@ -50,6 +50,21 @@ EXPECTED_SOURCE_TYPES = {
 }
 SHA256_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 DISALLOWED_REAL_ARTIFACTS = {"reports/telemetry_events.jsonl"}
+REQUIRED_REAL_ARTIFACT_PATHS = {
+    "provider-holdout": {"reports/output_execution_runs.json"},
+    "human-adjudication": {
+        "reports/output_review_adjudication.json",
+        "reports/output_review_decisions.json",
+    },
+    "native-permission-enforcement": {
+        "reports/runtime_permission_probes.json",
+        "reports/install_simulation.json",
+    },
+    "native-client-telemetry": {
+        "reports/adoption_drift_report.json",
+        "reports/telemetry_hook_recipes.json",
+    },
+}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -120,10 +135,14 @@ def validate_artifact_refs(
 ) -> dict[str, int]:
     refs = payload.get("artifact_refs")
     add_error(errors, isinstance(refs, list) and len(refs) > 0, "artifact_refs must contain at least one reference")
+    required_paths = REQUIRED_REAL_ARTIFACT_PATHS.get(str(payload.get("evidence_key", "")), set())
+    observed_paths: set[str] = set()
     stats = {
         "artifact_ref_count": len(refs) if isinstance(refs, list) else 0,
         "artifact_existing_count": 0,
         "artifact_sha256_verified_count": 0,
+        "required_artifact_count": len(required_paths) if not template_expected else 0,
+        "required_artifact_verified_count": 0,
     }
     if not isinstance(refs, list):
         return stats
@@ -137,6 +156,11 @@ def validate_artifact_refs(
         add_error(errors, ref.get("contains_raw_content") is False, f"artifact_refs[{index}] must not contain raw content")
         if template_expected or not path_text:
             continue
+        candidate = Path(path_text)
+        if not candidate.is_absolute() and ".." not in candidate.parts and not any(
+            token in path_text for token in ("<", ">", "*", "?")
+        ):
+            observed_paths.add(candidate.as_posix())
         resolved, path_error = resolve_artifact_path(path_text, root)
         if path_error:
             errors.append(f"artifact_refs[{index}].path {path_error}")
@@ -160,6 +184,14 @@ def validate_artifact_refs(
             errors.append(f"artifact_refs[{index}].sha256 does not match local artifact")
             continue
         stats["artifact_sha256_verified_count"] += 1
+        if rel in required_paths:
+            stats["required_artifact_verified_count"] += 1
+    if not template_expected and required_paths:
+        missing_required = sorted(required_paths - observed_paths)
+        for path in missing_required:
+            errors.append(f"artifact_refs must include required evidence artifact {path}")
+        if not missing_required and stats["required_artifact_verified_count"] < len(required_paths):
+            errors.append("all required evidence artifacts must have verified sha256 digests")
     return stats
 
 

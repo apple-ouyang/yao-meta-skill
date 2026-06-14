@@ -56,7 +56,7 @@ def run_kit(*extra: str) -> subprocess.CompletedProcess[str]:
     )
 
 
-def provider_submission(*, valid: bool) -> dict:
+def provider_submission(*, valid: bool, artifact_path: str = "reports/output_execution_runs.json") -> dict:
     return {
         "schema_version": "1.0",
         "evidence_key": "provider-holdout",
@@ -68,10 +68,10 @@ def provider_submission(*, valid: bool) -> dict:
         "summary": "Aggregate provider-backed holdout evidence for ledger review.",
         "artifact_refs": [
             {
-                "path": "reports/output_execution_runs.json",
+                "path": artifact_path,
                 "kind": "aggregate-report",
                 "contains_raw_content": not valid,
-                "sha256": sha256_file(ROOT / "reports" / "output_execution_runs.json") if valid else "example-only",
+                "sha256": sha256_file(ROOT / artifact_path) if valid else "example-only",
             }
         ],
         "provenance": {
@@ -153,11 +153,12 @@ def main() -> None:
     assert "ready to claim world-class: `false`" in markdown, markdown
     assert "Operator Checklist" in markdown, markdown
     assert "operator checklist: `0` ready / `4` total" in markdown, markdown
-    assert "0 existing / 0 sha256 verified / 1 refs" in markdown, markdown
+    assert "0 existing / 0 sha256 verified / 0 required verified / 1 refs" in markdown, markdown
     assert "`evidence/world_class/submissions/provider-holdout.json`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`" in markdown, markdown
     assert "`python3 scripts/yao.py world-class-ledger .`" in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
+    assert "Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests." in markdown, markdown
 
     kit_dir = TMP / "submission_kit"
     kit_proc = run_kit("--output-dir", str(kit_dir), "--evidence-key", "provider-holdout")
@@ -234,6 +235,22 @@ def main() -> None:
     assert any("attestation.real_external_or_human_evidence" in error for error in invalid_payload["submissions"][0]["errors"]), invalid_payload["submissions"]
     invalid_checklist = {item["evidence_key"]: item for item in invalid_payload["operator_checklist"]}
     assert invalid_checklist["provider-holdout"]["readiness"] == "fix-submission", invalid_checklist["provider-holdout"]
+
+    unrelated_dir = TMP / "unrelated_artifact_submissions"
+    unrelated_dir.mkdir()
+    (unrelated_dir / "provider-holdout.json").write_text(
+        json.dumps(provider_submission(valid=True, artifact_path="reports/context_budget.json"), ensure_ascii=False, indent=2)
+        + "\n",
+        encoding="utf-8",
+    )
+    unrelated_payload = run_intake("--submissions-dir", str(unrelated_dir))
+    assert unrelated_payload["ok"] is False, unrelated_payload
+    assert unrelated_payload["summary"]["decision"] == "fix-intake", unrelated_payload["summary"]
+    assert unrelated_payload["summary"]["invalid_submission_count"] == 1, unrelated_payload["summary"]
+    unrelated_errors = unrelated_payload["submissions"][0]["errors"]
+    assert any("required evidence artifact reports/output_execution_runs.json" in error for error in unrelated_errors), unrelated_errors
+    assert unrelated_payload["submissions"][0]["artifact_integrity"]["artifact_sha256_verified_count"] == 1, unrelated_payload["submissions"]
+    assert unrelated_payload["submissions"][0]["artifact_integrity"]["required_artifact_verified_count"] == 0, unrelated_payload["submissions"]
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

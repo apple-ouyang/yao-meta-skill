@@ -20,7 +20,7 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def provider_submission(artifact_root: Path = ROOT) -> dict:
+def provider_submission(artifact_root: Path = ROOT, artifact_path: str = "reports/output_execution_runs.json") -> dict:
     return {
         "schema_version": "1.0",
         "evidence_key": "provider-holdout",
@@ -32,10 +32,10 @@ def provider_submission(artifact_root: Path = ROOT) -> dict:
         "summary": "Aggregate provider-backed holdout evidence for ledger review.",
         "artifact_refs": [
             {
-                "path": "reports/output_execution_runs.json",
+                "path": artifact_path,
                 "kind": "aggregate-report",
                 "contains_raw_content": False,
-                "sha256": sha256_file(artifact_root / "reports" / "output_execution_runs.json"),
+                "sha256": sha256_file(artifact_root / artifact_path),
             }
         ],
         "provenance": {
@@ -212,6 +212,56 @@ def main() -> None:
     assert accepted_source_provider["source_accepted"] is True, accepted_source_provider
     assert accepted_source_provider["status"] == "pending", accepted_source_provider
     assert accepted_source_provider["submission_state"]["status"] == "missing", accepted_source_provider
+
+    (accepted_source_skill / "reports" / "context_budget.json").write_text(
+        json.dumps({"summary": {"unrelated": True}}, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    unrelated_accepted_submissions = TMP / "unrelated_accepted_submissions"
+    unrelated_accepted_submissions.mkdir()
+    (unrelated_accepted_submissions / "provider-holdout.json").write_text(
+        json.dumps(
+            provider_submission(accepted_source_skill, artifact_path="reports/context_budget.json"),
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    unrelated_accepted_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(accepted_source_skill),
+            "--output-json",
+            str(TMP / "unrelated_accepted_provider_ledger.json"),
+            "--output-md",
+            str(TMP / "unrelated_accepted_provider_ledger.md"),
+            "--submissions-dir",
+            str(unrelated_accepted_submissions),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    unrelated_accepted_payload = json.loads(unrelated_accepted_proc.stdout)
+    unrelated_accepted_summary = unrelated_accepted_payload["summary"]
+    assert unrelated_accepted_summary["source_accepted_count"] == 1, unrelated_accepted_summary
+    assert unrelated_accepted_summary["accepted_count"] == 0, unrelated_accepted_summary
+    assert unrelated_accepted_summary["invalid_submission_count"] == 1, unrelated_accepted_summary
+    unrelated_accepted_provider = {
+        entry["key"]: entry for entry in unrelated_accepted_payload["entries"]
+    }["provider-holdout"]
+    assert unrelated_accepted_provider["source_accepted"] is True, unrelated_accepted_provider
+    assert unrelated_accepted_provider["status"] == "pending", unrelated_accepted_provider
+    assert unrelated_accepted_provider["submission_state"]["status"] == "invalid-contract", unrelated_accepted_provider
+    assert any(
+        "required evidence artifact reports/output_execution_runs.json" in error
+        for error in unrelated_accepted_provider["submission_state"]["errors"]
+    ), unrelated_accepted_provider
 
     accepted_submissions = TMP / "accepted_submissions"
     accepted_submissions.mkdir()

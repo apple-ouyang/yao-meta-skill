@@ -1,6 +1,6 @@
 # World-Class Evidence Intake
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-14`
 
 ## Summary
 
@@ -21,10 +21,10 @@ This report validates the intake contract for human and external evidence. A val
 
 | Evidence | Status | Path | Artifacts | Errors |
 | --- | --- | --- | --- | --- |
-| `provider-holdout` | `pass` | `evidence/world_class/templates/provider-holdout.intake.json` | 0 existing / 0 sha256 verified / 1 refs | none |
-| `human-adjudication` | `pass` | `evidence/world_class/templates/human-adjudication.intake.json` | 0 existing / 0 sha256 verified / 2 refs | none |
-| `native-permission-enforcement` | `pass` | `evidence/world_class/templates/native-permission-enforcement.intake.json` | 0 existing / 0 sha256 verified / 3 refs | none |
-| `native-client-telemetry` | `pass` | `evidence/world_class/templates/native-client-telemetry.intake.json` | 0 existing / 0 sha256 verified / 2 refs | none |
+| `provider-holdout` | `pass` | `evidence/world_class/templates/provider-holdout.intake.json` | 0 existing / 0 sha256 verified / 0 required verified / 1 refs | none |
+| `human-adjudication` | `pass` | `evidence/world_class/templates/human-adjudication.intake.json` | 0 existing / 0 sha256 verified / 0 required verified / 2 refs | none |
+| `native-permission-enforcement` | `pass` | `evidence/world_class/templates/native-permission-enforcement.intake.json` | 0 existing / 0 sha256 verified / 0 required verified / 3 refs | none |
+| `native-client-telemetry` | `pass` | `evidence/world_class/templates/native-client-telemetry.intake.json` | 0 existing / 0 sha256 verified / 0 required verified / 2 refs | none |
 
 ## Submissions
 
@@ -201,6 +201,7 @@ This report validates the intake contract for human and external evidence. A val
 ## Boundary
 
 - Templates and planned work do not count as accepted evidence.
+- Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests.
 - Local command-runner output does not count as provider-backed model evidence.
 - Metadata fallback does not count as native permission enforcement.
 - Pending reviewer work does not count as human adjudication.

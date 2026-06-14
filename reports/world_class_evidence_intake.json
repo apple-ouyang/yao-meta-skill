@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-14",
   "skill_dir": ".",
   "summary": {
     "schema_present": true,
@@ -29,7 +29,9 @@
       "artifact_integrity": {
         "artifact_ref_count": 1,
         "artifact_existing_count": 0,
-        "artifact_sha256_verified_count": 0
+        "artifact_sha256_verified_count": 0,
+        "required_artifact_count": 0,
+        "required_artifact_verified_count": 0
       },
       "errors": []
     },
@@ -41,7 +43,9 @@
       "artifact_integrity": {
         "artifact_ref_count": 2,
         "artifact_existing_count": 0,
-        "artifact_sha256_verified_count": 0
+        "artifact_sha256_verified_count": 0,
+        "required_artifact_count": 0,
+        "required_artifact_verified_count": 0
       },
       "errors": []
     },
@@ -53,7 +57,9 @@
       "artifact_integrity": {
         "artifact_ref_count": 3,
         "artifact_existing_count": 0,
-        "artifact_sha256_verified_count": 0
+        "artifact_sha256_verified_count": 0,
+        "required_artifact_count": 0,
+        "required_artifact_verified_count": 0
       },
       "errors": []
     },
@@ -65,7 +71,9 @@
       "artifact_integrity": {
         "artifact_ref_count": 2,
         "artifact_existing_count": 0,
-        "artifact_sha256_verified_count": 0
+        "artifact_sha256_verified_count": 0,
+        "required_artifact_count": 0,
+        "required_artifact_verified_count": 0
       },
       "errors": []
     }
