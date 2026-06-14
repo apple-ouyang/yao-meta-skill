@@ -149,7 +149,7 @@ def main() -> None:
     assert "World-Class Operator Runbook" in html, html[:400]
     assert "ledger and claim guard" in html, html
     assert "position:sticky" in html, html
-    assert "<span>Blocked</span><strong>7</strong>" in html, html
+    assert f"<span>Blocked</span><strong>{summary['source_blocked_count']}</strong>" in html, html
     assert "<dt>Blocked</dt><dd><code>2</code></dd>" in html, html
     assert "Next Source Actions" in html, html
     assert "Source Evidence Snapshot" in html, html
