@@ -918,13 +918,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "72e36f4dcd9333a02663a39c209e26770384f247c6a5ad394b4d76684d04bdaf",
-      "source_contract_sha256": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25",
-      "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23",
+      "evidence_bundle_sha256": "4ce0fa8542a1c30cb1d54d548da4069a4a50414fa5287685fd4c9d448a4b5160",
+      "source_contract_sha256": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80",
+      "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 21,
@@ -938,12 +938,15 @@
       "world_class_open_gap_count": 4,
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
+      "world_class_source_check_count": 13,
+      "world_class_source_pass_count": 6,
+      "world_class_source_blocked_count": 7,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 3,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 4,
+      "working_tree_dirty": true,
+      "changed_file_count": 11
     },
-    "commit": "9067c9e211bd0bde80eb0a65b797d01426c97a81",
+    "commit": "88cec0e51e828c289294bd50041409262e60a40f",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1048,7 +1051,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 182,
-    "package_sha256": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25"
+    "package_sha256": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1086,8 +1089,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25",
-        "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23"
+        "package_sha256": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80",
+        "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096"
       },
       "compatibility": {
         "openai": "pass",
@@ -1118,7 +1121,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23",
+        "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1134,7 +1137,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23",
+      "archive_sha256": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096",
       "archive_entry_count": 577,
       "failure_count": 0,
       "warning_count": 0
@@ -1213,12 +1216,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "9bcb614b9c6eb6f38db0ab71019518f3f2320f060237c732d32bfd2c3e01bf23"
+          "to": "8a35bd4cea27874b716bf3057fbe970284da60681a42bc85868c710be82df096"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "e19dbe7ff57701690de54324ba7f20bca0f7f3715f73f8721fbcc8c33f5b9b25"
+          "to": "05cedc73473b1c73d331270ff1d7d8fc09eeb3e7289c7ae63dc4fd535e261f80"
         }
       ]
     },

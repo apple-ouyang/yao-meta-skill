@@ -1,28 +1,29 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `9067c9e211bd0bde80eb0a65b797d01426c97a81`
-Working tree dirty at generation: `false`
-Evidence bundle SHA256: `72e36f4dcd9333a02663a39c209e26770384f247c6a5ad394b4d76684d04bdaf`
+Commit: `88cec0e51e828c289294bd50041409262e60a40f`
+Working tree dirty at generation: `true`
+Evidence bundle SHA256: `4ce0fa8542a1c30cb1d54d548da4069a4a50414fa5287685fd4c9d448a4b5160`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `true`
+- release lock ready: `false`
 - methodology complete: `true`
 - required artifacts: `24`
 - missing artifacts: `0`
-- source contract sha256: `e19dbe7ff577`
-- archive sha256: `9bcb614b9c6e`
+- source contract sha256: `05cedc73473b`
+- archive sha256: `8a35bd4cea27`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `21`
 - provider evidence complete: `false`
 - human review complete: `false`
 - world-class ready: `false`
+- world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
-- public claim blockers: `3`
-- changed files at generation: `0`
+- public claim blockers: `4`
+- changed files at generation: `11`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -34,21 +35,22 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
+| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
 
 ## Release Lock
 
-- ready: `true`
-- reason: clean generation-time HEAD
+- ready: `false`
+- reason: working tree was dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `24` / `24`
-- sha256: `72e36f4dcd9333a02663a39c209e26770384f247c6a5ad394b4d76684d04bdaf`
+- sha256: `4ce0fa8542a1c30cb1d54d548da4069a4a50414fa5287685fd4c9d448a4b5160`
 
 ## Methodology Sections
 
@@ -70,15 +72,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `2991764f1ab4` |
+| output_execution | `reports/output_execution_runs.json` | present | `b9e64ef622ca` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `8251329e663d` |
-| trust_report | `reports/security_trust_report.json` | present | `016c810beee5` |
+| trust_report | `reports/security_trust_report.json` | present | `e369e69ac815` |
 | python_compatibility | `reports/python_compatibility.json` | present | `ae16e17266e4` |
-| registry_audit | `reports/registry_audit.json` | present | `4deadc853479` |
-| package_verification | `reports/package_verification.json` | present | `55f5816930f2` |
+| registry_audit | `reports/registry_audit.json` | present | `3919aefe4c4d` |
+| package_verification | `reports/package_verification.json` | present | `053ec1596910` |
 | install_simulation | `reports/install_simulation.json` | present | `1ed7ce5266c2` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `6bb2dcb0e1e5` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `164803bb1cea` |
