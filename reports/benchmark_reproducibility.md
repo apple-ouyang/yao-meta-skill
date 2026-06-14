@@ -1,7 +1,7 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-14`
-Commit: `c2f5672b2c9eb2e57fde9ce71feb8b89c4d65f4d`
+Commit: `6cb499cb508900b02827fe74c7b0646d58d718cc`
 Working tree dirty at generation: `false`
 Evidence bundle SHA256: `4ce0fa8542a1c30cb1d54d548da4069a4a50414fa5287685fd4c9d448a4b5160`
 
@@ -22,7 +22,7 @@ Evidence bundle SHA256: `4ce0fa8542a1c30cb1d54d548da4069a4a50414fa5287685fd4c9d4
 - world-class ready: `false`
 - world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
-- public claim blockers: `3`
+- public claim blockers: `4`
 - changed files at generation: `0`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
@@ -31,13 +31,14 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - ready: `false`
 - scope: public benchmark or world-class readiness claim
-- policy: Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, and accepted world-class evidence.
+- policy: Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks.
 
 | Blocker |
 | --- |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
+| world-class source checks are not all accepted (6/13 pass, 7 blocked) |
 
 ## Release Lock
 
