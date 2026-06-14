@@ -922,9 +922,9 @@
       "methodology_complete": true,
       "required_artifact_count": 24,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "647c1c56398003aff2ef71ceb5fd73c9c2eb510895ed8c70507f1bf8479b7866",
-      "source_contract_sha256": "e68243a9ecd99be64ffbc9fccaecbf6ba2453156121feec94b8f85250c6d88ca",
-      "archive_sha256": "afd00946e7ba23d2317d67cd365e31f4434cdc3b7fb6b2f52ff6d635050482aa",
+      "evidence_bundle_sha256": "d1e46322a670ebd2d3977fd716c13b3d00bc37816e83343fc21978eba96d40bb",
+      "source_contract_sha256": "e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f",
+      "archive_sha256": "0e4ba92cd88c099965383daf5c3d6319b917d7c83d5ef29917f1cd932c1bd6f8",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 21,
@@ -943,7 +943,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "1488957a6cec5bacd9e682ab66836bd47518e29f",
+    "commit": "78f94e47fd7ab999fdfc6d18ffb9917cf8848dba",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1048,7 +1048,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 181,
-    "package_sha256": "e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f"
+    "package_sha256": "8b89cae0e2eaf8456b9e97940706576db7ecaf0f46e5de8153c45486f3ab1677"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1086,8 +1086,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f",
-        "archive_sha256": "0e4ba92cd88c099965383daf5c3d6319b917d7c83d5ef29917f1cd932c1bd6f8"
+        "package_sha256": "8b89cae0e2eaf8456b9e97940706576db7ecaf0f46e5de8153c45486f3ab1677",
+        "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc"
       },
       "compatibility": {
         "openai": "pass",
@@ -1118,7 +1118,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "0e4ba92cd88c099965383daf5c3d6319b917d7c83d5ef29917f1cd932c1bd6f8",
+        "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1134,7 +1134,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "0e4ba92cd88c099965383daf5c3d6319b917d7c83d5ef29917f1cd932c1bd6f8",
+      "archive_sha256": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc",
       "archive_entry_count": 576,
       "failure_count": 0,
       "warning_count": 0
@@ -1213,12 +1213,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "0e4ba92cd88c099965383daf5c3d6319b917d7c83d5ef29917f1cd932c1bd6f8"
+          "to": "1bb01abccae0984f63251cb73a7782163bcf4b0afb260c73230dcb35da68d0dc"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "e38d34ebe54c377f47f6010c06716f8f972406cf1019a27e6ebc057371dd260f"
+          "to": "8b89cae0e2eaf8456b9e97940706576db7ecaf0f46e5de8153c45486f3ab1677"
         }
       ]
     },
@@ -1235,14 +1235,14 @@
     "ok": true,
     "summary": {
       "event_count": 1,
-      "adoption_sample_count": 1,
-      "activation_count": 1,
-      "accepted_count": 1,
+      "adoption_sample_count": 0,
+      "activation_count": 0,
+      "accepted_count": 0,
       "edited_count": 0,
       "rejected_count": 0,
       "missed_count": 0,
       "failed_count": 0,
-      "adoption_rate": 100.0,
+      "adoption_rate": 0,
       "missed_trigger_count": 0,
       "wrong_trigger_count": 0,
       "bad_output_count": 0,
@@ -1251,7 +1251,7 @@
       "review_overdue_count": 0,
       "risk_band": "low",
       "event_types": {
-        "skill_activation": 1
+        "review_event": 1
       },
       "failure_types": {},
       "source_types": {
@@ -1473,7 +1473,7 @@
         "status": "external_required",
         "category": "external",
         "owner": "Browser/Chrome/IDE/provider client integrator",
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "runbook": [
           "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -1718,7 +1718,7 @@
         "status": "pending",
         "source_status": "external_required",
         "source_accepted": false,
-        "current": "external source events 0; adoption samples 1",
+        "current": "external source events 0; adoption samples 0",
         "objective": "Import production metadata-only events from a real external client into the local drift loop.",
         "provenance_requirements": [
           "real external client source",
@@ -1746,7 +1746,7 @@
         ],
         "observed_state": {
           "external_source_events": 0,
-          "adoption_sample_count": 1,
+          "adoption_sample_count": 0,
           "raw_content_allowed": false,
           "risk_band": "low",
           "accepted": false

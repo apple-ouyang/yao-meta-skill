@@ -54,6 +54,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 730,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/optimize_description.py",
       "lines": 723,
       "kind": "cli-script",
@@ -73,13 +80,6 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
-    },
-    {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 674,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "tests/verify_review_studio.py",

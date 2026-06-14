@@ -245,7 +245,7 @@
       "review_state": "awaiting-submission",
       "source_accepted": false,
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "blocking_reason": "No evidence packet has been submitted for review.",
       "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
       "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
@@ -284,7 +284,7 @@
       ],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 1,
+        "adoption_sample_count": 0,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
