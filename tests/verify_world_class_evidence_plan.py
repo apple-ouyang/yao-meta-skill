@@ -55,7 +55,7 @@ def main() -> None:
     }, tasks
     assert set(requirements) == set(tasks), requirements
     assert any("--provider-runner openai" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
-    assert any("world-class-intake" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
+    assert any("world-class-intake . --submissions-dir evidence/world_class/submissions" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("output_review_decisions.json" in command for command in tasks["human-adjudication"]["runbook"]), tasks["human-adjudication"]
     assert any("runtime-permissions" in command for command in tasks["native-permission-enforcement"]["runbook"]), tasks["native-permission-enforcement"]

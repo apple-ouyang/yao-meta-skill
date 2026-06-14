@@ -7,9 +7,11 @@ The templates in `templates/` are review aids only. They do not count as accepte
 Run:
 
 ```bash
-python3 scripts/yao.py world-class-submission-kit . --output-dir /tmp/yao-world-class-submission-kit
-python3 scripts/yao.py world-class-intake .
-python3 scripts/yao.py world-class-submission-review .
+SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"
+python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-ledger . --submissions-dir "$SUBMISSIONS_DIR"
 ```
 
 The intake validator checks:

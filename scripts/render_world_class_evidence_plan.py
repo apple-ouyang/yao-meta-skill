@@ -149,7 +149,7 @@ def build_task(item: dict[str, Any]) -> dict[str, Any]:
     )
     intake_runbook = [
         f"Copy evidence/world_class/templates/{item['key']}.intake.json to evidence/world_class/submissions/{item['key']}.json and fill only real evidence fields.",
-        "python3 scripts/yao.py world-class-intake .",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
     ]
     intake_artifacts = [
         "evidence/world_class/intake.schema.json",

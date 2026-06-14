@@ -126,22 +126,22 @@ REPRODUCTION_COMMANDS = [
     },
     {
         "label": "world-class evidence ledger",
-        "command": "python3 scripts/yao.py world-class-ledger .",
+        "command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
         "evidence": "reports/world_class_evidence_ledger.json",
     },
     {
         "label": "world-class evidence intake",
-        "command": "python3 scripts/yao.py world-class-intake .",
+        "command": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "evidence": "reports/world_class_evidence_intake.json",
     },
     {
         "label": "world-class submission review",
-        "command": "python3 scripts/yao.py world-class-submission-review .",
+        "command": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
         "evidence": "reports/world_class_submission_review.json",
     },
     {
         "label": "world-class operator runbook",
-        "command": "python3 scripts/yao.py world-class-runbook .",
+        "command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions",
         "evidence": "reports/world_class_operator_runbook.json",
     },
     {

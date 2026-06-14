@@ -100,9 +100,25 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
     }
 
 
+def assert_documented_submission_commands() -> None:
+    expected_fragments = [
+        'SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"',
+        'world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"',
+        'world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"',
+        'world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"',
+        'world-class-ledger . --submissions-dir "$SUBMISSIONS_DIR"',
+    ]
+    for relative_path in ("README.md", "evidence/world_class/README.md"):
+        text = (ROOT / relative_path).read_text(encoding="utf-8")
+        for fragment in expected_fragments:
+            assert fragment in text, (relative_path, fragment)
+        assert "/tmp/yao-world-class-submission-kit" not in text, relative_path
+
+
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
+    assert_documented_submission_commands()
     default_json = TMP / "world_class_evidence_intake.json"
     default_md = TMP / "world_class_evidence_intake.md"
     payload = run_intake("--output-json", str(default_json), "--output-md", str(default_md))

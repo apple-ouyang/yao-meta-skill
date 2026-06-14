@@ -474,6 +474,7 @@ def main() -> None:
     }, world_class_action
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
     assert "world-class-runbook" in world_class_action["verification_command"], world_class_action
+    assert "--submissions-dir evidence/world_class/submissions" in world_class_action["verification_command"], world_class_action
     assert "reports/world_class_operator_runbook.html" in world_class_action["source_fix"], world_class_action
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]

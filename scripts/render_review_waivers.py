@@ -201,7 +201,10 @@ def world_class_boundary(skill_dir: Path) -> dict[str, Any] | None:
             "Keep claim guard active until ledger summary.ready_to_claim_world_class is true.",
         ],
         "suggested_evidence": "reports/world_class_evidence_ledger.md",
-        "suggested_command": "python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py world-class-claim-guard .",
+        "suggested_command": (
+            "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions "
+            "&& python3 scripts/yao.py world-class-claim-guard ."
+        ),
         "world_class_boundary": "Non-waivable completion boundary.",
     }
 

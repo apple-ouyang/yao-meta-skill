@@ -220,7 +220,11 @@ ACTION_GUIDANCE: dict[str, dict[str, Any]] = {
             {"path": "reports/runtime_permission_probes.md", "label": "runtime permission probes", "kind": "report", "patterns": ["# Runtime"]},
             {"path": "reports/adoption_drift_report.md", "label": "adoption drift", "kind": "report", "patterns": ["# Adoption"]},
         ],
-        "verification": "python3 scripts/yao.py world-class-runbook . && python3 scripts/yao.py world-class-ledger . && python3 scripts/yao.py review-studio .",
+        "verification": (
+            "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions "
+            "&& python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions "
+            "&& python3 scripts/yao.py review-studio ."
+        ),
     },
     "registry-audit": {
         "summary": "补齐 registry package metadata、checksum、license、owner、review cadence 和 install evidence。",

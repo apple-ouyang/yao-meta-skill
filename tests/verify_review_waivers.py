@@ -119,6 +119,7 @@ def main() -> None:
     assert candidates["world-class-evidence"]["waiver_allowed"] is False, candidates
     assert candidates["world-class-evidence"]["status"] == "cannot-waive", candidates
     assert "Non-waivable completion boundary" in candidates["world-class-evidence"]["world_class_boundary"], candidates
+    assert "--submissions-dir evidence/world_class/submissions" in candidates["world-class-evidence"]["suggested_command"], candidates
     root_markdown = root_report_md.read_text(encoding="utf-8")
     assert "Candidate Actions" in root_markdown, root_markdown
     assert "World-class evidence completion cannot be waived" in root_markdown, root_markdown

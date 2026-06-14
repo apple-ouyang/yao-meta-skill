@@ -145,11 +145,12 @@ python3 scripts/yao.py package-verify . --package-dir dist --require-zip
 python3 scripts/yao.py install-simulate . --package-dir dist
 python3 scripts/yao.py upgrade-check . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json
 python3 scripts/yao.py world-class-evidence .
-python3 scripts/yao.py world-class-submission-kit . --output-dir /tmp/yao-world-class-submission-kit
-python3 scripts/yao.py world-class-ledger .
-python3 scripts/yao.py world-class-intake .
-python3 scripts/yao.py world-class-submission-review .
-python3 scripts/yao.py world-class-runbook .
+SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"
+python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-ledger . --submissions-dir "$SUBMISSIONS_DIR"
+python3 scripts/yao.py world-class-runbook . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-claim-guard .
 python3 scripts/yao.py benchmark-reproducibility .
 ```

@@ -160,10 +160,10 @@ def main() -> None:
     assert artifacts["reports/world_class_claim_guard.json"]["exists"], artifacts
     assert artifacts["reports/python_compatibility.json"]["exists"], artifacts
     assert any(command["command"] == "make ci-test" for command in payload["reproduction_commands"]), payload
-    assert any(command["command"] == "python3 scripts/yao.py world-class-ledger ." for command in payload["reproduction_commands"]), payload
-    assert any(command["command"] == "python3 scripts/yao.py world-class-intake ." for command in payload["reproduction_commands"]), payload
-    assert any(command["command"] == "python3 scripts/yao.py world-class-submission-review ." for command in payload["reproduction_commands"]), payload
-    assert any(command["command"] == "python3 scripts/yao.py world-class-runbook ." for command in payload["reproduction_commands"]), payload
+    assert any(command["command"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
+    assert any(command["command"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
+    assert any(command["command"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
+    assert any(command["command"] == "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py world-class-claim-guard ." for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py python-compat ." for command in payload["reproduction_commands"]), payload
     assert any("provider-backed" in item for item in payload["limitations"]), payload["limitations"]
@@ -178,7 +178,7 @@ def main() -> None:
     assert "## Evidence Bundle" in markdown, markdown
     assert "reports/benchmark_methodology.md" in markdown, markdown
     assert "reports/world_class_operator_runbook.html" in markdown, markdown
-    assert "python3 scripts/yao.py world-class-runbook ." in markdown, markdown
+    assert "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions" in markdown, markdown
     assert "make ci-test" in markdown, markdown
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
