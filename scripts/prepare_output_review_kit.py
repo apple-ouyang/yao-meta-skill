@@ -239,7 +239,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 
 def html_text(value: Any) -> str:
-    return html.escape(str(value or ""), quote=True)
+    return html.escape("" if value is None else str(value), quote=True)
 
 
 def status_label(status: str) -> str:

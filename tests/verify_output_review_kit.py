@@ -113,6 +113,8 @@ def main() -> None:
     assert "python3 scripts/yao.py output-review" in kit_md_text, kit_md_text
     assert "<title>Output Review Kit</title>" in kit_html_text, kit_html_text
     assert "Reviewer cockpit for output quality decisions" in kit_html_text, kit_html_text
+    assert "<span>Ready</span><strong>0</strong>" in kit_html_text, kit_html_text
+    assert "<span>Invalid</span><strong>0</strong>" in kit_html_text, kit_html_text
     assert "Variant A" in kit_html_text and "Variant B" in kit_html_text, kit_html_text
     assert "Decision Template" in kit_html_text, kit_html_text
     assert_no_answer_key_leak(kit_json_text)
