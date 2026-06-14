@@ -1336,9 +1336,9 @@
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "6a3b36fb8168d0b7173e5e4fa9ea2613f4bdaf6f733e9959c32b72197b1e56de",
-          "source_contract_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5",
-          "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc",
+          "evidence_bundle_sha256": "ba36213f867958bf4a3f35d0d81e864862134510e313b87b4326197b25f36429",
+          "source_contract_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a",
+          "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 21,
@@ -1357,7 +1357,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "7cbbf58078b146fdb6f2e7678934f057e961bdf4",
+        "commit": "0936ce727e7ebc414bcc5a95db139bbecbd594f9",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -4764,7 +4764,7 @@
       "ok": true,
       "generated_at": "2026-06-14",
       "skill_dir": ".",
-      "commit": "7cbbf58078b146fdb6f2e7678934f057e961bdf4",
+      "commit": "0936ce727e7ebc414bcc5a95db139bbecbd594f9",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -4778,9 +4778,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "6a3b36fb8168d0b7173e5e4fa9ea2613f4bdaf6f733e9959c32b72197b1e56de",
-        "source_contract_sha256": "25098dc5932e847a1aeb06f51ada0de60fec1382fe286fc88e9bc5e60fb4d3c5",
-        "archive_sha256": "11c75419dc6599e7c555a153e4d72127a2c32a73d9426ecde4d110e4777453dc",
+        "evidence_bundle_sha256": "ba36213f867958bf4a3f35d0d81e864862134510e313b87b4326197b25f36429",
+        "source_contract_sha256": "52472a5f16d07e88959326df916a03a327b3f3c9443d2128556002c431c9f70a",
+        "archive_sha256": "36ec77ec0badfe8b44286434d0c10de0470dee241f33b569ea24a0e971721a0e",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 21,
@@ -4811,7 +4811,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "7cbbf58078b146fdb6f2e7678934f057e961bdf4",
+        "commit": "0936ce727e7ebc414bcc5a95db139bbecbd594f9",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -4821,7 +4821,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "6a3b36fb8168d0b7173e5e4fa9ea2613f4bdaf6f733e9959c32b72197b1e56de"
+        "sha256": "ba36213f867958bf4a3f35d0d81e864862134510e313b87b4326197b25f36429"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -4894,8 +4894,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7964,
-          "sha256": "2c230fbc6455657eec1738b43c33cf31219a6e70b8e5d846bada11e1051c3168"
+          "bytes": 7967,
+          "sha256": "f934e2b43e24d30cd23098b81c7d2602d9038c793f1afd7cd42b64974bee3bc2"
         },
         {
           "label": "blind_review",
@@ -4929,8 +4929,8 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 98830,
-          "sha256": "3c69120778acb66ad88743c62d26d119a23abab81926e2f8f0ed9cfbc483318c"
+          "bytes": 99433,
+          "sha256": "bde78b81ac27913186aa6072f60bddb8fc2b006f596413e032e4864ad345c1d3"
         },
         {
           "label": "python_compatibility",
@@ -4944,21 +4944,21 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "9387060b0ca239dde97a2f80fc0917cce44ff343ee99893af8f5443d7ebf75bc"
+          "sha256": "28c7a971924e56012df29e7bd924cc7a2d9a6de78b37b327b81c3b222cad29dd"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19325,
-          "sha256": "007d65fe23663d4377861b2e44612629eb3a90e0b1f400e763132bf5e6495f0a"
+          "sha256": "34d291fa975346752b34283f38f60e3498a7d1165f89f4081200ad8c2a8d5e1b"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 8604,
-          "sha256": "8f987e805c92bf4178e3f246356ab268e59f62e9b6948be09f5c53054e7780ec"
+          "sha256": "1ed7ce5266c2dd7ee8daf83a3a5c65cdb69ade1567a33b88b77b619d3f5afa16"
         },
         {
           "label": "skill_os2_audit",
@@ -4992,29 +4992,29 @@
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 7263,
-          "sha256": "4f03edb2ef28d9dfd27a393f8058d6e27d2b10fa8cbfe35f473e003556b9ffe0"
+          "bytes": 12413,
+          "sha256": "a6d609911ed5d14a4e710233f3207a12750982eaa1f9d6d6ebc5d612b16e7ac4"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 15206,
-          "sha256": "43492b169ade7202f4fcd5db989e314c3b04cb96d6178ec6854bb90788d7e586"
+          "bytes": 19980,
+          "sha256": "bb416ed286487c98c8e99d6bf3ddf5f0e041a0ccdd23b407f3b178383e3c5bb4"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 9445,
-          "sha256": "cb05eec07f1ed0939fecbfc46b9101029498be6b8ebc03bb536fa3223e5846af"
+          "bytes": 10458,
+          "sha256": "892412f842a17b9992056a52f65021698264294206fffc093ecf3dbe58c82400"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 13430,
-          "sha256": "68b45d5f6f88df6eb22ad23643846e60207ab41af11d9c85cb20d5fe3e0e7182"
+          "bytes": 16575,
+          "sha256": "e11b4f3ebe8f0a047b3118ccfc655595af185561c2d90e47974defcf876b0ef3"
         },
         {
           "label": "world_class_claim_guard",
