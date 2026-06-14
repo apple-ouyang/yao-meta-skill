@@ -4,10 +4,10 @@
   "generated_at": "2026-06-14",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 156,
-    "script_file_count": 97,
-    "test_file_count": 59,
-    "internal_module_count": 23,
+    "python_file_count": 159,
+    "script_file_count": 99,
+    "test_file_count": 60,
+    "internal_module_count": 25,
     "cli_script_count": 76,
     "command_handler_count": 34,
     "warn_line_threshold": 900,
@@ -75,18 +75,18 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "tests/verify_review_studio.py",
+      "lines": 695,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/render_review_viewer.py",
       "lines": 685,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
-    },
-    {
-      "path": "tests/verify_review_studio.py",
-      "lines": 680,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/skill_report_layout.py",
@@ -96,9 +96,9 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_reference_synthesis.py",
-      "lines": 644,
-      "kind": "cli-script",
+      "path": "scripts/review_studio_gates.py",
+      "lines": 645,
+      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }

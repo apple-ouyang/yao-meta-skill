@@ -3,23 +3,36 @@
   "ok": true,
   "generated_at": "2026-06-14",
   "skill_dir": ".",
-  "commit": "4e9a516485753462a803e618df8e8eb8a22184b0",
+  "commit": "44fe310092906bdef9f775132818a6a4bd59bcd0",
   "git_status": {
     "available": true,
-    "dirty": false,
-    "changed_file_count": 0,
-    "sample": [],
+    "dirty": true,
+    "changed_file_count": 38,
+    "sample": [
+      " M registry/index.json",
+      " M registry/packages/yao-meta-skill.json",
+      " M reports/adoption_drift_report.json",
+      " M reports/architecture_maintainability.json",
+      " M reports/architecture_maintainability.md",
+      " M reports/benchmark_reproducibility.json",
+      " M reports/benchmark_reproducibility.md",
+      " M reports/context_budget.json",
+      " M reports/context_budget.md",
+      " M reports/context_budget_summary.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md"
+    ],
     "scope": "generation-time status before this report is written"
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": true,
+    "release_lock_ready": false,
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "0b7c79cf4a585bdbd7acd1b328fb6dbceee35ef27999e609b0cf0a2e3c2ece83",
-    "source_contract_sha256": "23d757678bc61e183af53ac0724e02f44128857f51481984e6b6ffe6575fdfed",
-    "archive_sha256": "2a3600e27e24fc5799cce599f82763f78bbc6a682a96f08ecd9034f4510344bc",
+    "evidence_bundle_sha256": "a04ceeb7551b598338dc4c9306a64e770d0afa476d09bae2176c411b88336fd5",
+    "source_contract_sha256": "ad4a46c00c94b3c7cb75b8b6e65623b14571bb117000bf69b82be1b8cf330d6f",
+    "archive_sha256": "d7457b52e37910862b7519d510fb195fe31da1a4d5f25396237b6be18c323d81",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 21,
@@ -37,14 +50,15 @@
     "world_class_source_pass_count": 6,
     "world_class_source_blocked_count": 7,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 4,
-    "working_tree_dirty": false,
-    "changed_file_count": 0
+    "public_claim_blocker_count": 5,
+    "working_tree_dirty": true,
+    "changed_file_count": 38
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
+      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -53,10 +67,10 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": true,
-    "commit": "4e9a516485753462a803e618df8e8eb8a22184b0",
+    "ready": false,
+    "commit": "44fe310092906bdef9f775132818a6a4bd59bcd0",
     "status_scope": "generation-time status before this report is written",
-    "reason": "clean generation-time HEAD"
+    "reason": "working tree was dirty at generation time"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -64,7 +78,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "0b7c79cf4a585bdbd7acd1b328fb6dbceee35ef27999e609b0cf0a2e3c2ece83"
+    "sha256": "a04ceeb7551b598338dc4c9306a64e770d0afa476d09bae2176c411b88336fd5"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -138,7 +152,7 @@
       "path": "reports/output_execution_runs.json",
       "exists": true,
       "bytes": 7966,
-      "sha256": "a59b750aebed61481e2fa9a66bd196f1a8c87e5d5857c4e615c85eab156594ad"
+      "sha256": "648888efd4711dca8867f3362fcc032e0d339bec1ed909f8361ed6d80c7c2d37"
     },
     {
       "label": "blind_review",
@@ -173,28 +187,28 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 100003,
-      "sha256": "0415c413f6f024e413df0afb4adea17e2c2efc1e3a37d2e8689e6a05241e153e"
+      "sha256": "7485414e2c21348b67f13848eb5f71879bffb1790c6f210f2504ce776c4ba382"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 20747,
-      "sha256": "ae16e17266e4e7fed08f4423f8abca7902b0d1cc0839b5692925c62463b72e58"
+      "bytes": 21114,
+      "sha256": "293ad17a317463460b81ec176bff3b9a47bb1dde668e26f6393470022d4ca61e"
     },
     {
       "label": "registry_audit",
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "a3e00a3b9653da411f20ec24d488067efca021d1270b528f8e2facd1e9ddf743"
+      "sha256": "d9260f9f8065cf65c75a726e1ec46b27ba541f9841eba6a8cad146b452edde1e"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19325,
-      "sha256": "3ca24a8ae4b7a3ab68398022754abdec97a5a4b8d451b969d9e7d062244a9617"
+      "sha256": "6bd47290c4ed45a58ed36f5b9382b0962cab49303269e29bdc4d11b78769615e"
     },
     {
       "label": "install_simulation",
@@ -208,7 +222,7 @@
       "path": "reports/skill_os2_audit.json",
       "exists": true,
       "bytes": 14309,
-      "sha256": "6bb2dcb0e1e590deacd04c28a86bc74769c82810ecca6a5f660d6615e8db7c18"
+      "sha256": "e315f88fdec3c5355d53c73372df62df52ed912dd8f920624a62aa66b21168fc"
     },
     {
       "label": "world_class_evidence_plan",
@@ -221,15 +235,15 @@
       "label": "world_class_evidence_ledger",
       "path": "reports/world_class_evidence_ledger.json",
       "exists": true,
-      "bytes": 16763,
-      "sha256": "7b3d12cd30870cb361b7bb09e43d5ea88fd5bbe35a6d78f91303862a71489ff2"
+      "bytes": 20006,
+      "sha256": "9cd09dbeb451d9ec052b77cb41e02389c7d05d50bc1b3f12bd5185ccb0b44220"
     },
     {
       "label": "world_class_evidence_intake",
       "path": "reports/world_class_evidence_intake.json",
       "exists": true,
-      "bytes": 15552,
-      "sha256": "8f7f9db6f8999ba65078968f8e8383ad4a385000d60bc83ff822a3ca582cc6ce"
+      "bytes": 18865,
+      "sha256": "3467248c7c40f71b3f3ced7894f48b72195c325085e8fa384dc04e256d63ee46"
     },
     {
       "label": "world_class_submission_review",
@@ -242,22 +256,22 @@
       "label": "world_class_operator_runbook",
       "path": "reports/world_class_operator_runbook.json",
       "exists": true,
-      "bytes": 20738,
-      "sha256": "443e0335d2703160a41bb6dbd077268f889c0e55e27ca15483d17a3b635213a2"
+      "bytes": 24021,
+      "sha256": "5252fe6901ed2c3e2d40b0fe4380f6d981c1193b0f98fdebad24915e63f48eb2"
     },
     {
       "label": "world_class_operator_runbook_markdown",
       "path": "reports/world_class_operator_runbook.md",
       "exists": true,
-      "bytes": 12104,
-      "sha256": "4bd789775307e1b7730be09b0c46d35f678cdee67ef2c7ea29a81c97dd446e24"
+      "bytes": 15080,
+      "sha256": "4cdb9cf51b11a751322f7edf54da1f4eee00a4228e41a51875e2284f345e25c3"
     },
     {
       "label": "world_class_operator_runbook_html",
       "path": "reports/world_class_operator_runbook.html",
       "exists": true,
-      "bytes": 17616,
-      "sha256": "b94a0e9d92b6609eb6c06e608b52aa17174638bc1422e3b3d306521906bccb01"
+      "bytes": 21030,
+      "sha256": "04cc091b113f018072d07a1d71ad142773c415a49e633493689903e7b399b5e6"
     },
     {
       "label": "world_class_claim_guard",

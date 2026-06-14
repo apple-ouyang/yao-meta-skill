@@ -33,6 +33,12 @@
       "source_accepted": false,
       "current": "model-executed 0; token-observed 0",
       "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
+      "runbook": [
+        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
       "provenance_requirements": [
         "provider-backed model run",
         "observed timing",
@@ -124,6 +130,16 @@
       "source_accepted": false,
       "current": "0/5 decisions; pending 5",
       "objective": "Record real blind A/B reviewer decisions before claiming human output review completion.",
+      "runbook": [
+        "python3 scripts/yao.py output-review-kit --write-template",
+        "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
+        "python3 scripts/adjudicate_output_review.py --write-template",
+        "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
+        "python3 scripts/yao.py output-review",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
       "provenance_requirements": [
         "real reviewer identity",
         "blind A/B decisions",
@@ -229,6 +245,16 @@
       "source_accepted": false,
       "current": "native-enforced targets 0; installer-enforced targets 4",
       "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
+      "runbook": [
+        "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
+        "Update the generated target adapter only when the guard is actually enforced by that target.",
+        "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip",
+        "python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation",
+        "python3 scripts/yao.py runtime-permissions . --package-dir dist",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
       "provenance_requirements": [
         "real target client or external installer runtime guard",
         "native enforcement flag or externally accepted guard proof",
@@ -327,6 +353,15 @@
       "source_accepted": false,
       "current": "external source events 0; adoption samples 0",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
+      "runbook": [
+        "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
+        "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
+        "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl",
+        "python3 scripts/yao.py skill-atlas --workspace-root .",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
       "provenance_requirements": [
         "real external client source",
         "metadata-only event",

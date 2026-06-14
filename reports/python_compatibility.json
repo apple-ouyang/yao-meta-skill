@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 159,
+    "file_count": 162,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -126,6 +126,12 @@
     },
     {
       "path": "scripts/governance_check.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/html_rendering.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -581,6 +587,12 @@
       "issues": []
     },
     {
+      "path": "scripts/world_class_source_checks.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/yao.py",
       "ok": true,
       "issue_count": 0,
@@ -690,6 +702,12 @@
     },
     {
       "path": "tests/verify_github_benchmark_scan.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_html_rendering.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

@@ -38,6 +38,13 @@ This runbook coordinates evidence collection only. It does not accept submission
 - submission: `evidence/world_class/submissions/provider-holdout.json`
 - template: `evidence/world_class/templates/provider-holdout.intake.json`
 
+### Source Runbook
+
+- YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60
+- python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
+- Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
+- python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions
+
 ### Commands
 
 - prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`
@@ -94,6 +101,17 @@ This runbook coordinates evidence collection only. It does not accept submission
 - blocked source checks: `2`
 - submission: `evidence/world_class/submissions/human-adjudication.json`
 - template: `evidence/world_class/templates/human-adjudication.intake.json`
+
+### Source Runbook
+
+- python3 scripts/yao.py output-review-kit --write-template
+- Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
+- python3 scripts/adjudicate_output_review.py --write-template
+- Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.
+- python3 scripts/yao.py output-review
+- python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
+- Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
+- python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions
 
 ### Commands
 
@@ -155,6 +173,17 @@ This runbook coordinates evidence collection only. It does not accept submission
 - submission: `evidence/world_class/submissions/native-permission-enforcement.json`
 - template: `evidence/world_class/templates/native-permission-enforcement.intake.json`
 
+### Source Runbook
+
+- Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.
+- Update the generated target adapter only when the guard is actually enforced by that target.
+- python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip
+- python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation
+- python3 scripts/yao.py runtime-permissions . --package-dir dist
+- python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
+- Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.
+- python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions
+
 ### Commands
 
 - prepare_submission: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions`
@@ -213,6 +242,16 @@ This runbook coordinates evidence collection only. It does not accept submission
 - blocked source checks: `2`
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - template: `evidence/world_class/templates/native-client-telemetry.intake.json`
+
+### Source Runbook
+
+- python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/
+- Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.
+- python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl
+- python3 scripts/yao.py skill-atlas --workspace-root .
+- python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
+- Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.
+- python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions
 
 ### Commands
 

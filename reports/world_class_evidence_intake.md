@@ -81,6 +81,13 @@ This report validates the intake contract for human and external evidence. A val
   - Do not commit provider credentials or environment dumps.
   - The output execution report records output hashes and aggregate run metadata, not raw provider prompts.
 
+#### Source Runbook
+
+- `YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
+
 ### Human Adjudication
 
 - readiness: `awaiting-submission`
@@ -121,6 +128,17 @@ This report validates the intake contract for human and external evidence. A val
 - privacy_contract:
   - Reviewer decisions should not include raw user data or private customer detail.
   - Keep the answer key separate until after decisions are recorded.
+
+#### Source Runbook
+
+- `python3 scripts/yao.py output-review-kit --write-template`
+- Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
+- `python3 scripts/adjudicate_output_review.py --write-template`
+- Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.
+- `python3 scripts/yao.py output-review`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 
 ### Native Permission Enforcement
 
@@ -164,6 +182,17 @@ This report validates the intake contract for human and external evidence. A val
   - Do not mark native_enforcement true for metadata-only fallbacks.
   - Keep residual risks visible for targets that still rely on operator enforcement.
 
+#### Source Runbook
+
+- Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.
+- Update the generated target adapter only when the guard is actually enforced by that target.
+- `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip`
+- `python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation`
+- `python3 scripts/yao.py runtime-permissions . --package-dir dist`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
+
 ### Native Client Telemetry
 
 - readiness: `awaiting-submission`
@@ -202,6 +231,16 @@ This report validates the intake contract for human and external evidence. A val
 - privacy_contract:
   - Telemetry must remain metadata-only and local-first.
   - Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field.
+
+#### Source Runbook
+
+- `python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/`
+- Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.
+- `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl`
+- `python3 scripts/yao.py skill-atlas --workspace-root .`
+- `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
+- Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.
+- `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 
 ## Boundary
 
