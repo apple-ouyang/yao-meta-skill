@@ -62,7 +62,7 @@
       <span class="eyebrow">Blind A/B Human Review</span>
       <h1>Reviewer cockpit for output quality decisions</h1>
       <p class="lede">Compare visible Variant A and Variant B outputs, fill the decision file, then run adjudication. The answer key is intentionally hidden from this page.</p>
-      <div class="stats"><div><span>Cases</span><strong>5</strong></div><div><span>Ready</span><strong></strong></div><div><span>Pending</span><strong>5</strong></div><div><span>Invalid</span><strong></strong></div></div>
+      <div class="stats"><div><span>Cases</span><strong>5</strong></div><div><span>Ready</span><strong>0</strong></div><div><span>Pending</span><strong>5</strong></div><div><span>Invalid</span><strong>0</strong></div></div>
     </section>
     <section class="grid" id="flow">
       <article class="panel"><h2>Review Flow</h2><ol><li>Open reports/output_blind_review_pack.md or this kit and compare Variant A vs Variant B for each case.</li><li>Record choices in reports/output_review_decisions.json without opening the answer key.</li><li>Use winner_variant A or B, confidence from 0 to 1, and a short reason for every case.</li><li>Run python3 scripts/yao.py output-review after choices are recorded.</li><li>Refresh python3 scripts/yao.py review-studio . before asking for release approval.</li></ol></article>
