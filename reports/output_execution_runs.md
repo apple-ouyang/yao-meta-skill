@@ -23,16 +23,16 @@ Command runner evidence is present. This proves the eval harness executed an ext
 
 | Case | Variant | Mode | Model | Duration ms | Tokens | Score | Status |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| skill-package-contract | baseline | command | local-output-eval-runner | 32.06 | 33 | 0.0 | pass |
-| skill-package-contract | with_skill | command | local-output-eval-runner | 33.11 | 73 | 100.0 | pass |
-| output-eval-expectation | baseline | command | local-output-eval-runner | 37.71 | 36 | 0.0 | pass |
-| output-eval-expectation | with_skill | command | local-output-eval-runner | 38.71 | 80 | 100.0 | pass |
-| ir-before-packaging | baseline | command | local-output-eval-runner | 33.33 | 33 | 0.0 | pass |
-| ir-before-packaging | with_skill | command | local-output-eval-runner | 32.57 | 80 | 100.0 | pass |
-| near-neighbor-boundary | baseline | command | local-output-eval-runner | 34.02 | 36 | 0.0 | pass |
-| near-neighbor-boundary | with_skill | command | local-output-eval-runner | 34.28 | 65 | 100.0 | pass |
-| file-backed-governed-package | baseline | command | local-output-eval-runner | 35.33 | 37 | 0.0 | pass |
-| file-backed-governed-package | with_skill | command | local-output-eval-runner | 33.22 | 98 | 100.0 | pass |
+| skill-package-contract | baseline | command | local-output-eval-runner | 31.08 | 33 | 0.0 | pass |
+| skill-package-contract | with_skill | command | local-output-eval-runner | 30.0 | 73 | 100.0 | pass |
+| output-eval-expectation | baseline | command | local-output-eval-runner | 30.93 | 36 | 0.0 | pass |
+| output-eval-expectation | with_skill | command | local-output-eval-runner | 33.23 | 80 | 100.0 | pass |
+| ir-before-packaging | baseline | command | local-output-eval-runner | 32.74 | 33 | 0.0 | pass |
+| ir-before-packaging | with_skill | command | local-output-eval-runner | 30.29 | 80 | 100.0 | pass |
+| near-neighbor-boundary | baseline | command | local-output-eval-runner | 30.01 | 36 | 0.0 | pass |
+| near-neighbor-boundary | with_skill | command | local-output-eval-runner | 30.52 | 65 | 100.0 | pass |
+| file-backed-governed-package | baseline | command | local-output-eval-runner | 29.95 | 37 | 0.0 | pass |
+| file-backed-governed-package | with_skill | command | local-output-eval-runner | 30.09 | 98 | 100.0 | pass |
 
 ## Next Fixes
 

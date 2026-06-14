@@ -1087,7 +1087,7 @@
       "license": "MIT",
       "checksums": {
         "package_sha256": "d3341950a7fb52a18a3a2a7453f7c697cc92e443c6604facdeeb83848d4f867c",
-        "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
+        "archive_sha256": "587e2efa7dc1012628af57bf3e518f963f53d12d56acc74e7d772021cad8845a"
       },
       "compatibility": {
         "openai": "pass",
@@ -1118,7 +1118,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
+        "archive_sha256": "587e2efa7dc1012628af57bf3e518f963f53d12d56acc74e7d772021cad8845a",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1134,7 +1134,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541",
+      "archive_sha256": "587e2efa7dc1012628af57bf3e518f963f53d12d56acc74e7d772021cad8845a",
       "archive_entry_count": 576,
       "failure_count": 0,
       "warning_count": 0
@@ -1213,7 +1213,7 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "c2028f0a12c88f2cae3462c80af972be934333829252faf7c92816bcc54dc541"
+          "to": "587e2efa7dc1012628af57bf3e518f963f53d12d56acc74e7d772021cad8845a"
         },
         {
           "field": "package_sha256",
