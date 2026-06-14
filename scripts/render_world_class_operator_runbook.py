@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import argparse
-import html
 import json
 from datetime import date
 from pathlib import Path
 from typing import Any
 
+from html_rendering import html_text
 from render_world_class_evidence_intake import build_intake
 from render_world_class_evidence_ledger import build_ledger
 from render_world_class_submission_review import build_submission_review
@@ -21,10 +21,6 @@ def rel_path(path: Path, root: Path) -> str:
         return str(path.resolve().relative_to(root.resolve()))
     except ValueError:
         return str(path.resolve())
-
-
-def html_text(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def by_key(items: list[dict[str, Any]], key_name: str) -> dict[str, dict[str, Any]]:

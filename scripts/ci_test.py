@@ -36,6 +36,7 @@ DEFAULT_TARGETS = [
     "skill-overview-check",
     "skill-report-metrics-check",
     "skill-report-charts-check",
+    "html-rendering-check",
     "skill-ir-check",
     "compiler-check",
     "output-eval-check",

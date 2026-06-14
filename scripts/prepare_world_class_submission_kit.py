@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import hashlib
-import html
 import json
 import shlex
 import shutil
@@ -9,6 +8,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from html_rendering import html_text
 from render_world_class_evidence_intake import build_intake
 from world_class_evidence_contract import DISALLOWED_REAL_ARTIFACTS
 from world_class_source_checks import build_source_checklist, summarize_source_checklist
@@ -33,10 +33,6 @@ def shell_path(path: Path, root: Path) -> str:
 def write_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def html_text(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def has_glob_pattern(value: str) -> bool:

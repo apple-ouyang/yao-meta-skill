@@ -2,7 +2,6 @@
 """Prepare a reviewer-facing blind A/B output review kit."""
 
 import argparse
-import html
 import json
 from pathlib import Path
 from typing import Any
@@ -15,6 +14,7 @@ from adjudicate_output_review import (
     load_json,
     normalize_variant,
 )
+from html_rendering import html_text
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -236,10 +236,6 @@ def render_markdown(payload: dict[str, Any]) -> str:
         lines.extend(["## Failures", ""])
         lines.extend(f"- {failure}" for failure in payload["failures"])
     return "\n".join(lines).strip() + "\n"
-
-
-def html_text(value: Any) -> str:
-    return html.escape("" if value is None else str(value), quote=True)
 
 
 def status_label(status: str) -> str:
