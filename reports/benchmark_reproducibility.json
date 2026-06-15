@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-15",
   "skill_dir": ".",
-  "commit": "ad40ed8693324c51dec88d3b1f60d804f18b0462",
+  "commit": "c169e61dd493bc11f6b920323e25a31be888a67a",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "ad40ed8693324c51dec88d3b1f60d804f18b0462",
+    "commit": "c169e61dd493bc11f6b920323e25a31be888a67a",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
