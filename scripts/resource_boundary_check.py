@@ -15,8 +15,22 @@ IGNORED_RELATIVE_DIRS = {
     Path("tests") / "tmp_cli",
 }
 IGNORED_FILE_PATTERNS = {
+    "reports/benchmark_reproducibility*.json",
+    "reports/benchmark_reproducibility*.md",
     "reports/context_budget*.json",
     "reports/context_budget*.md",
+    "reports/evidence_consistency*.json",
+    "reports/evidence_consistency*.md",
+    "reports/review-studio*.html",
+    "reports/review-studio*.json",
+    "reports/review-viewer*.html",
+    "reports/review-viewer*.json",
+    "reports/skill-interpretation*.html",
+    "reports/skill-interpretation*.json",
+    "reports/skill-overview*.html",
+    "reports/skill-overview*.json",
+    "reports/world_class_evidence_preflight*.json",
+    "reports/world_class_evidence_preflight*.md",
     "reports/*pattern-analysis*.md",
     "reports/*research-plan*.md",
 }
