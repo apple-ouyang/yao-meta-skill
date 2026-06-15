@@ -20,6 +20,7 @@ REPORT_FILES = [
     "reports/world_class_evidence_ledger.json",
     "reports/world_class_evidence_plan.json",
     "reports/world_class_evidence_intake.json",
+    "reports/world_class_evidence_preflight.json",
     "reports/world_class_submission_review.json",
     "reports/world_class_operator_runbook.json",
     "reports/skill_os2_coverage.json",
@@ -53,6 +54,7 @@ def refresh_embedded_reports() -> None:
         "render_world_class_evidence_plan.py",
         "render_world_class_evidence_ledger.py",
         "render_world_class_evidence_intake.py",
+        "render_world_class_preflight.py",
         "render_world_class_submission_review.py",
         "render_world_class_operator_runbook.py",
         "render_world_class_claim_guard.py",
@@ -107,6 +109,7 @@ def assert_release_evidence_instructions_cover_first_class_reports() -> None:
     clean_lock = agents_text.split(clean_lock_header, 1)[1].split("If `reports/benchmark_reproducibility.json`", 1)[0]
     for block in [source_refresh, clean_lock]:
         assert "python3 scripts/render_skill_interpretation.py ." in block, block
+        assert "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"" in block, block
         assert "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"" in block, block
 
 
@@ -137,7 +140,7 @@ def main() -> None:
     assert payload["ok"] is True, payload
     assert payload["summary"]["decision"] == "consistent", payload
     assert payload["summary"]["fail_count"] == 0, payload
-    assert payload["summary"]["check_count"] >= 30, payload
+    assert payload["summary"]["check_count"] >= 31, payload
     checks = {item["key"]: item for item in payload["checks"]}
     assert checks["release-evidence-flow-covers-first-class-reports"]["status"] == "pass", checks[
         "release-evidence-flow-covers-first-class-reports"
@@ -145,6 +148,7 @@ def main() -> None:
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
+    assert checks["preflight-world-class-boundary"]["status"] == "pass", checks["preflight-world-class-boundary"]
     assert checks["review-studio-no-overclaim"]["status"] == "pass", checks["review-studio-no-overclaim"]
     assert checks["claim-guard-package-runtime-surface"]["status"] == "pass", checks[
         "claim-guard-package-runtime-surface"
@@ -214,6 +218,32 @@ def main() -> None:
     claim_guard_drift_checks = {item["key"]: item for item in claim_guard_drift_payload["checks"]}
     assert claim_guard_drift_checks["claim-guard-package-runtime-surface"]["status"] == "fail", (
         claim_guard_drift_checks["claim-guard-package-runtime-surface"]
+    )
+
+    preflight_drift_root = TMP / "preflight-drift-skill"
+    copy_reports(preflight_drift_root)
+    preflight_path = preflight_drift_root / "reports" / "world_class_evidence_preflight.json"
+    preflight = json.loads(preflight_path.read_text(encoding="utf-8"))
+    preflight["summary"]["credential_value_exposed"] = True
+    preflight_path.write_text(json.dumps(preflight, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    preflight_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(preflight_drift_root),
+            "--output-json",
+            str(TMP / "preflight_drift.json"),
+            "--output-md",
+            str(TMP / "preflight_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert preflight_drift_proc.returncode == 2, preflight_drift_proc.stdout
+    preflight_drift_payload = json.loads(preflight_drift_proc.stdout)
+    preflight_drift_checks = {item["key"]: item for item in preflight_drift_payload["checks"]}
+    assert preflight_drift_checks["preflight-world-class-boundary"]["status"] == "fail", (
+        preflight_drift_checks["preflight-world-class-boundary"]
     )
 
     release_flow_drift_root = TMP / "release-flow-drift-skill"

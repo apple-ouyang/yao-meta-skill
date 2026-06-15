@@ -1,0 +1,733 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-06-16",
+  "skill_dir": ".",
+  "summary": {
+    "evidence_item_count": 4,
+    "precheck_count": 13,
+    "precheck_pass_count": 8,
+    "precheck_missing_count": 1,
+    "precheck_optional_count": 1,
+    "precheck_human_required_count": 1,
+    "precheck_external_required_count": 2,
+    "collection_ready_count": 1,
+    "collection_blocked_count": 3,
+    "source_check_count": 13,
+    "source_pass_count": 6,
+    "source_blocked_count": 7,
+    "pending_count": 4,
+    "ready_to_claim_world_class": false,
+    "credential_value_exposed": false,
+    "preflight_counts_as_evidence": false,
+    "decision": "collection-preflight-blocked"
+  },
+  "status_counts": {
+    "blocked": 3,
+    "ready-for-human-review": 1
+  },
+  "precheck_status_counts": {
+    "pass": 8,
+    "missing": 1,
+    "optional": 1,
+    "human-required": 1,
+    "external-required": 2
+  },
+  "items": [
+    {
+      "evidence_key": "provider-holdout",
+      "label": "Provider Holdout",
+      "category": "external",
+      "owner": "operator with provider credentials",
+      "status": "blocked",
+      "ledger_status": "pending",
+      "intake_readiness": "awaiting-submission",
+      "review_state": "awaiting-submission",
+      "source_accepted": false,
+      "prechecks": [
+        {
+          "evidence_key": "provider-holdout",
+          "key": "output-cases",
+          "label": "Output eval cases",
+          "kind": "file",
+          "required": true,
+          "next_action": "Keep output holdout cases available before provider execution.",
+          "secret_value_redacted": false,
+          "path": "evals/output/cases.jsonl",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "key": "provider-runner",
+          "label": "Provider runner",
+          "kind": "file",
+          "required": true,
+          "next_action": "Use the provider runner instead of the local command runner for model-backed evidence.",
+          "secret_value_redacted": false,
+          "path": "scripts/provider_output_eval_runner.py",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "key": "openai-api-key",
+          "label": "Provider credential",
+          "kind": "env",
+          "required": true,
+          "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+          "secret_value_redacted": true,
+          "env": "OPENAI_API_KEY",
+          "status": "missing",
+          "actual": "not-set",
+          "default": ""
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "key": "provider-model",
+          "label": "Provider model",
+          "kind": "env",
+          "required": false,
+          "next_action": "Optionally set YAO_OUTPUT_EVAL_MODEL; the runbook defaults to gpt-4.1-mini.",
+          "secret_value_redacted": false,
+          "env": "YAO_OUTPUT_EVAL_MODEL",
+          "status": "optional",
+          "actual": "not-set",
+          "default": "gpt-4.1-mini"
+        }
+      ],
+      "source_checklist": [
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Provider model run",
+          "field": "model_executed_count",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Run provider-backed output-exec with real credentials."
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Timing observed",
+          "field": "timing_observed_count",
+          "expected": ">0",
+          "actual": 10,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Provider execution should record timing metadata."
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Token usage observed",
+          "field": "token_observed_count",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Provider execution should return non-estimated token usage."
+        }
+      ],
+      "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+      "submission_path": "evidence/world_class/submissions/provider-holdout.json",
+      "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
+      "runbook": [
+        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ]
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Human Adjudication",
+      "category": "human",
+      "owner": "human reviewer",
+      "status": "ready-for-human-review",
+      "ledger_status": "pending",
+      "intake_readiness": "awaiting-submission",
+      "review_state": "awaiting-submission",
+      "source_accepted": false,
+      "prechecks": [
+        {
+          "evidence_key": "human-adjudication",
+          "key": "review-kit",
+          "label": "Blind review kit",
+          "kind": "file",
+          "required": true,
+          "next_action": "Open the blind review kit and record real reviewer choices.",
+          "secret_value_redacted": false,
+          "path": "reports/output_review_kit.html",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "key": "decision-template",
+          "label": "Decision template",
+          "kind": "file",
+          "required": true,
+          "next_action": "Fill winner_variant values with real A/B decisions.",
+          "secret_value_redacted": false,
+          "path": "reports/output_review_decisions.json",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "key": "human-reviewer",
+          "label": "Human reviewer",
+          "kind": "human",
+          "required": true,
+          "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+          "secret_value_redacted": false,
+          "status": "human-required",
+          "actual": "external-human-action"
+        }
+      ],
+      "source_checklist": [
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Review pairs exist",
+          "field": "pair_count",
+          "expected": ">0",
+          "actual": 5,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Generate the blind A/B review pack."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "No pending decisions",
+          "field": "pending_count",
+          "expected": "==0",
+          "actual": 5,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Record a reviewer choice for every pair."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Judgments complete",
+          "field": "judgment_count",
+          "expected": "==pair_count",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Every pair needs one valid human judgment."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "No invalid decisions",
+          "field": "invalid_decision_count",
+          "expected": "==0",
+          "actual": 0,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Fix malformed winner/confidence entries."
+        }
+      ],
+      "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+      "submission_path": "evidence/world_class/submissions/human-adjudication.json",
+      "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
+      "runbook": [
+        "python3 scripts/yao.py output-review-kit --write-template",
+        "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
+        "python3 scripts/adjudicate_output_review.py --write-template",
+        "Edit reports/output_review_decisions.json with winner_variant values and reviewer metadata.",
+        "python3 scripts/yao.py output-review",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ]
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "label": "Native Permission Enforcement",
+      "category": "external",
+      "owner": "target client or installer integrator",
+      "status": "blocked",
+      "ledger_status": "pending",
+      "intake_readiness": "awaiting-submission",
+      "review_state": "awaiting-submission",
+      "source_accepted": false,
+      "prechecks": [
+        {
+          "evidence_key": "native-permission-enforcement",
+          "key": "permission-policy",
+          "label": "Permission policy",
+          "kind": "file",
+          "required": true,
+          "next_action": "Keep approved high-permission capabilities explicit.",
+          "secret_value_redacted": false,
+          "path": "security/permission_policy.json",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "key": "permission-probes",
+          "label": "Runtime probes",
+          "kind": "file",
+          "required": true,
+          "next_action": "Refresh runtime permission probes after packaging changes.",
+          "secret_value_redacted": false,
+          "path": "reports/runtime_permission_probes.json",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "key": "native-guard",
+          "label": "Native guard",
+          "kind": "external",
+          "required": true,
+          "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+          "secret_value_redacted": false,
+          "status": "external-required",
+          "actual": "external-integration-required"
+        }
+      ],
+      "source_checklist": [
+        {
+          "evidence_key": "native-permission-enforcement",
+          "label": "Native enforcement",
+          "field": "native_enforcement_count",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Collect real target-client or external runtime guard proof."
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "label": "Probe failures",
+          "field": "failure_count",
+          "expected": "==0",
+          "actual": 0,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Runtime permission probes must stay clean."
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "label": "Installer support",
+          "field": "installer_enforcement_ready",
+          "expected": "true",
+          "actual": true,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Installer enforcement is supporting evidence, not native proof."
+        }
+      ],
+      "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+      "submission_path": "evidence/world_class/submissions/native-permission-enforcement.json",
+      "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
+      "runbook": [
+        "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
+        "Update the generated target adapter only when the guard is actually enforced by that target.",
+        "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip",
+        "python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation",
+        "python3 scripts/yao.py runtime-permissions . --package-dir dist",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ]
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "label": "Native Client Telemetry",
+      "category": "external",
+      "owner": "Browser/Chrome/IDE/provider client integrator",
+      "status": "blocked",
+      "ledger_status": "pending",
+      "intake_readiness": "awaiting-submission",
+      "review_state": "awaiting-submission",
+      "source_accepted": false,
+      "prechecks": [
+        {
+          "evidence_key": "native-client-telemetry",
+          "key": "native-host",
+          "label": "Native telemetry host",
+          "kind": "file",
+          "required": true,
+          "next_action": "Use the native host to receive metadata-only client events.",
+          "secret_value_redacted": false,
+          "path": "scripts/telemetry_native_host.py",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "key": "hook-recipes",
+          "label": "Hook recipes",
+          "kind": "file",
+          "required": true,
+          "next_action": "Refresh telemetry hook recipes before external client installation.",
+          "secret_value_redacted": false,
+          "path": "reports/telemetry_hook_recipes.json",
+          "status": "pass",
+          "actual": "present"
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "key": "external-client",
+          "label": "External client",
+          "kind": "external",
+          "required": true,
+          "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+          "secret_value_redacted": false,
+          "status": "external-required",
+          "actual": "external-integration-required"
+        }
+      ],
+      "source_checklist": [
+        {
+          "evidence_key": "native-client-telemetry",
+          "label": "External events",
+          "field": "external_source_events",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Import at least one metadata-only event from a real client."
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "label": "Adoption sample",
+          "field": "adoption_sample_count",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Telemetry must include adoption outcome evidence."
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "label": "Raw content blocked",
+          "field": "raw_content_allowed",
+          "expected": "false",
+          "actual": false,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Telemetry must stay metadata-only."
+        }
+      ],
+      "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+      "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
+      "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
+      "runbook": [
+        "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
+        "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
+        "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl",
+        "python3 scripts/yao.py skill-atlas --workspace-root .",
+        "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
+        "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
+        "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ]
+    }
+  ],
+  "prechecks": [
+    {
+      "evidence_key": "provider-holdout",
+      "key": "output-cases",
+      "label": "Output eval cases",
+      "kind": "file",
+      "required": true,
+      "next_action": "Keep output holdout cases available before provider execution.",
+      "secret_value_redacted": false,
+      "path": "evals/output/cases.jsonl",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "key": "provider-runner",
+      "label": "Provider runner",
+      "kind": "file",
+      "required": true,
+      "next_action": "Use the provider runner instead of the local command runner for model-backed evidence.",
+      "secret_value_redacted": false,
+      "path": "scripts/provider_output_eval_runner.py",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "key": "openai-api-key",
+      "label": "Provider credential",
+      "kind": "env",
+      "required": true,
+      "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+      "secret_value_redacted": true,
+      "env": "OPENAI_API_KEY",
+      "status": "missing",
+      "actual": "not-set",
+      "default": ""
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "key": "provider-model",
+      "label": "Provider model",
+      "kind": "env",
+      "required": false,
+      "next_action": "Optionally set YAO_OUTPUT_EVAL_MODEL; the runbook defaults to gpt-4.1-mini.",
+      "secret_value_redacted": false,
+      "env": "YAO_OUTPUT_EVAL_MODEL",
+      "status": "optional",
+      "actual": "not-set",
+      "default": "gpt-4.1-mini"
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "key": "review-kit",
+      "label": "Blind review kit",
+      "kind": "file",
+      "required": true,
+      "next_action": "Open the blind review kit and record real reviewer choices.",
+      "secret_value_redacted": false,
+      "path": "reports/output_review_kit.html",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "key": "decision-template",
+      "label": "Decision template",
+      "kind": "file",
+      "required": true,
+      "next_action": "Fill winner_variant values with real A/B decisions.",
+      "secret_value_redacted": false,
+      "path": "reports/output_review_decisions.json",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "key": "human-reviewer",
+      "label": "Human reviewer",
+      "kind": "human",
+      "required": true,
+      "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+      "secret_value_redacted": false,
+      "status": "human-required",
+      "actual": "external-human-action"
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "key": "permission-policy",
+      "label": "Permission policy",
+      "kind": "file",
+      "required": true,
+      "next_action": "Keep approved high-permission capabilities explicit.",
+      "secret_value_redacted": false,
+      "path": "security/permission_policy.json",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "key": "permission-probes",
+      "label": "Runtime probes",
+      "kind": "file",
+      "required": true,
+      "next_action": "Refresh runtime permission probes after packaging changes.",
+      "secret_value_redacted": false,
+      "path": "reports/runtime_permission_probes.json",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "key": "native-guard",
+      "label": "Native guard",
+      "kind": "external",
+      "required": true,
+      "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+      "secret_value_redacted": false,
+      "status": "external-required",
+      "actual": "external-integration-required"
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "key": "native-host",
+      "label": "Native telemetry host",
+      "kind": "file",
+      "required": true,
+      "next_action": "Use the native host to receive metadata-only client events.",
+      "secret_value_redacted": false,
+      "path": "scripts/telemetry_native_host.py",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "key": "hook-recipes",
+      "label": "Hook recipes",
+      "kind": "file",
+      "required": true,
+      "next_action": "Refresh telemetry hook recipes before external client installation.",
+      "secret_value_redacted": false,
+      "path": "reports/telemetry_hook_recipes.json",
+      "status": "pass",
+      "actual": "present"
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "key": "external-client",
+      "label": "External client",
+      "kind": "external",
+      "required": true,
+      "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+      "secret_value_redacted": false,
+      "status": "external-required",
+      "actual": "external-integration-required"
+    }
+  ],
+  "source_checklist": [
+    {
+      "evidence_key": "provider-holdout",
+      "label": "Provider model run",
+      "field": "model_executed_count",
+      "expected": ">0",
+      "actual": 0,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Run provider-backed output-exec with real credentials."
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "label": "Timing observed",
+      "field": "timing_observed_count",
+      "expected": ">0",
+      "actual": 10,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Provider execution should record timing metadata."
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "label": "Token usage observed",
+      "field": "token_observed_count",
+      "expected": ">0",
+      "actual": 0,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Provider execution should return non-estimated token usage."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Review pairs exist",
+      "field": "pair_count",
+      "expected": ">0",
+      "actual": 5,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Generate the blind A/B review pack."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "No pending decisions",
+      "field": "pending_count",
+      "expected": "==0",
+      "actual": 5,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Record a reviewer choice for every pair."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Judgments complete",
+      "field": "judgment_count",
+      "expected": "==pair_count",
+      "actual": 0,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Every pair needs one valid human judgment."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "No invalid decisions",
+      "field": "invalid_decision_count",
+      "expected": "==0",
+      "actual": 0,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Fix malformed winner/confidence entries."
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "label": "Native enforcement",
+      "field": "native_enforcement_count",
+      "expected": ">0",
+      "actual": 0,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Collect real target-client or external runtime guard proof."
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "label": "Probe failures",
+      "field": "failure_count",
+      "expected": "==0",
+      "actual": 0,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Runtime permission probes must stay clean."
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "label": "Installer support",
+      "field": "installer_enforcement_ready",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Installer enforcement is supporting evidence, not native proof."
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "label": "External events",
+      "field": "external_source_events",
+      "expected": ">0",
+      "actual": 0,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Import at least one metadata-only event from a real client."
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "label": "Adoption sample",
+      "field": "adoption_sample_count",
+      "expected": ">0",
+      "actual": 0,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Telemetry must include adoption outcome evidence."
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "label": "Raw content blocked",
+      "field": "raw_content_allowed",
+      "expected": "false",
+      "actual": false,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Telemetry must stay metadata-only."
+    }
+  ],
+  "submissions": {
+    "directory": "evidence/world_class/submissions",
+    "preflight_counts_submission_as_completion": false
+  },
+  "source_reports": {
+    "ledger": "reports/world_class_evidence_ledger.json",
+    "intake": "reports/world_class_evidence_intake.json",
+    "submission_review": "reports/world_class_submission_review.json",
+    "operator_runbook": "reports/world_class_operator_runbook.json"
+  },
+  "artifacts": {
+    "json": "reports/world_class_evidence_preflight.json",
+    "markdown": "reports/world_class_evidence_preflight.md"
+  }
+}

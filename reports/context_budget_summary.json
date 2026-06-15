@@ -8,44 +8,47 @@
       "budget_limit": 1000,
       "initial_tokens": 960,
       "skill_body_tokens": 767,
-      "deferred_resource_tokens": 436837,
+      "deferred_resource_tokens": 442670,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
-          "estimated_tokens": 387626,
-          "file_count": 111
+          "estimated_tokens": 393459,
+          "file_count": 113
         }
       ],
       "deferred_resource_governance": {
-        "status": "governed",
+        "status": "needs-review",
         "large_dir_count": 1,
-        "governed_large_dir_count": 1,
+        "governed_large_dir_count": 0,
         "directories": [
           {
-            "status": "governed",
+            "status": "needs-review",
             "evidence": [
               "reports/security_trust_report.json",
               "reports/architecture_maintainability.json",
               "reports/python_compatibility.json"
             ],
             "reasons": [
-              "trust report covers scripts",
               "architecture report has no script hotspots or blockers",
               "Python compatibility report has no issues"
             ],
-            "missing": [],
+            "missing": [
+              "trust report covers scripts"
+            ],
             "path": "scripts",
-            "estimated_tokens": 387626,
-            "file_count": 111,
+            "estimated_tokens": 393459,
+            "file_count": 113,
             "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
           }
         ],
-        "summary": "Large deferred resources are indexed and backed by evidence."
+        "summary": "One or more large deferred resource directories still need explicit governance evidence."
       },
       "quality_density": 135.4,
       "unused_resource_dirs": [],
       "ok": true,
-      "warnings": []
+      "warnings": [
+        "Deferred resource footprint is high: 442670 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
+      ]
     },
     {
       "label": "complex-release-orchestrator",

@@ -8,6 +8,7 @@ Run:
 
 ```bash
 SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"
+python3 scripts/yao.py world-class-preflight . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"
@@ -22,6 +23,8 @@ The intake validator checks:
 - real submissions reference concrete files inside the skill directory and include a matching SHA-256 digest for each artifact
 - credentials, secrets, raw user content, and raw provider prompts are explicitly excluded
 - planned work, local command-only output, and metadata fallback are not claimed as completion evidence
+
+Run `world-class-preflight` before assigning external or human work. It checks local files, redacted environment readiness, human/external prerequisites, and source-evidence blockers without accepting evidence or printing secrets.
 
 The generated intake report also includes an `operator_checklist` for each pending evidence item. Use it to find the template path, target submission path, preparation command, validation command, required provenance, success checks, and privacy boundary before asking a reviewer or external operator to submit evidence.
 

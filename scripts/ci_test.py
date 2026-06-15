@@ -59,6 +59,7 @@ DEFAULT_TARGETS = [
     "world-class-evidence-check",
     "world-class-ledger-check",
     "world-class-intake-check",
+    "world-class-preflight-check",
     "world-class-submission-review-check",
     "world-class-runbook-check",
     "world-class-claim-guard-check",

@@ -21,6 +21,7 @@ REQUIRED_REPORTS = {
     "world_class_ledger": "reports/world_class_evidence_ledger.json",
     "world_class_plan": "reports/world_class_evidence_plan.json",
     "world_class_intake": "reports/world_class_evidence_intake.json",
+    "world_class_preflight": "reports/world_class_evidence_preflight.json",
     "world_class_submission_review": "reports/world_class_submission_review.json",
     "world_class_operator_runbook": "reports/world_class_operator_runbook.json",
     "skill_os2_coverage": "reports/skill_os2_coverage.json",
@@ -260,6 +261,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     ledger = reports["world_class_ledger"]
     world_class_plan = reports["world_class_plan"]
     world_class_intake = reports["world_class_intake"]
+    world_class_preflight = reports["world_class_preflight"]
     world_class_submission_review = reports["world_class_submission_review"]
     world_class_operator_runbook = reports["world_class_operator_runbook"]
     coverage = reports["skill_os2_coverage"]
@@ -280,6 +282,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     trust_summary = nested(trust, ["summary"], {})
     context_stats = nested(context_budget, ["stats"], {})
     claim_guard_summary = nested(claim_guard, ["summary"], {})
+    preflight_summary = nested(world_class_preflight, ["summary"], {})
     if isinstance(benchmark_summary, dict):
         compare_values(
             checks,
@@ -429,6 +432,28 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             actual=actual_benchmark_boundary,
             paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["benchmark"]],
             detail="Benchmark reproducibility must not overstate public claim readiness.",
+        )
+        preflight_boundary = {
+            "pending_count": ledger_summary.get("pending_count"),
+            "source_check_count": ledger_summary.get("source_check_count"),
+            "source_pass_count": ledger_summary.get("source_pass_count"),
+            "source_blocked_count": ledger_summary.get("source_blocked_count"),
+            "ready_to_claim_world_class": ledger_summary.get("ready_to_claim_world_class"),
+            "preflight_counts_as_evidence": False,
+            "credential_value_exposed": False,
+        }
+        actual_preflight_boundary = {
+            key: preflight_summary.get(key) if isinstance(preflight_summary, dict) else None
+            for key in preflight_boundary
+        }
+        compare_values(
+            checks,
+            key="preflight-world-class-boundary",
+            label="Preflight mirrors ledger without accepting evidence",
+            expected=preflight_boundary,
+            actual=actual_preflight_boundary,
+            paths=[REQUIRED_REPORTS["world_class_ledger"], REQUIRED_REPORTS["world_class_preflight"]],
+            detail="Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness.",
         )
 
     public_ready = bool(ledger_summary.get("ready_to_claim_world_class")) if isinstance(ledger_summary, dict) else False

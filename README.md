@@ -28,6 +28,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - a world-class evidence plan that turns remaining provider, human, native-permission, and real-client telemetry gaps into executable evidence tasks
 - a world-class evidence ledger that records which external and human evidence is accepted or still pending without treating planned work as proof
 - a world-class evidence intake contract that validates external and human evidence packets for provenance, privacy, artifact refs, and anti-overclaim rules before ledger review
+- a redacted world-class preflight report that checks local files, environment readiness, human/external prerequisites, and source blockers before operators collect evidence
 - a world-class submission review queue that compares evidence packets, intake validation, source artifacts, and ledger state without accepting evidence
 - a world-class operator runbook that gives reviewers the exact commands, artifacts, and collection checklist needed to close remaining evidence gaps
 - a world-class claim guard that scans public claim surfaces and blocks premature completed/true claims while the evidence ledger still has pending external or human evidence
@@ -151,6 +152,7 @@ python3 scripts/yao.py install-simulate . --package-dir dist
 python3 scripts/yao.py upgrade-check . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json
 python3 scripts/yao.py world-class-evidence .
 SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"
+python3 scripts/yao.py world-class-preflight . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"
 python3 scripts/yao.py world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"
@@ -428,7 +430,7 @@ Utility scripts that make the meta-skill operational:
 - `run_description_optimization_suite.py`: runs description optimization across the root skill and governed examples, then writes reusable reports and optional drift snapshots with calibration and family summaries
 - `promotion_checker.py`: applies promotion policy to current description candidates, writes promotion decisions, builds candidate registries, and emits iteration bundles with review stubs
 - `create_iteration_snapshot.py`: freezes the current promotion decision into a versioned release snapshot with review, route, and context evidence
-- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-report, skill-interpretation, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, evidence-consistency, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
+- `yao.py`: unified authoring CLI that exposes init, validate, optimize-description, promote-check, python-compat, review, release-snapshot, workspace-flow, report, skill-report, skill-interpretation, skill-ir, compile-skill, output-exec, output-review, skill-os2-audit, skill-os2-coverage, world-class-evidence, world-class-ledger, world-class-intake, world-class-preflight, world-class-submission-kit, world-class-submission-review, world-class-runbook, world-class-claim-guard, benchmark-reproducibility, evidence-consistency, telemetry-emit, telemetry-hooks, telemetry-import, package, registry-audit, package-verify, install-simulate, upgrade-check, review-waivers, and test as one entrypoint
 - `render_description_drift_history.py`: turns description-optimization snapshots into a readable drift-history report
 - `build_confusion_matrix.py`: scores route confusion across tracked sibling skills and `no_route` cases, then writes a route scorecard and optional milestone snapshot
 - `render_iteration_ledger.py`: compresses regression milestones, description optimization drift, and route scorecards into one iteration-facing ledger
@@ -442,6 +444,7 @@ Utility scripts that make the meta-skill operational:
 - `render_world_class_evidence_plan.py`: renders executable evidence tasks for remaining world-class gaps without treating planned external work as completed evidence
 - `render_world_class_evidence_ledger.py`: renders a machine-checkable ledger for current world-class evidence acceptance, anti-overclaim guards, provenance requirements, and privacy contracts
 - `render_world_class_evidence_intake.py`: validates world-class external and human evidence packets against provenance, privacy, artifact, and anti-overclaim requirements before ledger review
+- `render_world_class_preflight.py`: renders redacted collection preflight checks for pending provider, human, native-permission, and native-client evidence without accepting evidence
 - `render_world_class_submission_review.py`: renders a read-only queue that compares submissions, intake validation, source evidence, and ledger state without accepting evidence
 - `render_world_class_operator_runbook.py`: renders an operator-facing checklist and command map for collecting pending world-class evidence without accepting evidence
 - `render_world_class_claim_guard.py`: scans README, docs, and reports for premature world-class completion claims while accepted evidence is still pending

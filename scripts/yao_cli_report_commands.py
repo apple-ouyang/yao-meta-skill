@@ -72,6 +72,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_world_class_evidence_plan.py", [str(ROOT)]),
             run_script("render_world_class_evidence_ledger.py", [str(ROOT)]),
             run_script("render_world_class_evidence_intake.py", [str(ROOT)]),
+            run_script("render_world_class_preflight.py", [str(ROOT)]),
             run_script("render_world_class_submission_review.py", [str(ROOT)]),
             run_script("render_world_class_operator_runbook.py", [str(ROOT)]),
             run_script("render_world_class_claim_guard.py", [str(ROOT)]),
@@ -114,6 +115,7 @@ def command_report(args: argparse.Namespace) -> int:
             "world_class_evidence_plan": "reports/world_class_evidence_plan.json",
             "world_class_evidence_ledger": "reports/world_class_evidence_ledger.json",
             "world_class_evidence_intake": "reports/world_class_evidence_intake.json",
+            "world_class_evidence_preflight": "reports/world_class_evidence_preflight.json",
             "world_class_submission_review": "reports/world_class_submission_review.json",
             "world_class_operator_runbook": "reports/world_class_operator_runbook.json",
             "world_class_claim_guard": "reports/world_class_claim_guard.json",
@@ -173,6 +175,14 @@ def command_world_class_intake(args: argparse.Namespace) -> int:
         cmd.extend(["--submissions-dir", args.submissions_dir])
     append_outputs(cmd, args, generated_at=True)
     return emit_result(run_script("render_world_class_evidence_intake.py", cmd))
+
+
+def command_world_class_preflight(args: argparse.Namespace) -> int:
+    cmd = [resolved_skill_dir(args)]
+    if args.submissions_dir:
+        cmd.extend(["--submissions-dir", args.submissions_dir])
+    append_outputs(cmd, args, generated_at=True)
+    return emit_result(run_script("render_world_class_preflight.py", cmd))
 
 
 def command_world_class_submission_kit(args: argparse.Namespace) -> int:

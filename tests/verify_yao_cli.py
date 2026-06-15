@@ -80,7 +80,7 @@ def main() -> None:
     parser_help = yao_cli_module.build_parser().format_help()
     expected_help = (
         "quickstart skill-interpretation review-studio python-compat architecture-audit skill-os2-audit skill-os2-coverage "
-        "world-class-evidence world-class-ledger world-class-intake world-class-submission-kit "
+        "world-class-evidence world-class-ledger world-class-intake world-class-preflight world-class-submission-kit "
         "world-class-submission-review world-class-runbook world-class-claim-guard "
         "benchmark-reproducibility evidence-consistency output-review-kit adapt-scan adapt-propose adapt-apply "
         "telemetry-import telemetry-emit telemetry-hooks --record-cli-telemetry"

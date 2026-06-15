@@ -217,6 +217,17 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     world_class_intake_cmd.add_argument("--generated-at")
     world_class_intake_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_intake"))
 
+    world_class_preflight_cmd = subparsers.add_parser(
+        "world-class-preflight",
+        help="Render operator preflight checks for collecting pending world-class evidence.",
+    )
+    world_class_preflight_cmd.add_argument("skill_dir", nargs="?", default=".")
+    world_class_preflight_cmd.add_argument("--submissions-dir")
+    world_class_preflight_cmd.add_argument("--output-json")
+    world_class_preflight_cmd.add_argument("--output-md")
+    world_class_preflight_cmd.add_argument("--generated-at")
+    world_class_preflight_cmd.set_defaults(func=_handler(command_handlers, "command_world_class_preflight"))
+
     world_class_submission_kit_cmd = subparsers.add_parser(
         "world-class-submission-kit",
         help="Prepare editable world-class evidence submission drafts.",

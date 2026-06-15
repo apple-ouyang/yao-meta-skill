@@ -6,9 +6,9 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 173,
-    "json_claim_surface_count": 85,
-    "metadata_claim_surface_count": 86,
+    "claim_surface_count": 175,
+    "json_claim_surface_count": 86,
+    "metadata_claim_surface_count": 87,
     "package_claim_surface_count": 17,
     "violation_count": 0,
     "overclaim_guard_active": true,
@@ -668,6 +668,14 @@
     },
     {
       "path": "reports/world_class_evidence_plan.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_evidence_preflight.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_evidence_preflight.md",
       "violation_count": 0
     },
     {

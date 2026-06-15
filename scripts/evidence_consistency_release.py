@@ -13,6 +13,7 @@ FIRST_CLASS_REPORT_COMMANDS = [
     "python3 scripts/render_skill_overview.py .",
     "python3 scripts/render_skill_interpretation.py .",
     "python3 scripts/render_review_viewer.py .",
+    'python3 scripts/render_world_class_preflight.py . --generated-at "$GENERATED_AT"',
     "python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json",
     'python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"',
 ]
@@ -62,6 +63,7 @@ def build_release_evidence_flow_check(skill_dir: Path) -> dict[str, Any]:
             "reports/skill-overview.json",
             "reports/skill-interpretation.json",
             "reports/review-viewer.json",
+            "reports/world_class_evidence_preflight.json",
             "reports/review-studio.json",
             "reports/evidence_consistency.json",
         ],

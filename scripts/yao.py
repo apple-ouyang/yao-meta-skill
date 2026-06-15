@@ -56,6 +56,7 @@ from yao_cli_report_commands import (
     command_world_class_evidence,
     command_world_class_intake,
     command_world_class_ledger,
+    command_world_class_preflight,
     command_world_class_runbook,
     command_world_class_submission_kit,
     command_world_class_submission_review,

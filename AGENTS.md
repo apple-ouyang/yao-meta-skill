@@ -51,6 +51,7 @@ python3 scripts/render_skill_os2_coverage.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_skill_overview.py .
 python3 scripts/render_skill_interpretation.py .
 python3 scripts/render_review_viewer.py .
+python3 scripts/render_world_class_preflight.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
 python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"
 ```
@@ -62,6 +63,7 @@ python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED
 python3 scripts/render_skill_overview.py .
 python3 scripts/render_skill_interpretation.py .
 python3 scripts/render_review_viewer.py .
+python3 scripts/render_world_class_preflight.py . --generated-at "$GENERATED_AT"
 python3 scripts/render_review_studio.py . --output-html reports/review-studio.html --output-json reports/review-studio.json
 python3 scripts/render_evidence_consistency.py . --generated-at "$GENERATED_AT"
 ```
@@ -96,6 +98,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/world_class_evidence_contract.py`: shared intake contract and artifact-integrity validator. Keep ledger, intake, and submission review aligned so source evidence cannot be accepted without a valid real submission and matching artifact SHA-256 checks.
 - `scripts/render_world_class_submission_review.py`: read-only queue for external and human evidence packets after intake validation. Keep it from accepting evidence; it may only compare packet validity, source evidence checks, and ledger state.
 - `scripts/render_world_class_operator_runbook.py`: operator-facing world-class evidence runbook. Keep it as coordination guidance only; it must not accept evidence or flip world-class readiness.
+- `scripts/render_world_class_preflight.py`: operator-facing collection preflight for world-class evidence. Keep environment and external prerequisite checks redacted, and never let preflight count as accepted evidence.
 - `scripts/render_benchmark_reproducibility.py`: release-facing benchmark reproducibility manifest. Keep methodology sections, required artifacts, failure disclosure, reproduction commands, and world-class limitations machine-checkable.
 - `scripts/skill_report_model.py`, `scripts/skill_report_metrics.py`, `scripts/skill_report_charts.py`: skill overview data model, scoring, and inline SVG chart generation.
 - `scripts/yao_cli_config.py`: CLI target maps, archetype heuristics, diagnosis copy, and side-effect-free shaping helpers.

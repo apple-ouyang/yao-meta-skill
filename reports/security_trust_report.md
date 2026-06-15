@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `199`
-- Scripts: `112`
+- Scanned files: `200`
+- Scripts: `113`
 - Internal script modules: `30`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `69`
+- File-write scripts: `70`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `82`
+- CLI help smoke checked: `83`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `199`
-- Package SHA256: `ce3d8c67706a5059ae162d937f51d7469aee3d0095a53889c686524f2b43d544`
+- Package hash files: `200`
+- Package SHA256: `909d0f5bad8ede6cc24b6c733b614a36c178878447612aa97276ff05e5206ce1`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `82`
-- Passed scripts: `82`
+- Checked scripts: `83`
+- Passed scripts: `83`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -130,6 +130,7 @@
 | scripts/render_world_class_evidence_ledger.py | cli | True | True | True | False | False | True | False | Renders a machine-checkable ledger for world-class external and human evidence gaps. |
 | scripts/render_world_class_evidence_plan.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_world_class_operator_runbook.py | cli | True | True | True | False | False | True | False | Renders an operator runbook for collecting pending world-class evidence without accepting evidence. |
+| scripts/render_world_class_preflight.py | cli | True | True | True | False | False | True | False | Renders a preflight checklist for collecting pending world-class evidence without accepting evidence. |
 | scripts/render_world_class_submission_review.py | cli | True | True | True | False | False | True | False | Renders a read-only review queue for world-class evidence submissions before ledger acceptance. |
 | scripts/resource_boundary_check.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/review_studio_action_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by review_studio_actions.py to keep world-class evidence action cards out of generic Review Studio action wiring. |

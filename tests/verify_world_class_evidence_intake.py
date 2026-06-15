@@ -103,6 +103,7 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
 def assert_documented_submission_commands() -> None:
     expected_fragments = [
         'SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"',
+        'world-class-preflight . --submissions-dir "$SUBMISSIONS_DIR"',
         'world-class-submission-kit . --output-dir "$SUBMISSIONS_DIR"',
         'world-class-intake . --submissions-dir "$SUBMISSIONS_DIR"',
         'world-class-submission-review . --submissions-dir "$SUBMISSIONS_DIR"',
