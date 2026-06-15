@@ -74,7 +74,9 @@ def default_claim_surfaces(skill_dir: Path) -> list[Path]:
             paths.append(path)
     for directory, patterns in [
         (skill_dir / "docs", ["*.md"]),
-        (skill_dir / "reports", ["*.md", "*.html"]),
+        (skill_dir / "reports", ["*.md", "*.html", "*.json"]),
+        (skill_dir / "registry", ["*.json"]),
+        (skill_dir / "skill-ir", ["*.json"]),
     ]:
         if not directory.exists():
             continue
@@ -128,6 +130,7 @@ def build_guard(skill_dir: Path, generated_at: str, claim_surfaces: list[Path] |
         for match in matches:
             violations.append({"path": rel, **match})
     ok = len(violations) == 0
+    json_surface_count = sum(1 for item in scanned if item["path"].endswith(".json"))
     return {
         "schema_version": "1.0",
         "ok": ok,
@@ -137,6 +140,7 @@ def build_guard(skill_dir: Path, generated_at: str, claim_surfaces: list[Path] |
             "ledger_ready_to_claim_world_class": ledger_ready,
             "ledger_pending_count": ledger.get("summary", {}).get("pending_count", 0),
             "claim_surface_count": len(scanned),
+            "json_claim_surface_count": json_surface_count,
             "violation_count": len(violations),
             "overclaim_guard_active": True,
             "decision": (
@@ -175,10 +179,11 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- ledger ready to claim world-class: `{str(summary['ledger_ready_to_claim_world_class']).lower()}`",
         f"- ledger pending evidence: `{summary['ledger_pending_count']}`",
         f"- claim surfaces scanned: `{summary['claim_surface_count']}`",
+        f"- JSON claim surfaces scanned: `{summary['json_claim_surface_count']}`",
         f"- violations: `{summary['violation_count']}`",
         f"- overclaim guard active: `{str(summary['overclaim_guard_active']).lower()}`",
         "",
-        "This guard scans public claim surfaces for completion language that would contradict the world-class evidence ledger. It allows evidence planning and pending-state language, but blocks completion claims until the ledger is ready.",
+        "This guard scans public claim surfaces and machine-readable report metadata for completion language that would contradict the world-class evidence ledger. It allows evidence planning and pending-state language, but blocks completion claims until the ledger is ready.",
         "",
         "## Violations",
         "",

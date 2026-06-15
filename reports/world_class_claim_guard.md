@@ -7,11 +7,12 @@ Generated at: `2026-06-16`
 - decision: `claim-guard-pass-evidence-pending`
 - ledger ready to claim world-class: `false`
 - ledger pending evidence: `4`
-- claim surfaces scanned: `78`
+- claim surfaces scanned: `150`
+- JSON claim surfaces scanned: `72`
 - violations: `0`
 - overclaim guard active: `true`
 
-This guard scans public claim surfaces for completion language that would contradict the world-class evidence ledger. It allows evidence planning and pending-state language, but blocks completion claims until the ledger is ready.
+This guard scans public claim surfaces and machine-readable report metadata for completion language that would contradict the world-class evidence ledger. It allows evidence planning and pending-state language, but blocks completion claims until the ledger is ready.
 
 ## Violations
 

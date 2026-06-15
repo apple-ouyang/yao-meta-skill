@@ -6,8 +6,8 @@
 - Maturity: `governed`
 - Owner: `Yao Team`
 - License: `MIT`
-- Package SHA256: `85e86b1f0f774b8f04a45d0665553bdbacca16655d0a28d16577f53bac48535a`
-- Archive SHA256: `052aea12dfd456a03c6f0a260a59098da036209eea6a8d5109b951005c29f9d9`
+- Package SHA256: `365c0b0cafd05b0239206f84990741005c3699e1e6be3d82ccbaf903372218a0`
+- Archive SHA256: `c2e8d9a84e48571f8ba8d054fc462328401f64e8d335ab0078d292041d3ffb2e`
 - Install simulated: `True`
 
 ## Compatibility

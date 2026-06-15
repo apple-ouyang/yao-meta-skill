@@ -6,7 +6,8 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 78,
+    "claim_surface_count": 150,
+    "json_claim_surface_count": 72,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -68,7 +69,39 @@
       "violation_count": 0
     },
     {
+      "path": "registry/examples/yao-meta-skill-1.0.0.json",
+      "violation_count": 0
+    },
+    {
+      "path": "registry/index.json",
+      "violation_count": 0
+    },
+    {
+      "path": "registry/index.schema.json",
+      "violation_count": 0
+    },
+    {
+      "path": "registry/package.schema.json",
+      "violation_count": 0
+    },
+    {
+      "path": "registry/packages/yao-meta-skill.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/adaptation_approval_ledger.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/adaptation_proposals.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/adaptation_proposals.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/adaptation_regression_report.json",
       "violation_count": 0
     },
     {
@@ -76,7 +109,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/adoption_drift_report.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/adoption_drift_report.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/architecture_maintainability.json",
       "violation_count": 0
     },
     {
@@ -84,7 +125,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/artifact-design-profile.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/artifact-design-profile.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/baseline-compare.json",
       "violation_count": 0
     },
     {
@@ -96,7 +145,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/benchmark_reproducibility.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/benchmark_reproducibility.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/candidate_registry.json",
       "violation_count": 0
     },
     {
@@ -104,7 +161,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/compiled_targets.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/compiled_targets.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/conformance_matrix.json",
       "violation_count": 0
     },
     {
@@ -112,7 +177,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/context_budget.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/context_budget.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/context_budget_summary.json",
       "violation_count": 0
     },
     {
@@ -120,11 +193,27 @@
       "violation_count": 0
     },
     {
+      "path": "reports/description_optimization.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/description_optimization.md",
       "violation_count": 0
     },
     {
+      "path": "reports/description_optimization_suite.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/description_optimization_suite.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/eval_suite.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/evidence_consistency.json",
       "violation_count": 0
     },
     {
@@ -140,7 +229,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/github-benchmark-scan.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/github-benchmark-scan.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/governance_score.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/install_simulation.json",
       "violation_count": 0
     },
     {
@@ -148,7 +249,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/intent-confidence.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/intent-confidence.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/intent-context.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/intent-dialogue.json",
       "violation_count": 0
     },
     {
@@ -156,7 +269,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/iteration-directions.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/iteration-directions.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/iteration_bundles/governed-incident-command/bundle.json",
       "violation_count": 0
     },
     {
@@ -168,11 +289,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/iteration_bundles/team-frontend-review/bundle.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/iteration_bundles/team-frontend-review/bundle.md",
       "violation_count": 0
     },
     {
       "path": "reports/iteration_bundles/team-frontend-review/review.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/iteration_bundles/yao-meta-skill/bundle.json",
       "violation_count": 0
     },
     {
@@ -188,7 +317,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/output-risk-profile.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/output-risk-profile.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/output_blind_answer_key.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/output_blind_review_pack.json",
       "violation_count": 0
     },
     {
@@ -196,7 +337,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/output_execution_runs.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/output_execution_runs.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/output_quality_scorecard.json",
       "violation_count": 0
     },
     {
@@ -204,7 +353,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/output_review_adjudication.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/output_review_adjudication.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/output_review_decisions.json",
       "violation_count": 0
     },
     {
@@ -212,7 +369,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/output_review_kit.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/output_review_kit.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/package_verification.json",
       "violation_count": 0
     },
     {
@@ -220,7 +385,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/portability_score.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/portability_score.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/promotion_decisions.json",
       "violation_count": 0
     },
     {
@@ -228,7 +401,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/prompt-quality-profile.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/prompt-quality-profile.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/python_compatibility.json",
       "violation_count": 0
     },
     {
@@ -236,11 +417,23 @@
       "violation_count": 0
     },
     {
+      "path": "reports/reference-scan.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/reference-scan.md",
       "violation_count": 0
     },
     {
+      "path": "reports/reference-synthesis.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/reference-synthesis.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/registry_audit.json",
       "violation_count": 0
     },
     {
@@ -256,7 +449,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/review-studio.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/review-viewer.html",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/review-viewer.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/review_annotations.json",
       "violation_count": 0
     },
     {
@@ -264,7 +469,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/review_waivers.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/review_waivers.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/route_scorecard.json",
       "violation_count": 0
     },
     {
@@ -272,7 +485,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/runtime_permission_probes.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/runtime_permission_probes.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/security_trust_report.json",
       "violation_count": 0
     },
     {
@@ -281,6 +502,10 @@
     },
     {
       "path": "reports/skill-interpretation.html",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skill-interpretation.json",
       "violation_count": 0
     },
     {
@@ -296,7 +521,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/skill-overview.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/skill_atlas.html",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skill_atlas.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skill_os2_audit.json",
       "violation_count": 0
     },
     {
@@ -304,7 +541,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/skill_os2_coverage.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/skill_os2_coverage.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/system-model.json",
       "violation_count": 0
     },
     {
@@ -312,7 +557,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/telemetry_hook_recipes.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/telemetry_hook_recipes.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/upgrade_check.json",
       "violation_count": 0
     },
     {
@@ -320,7 +573,19 @@
       "violation_count": 0
     },
     {
+      "path": "reports/user_patterns.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/user_patterns.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_claim_guard.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_evidence_intake.json",
       "violation_count": 0
     },
     {
@@ -328,7 +593,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/world_class_evidence_ledger.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/world_class_evidence_ledger.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_evidence_plan.json",
       "violation_count": 0
     },
     {
@@ -340,7 +613,15 @@
       "violation_count": 0
     },
     {
+      "path": "reports/world_class_operator_runbook.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/world_class_operator_runbook.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/world_class_submission_review.json",
       "violation_count": 0
     },
     {
@@ -349,6 +630,14 @@
     },
     {
       "path": "reports/yao-deploy-bridge-skill-research-plan.md",
+      "violation_count": 0
+    },
+    {
+      "path": "skill-ir/examples/yao-meta-skill.json",
+      "violation_count": 0
+    },
+    {
+      "path": "skill-ir/schema.json",
       "violation_count": 0
     }
   ],

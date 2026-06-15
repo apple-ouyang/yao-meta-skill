@@ -42,13 +42,16 @@ def main() -> None:
     assert summary["ledger_ready_to_claim_world_class"] is False, summary
     assert summary["ledger_pending_count"] == 4, summary
     assert summary["claim_surface_count"] >= 10, summary
+    assert summary["json_claim_surface_count"] >= 10, summary
     assert summary["violation_count"] == 0, summary
     assert summary["overclaim_guard_active"] is True, summary
     assert any(item["path"] == "README.md" for item in payload["scanned_surfaces"]), payload["scanned_surfaces"]
+    assert any(item["path"] == "reports/world_class_evidence_ledger.json" for item in payload["scanned_surfaces"]), payload["scanned_surfaces"]
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Claim Guard" in markdown, markdown
     assert "claim-guard-pass-evidence-pending" in markdown, markdown
     assert "world-class evidence ledger" in markdown, markdown
+    assert "JSON claim surfaces scanned" in markdown, markdown
 
     safe_surface = TMP / "safe.md"
     safe_surface.write_text("ready to claim world-class: `false`\nworld-class evidence is pending.\n", encoding="utf-8")
@@ -93,6 +96,22 @@ def main() -> None:
     relative_payload = json.loads(relative_proc.stdout)
     assert relative_payload["summary"]["violation_count"] == 1, relative_payload
     assert relative_payload["violations"][0]["path"] == "tests/tmp_world_class_claim_guard/relative-unsafe.md", relative_payload
+
+    unsafe_json_surface = TMP / "unsafe.json"
+    unsafe_json_surface.write_text('{"world_class_ready": true}\n', encoding="utf-8")
+    unsafe_json_proc = run_guard(
+        "--claim-surface",
+        str(unsafe_json_surface),
+        "--output-json",
+        str(TMP / "unsafe_json_guard.json"),
+        "--output-md",
+        str(TMP / "unsafe_json_guard.md"),
+        check=False,
+    )
+    assert unsafe_json_proc.returncode == 2, unsafe_json_proc.stdout
+    unsafe_json_payload = json.loads(unsafe_json_proc.stdout)
+    assert unsafe_json_payload["summary"]["violation_count"] == 1, unsafe_json_payload
+    assert unsafe_json_payload["violations"][0]["rule"] == "json-world-class-ready-true", unsafe_json_payload
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 
