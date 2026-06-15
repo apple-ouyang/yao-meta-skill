@@ -50,14 +50,15 @@ def render_readme(report: dict[str, Any]) -> str:
             "",
             "This matrix combines draft, artifact, and source-check readiness into one operator action list. Matrix rows are guidance only; they do not count as completion evidence.",
             "",
-            "| Evidence | Stage | Draft | Artifacts | Source checks | Next action |",
-            "| --- | --- | --- | ---: | ---: | --- |",
+            "| Evidence | Stage | Draft | Submission refs | Supporting assets | Source checks | Next action |",
+            "| --- | --- | --- | ---: | ---: | ---: | --- |",
         ]
     )
     for item in report.get("evidence_matrix", []):
         lines.append(
             f"| `{item['evidence_key']}` | `{item['stage']}` | `{item['draft_status']}` | "
-            f"`{item['artifact_ready_count']}/{item['artifact_total_count']}` | "
+            f"`{item.get('submission_ref_ready_count', 0)}/{item.get('submission_ref_total_count', 0)}` | "
+            f"`{item.get('supporting_artifact_ready_count', 0)}/{item.get('supporting_artifact_total_count', 0)}` | "
             f"`{item['source_pass_count']}/{item['source_check_count']}` | {item['next_action']} |"
         )
     lines.extend(["", "## Execution Runbook", ""])
@@ -77,13 +78,16 @@ def render_readme(report: dict[str, Any]) -> str:
             "",
             "Use these paths and SHA-256 digests when filling `artifact_refs`. Glob patterns are expanded into concrete files; submissions must reference concrete paths, not globs.",
             "",
-            "| Evidence | Path | Status | SHA-256 |",
-            "| --- | --- | --- | --- |",
+            "| Evidence | Role | Path | Status | SHA-256 |",
+            "| --- | --- | --- | --- | --- |",
         ]
     )
     for item in report.get("artifact_checklist", []):
         digest = item.get("sha256") or "n/a"
-        lines.append(f"| `{item['evidence_key']}` | `{item['path']}` | `{item['status']}` | `{digest}` |")
+        lines.append(
+            f"| `{item['evidence_key']}` | `{item.get('artifact_role', 'supporting-evidence')}` | "
+            f"`{item['path']}` | `{item['status']}` | `{digest}` |"
+        )
     lines.extend(
         [
             "",
@@ -172,6 +176,7 @@ def render_html_artifact_checklist(items: list[dict[str, Any]]) -> str:
           </div>
           <dl>
             <dt>Pattern</dt><dd><code>{pattern}</code></dd>
+            <dt>Role</dt><dd>{role}</dd>
             <dt>Status</dt><dd>{status}</dd>
             <dt>SHA-256</dt><dd><code>{sha}</code></dd>
           </dl>
@@ -181,6 +186,7 @@ def render_html_artifact_checklist(items: list[dict[str, Any]]) -> str:
             key=html_text(item.get("evidence_key", "")),
             path=html_text(item.get("path", "")),
             pattern=html_text(item.get("source_pattern", "")),
+            role=html_text(item.get("artifact_role", "supporting-evidence")),
             sha=html_text(item.get("sha256") or "n/a"),
         )
         for item in items
@@ -229,7 +235,8 @@ def render_html_matrix(items: list[dict[str, Any]]) -> str:
           </header>
           <dl>
             <dt>Draft</dt><dd>{draft}</dd>
-            <dt>Artifacts</dt><dd>{artifact_ready}/{artifact_total} ready</dd>
+            <dt>Submission refs</dt><dd>{submission_ref_ready}/{submission_ref_total} ready</dd>
+            <dt>Supporting assets</dt><dd>{supporting_ready}/{supporting_total} ready</dd>
             <dt>Source</dt><dd>{source_pass}/{source_total} pass</dd>
             <dt>Owner</dt><dd>{owner}</dd>
           </dl>
@@ -239,8 +246,10 @@ def render_html_matrix(items: list[dict[str, Any]]) -> str:
             stage=html_text(item.get("stage", "")),
             key=html_text(item.get("evidence_key", "")),
             draft=html_text(item.get("draft_status", "")),
-            artifact_ready=html_text(item.get("artifact_ready_count", 0)),
-            artifact_total=html_text(item.get("artifact_total_count", 0)),
+            submission_ref_ready=html_text(item.get("submission_ref_ready_count", 0)),
+            submission_ref_total=html_text(item.get("submission_ref_total_count", 0)),
+            supporting_ready=html_text(item.get("supporting_artifact_ready_count", 0)),
+            supporting_total=html_text(item.get("supporting_artifact_total_count", 0)),
             source_pass=html_text(item.get("source_pass_count", 0)),
             source_total=html_text(item.get("source_check_count", 0)),
             owner=html_text(item.get("owner", "")),
@@ -291,12 +300,15 @@ def render_html(report: dict[str, Any]) -> str:
     summary = report["summary"]
     artifact_ready = summary.get("artifact_ready_count", 0)
     artifact_total = summary.get("artifact_checklist_count", 0)
+    submission_ref_ready = summary.get("submission_ref_ready_count", 0)
+    submission_ref_total = summary.get("submission_ref_count", 0)
     stats = [
         ("Requested", summary["requested_count"]),
         ("Written", summary["written_count"]),
         ("Existing", summary["existing_count"]),
         ("Skipped", summary["skipped_count"]),
-        ("Artifacts", f"{artifact_ready}/{artifact_total}"),
+        ("Submit refs", f"{submission_ref_ready}/{submission_ref_total}"),
+        ("Support", f"{artifact_ready - submission_ref_ready}/{artifact_total - submission_ref_total}"),
         ("Prefilled", summary.get("artifact_ref_prefill_count", 0)),
     ]
     stat_html = "".join(
@@ -378,9 +390,9 @@ def render_html(report: dict[str, Any]) -> str:
       <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Use prefilled SHA-256 values as convenience data, not evidence acceptance.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
     </section>
-    <section class="section" id="matrix"><h2>Evidence Matrix</h2><p class="muted">The matrix combines draft status, artifact readiness, source checks, and the next operator action. It is guidance only and never counts as accepted evidence.</p><div class="matrix-grid">{matrix_html}</div></section>
+    <section class="section" id="matrix"><h2>Evidence Matrix</h2><p class="muted">The matrix separates submission artifact_refs from supporting assets, then combines draft status, source checks, and the next operator action. It is guidance only and never counts as accepted evidence.</p><div class="matrix-grid">{matrix_html}</div></section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
-    <section class="section" id="artifacts"><h2>Artifact Checklist</h2><p class="muted">Copy concrete paths and SHA-256 digests from here into artifact_refs after real evidence exists. Glob patterns are expanded for operator convenience only.</p><div class="artifact-grid">{artifact_html}</div></section>
+    <section class="section" id="artifacts"><h2>Artifact Checklist</h2><p class="muted">Rows marked submission-ref are the paths expected in artifact_refs. Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into the submission. Glob patterns are expanded for operator convenience only.</p><div class="artifact-grid">{artifact_html}</div></section>
     <section class="section" id="source"><h2>Source Evidence Snapshot</h2><p class="muted">This section shows current aggregate source checks. It explains remaining blockers without changing the ledger.</p><div class="source-grid">{source_html}</div></section>
     <section class="section" id="evidence"><h2>Evidence Requirements</h2><div class="evidence-grid">{evidence_html}</div></section>
     <section class="section" id="safety"><h2>Safety Boundary</h2><div class="notice"><ul><li>Drafts never count as accepted ledger evidence.</li><li>Valid intake means ready for ledger review, not world-class completion.</li><li>Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content.</li></ul></div></section>

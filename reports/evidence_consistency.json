@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 478929/120000; top deferred scripts 419118; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 480160/120000; top deferred scripts 420349; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 478929/120000; top deferred scripts 419118; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 480160/120000; top deferred scripts 420349; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -207,8 +207,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "30451d41f615562dfd0380414cc8447d4dad5e38",
-      "actual": "30451d41f615562dfd0380414cc8447d4dad5e38",
+      "expected": "e0a19e9b24a28e57e04aa8254013402eb93bf86b",
+      "actual": "e0a19e9b24a28e57e04aa8254013402eb93bf86b",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -261,30 +261,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "1b03b1e4bab90eac18aa1ee7f0ddd1d7293c3bdfb32620531c4fc231e33e2b60",
-        "archive_sha256": "38e8e607c1ed5bd016ea242f8fac3e8dfdfe16b165876bc4e19f587481e7c5ca",
+        "source_contract_sha256": "892708619b13ff1af2f189a9a4526123c509bb8b3899dc721af6e66a80ba492c",
+        "archive_sha256": "b90b116cb657d9fa1ba2f3f0620a05965890b996917626dcdc7f974a05aaeb0d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "1b03b1e4bab90eac18aa1ee7f0ddd1d7293c3bdfb32620531c4fc231e33e2b60",
-        "archive_sha256": "38e8e607c1ed5bd016ea242f8fac3e8dfdfe16b165876bc4e19f587481e7c5ca",
+        "source_contract_sha256": "892708619b13ff1af2f189a9a4526123c509bb8b3899dc721af6e66a80ba492c",
+        "archive_sha256": "b90b116cb657d9fa1ba2f3f0620a05965890b996917626dcdc7f974a05aaeb0d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "30451d41f615562dfd0380414cc8447d4dad5e38",
-      "actual": "30451d41f615562dfd0380414cc8447d4dad5e38",
+      "expected": "e0a19e9b24a28e57e04aa8254013402eb93bf86b",
+      "actual": "e0a19e9b24a28e57e04aa8254013402eb93bf86b",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -407,30 +407,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "1b03b1e4bab90eac18aa1ee7f0ddd1d7293c3bdfb32620531c4fc231e33e2b60",
-        "archive_sha256": "38e8e607c1ed5bd016ea242f8fac3e8dfdfe16b165876bc4e19f587481e7c5ca",
+        "source_contract_sha256": "892708619b13ff1af2f189a9a4526123c509bb8b3899dc721af6e66a80ba492c",
+        "archive_sha256": "b90b116cb657d9fa1ba2f3f0620a05965890b996917626dcdc7f974a05aaeb0d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "1b03b1e4bab90eac18aa1ee7f0ddd1d7293c3bdfb32620531c4fc231e33e2b60",
-        "archive_sha256": "38e8e607c1ed5bd016ea242f8fac3e8dfdfe16b165876bc4e19f587481e7c5ca",
+        "source_contract_sha256": "892708619b13ff1af2f189a9a4526123c509bb8b3899dc721af6e66a80ba492c",
+        "archive_sha256": "b90b116cb657d9fa1ba2f3f0620a05965890b996917626dcdc7f974a05aaeb0d",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",

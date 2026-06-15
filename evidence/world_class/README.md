@@ -34,6 +34,8 @@ The generated intake report also includes an `operator_checklist` for each pendi
 
 The submission kit command creates editable JSON drafts plus a local README for an external operator or human reviewer. Use `--prefill-artifacts` when you want the kit to insert SHA-256 digests for currently available local aggregate artifacts. Prefill is operator convenience only: those drafts still keep `template_only: true` and do not count as evidence until the real run or review exists, the packet is edited truthfully, every artifact ref points to a local aggregate evidence file with a matching `sha256`, and `world-class-intake` validates it.
 
+The submission kit separates artifact rows into `submission-ref` and `supporting-evidence`. `submission-ref` rows are the concrete paths expected in a real packet's `artifact_refs`; `supporting-evidence` rows help reviewers audit the packet and do not all need to be copied into the submission.
+
 The submission review command renders a read-only queue that compares valid packets with the source evidence checks and current ledger state. It is for reviewer triage only; it does not accept evidence or make the world-class claim true.
 
 Accepted intake means "ready for ledger review", not evidence that the final public claim is ready. The ledger remains the source of truth for `ready_to_claim_world_class`.

@@ -93,6 +93,10 @@ def build_evidence_matrix(
         draft_status, draft_path = _draft_status(files_by_key, key)
         artifact_ready_count = sum(1 for row in artifact_rows if row.get("artifact_ref_ready"))
         artifact_missing_count = len(artifact_rows) - artifact_ready_count
+        submission_ref_rows = [row for row in artifact_rows if row.get("submission_ref_required")]
+        supporting_rows = [row for row in artifact_rows if not row.get("submission_ref_required")]
+        submission_ref_ready_count = sum(1 for row in submission_ref_rows if row.get("artifact_ref_ready"))
+        supporting_artifact_ready_count = sum(1 for row in supporting_rows if row.get("artifact_ref_ready"))
         source_pass_count = sum(1 for row in source_rows if row.get("status") == "pass")
         source_blocked_count = len(source_rows) - source_pass_count
         invalid_draft = draft_status not in {"written", "exists"}
@@ -115,6 +119,12 @@ def build_evidence_matrix(
                 "artifact_ready_count": artifact_ready_count,
                 "artifact_total_count": len(artifact_rows),
                 "artifact_missing_count": artifact_missing_count,
+                "submission_ref_ready_count": submission_ref_ready_count,
+                "submission_ref_total_count": len(submission_ref_rows),
+                "submission_ref_missing_count": len(submission_ref_rows) - submission_ref_ready_count,
+                "supporting_artifact_ready_count": supporting_artifact_ready_count,
+                "supporting_artifact_total_count": len(supporting_rows),
+                "supporting_artifact_missing_count": len(supporting_rows) - supporting_artifact_ready_count,
                 "source_pass_count": source_pass_count,
                 "source_check_count": len(source_rows),
                 "source_blocked_count": source_blocked_count,
@@ -137,5 +147,15 @@ def summarize_evidence_matrix(matrix: list[dict[str, Any]]) -> dict[str, int]:
         "evidence_matrix_prepare_draft_count": sum(1 for item in matrix if item.get("stage") == "prepare-draft"),
         "evidence_matrix_fix_artifacts_count": sum(1 for item in matrix if item.get("stage") == "fix-artifacts"),
         "evidence_matrix_validate_packet_count": sum(1 for item in matrix if item.get("stage") == "validate-packet"),
+        "evidence_matrix_submission_ref_count": sum(int(item.get("submission_ref_total_count", 0)) for item in matrix),
+        "evidence_matrix_submission_ref_ready_count": sum(
+            int(item.get("submission_ref_ready_count", 0)) for item in matrix
+        ),
+        "evidence_matrix_supporting_artifact_count": sum(
+            int(item.get("supporting_artifact_total_count", 0)) for item in matrix
+        ),
+        "evidence_matrix_supporting_artifact_ready_count": sum(
+            int(item.get("supporting_artifact_ready_count", 0)) for item in matrix
+        ),
         "evidence_matrix_counts_as_completion": 0,
     }

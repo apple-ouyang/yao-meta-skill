@@ -617,11 +617,19 @@ def main() -> None:
     assert kit_payload["summary"]["written_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["artifact_checklist_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["artifact_ready_count"] >= 1, kit_payload["summary"]
+    assert kit_payload["summary"]["submission_ref_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["submission_ref_ready_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["supporting_artifact_count"] >= 1, kit_payload["summary"]
+    assert kit_payload["summary"]["supporting_artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["source_check_count"] == 3, kit_payload["summary"]
     assert kit_payload["summary"]["source_pass_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["source_blocked_count"] == 2, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_count"] == 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_collect_source_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_submission_ref_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_submission_ref_ready_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_supporting_artifact_count"] >= 1, kit_payload["summary"]
+    assert kit_payload["summary"]["evidence_matrix_supporting_artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_counts_as_completion"] == 0, kit_payload["summary"]
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
     assert kit_payload["safety"]["template_only_drafts"] is True, kit_payload["safety"]
@@ -634,6 +642,10 @@ def main() -> None:
     assert matrix_row["draft_status"] == "written", matrix_row
     assert matrix_row["artifact_ready_count"] >= 1, matrix_row
     assert matrix_row["artifact_total_count"] >= matrix_row["artifact_ready_count"], matrix_row
+    assert matrix_row["submission_ref_ready_count"] == 1, matrix_row
+    assert matrix_row["submission_ref_total_count"] == 1, matrix_row
+    assert matrix_row["supporting_artifact_ready_count"] >= 1, matrix_row
+    assert matrix_row["supporting_artifact_total_count"] >= matrix_row["supporting_artifact_ready_count"], matrix_row
     assert matrix_row["source_pass_count"] == 1, matrix_row
     assert matrix_row["source_check_count"] == 3, matrix_row
     assert matrix_row["source_blocked_count"] == 2, matrix_row
@@ -642,8 +654,12 @@ def main() -> None:
     artifact_rows = {item["path"]: item for item in kit_payload["artifact_checklist"]}
     assert "reports/output_execution_runs.json" in artifact_rows, artifact_rows
     assert artifact_rows["reports/output_execution_runs.json"]["artifact_ref_ready"] is True, artifact_rows
+    assert artifact_rows["reports/output_execution_runs.json"]["artifact_role"] == "submission-ref", artifact_rows
+    assert artifact_rows["reports/output_execution_runs.json"]["submission_ref_required"] is True, artifact_rows
     assert len(artifact_rows["reports/output_execution_runs.json"]["sha256"]) == 64, artifact_rows
     assert artifact_rows["reports/output_execution_runs.json"]["contains_raw_content"] is False, artifact_rows
+    assert artifact_rows["reports/output_execution_runs.md"]["artifact_role"] == "supporting-evidence", artifact_rows
+    assert artifact_rows["reports/output_execution_runs.md"]["submission_ref_required"] is False, artifact_rows
     source_rows = {item["field"]: item for item in kit_payload["source_checklist"]}
     assert source_rows["model_executed_count"]["status"] == "blocked", source_rows
     assert source_rows["model_executed_count"]["actual"] == 0, source_rows
@@ -667,6 +683,10 @@ def main() -> None:
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
     assert "Evidence Matrix" in kit_readme, kit_readme
+    assert "Submission refs" in kit_readme, kit_readme
+    assert "Supporting assets" in kit_readme, kit_readme
+    assert "`submission-ref`" in kit_readme, kit_readme
+    assert "`supporting-evidence`" in kit_readme, kit_readme
     assert "`collect-source`" in kit_readme, kit_readme
     assert "Matrix rows are guidance only" in kit_readme, kit_readme
     assert "Source Evidence Snapshot" in kit_readme, kit_readme
@@ -680,7 +700,11 @@ def main() -> None:
     assert "Evidence Matrix" in kit_html, kit_html
     assert "matrix-card collect-source" in kit_html, kit_html
     assert (
-        f"<dt>Artifacts</dt><dd>{matrix_row['artifact_ready_count']}/{matrix_row['artifact_total_count']} ready</dd>"
+        f"<dt>Submission refs</dt><dd>{matrix_row['submission_ref_ready_count']}/{matrix_row['submission_ref_total_count']} ready</dd>"
+        in kit_html
+    ), kit_html
+    assert (
+        f"<dt>Supporting assets</dt><dd>{matrix_row['supporting_artifact_ready_count']}/{matrix_row['supporting_artifact_total_count']} ready</dd>"
         in kit_html
     ), kit_html
     assert "<dt>Source</dt><dd>1/3 pass</dd>" in kit_html, kit_html
@@ -692,6 +716,7 @@ def main() -> None:
     assert "Execution Runbook" in kit_html, kit_html
     assert "output-exec --provider-runner openai" in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
+    assert "Rows marked submission-ref are the paths expected in artifact_refs" in kit_html, kit_html
 
     prefilled_kit_dir = TMP / "prefilled_submission_kit"
     prefilled_proc = run_kit(

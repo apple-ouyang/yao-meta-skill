@@ -69,6 +69,25 @@ def artifact_rows_by_key_and_path(rows: list[dict[str, Any]]) -> dict[tuple[str,
     return ready
 
 
+def template_artifact_ref_paths(skill_dir: Path, item: dict[str, Any]) -> set[str]:
+    template_path = skill_dir / str(item.get("template_path", ""))
+    errors: list[str] = []
+    payload = load_template_payload(template_path, errors)
+    if payload is None:
+        return set()
+    refs = payload.get("artifact_refs", [])
+    if not isinstance(refs, list):
+        return set()
+    paths: set[str] = set()
+    for ref in refs:
+        if not isinstance(ref, dict):
+            continue
+        path = str(ref.get("path", "")).strip()
+        if path:
+            paths.add(path)
+    return paths
+
+
 def load_template_payload(path: Path, errors: list[str]) -> dict[str, Any] | None:
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
@@ -201,12 +220,22 @@ def artifact_row(skill_dir: Path, evidence_key: str, pattern: str, path: Path, s
     }
 
 
+def with_artifact_role(row: dict[str, Any], submission_ref_paths: set[str]) -> dict[str, Any]:
+    is_submission_ref = str(row.get("path", "")) in submission_ref_paths
+    return {
+        **row,
+        "artifact_role": "submission-ref" if is_submission_ref else "supporting-evidence",
+        "submission_ref_required": is_submission_ref,
+    }
+
+
 def artifact_checklist_for_item(skill_dir: Path, item: dict[str, Any]) -> list[dict[str, Any]]:
     key = str(item.get("evidence_key", ""))
     must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
     artifacts = must_collect.get("evidence_artifacts", [])
     if not isinstance(artifacts, list):
         return []
+    submission_ref_paths = template_artifact_ref_paths(skill_dir, item)
     rows: list[dict[str, Any]] = []
     for artifact in artifacts:
         pattern = str(artifact or "").strip()
@@ -214,31 +243,12 @@ def artifact_checklist_for_item(skill_dir: Path, item: dict[str, Any]) -> list[d
             continue
         if Path(pattern).is_absolute() or ".." in Path(pattern).parts:
             rows.append(
-                {
-                    "evidence_key": key,
-                    "source_pattern": pattern,
-                    "path": pattern,
-                    "status": "unsafe-path",
-                    "exists": False,
-                    "is_file": False,
-                    "sha256": "",
-                    "artifact_ref_ready": False,
-                    "copy_path": "",
-                    "copy_sha256": "",
-                    "contains_raw_content": False,
-                    "concrete_reference_required": True,
-                }
-            )
-            continue
-        if has_glob_pattern(pattern):
-            matches = sorted(path for path in skill_dir.glob(pattern) if path.is_file())
-            if not matches:
-                rows.append(
+                with_artifact_role(
                     {
                         "evidence_key": key,
                         "source_pattern": pattern,
                         "path": pattern,
-                        "status": "glob-no-match",
+                        "status": "unsafe-path",
                         "exists": False,
                         "is_file": False,
                         "sha256": "",
@@ -247,13 +257,38 @@ def artifact_checklist_for_item(skill_dir: Path, item: dict[str, Any]) -> list[d
                         "copy_sha256": "",
                         "contains_raw_content": False,
                         "concrete_reference_required": True,
-                    }
+                    },
+                    submission_ref_paths,
+                )
+            )
+            continue
+        if has_glob_pattern(pattern):
+            matches = sorted(path for path in skill_dir.glob(pattern) if path.is_file())
+            if not matches:
+                rows.append(
+                    with_artifact_role(
+                        {
+                            "evidence_key": key,
+                            "source_pattern": pattern,
+                            "path": pattern,
+                            "status": "glob-no-match",
+                            "exists": False,
+                            "is_file": False,
+                            "sha256": "",
+                            "artifact_ref_ready": False,
+                            "copy_path": "",
+                            "copy_sha256": "",
+                            "contains_raw_content": False,
+                            "concrete_reference_required": True,
+                        },
+                        submission_ref_paths,
+                    )
                 )
                 continue
             for match in matches:
-                rows.append(artifact_row(skill_dir, key, pattern, match, "ready"))
+                rows.append(with_artifact_role(artifact_row(skill_dir, key, pattern, match, "ready"), submission_ref_paths))
             continue
-        rows.append(artifact_row(skill_dir, key, pattern, skill_dir / pattern, ""))
+        rows.append(with_artifact_role(artifact_row(skill_dir, key, pattern, skill_dir / pattern, ""), submission_ref_paths))
     return rows
 
 
@@ -305,6 +340,10 @@ def build_submission_kit(
     artifact_ready_count = sum(1 for item in artifact_checklist if item.get("artifact_ref_ready"))
     artifact_missing_count = sum(1 for item in artifact_checklist if not item.get("artifact_ref_ready"))
     artifact_glob_count = sum(1 for item in artifact_checklist if item.get("concrete_reference_required"))
+    submission_ref_rows = [item for item in artifact_checklist if item.get("submission_ref_required")]
+    supporting_rows = [item for item in artifact_checklist if not item.get("submission_ref_required")]
+    submission_ref_ready_count = sum(1 for item in submission_ref_rows if item.get("artifact_ref_ready"))
+    supporting_artifact_ready_count = sum(1 for item in supporting_rows if item.get("artifact_ref_ready"))
     source_summary = summarize_source_checklist(source_checklist)
     matrix_summary = summarize_evidence_matrix(evidence_matrix)
     ok = not unknown_keys and skipped_count == 0
@@ -325,6 +364,12 @@ def build_submission_kit(
             "artifact_ready_count": artifact_ready_count,
             "artifact_missing_count": artifact_missing_count,
             "artifact_glob_expansion_count": artifact_glob_count,
+            "submission_ref_count": len(submission_ref_rows),
+            "submission_ref_ready_count": submission_ref_ready_count,
+            "submission_ref_missing_count": len(submission_ref_rows) - submission_ref_ready_count,
+            "supporting_artifact_count": len(supporting_rows),
+            "supporting_artifact_ready_count": supporting_artifact_ready_count,
+            "supporting_artifact_missing_count": len(supporting_rows) - supporting_artifact_ready_count,
             "artifact_prefill_enabled": prefill_artifacts,
             "artifact_ref_prefill_count": prefilled_artifact_ref_count,
             "artifact_ref_unfilled_count": unfilled_artifact_ref_count,

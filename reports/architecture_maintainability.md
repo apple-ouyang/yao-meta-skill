@@ -31,8 +31,8 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `tests/verify_world_class_evidence_intake.py` | `867` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `tests/verify_world_class_evidence_intake.py` | `842` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `tests/verify_review_studio.py` | `816` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -45,8 +45,8 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `867` | `test` | `pass` |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `842` | `test` | `pass` |
 | `tests/verify_review_studio.py` | `816` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |

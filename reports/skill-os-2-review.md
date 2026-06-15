@@ -22,6 +22,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - World-Class Evidence Ledger v0 that records current acceptance state, provenance requirements, privacy contracts, and anti-overclaim guards for those remaining gaps.
 - World-Class Intake Contract Hardening v0 so real evidence submissions must use the ledger's canonical `<evidence-key>.json` filename and are recursively rejected when they include raw prompt, output, transcript, message, credential, secret, token, or API-key fields.
 - World-Class Submission Matrix v0 so the submission kit exposes a single operator-facing matrix for draft status, artifact readiness, source-check blockers, and the next action without counting matrix rows as completion evidence.
+- World-Class Submission Artifact Roles v0 so submission kits distinguish `submission-ref` rows that belong in `artifact_refs` from supporting audit assets, reducing operator ambiguity without accepting evidence.
 - World-Class Submission Kit Rendering v0 so Markdown and HTML kit presentation lives in a dedicated internal renderer, keeping the CLI focused on evidence assembly and file emission.
 - Benchmark Reproducibility v0 that turns public benchmark methodology, required artifacts, failure disclosure, and reproduction commands into machine-checkable release evidence.
 - Review Studio 2.0 v0 for one-page blocker, warning, evidence-path, review-action, and release-gate review.
