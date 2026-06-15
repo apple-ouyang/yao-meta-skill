@@ -33,7 +33,7 @@ Mode rules: [Method](references/skill-engineering-method.md), [Operating Modes](
 6. Add only folders and gates that earn their keep.
 7. Surface the top three next iteration directions.
 
-Core playbooks: [Method](references/skill-engineering-method.md), [Intent](references/intent-dialogue.md), [Skill IR](references/skill-ir-method.md), [Output Eval](references/output-eval-method.md), [Registry](references/distribution-registry-method.md), [Review Studio](references/review-studio-method.md).
+Core playbooks: [Method](references/skill-engineering-method.md), [Intent](references/intent-dialogue.md), [Skill IR](references/skill-ir-method.md), [Output Eval](references/output-eval-method.md), [Registry](references/distribution-registry-method.md), [Review Studio](references/review-studio-method.md), [SkillOps Decision](references/skillops-decision-policy.md).
 
 ## Skill OS 2.0 Gates
 
@@ -57,4 +57,4 @@ Unless the user asks otherwise, produce a working skill directory with `SKILL.md
 
 ## Reference Map
 
-Primary references: [Method](references/skill-engineering-method.md), [Artifact Design](references/artifact-design-doctrine.md), [Systems Thinking](references/systems-thinking-doctrine.md), [Governance](references/governance.md).
+Primary references: [Method](references/skill-engineering-method.md), [Artifact Design](references/artifact-design-doctrine.md), [Systems Thinking](references/systems-thinking-doctrine.md), [Governance](references/governance.md), [SkillOps Decision](references/skillops-decision-policy.md).

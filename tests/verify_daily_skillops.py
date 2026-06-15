@@ -150,6 +150,16 @@ def main() -> None:
     assert payload["summary"]["public_world_class_ready"] is False, payload
     assert payload["summary"]["release_lock_ready"] is True, payload
     assert payload["summary"]["evidence_consistency_ok"] is True, payload
+    assert payload["opportunity_summary"]["opportunity_count"] >= 4, payload
+    assert payload["opportunity_summary"]["top_score"] >= 70, payload
+    assert payload["decision_policy"]["writes_source_files"] is False, payload
+    assert payload["decision_policy"]["auto_patch_enabled"] is False, payload
+    action_types = {item["action_type"] for item in payload["opportunities"]}
+    assert {"patch_existing_skill", "agents_update"} <= action_types, payload["opportunities"]
+    assert action_types <= set(payload["decision_policy"]["action_types"]), payload["opportunities"]
+    assert all(item["write_allowed_without_approval"] is False for item in payload["opportunities"]), payload[
+        "opportunities"
+    ]
     action_keys = {item["key"] for item in payload["actions"]}
     assert {"review-adaptation-proposals", "resolve-pending-approvals", "close-world-class-evidence"} <= action_keys, payload
     assert output_json.exists(), output_json
@@ -168,6 +178,8 @@ def main() -> None:
     assert "Daily SkillOps Report" in markdown, markdown
     assert "does not scan private logs" in markdown, markdown
     assert "daily_report_counts_as_world_class_evidence: `false`" in markdown, markdown
+    assert "## Opportunities" in markdown, markdown
+    assert "ready for approval review" in markdown, markdown
 
     cli_dir = TMP / "cli-daily-skillops-demo"
     cli_dir.mkdir(parents=True)
@@ -227,6 +239,7 @@ def main() -> None:
     assert no_refresh_payload["summary"]["source_supplied"] is True, no_refresh_payload
     assert no_refresh_payload["summary"]["pattern_count"] >= 4, no_refresh_payload
     assert no_refresh_payload["summary"]["proposal_count"] >= 4, no_refresh_payload
+    assert no_refresh_payload["opportunity_summary"]["opportunity_count"] >= 4, no_refresh_payload
     assert not (no_refresh_dir / "reports" / "adaptation_proposals.json").exists(), no_refresh_dir
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))

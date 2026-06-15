@@ -8,6 +8,7 @@ from typing import Any
 
 from propose_adaptation import build_report as build_proposal_report
 from propose_adaptation import render_markdown as render_proposals_markdown
+from skillops_opportunity import build_opportunities, decision_policy_contract, summarize_opportunities
 from summarize_user_signals import build_report as build_pattern_report
 from summarize_user_signals import render_markdown as render_patterns_markdown
 
@@ -247,6 +248,9 @@ def build_report(
     proposal_contract = proposal_report.get("proposal_contract", {}) if isinstance(proposal_report.get("proposal_contract"), dict) else {}
 
     proposal_rows = compact_proposals(proposal_report)
+    pattern_rows = pattern_report.get("patterns", []) if isinstance(pattern_report.get("patterns"), list) else []
+    opportunities = build_opportunities(pattern_rows, proposal_rows)
+    opportunity_summary = summarize_opportunities(opportunities)
     failure_count = len(failures)
     summary = {
         "decision": "blocked" if failure_count else "proposal-review" if proposal_rows else "monitor",
@@ -298,6 +302,9 @@ def build_report(
         "source": source_summary(pattern_report) if pattern_report else {},
         "patterns": pattern_report.get("patterns", []) if isinstance(pattern_report.get("patterns"), list) else [],
         "proposals": proposal_rows,
+        "opportunity_summary": opportunity_summary,
+        "opportunities": opportunities,
+        "decision_policy": decision_policy_contract(),
         "approval": {
             "approval_count": summary["approval_count"],
             "pending_review_count": summary["pending_review_count"],
@@ -374,6 +381,28 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.extend(["", "## Actions", ""])
     for action in report["actions"]:
         lines.append(f"- `{action['priority']}` {action['action']}")
+    lines.extend(["", "## Opportunities", ""])
+    opportunity_summary = report.get("opportunity_summary", {})
+    lines.extend(
+        [
+            f"- count: `{opportunity_summary.get('opportunity_count', 0)}`",
+            f"- top score: `{opportunity_summary.get('top_score', 0)}`",
+            f"- ready for approval review: `{opportunity_summary.get('ready_for_approval_review_count', 0)}`",
+        ]
+    )
+    for opportunity in report.get("opportunities", []):
+        lines.extend(
+            [
+                f"### {opportunity.get('title', '')}",
+                "",
+                f"- ID: `{opportunity.get('opportunity_id', '')}`",
+                f"- Action: `{opportunity.get('action_type', '')}`",
+                f"- Decision: `{opportunity.get('decision', '')}`",
+                f"- Score: `{opportunity.get('score', 0)}`",
+                f"- Risk: `{opportunity.get('risk_level', '')}`",
+                f"- Policy: {opportunity.get('policy_reason', '')}",
+            ]
+        )
     lines.extend(["", "## Patterns", ""])
     patterns = report.get("patterns", [])
     if not patterns:

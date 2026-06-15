@@ -67,6 +67,7 @@ DEFAULT_TARGETS = [
     "evidence-consistency-check",
     "feedback-check",
     "adaptation-safety-check",
+    "skillops-opportunity-check",
     "daily-skillops-check",
     "adoption-drift-check",
     "telemetry-import-check",
