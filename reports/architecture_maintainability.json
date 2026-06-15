@@ -31,7 +31,7 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 850,
+      "lines": 859,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -117,7 +117,7 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 850,
+      "lines": 859,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

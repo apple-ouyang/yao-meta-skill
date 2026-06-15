@@ -133,6 +133,7 @@
       "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
       "commands": {
         "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions",
+        "prepare_prefilled_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
@@ -140,10 +141,12 @@
       },
       "submission_kit": {
         "prepare_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions",
+        "prefill_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts",
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/provider-holdout.json",
         "template_path": "evidence/world_class/templates/provider-holdout.intake.json",
-        "drafts_count_as_evidence": false
+        "drafts_count_as_evidence": false,
+        "artifact_prefill_counts_as_evidence": false
       },
       "runbook": [
         "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
@@ -246,6 +249,7 @@
       "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
       "commands": {
         "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions",
+        "prepare_prefilled_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions --prefill-artifacts",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
@@ -253,10 +257,12 @@
       },
       "submission_kit": {
         "prepare_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions",
+        "prefill_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions --prefill-artifacts",
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/human-adjudication.json",
         "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
-        "drafts_count_as_evidence": false
+        "drafts_count_as_evidence": false,
+        "artifact_prefill_counts_as_evidence": false
       },
       "runbook": [
         "python3 scripts/yao.py output-review-kit --write-template",
@@ -353,6 +359,7 @@
       "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
       "commands": {
         "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions",
+        "prepare_prefilled_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
@@ -360,10 +367,12 @@
       },
       "submission_kit": {
         "prepare_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions",
+        "prefill_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts",
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/native-permission-enforcement.json",
         "template_path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
-        "drafts_count_as_evidence": false
+        "drafts_count_as_evidence": false,
+        "artifact_prefill_counts_as_evidence": false
       },
       "runbook": [
         "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
@@ -460,6 +469,7 @@
       "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
       "commands": {
         "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions",
+        "prepare_prefilled_submission": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --prefill-artifacts",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
         "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
@@ -467,10 +477,12 @@
       },
       "submission_kit": {
         "prepare_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions",
+        "prefill_command": "python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --prefill-artifacts",
         "output_dir": "evidence/world_class/submissions",
         "draft_path": "evidence/world_class/submissions/native-client-telemetry.json",
         "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
-        "drafts_count_as_evidence": false
+        "drafts_count_as_evidence": false,
+        "artifact_prefill_counts_as_evidence": false
       },
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -776,14 +788,17 @@
     "directory": "evidence/world_class/submissions",
     "commands": {
       "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions",
+      "prepare_prefilled_submission": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts",
       "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
       "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
       "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
       "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
     },
     "submission_kit_command": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions",
+    "submission_kit_prefill_command": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts",
     "preflight_counts_submission_as_completion": false,
-    "drafts_count_as_evidence": false
+    "drafts_count_as_evidence": false,
+    "artifact_prefill_counts_as_evidence": false
   },
   "source_reports": {
     "ledger": "reports/world_class_evidence_ledger.json",

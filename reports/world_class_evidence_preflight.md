@@ -18,13 +18,15 @@ This preflight report checks whether an operator can start collecting the remain
 
 - submissions directory: `evidence/world_class/submissions`
 - prepare drafts: `python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions`
+- prepare drafts with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts`
 - validate intake: `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`
 - review queue: `python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions`
 - refresh ledger: `python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`
 - guard claims: `python3 scripts/yao.py world-class-claim-guard .`
 - drafts count as evidence: `false`
+- artifact prefill counts as evidence: `false`
 
-Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests.
+Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests. The prefill command only inserts local artifact SHA-256 digests; it does not make a draft count as evidence.
 
 ## Evidence Items
 
@@ -41,6 +43,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/provider-holdout.json`
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions`
+- prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts`
 
 ### Prechecks
 
@@ -65,6 +68,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/human-adjudication.json`
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions`
+- prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions --prefill-artifacts`
 
 ### Prechecks
 
@@ -89,6 +93,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/native-permission-enforcement.json`
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions`
+- prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts`
 
 ### Prechecks
 
@@ -112,6 +117,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 - ledger: `pending`
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions`
+- prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --prefill-artifacts`
 
 ### Prechecks
 

@@ -43,6 +43,7 @@
     code { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }
     .next-action, .runbook { background:var(--soft); border-radius:8px; padding:14px; margin:14px 0; }
     .next-action p { margin-top:0; }
+    .next-action code { display:block; margin-top:8px; }
     .check-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
     .check-row { padding:14px; min-width:0; }
     .check-section { margin-top:16px; }
@@ -63,14 +64,15 @@
     <section class="section two-col" id="handoff">
       <article class="panel">
         <h2>Submission Kit</h2>
-        <p class="muted">Generate drafts only after real provider, human-review, native-permission, or native-client work exists. Drafts remain non-evidence until valid aggregate artifact refs and SHA-256 digests are supplied.</p>
+        <p class="muted">Generate drafts only after real provider, human-review, native-permission, or native-client work exists. Drafts remain non-evidence until valid aggregate artifact refs and SHA-256 digests are supplied. Artifact prefill is convenience data only.</p>
         <ul>
           <li>submissions directory: <code>evidence/world_class/submissions</code></li>
           <li>drafts count as evidence: <code>false</code></li>
+          <li>artifact prefill counts as evidence: <code>false</code></li>
           <li>preflight accepts evidence: <code>false</code></li>
         </ul>
       </article>
-      <aside class="panel"><h2>Commands</h2><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>submission review</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></aside>
+      <aside class="panel"><h2>Commands</h2><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions</code></li><li><span>prepare prefilled submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>submission review</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></aside>
     </section>
     <section class="section" id="queue"><h2>Evidence Queue</h2><div class="evidence-grid">
       <article class="evidence-card blocked">
@@ -89,6 +91,7 @@
           <h4>Next Action</h4>
           <p>Set OPENAI_API_KEY in the operator shell; never commit or print the value.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions</code>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts</code>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -207,6 +210,7 @@
           <h4>Next Action</h4>
           <p>Assign a real reviewer identity before claiming human adjudication.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions</code>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key human-adjudication --output-dir evidence/world_class/submissions --prefill-artifacts</code>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -326,6 +330,7 @@
           <h4>Next Action</h4>
           <p>Attach a real target-client or external installer runtime guard; metadata fallback is not enough.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions</code>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts</code>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -432,6 +437,7 @@
           <h4>Next Action</h4>
           <p>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</p>
           <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions</code>
+          <code>python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --prefill-artifacts</code>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
