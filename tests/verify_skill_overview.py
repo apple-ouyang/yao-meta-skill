@@ -162,6 +162,9 @@ def main() -> None:
     assert overview_json["benchmark_reproducibility"]["summary"] == {}, overview_json["benchmark_reproducibility"]
     assert "world_class_evidence_ledger" in overview_json, overview_json.keys()
     assert overview_json["world_class_evidence_ledger"]["summary"] == {}, overview_json["world_class_evidence_ledger"]
+    assert "world_class_readiness" in overview_json, overview_json.keys()
+    assert overview_json["world_class_readiness"]["entry_count"] == 0, overview_json["world_class_readiness"]
+    assert overview_json["world_class_readiness"]["decision"] == "not-generated", overview_json["world_class_readiness"]
     assert "runtime_conformance" in overview_json, overview_json.keys()
     assert "runtime_permissions" in overview_json, overview_json.keys()
     assert overview_json["runtime_permissions"]["summary"] == {}, overview_json["runtime_permissions"]
@@ -182,6 +185,53 @@ def main() -> None:
 
     initial_report_html = (created / "reports" / "skill-overview.html").read_text(encoding="utf-8")
     assert directions_json["directions"][0]["title"] in initial_report_html, initial_report_html[:5000]
+    assert "世界证据" in initial_report_html, initial_report_html
+    assert "No world-class ledger has been generated" in initial_report_html, initial_report_html
+
+    sample_ledger = {
+        "schema_version": "1.0",
+        "ok": True,
+        "summary": {
+            "ledger_entry_count": 2,
+            "accepted_count": 0,
+            "pending_count": 2,
+            "external_pending_count": 1,
+            "human_pending_count": 1,
+            "source_check_count": 4,
+            "source_pass_count": 1,
+            "ready_to_claim_world_class": False,
+            "decision": "evidence-pending",
+        },
+        "entries": [
+            {
+                "key": "provider-holdout",
+                "label": "Provider Holdout",
+                "category": "external",
+                "status": "pending",
+                "source_checklist": [
+                    {"label": "Provider model run", "status": "blocked"},
+                    {"label": "Timing observed", "status": "pass"},
+                ],
+            },
+            {
+                "key": "human-adjudication",
+                "label": "Human Adjudication",
+                "category": "human",
+                "status": "pending",
+                "source_checklist": [
+                    {"label": "No pending decisions", "status": "blocked"},
+                ],
+            },
+        ],
+    }
+    (created / "reports" / "world_class_evidence_ledger.json").write_text(
+        json.dumps(sample_ledger, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    (created / "reports" / "world_class_evidence_ledger.md").write_text(
+        "# World Class Evidence Ledger\n",
+        encoding="utf-8",
+    )
 
     rerender_result = run("skill-report", str(created))
     assert rerender_result["ok"], rerender_result
@@ -222,6 +272,17 @@ def main() -> None:
     assert "Skill name" in report_html, report_html[:5000]
     assert "Turn one-off experience into a reusable, evaluable, and portable skill package." in report_html, report_html[:9000]
     assert "After creation, open reports/skill-overview.html before expanding the package further." in report_html, report_html[:9000]
+    assert "世界证据" in report_html, report_html
+    assert "证据待补" in report_html, report_html
+    assert "世界级证据尚未完成：2 项待补，0 项已接受。" in report_html, report_html
+    assert "World-class evidence is not complete: 2 pending, 0 accepted." in report_html, report_html
+    assert "提供商留出" in report_html, report_html
+    assert "人工盲评" in report_html, report_html
+    assert "Provider Holdout" in report_html, report_html
+    assert "阻塞检查" in report_html, report_html
+    assert "Blocked Checks" in report_html, report_html
+    assert "Provider model run" in report_html, report_html
+    assert "No pending decisions" in report_html, report_html
     assert '<span data-lang="en">把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。</span>' not in report_html, report_html[:9000]
     assert '<span data-lang="en">创建完成后建议先打开 reports/skill-overview.html，再继续扩展包体。</span>' not in report_html, report_html[:9000]
     assert "输入材料" in report_html, report_html[:3000]
@@ -230,6 +291,11 @@ def main() -> None:
     assert "下一步" in report_html, report_html[:4200]
 
     overview_json = json.loads((created / "reports" / "skill-overview.json").read_text(encoding="utf-8"))
+    assert "reports/world_class_evidence_ledger.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
+    assert overview_json["world_class_readiness"]["entry_count"] == 2, overview_json["world_class_readiness"]
+    assert overview_json["world_class_readiness"]["pending_count"] == 2, overview_json["world_class_readiness"]
+    assert overview_json["world_class_readiness"]["source_pass_count"] == 1, overview_json["world_class_readiness"]
+    assert overview_json["world_class_readiness"]["source_check_count"] == 4, overview_json["world_class_readiness"]
     assert "执行流程" in report_html, report_html[:5000]
     assert "调用方式" in report_html, report_html[:5000]
     assert "证据不足" in report_html or "证据充分" in report_html, report_html[:8000]

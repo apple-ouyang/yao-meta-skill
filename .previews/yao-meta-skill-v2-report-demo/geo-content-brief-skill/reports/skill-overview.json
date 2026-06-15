@@ -397,6 +397,20 @@
       "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
     ]
   },
+  "world_class_readiness": {
+    "ready": false,
+    "decision": "not-generated",
+    "entry_count": 0,
+    "pending_count": 0,
+    "accepted_count": 0,
+    "external_pending_count": 0,
+    "human_pending_count": 0,
+    "source_check_count": 0,
+    "source_pass_count": 0,
+    "conclusion_zh": "未生成 world-class ledger；当前报告不会宣称世界级完成。",
+    "conclusion_en": "No world-class ledger was generated; this report does not claim world-class completion.",
+    "entries": []
+  },
   "package_assets": {
     "entries": [
       {

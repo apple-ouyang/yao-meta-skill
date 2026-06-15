@@ -574,6 +574,122 @@ def skill_overview_css() -> str:
       font-size: 12px;
     }
     td:first-child, th:first-child { width: 96px; }
+    .world-readiness {
+      margin-top: 16px;
+      display: grid;
+      gap: 16px;
+    }
+    .section-head > .world-readiness {
+      grid-column: 2;
+    }
+    .world-readiness-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+    }
+    .world-readiness-head p {
+      margin-top: 8px;
+      max-width: 72ch;
+    }
+    .world-status {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .evidence-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .evidence-kpi {
+      padding: 14px;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: var(--wash);
+      min-width: 0;
+    }
+    .evidence-kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .evidence-kpi strong {
+      display: block;
+      margin-top: 4px;
+      color: var(--brand);
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .evidence-kpi small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.45;
+      overflow-wrap: break-word;
+    }
+    .evidence-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .evidence-item {
+      padding: 14px;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: #ffffff;
+      min-width: 0;
+    }
+    .evidence-item span {
+      color: var(--brand);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+    .evidence-item h4 {
+      margin: 4px 0 8px;
+      color: var(--ink);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .evidence-item h5 {
+      margin: 12px 0 6px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .evidence-item p {
+      margin: 0;
+      max-width: none;
+      color: var(--muted);
+      overflow-wrap: break-word;
+    }
+    .blocked-checks {
+      margin: 0;
+      padding-left: 1.05em;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .blocked-checks li {
+      overflow-wrap: break-word;
+    }
+    .blocked-checks li::marker {
+      color: var(--brand);
+    }
+    .blocked-checks-empty {
+      font-size: 13px;
+    }
     .roadmap {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -604,9 +720,11 @@ def skill_overview_css() -> str:
       .report-mark { display: none; }
       .report-nav a { min-width: 72px; }
       .hero-grid, .section-head { grid-template-columns: 1fr; }
+      .section-head > .world-readiness { grid-column: auto; }
       .hero-grid { gap: 24px; }
       .score-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .metrics-primary, .two-col, .metric-grid, .chart-grid, .roadmap { grid-template-columns: 1fr; }
+      .evidence-list { grid-template-columns: 1fr; }
       .metric-card { grid-template-columns: 86px minmax(0, 1fr); }
       h1 { font-size: 2.75rem; }
     }
@@ -631,6 +749,7 @@ def skill_overview_css() -> str:
       .score-strip { grid-template-columns: 1fr; }
       section { margin-top: 34px; padding-top: 34px; }
       .panel, .metric-card, .roadmap-item, .chart-figure, .hero-card { padding: 18px; }
+      .world-readiness-head, .evidence-kpis { grid-template-columns: 1fr; }
       .metric-card { grid-template-columns: 1fr; gap: 10px; }
       .metric-card strong { margin-bottom: 2px; }
       .metric-summary-list li { grid-template-columns: auto minmax(0, 1fr) auto; }

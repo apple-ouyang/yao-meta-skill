@@ -88,6 +88,118 @@ def render_audit_rows(items: list[dict]) -> str:
     return "".join(rows)
 
 
+WORLD_CLASS_CHECK_COPY = {
+    "Provider model run": ("提供商实跑", "Provider model run"),
+    "Token usage observed": ("Token 用量", "Token usage observed"),
+    "No pending decisions": ("无待判定", "No pending decisions"),
+    "Judgments complete": ("盲评完成", "Judgments complete"),
+    "Native enforcement": ("原生执行", "Native enforcement"),
+    "External events": ("外部事件", "External events"),
+    "Adoption sample": ("采用样本", "Adoption sample"),
+}
+
+
+def render_world_class_check(check: object) -> str:
+    if isinstance(check, dict):
+        label_en = str(check.get("label_en") or check.get("label") or "")
+        label_zh = str(check.get("label_zh") or "")
+    else:
+        label_en = str(check)
+        label_zh = ""
+    label_zh, label_en = WORLD_CLASS_CHECK_COPY.get(label_en, (label_zh or label_en, label_en))
+    return f"<li>{bi_span(label_zh, label_en)}</li>"
+
+
+def render_world_class_readiness(readiness: dict) -> str:
+    if not readiness:
+        return ""
+    kpis = [
+        (
+            "待补证据",
+            "Pending",
+            readiness.get("pending_count", 0),
+            "仍需外部或人工证据接受。",
+            "External or human evidence still needs acceptance.",
+        ),
+        (
+            "已接受",
+            "Accepted",
+            readiness.get("accepted_count", 0),
+            "已通过 source check 与提交契约。",
+            "Passed source checks and submission contract.",
+        ),
+        (
+            "源检查",
+            "Source Checks",
+            f"{readiness.get('source_pass_count', 0)} / {readiness.get('source_check_count', 0)}",
+            "通过数 / 总检查数。",
+            "Passed checks / total checks.",
+        ),
+    ]
+    kpi_html = "".join(
+        "<article class='evidence-kpi'>"
+        f"<span>{bi_span(zh, en)}</span>"
+        f"<strong>{html.escape(str(value))}</strong>"
+        f"<small>{bi_span(note_zh, note_en)}</small>"
+        "</article>"
+        for zh, en, value, note_zh, note_en in kpis
+    )
+    entries = readiness.get("entries", [])
+    if entries:
+        blocks = []
+        for item in entries:
+            blocked_checks = [
+                str(check).strip()
+                for check in item.get("blocked_checks", [])
+                if str(check).strip()
+            ]
+            if blocked_checks:
+                checks_html = (
+                    "<ul class='blocked-checks'>"
+                    + "".join(render_world_class_check(check) for check in blocked_checks)
+                    + "</ul>"
+                )
+            else:
+                checks_html = (
+                    "<p class='blocked-checks-empty'>"
+                    f"{bi_span('当前没有阻塞检查。', 'No blocked checks right now.')}"
+                    "</p>"
+                )
+            blocks.append(
+                "<article class='evidence-item'>"
+                "<div>"
+                f"<span>{bi_span(str(item.get('category_zh', '外部证据')), str(item.get('category_en', 'External evidence')))}</span>"
+                f"<h4>{bi_span(str(item.get('label_zh', item.get('key', '证据项'))), str(item.get('label_en', item.get('key', 'Evidence item'))))}</h4>"
+                "</div>"
+                f"<p>{bi_span(str(item.get('summary_zh', '仍待补充证据。')), str(item.get('summary_en', 'Evidence is still pending.')))}</p>"
+                f"<h5>{bi_span('阻塞检查', 'Blocked Checks')}</h5>"
+                f"{checks_html}"
+                "</article>"
+            )
+        entry_html = "".join(blocks)
+    else:
+        entry_html = (
+            "<article class='evidence-item empty'>"
+            f"<p>{bi_span('尚未生成 world-class ledger；这里只保留反过度承诺提示。', 'No world-class ledger has been generated; this panel keeps the anti-overclaim guard visible.')}</p>"
+            "</article>"
+        )
+    status = "可宣称" if readiness.get("ready") else "证据待补"
+    status_en = "Claim-ready" if readiness.get("ready") else "Evidence pending"
+    return (
+        "<article class='panel world-readiness'>"
+        "<div class='world-readiness-head'>"
+        "<div>"
+        f"<h3>{bi_span('世界证据', 'World Evidence')}</h3>"
+        f"<p>{bi_span(str(readiness.get('conclusion_zh', '世界级证据状态未知。')), str(readiness.get('conclusion_en', 'World-class evidence status is unknown.')))}</p>"
+        "</div>"
+        f"<span class='world-status'>{bi_span(status, status_en)}</span>"
+        "</div>"
+        f"<div class='evidence-kpis'>{kpi_html}</div>"
+        f"<div class='evidence-list'>{entry_html}</div>"
+        "</article>"
+    )
+
+
 def render_score_strip(scorecard: dict) -> str:
     keys = ["completeness_score", "trigger_score", "evidence_score", "context_cost"]
     cards = []
@@ -135,6 +247,7 @@ def render_html(summary: dict) -> str:
     contract = summary.get("contract_boundary", {})
     quality = summary.get("quality_review", {})
     risk = summary.get("risk_governance", {})
+    world_readiness = summary.get("world_class_readiness", {})
     assets = summary.get("package_assets", {})
     roadmap = summary.get("iteration_roadmap", {})
     output_execution = summary.get("output_execution", {})
@@ -385,6 +498,7 @@ def render_html(summary: dict) -> str:
             </table>
           </div>
         </div>
+        {render_world_class_readiness(world_readiness)}
       </div>
     </section>
 

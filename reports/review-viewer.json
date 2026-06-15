@@ -402,6 +402,80 @@
         "Do not silently broaden the skill into adjacent jobs just because the examples are nearby."
       ]
     },
+    "world_class_readiness": {
+      "ready": false,
+      "decision": "evidence-pending",
+      "entry_count": 4,
+      "pending_count": 4,
+      "accepted_count": 0,
+      "external_pending_count": 3,
+      "human_pending_count": 1,
+      "source_check_count": 13,
+      "source_pass_count": 6,
+      "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
+      "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
+      "entries": [
+        {
+          "key": "provider-holdout",
+          "label_zh": "提供商留出",
+          "label_en": "Provider Holdout",
+          "category": "external",
+          "category_zh": "外部证据",
+          "category_en": "External evidence",
+          "status": "pending",
+          "summary_zh": "缺少真实 provider 模型运行和 token metadata。",
+          "summary_en": "Missing a real provider model run and token metadata.",
+          "blocked_checks": [
+            "Provider model run",
+            "Token usage observed"
+          ]
+        },
+        {
+          "key": "human-adjudication",
+          "label_zh": "人工盲评",
+          "label_en": "Human Adjudication",
+          "category": "human",
+          "category_zh": "人工证据",
+          "category_en": "Human evidence",
+          "status": "pending",
+          "summary_zh": "盲评 pair 仍待真实 reviewer 决策。",
+          "summary_en": "Blind-review pairs still need real reviewer decisions.",
+          "blocked_checks": [
+            "No pending decisions",
+            "Judgments complete"
+          ]
+        },
+        {
+          "key": "native-permission-enforcement",
+          "label_zh": "原生权限",
+          "label_en": "Native Permission",
+          "category": "external",
+          "category_zh": "外部证据",
+          "category_en": "External evidence",
+          "status": "pending",
+          "summary_zh": "原生 runtime enforcement 仍待目标客户端或外部安装器证明。",
+          "summary_en": "Native runtime enforcement still needs target-client or external-installer proof.",
+          "blocked_checks": [
+            "Native enforcement"
+          ]
+        },
+        {
+          "key": "native-client-telemetry",
+          "label_zh": "原生遥测",
+          "label_en": "Native Telemetry",
+          "category": "external",
+          "category_zh": "外部证据",
+          "category_en": "External evidence",
+          "status": "pending",
+          "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
+          "summary_en": "Real external-client metadata-only events have not been imported yet.",
+          "blocked_checks": [
+            "External events",
+            "Adoption sample"
+          ]
+        }
+      ]
+    },
     "package_assets": {
       "entries": [
         {
@@ -438,7 +512,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 99
+          "file_count": 101
         },
         {
           "path": "evals",
@@ -453,7 +527,7 @@
           "file_count": 207
         }
       ],
-      "file_count": 370,
+      "file_count": 372,
       "folder_count": 4,
       "distribution": [
         {
@@ -478,7 +552,7 @@
         },
         {
           "label": "scripts",
-          "value": 99
+          "value": 101
         },
         {
           "label": "evals",
@@ -607,7 +681,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 99
+        "file_count": 101
       },
       {
         "path": "evals",
