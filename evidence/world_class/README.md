@@ -23,7 +23,9 @@ The intake validator checks:
 - the category and source type match the expected human or external evidence path
 - artifact references are declared
 - real submissions reference concrete files inside the skill directory and include a matching SHA-256 digest for each artifact
+- real submissions use the canonical `<evidence-key>.json` filename expected by the ledger
 - credentials, secrets, raw user content, and raw provider prompts are explicitly excluded
+- raw prompt, output, transcript, message, credential, secret, token, and API-key fields are rejected even when nested
 - planned work, local command-only output, and metadata fallback are not claimed as completion evidence
 
 Run `world-class-preflight` before assigning external or human work. It checks local files, redacted environment readiness, human/external prerequisites, and source-evidence blockers without accepting evidence or printing secrets.

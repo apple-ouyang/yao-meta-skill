@@ -78,6 +78,36 @@ PLACEHOLDER_FRAGMENTS = (
     "client or installer component",
     "/local/path/not/committed",
 )
+FORBIDDEN_REAL_SUBMISSION_FIELDS = {
+    "api_key",
+    "assistant_message",
+    "assistant_messages",
+    "baseline_output",
+    "credential",
+    "credentials",
+    "input",
+    "inputs",
+    "message",
+    "messages",
+    "model_output",
+    "output",
+    "outputs",
+    "prompt",
+    "prompts",
+    "raw_content",
+    "raw_output",
+    "raw_prompt",
+    "raw_provider_prompt",
+    "raw_user_content",
+    "secret",
+    "secrets",
+    "token",
+    "transcript",
+    "transcripts",
+    "user_message",
+    "user_messages",
+    "with_skill_output",
+}
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -126,6 +156,56 @@ def require_real_text(errors: list[str], value: Any, field: str) -> None:
     text = str(value or "").strip()
     add_error(errors, bool(text), f"{field} is required")
     add_error(errors, not has_placeholder_text(text), f"{field} must not use template placeholder text")
+
+
+def forbidden_submission_field_paths(value: Any, prefix: str = "$") -> list[str]:
+    found: list[str] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            key_text = str(key)
+            child_path = f"{prefix}.{key_text}"
+            if key_text.strip().lower() in FORBIDDEN_REAL_SUBMISSION_FIELDS:
+                found.append(child_path)
+            found.extend(forbidden_submission_field_paths(child, child_path))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            found.extend(forbidden_submission_field_paths(child, f"{prefix}[{index}]"))
+    return found
+
+
+def validate_real_submission_file_identity(
+    payload: dict[str, Any],
+    errors: list[str],
+    *,
+    path: Path,
+    template_expected: bool,
+) -> None:
+    if template_expected:
+        return
+    evidence_key = str(payload.get("evidence_key", "")).strip()
+    expected_name = f"{evidence_key}.json"
+    add_error(
+        errors,
+        path.name == expected_name,
+        f"real submission filename must be {expected_name}",
+    )
+
+
+def validate_real_submission_privacy_fields(
+    payload: dict[str, Any],
+    errors: list[str],
+    *,
+    template_expected: bool,
+) -> None:
+    if template_expected:
+        return
+    blocked_paths = forbidden_submission_field_paths(payload)
+    add_error(
+        errors,
+        not blocked_paths,
+        "real submission must not include raw content, credential, secret, token, prompt, output, transcript, or message fields: "
+        + ", ".join(blocked_paths[:8]),
+    )
 
 
 def sha256_file(path: Path) -> str:
@@ -575,6 +655,8 @@ def validate_payload(
     add_error(errors, bool(str(payload.get("submitted_at", "")).strip()), "submitted_at is required")
     add_error(errors, bool(str(payload.get("summary", "")).strip()), "summary is required")
     if not template_expected:
+        validate_real_submission_file_identity(payload, errors, path=path, template_expected=template_expected)
+        validate_real_submission_privacy_fields(payload, errors, template_expected=template_expected)
         require_real_text(errors, payload.get("submitted_by", ""), "submitted_by")
         add_error(
             errors,

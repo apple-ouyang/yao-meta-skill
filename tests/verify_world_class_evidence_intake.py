@@ -438,6 +438,28 @@ def assert_external_contract_artifact_validation() -> None:
         template_expected=False,
     )
     assert provider_valid["status"] == "pass", provider_valid
+    provider_wrong_filename = validate_payload(
+        provider_artifact_submission(skill_root),
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-copy.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_wrong_filename["status"] == "fail", provider_wrong_filename
+    assert any("filename must be provider-holdout.json" in error for error in provider_wrong_filename["errors"]), provider_wrong_filename["errors"]
+    provider_leak = provider_artifact_submission(skill_root)
+    provider_leak["provenance"]["messages"] = ["raw messages must not be accepted"]
+    provider_leak["raw_prompt"] = "raw prompt must not be accepted"
+    provider_leak_result = validate_payload(
+        provider_leak,
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_leak_result["status"] == "fail", provider_leak_result
+    assert any("raw content, credential, secret" in error for error in provider_leak_result["errors"]), provider_leak_result["errors"]
+    assert any("$.raw_prompt" in error and "$.provenance.messages" in error for error in provider_leak_result["errors"]), provider_leak_result["errors"]
     write_provider_artifact(skill_root, complete=False)
     provider_invalid = validate_payload(
         provider_artifact_submission(skill_root),

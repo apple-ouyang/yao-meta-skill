@@ -421,7 +421,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 72,
+              "script_count": 73,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -436,6 +436,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/export_skill_ir.py",
                 "scripts/github_benchmark_scan.py",
+                "scripts/import_output_review_decisions.py",
                 "scripts/import_telemetry_events.py",
                 "scripts/init_skill.py",
                 "scripts/prepare_output_review_kit.py",
@@ -534,14 +535,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 85,
+            "checked_count": 86,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 72,
+            "file_write_script_count": 73,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -563,7 +564,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 72,
+            "file_write": 73,
             "subprocess": 10,
             "interactive": 0
           },
@@ -676,7 +677,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 72,
+            "script_count": 73,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -691,6 +692,7 @@
               "scripts/emit_telemetry_event.py",
               "scripts/export_skill_ir.py",
               "scripts/github_benchmark_scan.py",
+              "scripts/import_output_review_decisions.py",
               "scripts/import_telemetry_events.py",
               "scripts/init_skill.py",
               "scripts/prepare_output_review_kit.py",
@@ -789,14 +791,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 85,
+          "checked_count": 86,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 72,
+          "file_write_script_count": 73,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -816,7 +818,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 72,
+          "file_write": 73,
           "subprocess": 10,
           "interactive": 0
         },
@@ -1326,7 +1328,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 72,
+              "script_count": 73,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -1341,6 +1343,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/export_skill_ir.py",
                 "scripts/github_benchmark_scan.py",
+                "scripts/import_output_review_decisions.py",
                 "scripts/import_telemetry_events.py",
                 "scripts/init_skill.py",
                 "scripts/prepare_output_review_kit.py",
@@ -1439,14 +1442,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 85,
+            "checked_count": 86,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 72,
+            "file_write_script_count": 73,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -1468,7 +1471,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 72,
+            "file_write": 73,
             "subprocess": 10,
             "interactive": 0
           },
@@ -1581,7 +1584,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 72,
+            "script_count": 73,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -1596,6 +1599,7 @@
               "scripts/emit_telemetry_event.py",
               "scripts/export_skill_ir.py",
               "scripts/github_benchmark_scan.py",
+              "scripts/import_output_review_decisions.py",
               "scripts/import_telemetry_events.py",
               "scripts/init_skill.py",
               "scripts/prepare_output_review_kit.py",
@@ -1694,14 +1698,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 85,
+          "checked_count": 86,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 72,
+          "file_write_script_count": 73,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -1721,7 +1725,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 72,
+          "file_write": 73,
           "subprocess": 10,
           "interactive": 0
         },
@@ -2231,7 +2235,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 72,
+              "script_count": 73,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -2246,6 +2250,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/export_skill_ir.py",
                 "scripts/github_benchmark_scan.py",
+                "scripts/import_output_review_decisions.py",
                 "scripts/import_telemetry_events.py",
                 "scripts/init_skill.py",
                 "scripts/prepare_output_review_kit.py",
@@ -2344,14 +2349,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 85,
+            "checked_count": 86,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 72,
+            "file_write_script_count": 73,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -2373,7 +2378,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 72,
+            "file_write": 73,
             "subprocess": 10,
             "interactive": 0
           },
@@ -2479,7 +2484,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 72,
+            "script_count": 73,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -2494,6 +2499,7 @@
               "scripts/emit_telemetry_event.py",
               "scripts/export_skill_ir.py",
               "scripts/github_benchmark_scan.py",
+              "scripts/import_output_review_decisions.py",
               "scripts/import_telemetry_events.py",
               "scripts/init_skill.py",
               "scripts/prepare_output_review_kit.py",
@@ -2592,14 +2598,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 85,
+          "checked_count": 86,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 72,
+          "file_write_script_count": 73,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -2619,7 +2625,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 72,
+          "file_write": 73,
           "subprocess": 10,
           "interactive": 0
         },
@@ -3120,7 +3126,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 72,
+              "script_count": 73,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -3135,6 +3141,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/export_skill_ir.py",
                 "scripts/github_benchmark_scan.py",
+                "scripts/import_output_review_decisions.py",
                 "scripts/import_telemetry_events.py",
                 "scripts/init_skill.py",
                 "scripts/prepare_output_review_kit.py",
@@ -3233,14 +3240,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 85,
+            "checked_count": 86,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 72,
+            "file_write_script_count": 73,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -3262,7 +3269,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 72,
+            "file_write": 73,
             "subprocess": 10,
             "interactive": 0
           },
@@ -3368,7 +3375,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 72,
+            "script_count": 73,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -3383,6 +3390,7 @@
               "scripts/emit_telemetry_event.py",
               "scripts/export_skill_ir.py",
               "scripts/github_benchmark_scan.py",
+              "scripts/import_output_review_decisions.py",
               "scripts/import_telemetry_events.py",
               "scripts/init_skill.py",
               "scripts/prepare_output_review_kit.py",
@@ -3481,14 +3489,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 85,
+          "checked_count": 86,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 72,
+          "file_write_script_count": 73,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -3508,7 +3516,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 72,
+          "file_write": 73,
           "subprocess": 10,
           "interactive": 0
         },
@@ -4009,7 +4017,7 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 72,
+              "script_count": 73,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
                 "scripts/apply_adaptation.py",
@@ -4024,6 +4032,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/export_skill_ir.py",
                 "scripts/github_benchmark_scan.py",
+                "scripts/import_output_review_decisions.py",
                 "scripts/import_telemetry_events.py",
                 "scripts/init_skill.py",
                 "scripts/prepare_output_review_kit.py",
@@ -4122,14 +4131,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 85,
+            "checked_count": 86,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 72,
+            "file_write_script_count": 73,
             "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -4151,7 +4160,7 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 72,
+            "file_write": 73,
             "subprocess": 10,
             "interactive": 0
           },
@@ -4261,7 +4270,7 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 72,
+            "script_count": 73,
             "scripts": [
               "scripts/adjudicate_output_review.py",
               "scripts/apply_adaptation.py",
@@ -4276,6 +4285,7 @@
               "scripts/emit_telemetry_event.py",
               "scripts/export_skill_ir.py",
               "scripts/github_benchmark_scan.py",
+              "scripts/import_output_review_decisions.py",
               "scripts/import_telemetry_events.py",
               "scripts/init_skill.py",
               "scripts/prepare_output_review_kit.py",
@@ -4374,14 +4384,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 85,
+          "checked_count": 86,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 72,
+          "file_write_script_count": 73,
           "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -4401,7 +4411,7 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 72,
+          "file_write": 73,
           "subprocess": 10,
           "interactive": 0
         },

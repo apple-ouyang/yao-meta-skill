@@ -44,6 +44,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 817,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
@@ -56,13 +63,6 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 795,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "tests/verify_review_studio.py",
@@ -130,6 +130,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 817,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
@@ -142,13 +149,6 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 795,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "tests/verify_review_studio.py",

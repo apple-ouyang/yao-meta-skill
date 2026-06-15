@@ -32,9 +32,9 @@ No file-size hotspots found.
 | `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `tests/verify_world_class_evidence_intake.py` | `817` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `tests/verify_world_class_evidence_intake.py` | `795` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `tests/verify_review_studio.py` | `784` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/prepare_world_class_submission_kit.py` | `724` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -48,9 +48,9 @@ No file-size hotspots found.
 | `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
 | `scripts/yao_cli_parser.py` | `870` | `internal-module` | `pass` |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `817` | `test` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `795` | `test` | `pass` |
 | `tests/verify_review_studio.py` | `784` | `test` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/prepare_world_class_submission_kit.py` | `724` | `cli-script` | `pass` |
