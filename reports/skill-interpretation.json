@@ -102,7 +102,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 360 个词/字，references 约 16740 个词/字。",
+        "入口约 360 个词/字，references 约 16770 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -206,7 +206,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 360 个词/字，references 约 16740 个词/字。"
+      "上下文成本需要补强：入口约 360 个词/字，references 约 16770 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -1005,9 +1005,9 @@
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "164fa736727f9162f4c61860de8fb4c7b450c026c742c6f9233520578e25c860",
-      "source_contract_sha256": "8db4f8cfb8963484c2afb548453c44adca024b726e3f8cbd2ce1dcd4411cadfa",
-      "archive_sha256": "167bcde6bde563dfbffa949455c36bb55a70c4e7573bf166d9a4beb36cb95407",
+      "evidence_bundle_sha256": "95a01210eb2bacbef1d295e72bd60fdcce075db27930533679397b5aad82e4cf",
+      "source_contract_sha256": "f7b3e6749356356d3cc8b8e36bdf46a9eeedd6615f6831e033540d5bdda2b2bc",
+      "archive_sha256": "c26d85598e496b35e5ae4d0867a58652c62541c505c12fab5a9d6ea0598b99a6",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1029,7 +1029,7 @@
       "working_tree_dirty": false,
       "changed_file_count": 0
     },
-    "commit": "15c743370e53311292e7045b2ec93f3046838055",
+    "commit": "c325269f10a7c691646aefc5f48ca73e0a94542f",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1134,7 +1134,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 211,
-    "package_sha256": "8db4f8cfb8963484c2afb548453c44adca024b726e3f8cbd2ce1dcd4411cadfa"
+    "package_sha256": "f7b3e6749356356d3cc8b8e36bdf46a9eeedd6615f6831e033540d5bdda2b2bc"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1172,8 +1172,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "8db4f8cfb8963484c2afb548453c44adca024b726e3f8cbd2ce1dcd4411cadfa",
-        "archive_sha256": "167bcde6bde563dfbffa949455c36bb55a70c4e7573bf166d9a4beb36cb95407"
+        "package_sha256": "f7b3e6749356356d3cc8b8e36bdf46a9eeedd6615f6831e033540d5bdda2b2bc",
+        "archive_sha256": "c26d85598e496b35e5ae4d0867a58652c62541c505c12fab5a9d6ea0598b99a6"
       },
       "compatibility": {
         "openai": "pass",
@@ -1204,7 +1204,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "167bcde6bde563dfbffa949455c36bb55a70c4e7573bf166d9a4beb36cb95407",
+        "archive_sha256": "c26d85598e496b35e5ae4d0867a58652c62541c505c12fab5a9d6ea0598b99a6",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1220,7 +1220,7 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "167bcde6bde563dfbffa949455c36bb55a70c4e7573bf166d9a4beb36cb95407",
+      "archive_sha256": "c26d85598e496b35e5ae4d0867a58652c62541c505c12fab5a9d6ea0598b99a6",
       "archive_entry_count": 645,
       "failure_count": 0,
       "warning_count": 0
@@ -1299,12 +1299,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "167bcde6bde563dfbffa949455c36bb55a70c4e7573bf166d9a4beb36cb95407"
+          "to": "c26d85598e496b35e5ae4d0867a58652c62541c505c12fab5a9d6ea0598b99a6"
         },
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "8db4f8cfb8963484c2afb548453c44adca024b726e3f8cbd2ce1dcd4411cadfa"
+          "to": "f7b3e6749356356d3cc8b8e36bdf46a9eeedd6615f6831e033540d5bdda2b2bc"
         }
       ]
     },
