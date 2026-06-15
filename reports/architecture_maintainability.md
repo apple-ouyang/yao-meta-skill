@@ -13,7 +13,7 @@ Generated at: `2026-06-15`
 - Yao CLI command handlers: `64`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `897`
+- largest file lines: `899`
 - hotspots: `0`
 - blockers: `0`
 
@@ -27,7 +27,7 @@ No file-size hotspots found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_yao_cli.py` | `897` | `test` | `pass` |
+| `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
 | `scripts/yao_cli_parser.py` | `810` | `internal-module` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |

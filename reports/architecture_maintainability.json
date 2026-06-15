@@ -14,7 +14,7 @@
     "command_module_count": 6,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 897,
+    "largest_file_lines": 899,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -22,7 +22,7 @@
   "largest_files": [
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 897,
+      "lines": 899,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
