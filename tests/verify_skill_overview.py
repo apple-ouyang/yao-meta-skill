@@ -10,6 +10,7 @@ CLI = ROOT / "scripts" / "yao.py"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from skill_report_layout import render_language_switch, render_report_nav, skill_overview_css, skill_overview_script
+from skill_report_i18n import en_for
 from skill_report_model import REPORT_NAV_V2
 
 
@@ -59,6 +60,18 @@ def main() -> None:
     assert 'setLanguage("zh-CN")' in script_contract, script_contract[-1000:]
     assert "scaleX(" in script_contract, script_contract
     assert "aria-current" in script_contract, script_contract
+
+    assert en_for("把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。") == (
+        "Turn one-off experience into a reusable, evaluable, and portable skill package."
+    )
+    assert en_for("交付结果：SKILL.md, agents/interface.yaml") == "Deliverables: SKILL.md, agents/interface.yaml"
+    assert en_for("已生成 12 / 20 类报告证据。") == "Generated 12 / 20 evidence report types."
+    assert en_for("入口约 864 个词/字，references 约 565 个词/字。") == (
+        "Entrypoint is about 864 words/characters; references are about 565."
+    )
+    assert en_for("Use this skill when the request matches: 中文描述") == (
+        "Use this skill when the request matches the frontmatter description."
+    )
 
     tmp_root = ROOT / "tests" / "tmp_skill_overview"
     if tmp_root.exists():
@@ -207,6 +220,10 @@ def main() -> None:
     assert "成熟度" in report_html, report_html[:5000]
     assert "更新时间" in report_html, report_html[:5000]
     assert "Skill name" in report_html, report_html[:5000]
+    assert "Turn one-off experience into a reusable, evaluable, and portable skill package." in report_html, report_html[:9000]
+    assert "After creation, open reports/skill-overview.html before expanding the package further." in report_html, report_html[:9000]
+    assert '<span data-lang="en">把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。</span>' not in report_html, report_html[:9000]
+    assert '<span data-lang="en">创建完成后建议先打开 reports/skill-overview.html，再继续扩展包体。</span>' not in report_html, report_html[:9000]
     assert "输入材料" in report_html, report_html[:3000]
     assert "输出结果" in report_html, report_html[:3400]
     assert "Top 3 Next Moves" not in report_html, report_html[:3800]

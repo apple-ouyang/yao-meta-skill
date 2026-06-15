@@ -92,6 +92,7 @@ def main() -> None:
         "scripts/review_studio_gates.py",
         "scripts/review_studio_layout.py",
         "scripts/skill_report_charts.py",
+        "scripts/skill_report_i18n.py",
         "scripts/skill_report_layout.py",
         "scripts/skill_report_metrics.py",
         "scripts/skill_report_model.py",
@@ -108,6 +109,7 @@ def main() -> None:
     assert "review_studio_gates.py" not in warning_text, payload["warnings"]
     assert "review_studio_layout.py" not in warning_text, payload["warnings"]
     assert "skill_report_charts.py" not in warning_text, payload["warnings"]
+    assert "skill_report_i18n.py" not in warning_text, payload["warnings"]
     assert "skill_report_layout.py" not in warning_text, payload["warnings"]
     assert "skill_report_metrics.py" not in warning_text, payload["warnings"]
     assert "skill_report_model.py" not in warning_text, payload["warnings"]
