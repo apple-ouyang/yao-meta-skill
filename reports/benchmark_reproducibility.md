@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-15`
-Commit: `7acc6d9cf780e38570c20813186d0efea5ac8ad0`
+Commit: `f0be4dba348d6a7cd6534d44d13011cacd5ec566`
 Working tree dirty at generation: `true`
-Evidence bundle SHA256: `3b2b3f509e12a9445841c30b8b2cf5eb0f955d30402a95d54844b70c60d87a56`
+Evidence bundle SHA256: `2885b1100c09f73a4e09c9a210eb41bccfda117c08ffd62d60619987b9ff76eb`
 
 ## Summary
 
@@ -23,7 +23,7 @@ Evidence bundle SHA256: `3b2b3f509e12a9445841c30b8b2cf5eb0f955d30402a95d54844b70
 - world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
 - public claim blockers: `5`
-- changed files at generation: `38`
+- changed files at generation: `27`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -51,7 +51,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `24` / `24`
-- sha256: `3b2b3f509e12a9445841c30b8b2cf5eb0f955d30402a95d54844b70c60d87a56`
+- sha256: `2885b1100c09f73a4e09c9a210eb41bccfda117c08ffd62d60619987b9ff76eb`
 
 ## Methodology Sections
 
@@ -73,7 +73,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `712890e85fdd` |
+| output_execution | `reports/output_execution_runs.json` | present | `e05906fb7e42` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |

@@ -3,24 +3,24 @@
   "ok": true,
   "generated_at": "2026-06-15",
   "skill_dir": ".",
-  "commit": "7acc6d9cf780e38570c20813186d0efea5ac8ad0",
+  "commit": "f0be4dba348d6a7cd6534d44d13011cacd5ec566",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 38,
+    "changed_file_count": 27,
     "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
       " M reports/adoption_drift_report.json",
+      " M reports/adoption_drift_report.md",
       " M reports/architecture_maintainability.json",
       " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/context_budget.json",
-      " M reports/context_budget.md",
-      " M reports/context_budget_summary.json",
-      " M reports/install_simulation.json",
-      " M reports/install_simulation.md"
+      " M reports/compiled_targets.json",
+      " M reports/output_execution_runs.json",
+      " M reports/output_execution_runs.md",
+      " M reports/python_compatibility.json",
+      " M reports/python_compatibility.md",
+      " M reports/review_annotations.json",
+      " M reports/review_waivers.json",
+      " M reports/review_waivers.md"
     ],
     "scope": "generation-time status before this report is written"
   },
@@ -30,7 +30,7 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "3b2b3f509e12a9445841c30b8b2cf5eb0f955d30402a95d54844b70c60d87a56",
+    "evidence_bundle_sha256": "2885b1100c09f73a4e09c9a210eb41bccfda117c08ffd62d60619987b9ff76eb",
     "source_contract_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5",
     "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
     "output_case_count": 5,
@@ -52,7 +52,7 @@
     "public_claim_ready": false,
     "public_claim_blocker_count": 5,
     "working_tree_dirty": true,
-    "changed_file_count": 38
+    "changed_file_count": 27
   },
   "public_claim": {
     "ready": false,
@@ -68,7 +68,7 @@
   },
   "release_lock": {
     "ready": false,
-    "commit": "7acc6d9cf780e38570c20813186d0efea5ac8ad0",
+    "commit": "f0be4dba348d6a7cd6534d44d13011cacd5ec566",
     "status_scope": "generation-time status before this report is written",
     "reason": "working tree was dirty at generation time"
   },
@@ -78,7 +78,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "3b2b3f509e12a9445841c30b8b2cf5eb0f955d30402a95d54844b70c60d87a56"
+    "sha256": "2885b1100c09f73a4e09c9a210eb41bccfda117c08ffd62d60619987b9ff76eb"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -151,8 +151,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7967,
-      "sha256": "712890e85fdd3334e3196b2597555491be047313728c2e2891134da71e1ca7e8"
+      "bytes": 7965,
+      "sha256": "e05906fb7e4242e1b4c373285f5bca3283986301f13e08c2d64715efb9f827a4"
     },
     {
       "label": "blind_review",
