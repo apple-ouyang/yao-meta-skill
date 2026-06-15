@@ -4,14 +4,14 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 32,
-    "pass_count": 32,
+    "check_count": 33,
+    "pass_count": 33,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 32,
+    "pass": 33,
     "warn": 0,
     "fail": 0
   },
@@ -53,6 +53,7 @@
         "source_refresh_section": true,
         "clean_lock_section": true,
         "source_refresh_commands": {
+          "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
@@ -62,6 +63,7 @@
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         },
         "clean_lock_commands": {
+          "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
@@ -76,6 +78,7 @@
         "source_refresh_section": true,
         "clean_lock_section": true,
         "source_refresh_commands": {
+          "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
@@ -85,6 +88,7 @@
           "python3 scripts/render_evidence_consistency.py . --generated-at \"$GENERATED_AT\"": true
         },
         "clean_lock_commands": {
+          "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_benchmark_reproducibility.py . --generated-at \"$GENERATED_AT\"": true,
           "python3 scripts/render_skill_overview.py .": true,
           "python3 scripts/render_skill_interpretation.py .": true,
@@ -96,6 +100,8 @@
       },
       "paths": [
         "AGENTS.md",
+        "reports/context_budget.json",
+        "reports/context_budget_summary.json",
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json",
         "reports/skill-interpretation.json",
@@ -105,6 +111,26 @@
         "reports/evidence_consistency.json"
       ],
       "detail": "Release refresh and clean-lock instructions must regenerate every first-class report before evidence consistency can be trusted."
+    },
+    {
+      "key": "review-studio-context-budget-mirror",
+      "label": "Review Studio mirrors context budget governance",
+      "status": "pass",
+      "expected": {
+        "status": "pass",
+        "detail": "initial load 960/1000; deferred 445139/120000; top deferred scripts 395928; resource governance governed; quality density 135.4",
+        "evidence": "reports/context_budget.json"
+      },
+      "actual": {
+        "status": "pass",
+        "detail": "initial load 960/1000; deferred 445139/120000; top deferred scripts 395928; resource governance governed; quality density 135.4",
+        "evidence": "reports/context_budget.json"
+      },
+      "paths": [
+        "reports/context_budget.json",
+        "reports/review-studio.json"
+      ],
+      "detail": "Review Studio must not keep stale context warnings after context reports prove large deferred resources are governed."
     },
     {
       "key": "benchmark-release-lock-self-consistency",
@@ -121,8 +147,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
-      "actual": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
+      "expected": "78904abae1f63b52d27a9e2d24d103fab8273a1a",
+      "actual": "78904abae1f63b52d27a9e2d24d103fab8273a1a",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -137,8 +163,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
-        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
+        "source_contract_sha256": "f647963c56327666e96f22816c4332ef29884b2f60e21737ee9d750eb913a461",
+        "archive_sha256": "74a5d0bbef71f517abcbea39ac58359fce5cbbb220f85a9037555db45e07e42e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -150,8 +176,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
-        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
+        "source_contract_sha256": "f647963c56327666e96f22816c4332ef29884b2f60e21737ee9d750eb913a461",
+        "archive_sha256": "74a5d0bbef71f517abcbea39ac58359fce5cbbb220f85a9037555db45e07e42e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -267,8 +293,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
-      "actual": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
+      "expected": "78904abae1f63b52d27a9e2d24d103fab8273a1a",
+      "actual": "78904abae1f63b52d27a9e2d24d103fab8273a1a",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -283,8 +309,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
-        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
+        "source_contract_sha256": "f647963c56327666e96f22816c4332ef29884b2f60e21737ee9d750eb913a461",
+        "archive_sha256": "74a5d0bbef71f517abcbea39ac58359fce5cbbb220f85a9037555db45e07e42e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -296,8 +322,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
-        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
+        "source_contract_sha256": "f647963c56327666e96f22816c4332ef29884b2f60e21737ee9d750eb913a461",
+        "archive_sha256": "74a5d0bbef71f517abcbea39ac58359fce5cbbb220f85a9037555db45e07e42e",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -2145,9 +2171,9 @@
       "label": "Skill OS 2.0 review summary mirrors current evidence",
       "status": "pass",
       "expected": [
-        "score `89`",
+        "score `91`",
         "`16` gates",
-        "`4` warnings",
+        "`3` warnings",
         "`30` declared internal modules",
         "`83 / 83` CLI help smoke checks passing across `113` scripts",
         "`623` zip entries",
