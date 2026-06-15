@@ -525,10 +525,10 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 215
+          "file_count": 132
         }
       ],
-      "file_count": 389,
+      "file_count": 306,
       "folder_count": 4,
       "distribution": [
         {
@@ -561,7 +561,7 @@
         },
         {
           "label": "reports",
-          "value": 215
+          "value": 132
         }
       ]
     },
@@ -695,7 +695,7 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 215
+        "file_count": 132
       }
     ],
     "strengths": [
@@ -996,7 +996,7 @@
       "ok": true,
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
@@ -1020,11 +1020,11 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5,
-        "working_tree_dirty": true,
-        "changed_file_count": 65
+        "public_claim_blocker_count": 4,
+        "working_tree_dirty": false,
+        "changed_file_count": 0
       },
-      "commit": "effbf3f74c4ce959c7444d873d0586d884a43202",
+      "commit": "a5dab4779d48b51ea8ace316527d38dd559e6b01",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
