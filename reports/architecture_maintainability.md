@@ -1,6 +1,6 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-16`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -35,7 +35,7 @@ No file-size hotspots found.
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_world_class_evidence_intake.py` | `795` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `tests/verify_review_studio.py` | `766` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_review_studio.py` | `767` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/prepare_world_class_submission_kit.py` | `724` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/compile_skill.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -51,7 +51,7 @@ No file-size hotspots found.
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `795` | `test` | `pass` |
-| `tests/verify_review_studio.py` | `766` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `767` | `test` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/prepare_world_class_submission_kit.py` | `724` | `cli-script` | `pass` |
 | `scripts/compile_skill.py` | `723` | `cli-script` | `pass` |

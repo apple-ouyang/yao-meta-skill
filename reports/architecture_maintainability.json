@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "python_file_count": 181,
@@ -66,7 +66,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 766,
+      "lines": 767,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -152,7 +152,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 766,
+      "lines": 767,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

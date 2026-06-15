@@ -1,19 +1,19 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `5e72c0c8f8227c5c92d9f289a62f675cbf6d8b82`
-Working tree dirty at generation: `false`
-Evidence bundle SHA256: `4e46ec51849a179cd6db9ea908a7d49df080b3f10463d4a98e54aaa5968e37cd`
+Commit: `e65ee917b74da20b0b8802451a50b5837ba6d9ac`
+Working tree dirty at generation: `true`
+Evidence bundle SHA256: `22c574f08fad83840f2b9e1d71f987a1c9bba1c929a0aa03a883e336933af2a2`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `true`
+- release lock ready: `false`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
 - source contract sha256: `b6abceeea0f2`
-- archive sha256: `a521b75a29e5`
+- archive sha256: `7e55b9259f9a`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `23`
@@ -22,8 +22,8 @@ Evidence bundle SHA256: `4e46ec51849a179cd6db9ea908a7d49df080b3f10463d4a98e54aaa
 - world-class ready: `false`
 - world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
-- public claim blockers: `4`
-- changed files at generation: `0`
+- public claim blockers: `5`
+- changed files at generation: `22`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -35,6 +35,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
+| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -42,15 +43,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `true`
-- reason: clean generation-time HEAD
+- ready: `false`
+- reason: working tree was dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `4e46ec51849a179cd6db9ea908a7d49df080b3f10463d4a98e54aaa5968e37cd`
+- sha256: `22c574f08fad83840f2b9e1d71f987a1c9bba1c929a0aa03a883e336933af2a2`
 
 ## Methodology Sections
 
@@ -72,15 +73,15 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `6fa9f0b5a294` |
+| output_execution | `reports/output_execution_runs.json` | present | `d789a1a2920a` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
 | trust_report | `reports/security_trust_report.json` | present | `ba3b69b8eb33` |
 | python_compatibility | `reports/python_compatibility.json` | present | `aa89183f58b2` |
-| registry_audit | `reports/registry_audit.json` | present | `ba8c24683f0e` |
-| package_verification | `reports/package_verification.json` | present | `667250d991ae` |
+| registry_audit | `reports/registry_audit.json` | present | `c7520ea9cfb6` |
+| package_verification | `reports/package_verification.json` | present | `e46eaa920aca` |
 | install_simulation | `reports/install_simulation.json` | present | `df390c157451` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `e12318b1e083` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `76a3f8e2b12b` |
