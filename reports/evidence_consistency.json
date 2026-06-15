@@ -243,8 +243,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "5cb10444c49c40d58b76784e6c4bf993c863e827",
-      "actual": "5cb10444c49c40d58b76784e6c4bf993c863e827",
+      "expected": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
+      "actual": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -389,8 +389,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "5cb10444c49c40d58b76784e6c4bf993c863e827",
-      "actual": "5cb10444c49c40d58b76784e6c4bf993c863e827",
+      "expected": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
+      "actual": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -1519,10 +1519,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 229
+            "file_count": 227
           }
         ],
-        "file_count": 411,
+        "file_count": 409,
         "folder_count": 4,
         "distribution": [
           {
@@ -1555,7 +1555,7 @@
           },
           {
             "label": "reports",
-            "value": 229
+            "value": 227
           }
         ]
       },
@@ -1607,10 +1607,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 229
+            "file_count": 227
           }
         ],
-        "file_count": 411,
+        "file_count": 409,
         "folder_count": 4,
         "distribution": [
           {
@@ -1643,7 +1643,7 @@
           },
           {
             "label": "reports",
-            "value": 229
+            "value": 227
           }
         ]
       },

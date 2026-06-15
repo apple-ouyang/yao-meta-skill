@@ -1206,10 +1206,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 229
+            "file_count": 227
           }
         ],
-        "file_count": 411,
+        "file_count": 409,
         "folder_count": 4,
         "distribution": [
           {
@@ -1242,7 +1242,7 @@
           },
           {
             "label": "reports",
-            "value": 229
+            "value": 227
           }
         ]
       },
@@ -1376,7 +1376,7 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 229
+          "file_count": 227
         }
       ],
       "strengths": [
@@ -1704,9 +1704,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 60
+          "changed_file_count": 2
         },
-        "commit": "5cb10444c49c40d58b76784e6c4bf993c863e827",
+        "commit": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5301,24 +5301,14 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "5cb10444c49c40d58b76784e6c4bf993c863e827",
+      "commit": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 60,
+        "changed_file_count": 2,
         "sample": [
-          " M AGENTS.md",
-          " M Makefile",
-          " M README.md",
-          " M registry/index.json",
-          " M registry/packages/yao-meta-skill.json",
-          " M reports/adaptation_proposals.json",
-          " M reports/adaptation_proposals.md",
-          " M reports/adoption_drift_report.json",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md"
+          " M reports/context_budget.json",
+          " M reports/context_budget_summary.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5350,7 +5340,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 60
+        "changed_file_count": 2
       },
       "public_claim": {
         "ready": false,
@@ -5366,7 +5356,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "5cb10444c49c40d58b76784e6c4bf993c863e827",
+        "commit": "cf4da354992c8876ccd73940f1b03e47c437d5a9",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -15819,9 +15809,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1001283,
+        "other_text_tokens": 1001289,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1002050,
+        "estimated_total_text_tokens": 1002056,
         "deferred_resource_tokens": 461032,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -17938,7 +17928,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-15T20:28:47Z",
+      "generated_at": "2026-06-16",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
