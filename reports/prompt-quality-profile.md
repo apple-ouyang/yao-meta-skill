@@ -1,7 +1,7 @@
 # Prompt Quality Profile
 
 Skill: `yao-meta-skill`
-Relevance: `prompt-heavy`
+Relevance: `prompt-aware`
 Overall quality score: `89.0/100`
 
 ## Primary Task Family
@@ -74,12 +74,12 @@ Overall quality score: `89.0/100`
 - Task: Generate variants, explain selection logic, and preserve the user's distinctive constraints.
 - Format: Return options with rationale, selection criteria, and refinement paths.
 
-### Prompt engineering
+### Analytical reasoning
 - Score: `1`
-- Keywords: prompt
-- Role: Use a prompt engineer role only when role design materially improves execution.
-- Task: Map Role, Task, and Format into skill behavior rather than copying a large prompt template.
-- Format: Return a compact prompt contract plus tests, quality matrix, and usage notes.
+- Keywords: decision
+- Role: Use an analyst role that separates evidence, inference, uncertainty, and recommendation.
+- Task: State assumptions, compare alternatives, and make the decision path inspectable.
+- Format: Return findings, evidence, tradeoffs, recommendation, and residual risks.
 
 ## Self-Repair Checks
 

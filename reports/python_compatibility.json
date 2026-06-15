@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 184,
+    "file_count": 186,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -611,6 +611,12 @@
       "issues": []
     },
     {
+      "path": "scripts/skillops_opportunity.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/summarize_user_signals.py",
       "ok": true,
       "issue_count": 0,
@@ -1032,6 +1038,12 @@
     },
     {
       "path": "tests/verify_skill_report_metrics.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_skillops_opportunity.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

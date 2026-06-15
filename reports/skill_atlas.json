@@ -44,7 +44,7 @@
   },
   "catalog": {
     "workspace_root": ".",
-    "generated_at": "2026-06-13",
+    "generated_at": "2026-06-16",
     "skills": [
       {
         "name": "yao-meta-skill",
@@ -159,6 +159,7 @@
           "scripts/skill_report_metrics.py",
           "scripts/skill_report_model.py",
           "scripts/skill_report_world_class.py",
+          "scripts/skillops_opportunity.py",
           "scripts/summarize_user_signals.py",
           "scripts/sync_local_install.py",
           "scripts/telemetry_native_host.py",
@@ -209,6 +210,7 @@
           "references/skill-atlas-method.md",
           "references/skill-engineering-method.md",
           "references/skill-ir-method.md",
+          "references/skillops-decision-policy.md",
           "references/systems-thinking-doctrine.md",
           "references/telemetry-drift-method.md",
           "references/trust-security-method.md",
@@ -244,8 +246,8 @@
           "report": "reports/adoption_drift_report.json",
           "risk_band": "low",
           "event_count": 1,
-          "adoption_sample_count": 1,
-          "adoption_rate": 100.0,
+          "adoption_sample_count": 0,
+          "adoption_rate": 0,
           "candidate_count": 0
         }
       },
@@ -908,7 +910,7 @@
       "name": "incident-command-governor",
       "path": "examples/governed-incident-command/generated-skill",
       "reason": "review overdue by cadence monthly",
-      "age_days": 74,
+      "age_days": 77,
       "allowed_days": 31,
       "actionable": false,
       "scope": "example"

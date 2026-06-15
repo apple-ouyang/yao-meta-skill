@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 202,
-    "script_count": 115,
-    "internal_module_count": 31,
+    "scanned_files": 204,
+    "script_count": 116,
+    "internal_module_count": 32,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 202,
-    "package_sha256": "b6abceeea0f2329299123b8e295469602f9e742298f729e60d9b56ef49b48083"
+    "package_hash_file_count": 204,
+    "package_sha256": "7de584946cac8f2ed241aa331ba4c0c2d69fa1c4eae2c06b92882b8af6ad07d7"
   },
   "failures": [],
   "warnings": [],
@@ -1377,6 +1377,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/skillops_opportunity.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_daily_skillops_report.py to score SkillOps opportunities without writing files.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/summarize_user_signals.py",
       "interface": "cli",
       "interface_declared": true,
@@ -1691,7 +1705,7 @@
     "checked_count": 84,
     "passed_count": 84,
     "failed_count": 0,
-    "skipped_count": 31,
+    "skipped_count": 32,
     "failed_scripts": [],
     "results": [
       {
@@ -2614,6 +2628,10 @@
       },
       {
         "path": "scripts/skill_report_world_class.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/skillops_opportunity.py",
         "reason": "internal module"
       },
       {

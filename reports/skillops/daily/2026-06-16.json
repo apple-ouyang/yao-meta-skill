@@ -268,6 +268,208 @@
       ]
     }
   ],
+  "opportunity_summary": {
+    "opportunity_count": 5,
+    "top_score": 88,
+    "ready_for_approval_review_count": 1,
+    "proposal_review_count": 4,
+    "observe_more_evidence_count": 0,
+    "report_only_count": 0,
+    "action_type_counts": {
+      "patch_existing_skill": 3,
+      "agents_update": 1,
+      "add_eval": 1
+    },
+    "decision_counts": {
+      "ready_for_approval_review": 1,
+      "proposal_review": 4
+    }
+  },
+  "opportunities": [
+    {
+      "opportunity_id": "skillops-4ad91c18dd",
+      "proposal_id": "adapt-fbfe921ba5",
+      "pattern_id": "report_ui",
+      "title": "Improve report layout, visual hierarchy, and chart readability",
+      "opportunity_type": "artifact-quality",
+      "action_type": "patch_existing_skill",
+      "decision": "ready_for_approval_review",
+      "priority": "medium",
+      "score": 88,
+      "score_reasons": [
+        "support_count=5",
+        "confidence=0.95",
+        "risk=medium",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated report layout feedback maps to existing renderer and design doctrine changes.",
+      "risk_level": "medium",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 5,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md",
+        "tests/verify_skill_overview.py"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py",
+        "python3 tests/verify_skill_report_charts.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-531e13c1c6",
+      "proposal_id": "adapt-59d219a1fb",
+      "pattern_id": "approval_safety",
+      "title": "Keep adaptive iteration approval-gated",
+      "opportunity_type": "governance",
+      "action_type": "agents_update",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated privacy and approval signals should tighten durable operating guidance.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "references/user-memory-policy.md",
+        "references/autonomous-adaptation.md",
+        "schemas/adaptation-proposal.schema.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-709ef884f3",
+      "proposal_id": "adapt-18c7517f3d",
+      "pattern_id": "language_default",
+      "title": "Keep reports Chinese-first with optional English",
+      "opportunity_type": "report-experience",
+      "action_type": "patch_existing_skill",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated language preferences can improve existing report templates after approval.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "scripts/render_skill_overview.py",
+        "references/artifact-design-doctrine.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_skill_overview.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-f9e43237aa",
+      "proposal_id": "adapt-457baca160",
+      "pattern_id": "delivery_format",
+      "title": "Make generated artifact paths explicit in CLI output",
+      "opportunity_type": "artifact-discoverability",
+      "action_type": "patch_existing_skill",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 82,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=low",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated delivery-path requests can improve CLI and README artifact discoverability.",
+      "risk_level": "low",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "scripts/yao.py",
+        "README.md"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_yao_cli.py"
+      ]
+    },
+    {
+      "opportunity_id": "skillops-0a3a2de7c3",
+      "proposal_id": "adapt-abfee25d3a",
+      "pattern_id": "evidence_testing",
+      "title": "Attach tests and evidence refresh to each upgrade",
+      "opportunity_type": "quality-gate",
+      "action_type": "add_eval",
+      "decision": "proposal_review",
+      "priority": "medium",
+      "score": 74,
+      "score_reasons": [
+        "support_count=2",
+        "confidence=0.79",
+        "risk=medium",
+        "target_files_present",
+        "verification_present",
+        "approval_required"
+      ],
+      "policy_reason": "Repeated verification and evidence requests should become focused checks.",
+      "risk_level": "medium",
+      "requires_approval": true,
+      "write_allowed_without_approval": false,
+      "evidence_count": 2,
+      "target_files": [
+        "tests/verify_adaptation_safety.py",
+        "scripts/render_skill_os2_coverage.py",
+        "reports/skill_os2_coverage.json"
+      ],
+      "verification_commands": [
+        "python3 tests/verify_adaptation_safety.py",
+        "python3 tests/verify_skill_os2_coverage.py"
+      ]
+    }
+  ],
+  "decision_policy": {
+    "schema_version": "1.0",
+    "contract": "skillops-opportunity-scoring",
+    "score_range": [
+      0,
+      100
+    ],
+    "score_bands": {
+      "85-100": "ready_for_approval_review",
+      "70-84": "proposal_review",
+      "50-69": "observe_more_evidence",
+      "0-49": "report_only_or_no_action"
+    },
+    "action_types": [
+      "add_eval",
+      "agents_update",
+      "patch_existing_skill",
+      "report_only"
+    ],
+    "writes_source_files": false,
+    "auto_patch_enabled": false,
+    "approval_required_for_writes": true
+  },
   "approval": {
     "approval_count": 0,
     "pending_review_count": 0,
