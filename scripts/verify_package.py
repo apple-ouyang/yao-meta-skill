@@ -75,6 +75,10 @@ def add_check(checks: list[dict[str, str]], failures: list[str], check_id: str, 
         failures.append(detail)
 
 
+def package_name(manifest: dict[str, Any], skill_dir: Path) -> str:
+    return str(manifest.get("name") or skill_dir.name)
+
+
 def verify_package(
     skill_dir: Path,
     package_dir: Path,
@@ -91,6 +95,7 @@ def verify_package(
 
     manifest_path = package_dir / "manifest.json"
     manifest = load_json(manifest_path)
+    package_root = package_name(manifest, skill_dir)
     add_check(checks, failures, "package-manifest", bool(manifest), f"Package manifest exists: {display_path(manifest_path)}")
 
     targets = required_targets(expectations, package_dir)
@@ -117,7 +122,7 @@ def verify_package(
         for rel in required_files:
             add_check(checks, failures, f"{target}-file-{rel}", (package_dir / rel).exists(), f"Package contains {rel}")
 
-    archive_path = package_dir / f"{skill_dir.name}.zip"
+    archive_path = package_dir / f"{package_root}.zip"
     archive_sha = ""
     archive_entries: list[str] = []
     if archive_path.exists():
@@ -129,9 +134,9 @@ def verify_package(
         else:
             unsafe_entries = unsafe_zip_entries(archive_entries)
             required_entries = [
-                f"{skill_dir.name}/SKILL.md",
-                f"{skill_dir.name}/manifest.json",
-                f"{skill_dir.name}/agents/interface.yaml",
+                f"{package_root}/SKILL.md",
+                f"{package_root}/manifest.json",
+                f"{package_root}/agents/interface.yaml",
             ]
             add_check(checks, failures, "archive-safe-paths", not unsafe_entries, "Archive has no absolute or parent-traversal entries")
             for entry in required_entries:

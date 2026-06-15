@@ -91,6 +91,10 @@ def add_check(checks: list[dict[str, str]], failures: list[str], check_id: str, 
         failures.append(detail)
 
 
+def package_name(package_manifest: dict[str, Any], skill_dir: Path) -> str:
+    return str(package_manifest.get("name") or skill_dir.name)
+
+
 def adapter_targets(adapter_root: Path) -> list[str]:
     targets_dir = adapter_root / "targets"
     if not targets_dir.exists():
@@ -188,8 +192,9 @@ def simulate_install(skill_dir: Path, package_dir: Path, install_root: Path | No
     checks: list[dict[str, str]] = []
     failures: list[str] = []
     warnings: list[str] = []
-    archive_path = package_dir / f"{skill_dir.name}.zip"
     package_manifest = load_json(package_dir / "manifest.json")
+    package_root = package_name(package_manifest, skill_dir)
+    archive_path = package_dir / f"{package_root}.zip"
     installed_dir: Path | None = None
     archive_entries: list[str] = []
 
@@ -201,7 +206,7 @@ def simulate_install(skill_dir: Path, package_dir: Path, install_root: Path | No
     else:
         requested_root = install_root.resolve()
         requested_root.mkdir(parents=True, exist_ok=True)
-        install_base = requested_root / f"simulate-{skill_dir.name}"
+        install_base = requested_root / f"simulate-{package_root}"
         if install_base.exists():
             shutil.rmtree(install_base)
         install_base.mkdir(parents=True, exist_ok=True)
@@ -218,7 +223,7 @@ def simulate_install(skill_dir: Path, package_dir: Path, install_root: Path | No
                 unsafe_entries = unsafe_zip_entries(archive_entries)
                 add_check(checks, failures, "archive-safe-paths", not unsafe_entries, "Archive has no absolute or parent-traversal entries")
                 roots = top_level_dirs(archive_entries)
-                add_check(checks, failures, "single-top-level", roots == [skill_dir.name], f"Archive top-level directory is {skill_dir.name}")
+                add_check(checks, failures, "single-top-level", roots == [package_root], f"Archive top-level directory is {package_root}")
                 if not unsafe_entries and roots:
                     with zipfile.ZipFile(archive_path) as archive:
                         archive.extractall(install_base)
@@ -228,7 +233,7 @@ def simulate_install(skill_dir: Path, package_dir: Path, install_root: Path | No
         source_manifest = load_json(installed_dir / "manifest.json") if installed_dir else {}
         interface_doc = load_yaml(installed_dir / "agents" / "interface.yaml") if installed_dir else {}
         add_check(checks, failures, "entrypoint-load", bool(frontmatter), "Installed SKILL.md frontmatter is readable")
-        add_check(checks, failures, "entrypoint-name", frontmatter.get("name") == skill_dir.name, "Installed SKILL.md name matches package directory")
+        add_check(checks, failures, "entrypoint-name", frontmatter.get("name") == package_root, "Installed SKILL.md name matches package directory")
         add_check(checks, failures, "entrypoint-description", bool(frontmatter.get("description")), "Installed SKILL.md description is present")
         add_check(checks, failures, "manifest-load", bool(source_manifest), "Installed manifest.json is readable")
         add_check(checks, failures, "manifest-name", source_manifest.get("name") == package_manifest.get("name"), "Installed manifest name matches package manifest")

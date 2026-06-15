@@ -3,7 +3,7 @@ import argparse
 import json
 import shutil
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import yaml
 
 from compile_skill import compile_target_contract
@@ -62,6 +62,14 @@ def find_skill_ir(skill_dir: Path, name: str) -> tuple[dict, str]:
         if payload:
             return payload, display_path(path, skill_dir)
     return {}, "frontmatter-fallback"
+
+
+def package_name_from_manifest(manifest: dict, skill_dir: Path) -> str:
+    name = str(manifest.get("name") or "").strip()
+    if name:
+        return name
+    frontmatter = read_frontmatter(skill_dir / "SKILL.md")
+    return str(frontmatter.get("name") or skill_dir.name)
 
 
 def require_fields(payload: dict, fields: list[str], label: str) -> None:
@@ -213,7 +221,7 @@ def build_manifest(skill_dir: Path, platform: str) -> dict:
         "description": semantic["description"],
         "version": manifest.get("version") or frontmatter.get("version", "1.0.0"),
         "platform": platform,
-        "skill_root": skill_dir.name,
+        "skill_root": semantic["name"],
         "job_to_be_done": semantic["job_to_be_done"],
         "ir_source": semantic["ir_source"],
         "ir_schema_version": semantic["ir_schema_version"],
@@ -496,7 +504,7 @@ def write_adapter(skill_dir: Path, out_dir: Path, platform: str) -> Path:
         notes = target_dir / "README.md"
         native = payload["target_native_contract"]
         notes.write_text(
-            f"# Claude-Compatible Package\n\nUse `{skill_dir.name}` with its neutral source files. This target does not require vendor metadata by default.\n\n"
+            f"# Claude-Compatible Package\n\nUse `{payload['name']}` with its neutral source files. This target does not require vendor metadata by default.\n\n"
             f"Native surface: {native['native_surface']}.\n\n"
             f"Activation: {native['activation']['policy']}\n\n"
             f"Resources: {native['resources']['strategy']}\n\n"
@@ -510,7 +518,7 @@ def write_adapter(skill_dir: Path, out_dir: Path, platform: str) -> Path:
         native = payload["target_native_contract"]
         notes.write_text(
             f"# VS Code / Copilot Agent Skills Package\n\n"
-            f"Install `{skill_dir.name}` as a VS Code user or project scoped Agent Skill. Keep the folder name aligned with `SKILL.md` frontmatter name.\n\n"
+            f"Install `{payload['name']}` as a VS Code user or project scoped Agent Skill. Keep the folder name aligned with `SKILL.md` frontmatter name.\n\n"
             f"Native surface: {native['native_surface']}.\n\n"
             f"Activation: {native['activation']['policy']}\n\n"
             f"Resources: {native['resources']['strategy']}\n\n"
@@ -524,15 +532,15 @@ def write_adapter(skill_dir: Path, out_dir: Path, platform: str) -> Path:
             "Install the package as a VS Code user or project scoped Agent Skill; use targets/vscode/README.md for scope and trust notes."
         )
     else:
-        payload["install_hint"] = f"Use {skill_dir.name} as an Agent Skills compatible package."
+        payload["install_hint"] = f"Use {payload['name']} as an Agent Skills compatible package."
     path = target_dir / "adapter.json"
     payload["contract"] = PLATFORM_CONTRACTS.get(platform, PLATFORM_CONTRACTS["generic"])
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return path
 
 
-def make_zip(skill_dir: Path, out_dir: Path) -> Path:
-    zip_path = out_dir / f"{skill_dir.name}.zip"
+def make_zip(skill_dir: Path, out_dir: Path, package_name: str) -> Path:
+    zip_path = out_dir / f"{package_name}.zip"
     skill_root = skill_dir.resolve()
     out_root = out_dir.resolve()
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
@@ -547,17 +555,18 @@ def make_zip(skill_dir: Path, out_dir: Path) -> Path:
             rel_path = path.relative_to(skill_dir)
             if should_skip_archive_path(rel_path):
                 continue
-            zf.write(path, arcname=str(path.relative_to(skill_dir.parent)))
+            zf.write(path, arcname=str(PurePosixPath(package_name, *rel_path.parts)))
     return zip_path
 
 
-def copy_manifest(skill_dir: Path, out_dir: Path) -> Path:
+def copy_manifest(skill_dir: Path, out_dir: Path) -> tuple[Path, str]:
     manifest_path = out_dir / "manifest.json"
+    manifest = build_manifest(skill_dir, "generic")
     manifest_path.write_text(
-        json.dumps(build_manifest(skill_dir, "generic"), ensure_ascii=False, indent=2),
+        json.dumps(manifest, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    return manifest_path
+    return manifest_path, package_name_from_manifest(manifest, skill_dir)
 
 
 def load_expectations(path: Path | None) -> dict:
@@ -608,12 +617,12 @@ def main() -> None:
         if out_dir.exists():
             shutil.rmtree(out_dir)
         out_dir.mkdir(parents=True)
-        manifest = copy_manifest(skill_dir, out_dir)
+        manifest, package_name = copy_manifest(skill_dir, out_dir)
         generated.append(str(manifest))
         for platform in (args.platform or ["generic"]):
             generated.append(str(write_adapter(skill_dir, out_dir, platform)))
         if args.zip:
-            generated.append(str(make_zip(skill_dir, out_dir)))
+            generated.append(str(make_zip(skill_dir, out_dir, package_name)))
     except (FileNotFoundError, ValueError, yaml.YAMLError) as exc:
         failures.append(str(exc))
 

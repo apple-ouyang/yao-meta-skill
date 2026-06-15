@@ -3,6 +3,7 @@ import json
 import shutil
 import subprocess
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
 
@@ -28,12 +29,12 @@ def run(cmd: list[str]) -> dict:
     }
 
 
-def build_package(out_dir: Path) -> dict:
+def build_package(out_dir: Path, skill_root: Path = ROOT) -> dict:
     return run(
         [
             sys.executable,
             str(PACKAGER),
-            str(ROOT),
+            str(skill_root),
             "--platform",
             "openai",
             "--platform",
@@ -51,12 +52,12 @@ def build_package(out_dir: Path) -> dict:
     )
 
 
-def simulate(package_dir: Path, output_json: Path, output_md: Path) -> dict:
+def simulate(package_dir: Path, output_json: Path, output_md: Path, skill_root: Path = ROOT) -> dict:
     return run(
         [
             sys.executable,
             str(SIMULATOR),
-            str(ROOT),
+            str(skill_root),
             "--package-dir",
             str(package_dir),
             "--install-root",
@@ -113,6 +114,22 @@ def main() -> None:
     valid_markdown = (TMP / "install_simulation.md").read_text(encoding="utf-8")
     assert "Install Simulation" in valid_markdown
     assert "Installer permissions enforced" in valid_markdown
+
+    with tempfile.TemporaryDirectory(prefix="renamed-install-root-") as temp_root:
+        renamed_root = Path(temp_root) / "checkout-alias"
+        shutil.copytree(
+            ROOT,
+            renamed_root,
+            ignore=shutil.ignore_patterns(".git", ".previews", "dist", "__pycache__", ".pytest_cache", "tmp*"),
+        )
+        renamed_dir = TMP / "renamed-dist"
+        renamed_build = build_package(renamed_dir, renamed_root)
+        assert renamed_build["ok"], renamed_build
+        assert (renamed_dir / "yao-meta-skill.zip").exists(), renamed_build
+        renamed_valid = simulate(renamed_dir, TMP / "renamed_install_simulation.json", TMP / "renamed_install_simulation.md", renamed_root)
+        assert renamed_valid["ok"], renamed_valid
+        assert renamed_valid["payload"]["summary"]["archive_extracted"], renamed_valid
+        assert renamed_valid["payload"]["installed_skill_dir"].endswith("simulate-yao-meta-skill/yao-meta-skill"), renamed_valid
 
     policy_gap_dir = TMP / "policy-gap-dist"
     shutil.copytree(valid_dir, policy_gap_dir)

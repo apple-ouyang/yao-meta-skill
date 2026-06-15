@@ -1000,8 +1000,8 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "1a11230c3274b89fc877d2e243970b3c15508fa913d7efc8f26d53949395c4a2",
-        "source_contract_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
+        "evidence_bundle_sha256": "0d1c762a722d1bbc83339a0365efcfcdf027849fc83c7079da92a524b905f5ab",
+        "source_contract_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306",
         "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -1022,9 +1022,9 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 16
+        "changed_file_count": 38
       },
-      "commit": "84b761abce9f0a361ddea7d446d0454666de0885",
+      "commit": "db1b24cbda5eb00f71b35846dff0f178625aa31d",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1129,7 +1129,7 @@
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
       "package_hash_file_count": 194,
-      "package_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713"
+      "package_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1167,7 +1167,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713",
+          "package_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306",
           "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc"
         },
         "compatibility": {
@@ -1299,7 +1299,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "278b4ff6c0c7e8406dfa62e5813013532af58e35d12b22f8bef25d59ac544713"
+            "to": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306"
           }
         ]
       },
