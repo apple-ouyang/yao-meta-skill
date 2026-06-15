@@ -48,8 +48,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "2df5c9acd093f45e27318bbe5ff984fae3a5fd8e",
-      "actual": "2df5c9acd093f45e27318bbe5ff984fae3a5fd8e",
+      "expected": "0e6327ca9399c6995b192fdf710fa4c99699c2c8",
+      "actual": "0e6327ca9399c6995b192fdf710fa4c99699c2c8",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -64,8 +64,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306",
-        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "source_contract_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4",
+        "archive_sha256": "798153ff8e1569408e8f658be5aea1f144ee44bfe4edf658c71d6a2f0275c1c8",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -77,8 +77,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306",
-        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "source_contract_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4",
+        "archive_sha256": "798153ff8e1569408e8f658be5aea1f144ee44bfe4edf658c71d6a2f0275c1c8",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -194,8 +194,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "2df5c9acd093f45e27318bbe5ff984fae3a5fd8e",
-      "actual": "2df5c9acd093f45e27318bbe5ff984fae3a5fd8e",
+      "expected": "0e6327ca9399c6995b192fdf710fa4c99699c2c8",
+      "actual": "0e6327ca9399c6995b192fdf710fa4c99699c2c8",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -210,8 +210,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306",
-        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "source_contract_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4",
+        "archive_sha256": "798153ff8e1569408e8f658be5aea1f144ee44bfe4edf658c71d6a2f0275c1c8",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -223,8 +223,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4660a11db94947ab603dca42eddc447698785d08f0df2972bf2ca43454683306",
-        "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
+        "source_contract_sha256": "76edc3f9936da8966eff0e0f689568c7d6d787691a45773a3e86bb38be6b0cc4",
+        "archive_sha256": "798153ff8e1569408e8f658be5aea1f144ee44bfe4edf658c71d6a2f0275c1c8",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -1312,7 +1312,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 107
+            "file_count": 109
           },
           {
             "path": "evals",
@@ -1327,7 +1327,7 @@
             "file_count": 215
           }
         ],
-        "file_count": 389,
+        "file_count": 391,
         "folder_count": 4,
         "distribution": [
           {
@@ -1352,7 +1352,7 @@
           },
           {
             "label": "scripts",
-            "value": 107
+            "value": 109
           },
           {
             "label": "evals",
@@ -1400,7 +1400,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 107
+            "file_count": 109
           },
           {
             "path": "evals",
@@ -1415,7 +1415,7 @@
             "file_count": 215
           }
         ],
-        "file_count": 389,
+        "file_count": 391,
         "folder_count": 4,
         "distribution": [
           {
@@ -1440,7 +1440,7 @@
           },
           {
             "label": "scripts",
-            "value": 107
+            "value": 109
           },
           {
             "label": "evals",
