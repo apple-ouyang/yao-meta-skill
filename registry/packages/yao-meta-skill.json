@@ -17,7 +17,7 @@
   "license": "MIT",
   "checksums": {
     "package_sha256": "7334782000ae11f8ab7279a11d34953a2016f8955c96ba0d8a66c312498424ff",
-    "archive_sha256": "f1790c1dd3b98d473a3ae9a9f6ab9d33bda7300e6f74453c2d30d2a8d7ed667a"
+    "archive_sha256": "2b1cee2d9a5ac643a10d7ed1fe88f8614c161b48b70df714d999b5471e7a2fa9"
   },
   "compatibility": {
     "openai": "pass",
@@ -48,7 +48,7 @@
   },
   "distribution": {
     "archive_verified": true,
-    "archive_sha256": "f1790c1dd3b98d473a3ae9a9f6ab9d33bda7300e6f74453c2d30d2a8d7ed667a",
+    "archive_sha256": "2b1cee2d9a5ac643a10d7ed1fe88f8614c161b48b70df714d999b5471e7a2fa9",
     "package_verification": "reports/package_verification.json",
     "install_simulated": true,
     "install_simulation": "reports/install_simulation.json"
