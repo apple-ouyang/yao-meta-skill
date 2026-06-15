@@ -3,24 +3,21 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
+  "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 36,
+    "changed_file_count": 9,
     "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/adoption_drift_report.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
-      " M reports/context_budget.json",
-      " M reports/context_budget.md",
-      " M reports/context_budget_summary.json",
       " M reports/evidence_consistency.json",
-      " M reports/install_simulation.json"
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json",
+      " M reports/skill-os-2-review.md",
+      " M reports/skill-overview.json"
     ],
     "scope": "generation-time status before this report is written"
   },
@@ -52,7 +49,7 @@
     "public_claim_ready": false,
     "public_claim_blocker_count": 5,
     "working_tree_dirty": true,
-    "changed_file_count": 36
+    "changed_file_count": 9
   },
   "public_claim": {
     "ready": false,
@@ -68,7 +65,7 @@
   },
   "release_lock": {
     "ready": false,
-    "commit": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
+    "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
     "status_scope": "generation-time status before this report is written",
     "reason": "working tree was dirty at generation time"
   },

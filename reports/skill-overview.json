@@ -1021,9 +1021,9 @@
       "public_claim_ready": false,
       "public_claim_blocker_count": 5,
       "working_tree_dirty": true,
-      "changed_file_count": 36
+      "changed_file_count": 9
     },
-    "commit": "391821240ba14f088d0fbe12dd5f1fdca7917a39",
+    "commit": "a7960d4cfd2d9a17cbaebcee7b823f0db13df0cf",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
