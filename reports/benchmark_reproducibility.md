@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-15`
-Commit: `14ad95850f38ef1ae1dabe1fe47578360c0ed867`
+Commit: `afdd5332710bf8b6dd673f034fc78aed36096fcb`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `f00f42607ce64b44f883be46d170e3b5b15b699ef5aeb7ac12e03fd08d6e0ef4`
+Evidence bundle SHA256: `336d2c39f255d97b64d380259f5b7709ba544a0d1537b28e392254cc49ab4f95`
 
 ## Summary
 
@@ -13,7 +13,7 @@ Evidence bundle SHA256: `f00f42607ce64b44f883be46d170e3b5b15b699ef5aeb7ac12e03fd
 - required artifacts: `24`
 - missing artifacts: `0`
 - source contract sha256: `7334782000ae`
-- archive sha256: `f1790c1dd3b9`
+- archive sha256: `2b1cee2d9a5a`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `22`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `24` / `24`
-- sha256: `f00f42607ce64b44f883be46d170e3b5b15b699ef5aeb7ac12e03fd08d6e0ef4`
+- sha256: `336d2c39f255d97b64d380259f5b7709ba544a0d1537b28e392254cc49ab4f95`
 
 ## Methodology Sections
 
@@ -79,8 +79,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
 | trust_report | `reports/security_trust_report.json` | present | `7e6b33da861c` |
 | python_compatibility | `reports/python_compatibility.json` | present | `471c481ff9f9` |
-| registry_audit | `reports/registry_audit.json` | present | `960cfafa3c72` |
-| package_verification | `reports/package_verification.json` | present | `516d4a212686` |
+| registry_audit | `reports/registry_audit.json` | present | `fac66f951324` |
+| package_verification | `reports/package_verification.json` | present | `f8d665d9105c` |
 | install_simulation | `reports/install_simulation.json` | present | `fc4522d78fc4` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `57536bc67370` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `933cdb002181` |
