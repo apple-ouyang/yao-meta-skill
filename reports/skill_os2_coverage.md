@@ -10,8 +10,8 @@ Generated at: `2026-06-16`
 - pass: `21` / `21`
 - missing: `0`
 - warn: `0`
-- reference extensions: `2`
-- extension covered: `2`
+- reference extensions: `3`
+- extension covered: `3`
 - extension partial: `0`
 - extension planned: `0`
 - adaptive extension ready: `true`
@@ -26,9 +26,9 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Skill IR | `pass` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir .` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `pass` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec . && python3 scripts/yao.py output-review .` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `pass` | 5/5 targets pass | `python3 scripts/yao.py conformance .` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `pass` | 114 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
+| Trust Security | `pass` | 115 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust .` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `pass` | 12 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root .` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `pass` | archive entries 626; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
+| Registry Distribution | `pass` | archive entries 630; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .` | `python3 tests/verify_registry_audit.py` |
 | Review Studio | `pass` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio .` | `python3 tests/verify_review_studio.py` |
 | Telemetry Drift | `pass` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . && python3 scripts/yao.py adoption-drift .` | `python3 tests/verify_telemetry_hooks.py` |
 
@@ -56,6 +56,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | --- | --- | --- | --- | --- |
 | Skill Interpretation Report | `covered` | Skill Overview v2 is canonical and mirrored as first-class skill-interpretation HTML/JSON with schema and tests. | Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests. | Keep overview and interpretation contracts in lockstep when report sections, metrics, or layout semantics change. |
 | Adaptive Self-Iteration | `covered` | Full adaptive loop includes proposal, approval, patch application, regression evidence, and rollback metadata. | Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan. | Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path. |
+| Daily SkillOps Report | `covered` | Daily SkillOps report is a CLI-backed, explicit-source operations cockpit with tests and committed dated evidence. | Generate reports/skillops/daily/YYYY-MM-DD.* from explicit sources without private log scanning, source writes, auto-patching, or world-class overclaiming. | Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves. |
 
 These extension tracks come from the user-supplied 2.0 reference plan. They are tracked separately from the formal Skill OS blueprint so the report can distinguish landed local architecture from planned explainer/adaptor evolution.
 
@@ -63,7 +64,7 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - Close the four world-class evidence ledger entries with accepted human or external evidence.
 - Keep the first-class skill interpretation report and Skill Overview v2 contract synchronized as the report model evolves.
-- Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.
+- Use Daily SkillOps with explicit curated sources to review adaptation proposals without scanning private logs or auto-patching.
 - Keep the blueprint coverage report in CI so 2.0 plan drift is visible.
 
 ## Evidence Detail
@@ -228,3 +229,10 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 - status: `covered`
 - existing evidence: `references/autonomous-adaptation.md`, `references/user-memory-policy.md`, `schemas/adaptation-proposal.schema.json`, `scripts/summarize_user_signals.py`, `scripts/propose_adaptation.py`, `tests/verify_adaptation_safety.py`, `scripts/apply_adaptation.py`, `reports/adaptation_approval_ledger.json`, `reports/adaptation_regression_report.json`, `reports/user_patterns.json`, `reports/adaptation_proposals.json`, `reports/iteration-directions.md`, `reports/adoption_drift_report.md`
 - next action: Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path.
+
+### Daily SkillOps Report
+
+- objective: Daily operations layer summarizes explicit-source conversation patterns, proposal-only adaptation work, approval state, release locks, and world-class evidence gaps.
+- status: `covered`
+- existing evidence: `scripts/render_daily_skillops_report.py`, `tests/verify_daily_skillops.py`, `reports/skillops/daily/2026-06-16.json`, `reports/skillops/daily/2026-06-16.md`
+- next action: Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves.

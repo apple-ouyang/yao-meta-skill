@@ -6,9 +6,9 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 176,
-    "json_claim_surface_count": 86,
-    "metadata_claim_surface_count": 87,
+    "claim_surface_count": 178,
+    "json_claim_surface_count": 87,
+    "metadata_claim_surface_count": 88,
     "package_claim_surface_count": 17,
     "violation_count": 0,
     "overclaim_guard_active": true,
@@ -608,6 +608,14 @@
     },
     {
       "path": "reports/skill_os2_coverage.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/daily/2026-06-16.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/daily/2026-06-16.md",
       "violation_count": 0
     },
     {

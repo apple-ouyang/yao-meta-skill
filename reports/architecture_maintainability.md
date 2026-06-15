@@ -5,12 +5,12 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `179`
-- scripts: `114`
-- tests: `65`
+- python files: `181`
+- scripts: `115`
+- tests: `66`
 - internal modules: `34`
-- CLI scripts: `82`
-- Yao CLI command handlers: `65`
+- CLI scripts: `83`
+- Yao CLI command handlers: `66`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `899`
@@ -31,7 +31,7 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
-| `scripts/yao_cli_parser.py` | `827` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/yao_cli_parser.py` | `843` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_world_class_evidence_intake.py` | `795` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
@@ -47,7 +47,7 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `899` | `test` | `pass` |
 | `scripts/render_evidence_consistency.py` | `859` | `cli-script` | `pass` |
-| `scripts/yao_cli_parser.py` | `827` | `internal-module` | `pass` |
+| `scripts/yao_cli_parser.py` | `843` | `internal-module` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `795` | `test` | `pass` |

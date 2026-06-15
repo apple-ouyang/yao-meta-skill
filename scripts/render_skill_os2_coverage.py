@@ -55,6 +55,24 @@ def paths_exist(skill_dir: Path, paths: list[str]) -> bool:
     return all((skill_dir / item).exists() for item in paths)
 
 
+def latest_daily_skillops_paths(skill_dir: Path) -> list[str]:
+    base_paths = [
+        "scripts/render_daily_skillops_report.py",
+        "tests/verify_daily_skillops.py",
+    ]
+    daily_dir = skill_dir / "reports" / "skillops" / "daily"
+    daily_json_reports = sorted(daily_dir.glob("*.json")) if daily_dir.exists() else []
+    if not daily_json_reports:
+        return [
+            *base_paths,
+            "reports/skillops/daily/YYYY-MM-DD.json",
+            "reports/skillops/daily/YYYY-MM-DD.md",
+        ]
+    latest_json = daily_json_reports[-1]
+    latest_md = latest_json.with_suffix(".md")
+    return [*base_paths, rel_path(latest_json, skill_dir), rel_path(latest_md, skill_dir)]
+
+
 def condition_status(condition: bool, evidence_items: list[dict[str, Any]]) -> str:
     if not all_exist(evidence_items):
         return "missing"
@@ -387,6 +405,26 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             skill_dir=skill_dir,
         )
     )
+    daily_skillops_paths = latest_daily_skillops_paths(skill_dir)
+    daily_skillops_ready = paths_exist(skill_dir, daily_skillops_paths)
+    daily_skillops_status = "covered" if daily_skillops_ready else "partial"
+    extension_tracks.append(
+        build_extension_track(
+            key="daily-skillops-report",
+            label="Daily SkillOps Report",
+            status=daily_skillops_status,
+            objective="Daily operations layer summarizes explicit-source conversation patterns, proposal-only adaptation work, approval state, release locks, and world-class evidence gaps.",
+            current=(
+                "Daily SkillOps report is a CLI-backed, explicit-source operations cockpit with tests and committed dated evidence."
+                if daily_skillops_ready
+                else "Adaptive scan/propose exists, but the daily operations report is not fully wired into scripts, tests, and evidence artifacts."
+            ),
+            target="Generate reports/skillops/daily/YYYY-MM-DD.* from explicit sources without private log scanning, source writes, auto-patching, or world-class overclaiming.",
+            artifact_paths=daily_skillops_paths,
+            next_action="Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves.",
+            skill_dir=skill_dir,
+        )
+    )
     extension_counts: dict[str, int] = {}
     for item in extension_tracks:
         extension_counts[item["status"]] = extension_counts.get(item["status"], 0) + 1
@@ -429,7 +467,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "next_highest_leverage": [
             "Close the four world-class evidence ledger entries with accepted human or external evidence.",
             "Keep the first-class skill interpretation report and Skill Overview v2 contract synchronized as the report model evolves.",
-            "Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.",
+            "Use Daily SkillOps with explicit curated sources to review adaptation proposals without scanning private logs or auto-patching.",
             "Keep the blueprint coverage report in CI so 2.0 plan drift is visible.",
         ],
         "source_blueprint": {
@@ -440,6 +478,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "reference_extensions": [
                 "Skill interpretation report",
                 "Adaptive self-iteration with local preference memory and approval gates",
+                "Daily SkillOps operations report",
             ],
         },
         "artifacts": {

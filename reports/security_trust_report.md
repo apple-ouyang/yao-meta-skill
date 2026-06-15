@@ -1,22 +1,22 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `201`
-- Scripts: `114`
+- Scanned files: `202`
+- Scripts: `115`
 - Internal script modules: `31`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
 - Network policy missing scripts: `0`
-- File-write scripts: `70`
+- File-write scripts: `71`
 - Permission approvals: `3 / 3`
 - Permission approval gaps: `0`
-- CLI help smoke checked: `83`
+- CLI help smoke checked: `84`
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `201`
-- Package SHA256: `bcfcc1a7fc34bd4b70746355ca3627bebc8a3c57a4703c014192aabbf8296ddf`
+- Package hash files: `202`
+- Package SHA256: `b6abceeea0f2329299123b8e295469602f9e742298f729e60d9b56ef49b48083`
 
 ## Failures
 
@@ -54,8 +54,8 @@
 
 - Enabled: `True`
 - Timeout seconds: `5.0`
-- Checked scripts: `83`
-- Passed scripts: `83`
+- Checked scripts: `84`
+- Passed scripts: `84`
 - Failed scripts: `none`
 
 ## Script Surface
@@ -101,6 +101,7 @@
 | scripts/render_baseline_compare.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_benchmark_reproducibility.py | cli | True | True | True | False | False | True | True | Renders a release-facing benchmark reproducibility manifest and Markdown report. |
 | scripts/render_context_reports.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/render_daily_skillops_report.py | cli | True | True | True | False | False | True | False | Renders a Daily SkillOps report that summarizes explicit-source patterns, proposals, approval state, and release evidence without scanning private logs or applying patches. |
 | scripts/render_description_drift_history.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_eval_dashboard.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/render_evidence_consistency.py | cli | True | True | True | False | False | True | False | Renders a cross-report evidence consistency gate for generated Skill OS reports. |

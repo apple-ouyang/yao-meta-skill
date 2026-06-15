@@ -10,10 +10,10 @@
     "pass_count": 21,
     "warn_count": 0,
     "missing_count": 0,
-    "extension_track_count": 2,
+    "extension_track_count": 3,
     "extension_partial_count": 0,
     "extension_planned_count": 0,
-    "extension_covered_count": 2,
+    "extension_covered_count": 3,
     "adaptive_extension_ready": true,
     "local_blueprint_ready": true,
     "public_world_class_ready": false,
@@ -26,7 +26,7 @@
     "missing": 0
   },
   "extension_status_counts": {
-    "covered": 2
+    "covered": 3
   },
   "modules": [
     {
@@ -130,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "114 scripts; secrets 0; help failures 0",
+      "current": "115 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -204,7 +204,7 @@
       "label": "Registry Distribution",
       "status": "pass",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 626; install failures 0",
+      "current": "archive entries 630; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
@@ -731,22 +731,50 @@
         }
       ],
       "next_action": "Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path."
+    },
+    {
+      "key": "daily-skillops-report",
+      "label": "Daily SkillOps Report",
+      "status": "covered",
+      "objective": "Daily operations layer summarizes explicit-source conversation patterns, proposal-only adaptation work, approval state, release locks, and world-class evidence gaps.",
+      "current": "Daily SkillOps report is a CLI-backed, explicit-source operations cockpit with tests and committed dated evidence.",
+      "target": "Generate reports/skillops/daily/YYYY-MM-DD.* from explicit sources without private log scanning, source writes, auto-patching, or world-class overclaiming.",
+      "evidence": [
+        {
+          "path": "scripts/render_daily_skillops_report.py",
+          "exists": true
+        },
+        {
+          "path": "tests/verify_daily_skillops.py",
+          "exists": true
+        },
+        {
+          "path": "reports/skillops/daily/2026-06-16.json",
+          "exists": true
+        },
+        {
+          "path": "reports/skillops/daily/2026-06-16.md",
+          "exists": true
+        }
+      ],
+      "next_action": "Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves."
     }
   ],
   "next_highest_leverage": [
     "Close the four world-class evidence ledger entries with accepted human or external evidence.",
     "Keep the first-class skill interpretation report and Skill Overview v2 contract synchronized as the report model evolves.",
-    "Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.",
+    "Use Daily SkillOps with explicit curated sources to review adaptation proposals without scanning private logs or auto-patching.",
     "Keep the blueprint coverage report in CI so 2.0 plan drift is visible."
   ],
   "source_blueprint": {
     "title": "Skill Overview / Skill OS 2.0 upgrade plan",
     "core_module_count": 8,
     "recommended_pr_count": 13,
-    "reference_extension_count": 2,
+    "reference_extension_count": 3,
     "reference_extensions": [
       "Skill interpretation report",
-      "Adaptive self-iteration with local preference memory and approval gates"
+      "Adaptive self-iteration with local preference memory and approval gates",
+      "Daily SkillOps operations report"
     ]
   },
   "artifacts": {

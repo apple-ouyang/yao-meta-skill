@@ -77,3 +77,29 @@ def command_adapt_apply(args: argparse.Namespace) -> int:
     result = run_script("apply_adaptation.py", cmd)
     print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
     return 0 if result["ok"] else 2
+
+
+def command_daily_skillops(args: argparse.Namespace) -> int:
+    skill_dir = str(Path(args.skill_dir).resolve())
+    cmd = [skill_dir]
+    if args.source:
+        cmd.extend(["--source", args.source])
+    if args.patterns_json:
+        cmd.extend(["--patterns-json", args.patterns_json])
+    if args.proposals_json:
+        cmd.extend(["--proposals-json", args.proposals_json])
+    if args.output_json:
+        cmd.extend(["--output-json", args.output_json])
+    if args.output_md:
+        cmd.extend(["--output-md", args.output_md])
+    if args.min_support is not None:
+        cmd.extend(["--min-support", str(args.min_support)])
+    if args.generated_at:
+        cmd.extend(["--generated-at", args.generated_at])
+    if args.allow_history_source:
+        cmd.append("--allow-history-source")
+    if args.no_refresh_source_reports:
+        cmd.append("--no-refresh-source-reports")
+    result = run_script("render_daily_skillops_report.py", cmd)
+    print(json.dumps(result["payload"] if result["payload"] is not None else result, ensure_ascii=False, indent=2))
+    return 0 if result["ok"] else 2

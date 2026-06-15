@@ -459,6 +459,22 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     adapt_apply_cmd.set_defaults(rollback_on_failure=True)
     adapt_apply_cmd.set_defaults(func=_handler(command_handlers, "command_adapt_apply"))
 
+    daily_skillops_cmd = subparsers.add_parser(
+        "daily-skillops",
+        help="Render a Daily SkillOps report from explicit-source adaptive evidence without scanning private logs or applying patches.",
+    )
+    daily_skillops_cmd.add_argument("skill_dir", nargs="?", default=".")
+    daily_skillops_cmd.add_argument("--source")
+    daily_skillops_cmd.add_argument("--patterns-json", default="reports/user_patterns.json")
+    daily_skillops_cmd.add_argument("--proposals-json", default="reports/adaptation_proposals.json")
+    daily_skillops_cmd.add_argument("--output-json")
+    daily_skillops_cmd.add_argument("--output-md")
+    daily_skillops_cmd.add_argument("--min-support", type=int, default=2)
+    daily_skillops_cmd.add_argument("--generated-at")
+    daily_skillops_cmd.add_argument("--allow-history-source", action="store_true")
+    daily_skillops_cmd.add_argument("--no-refresh-source-reports", action="store_true")
+    daily_skillops_cmd.set_defaults(func=_handler(command_handlers, "command_daily_skillops"))
+
     adoption_drift_cmd = subparsers.add_parser(
         "adoption-drift",
         help="Render local-first metadata-only adoption and drift telemetry for a skill package.",

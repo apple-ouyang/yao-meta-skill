@@ -114,13 +114,13 @@ Next move: add real client or installer permission enforcement integration.
 | Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, `0 / 5` reviewer decisions pending, `0` answer keys revealed, and `5` pending answers hidden |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
-| Trust | `0` secret findings, `1` pinned dependency file, `31` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `83 / 83` CLI help smoke checks passing across `114` scripts, source-contract hash scope explicit |
+| Trust | `0` secret findings, `1` pinned dependency file, `31` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `84 / 84` CLI help smoke checks passing across `115` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `626` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `626` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `630` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `630` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only review event, `1` adoption sample, adoption `100`, risk band `low`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |
@@ -133,7 +133,7 @@ Next move: add real client or installer permission enforcement integration.
 | Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; provider and human evidence remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
 | Context Budget | initial load `960/1000`, under the production budget |
-| CI | `make ci-test` target count is `77` after the world-class preflight gate update |
+| CI | `make ci-test` target count is `78` after the Daily SkillOps gate update |
 
 ## Next Highest-Leverage Moves
 

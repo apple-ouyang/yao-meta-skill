@@ -4,12 +4,12 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 179,
-    "script_file_count": 114,
-    "test_file_count": 65,
+    "python_file_count": 181,
+    "script_file_count": 115,
+    "test_file_count": 66,
     "internal_module_count": 34,
-    "cli_script_count": 82,
-    "command_handler_count": 65,
+    "cli_script_count": 83,
+    "command_handler_count": 66,
     "entrypoint_command_handler_count": 18,
     "command_module_count": 6,
     "warn_line_threshold": 900,
@@ -38,7 +38,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 827,
+      "lines": 843,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -124,7 +124,7 @@
     },
     {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 827,
+      "lines": 843,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

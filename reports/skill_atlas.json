@@ -103,6 +103,7 @@
           "scripts/render_baseline_compare.py",
           "scripts/render_benchmark_reproducibility.py",
           "scripts/render_context_reports.py",
+          "scripts/render_daily_skillops_report.py",
           "scripts/render_description_drift_history.py",
           "scripts/render_eval_dashboard.py",
           "scripts/render_evidence_consistency.py",
