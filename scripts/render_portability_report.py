@@ -22,6 +22,11 @@ def find_ir(root: Path) -> tuple[dict, str]:
         root / "reports" / "skill-ir.json",
         root / "skill-ir" / "examples" / f"{root.name}.json",
     ]
+    examples_dir = root / "skill-ir" / "examples"
+    if examples_dir.exists():
+        for path in sorted(examples_dir.glob("*.json")):
+            if path not in candidates:
+                candidates.append(path)
     for path in candidates:
         if path.exists():
             return load_json(path), str(path.relative_to(root))

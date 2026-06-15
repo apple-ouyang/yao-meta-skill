@@ -2,14 +2,31 @@
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_portability_report.py"
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from render_portability_report import find_ir
 
 
 def main() -> None:
+    with tempfile.TemporaryDirectory(prefix="renamed-skill-root-") as tmp:
+        tmp_root = Path(tmp)
+        ir_dir = tmp_root / "skill-ir" / "examples"
+        ir_dir.mkdir(parents=True)
+        ir_path = ir_dir / "yao-meta-skill.json"
+        ir_path.write_text(
+            json.dumps({"schema_version": "2.0.0", "job_to_be_done": "test renamed checkout"}),
+            encoding="utf-8",
+        )
+        ir_payload, ir_source = find_ir(tmp_root)
+        assert ir_payload["schema_version"] == "2.0.0", ir_payload
+        assert ir_source == "skill-ir/examples/yao-meta-skill.json", ir_source
+
     payload = None
     for args in ([], [str(ROOT)]):
         proc = subprocess.run(
