@@ -130,7 +130,7 @@ Next move: add real client or installer permission enforcement integration.
 | Skill OS 2.0 Audit | `15` audited areas, with local foundation evidence separated from human-required and external-required gaps |
 | World-Class Evidence Plan | `4` remaining evidence tasks: `1` human-required and `3` external-required, all with runbooks, success checks, and privacy contracts |
 | World-Class Evidence Ledger | `4` evidence entries remain pending: `1` human-required and `3` external-required; anti-overclaim guards block planned work, metadata fallbacks, pending review, and local command runners from counting as completion |
-| Benchmark Reproducibility | local reproducibility ready with `24` required artifacts, `0` missing artifacts, `22` reproduction commands, and `3` disclosed failure cases; provider and human evidence remain explicit limitations |
+| Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; provider and human evidence remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
 | Context Budget | initial load `960/1000`, under the production budget |
 | CI | `make ci-test` target count is `77` after the world-class preflight gate update |

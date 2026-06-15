@@ -43,6 +43,19 @@ def main() -> None:
     subprocess.run(
         [
             sys.executable,
+            str(ROOT / "scripts" / "render_world_class_preflight.py"),
+            str(ROOT),
+            "--generated-at",
+            "2026-06-13",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    subprocess.run(
+        [
+            sys.executable,
             str(ROOT / "scripts" / "render_world_class_submission_review.py"),
             str(ROOT),
             "--generated-at",
@@ -163,6 +176,7 @@ def main() -> None:
     assert artifacts["reports/world_class_evidence_plan.json"]["exists"], artifacts
     assert artifacts["reports/world_class_evidence_ledger.json"]["exists"], artifacts
     assert artifacts["reports/world_class_evidence_intake.json"]["exists"], artifacts
+    assert artifacts["reports/world_class_evidence_preflight.json"]["exists"], artifacts
     assert artifacts["reports/world_class_submission_review.json"]["exists"], artifacts
     assert artifacts["reports/world_class_operator_runbook.json"]["exists"], artifacts
     assert artifacts["reports/world_class_operator_runbook.md"]["exists"], artifacts
@@ -172,6 +186,7 @@ def main() -> None:
     assert any(command["command"] == "make ci-test" for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
+    assert any(command["command"] == "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions" for command in payload["reproduction_commands"]), payload
     assert any(command["command"] == "python3 scripts/yao.py world-class-claim-guard ." for command in payload["reproduction_commands"]), payload
@@ -190,7 +205,9 @@ def main() -> None:
     assert "## Release Lock" in markdown, markdown
     assert "## Evidence Bundle" in markdown, markdown
     assert "reports/benchmark_methodology.md" in markdown, markdown
+    assert "reports/world_class_evidence_preflight.json" in markdown, markdown
     assert "reports/world_class_operator_runbook.html" in markdown, markdown
+    assert "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions" in markdown, markdown
     assert "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions" in markdown, markdown
     assert "python3 scripts/yao.py evidence-consistency ." in markdown, markdown
     assert "make ci-test" in markdown, markdown
