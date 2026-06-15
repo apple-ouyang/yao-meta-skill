@@ -103,6 +103,173 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
     }
 
 
+def external_submission(
+    skill_root: Path,
+    *,
+    evidence_key: str,
+    source_type: str,
+    category: str = "external",
+    submitted_by: str = "Yao external operator",
+    artifact_paths: tuple[str, ...],
+    provenance: dict,
+) -> dict:
+    return {
+        "schema_version": "1.0",
+        "evidence_key": evidence_key,
+        "template_only": False,
+        "category": category,
+        "source_type": source_type,
+        "submitted_by": submitted_by,
+        "submitted_at": "2026-06-14",
+        "summary": f"Completed {evidence_key} evidence for ledger review.",
+        "artifact_refs": [
+            {
+                "path": path,
+                "kind": "aggregate-report",
+                "contains_raw_content": False,
+                "sha256": sha256_file(skill_root / path),
+            }
+            for path in artifact_paths
+        ],
+        "provenance": provenance,
+        "privacy": {
+            "raw_user_content_included": False,
+            "raw_provider_prompt_included": False,
+            "credentials_included": False,
+            "secrets_included": False,
+        },
+        "anti_overclaim": {
+            "planned_work_counts_as_evidence": False,
+            "metadata_fallback_counts_as_native_enforcement": False,
+            "pending_review_counts_as_human_decision": False,
+            "local_command_runner_counts_as_provider_model": False,
+        },
+        "attestation": {
+            "real_external_or_human_evidence": True,
+            "reviewer_or_operator_identity_present": True,
+            "artifact_refs_reviewed": True,
+            "privacy_contract_satisfied": True,
+        },
+    }
+
+
+def write_provider_artifact(skill_root: Path, *, complete: bool) -> None:
+    write_json(
+        skill_root / "reports" / "output_execution_runs.json",
+        {
+            "schema_version": "1.0",
+            "ok": True,
+            "summary": {
+                "variant_run_count": 2,
+                "model_executed_count": 2 if complete else 0,
+                "timing_observed_count": 2,
+                "token_observed_count": 2 if complete else 0,
+                "failure_count": 0,
+            },
+        },
+    )
+
+
+def provider_artifact_submission(skill_root: Path) -> dict:
+    return external_submission(
+        skill_root,
+        evidence_key="provider-holdout",
+        source_type="provider-output-eval",
+        artifact_paths=("reports/output_execution_runs.json",),
+        provenance={
+            "provider": "openai",
+            "model": "gpt-4.1-mini",
+            "credential_material_committed": False,
+        },
+    )
+
+
+def write_native_permission_artifacts(skill_root: Path, *, complete: bool) -> None:
+    write_json(
+        skill_root / "reports" / "runtime_permission_probes.json",
+        {
+            "schema_version": "1.0",
+            "ok": True,
+            "summary": {
+                "native_enforcement_count": 1 if complete else 0,
+                "failure_count": 0,
+                "installer_enforcement_ready": True,
+            },
+        },
+    )
+    write_json(
+        skill_root / "reports" / "install_simulation.json",
+        {
+            "schema_version": "1.0",
+            "ok": True,
+            "summary": {
+                "installer_permission_enforced_count": 12,
+                "installer_permission_failure_count": 0,
+                "failure_count": 0,
+            },
+        },
+    )
+
+
+def native_permission_submission(skill_root: Path) -> dict:
+    return external_submission(
+        skill_root,
+        evidence_key="native-permission-enforcement",
+        source_type="runtime-permission-guard",
+        artifact_paths=("reports/runtime_permission_probes.json", "reports/install_simulation.json"),
+        provenance={
+            "target": "vscode",
+            "guard_location": "VS Code extension runtime permission guard",
+            "guard_scope": "target-client-native",
+            "guard_blocks_undeclared_capability": True,
+            "metadata_fallback_retained_for_other_targets": True,
+        },
+    )
+
+
+def write_native_telemetry_artifacts(skill_root: Path, *, complete: bool) -> None:
+    write_json(
+        skill_root / "reports" / "adoption_drift_report.json",
+        {
+            "schema_version": "2.0",
+            "ok": True,
+            "privacy_contract": {
+                "raw_content_allowed": False,
+                "raw_event_log_packaged": False,
+            },
+            "summary": {
+                "source_types": {"external": 1 if complete else 0},
+                "adoption_sample_count": 1 if complete else 0,
+            },
+        },
+    )
+    write_json(
+        skill_root / "reports" / "telemetry_hook_recipes.json",
+        {
+            "schema_version": "1.0",
+            "ok": True,
+            "privacy_contract": {"raw_content_allowed": False},
+            "summary": {"metadata_only_recipe_count": 5},
+        },
+    )
+
+
+def native_telemetry_submission(skill_root: Path) -> dict:
+    return external_submission(
+        skill_root,
+        evidence_key="native-client-telemetry",
+        source_type="native-client-telemetry",
+        submitted_by="Yao client integrator",
+        artifact_paths=("reports/adoption_drift_report.json", "reports/telemetry_hook_recipes.json"),
+        provenance={
+            "client": "Chrome extension production build",
+            "native_host_manifest": "/Users/laoyao/.config/chrome/native-hosts/yao-meta-skill.json",
+            "event_source": "external",
+            "metadata_only": True,
+        },
+    )
+
+
 def write_json(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -259,6 +426,74 @@ def assert_human_contract_artifact_validation() -> None:
     assert any("provenance.reviewer must match decisions.reviewer" in error for error in mismatch_result["errors"]), mismatch_result["errors"]
 
 
+def assert_external_contract_artifact_validation() -> None:
+    skill_root = TMP / "external_contract_root"
+    provider_entry = {"key": "provider-holdout", "category": "external"}
+    write_provider_artifact(skill_root, complete=True)
+    provider_valid = validate_payload(
+        provider_artifact_submission(skill_root),
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_valid["status"] == "pass", provider_valid
+    write_provider_artifact(skill_root, complete=False)
+    provider_invalid = validate_payload(
+        provider_artifact_submission(skill_root),
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_invalid["status"] == "fail", provider_invalid
+    assert any("summary.model_executed_count must be >0" in error for error in provider_invalid["errors"]), provider_invalid["errors"]
+    assert any("summary.token_observed_count must be >0" in error for error in provider_invalid["errors"]), provider_invalid["errors"]
+
+    permission_entry = {"key": "native-permission-enforcement", "category": "external"}
+    write_native_permission_artifacts(skill_root, complete=True)
+    permission_valid = validate_payload(
+        native_permission_submission(skill_root),
+        permission_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-permission-enforcement.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert permission_valid["status"] == "pass", permission_valid
+    write_native_permission_artifacts(skill_root, complete=False)
+    permission_invalid = validate_payload(
+        native_permission_submission(skill_root),
+        permission_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-permission-enforcement.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert permission_invalid["status"] == "fail", permission_invalid
+    assert any("summary.native_enforcement_count must be >0" in error for error in permission_invalid["errors"]), permission_invalid["errors"]
+
+    telemetry_entry = {"key": "native-client-telemetry", "category": "external"}
+    write_native_telemetry_artifacts(skill_root, complete=True)
+    telemetry_valid = validate_payload(
+        native_telemetry_submission(skill_root),
+        telemetry_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-client-telemetry.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert telemetry_valid["status"] == "pass", telemetry_valid
+    write_native_telemetry_artifacts(skill_root, complete=False)
+    telemetry_invalid = validate_payload(
+        native_telemetry_submission(skill_root),
+        telemetry_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "native-client-telemetry.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert telemetry_invalid["status"] == "fail", telemetry_invalid
+    assert any("summary.source_types.external must be >0" in error for error in telemetry_invalid["errors"]), telemetry_invalid["errors"]
+    assert any("summary.adoption_sample_count must be >0" in error for error in telemetry_invalid["errors"]), telemetry_invalid["errors"]
+
+
 def assert_documented_submission_commands() -> None:
     expected_fragments = [
         'SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"',
@@ -282,6 +517,7 @@ def main() -> None:
     default_json = TMP / "world_class_evidence_intake.json"
     default_md = TMP / "world_class_evidence_intake.md"
     assert_human_contract_artifact_validation()
+    assert_external_contract_artifact_validation()
     payload = run_intake("--output-json", str(default_json), "--output-md", str(default_md))
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
@@ -454,20 +690,20 @@ def main() -> None:
         encoding="utf-8",
     )
     valid_payload = run_intake("--submissions-dir", str(valid_dir))
-    assert valid_payload["ok"] is True, valid_payload
-    assert valid_payload["summary"]["decision"] == "source-evidence-incomplete", valid_payload["summary"]
-    assert valid_payload["summary"]["valid_submission_count"] == 1, valid_payload["summary"]
-    assert valid_payload["summary"]["valid_packet_source_incomplete_count"] == 1, valid_payload["summary"]
+    assert valid_payload["ok"] is False, valid_payload
+    assert valid_payload["summary"]["decision"] == "fix-intake", valid_payload["summary"]
+    assert valid_payload["summary"]["valid_submission_count"] == 0, valid_payload["summary"]
+    assert valid_payload["summary"]["invalid_submission_count"] == 1, valid_payload["summary"]
+    assert valid_payload["summary"]["valid_packet_source_incomplete_count"] == 0, valid_payload["summary"]
     assert valid_payload["summary"]["operator_checklist_ready_count"] == 0, valid_payload["summary"]
     assert valid_payload["summary"]["ready_for_ledger_review"] is False, valid_payload["summary"]
     assert valid_payload["summary"]["ready_to_claim_world_class"] is False, valid_payload["summary"]
-    assert valid_payload["submissions"][0]["status"] == "pass", valid_payload["submissions"]
+    assert valid_payload["submissions"][0]["status"] == "fail", valid_payload["submissions"]
     assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_existing_count"] == 1, valid_payload["submissions"]
     assert valid_payload["submissions"][0]["artifact_integrity"]["artifact_sha256_verified_count"] == 1, valid_payload["submissions"]
+    assert any("summary.model_executed_count must be >0" in error for error in valid_payload["submissions"][0]["errors"]), valid_payload["submissions"]
     valid_checklist = {item["evidence_key"]: item for item in valid_payload["operator_checklist"]}
-    assert valid_checklist["provider-holdout"]["readiness"] == "source-evidence-incomplete", valid_checklist["provider-holdout"]
-    assert "source evidence checks still do not pass" in valid_checklist["provider-holdout"]["blocking_reason"], valid_checklist["provider-holdout"]
-    assert valid_checklist["provider-holdout"]["submission_path"].endswith("tests/tmp_world_class_evidence_intake/valid_submissions/provider-holdout.json"), valid_checklist["provider-holdout"]
+    assert valid_checklist["provider-holdout"]["readiness"] == "fix-submission", valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["validate_intake"], valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["submission_review"], valid_checklist["provider-holdout"]
     assert "tests/tmp_world_class_evidence_intake/valid_submissions" in valid_checklist["provider-holdout"]["commands"]["refresh_ledger"], valid_checklist["provider-holdout"]

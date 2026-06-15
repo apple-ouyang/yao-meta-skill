@@ -191,14 +191,15 @@ def main() -> None:
     )
     submitted_summary = submitted["summary"]
     assert submitted_summary["awaiting_submission_count"] == 3, submitted_summary
-    assert submitted_summary["valid_packet_source_incomplete_count"] == 1, submitted_summary
+    assert submitted_summary["valid_packet_source_incomplete_count"] == 0, submitted_summary
+    assert submitted_summary["invalid_submission_count"] == 1, submitted_summary
     assert submitted_summary["ready_for_ledger_review_count"] == 0, submitted_summary
     assert submitted_summary["source_pass_count"] + submitted_summary["source_blocked_count"] == submitted_summary["source_check_count"], submitted_summary
     assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     assert submitted_summary["ready_to_claim_world_class"] is False, submitted_summary
     submitted_provider = {item["evidence_key"]: item for item in submitted["items"]}["provider-holdout"]
-    assert submitted_provider["intake_readiness"] == "source-evidence-incomplete", submitted_provider
-    assert submitted_provider["review_state"] == "source-evidence-incomplete", submitted_provider
+    assert submitted_provider["intake_readiness"] == "fix-submission", submitted_provider
+    assert submitted_provider["review_state"] == "fix-submission", submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
     assert submitted_provider["blocked_source_check_count"] == 2, submitted_provider
     assert submitted_provider["next_source_actions"] == provider["next_source_actions"], submitted_provider

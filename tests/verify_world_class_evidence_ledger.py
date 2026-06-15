@@ -178,26 +178,32 @@ def main() -> None:
     )
     submitted_payload = json.loads(submitted_proc.stdout)
     submitted_summary = submitted_payload["summary"]
-    assert submitted_summary["submitted_entry_count"] == 1, submitted_summary
-    assert submitted_summary["submitted_but_pending_count"] == 1, submitted_summary
+    assert submitted_summary["submitted_entry_count"] == 0, submitted_summary
+    assert submitted_summary["submitted_but_pending_count"] == 0, submitted_summary
+    assert submitted_summary["invalid_submission_count"] == 1, submitted_summary
     assert submitted_summary["accepted_count"] == 0, submitted_summary
     assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     submitted_provider = {entry["key"]: entry for entry in submitted_payload["entries"]}["provider-holdout"]
     assert submitted_provider["status"] == "pending", submitted_provider
-    assert submitted_provider["submission_state"]["status"] == "submitted", submitted_provider
+    assert submitted_provider["submission_state"]["status"] == "invalid-contract", submitted_provider
     assert submitted_provider["submission_state"]["artifact_sha256_verified_count"] == 1, submitted_provider
     assert submitted_provider["submission_state"]["attested_real_evidence"] is True, submitted_provider
     assert submitted_provider["submission_state"]["ledger_counts_as_completion"] is False, submitted_provider
+    assert any("summary.model_executed_count must be >0" in error for error in submitted_provider["submission_state"]["errors"]), submitted_provider
 
     accepted_source_skill = TMP / "accepted_source_skill"
     (accepted_source_skill / "reports").mkdir(parents=True)
     (accepted_source_skill / "reports" / "output_execution_runs.json").write_text(
         json.dumps(
             {
+                "schema_version": "1.0",
+                "ok": True,
                 "summary": {
+                    "variant_run_count": 1,
                     "model_executed_count": 1,
                     "timing_observed_count": 1,
                     "token_observed_count": 1,
+                    "failure_count": 0,
                 }
             },
             ensure_ascii=False,

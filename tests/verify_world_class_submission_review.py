@@ -141,21 +141,25 @@ def main() -> None:
         str(TMP / "submitted_review.json"),
         "--output-md",
         str(TMP / "submitted_review.md"),
+        check=False,
     )
+    assert submitted_proc.returncode == 2, submitted_proc.stdout
     submitted_payload = json.loads(submitted_proc.stdout)
     submitted_summary = submitted_payload["summary"]
-    assert submitted_summary["decision"] == "source-evidence-incomplete", submitted_summary
-    assert submitted_summary["valid_packet_source_incomplete_count"] == 1, submitted_summary
+    assert submitted_payload["ok"] is False, submitted_payload
+    assert submitted_summary["decision"] == "fix-submissions", submitted_summary
+    assert submitted_summary["valid_packet_source_incomplete_count"] == 0, submitted_summary
     assert submitted_summary["awaiting_submission_count"] == 3, submitted_summary
-    assert submitted_summary["invalid_submission_count"] == 0, submitted_summary
+    assert submitted_summary["invalid_submission_count"] == 1, submitted_summary
     assert submitted_summary["source_pass_count"] + submitted_summary["source_blocked_count"] == submitted_summary["source_check_count"], submitted_summary
     assert submitted_summary["source_blocked_count"] >= 6, submitted_summary
     submitted_provider = {item["evidence_key"]: item for item in submitted_payload["items"]}["provider-holdout"]
-    assert submitted_provider["review_state"] == "source-evidence-incomplete", submitted_provider
-    assert submitted_provider["intake_status"] == "pass", submitted_provider
-    assert submitted_provider["submission_status"] == "submitted", submitted_provider
+    assert submitted_provider["review_state"] == "fix-submission", submitted_provider
+    assert submitted_provider["intake_status"] == "fail", submitted_provider
+    assert submitted_provider["submission_status"] == "invalid-contract", submitted_provider
     assert submitted_provider["artifact_ref_count"] == 1, submitted_provider
     assert submitted_provider["source_accepted"] is False, submitted_provider
+    assert any("summary.model_executed_count must be >0" in error for error in submitted_provider["intake_errors"]), submitted_provider
     assert "model_executed_count" in submitted_provider["observed_state"], submitted_provider
     submitted_source = {item["field"]: item for item in submitted_provider["source_checklist"]}
     assert submitted_source["model_executed_count"]["status"] == "blocked", submitted_source

@@ -241,7 +241,51 @@ def artifact_ref_path_map(payload: dict[str, Any], root: Path) -> dict[str, Path
 
 
 def real_int(value: Any) -> int | None:
-    return value if isinstance(value, int) else None
+    return value if isinstance(value, int) and not isinstance(value, bool) else None
+
+
+def summary(payload: dict[str, Any]) -> dict[str, Any]:
+    value = payload.get("summary", {})
+    return value if isinstance(value, dict) else {}
+
+
+def source_types(payload: dict[str, Any]) -> dict[str, Any]:
+    value = summary(payload).get("source_types", {})
+    return value if isinstance(value, dict) else {}
+
+
+def privacy_contract(payload: dict[str, Any]) -> dict[str, Any]:
+    value = payload.get("privacy_contract", {})
+    return value if isinstance(value, dict) else {}
+
+
+def validate_provider_holdout_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:
+    paths = artifact_ref_path_map(payload, root)
+    execution = load_json(paths.get("reports/output_execution_runs.json", root / "__missing__"))
+    if not execution:
+        return
+    execution_summary = summary(execution)
+    add_error(errors, execution.get("ok") is True, "provider-holdout output execution report ok must be true")
+    add_error(
+        errors,
+        bool(real_int(execution_summary.get("model_executed_count")) and execution_summary["model_executed_count"] > 0),
+        "provider-holdout output execution summary.model_executed_count must be >0",
+    )
+    add_error(
+        errors,
+        bool(real_int(execution_summary.get("timing_observed_count")) and execution_summary["timing_observed_count"] > 0),
+        "provider-holdout output execution summary.timing_observed_count must be >0",
+    )
+    add_error(
+        errors,
+        bool(real_int(execution_summary.get("token_observed_count")) and execution_summary["token_observed_count"] > 0),
+        "provider-holdout output execution summary.token_observed_count must be >0",
+    )
+    add_error(
+        errors,
+        execution_summary.get("failure_count") == 0,
+        "provider-holdout output execution summary.failure_count must be 0",
+    )
 
 
 def validate_human_adjudication_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:
@@ -334,11 +378,110 @@ def validate_human_adjudication_artifacts(payload: dict[str, Any], errors: list[
     )
 
 
+def validate_native_permission_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:
+    paths = artifact_ref_path_map(payload, root)
+    probes = load_json(paths.get("reports/runtime_permission_probes.json", root / "__missing__"))
+    install = load_json(paths.get("reports/install_simulation.json", root / "__missing__"))
+    if probes:
+        probe_summary = summary(probes)
+        add_error(errors, probes.get("ok") is True, "native-permission-enforcement runtime probe report ok must be true")
+        add_error(
+            errors,
+            bool(real_int(probe_summary.get("native_enforcement_count")) and probe_summary["native_enforcement_count"] > 0),
+            "native-permission-enforcement runtime probe summary.native_enforcement_count must be >0",
+        )
+        add_error(
+            errors,
+            probe_summary.get("failure_count") == 0,
+            "native-permission-enforcement runtime probe summary.failure_count must be 0",
+        )
+        add_error(
+            errors,
+            probe_summary.get("installer_enforcement_ready") is True,
+            "native-permission-enforcement runtime probe summary.installer_enforcement_ready must be true",
+        )
+    if install:
+        install_summary = summary(install)
+        add_error(errors, install.get("ok") is True, "native-permission-enforcement install simulation report ok must be true")
+        add_error(
+            errors,
+            bool(
+                real_int(install_summary.get("installer_permission_enforced_count"))
+                and install_summary["installer_permission_enforced_count"] > 0
+            ),
+            "native-permission-enforcement install simulation summary.installer_permission_enforced_count must be >0",
+        )
+        add_error(
+            errors,
+            install_summary.get("installer_permission_failure_count") == 0,
+            "native-permission-enforcement install simulation summary.installer_permission_failure_count must be 0",
+        )
+        add_error(
+            errors,
+            install_summary.get("failure_count") == 0,
+            "native-permission-enforcement install simulation summary.failure_count must be 0",
+        )
+
+
+def validate_native_client_telemetry_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:
+    paths = artifact_ref_path_map(payload, root)
+    adoption = load_json(paths.get("reports/adoption_drift_report.json", root / "__missing__"))
+    recipes = load_json(paths.get("reports/telemetry_hook_recipes.json", root / "__missing__"))
+    if adoption:
+        adoption_summary = summary(adoption)
+        adoption_privacy = privacy_contract(adoption)
+        add_error(errors, adoption.get("ok") is True, "native-client-telemetry adoption drift report ok must be true")
+        add_error(
+            errors,
+            bool(real_int(source_types(adoption).get("external")) and source_types(adoption)["external"] > 0),
+            "native-client-telemetry adoption drift summary.source_types.external must be >0",
+        )
+        add_error(
+            errors,
+            bool(real_int(adoption_summary.get("adoption_sample_count")) and adoption_summary["adoption_sample_count"] > 0),
+            "native-client-telemetry adoption drift summary.adoption_sample_count must be >0",
+        )
+        add_error(
+            errors,
+            adoption_privacy.get("raw_content_allowed") is False,
+            "native-client-telemetry adoption drift privacy_contract.raw_content_allowed must be false",
+        )
+        add_error(
+            errors,
+            adoption_privacy.get("raw_event_log_packaged") is False,
+            "native-client-telemetry adoption drift privacy_contract.raw_event_log_packaged must be false",
+        )
+    if recipes:
+        recipes_summary = summary(recipes)
+        recipes_privacy = privacy_contract(recipes)
+        add_error(errors, recipes.get("ok") is True, "native-client-telemetry hook recipes report ok must be true")
+        add_error(
+            errors,
+            bool(
+                real_int(recipes_summary.get("metadata_only_recipe_count"))
+                and recipes_summary["metadata_only_recipe_count"] > 0
+            ),
+            "native-client-telemetry hook recipes summary.metadata_only_recipe_count must be >0",
+        )
+        add_error(
+            errors,
+            recipes_privacy.get("raw_content_allowed") is False,
+            "native-client-telemetry hook recipes privacy_contract.raw_content_allowed must be false",
+        )
+
+
 def validate_real_artifact_payloads(payload: dict[str, Any], errors: list[str], root: Path, template_expected: bool) -> None:
     if template_expected:
         return
-    if str(payload.get("evidence_key", "")) == "human-adjudication":
+    evidence_key = str(payload.get("evidence_key", ""))
+    if evidence_key == "provider-holdout":
+        validate_provider_holdout_artifacts(payload, errors, root)
+    elif evidence_key == "human-adjudication":
         validate_human_adjudication_artifacts(payload, errors, root)
+    elif evidence_key == "native-permission-enforcement":
+        validate_native_permission_artifacts(payload, errors, root)
+    elif evidence_key == "native-client-telemetry":
+        validate_native_client_telemetry_artifacts(payload, errors, root)
 
 
 def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> None:
