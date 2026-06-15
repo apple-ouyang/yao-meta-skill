@@ -18,9 +18,9 @@ except ImportError:  # pragma: no cover
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SCAN_DIRS = ["agents", "docs", "evals", "references", "runtime", "scripts", "security", "skill-ir", "templates"]
+SCAN_DIRS = ["agents", "assets", "docs", "evals", "references", "runtime", "scripts", "security", "skill-ir", "templates"]
 ROOT_FILES = ["SKILL.md", "README.md", "manifest.json", "requirements-ci.txt", "Makefile"]
-TEXT_SUFFIXES = {".md", ".json", ".jsonl", ".yaml", ".yml", ".py", ".sh", ".txt", ".toml"}
+TEXT_SUFFIXES = {".css", ".js", ".md", ".json", ".jsonl", ".yaml", ".yml", ".py", ".sh", ".txt", ".toml"}
 PACKAGE_HASH_SCOPE = "source-contract-without-generated-reports"
 INTERNAL_SCRIPT_INTERFACE = "internal-module"
 NETWORK_POLICY_REL_PATH = "security/network_policy.json"

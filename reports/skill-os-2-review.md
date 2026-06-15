@@ -13,6 +13,7 @@ Yao Meta Skill is no longer only a Meta Skill factory. The current working tree 
 - Trust/Security v0 for secret, dependency, script, bounded network host policy, execution-level CLI help smoke checks, trust metadata, and stable source-contract integrity checks.
 - Skill Atlas v0 for portfolio catalog, route overlap, stale ownership, dependency signals, aggregate drift signals, and no-route opportunities.
 - Bilingual Skill Overview v2 that includes these evidence surfaces.
+- Skill Overview Asset Split v0 so long report CSS and JavaScript live in `assets/skill-overview.css` and `assets/skill-overview.js`, while the Python layout module keeps the generated report single-file by inlining those assets at render time.
 - Skill OS 2.0 Audit v0 for requirement-by-requirement evidence mapping, with explicit separation between local evidence, human-required review, and external-required provider/client integrations.
 - World-Class Evidence Plan v0 that turns the remaining provider holdout, human adjudication, native permission enforcement, and native client telemetry gaps into executable runbooks with success checks and privacy contracts.
 - World-Class Evidence Ledger v0 that records current acceptance state, provenance requirements, privacy contracts, and anti-overclaim guards for those remaining gaps.
@@ -127,8 +128,8 @@ Next move: add real client or installer permission enforcement integration.
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `643` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `643` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `645` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `645` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only review event, `1` adoption sample, adoption `100`, risk band `low`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |

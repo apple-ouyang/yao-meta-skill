@@ -8,6 +8,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "trust_check.py"
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from trust_check import iter_scan_files, relpath
 
 
 INTERFACE = """interface:
@@ -60,6 +63,9 @@ def main() -> None:
     assert payload["summary"]["package_hash_scope"] == "source-contract-without-generated-reports", payload
     assert payload["summary"]["package_hash_file_count"] == payload["summary"]["scanned_files"], payload
     assert payload["summary"]["package_sha256"], payload
+    scanned_paths = {relpath(ROOT, path) for path in iter_scan_files(ROOT)}
+    assert "assets/skill-overview.css" in scanned_paths, scanned_paths
+    assert "assets/skill-overview.js" in scanned_paths, scanned_paths
     assert payload["summary"]["internal_module_count"] >= 3, payload
     assert payload["summary"]["network_script_count"] == 3, payload
     assert payload["summary"]["network_policy_covered_count"] == payload["summary"]["network_script_count"], payload

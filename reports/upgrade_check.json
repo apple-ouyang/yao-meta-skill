@@ -70,12 +70,12 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "d26f3390edd0335f75fe05f77fd65d40541728fdb1d0779419cd9dce077a4034"
+        "to": "167bcde6bde563dfbffa949455c36bb55a70c4e7573bf166d9a4beb36cb95407"
       },
       {
         "field": "package_sha256",
         "from": "0000000000000000000000000000000000000000000000000000000000000000",
-        "to": "00efa72ae52906f680980aa05c3e4205d9556654e7a14c5fcc1bdc8eb2a81313"
+        "to": "8db4f8cfb8963484c2afb548453c44adca024b726e3f8cbd2ce1dcd4411cadfa"
       }
     ]
   },

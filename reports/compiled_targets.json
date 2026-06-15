@@ -142,6 +142,7 @@
             "references/skill-atlas-method.md",
             "references/skill-engineering-method.md",
             "references/skill-ir-method.md",
+            "references/skillops-decision-policy.md",
             "references/systems-thinking-doctrine.md",
             "references/telemetry-drift-method.md",
             "references/trust-security-method.md",
@@ -167,6 +168,7 @@
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
             "scripts/html_rendering.py",
+            "scripts/import_output_review_decisions.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -187,6 +189,7 @@
             "scripts/render_baseline_compare.py",
             "scripts/render_benchmark_reproducibility.py",
             "scripts/render_context_reports.py",
+            "scripts/render_daily_skillops_report.py",
             "scripts/render_description_drift_history.py",
             "scripts/render_eval_dashboard.py",
             "scripts/render_evidence_consistency.py",
@@ -211,6 +214,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_weekly_curator_report.py",
             "scripts/render_world_class_claim_guard.py",
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
@@ -226,6 +230,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
             "scripts/review_viewer_data.py",
@@ -242,6 +247,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/skill_report_world_class.py",
+            "scripts/skillops_opportunity.py",
             "scripts/summarize_user_signals.py",
             "scripts/sync_local_install.py",
             "scripts/telemetry_native_host.py",
@@ -252,6 +258,8 @@
             "scripts/verify_package.py",
             "scripts/world_class_evidence_contract.py",
             "scripts/world_class_source_checks.py",
+            "scripts/world_class_submission_kit_rendering.py",
+            "scripts/world_class_submission_matrix.py",
             "scripts/yao.py",
             "scripts/yao_cli_adaptation_commands.py",
             "scripts/yao_cli_config.py",
@@ -264,6 +272,8 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/skill-overview.css",
+            "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
             "templates/complex_skill.md.j2"
           ],
@@ -313,9 +323,9 @@
             "reports/governance_score.json"
           ],
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           }
         },
@@ -584,9 +594,9 @@
           "resources": {
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
-              "references": 34,
-              "scripts": 114,
-              "assets": 2,
+              "references": 35,
+              "scripts": 121,
+              "assets": 4,
               "reports": 43
             },
             "generated_files": [
@@ -596,7 +606,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 114,
+            "script_count": 121,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -838,9 +848,9 @@
         "resources": {
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           },
           "generated_files": [
@@ -850,7 +860,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 114,
+          "script_count": 121,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1049,6 +1059,7 @@
             "references/skill-atlas-method.md",
             "references/skill-engineering-method.md",
             "references/skill-ir-method.md",
+            "references/skillops-decision-policy.md",
             "references/systems-thinking-doctrine.md",
             "references/telemetry-drift-method.md",
             "references/trust-security-method.md",
@@ -1074,6 +1085,7 @@
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
             "scripts/html_rendering.py",
+            "scripts/import_output_review_decisions.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -1094,6 +1106,7 @@
             "scripts/render_baseline_compare.py",
             "scripts/render_benchmark_reproducibility.py",
             "scripts/render_context_reports.py",
+            "scripts/render_daily_skillops_report.py",
             "scripts/render_description_drift_history.py",
             "scripts/render_eval_dashboard.py",
             "scripts/render_evidence_consistency.py",
@@ -1118,6 +1131,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_weekly_curator_report.py",
             "scripts/render_world_class_claim_guard.py",
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
@@ -1133,6 +1147,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
             "scripts/review_viewer_data.py",
@@ -1149,6 +1164,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/skill_report_world_class.py",
+            "scripts/skillops_opportunity.py",
             "scripts/summarize_user_signals.py",
             "scripts/sync_local_install.py",
             "scripts/telemetry_native_host.py",
@@ -1159,6 +1175,8 @@
             "scripts/verify_package.py",
             "scripts/world_class_evidence_contract.py",
             "scripts/world_class_source_checks.py",
+            "scripts/world_class_submission_kit_rendering.py",
+            "scripts/world_class_submission_matrix.py",
             "scripts/yao.py",
             "scripts/yao_cli_adaptation_commands.py",
             "scripts/yao_cli_config.py",
@@ -1171,6 +1189,8 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/skill-overview.css",
+            "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
             "templates/complex_skill.md.j2"
           ],
@@ -1220,9 +1240,9 @@
             "reports/governance_score.json"
           ],
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           }
         },
@@ -1491,9 +1511,9 @@
           "resources": {
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
-              "references": 34,
-              "scripts": 114,
-              "assets": 2,
+              "references": 35,
+              "scripts": 121,
+              "assets": 4,
               "reports": 43
             },
             "generated_files": [
@@ -1503,7 +1523,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 114,
+            "script_count": 121,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1745,9 +1765,9 @@
         "resources": {
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           },
           "generated_files": [
@@ -1757,7 +1777,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 114,
+          "script_count": 121,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1956,6 +1976,7 @@
             "references/skill-atlas-method.md",
             "references/skill-engineering-method.md",
             "references/skill-ir-method.md",
+            "references/skillops-decision-policy.md",
             "references/systems-thinking-doctrine.md",
             "references/telemetry-drift-method.md",
             "references/trust-security-method.md",
@@ -1981,6 +2002,7 @@
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
             "scripts/html_rendering.py",
+            "scripts/import_output_review_decisions.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -2001,6 +2023,7 @@
             "scripts/render_baseline_compare.py",
             "scripts/render_benchmark_reproducibility.py",
             "scripts/render_context_reports.py",
+            "scripts/render_daily_skillops_report.py",
             "scripts/render_description_drift_history.py",
             "scripts/render_eval_dashboard.py",
             "scripts/render_evidence_consistency.py",
@@ -2025,6 +2048,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_weekly_curator_report.py",
             "scripts/render_world_class_claim_guard.py",
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
@@ -2040,6 +2064,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
             "scripts/review_viewer_data.py",
@@ -2056,6 +2081,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/skill_report_world_class.py",
+            "scripts/skillops_opportunity.py",
             "scripts/summarize_user_signals.py",
             "scripts/sync_local_install.py",
             "scripts/telemetry_native_host.py",
@@ -2066,6 +2092,8 @@
             "scripts/verify_package.py",
             "scripts/world_class_evidence_contract.py",
             "scripts/world_class_source_checks.py",
+            "scripts/world_class_submission_kit_rendering.py",
+            "scripts/world_class_submission_matrix.py",
             "scripts/yao.py",
             "scripts/yao_cli_adaptation_commands.py",
             "scripts/yao_cli_config.py",
@@ -2078,6 +2106,8 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/skill-overview.css",
+            "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
             "templates/complex_skill.md.j2"
           ],
@@ -2127,9 +2157,9 @@
             "reports/governance_score.json"
           ],
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           }
         },
@@ -2398,9 +2428,9 @@
           "resources": {
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
-              "references": 34,
-              "scripts": 114,
-              "assets": 2,
+              "references": 35,
+              "scripts": 121,
+              "assets": 4,
               "reports": 43
             },
             "generated_files": [
@@ -2409,7 +2439,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 114,
+            "script_count": 121,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2645,9 +2675,9 @@
         "resources": {
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           },
           "generated_files": [
@@ -2656,7 +2686,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 114,
+          "script_count": 121,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2847,6 +2877,7 @@
             "references/skill-atlas-method.md",
             "references/skill-engineering-method.md",
             "references/skill-ir-method.md",
+            "references/skillops-decision-policy.md",
             "references/systems-thinking-doctrine.md",
             "references/telemetry-drift-method.md",
             "references/trust-security-method.md",
@@ -2872,6 +2903,7 @@
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
             "scripts/html_rendering.py",
+            "scripts/import_output_review_decisions.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -2892,6 +2924,7 @@
             "scripts/render_baseline_compare.py",
             "scripts/render_benchmark_reproducibility.py",
             "scripts/render_context_reports.py",
+            "scripts/render_daily_skillops_report.py",
             "scripts/render_description_drift_history.py",
             "scripts/render_eval_dashboard.py",
             "scripts/render_evidence_consistency.py",
@@ -2916,6 +2949,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_weekly_curator_report.py",
             "scripts/render_world_class_claim_guard.py",
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
@@ -2931,6 +2965,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
             "scripts/review_viewer_data.py",
@@ -2947,6 +2982,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/skill_report_world_class.py",
+            "scripts/skillops_opportunity.py",
             "scripts/summarize_user_signals.py",
             "scripts/sync_local_install.py",
             "scripts/telemetry_native_host.py",
@@ -2957,6 +2993,8 @@
             "scripts/verify_package.py",
             "scripts/world_class_evidence_contract.py",
             "scripts/world_class_source_checks.py",
+            "scripts/world_class_submission_kit_rendering.py",
+            "scripts/world_class_submission_matrix.py",
             "scripts/yao.py",
             "scripts/yao_cli_adaptation_commands.py",
             "scripts/yao_cli_config.py",
@@ -2969,6 +3007,8 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/skill-overview.css",
+            "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
             "templates/complex_skill.md.j2"
           ],
@@ -3018,9 +3058,9 @@
             "reports/governance_score.json"
           ],
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           }
         },
@@ -3289,9 +3329,9 @@
           "resources": {
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
-              "references": 34,
-              "scripts": 114,
-              "assets": 2,
+              "references": 35,
+              "scripts": 121,
+              "assets": 4,
               "reports": 43
             },
             "generated_files": [
@@ -3301,7 +3341,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 114,
+            "script_count": 121,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3536,9 +3576,9 @@
         "resources": {
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           },
           "generated_files": [
@@ -3548,7 +3588,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 114,
+          "script_count": 121,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3738,6 +3778,7 @@
             "references/skill-atlas-method.md",
             "references/skill-engineering-method.md",
             "references/skill-ir-method.md",
+            "references/skillops-decision-policy.md",
             "references/systems-thinking-doctrine.md",
             "references/telemetry-drift-method.md",
             "references/trust-security-method.md",
@@ -3763,6 +3804,7 @@
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
             "scripts/html_rendering.py",
+            "scripts/import_output_review_decisions.py",
             "scripts/import_telemetry_events.py",
             "scripts/init_skill.py",
             "scripts/judge_blind_eval.py",
@@ -3783,6 +3825,7 @@
             "scripts/render_baseline_compare.py",
             "scripts/render_benchmark_reproducibility.py",
             "scripts/render_context_reports.py",
+            "scripts/render_daily_skillops_report.py",
             "scripts/render_description_drift_history.py",
             "scripts/render_eval_dashboard.py",
             "scripts/render_evidence_consistency.py",
@@ -3807,6 +3850,7 @@
             "scripts/render_social_preview.py",
             "scripts/render_system_model.py",
             "scripts/render_telemetry_hook_recipes.py",
+            "scripts/render_weekly_curator_report.py",
             "scripts/render_world_class_claim_guard.py",
             "scripts/render_world_class_evidence_intake.py",
             "scripts/render_world_class_evidence_ledger.py",
@@ -3822,6 +3866,7 @@
             "scripts/review_studio_gates.py",
             "scripts/review_studio_layout.py",
             "scripts/review_studio_output_review.py",
+            "scripts/review_studio_skillops.py",
             "scripts/review_studio_waivers.py",
             "scripts/review_studio_world_class.py",
             "scripts/review_viewer_data.py",
@@ -3838,6 +3883,7 @@
             "scripts/skill_report_metrics.py",
             "scripts/skill_report_model.py",
             "scripts/skill_report_world_class.py",
+            "scripts/skillops_opportunity.py",
             "scripts/summarize_user_signals.py",
             "scripts/sync_local_install.py",
             "scripts/telemetry_native_host.py",
@@ -3848,6 +3894,8 @@
             "scripts/verify_package.py",
             "scripts/world_class_evidence_contract.py",
             "scripts/world_class_source_checks.py",
+            "scripts/world_class_submission_kit_rendering.py",
+            "scripts/world_class_submission_matrix.py",
             "scripts/yao.py",
             "scripts/yao_cli_adaptation_commands.py",
             "scripts/yao_cli_config.py",
@@ -3860,6 +3908,8 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/skill-overview.css",
+            "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
             "templates/complex_skill.md.j2"
           ],
@@ -3909,9 +3959,9 @@
             "reports/governance_score.json"
           ],
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           }
         },
@@ -4180,9 +4230,9 @@
           "resources": {
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
-              "references": 34,
-              "scripts": 114,
-              "assets": 2,
+              "references": 35,
+              "scripts": 121,
+              "assets": 4,
               "reports": 43
             },
             "generated_files": [
@@ -4192,7 +4242,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 114,
+            "script_count": 121,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -4431,9 +4481,9 @@
         "resources": {
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
-            "references": 34,
-            "scripts": 114,
-            "assets": 2,
+            "references": 35,
+            "scripts": 121,
+            "assets": 4,
             "reports": 43
           },
           "generated_files": [
@@ -4443,7 +4493,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 114,
+          "script_count": 121,
           "help_smoke_failed_count": 0
         },
         "permissions": {

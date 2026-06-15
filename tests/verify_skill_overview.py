@@ -44,6 +44,7 @@ def main() -> None:
     assert 'aria-pressed="true"' in language_switch_contract, language_switch_contract
 
     css_contract = skill_overview_css()
+    assert css_contract == (ROOT / "assets" / "skill-overview.css").read_text(encoding="utf-8").strip()
     assert "position: sticky" in css_contract, css_contract[:1200]
     assert ".report-nav {" in css_contract, css_contract[:3200]
     assert "background: #ffffff" in css_contract, css_contract[:1600]
@@ -57,6 +58,7 @@ def main() -> None:
     assert "@media (max-width: 980px)" in css_contract, css_contract[-2200:]
 
     script_contract = skill_overview_script()
+    assert script_contract == (ROOT / "assets" / "skill-overview.js").read_text(encoding="utf-8").strip()
     assert 'setLanguage("zh-CN")' in script_contract, script_contract[-1000:]
     assert "scaleX(" in script_contract, script_contract
     assert "aria-current" in script_contract, script_contract

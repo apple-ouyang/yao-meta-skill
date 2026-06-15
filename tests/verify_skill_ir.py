@@ -51,6 +51,8 @@ def main() -> None:
     }
     actual_scripts = set(payload["resources"]["scripts"])
     assert expected_scripts <= actual_scripts, sorted(expected_scripts - actual_scripts)
+    assert "assets/skill-overview.css" in payload["resources"]["assets"], payload["resources"]["assets"]
+    assert "assets/skill-overview.js" in payload["resources"]["assets"], payload["resources"]["assets"]
     assert payload["resources"]["reports"], payload
     assert "evals/trigger_cases.json" in payload["eval_plan"]["trigger"], payload["eval_plan"]
     assert payload["risk"]["trust_boundary"] == "external", payload

@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 899,
-    "watchlist_count": 10,
+    "watchlist_count": 9,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -49,13 +49,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/skill_report_layout.py",
-      "lines": 808,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/skill_report_model.py",
@@ -105,6 +98,13 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/review_studio_layout.py",
+      "lines": 694,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [
@@ -135,13 +135,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/skill_report_layout.py",
-      "lines": 808,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/skill_report_model.py",

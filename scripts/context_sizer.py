@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 
-TEXT_EXTS = {".md", ".txt", ".yaml", ".yml", ".json", ".py", ".sh", ".js", ".ts"}
+TEXT_EXTS = {".css", ".md", ".txt", ".yaml", ".yml", ".json", ".py", ".sh", ".js", ".ts"}
 IGNORED_RELATIVE_DIRS = {
     Path("reports") / "release_snapshots",
     Path("tests") / "tmp",

@@ -176,6 +176,8 @@
         "references/telemetry-drift-method.md",
         "references/trust-security-method.md",
         "references/user-memory-policy.md",
+        "assets/skill-overview.css",
+        "assets/skill-overview.js",
         "templates/basic_skill.md.j2",
         "templates/complex_skill.md.j2"
       ],
