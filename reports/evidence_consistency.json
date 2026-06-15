@@ -48,8 +48,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "a0e7b5197ddee66acb3bf2b4e680ec512c7dc27a",
-      "actual": "a0e7b5197ddee66acb3bf2b4e680ec512c7dc27a",
+      "expected": "b5c185deb58db8b85d14627073e995b60f5e6434",
+      "actual": "b5c185deb58db8b85d14627073e995b60f5e6434",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -64,8 +64,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc",
-        "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
+        "source_contract_sha256": "139e01a5911f8ebee568acdfdca49b40f6cde9459c656379506f5d22b0730721",
+        "archive_sha256": "17a4569c32e11ac7c7d3ccf01c7d452ae040e48192f8a04027c51beea35a03bf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -77,8 +77,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc",
-        "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
+        "source_contract_sha256": "139e01a5911f8ebee568acdfdca49b40f6cde9459c656379506f5d22b0730721",
+        "archive_sha256": "17a4569c32e11ac7c7d3ccf01c7d452ae040e48192f8a04027c51beea35a03bf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -194,8 +194,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "a0e7b5197ddee66acb3bf2b4e680ec512c7dc27a",
-      "actual": "a0e7b5197ddee66acb3bf2b4e680ec512c7dc27a",
+      "expected": "b5c185deb58db8b85d14627073e995b60f5e6434",
+      "actual": "b5c185deb58db8b85d14627073e995b60f5e6434",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -210,8 +210,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc",
-        "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
+        "source_contract_sha256": "139e01a5911f8ebee568acdfdca49b40f6cde9459c656379506f5d22b0730721",
+        "archive_sha256": "17a4569c32e11ac7c7d3ccf01c7d452ae040e48192f8a04027c51beea35a03bf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -223,8 +223,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "14b4c185bf672aa498365077882090370f28b6deef51ecc1dc0f3b32bd0eb7bc",
-        "archive_sha256": "756c7446af442f1e7497c2e8b20a5e6d71d32c1801ca42da2be651c0d9ca9145",
+        "source_contract_sha256": "139e01a5911f8ebee568acdfdca49b40f6cde9459c656379506f5d22b0730721",
+        "archive_sha256": "17a4569c32e11ac7c7d3ccf01c7d452ae040e48192f8a04027c51beea35a03bf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -398,7 +398,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 356 个词/字，references 约 16316 个词/字。",
+            "入口约 356 个词/字，references 约 16388 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -462,7 +462,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 356 个词/字，references 约 16316 个词/字。",
+            "入口约 356 个词/字，references 约 16388 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -694,7 +694,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 356 个词/字，references 约 16316 个词/字。"
+          "上下文成本需要补强：入口约 356 个词/字，references 约 16388 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -742,7 +742,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 356 个词/字，references 约 16316 个词/字。"
+          "上下文成本需要补强：入口约 356 个词/字，references 约 16388 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
