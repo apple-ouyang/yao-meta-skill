@@ -29,4 +29,4 @@ The submission kit command creates editable JSON drafts plus a local README for 
 
 The submission review command renders a read-only queue that compares valid packets with the source evidence checks and current ledger state. It is for reviewer triage only; it does not accept evidence or make the world-class claim true.
 
-Accepted intake means "ready for ledger review", not "world-class complete". The ledger remains the source of truth for `ready_to_claim_world_class`.
+Accepted intake means "ready for ledger review", not evidence that the final public claim is ready. The ledger remains the source of truth for `ready_to_claim_world_class`.

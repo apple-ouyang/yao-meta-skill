@@ -43,15 +43,38 @@ def main() -> None:
     assert summary["ledger_pending_count"] == 4, summary
     assert summary["claim_surface_count"] >= 10, summary
     assert summary["json_claim_surface_count"] >= 10, summary
+    assert summary["metadata_claim_surface_count"] >= summary["json_claim_surface_count"], summary
+    assert summary["package_claim_surface_count"] >= 5, summary
     assert summary["violation_count"] == 0, summary
     assert summary["overclaim_guard_active"] is True, summary
     assert any(item["path"] == "README.md" for item in payload["scanned_surfaces"]), payload["scanned_surfaces"]
+    assert any(item["path"] == "manifest.json" for item in payload["scanned_surfaces"]), payload["scanned_surfaces"]
+    assert any(item["path"] == "evidence/world_class/README.md" for item in payload["scanned_surfaces"]), payload[
+        "scanned_surfaces"
+    ]
+    assert any(item["path"] == "agents/interface.yaml" for item in payload["scanned_surfaces"]), payload[
+        "scanned_surfaces"
+    ]
+    assert any(item["path"] == "dist/manifest.json" for item in payload["scanned_surfaces"]), payload[
+        "scanned_surfaces"
+    ]
+    assert any(item["path"] == "dist/targets/openai/adapter.json" for item in payload["scanned_surfaces"]), payload[
+        "scanned_surfaces"
+    ]
+    assert any(item["path"] == "security/permission_policy.json" for item in payload["scanned_surfaces"]), payload[
+        "scanned_surfaces"
+    ]
+    assert not any(
+        item["path"].startswith("dist/install-simulation/") for item in payload["scanned_surfaces"]
+    ), payload["scanned_surfaces"]
     assert any(item["path"] == "reports/world_class_evidence_ledger.json" for item in payload["scanned_surfaces"]), payload["scanned_surfaces"]
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Claim Guard" in markdown, markdown
     assert "claim-guard-pass-evidence-pending" in markdown, markdown
     assert "world-class evidence ledger" in markdown, markdown
     assert "JSON claim surfaces scanned" in markdown, markdown
+    assert "metadata claim surfaces scanned" in markdown, markdown
+    assert "package/runtime claim surfaces scanned" in markdown, markdown
 
     safe_surface = TMP / "safe.md"
     safe_surface.write_text("ready to claim world-class: `false`\nworld-class evidence is pending.\n", encoding="utf-8")

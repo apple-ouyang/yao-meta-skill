@@ -6,8 +6,10 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 150,
-    "json_claim_surface_count": 72,
+    "claim_surface_count": 173,
+    "json_claim_surface_count": 85,
+    "metadata_claim_surface_count": 86,
+    "package_claim_surface_count": 17,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -49,6 +51,38 @@
       "violation_count": 0
     },
     {
+      "path": "agents/interface.yaml",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/manifest.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/claude/README.md",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/claude/adapter.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/generic/adapter.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/openai/adapter.json",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/vscode/README.md",
+      "violation_count": 0
+    },
+    {
+      "path": "dist/targets/vscode/adapter.json",
+      "violation_count": 0
+    },
+    {
       "path": "docs/README.fr-FR.md",
       "violation_count": 0
     },
@@ -66,6 +100,34 @@
     },
     {
       "path": "docs/migration-v2.md",
+      "violation_count": 0
+    },
+    {
+      "path": "evidence/world_class/README.md",
+      "violation_count": 0
+    },
+    {
+      "path": "evidence/world_class/intake.schema.json",
+      "violation_count": 0
+    },
+    {
+      "path": "evidence/world_class/templates/human-adjudication.intake.json",
+      "violation_count": 0
+    },
+    {
+      "path": "evidence/world_class/templates/native-client-telemetry.intake.json",
+      "violation_count": 0
+    },
+    {
+      "path": "evidence/world_class/templates/native-permission-enforcement.intake.json",
+      "violation_count": 0
+    },
+    {
+      "path": "evidence/world_class/templates/provider-holdout.intake.json",
+      "violation_count": 0
+    },
+    {
+      "path": "manifest.json",
       "violation_count": 0
     },
     {
@@ -630,6 +692,38 @@
     },
     {
       "path": "reports/yao-deploy-bridge-skill-research-plan.md",
+      "violation_count": 0
+    },
+    {
+      "path": "security/dependency_policy.md",
+      "violation_count": 0
+    },
+    {
+      "path": "security/network_policy.json",
+      "violation_count": 0
+    },
+    {
+      "path": "security/network_policy.md",
+      "violation_count": 0
+    },
+    {
+      "path": "security/permission_policy.json",
+      "violation_count": 0
+    },
+    {
+      "path": "security/permission_policy.md",
+      "violation_count": 0
+    },
+    {
+      "path": "security/script_policy.md",
+      "violation_count": 0
+    },
+    {
+      "path": "security/secret_policy.md",
+      "violation_count": 0
+    },
+    {
+      "path": "security/trust_policy.md",
       "violation_count": 0
     },
     {

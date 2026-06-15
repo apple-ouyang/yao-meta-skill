@@ -66,16 +66,33 @@ def resolve_claim_surface(raw_path: str, skill_dir: Path) -> Path:
     return path.resolve()
 
 
+def should_scan_claim_surface(path: Path) -> bool:
+    parts = path.parts
+    if "release_snapshots" in parts:
+        return False
+    if path.name in {"world_class_claim_guard.md", "world_class_claim_guard.html"}:
+        return False
+    if "dist" in parts and "install-simulation" in parts:
+        return False
+    if "evidence" in parts and "world_class" in parts and "submissions" in parts:
+        return False
+    return True
+
+
 def default_claim_surfaces(skill_dir: Path) -> list[Path]:
     paths: list[Path] = []
-    for rel in ["README.md", "SKILL.md"]:
+    for rel in ["README.md", "SKILL.md", "manifest.json"]:
         path = skill_dir / rel
         if path.exists():
             paths.append(path)
     for directory, patterns in [
+        (skill_dir / "agents", ["*.yaml", "*.yml", "*.json"]),
         (skill_dir / "docs", ["*.md"]),
+        (skill_dir / "evidence" / "world_class", ["*.md", "*.json"]),
+        (skill_dir / "dist", ["*.json", "*.md"]),
         (skill_dir / "reports", ["*.md", "*.html", "*.json"]),
         (skill_dir / "registry", ["*.json"]),
+        (skill_dir / "security", ["*.md", "*.json"]),
         (skill_dir / "skill-ir", ["*.json"]),
     ]:
         if not directory.exists():
@@ -84,9 +101,7 @@ def default_claim_surfaces(skill_dir: Path) -> list[Path]:
             paths.extend(
                 path
                 for path in directory.rglob(pattern)
-                if path.is_file()
-                and "release_snapshots" not in path.parts
-                and path.name not in {"world_class_claim_guard.md", "world_class_claim_guard.html"}
+                if path.is_file() and should_scan_claim_surface(path)
             )
     return sorted(set(paths), key=lambda item: rel_path(item, skill_dir))
 
@@ -131,6 +146,15 @@ def build_guard(skill_dir: Path, generated_at: str, claim_surfaces: list[Path] |
             violations.append({"path": rel, **match})
     ok = len(violations) == 0
     json_surface_count = sum(1 for item in scanned if item["path"].endswith(".json"))
+    metadata_surface_count = sum(
+        1 for item in scanned if item["path"].endswith((".json", ".yaml", ".yml"))
+    )
+    package_surface_count = sum(
+        1
+        for item in scanned
+        if item["path"] == "manifest.json"
+        or item["path"].startswith(("agents/", "dist/", "security/"))
+    )
     return {
         "schema_version": "1.0",
         "ok": ok,
@@ -141,6 +165,8 @@ def build_guard(skill_dir: Path, generated_at: str, claim_surfaces: list[Path] |
             "ledger_pending_count": ledger.get("summary", {}).get("pending_count", 0),
             "claim_surface_count": len(scanned),
             "json_claim_surface_count": json_surface_count,
+            "metadata_claim_surface_count": metadata_surface_count,
+            "package_claim_surface_count": package_surface_count,
             "violation_count": len(violations),
             "overclaim_guard_active": True,
             "decision": (
@@ -180,10 +206,12 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- ledger pending evidence: `{summary['ledger_pending_count']}`",
         f"- claim surfaces scanned: `{summary['claim_surface_count']}`",
         f"- JSON claim surfaces scanned: `{summary['json_claim_surface_count']}`",
+        f"- metadata claim surfaces scanned: `{summary['metadata_claim_surface_count']}`",
+        f"- package/runtime claim surfaces scanned: `{summary['package_claim_surface_count']}`",
         f"- violations: `{summary['violation_count']}`",
         f"- overclaim guard active: `{str(summary['overclaim_guard_active']).lower()}`",
         "",
-        "This guard scans public claim surfaces and machine-readable report metadata for completion language that would contradict the world-class evidence ledger. It allows evidence planning and pending-state language, but blocks completion claims until the ledger is ready.",
+        "This guard scans public claim surfaces, machine-readable reports, and package/runtime metadata for completion language that would contradict the world-class evidence ledger. It allows evidence planning and pending-state language, but blocks completion claims until the ledger is ready.",
         "",
         "## Violations",
         "",
