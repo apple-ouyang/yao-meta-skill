@@ -4,6 +4,7 @@ import re
 from datetime import date
 from pathlib import Path
 
+from skill_ir_paths import find_skill_ir
 from skill_report_metrics import calculate_scorecard
 from skill_report_world_class import world_class_readiness, world_class_roadmap_item
 
@@ -82,35 +83,6 @@ def load_json(path: Path) -> dict:
     except json.JSONDecodeError:
         return {}
     return payload if isinstance(payload, dict) else {}
-
-
-def display_path(path: Path, root: Path) -> str:
-    try:
-        return str(path.resolve().relative_to(root.resolve()))
-    except ValueError:
-        return str(path)
-
-
-def find_skill_ir(skill_dir: Path, name: str) -> tuple[dict, str]:
-    candidates = [
-        skill_dir / "reports" / "skill-ir.json",
-        skill_dir / "skill-ir" / "examples" / f"{name}.json",
-        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
-    ]
-    examples_dir = skill_dir / "skill-ir" / "examples"
-    if examples_dir.exists():
-        for path in sorted(examples_dir.glob("*.json")):
-            if path not in candidates:
-                candidates.append(path)
-    seen: set[Path] = set()
-    for path in candidates:
-        if path in seen:
-            continue
-        seen.add(path)
-        payload = load_json(path)
-        if payload:
-            return payload, display_path(path, skill_dir)
-    return {}, ""
 
 
 def extract_title(body: str, fallback: str) -> str:

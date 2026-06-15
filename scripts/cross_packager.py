@@ -7,6 +7,7 @@ from pathlib import Path, PurePosixPath
 import yaml
 
 from compile_skill import compile_target_contract
+from skill_ir_paths import find_skill_ir as find_skill_ir_document
 
 
 def display_path(path: Path, root: Path) -> str:
@@ -48,20 +49,7 @@ def read_interface(skill_dir: Path) -> dict:
 
 
 def find_skill_ir(skill_dir: Path, name: str) -> tuple[dict, str]:
-    candidates = [
-        skill_dir / "reports" / "skill-ir.json",
-        skill_dir / "skill-ir" / "examples" / f"{name}.json",
-        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
-    ]
-    seen = set()
-    for path in candidates:
-        if path in seen:
-            continue
-        seen.add(path)
-        payload = read_json(path)
-        if payload:
-            return payload, display_path(path, skill_dir)
-    return {}, "frontmatter-fallback"
+    return find_skill_ir_document(skill_dir, name, fallback_source="frontmatter-fallback")
 
 
 def package_name_from_manifest(manifest: dict, skill_dir: Path) -> str:

@@ -149,6 +149,7 @@
           ],
           "scripts": [
             "scripts/adjudicate_output_review.py",
+            "scripts/apply_adaptation.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/check_update.py",
@@ -160,6 +161,8 @@
             "scripts/cross_packager.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
+            "scripts/evidence_consistency_release.py",
+            "scripts/evidence_consistency_world_class.py",
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
@@ -213,6 +216,7 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/render_world_class_operator_runbook.py",
+            "scripts/render_world_class_preflight.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_action_evidence.py",
@@ -227,7 +231,37 @@
             "scripts/review_viewer_data.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
-            "scripts/run_eval_suite.py"
+            "scripts/run_eval_suite.py",
+            "scripts/run_output_eval.py",
+            "scripts/run_output_execution.py",
+            "scripts/simulate_install.py",
+            "scripts/skill_ir_paths.py",
+            "scripts/skill_report_charts.py",
+            "scripts/skill_report_i18n.py",
+            "scripts/skill_report_layout.py",
+            "scripts/skill_report_metrics.py",
+            "scripts/skill_report_model.py",
+            "scripts/skill_report_world_class.py",
+            "scripts/summarize_user_signals.py",
+            "scripts/sync_local_install.py",
+            "scripts/telemetry_native_host.py",
+            "scripts/trigger_eval.py",
+            "scripts/trust_check.py",
+            "scripts/upgrade_check.py",
+            "scripts/validate_skill.py",
+            "scripts/verify_package.py",
+            "scripts/world_class_evidence_contract.py",
+            "scripts/world_class_source_checks.py",
+            "scripts/yao.py",
+            "scripts/yao_cli_adaptation_commands.py",
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_create_commands.py",
+            "scripts/yao_cli_distribution_commands.py",
+            "scripts/yao_cli_output_commands.py",
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_report_commands.py",
+            "scripts/yao_cli_runtime.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -280,7 +314,7 @@
           ],
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           }
@@ -548,7 +582,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 34,
-              "scripts": 80,
+              "scripts": 114,
               "assets": 2,
               "reports": 43
             },
@@ -559,7 +593,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 80,
+            "script_count": 114,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -799,7 +833,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           },
@@ -810,7 +844,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 80,
+          "script_count": 114,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1016,6 +1050,7 @@
           ],
           "scripts": [
             "scripts/adjudicate_output_review.py",
+            "scripts/apply_adaptation.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/check_update.py",
@@ -1027,6 +1062,8 @@
             "scripts/cross_packager.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
+            "scripts/evidence_consistency_release.py",
+            "scripts/evidence_consistency_world_class.py",
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
@@ -1080,6 +1117,7 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/render_world_class_operator_runbook.py",
+            "scripts/render_world_class_preflight.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_action_evidence.py",
@@ -1094,7 +1132,37 @@
             "scripts/review_viewer_data.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
-            "scripts/run_eval_suite.py"
+            "scripts/run_eval_suite.py",
+            "scripts/run_output_eval.py",
+            "scripts/run_output_execution.py",
+            "scripts/simulate_install.py",
+            "scripts/skill_ir_paths.py",
+            "scripts/skill_report_charts.py",
+            "scripts/skill_report_i18n.py",
+            "scripts/skill_report_layout.py",
+            "scripts/skill_report_metrics.py",
+            "scripts/skill_report_model.py",
+            "scripts/skill_report_world_class.py",
+            "scripts/summarize_user_signals.py",
+            "scripts/sync_local_install.py",
+            "scripts/telemetry_native_host.py",
+            "scripts/trigger_eval.py",
+            "scripts/trust_check.py",
+            "scripts/upgrade_check.py",
+            "scripts/validate_skill.py",
+            "scripts/verify_package.py",
+            "scripts/world_class_evidence_contract.py",
+            "scripts/world_class_source_checks.py",
+            "scripts/yao.py",
+            "scripts/yao_cli_adaptation_commands.py",
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_create_commands.py",
+            "scripts/yao_cli_distribution_commands.py",
+            "scripts/yao_cli_output_commands.py",
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_report_commands.py",
+            "scripts/yao_cli_runtime.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -1147,7 +1215,7 @@
           ],
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           }
@@ -1415,7 +1483,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 34,
-              "scripts": 80,
+              "scripts": 114,
               "assets": 2,
               "reports": 43
             },
@@ -1426,7 +1494,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 80,
+            "script_count": 114,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1666,7 +1734,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           },
@@ -1677,7 +1745,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 80,
+          "script_count": 114,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1883,6 +1951,7 @@
           ],
           "scripts": [
             "scripts/adjudicate_output_review.py",
+            "scripts/apply_adaptation.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/check_update.py",
@@ -1894,6 +1963,8 @@
             "scripts/cross_packager.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
+            "scripts/evidence_consistency_release.py",
+            "scripts/evidence_consistency_world_class.py",
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
@@ -1947,6 +2018,7 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/render_world_class_operator_runbook.py",
+            "scripts/render_world_class_preflight.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_action_evidence.py",
@@ -1961,7 +2033,37 @@
             "scripts/review_viewer_data.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
-            "scripts/run_eval_suite.py"
+            "scripts/run_eval_suite.py",
+            "scripts/run_output_eval.py",
+            "scripts/run_output_execution.py",
+            "scripts/simulate_install.py",
+            "scripts/skill_ir_paths.py",
+            "scripts/skill_report_charts.py",
+            "scripts/skill_report_i18n.py",
+            "scripts/skill_report_layout.py",
+            "scripts/skill_report_metrics.py",
+            "scripts/skill_report_model.py",
+            "scripts/skill_report_world_class.py",
+            "scripts/summarize_user_signals.py",
+            "scripts/sync_local_install.py",
+            "scripts/telemetry_native_host.py",
+            "scripts/trigger_eval.py",
+            "scripts/trust_check.py",
+            "scripts/upgrade_check.py",
+            "scripts/validate_skill.py",
+            "scripts/verify_package.py",
+            "scripts/world_class_evidence_contract.py",
+            "scripts/world_class_source_checks.py",
+            "scripts/yao.py",
+            "scripts/yao_cli_adaptation_commands.py",
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_create_commands.py",
+            "scripts/yao_cli_distribution_commands.py",
+            "scripts/yao_cli_output_commands.py",
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_report_commands.py",
+            "scripts/yao_cli_runtime.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2014,7 +2116,7 @@
           ],
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           }
@@ -2282,7 +2384,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 34,
-              "scripts": 80,
+              "scripts": 114,
               "assets": 2,
               "reports": 43
             },
@@ -2292,7 +2394,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 80,
+            "script_count": 114,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2526,7 +2628,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           },
@@ -2536,7 +2638,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 80,
+          "script_count": 114,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2734,6 +2836,7 @@
           ],
           "scripts": [
             "scripts/adjudicate_output_review.py",
+            "scripts/apply_adaptation.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/check_update.py",
@@ -2745,6 +2848,8 @@
             "scripts/cross_packager.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
+            "scripts/evidence_consistency_release.py",
+            "scripts/evidence_consistency_world_class.py",
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
@@ -2798,6 +2903,7 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/render_world_class_operator_runbook.py",
+            "scripts/render_world_class_preflight.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_action_evidence.py",
@@ -2812,7 +2918,37 @@
             "scripts/review_viewer_data.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
-            "scripts/run_eval_suite.py"
+            "scripts/run_eval_suite.py",
+            "scripts/run_output_eval.py",
+            "scripts/run_output_execution.py",
+            "scripts/simulate_install.py",
+            "scripts/skill_ir_paths.py",
+            "scripts/skill_report_charts.py",
+            "scripts/skill_report_i18n.py",
+            "scripts/skill_report_layout.py",
+            "scripts/skill_report_metrics.py",
+            "scripts/skill_report_model.py",
+            "scripts/skill_report_world_class.py",
+            "scripts/summarize_user_signals.py",
+            "scripts/sync_local_install.py",
+            "scripts/telemetry_native_host.py",
+            "scripts/trigger_eval.py",
+            "scripts/trust_check.py",
+            "scripts/upgrade_check.py",
+            "scripts/validate_skill.py",
+            "scripts/verify_package.py",
+            "scripts/world_class_evidence_contract.py",
+            "scripts/world_class_source_checks.py",
+            "scripts/yao.py",
+            "scripts/yao_cli_adaptation_commands.py",
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_create_commands.py",
+            "scripts/yao_cli_distribution_commands.py",
+            "scripts/yao_cli_output_commands.py",
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_report_commands.py",
+            "scripts/yao_cli_runtime.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -2865,7 +3001,7 @@
           ],
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           }
@@ -3133,7 +3269,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 34,
-              "scripts": 80,
+              "scripts": 114,
               "assets": 2,
               "reports": 43
             },
@@ -3144,7 +3280,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 80,
+            "script_count": 114,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3377,7 +3513,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           },
@@ -3388,7 +3524,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 80,
+          "script_count": 114,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3585,6 +3721,7 @@
           ],
           "scripts": [
             "scripts/adjudicate_output_review.py",
+            "scripts/apply_adaptation.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/check_update.py",
@@ -3596,6 +3733,8 @@
             "scripts/cross_packager.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
+            "scripts/evidence_consistency_release.py",
+            "scripts/evidence_consistency_world_class.py",
             "scripts/export_skill_ir.py",
             "scripts/github_benchmark_scan.py",
             "scripts/governance_check.py",
@@ -3649,6 +3788,7 @@
             "scripts/render_world_class_evidence_ledger.py",
             "scripts/render_world_class_evidence_plan.py",
             "scripts/render_world_class_operator_runbook.py",
+            "scripts/render_world_class_preflight.py",
             "scripts/render_world_class_submission_review.py",
             "scripts/resource_boundary_check.py",
             "scripts/review_studio_action_evidence.py",
@@ -3663,7 +3803,37 @@
             "scripts/review_viewer_data.py",
             "scripts/run_conformance_suite.py",
             "scripts/run_description_optimization_suite.py",
-            "scripts/run_eval_suite.py"
+            "scripts/run_eval_suite.py",
+            "scripts/run_output_eval.py",
+            "scripts/run_output_execution.py",
+            "scripts/simulate_install.py",
+            "scripts/skill_ir_paths.py",
+            "scripts/skill_report_charts.py",
+            "scripts/skill_report_i18n.py",
+            "scripts/skill_report_layout.py",
+            "scripts/skill_report_metrics.py",
+            "scripts/skill_report_model.py",
+            "scripts/skill_report_world_class.py",
+            "scripts/summarize_user_signals.py",
+            "scripts/sync_local_install.py",
+            "scripts/telemetry_native_host.py",
+            "scripts/trigger_eval.py",
+            "scripts/trust_check.py",
+            "scripts/upgrade_check.py",
+            "scripts/validate_skill.py",
+            "scripts/verify_package.py",
+            "scripts/world_class_evidence_contract.py",
+            "scripts/world_class_source_checks.py",
+            "scripts/yao.py",
+            "scripts/yao_cli_adaptation_commands.py",
+            "scripts/yao_cli_config.py",
+            "scripts/yao_cli_create_commands.py",
+            "scripts/yao_cli_distribution_commands.py",
+            "scripts/yao_cli_output_commands.py",
+            "scripts/yao_cli_parser.py",
+            "scripts/yao_cli_report_commands.py",
+            "scripts/yao_cli_runtime.py",
+            "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
             "templates/basic_skill.md.j2",
@@ -3716,7 +3886,7 @@
           ],
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           }
@@ -3984,7 +4154,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 34,
-              "scripts": 80,
+              "scripts": 114,
               "assets": 2,
               "reports": 43
             },
@@ -3995,7 +4165,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 80,
+            "script_count": 114,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -4232,7 +4402,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 34,
-            "scripts": 80,
+            "scripts": 114,
             "assets": 2,
             "reports": 43
           },
@@ -4243,7 +4413,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 80,
+          "script_count": 114,
           "help_smoke_failed_count": 0
         },
         "permissions": {

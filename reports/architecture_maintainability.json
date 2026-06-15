@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 177,
-    "script_file_count": 113,
-    "test_file_count": 64,
-    "internal_module_count": 33,
+    "python_file_count": 179,
+    "script_file_count": 114,
+    "test_file_count": 65,
+    "internal_module_count": 34,
     "cli_script_count": 82,
     "command_handler_count": 65,
     "entrypoint_command_handler_count": 18,
@@ -31,15 +31,8 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 871,
+      "lines": 850,
       "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/skill_report_model.py",
-      "lines": 828,
-      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -58,6 +51,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/skill_report_model.py",
+      "lines": 800,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "tests/verify_review_studio.py",
       "lines": 766,
       "kind": "test",
@@ -65,15 +65,15 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/compile_skill.py",
-      "lines": 734,
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 730,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 730,
+      "path": "scripts/compile_skill.py",
+      "lines": 723,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -117,15 +117,8 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 871,
+      "lines": 850,
       "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/skill_report_model.py",
-      "lines": 828,
-      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -144,6 +137,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/skill_report_model.py",
+      "lines": 800,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "tests/verify_review_studio.py",
       "lines": 766,
       "kind": "test",
@@ -151,15 +151,15 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/compile_skill.py",
-      "lines": 734,
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 730,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 730,
+      "path": "scripts/compile_skill.py",
+      "lines": 723,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

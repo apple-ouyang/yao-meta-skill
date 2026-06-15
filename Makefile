@@ -54,6 +54,7 @@ html-rendering-check:
 
 skill-ir-check:
 	$(PYTHON) tests/verify_skill_ir.py
+	$(PYTHON) tests/verify_skill_ir_paths.py
 
 compiler-check:
 	$(PYTHON) tests/verify_compile_skill.py

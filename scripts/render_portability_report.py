@@ -5,6 +5,8 @@ from pathlib import Path
 
 import yaml
 
+from skill_ir_paths import find_skill_ir
+
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -18,19 +20,7 @@ def load_yaml(path: Path) -> dict:
 
 
 def find_ir(root: Path) -> tuple[dict, str]:
-    candidates = [
-        root / "reports" / "skill-ir.json",
-        root / "skill-ir" / "examples" / f"{root.name}.json",
-    ]
-    examples_dir = root / "skill-ir" / "examples"
-    if examples_dir.exists():
-        for path in sorted(examples_dir.glob("*.json")):
-            if path not in candidates:
-                candidates.append(path)
-    for path in candidates:
-        if path.exists():
-            return load_json(path), str(path.relative_to(root))
-    return {}, "missing"
+    return find_skill_ir(root, root.name, fallback_source="missing")
 
 
 def band_for(score: int) -> str:

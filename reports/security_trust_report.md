@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `200`
-- Scripts: `113`
-- Internal script modules: `30`
+- Scanned files: `201`
+- Scripts: `114`
+- Internal script modules: `31`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `200`
-- Package SHA256: `7734802eb54b761e419b62d6d7e0d5861aa10401b8e8cf956934e51f9b87ba0d`
+- Package hash files: `201`
+- Package SHA256: `836b5ebaf4a608a1a89fa84306ab9b4bb7e0555c74b6ca8e572ffb1833cc0f8c`
 
 ## Failures
 
@@ -149,6 +149,7 @@
 | scripts/run_output_eval.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/run_output_execution.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/simulate_install.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/skill_ir_paths.py | internal-module | True | False | False | False | False | False | False | Imported by compiler, registry, conformance, and report scripts to locate canonical Skill IR artifacts. |
 | scripts/skill_report_charts.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to render inline SVG report charts. |
 | scripts/skill_report_i18n.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to keep bilingual report copy and fallback rules out of HTML rendering. |
 | scripts/skill_report_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to keep overview report layout and CSS out of data rendering. |

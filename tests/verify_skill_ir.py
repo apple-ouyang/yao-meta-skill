@@ -44,6 +44,13 @@ def main() -> None:
     assert any("`Governed`" in item for item in payload["workflow"]["decision_points"]), payload["workflow"]["decision_points"]
     assert payload["resources"]["references"], payload
     assert payload["resources"]["scripts"], payload
+    expected_scripts = {
+        str(path.relative_to(ROOT))
+        for path in (ROOT / "scripts").rglob("*")
+        if path.is_file() and path.suffix in {".py", ".sh", ".js", ".ts"}
+    }
+    actual_scripts = set(payload["resources"]["scripts"])
+    assert expected_scripts <= actual_scripts, sorted(expected_scripts - actual_scripts)
     assert payload["resources"]["reports"], payload
     assert "evals/trigger_cases.json" in payload["eval_plan"]["trigger"], payload["eval_plan"]
     assert payload["risk"]["trust_boundary"] == "external", payload

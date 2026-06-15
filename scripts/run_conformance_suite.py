@@ -10,6 +10,8 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None
 
+from skill_ir_paths import find_skill_ir as find_skill_ir_document
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_TARGETS = ["openai", "claude", "agent-skills", "vscode", "generic"]
@@ -64,10 +66,7 @@ def parse_frontmatter(path: Path) -> tuple[dict[str, Any], str]:
 
 
 def find_skill_ir(skill_dir: Path, name: str) -> dict[str, Any]:
-    direct = load_json(skill_dir / "reports" / "skill-ir.json")
-    if direct:
-        return direct
-    return load_json(skill_dir / "skill-ir" / "examples" / f"{name}.json")
+    return find_skill_ir_document(skill_dir, name)[0]
 
 
 def add_check(checks: list[str], failures: list[str], condition: bool, passed: str, failed: str) -> None:

@@ -8,6 +8,7 @@ from typing import Any
 
 from evidence_consistency_release import build_release_evidence_flow_check
 from evidence_consistency_world_class import build_world_class_workflow_check
+from skill_ir_paths import find_skill_ir_path
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -120,28 +121,6 @@ def rel_path(path: Path, root: Path) -> str:
         return str(path.resolve().relative_to(root.resolve()))
     except ValueError:
         return str(path.resolve())
-
-
-def canonical_skill_ir_path(skill_dir: Path, skill_name: str) -> str:
-    candidates = [
-        skill_dir / "reports" / "skill-ir.json",
-        skill_dir / "skill-ir" / "examples" / f"{skill_name}.json",
-        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
-    ]
-    examples_dir = skill_dir / "skill-ir" / "examples"
-    if examples_dir.exists():
-        for path in sorted(examples_dir.glob("*.json")):
-            if path not in candidates:
-                candidates.append(path)
-    seen: set[Path] = set()
-    for path in candidates:
-        if path in seen:
-            continue
-        seen.add(path)
-        payload, failure = load_json(path)
-        if not failure and payload.get("schema_version"):
-            return rel_path(path, skill_dir)
-    return ""
 
 
 def nested(payload: dict[str, Any], path: list[str], default: Any = None) -> Any:
@@ -368,7 +347,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             detail="The benchmark release lock must reflect the generation-time git dirty flag.",
         )
     skill_name = str(overview.get("name") or nested(review_studio, ["data", "frontmatter", "name"]) or skill_dir.name)
-    expected_skill_ir_path = canonical_skill_ir_path(skill_dir, skill_name)
+    expected_skill_ir_path = find_skill_ir_path(skill_dir, skill_name, require_schema=True)
     expected_skill_ir = {
         "source_path": expected_skill_ir_path,
         "exists": bool(expected_skill_ir_path and (skill_dir / expected_skill_ir_path).exists()),

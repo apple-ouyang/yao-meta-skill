@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 from typing import Any
 
+from skill_ir_paths import find_skill_ir_path as find_skill_ir_path_for_name
+
 try:
     import yaml
 except ImportError:  # pragma: no cover
@@ -56,34 +58,10 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
     return data
 
 
-def display_path(path: Path, root: Path) -> str:
-    try:
-        return str(path.resolve().relative_to(root.resolve()))
-    except ValueError:
-        return str(path)
-
-
 def find_skill_ir_path(skill_dir: Path) -> str:
     frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
     name = str(frontmatter.get("name") or skill_dir.name)
-    candidates = [
-        skill_dir / "reports" / "skill-ir.json",
-        skill_dir / "skill-ir" / "examples" / f"{name}.json",
-        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
-    ]
-    examples_dir = skill_dir / "skill-ir" / "examples"
-    if examples_dir.exists():
-        for path in sorted(examples_dir.glob("*.json")):
-            if path not in candidates:
-                candidates.append(path)
-    seen: set[Path] = set()
-    for path in candidates:
-        if path in seen:
-            continue
-        seen.add(path)
-        if path.exists():
-            return display_path(path, skill_dir)
-    return ""
+    return find_skill_ir_path_for_name(skill_dir, name)
 
 
 def evidence_paths(skill_dir: Path) -> dict[str, str]:

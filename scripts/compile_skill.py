@@ -10,6 +10,8 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None
 
+from skill_ir_paths import find_skill_ir as find_skill_ir_document
+
 
 ROOT = Path(__file__).resolve().parent.parent
 COMPILER_SCHEMA_VERSION = "1.0"
@@ -148,20 +150,7 @@ def read_frontmatter(path: Path) -> dict[str, Any]:
 
 
 def find_skill_ir(skill_dir: Path, name: str) -> tuple[dict[str, Any], str]:
-    candidates = [
-        skill_dir / "reports" / "skill-ir.json",
-        skill_dir / "skill-ir" / "examples" / f"{name}.json",
-        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
-    ]
-    seen: set[Path] = set()
-    for path in candidates:
-        if path in seen:
-            continue
-        seen.add(path)
-        payload = load_json(path)
-        if payload:
-            return payload, display_path(path, skill_dir)
-    return {}, "frontmatter-fallback"
+    return find_skill_ir_document(skill_dir, name, fallback_source="frontmatter-fallback")
 
 
 def count_list(payload: dict[str, Any], key: str) -> int:
