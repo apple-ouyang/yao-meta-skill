@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_claim_guard.py"
 TMP = ROOT / "tests" / "tmp_world_class_claim_guard"
+sys.path.insert(0, str(ROOT / "scripts"))
+from render_world_class_claim_guard import default_claim_surfaces, rel_path  # noqa: E402
 
 
 def run_guard(*extra: str, check: bool = True, cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
@@ -55,12 +57,6 @@ def main() -> None:
     assert any(item["path"] == "agents/interface.yaml" for item in payload["scanned_surfaces"]), payload[
         "scanned_surfaces"
     ]
-    assert any(item["path"] == "dist/manifest.json" for item in payload["scanned_surfaces"]), payload[
-        "scanned_surfaces"
-    ]
-    assert any(item["path"] == "dist/targets/openai/adapter.json" for item in payload["scanned_surfaces"]), payload[
-        "scanned_surfaces"
-    ]
     assert any(item["path"] == "security/permission_policy.json" for item in payload["scanned_surfaces"]), payload[
         "scanned_surfaces"
     ]
@@ -68,6 +64,29 @@ def main() -> None:
         item["path"].startswith("dist/install-simulation/") for item in payload["scanned_surfaces"]
     ), payload["scanned_surfaces"]
     assert any(item["path"] == "reports/world_class_evidence_ledger.json" for item in payload["scanned_surfaces"]), payload["scanned_surfaces"]
+
+    surface_fixture = TMP / "surface-fixture"
+    for rel in [
+        "README.md",
+        "SKILL.md",
+        "manifest.json",
+        "agents/interface.yaml",
+        "dist/manifest.json",
+        "dist/targets/openai/adapter.json",
+        "dist/install-simulation/simulate-skill/SKILL.md",
+        "security/permission_policy.json",
+        "evidence/world_class/README.md",
+        "evidence/world_class/submissions/provider-holdout.json",
+    ]:
+        target = surface_fixture / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text("{}\n" if target.suffix == ".json" else "fixture\n", encoding="utf-8")
+    fixture_surfaces = {rel_path(path, surface_fixture) for path in default_claim_surfaces(surface_fixture)}
+    assert "dist/manifest.json" in fixture_surfaces, fixture_surfaces
+    assert "dist/targets/openai/adapter.json" in fixture_surfaces, fixture_surfaces
+    assert "dist/install-simulation/simulate-skill/SKILL.md" not in fixture_surfaces, fixture_surfaces
+    assert "evidence/world_class/submissions/provider-holdout.json" not in fixture_surfaces, fixture_surfaces
+
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Claim Guard" in markdown, markdown
     assert "claim-guard-pass-evidence-pending" in markdown, markdown
