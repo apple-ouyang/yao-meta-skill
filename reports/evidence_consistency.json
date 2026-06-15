@@ -179,12 +179,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 960/1000; deferred 446157/120000; top deferred scripts 396946; resource governance governed; quality density 135.4",
+        "detail": "initial load 960/1000; deferred 449071/120000; top deferred scripts 399860; resource governance governed; quality density 135.4",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 960/1000; deferred 446157/120000; top deferred scripts 396946; resource governance governed; quality density 135.4",
+        "detail": "initial load 960/1000; deferred 449071/120000; top deferred scripts 399860; resource governance governed; quality density 135.4",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -197,8 +197,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -208,8 +208,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "f682bf9376e70668b25f4d96be02bf4981231476",
-      "actual": "f682bf9376e70668b25f4d96be02bf4981231476",
+      "expected": "f6d3bb523f453f40adc067f348dd2734a3b5c8cd",
+      "actual": "f6d3bb523f453f40adc067f348dd2734a3b5c8cd",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -221,30 +221,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b2ab2a00182b60cc9e702de55d8cad1dfc9e49a50b7f8a01ac896ffdf0ee030d",
-        "archive_sha256": "c4ab5ba9c345474701486a405d0fc43bf9317ecfc577fe5e67cbbbd63f54fa26",
+        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
+        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b2ab2a00182b60cc9e702de55d8cad1dfc9e49a50b7f8a01ac896ffdf0ee030d",
-        "archive_sha256": "c4ab5ba9c345474701486a405d0fc43bf9317ecfc577fe5e67cbbbd63f54fa26",
+        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
+        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -354,8 +354,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "f682bf9376e70668b25f4d96be02bf4981231476",
-      "actual": "f682bf9376e70668b25f4d96be02bf4981231476",
+      "expected": "f6d3bb523f453f40adc067f348dd2734a3b5c8cd",
+      "actual": "f6d3bb523f453f40adc067f348dd2734a3b5c8cd",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -367,30 +367,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b2ab2a00182b60cc9e702de55d8cad1dfc9e49a50b7f8a01ac896ffdf0ee030d",
-        "archive_sha256": "c4ab5ba9c345474701486a405d0fc43bf9317ecfc577fe5e67cbbbd63f54fa26",
+        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
+        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b2ab2a00182b60cc9e702de55d8cad1dfc9e49a50b7f8a01ac896ffdf0ee030d",
-        "archive_sha256": "c4ab5ba9c345474701486a405d0fc43bf9317ecfc577fe5e67cbbbd63f54fa26",
+        "source_contract_sha256": "c0c5e61a719efa6217dedd4e04de0b4a175ab73194a4b4ee2cbd18394240ce98",
+        "archive_sha256": "889886dd1eaeed6a4996a739f9312f47d67ec04ba3a1396bae7dc351b9b40dcf",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -1484,10 +1484,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 224
+            "file_count": 225
           }
         ],
-        "file_count": 404,
+        "file_count": 405,
         "folder_count": 4,
         "distribution": [
           {
@@ -1520,7 +1520,7 @@
           },
           {
             "label": "reports",
-            "value": 224
+            "value": 225
           }
         ]
       },
@@ -1572,10 +1572,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 224
+            "file_count": 225
           }
         ],
-        "file_count": 404,
+        "file_count": 405,
         "folder_count": 4,
         "distribution": [
           {
@@ -1608,7 +1608,7 @@
           },
           {
             "label": "reports",
-            "value": 224
+            "value": 225
           }
         ]
       },
@@ -1824,6 +1824,8 @@
         "directory": "evidence/world_class/submissions",
         "drafts_count_as_evidence": false,
         "preflight_counts_submission_as_completion": false,
+        "html_report": "reports/world_class_evidence_preflight.html",
+        "html_exists": true,
         "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
@@ -1834,6 +1836,8 @@
         "directory": "evidence/world_class/submissions",
         "drafts_count_as_evidence": false,
         "preflight_counts_submission_as_completion": false,
+        "html_report": "reports/world_class_evidence_preflight.html",
+        "html_exists": true,
         "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions",
         "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
         "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
@@ -1841,7 +1845,8 @@
         "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
       },
       "paths": [
-        "reports/world_class_evidence_preflight.json"
+        "reports/world_class_evidence_preflight.json",
+        "reports/world_class_evidence_preflight.html"
       ],
       "detail": "Preflight must give operators the exact draft, intake, review, ledger, and claim-guard commands without letting drafts or submissions count as accepted evidence."
     },
@@ -2237,8 +2242,8 @@
         "`3` warnings",
         "`30` declared internal modules",
         "`83 / 83` CLI help smoke checks passing across `113` scripts",
-        "`623` zip entries",
-        "archive with `623` entries",
+        "`624` zip entries",
+        "archive with `624` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
