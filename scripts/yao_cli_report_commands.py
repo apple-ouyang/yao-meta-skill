@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from yao_cli_config import baseline_compare_args, local_output_runner_command
-from yao_cli_runtime import ROOT, run_script
+from yao_cli_runtime import ROOT, run_adoption_drift_if_source_exists, run_script
 
 
 SCRIPT_INTERFACE = "internal-module"
@@ -30,24 +30,6 @@ def append_outputs(cmd: list[str], args: argparse.Namespace, *, markdown: bool =
         cmd.extend(["--output-md", args.output_md])
     if generated_at and getattr(args, "generated_at", None):
         cmd.extend(["--generated-at", args.generated_at])
-
-
-def run_adoption_drift_if_source_exists() -> dict:
-    events_path = ROOT / "reports" / "telemetry_events.jsonl"
-    if events_path.exists():
-        return run_script("render_adoption_drift_report.py", [str(ROOT)])
-    return {
-        "command": "render_adoption_drift_report.py skipped: missing reports/telemetry_events.jsonl",
-        "returncode": 0,
-        "ok": True,
-        "stdout": "",
-        "stderr": "",
-        "payload": {
-            "ok": True,
-            "skipped": True,
-            "reason": "raw telemetry event logs are local-only; keeping committed adoption_drift_report artifacts",
-        },
-    }
 
 
 def render_skill_report_command(args: argparse.Namespace, script_name: str, *, markdown: bool = True, generated_at: bool = False) -> int:

@@ -61,7 +61,7 @@ from yao_cli_report_commands import (
     command_world_class_submission_kit,
     command_world_class_submission_review,
 )
-from yao_cli_runtime import ROOT, run_script
+from yao_cli_runtime import ROOT, run_adoption_drift_if_source_exists, run_script
 from yao_cli_telemetry import add_telemetry_args, maybe_record_cli_event
 
 
@@ -428,7 +428,7 @@ def command_workspace_flow(args: argparse.Namespace) -> int:
             {"phase": "report-refresh", "result": run_script("python_compat_check.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_architecture_maintainability.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("compile_skill.py", [str(ROOT)])},
-            {"phase": "report-refresh", "result": run_script("render_adoption_drift_report.py", [str(ROOT)])},
+            {"phase": "report-refresh", "result": run_adoption_drift_if_source_exists()},
             {"phase": "report-refresh", "result": run_script("render_telemetry_hook_recipes.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_review_waivers.py", [str(ROOT)])},
             {"phase": "report-refresh", "result": run_script("render_review_annotations.py", [str(ROOT)])},

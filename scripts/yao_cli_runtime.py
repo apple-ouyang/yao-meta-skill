@@ -43,3 +43,22 @@ def run_script(name: str, args: list[str], cwd: Path | None = None) -> dict:
         "stderr": proc.stderr,
         "payload": payload,
     }
+
+
+def run_adoption_drift_if_source_exists(skill_dir: Path | None = None) -> dict:
+    target = (skill_dir or ROOT).resolve()
+    events_path = target / "reports" / "telemetry_events.jsonl"
+    if events_path.exists():
+        return run_script("render_adoption_drift_report.py", [str(target)])
+    return {
+        "command": "render_adoption_drift_report.py skipped: missing reports/telemetry_events.jsonl",
+        "returncode": 0,
+        "ok": True,
+        "stdout": "",
+        "stderr": "",
+        "payload": {
+            "ok": True,
+            "skipped": True,
+            "reason": "raw telemetry event logs are local-only; keeping committed adoption_drift_report artifacts",
+        },
+    }
