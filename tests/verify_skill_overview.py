@@ -11,7 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from skill_report_layout import render_language_switch, render_report_nav, skill_overview_css, skill_overview_script
 from skill_report_i18n import en_for
-from skill_report_model import REPORT_NAV_V2
+from skill_report_model import REPORT_NAV_V2, build_report_model
 
 
 def run(*args: str) -> dict:
@@ -83,6 +83,13 @@ def main() -> None:
         "Submit valid intake packets and let the ledger verify artifact SHA-256 digests."
     )
 
+    root_model = build_report_model(ROOT)
+    assert root_model["skill_ir"]["source_path"] == "skill-ir/examples/yao-meta-skill.json", root_model["skill_ir"]
+    assert "skill-ir/examples/yao-meta-skill.json" in root_model["skill_summary"]["deliverables"], root_model[
+        "skill_summary"
+    ]
+    assert "reports/skill-ir.json" not in root_model["skill_summary"]["deliverables"], root_model["skill_summary"]
+
     tmp_root = ROOT / "tests" / "tmp_skill_overview"
     if tmp_root.exists():
         subprocess.run(["rm", "-rf", str(tmp_root)], check=True)
@@ -144,6 +151,7 @@ def main() -> None:
     }
     assert expected_v2_keys.issubset(overview_json.keys()), overview_json.keys()
     assert "reports/skill-ir.json" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
+    assert overview_json["skill_ir"]["source_path"] == "reports/skill-ir.json", overview_json["skill_ir"]
     assert "reports/compiled_targets.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/output_quality_scorecard.md" in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]
     assert "reports/output_blind_review_pack.md" not in overview_json["skill_summary"]["deliverables"], overview_json["skill_summary"]

@@ -122,6 +122,28 @@ def rel_path(path: Path, root: Path) -> str:
         return str(path.resolve())
 
 
+def canonical_skill_ir_path(skill_dir: Path, skill_name: str) -> str:
+    candidates = [
+        skill_dir / "reports" / "skill-ir.json",
+        skill_dir / "skill-ir" / "examples" / f"{skill_name}.json",
+        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
+    ]
+    examples_dir = skill_dir / "skill-ir" / "examples"
+    if examples_dir.exists():
+        for path in sorted(examples_dir.glob("*.json")):
+            if path not in candidates:
+                candidates.append(path)
+    seen: set[Path] = set()
+    for path in candidates:
+        if path in seen:
+            continue
+        seen.add(path)
+        payload, failure = load_json(path)
+        if not failure and payload.get("schema_version"):
+            return rel_path(path, skill_dir)
+    return ""
+
+
 def nested(payload: dict[str, Any], path: list[str], default: Any = None) -> Any:
     current: Any = payload
     for key in path:
@@ -345,6 +367,45 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             paths=[REQUIRED_REPORTS["benchmark"]],
             detail="The benchmark release lock must reflect the generation-time git dirty flag.",
         )
+    skill_name = str(overview.get("name") or nested(review_studio, ["data", "frontmatter", "name"]) or skill_dir.name)
+    expected_skill_ir_path = canonical_skill_ir_path(skill_dir, skill_name)
+    expected_skill_ir = {
+        "source_path": expected_skill_ir_path,
+        "exists": bool(expected_skill_ir_path and (skill_dir / expected_skill_ir_path).exists()),
+        "schema_version": load_json(skill_dir / expected_skill_ir_path)[0].get("schema_version")
+        if expected_skill_ir_path
+        else "",
+    }
+    actual_skill_ir = {
+        "overview_source_path": nested(overview, ["skill_ir", "source_path"], ""),
+        "interpretation_source_path": nested(interpretation, ["skill_ir", "source_path"], ""),
+        "review_studio_evidence_path": nested(review_studio, ["evidence_paths", "skill_ir"], ""),
+        "overview_deliverable": expected_skill_ir_path in nested(overview, ["skill_summary", "deliverables"], []),
+        "interpretation_deliverable": expected_skill_ir_path
+        in nested(interpretation, ["skill_summary", "deliverables"], []),
+    }
+    compare_values(
+        checks,
+        key="skill-ir-evidence-path-contract",
+        label="Human-facing reports expose the canonical Skill IR artifact",
+        expected={
+            "overview_source_path": expected_skill_ir["source_path"],
+            "interpretation_source_path": expected_skill_ir["source_path"],
+            "review_studio_evidence_path": expected_skill_ir["source_path"],
+            "overview_deliverable": True,
+            "interpretation_deliverable": True,
+            "exists": True,
+            "schema_version": "2.0.0",
+        },
+        actual={**actual_skill_ir, **{key: expected_skill_ir[key] for key in ("exists", "schema_version")}},
+        paths=[
+            REQUIRED_REPORTS["overview"],
+            REQUIRED_REPORTS["interpretation"],
+            REQUIRED_REPORTS["review_studio"],
+            expected_skill_ir_path or "skill-ir/examples",
+        ],
+        detail="Skill IR is the 2.0 platform-neutral semantic source, so user-facing reports must link to the artifact that actually exists.",
+    )
     for report_key, payload in [("overview", overview), ("interpretation", interpretation)]:
         embedded_benchmark = nested(payload, ["benchmark_reproducibility"], {})
         compare_values(

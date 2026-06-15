@@ -393,6 +393,9 @@ def main() -> None:
     assert output_html.exists(), output_html
     assert output_json.exists(), output_json
     full_payload = json.loads(output_json.read_text(encoding="utf-8"))
+    assert full_payload["evidence_paths"]["skill_ir"] == "skill-ir/examples/yao-meta-skill.json", full_payload[
+        "evidence_paths"
+    ]
     assert full_payload["evidence_paths"]["compiled_targets"] == "reports/compiled_targets.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_execution"] == "reports/output_execution_runs.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["output_blind_review"] == "reports/output_blind_review_pack.md", full_payload["evidence_paths"]

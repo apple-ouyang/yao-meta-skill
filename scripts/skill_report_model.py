@@ -84,6 +84,35 @@ def load_json(path: Path) -> dict:
     return payload if isinstance(payload, dict) else {}
 
 
+def display_path(path: Path, root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(root.resolve()))
+    except ValueError:
+        return str(path)
+
+
+def find_skill_ir(skill_dir: Path, name: str) -> tuple[dict, str]:
+    candidates = [
+        skill_dir / "reports" / "skill-ir.json",
+        skill_dir / "skill-ir" / "examples" / f"{name}.json",
+        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
+    ]
+    examples_dir = skill_dir / "skill-ir" / "examples"
+    if examples_dir.exists():
+        for path in sorted(examples_dir.glob("*.json")):
+            if path not in candidates:
+                candidates.append(path)
+    seen: set[Path] = set()
+    for path in candidates:
+        if path in seen:
+            continue
+        seen.add(path)
+        payload = load_json(path)
+        if payload:
+            return payload, display_path(path, skill_dir)
+    return {}, ""
+
+
 def extract_title(body: str, fallback: str) -> str:
     for line in body.splitlines():
         if line.startswith("# "):
@@ -498,14 +527,11 @@ def build_report_model(skill_dir: Path) -> dict:
     world_class_evidence = load_json(skill_dir / "reports" / "world_class_evidence_plan.json")
     world_class_evidence_ledger = load_json(skill_dir / "reports" / "world_class_evidence_ledger.json")
     compiled_targets = load_json(skill_dir / "reports" / "compiled_targets.json")
-    skill_ir = load_json(skill_dir / "reports" / "skill-ir.json")
-    if not skill_ir:
-        example_ir = skill_dir / "skill-ir" / "examples" / f"{frontmatter.get('name', skill_dir.name)}.json"
-        skill_ir = load_json(example_ir)
     reference_synthesis = load_json(skill_dir / "reports" / "reference-synthesis.json")
     iteration = load_json(skill_dir / "reports" / "iteration-directions.json")
 
     name = frontmatter.get("name", skill_dir.name)
+    skill_ir, skill_ir_path = find_skill_ir(skill_dir, name)
     description = frontmatter.get("description", "No description found.")
     title = extract_title(body, name.replace("-", " ").title())
     display_name = interface_data.get("interface", {}).get("display_name", title)
@@ -530,7 +556,7 @@ def build_report_model(skill_dir: Path) -> dict:
     deliverables = [
         "SKILL.md",
         "agents/interface.yaml",
-        "reports/skill-ir.json",
+        skill_ir_path or "reports/skill-ir.json",
         "reports/compiled_targets.md",
         "reports/output_quality_scorecard.md",
         "reports/conformance_matrix.md",
@@ -654,6 +680,7 @@ def build_report_model(skill_dir: Path) -> dict:
         "benchmark_highlights": [],
         "skill_ir": {
             "schema_version": skill_ir.get("schema_version", ""),
+            "source_path": skill_ir_path,
             "target_count": len(skill_ir.get("targets", [])),
             "trigger_samples": len(skill_ir.get("trigger_surface", {}).get("should_trigger", [])),
             "output_eval_cases": len(skill_ir.get("eval_plan", {}).get("output", [])),

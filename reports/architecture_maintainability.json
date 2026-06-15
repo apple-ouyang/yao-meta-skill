@@ -30,16 +30,23 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 822,
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 871,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/skill_report_model.py",
+      "lines": 828,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 810,
-      "kind": "cli-script",
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 822,
+      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -51,15 +58,8 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/skill_report_model.py",
-      "lines": 801,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "tests/verify_review_studio.py",
-      "lines": 763,
+      "lines": 766,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -116,16 +116,23 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/yao_cli_parser.py",
-      "lines": 822,
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 871,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/skill_report_model.py",
+      "lines": 828,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 810,
-      "kind": "cli-script",
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 822,
+      "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -137,15 +144,8 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/skill_report_model.py",
-      "lines": 801,
-      "kind": "internal-module",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "tests/verify_review_studio.py",
-      "lines": 763,
+      "lines": 766,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

@@ -35,6 +35,7 @@ REPORT_FILES = [
     "reports/context_budget.json",
     "reports/world_class_claim_guard.json",
     "reports/skill-os-2-review.md",
+    "skill-ir/examples/yao-meta-skill.json",
     "scripts/ci_test.py",
 ]
 
@@ -158,6 +159,12 @@ def main() -> None:
     assert checks["review-studio-context-budget-mirror"]["status"] == "pass", checks[
         "review-studio-context-budget-mirror"
     ]
+    assert checks["skill-ir-evidence-path-contract"]["status"] == "pass", checks[
+        "skill-ir-evidence-path-contract"
+    ]
+    assert checks["skill-ir-evidence-path-contract"]["actual"]["review_studio_evidence_path"] == (
+        "skill-ir/examples/yao-meta-skill.json"
+    ), checks["skill-ir-evidence-path-contract"]
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
@@ -206,6 +213,32 @@ def main() -> None:
     assert drift_payload["summary"]["decision"] == "evidence-drift-detected", drift_payload
     assert drift_checks["overview-adoption-summary"]["status"] == "fail", drift_checks["overview-adoption-summary"]
     assert drift_checks["interpretation-adoption-summary"]["status"] == "pass", drift_checks["interpretation-adoption-summary"]
+
+    skill_ir_drift_root = TMP / "skill-ir-drift-skill"
+    copy_reports(skill_ir_drift_root)
+    studio_path = skill_ir_drift_root / "reports" / "review-studio.json"
+    studio = json.loads(studio_path.read_text(encoding="utf-8"))
+    studio["evidence_paths"]["skill_ir"] = "reports/skill-ir.json"
+    studio_path.write_text(json.dumps(studio, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    skill_ir_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(skill_ir_drift_root),
+            "--output-json",
+            str(TMP / "skill_ir_drift.json"),
+            "--output-md",
+            str(TMP / "skill_ir_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert skill_ir_drift_proc.returncode == 2, skill_ir_drift_proc.stdout
+    skill_ir_drift_payload = json.loads(skill_ir_drift_proc.stdout)
+    skill_ir_drift_checks = {item["key"]: item for item in skill_ir_drift_payload["checks"]}
+    assert skill_ir_drift_checks["skill-ir-evidence-path-contract"]["status"] == "fail", (
+        skill_ir_drift_checks["skill-ir-evidence-path-contract"]
+    )
 
     claim_guard_drift_root = TMP / "claim-guard-drift-skill"
     copy_reports(claim_guard_drift_root)

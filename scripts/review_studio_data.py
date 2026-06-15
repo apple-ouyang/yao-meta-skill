@@ -56,6 +56,36 @@ def parse_frontmatter(path: Path) -> dict[str, Any]:
     return data
 
 
+def display_path(path: Path, root: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(root.resolve()))
+    except ValueError:
+        return str(path)
+
+
+def find_skill_ir_path(skill_dir: Path) -> str:
+    frontmatter = parse_frontmatter(skill_dir / "SKILL.md")
+    name = str(frontmatter.get("name") or skill_dir.name)
+    candidates = [
+        skill_dir / "reports" / "skill-ir.json",
+        skill_dir / "skill-ir" / "examples" / f"{name}.json",
+        skill_dir / "skill-ir" / "examples" / f"{skill_dir.name}.json",
+    ]
+    examples_dir = skill_dir / "skill-ir" / "examples"
+    if examples_dir.exists():
+        for path in sorted(examples_dir.glob("*.json")):
+            if path not in candidates:
+                candidates.append(path)
+    seen: set[Path] = set()
+    for path in candidates:
+        if path in seen:
+            continue
+        seen.add(path)
+        if path.exists():
+            return display_path(path, skill_dir)
+    return ""
+
+
 def evidence_paths(skill_dir: Path) -> dict[str, str]:
     rels = {
         "skill_overview": "reports/skill-overview.html",
@@ -95,8 +125,10 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
         "install_simulation": "reports/install_simulation.md",
         "upgrade_check": "reports/upgrade_check.md",
         "migration": "docs/migration-v2.md",
-        "skill_ir": "reports/skill-ir.json",
     }
+    skill_ir_path = find_skill_ir_path(skill_dir)
+    if skill_ir_path:
+        rels["skill_ir"] = skill_ir_path
     return {key: rel for key, rel in rels.items() if (skill_dir / rel).exists() or (ROOT / rel).exists()}
 
 
