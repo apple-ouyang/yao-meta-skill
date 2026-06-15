@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 189,
-    "script_file_count": 120,
+    "python_file_count": 190,
+    "script_file_count": 121,
     "test_file_count": 69,
-    "internal_module_count": 37,
+    "internal_module_count": 38,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 899,
-    "watchlist_count": 11,
+    "watchlist_count": 10,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -72,13 +72,6 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
-      "path": "scripts/prepare_world_class_submission_kit.py",
-      "lines": 783,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/build_skill_atlas.py",
       "lines": 730,
       "kind": "cli-script",
@@ -103,6 +96,13 @@
       "path": "scripts/trust_check.py",
       "lines": 714,
       "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/apply_adaptation.py",
+      "lines": 706,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
@@ -156,13 +156,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/prepare_world_class_submission_kit.py",
-      "lines": 783,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/build_skill_atlas.py",

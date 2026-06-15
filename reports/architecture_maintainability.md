@@ -5,17 +5,17 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `189`
-- scripts: `120`
+- python files: `190`
+- scripts: `121`
 - tests: `69`
-- internal modules: `37`
+- internal modules: `38`
 - CLI scripts: `85`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `899`
 - watch threshold lines: `720`
-- watchlist: `11`
+- watchlist: `10`
 - hotspots: `0`
 - blockers: `0`
 
@@ -36,7 +36,6 @@ No file-size hotspots found.
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_review_studio.py` | `784` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/prepare_world_class_submission_kit.py` | `783` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/compile_skill.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/optimize_description.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -52,11 +51,11 @@ No file-size hotspots found.
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `tests/verify_review_studio.py` | `784` | `test` | `pass` |
-| `scripts/prepare_world_class_submission_kit.py` | `783` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/compile_skill.py` | `723` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
+| `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
 
 ## Release Rule
 
