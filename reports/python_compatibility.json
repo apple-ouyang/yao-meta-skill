@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-13",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 165,
+    "file_count": 169,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -192,6 +192,12 @@
     },
     {
       "path": "scripts/promotion_checker.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/propose_adaptation.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -557,6 +563,12 @@
       "issues": []
     },
     {
+      "path": "scripts/summarize_user_signals.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/sync_local_install.py",
       "ok": true,
       "issue_count": 0,
@@ -617,6 +629,12 @@
       "issues": []
     },
     {
+      "path": "scripts/yao_cli_adaptation_commands.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "scripts/yao_cli_config.py",
       "ok": true,
       "issue_count": 0,
@@ -648,6 +666,12 @@
     },
     {
       "path": "scripts/yao_cli_telemetry.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/verify_adaptation_safety.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

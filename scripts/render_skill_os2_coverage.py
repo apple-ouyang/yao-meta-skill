@@ -50,6 +50,10 @@ def all_exist(items: list[dict[str, Any]]) -> bool:
     return all(item["exists"] for item in items)
 
 
+def paths_exist(skill_dir: Path, paths: list[str]) -> bool:
+    return all((skill_dir / item).exists() for item in paths)
+
+
 def condition_status(condition: bool, evidence_items: list[dict[str, Any]]) -> str:
     if not all_exist(evidence_items):
         return "missing"
@@ -316,28 +320,57 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             next_action="Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests.",
             skill_dir=skill_dir,
         ),
+    ]
+    adaptive_foundation_paths = [
+        "references/autonomous-adaptation.md",
+        "references/user-memory-policy.md",
+        "schemas/adaptation-proposal.schema.json",
+        "scripts/summarize_user_signals.py",
+        "scripts/propose_adaptation.py",
+        "tests/verify_adaptation_safety.py",
+    ]
+    adaptive_apply_paths = [
+        "scripts/apply_adaptation.py",
+        "reports/adaptation_approval_ledger.json",
+        "reports/adaptation_regression_report.json",
+    ]
+    adaptive_foundation_ready = paths_exist(skill_dir, adaptive_foundation_paths)
+    adaptive_apply_ready = paths_exist(skill_dir, adaptive_apply_paths)
+    adaptive_status = "covered" if adaptive_foundation_ready and adaptive_apply_ready else ("partial" if adaptive_foundation_ready else "planned")
+    adaptive_current = (
+        "Proposal-only adapt-scan/adapt-propose foundation exists with policy, schema, and safety tests; approval-gated patch application is not implemented yet."
+        if adaptive_status == "partial"
+        else (
+            "Full adaptive loop includes proposal, approval, patch application, regression evidence, and rollback metadata."
+            if adaptive_status == "covered"
+            else "The repo has feedback, iteration, telemetry, and review artifacts, but no adapt-scan/adapt-propose/adapt-apply approval loop and no user-memory policy."
+        )
+    )
+    adaptive_next_action = (
+        "Add adapt-apply only after approval ledger, allowlisted targets, dry-run diffs, regression reports, and rollback artifacts are designed."
+        if adaptive_status == "partial"
+        else "Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path."
+    )
+    extension_tracks.append(
         build_extension_track(
             key="adaptive-self-iteration",
             label="Adaptive Self-Iteration",
-            status="planned",
+            status=adaptive_status,
             objective="Local-first preference memory, repeated-signal extraction, adaptation proposals, approval, patch application, regression evidence, and rollback.",
-            current="The repo has feedback, iteration, telemetry, and review artifacts, but no adapt-scan/adapt-propose/adapt-apply approval loop and no user-memory policy.",
+            current=adaptive_current,
             target="Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan.",
             artifact_paths=[
-                "references/autonomous-adaptation.md",
-                "references/user-memory-policy.md",
-                "schemas/adaptation-proposal.schema.json",
-                "scripts/summarize_user_signals.py",
-                "scripts/propose_adaptation.py",
-                "scripts/apply_adaptation.py",
-                "tests/verify_adaptation_safety.py",
+                *adaptive_foundation_paths,
+                *adaptive_apply_paths,
+                "reports/user_patterns.json",
+                "reports/adaptation_proposals.json",
                 "reports/iteration-directions.md",
                 "reports/adoption_drift_report.md",
             ],
-            next_action="Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path.",
+            next_action=adaptive_next_action,
             skill_dir=skill_dir,
-        ),
-    ]
+        )
+    )
     extension_counts: dict[str, int] = {}
     for item in extension_tracks:
         extension_counts[item["status"]] = extension_counts.get(item["status"], 0) + 1
@@ -360,7 +393,7 @@ def build_coverage(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         "extension_partial_count": extension_counts.get("partial", 0),
         "extension_planned_count": extension_counts.get("planned", 0),
         "extension_covered_count": extension_counts.get("covered", 0),
-        "adaptive_extension_ready": extension_counts.get("planned", 0) == 0,
+        "adaptive_extension_ready": adaptive_status == "covered",
         "local_blueprint_ready": local_ready,
         "public_world_class_ready": public_ready,
         "world_class_evidence_pending_count": pending_world_class,

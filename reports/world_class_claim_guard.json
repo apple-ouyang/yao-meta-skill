@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 73,
+    "claim_surface_count": 75,
     "violation_count": 0,
     "overclaim_guard_active": true,
     "decision": "claim-guard-pass-evidence-pending"
@@ -65,6 +65,10 @@
     },
     {
       "path": "docs/migration-v2.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/adaptation_proposals.md",
       "violation_count": 0
     },
     {
@@ -301,6 +305,10 @@
     },
     {
       "path": "reports/upgrade_check.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/user_patterns.md",
       "violation_count": 0
     },
     {

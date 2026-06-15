@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 162,
-    "script_file_count": 102,
-    "test_file_count": 60,
-    "internal_module_count": 28,
-    "cli_script_count": 76,
+    "python_file_count": 166,
+    "script_file_count": 105,
+    "test_file_count": 61,
+    "internal_module_count": 29,
+    "cli_script_count": 78,
     "command_handler_count": 34,
     "warn_line_threshold": 900,
     "block_line_threshold": 1500,
-    "largest_file_lines": 891,
+    "largest_file_lines": 894,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -20,14 +20,14 @@
   "largest_files": [
     {
       "path": "tests/verify_yao_cli.py",
-      "lines": 891,
+      "lines": 894,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/yao.py",
-      "lines": 881,
+      "lines": 882,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split command handlers by domain while keeping scripts/yao.py as the thin CLI orchestrator."
@@ -47,18 +47,18 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_review_studio.py",
-      "lines": 745,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
       "path": "scripts/yao_cli_parser.py",
-      "lines": 741,
+      "lines": 765,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_review_studio.py",
+      "lines": 749,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/compile_skill.py",

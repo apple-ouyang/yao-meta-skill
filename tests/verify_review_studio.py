@@ -538,13 +538,15 @@ def main() -> None:
         assert full_payload["data"]["skill_os2_coverage"]["summary"]["local_blueprint_ready"] is True, full_payload["data"]["skill_os2_coverage"]
         assert full_payload["data"]["skill_os2_coverage"]["summary"]["public_world_class_ready"] is False, full_payload["data"]["skill_os2_coverage"]
         assert full_payload["data"]["skill_os2_coverage"]["summary"]["extension_track_count"] == 2, full_payload["data"]["skill_os2_coverage"]
-        assert full_payload["data"]["skill_os2_coverage"]["summary"]["extension_planned_count"] == 1, full_payload["data"]["skill_os2_coverage"]
+        assert full_payload["data"]["skill_os2_coverage"]["summary"]["extension_partial_count"] == 2, full_payload["data"]["skill_os2_coverage"]
+        assert full_payload["data"]["skill_os2_coverage"]["summary"]["extension_planned_count"] == 0, full_payload["data"]["skill_os2_coverage"]
+        assert full_payload["data"]["skill_os2_coverage"]["summary"]["adaptive_extension_ready"] is False, full_payload["data"]["skill_os2_coverage"]
         extension_tracks = {
             item["key"]: item
             for item in full_payload["data"]["skill_os2_coverage"]["reference_extension_tracks"]
         }
         assert extension_tracks["skill-interpretation-report"]["status"] == "partial", extension_tracks
-        assert extension_tracks["adaptive-self-iteration"]["status"] == "planned", extension_tracks
+        assert extension_tracks["adaptive-self-iteration"]["status"] == "partial", extension_tracks
     world_class_entries = full_payload["data"]["world_class_evidence_ledger"]["entries"]
     assert len(world_class_entries) == 4, world_class_entries
     assert {item["key"] for item in world_class_entries} == {
@@ -654,7 +656,9 @@ def main() -> None:
     assert "蓝图覆盖" in html, html
     assert "Extension Track Count" in html, html
     assert "Adaptive Extension Ready" in html, html
-    assert "extensions partial 1, planned 1" in html, html
+    assert "<dt>Extension Partial Count</dt><dd>2</dd>" in html, html
+    assert "<dt>Extension Planned Count</dt><dd>0</dd>" in html, html
+    assert "Adaptive Extension Ready" in html, html
     assert "本地蓝图" in html, html
     assert "public world-class 仍以 world-class evidence ledger" in html, html
     assert "公开声明" in html, html

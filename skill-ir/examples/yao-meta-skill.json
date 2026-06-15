@@ -77,6 +77,7 @@
     "references": [
       "references/artifact-design-doctrine.md",
       "references/authoring-discipline.md",
+      "references/autonomous-adaptation.md",
       "references/distribution-registry-method.md",
       "references/eval-playbook.md",
       "references/gate-selection.md",
@@ -106,7 +107,8 @@
       "references/skill-ir-method.md",
       "references/systems-thinking-doctrine.md",
       "references/telemetry-drift-method.md",
-      "references/trust-security-method.md"
+      "references/trust-security-method.md",
+      "references/user-memory-policy.md"
     ],
     "scripts": [
       "scripts/adjudicate_output_review.py",
@@ -135,6 +137,7 @@
       "scripts/prepare_world_class_submission_kit.py",
       "scripts/probe_runtime_permissions.py",
       "scripts/promotion_checker.py",
+      "scripts/propose_adaptation.py",
       "scripts/provider_output_eval_runner.py",
       "scripts/python_compat_check.py",
       "scripts/registry_audit.py",
@@ -187,8 +190,7 @@
       "scripts/run_description_optimization_suite.py",
       "scripts/run_eval_suite.py",
       "scripts/run_output_eval.py",
-      "scripts/run_output_execution.py",
-      "scripts/simulate_install.py"
+      "scripts/run_output_execution.py"
     ],
     "assets": [
       "templates/basic_skill.md.j2",
@@ -243,6 +245,7 @@
   "eval_plan": {
     "trigger": [
       "evals/README.md",
+      "evals/adaptation/user_signals.example.jsonl",
       "evals/adversarial/trigger_cases.json",
       "evals/blind_holdout/trigger_cases.json",
       "evals/confusion/route_cases.json",

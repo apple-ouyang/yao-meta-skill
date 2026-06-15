@@ -63,6 +63,7 @@ DEFAULT_TARGETS = [
     "world-class-claim-guard-check",
     "benchmark-reproducibility-check",
     "feedback-check",
+    "adaptation-safety-check",
     "adoption-drift-check",
     "telemetry-import-check",
     "telemetry-emit-check",

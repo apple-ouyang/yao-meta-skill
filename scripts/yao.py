@@ -11,6 +11,7 @@ from yao_cli_config import (
     resolve_promotion_target,
     resolve_target,
 )
+from yao_cli_adaptation_commands import command_adapt_propose, command_adapt_scan
 from yao_cli_create_commands import command_init, command_quickstart
 from yao_cli_parser import build_parser as build_cli_parser
 from yao_cli_report_commands import (

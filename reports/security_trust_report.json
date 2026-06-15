@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 186,
-    "script_count": 102,
-    "internal_module_count": 25,
+    "scanned_files": 192,
+    "script_count": 105,
+    "internal_module_count": 26,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -12,18 +12,18 @@
     "network_script_count": 3,
     "network_policy_covered_count": 3,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 64,
+    "file_write_script_count": 66,
     "permission_required_count": 3,
     "permission_approved_count": 3,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 77,
+    "help_smoke_checked_count": 79,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 186,
-    "package_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5"
+    "package_hash_file_count": 192,
+    "package_sha256": "37a1ec0f35323886bdae64523b4113f5dc4ba3153117ee4980b8e5cd54b49aba"
   },
   "failures": [],
   "warnings": [],
@@ -393,6 +393,20 @@
       "interface": "cli",
       "interface_declared": false,
       "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/propose_adaptation.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Turns redacted repeated preference patterns into proposal-only adaptation plans.",
       "has_argparse": true,
       "has_main_guard": true,
       "uses_input": false,
@@ -1251,6 +1265,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/summarize_user_signals.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Scans an explicit local source file and summarizes redacted repeated user preference signals.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/sync_local_install.py",
       "interface": "cli",
       "interface_declared": false,
@@ -1391,6 +1419,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/yao_cli_adaptation_commands.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao.py to keep adaptive scan/proposal command handlers outside the thin CLI orchestrator.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/yao_cli_config.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1505,11 +1547,11 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 77,
-    "checked_count": 77,
-    "passed_count": 77,
+    "candidate_count": 79,
+    "checked_count": 79,
+    "passed_count": 79,
     "failed_count": 0,
-    "skipped_count": 25,
+    "skipped_count": 26,
     "failed_scripts": [],
     "results": [
       {
@@ -1760,6 +1802,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: promotion_checker.py [-h] [--optimization-suite OPTIMIZATION_SUITE]\n                            [--route-scorecard ROUTE_SCORECARD]\n                            [--output-json OUTPUT_JSON]\n                            [--output-md OUTP",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/propose_adaptation.py",
+        "command": "python3 scripts/propose_adaptation.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: propose_adaptation.py [-h] [--patterns-json PATTERNS_JSON]\n                             [--output-json OUTPUT_JSON]\n                             [--output-md OUTPUT_MD]\n                             [--generated-at GENERATED_AT]\n     ",
         "stderr_excerpt": ""
       },
       {
@@ -2203,6 +2255,16 @@
         "stderr_excerpt": ""
       },
       {
+        "path": "scripts/summarize_user_signals.py",
+        "command": "python3 scripts/summarize_user_signals.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: summarize_user_signals.py [-h] --source SOURCE\n                                 [--output-json OUTPUT_JSON]\n                                 [--output-md OUTPUT_MD]\n                                 [--min-support MIN_SUPPORT]\n       ",
+        "stderr_excerpt": ""
+      },
+      {
         "path": "scripts/sync_local_install.py",
         "command": "python3 scripts/sync_local_install.py --help",
         "returncode": 0,
@@ -2361,6 +2423,10 @@
         "reason": "internal module"
       },
       {
+        "path": "scripts/yao_cli_adaptation_commands.py",
+        "reason": "internal module"
+      },
+      {
         "path": "scripts/yao_cli_config.py",
         "reason": "internal module"
       },
@@ -2456,6 +2522,7 @@
           "scripts/prepare_world_class_submission_kit.py",
           "scripts/probe_runtime_permissions.py",
           "scripts/promotion_checker.py",
+          "scripts/propose_adaptation.py",
           "scripts/python_compat_check.py",
           "scripts/registry_audit.py",
           "scripts/render_adoption_drift_report.py",
@@ -2497,6 +2564,7 @@
           "scripts/run_output_eval.py",
           "scripts/run_output_execution.py",
           "scripts/simulate_install.py",
+          "scripts/summarize_user_signals.py",
           "scripts/sync_local_install.py",
           "scripts/telemetry_native_host.py",
           "scripts/trust_check.py",

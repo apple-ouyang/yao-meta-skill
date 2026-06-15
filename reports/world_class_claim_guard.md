@@ -1,13 +1,13 @@
 # World-Class Claim Guard
 
-Generated at: `2026-06-15`
+Generated at: `2026-06-13`
 
 ## Summary
 
 - decision: `claim-guard-pass-evidence-pending`
 - ledger ready to claim world-class: `false`
 - ledger pending evidence: `4`
-- claim surfaces scanned: `73`
+- claim surfaces scanned: `75`
 - violations: `0`
 - overclaim guard active: `true`
 

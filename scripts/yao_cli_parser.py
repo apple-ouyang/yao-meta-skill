@@ -373,6 +373,30 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     feedback_cmd.add_argument("--recommended-action", default="review")
     feedback_cmd.set_defaults(func=_handler(command_handlers, "command_feedback"))
 
+    adapt_scan_cmd = subparsers.add_parser(
+        "adapt-scan",
+        help="Scan one explicit local source file for redacted repeated user preference signals.",
+    )
+    adapt_scan_cmd.add_argument("skill_dir", nargs="?", default=".")
+    adapt_scan_cmd.add_argument("--source", required=True)
+    adapt_scan_cmd.add_argument("--output-json")
+    adapt_scan_cmd.add_argument("--output-md")
+    adapt_scan_cmd.add_argument("--min-support", type=int, default=2)
+    adapt_scan_cmd.add_argument("--generated-at")
+    adapt_scan_cmd.add_argument("--allow-history-source", action="store_true")
+    adapt_scan_cmd.set_defaults(func=_handler(command_handlers, "command_adapt_scan"))
+
+    adapt_propose_cmd = subparsers.add_parser(
+        "adapt-propose",
+        help="Create proposal-only adaptation plans from redacted repeated preference patterns.",
+    )
+    adapt_propose_cmd.add_argument("skill_dir", nargs="?", default=".")
+    adapt_propose_cmd.add_argument("--patterns-json")
+    adapt_propose_cmd.add_argument("--output-json")
+    adapt_propose_cmd.add_argument("--output-md")
+    adapt_propose_cmd.add_argument("--generated-at")
+    adapt_propose_cmd.set_defaults(func=_handler(command_handlers, "command_adapt_propose"))
+
     adoption_drift_cmd = subparsers.add_parser(
         "adoption-drift",
         help="Render local-first metadata-only adoption and drift telemetry for a skill package.",

@@ -42,6 +42,7 @@ It turns rough workflows, transcripts, prompts, notes, and runbooks into reusabl
 - three high-value next iteration directions after the first package is created
 - a lightweight feedback log that does not require a full promotion cycle
 - a local-first metadata-only adoption and drift report that turns real usage signals into next iteration candidates, with optional `yao.py` CLI run capture, external client event emit hooks, hook recipes, and JSONL import that record command names and outcomes without arguments or raw content
+- an explicit-source adaptive proposal loop that summarizes redacted repeated user preferences and generates approval-gated adaptation proposals without scanning private logs or writing source files
 - a Browser/Chrome Native Messaging telemetry host that can receive length-prefixed metadata-only client events and generate a local launcher plus manifest without storing raw content
 - a Skill Atlas drift layer that reads aggregate adoption reports and surfaces portfolio-level drift signals without packaging raw telemetry logs
 - a baseline compare report for with-skill vs baseline review
@@ -118,6 +119,8 @@ python3 scripts/yao.py artifact-design-profile my-skill
 python3 scripts/yao.py prompt-quality-profile my-skill
 python3 scripts/yao.py system-model my-skill
 python3 scripts/yao.py feedback my-skill --note "Tighten exclusions before adding scripts." --rating 4 --category boundary
+python3 scripts/yao.py adapt-scan my-skill --source ./curated-user-signals.jsonl
+python3 scripts/yao.py adapt-propose my-skill
 python3 scripts/yao.py adoption-drift my-skill --record-event skill_activation --activation-type explicit --outcome accepted
 YAO_CLI_TELEMETRY=1 python3 scripts/yao.py validate my-skill
 python3 scripts/yao.py telemetry-emit my-skill --event skill_activation --activation-type explicit --outcome accepted --command browser-extension

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "item_count": 20,
@@ -11,8 +11,8 @@
     "warn_count": 0,
     "missing_count": 0,
     "extension_track_count": 2,
-    "extension_partial_count": 1,
-    "extension_planned_count": 1,
+    "extension_partial_count": 2,
+    "extension_planned_count": 0,
     "extension_covered_count": 0,
     "adaptive_extension_ready": false,
     "local_blueprint_ready": true,
@@ -26,8 +26,7 @@
     "missing": 0
   },
   "extension_status_counts": {
-    "partial": 1,
-    "planned": 1
+    "partial": 2
   },
   "modules": [
     {
@@ -131,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "102 scripts; secrets 0; help failures 0",
+      "current": "105 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -648,38 +647,54 @@
     {
       "key": "adaptive-self-iteration",
       "label": "Adaptive Self-Iteration",
-      "status": "planned",
+      "status": "partial",
       "objective": "Local-first preference memory, repeated-signal extraction, adaptation proposals, approval, patch application, regression evidence, and rollback.",
-      "current": "The repo has feedback, iteration, telemetry, and review artifacts, but no adapt-scan/adapt-propose/adapt-apply approval loop and no user-memory policy.",
+      "current": "Proposal-only adapt-scan/adapt-propose foundation exists with policy, schema, and safety tests; approval-gated patch application is not implemented yet.",
       "target": "Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan.",
       "evidence": [
         {
           "path": "references/autonomous-adaptation.md",
-          "exists": false
+          "exists": true
         },
         {
           "path": "references/user-memory-policy.md",
-          "exists": false
+          "exists": true
         },
         {
           "path": "schemas/adaptation-proposal.schema.json",
-          "exists": false
+          "exists": true
         },
         {
           "path": "scripts/summarize_user_signals.py",
-          "exists": false
+          "exists": true
         },
         {
           "path": "scripts/propose_adaptation.py",
-          "exists": false
+          "exists": true
+        },
+        {
+          "path": "tests/verify_adaptation_safety.py",
+          "exists": true
         },
         {
           "path": "scripts/apply_adaptation.py",
           "exists": false
         },
         {
-          "path": "tests/verify_adaptation_safety.py",
+          "path": "reports/adaptation_approval_ledger.json",
           "exists": false
+        },
+        {
+          "path": "reports/adaptation_regression_report.json",
+          "exists": false
+        },
+        {
+          "path": "reports/user_patterns.json",
+          "exists": true
+        },
+        {
+          "path": "reports/adaptation_proposals.json",
+          "exists": true
         },
         {
           "path": "reports/iteration-directions.md",
@@ -690,7 +705,7 @@
           "exists": true
         }
       ],
-      "next_action": "Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path."
+      "next_action": "Add adapt-apply only after approval ledger, allowlisted targets, dry-run diffs, regression reports, and rollback artifacts are designed."
     }
   ],
   "next_highest_leverage": [
