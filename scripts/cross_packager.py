@@ -400,7 +400,7 @@ PLATFORM_CONTRACTS = {
     },
 }
 
-EXCLUDED_ARCHIVE_PARTS = {".git", "__pycache__", ".venv", "venv", "node_modules", "dist"}
+EXCLUDED_ARCHIVE_PARTS = {".git", ".previews", "__pycache__", ".venv", "venv", "node_modules", "dist"}
 
 
 def should_skip_archive_path(rel_path: Path) -> bool:

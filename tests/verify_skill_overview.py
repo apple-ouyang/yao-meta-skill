@@ -46,7 +46,10 @@ def main() -> None:
     assert "position: sticky" in css_contract, css_contract[:1200]
     assert ".report-nav {" in css_contract, css_contract[:3200]
     assert "background: #ffffff" in css_contract, css_contract[:1600]
-    assert ".metrics-lead" in css_contract, css_contract[:7000]
+    assert ".section-body" in css_contract, css_contract[:7000]
+    assert ".metrics-primary" in css_contract, css_contract[:7000]
+    assert "repeat(auto-fit, minmax(320px, 1fr))" in css_contract, css_contract[:9000]
+    assert "overflow-wrap: break-word" in css_contract, css_contract[:9000]
     assert "@media (max-width: 980px)" in css_contract, css_contract[-2200:]
 
     script_contract = skill_overview_script()
@@ -175,8 +178,9 @@ def main() -> None:
     assert 'class="skip-link"' in report_html, report_html[:2400]
     assert 'class="progress-bar"' in report_html, report_html[:2400]
     assert 'aria-current' in report_html, report_html[-3000:]
-    assert 'class="metrics-stack"' in report_html, report_html[:9000]
-    assert 'class="metrics-lead"' in report_html, report_html[:9000]
+    assert 'class="section-body metrics-report"' in report_html, report_html[:9000]
+    assert 'class="metrics-primary"' in report_html, report_html[:9000]
+    assert 'class="metrics-stack"' not in report_html, report_html[:9000]
     assert "class='metric-summary-list'" in report_html, report_html[:9000]
     assert "class='metric-card-head'" in report_html, report_html[:12000]
     assert 'data-set-lang="zh-CN"' in report_html, report_html[:2600]

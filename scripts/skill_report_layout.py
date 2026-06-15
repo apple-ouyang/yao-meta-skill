@@ -365,6 +365,9 @@ def skill_overview_css() -> str:
       max-width: 43ch;
       text-wrap: pretty;
     }
+    .section-body {
+      margin-top: 24px;
+    }
     .two-col, .metric-grid, .chart-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -374,15 +377,20 @@ def skill_overview_css() -> str:
     .quality-panels {
       margin-top: 16px;
     }
-    .metrics-stack {
+    .metrics-report {
       display: grid;
-      gap: 18px;
+      gap: 20px;
     }
-    .metrics-lead {
+    .metrics-primary {
       display: grid;
-      grid-template-columns: minmax(420px, 1.15fr) minmax(300px, 0.85fr);
-      gap: 18px;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      gap: 20px;
       align-items: stretch;
+    }
+    .metrics-primary .chart-figure {
+      min-height: 100%;
+      display: grid;
+      align-content: center;
     }
     .metrics-note {
       display: grid;
@@ -424,6 +432,7 @@ def skill_overview_css() -> str:
       grid-column: 2 / 4;
       color: var(--muted);
       line-height: 1.5;
+      overflow-wrap: break-word;
     }
     .metric-status {
       display: inline-flex;
@@ -436,7 +445,7 @@ def skill_overview_css() -> str:
       font-size: 12px;
     }
     .metric-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       margin-top: 2px;
     }
     .list, .compact-list, .step-list {
@@ -448,8 +457,13 @@ def skill_overview_css() -> str:
     .list li::marker, .compact-list li::marker, .step-list li::marker { color: var(--brand); }
     .compact-list {
       gap: 6px;
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--muted);
+      line-height: 1.55;
+    }
+    .compact-list li, .list li, .step-list li {
+      min-width: 0;
+      overflow-wrap: break-word;
     }
     .panel, .metric-card, .roadmap-item {
       background: #ffffff;
@@ -457,6 +471,7 @@ def skill_overview_css() -> str:
       border-radius: 8px;
       padding: 22px;
       box-shadow: 0 1px 2px rgba(27, 54, 93, 0.04);
+      min-width: 0;
     }
     .metric-card {
       display: grid;
@@ -485,6 +500,9 @@ def skill_overview_css() -> str:
     }
     .metric-card-body {
       min-width: 0;
+    }
+    .metric-card-body .compact-list {
+      gap: 7px;
     }
     .chart-figure {
       margin: 0;
@@ -573,7 +591,7 @@ def skill_overview_css() -> str:
       .hero-grid, .section-head { grid-template-columns: 1fr; }
       .hero-grid { gap: 24px; }
       .score-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .metrics-lead, .two-col, .metric-grid, .chart-grid, .roadmap { grid-template-columns: 1fr; }
+      .metrics-primary, .two-col, .metric-grid, .chart-grid, .roadmap { grid-template-columns: 1fr; }
       .metric-card { grid-template-columns: 86px minmax(0, 1fr); }
       h1 { font-size: 2.75rem; }
     }

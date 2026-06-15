@@ -409,19 +409,20 @@ def render_html(summary: dict) -> str:
           <h2>{bi_span("总览指标", "Metrics")}</h2>
           <p>{bi_span("分数来自本地文件和 reports 证据，缺失时明确标为证据不足。", "Scores are derived from package files and reports; missing inputs are shown as evidence gaps.")}</p>
         </div>
-        <div>
-          <div class="metrics-stack">
-            <div class="metrics-lead">
-              {charts["radar"]}
-              <article class="panel metrics-note">
-                <h3>{bi_span("指标判读", "Reading")}</h3>
-                <p>{bi_span("先看雷达图判断能力短板，再看下方每项分数的证据原因。分数不是装饰数字，必须和本地文件、reports 证据或证据不足提示对应。", "Read the radar first for weak spots, then inspect each score with its evidence. Scores must map to local files, reports, or explicit evidence gaps.")}</p>
-                {render_metric_summary(scorecard)}
-              </article>
-            </div>
-            <div class="metric-grid">{render_metric_cards(scorecard)}</div>
-          </div>
+        <article class="panel metrics-note">
+          <h3>{bi_span("指标判读", "Reading")}</h3>
+          <p>{bi_span("先看雷达图判断能力短板，再看每项分数的证据原因。分数不是装饰数字，必须和本地文件、reports 证据或证据不足提示对应。", "Read the radar first for weak spots, then inspect each score with its evidence. Scores must map to local files, reports, or explicit evidence gaps.")}</p>
+        </article>
+      </div>
+      <div class="section-body metrics-report">
+        <div class="metrics-primary">
+          {charts["radar"]}
+          <article class="panel metrics-note">
+            <h3>{bi_span("成熟度条", "Maturity Bar")}</h3>
+            {render_metric_summary(scorecard)}
+          </article>
         </div>
+        <div class="metric-grid">{render_metric_cards(scorecard)}</div>
       </div>
     </section>
 

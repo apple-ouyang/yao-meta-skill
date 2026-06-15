@@ -54,7 +54,7 @@ def generated_zip_entries(names: list[str]) -> list[str]:
     generated = []
     for name in names:
         parts = PurePosixPath(name).parts
-        if "dist" in parts or (len(parts) > 2 and parts[1] == "tests" and any(part.startswith("tmp") for part in parts[2:])):
+        if ".previews" in parts or "dist" in parts or (len(parts) > 2 and parts[1] == "tests" and any(part.startswith("tmp") for part in parts[2:])):
             generated.append(name)
     return generated
 
@@ -137,7 +137,7 @@ def verify_package(
             for entry in required_entries:
                 add_check(checks, failures, f"archive-entry-{entry}", entry in archive_entries, f"Archive contains {entry}")
             generated_entries = generated_zip_entries(archive_entries)
-            add_check(checks, failures, "archive-excludes-generated", not generated_entries, "Archive excludes generated dist/ and tests/tmp* contents")
+            add_check(checks, failures, "archive-excludes-generated", not generated_entries, "Archive excludes generated dist/, .previews/, and tests/tmp* contents")
     elif require_zip:
         add_check(checks, failures, "archive-present", False, f"Missing required package archive: {display_path(archive_path)}")
     else:
