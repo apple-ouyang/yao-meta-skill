@@ -1676,13 +1676,13 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": false,
+          "release_lock_ready": true,
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "973e79957defbf5b70acff7de4f500e1618fb32636719d0ebe18c2210e6b5f3f",
-          "source_contract_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
-          "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
+          "evidence_bundle_sha256": "a76544029263cb74d648e507a64bc91f1222fadeed84f128dc62ed3faafd4b4c",
+          "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
+          "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 22,
@@ -1700,11 +1700,11 @@
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 5,
-          "working_tree_dirty": true,
-          "changed_file_count": 11
+          "public_claim_blocker_count": 4,
+          "working_tree_dirty": false,
+          "changed_file_count": 0
         },
-        "commit": "bf1499d9b8ef137420dfc25b56d332005721da59",
+        "commit": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -4346,7 +4346,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.36,
+          "duration_ms": 26.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4374,7 +4374,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.68,
+          "duration_ms": 26.34,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4397,7 +4397,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.7,
+          "duration_ms": 26.22,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4425,7 +4425,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.11,
+          "duration_ms": 26.54,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4448,7 +4448,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.55,
+          "duration_ms": 26.72,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4476,7 +4476,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.2,
+          "duration_ms": 26.47,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4499,7 +4499,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.04,
+          "duration_ms": 27.05,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4526,7 +4526,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.72,
+          "duration_ms": 26.35,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4549,7 +4549,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.6,
+          "duration_ms": 26.32,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4578,7 +4578,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.01,
+          "duration_ms": 26.65,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5299,35 +5299,23 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "bf1499d9b8ef137420dfc25b56d332005721da59",
+      "commit": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
       "git_status": {
         "available": true,
-        "dirty": true,
-        "changed_file_count": 11,
-        "sample": [
-          " M reports/adoption_drift_report.json",
-          " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json",
-          " M reports/output_execution_runs.json",
-          " M reports/output_execution_runs.md",
-          " M reports/python_compatibility.json",
-          " M reports/python_compatibility.md",
-          " M reports/review_waivers.json",
-          " M reports/review_waivers.md",
-          " M scripts/render_evidence_consistency.py"
-        ],
+        "dirty": false,
+        "changed_file_count": 0,
+        "sample": [],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "973e79957defbf5b70acff7de4f500e1618fb32636719d0ebe18c2210e6b5f3f",
-        "source_contract_sha256": "002cb9e43ee22c7ba2a59422e4e123fb801242506a1a189b9a8bc8ad7d71f7f8",
-        "archive_sha256": "eddf1d422b1ad8d50dc0b49f0525c33010e4fe7db31a4c605dcd68c33adf56e8",
+        "evidence_bundle_sha256": "a76544029263cb74d648e507a64bc91f1222fadeed84f128dc62ed3faafd4b4c",
+        "source_contract_sha256": "caa815571f7c86fa95447cd7407875eb452cac255c45360db63b017699425921",
+        "archive_sha256": "6721f9af9fc9784b0491f8e73dd92db8a38b3629fc08170ddd3269f2a3c9b48f",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 22,
@@ -5345,15 +5333,14 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5,
-        "working_tree_dirty": true,
-        "changed_file_count": 11
+        "public_claim_blocker_count": 4,
+        "working_tree_dirty": false,
+        "changed_file_count": 0
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
-          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -5362,10 +5349,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": false,
-        "commit": "bf1499d9b8ef137420dfc25b56d332005721da59",
+        "ready": true,
+        "commit": "0979c8753e01e9cbcfbcd9905b160b8f3b6f5372",
         "status_scope": "generation-time status before this report is written",
-        "reason": "working tree was dirty at generation time"
+        "reason": "clean generation-time HEAD"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5373,7 +5360,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "973e79957defbf5b70acff7de4f500e1618fb32636719d0ebe18c2210e6b5f3f"
+        "sha256": "a76544029263cb74d648e507a64bc91f1222fadeed84f128dc62ed3faafd4b4c"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5447,7 +5434,7 @@
           "path": "reports/output_execution_runs.json",
           "exists": true,
           "bytes": 7967,
-          "sha256": "6ac52b821a85dc924f2a3b0cdad440fdfee36222604f8f13b66aaa9387581f45"
+          "sha256": "0e4a474685833f04094d42f56dd84af5722185ece221fa6b63ec0996e84921d0"
         },
         {
           "label": "blind_review",
@@ -5482,7 +5469,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 109099,
-          "sha256": "0b11eb520b7275c36de490ba81e7c96e40ba9dd6baafd74fb4b1abd396042e33"
+          "sha256": "4fd98fe60dcdd1a0b8c6d0e6569bd21b5a07d695a0987a2f771d4e7b25fdec46"
         },
         {
           "label": "python_compatibility",
@@ -5496,14 +5483,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "944ae2224089a684a7495706685005d148b1ce8eea2efd1c18f318f1ffc59032"
+          "sha256": "7c901c1abbfa4ef1e8216f5ff4426fd41f929034722914d35d5d9995c6b215e7"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "c7a048b6bb2f6b13e88f473137c6b469fe7d25e99c67ca4018b9cf0f7308f312"
+          "sha256": "0ffbc5dcb848ab2965a6e01708d7c39d243c98b8fa387ecef5280d04f112da6e"
         },
         {
           "label": "install_simulation",
@@ -15413,9 +15400,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1370082,
+        "other_text_tokens": 1370410,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1370849,
+        "estimated_total_text_tokens": 1371177,
         "deferred_resource_tokens": 434418,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -17336,7 +17323,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-15T16:50:03Z",
+      "generated_at": "2026-06-15T16:51:01Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
