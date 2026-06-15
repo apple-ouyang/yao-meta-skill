@@ -36,9 +36,9 @@ No file-size hotspots found.
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
+| `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
 | `scripts/review_studio_layout.py` | `694` | `internal-module` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
-| `scripts/cross_packager.py` | `650` | `cli-script` | `pass` |
 
 ## Release Rule
 
