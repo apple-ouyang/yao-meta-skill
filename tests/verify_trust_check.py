@@ -66,6 +66,7 @@ def main() -> None:
     scanned_paths = {relpath(ROOT, path) for path in iter_scan_files(ROOT)}
     assert "assets/skill-overview.css" in scanned_paths, scanned_paths
     assert "assets/skill-overview.js" in scanned_paths, scanned_paths
+    assert "assets/review-studio.css" in scanned_paths, scanned_paths
     assert payload["summary"]["internal_module_count"] >= 3, payload
     assert payload["summary"]["network_script_count"] == 3, payload
     assert payload["summary"]["network_policy_covered_count"] == payload["summary"]["network_script_count"], payload

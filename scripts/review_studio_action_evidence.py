@@ -22,6 +22,13 @@ def action_command_rows(commands: dict[str, Any]) -> list[dict[str, str]]:
     return rows
 
 
+def first_text_items(*values: Any, limit: int = 4) -> list[str]:
+    for value in values:
+        if isinstance(value, list) and value:
+            return [str(item) for item in value[:limit]]
+    return []
+
+
 def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
     ledger = data.get("world_class_evidence_ledger", {}) if isinstance(data, dict) else {}
     entries = ledger.get("entries", []) if isinstance(ledger, dict) else []
@@ -58,6 +65,7 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
         runbook = entry.get("runbook", [])
         if not runbook and isinstance(checklist.get("must_collect", {}), dict):
             runbook = checklist["must_collect"].get("runbook", [])
+        must_collect = checklist.get("must_collect", {}) if isinstance(checklist.get("must_collect", {}), dict) else {}
         steps.append(
             {
                 "key": key,
@@ -74,9 +82,29 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                 "blocked_checks": blocked_checks,
                 "commands": action_command_rows(checklist.get("commands", {}) if isinstance(checklist.get("commands", {}), dict) else {}),
                 "runbook": [str(item) for item in runbook[:3]],
+                "provenance_requirements": first_text_items(
+                    must_collect.get("provenance_requirements"),
+                    entry.get("provenance_requirements"),
+                    limit=3,
+                ),
+                "success_checks": first_text_items(must_collect.get("success_checks"), entry.get("success_checks")),
+                "evidence_artifacts": first_text_items(
+                    must_collect.get("evidence_artifacts"),
+                    entry.get("evidence_artifacts"),
+                    limit=5,
+                ),
+                "privacy_contract": first_text_items(must_collect.get("privacy_contract"), entry.get("privacy_contract"), limit=3),
             }
         )
     return steps
+
+
+def render_small_list(items: list[Any], empty: str, ordered: bool = False) -> str:
+    if not items:
+        return f"<p class='muted'>{html.escape(empty)}</p>"
+    tag = "ol" if ordered else "ul"
+    rows = "".join(f"<li>{html.escape(str(item))}</li>" for item in items)
+    return f"<{tag}>{rows}</{tag}>"
 
 
 def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
@@ -136,6 +164,22 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
                 else "<p class='muted'>暂无首要步骤。</p>"
             )
             + "</details>"
+            "<details class='action-collection-details'><summary>采集契约</summary>"
+            "<div class='action-collection-grid'>"
+            "<section><h5>来源要求</h5>"
+            + render_small_list(step.get("provenance_requirements", []), "暂无来源要求。")
+            + "</section>"
+            "<section><h5>通过条件</h5>"
+            + render_small_list(step.get("success_checks", []), "暂无通过条件。")
+            + "</section>"
+            "<section><h5>证据资产</h5>"
+            + render_small_list(step.get("evidence_artifacts", []), "暂无证据资产。")
+            + "</section>"
+            "<section><h5>隐私边界</h5>"
+            + render_small_list(step.get("privacy_contract", []), "暂无隐私边界。")
+            + "</section>"
+            "</div>"
+            "</details>"
             "</article>"
         )
     return (

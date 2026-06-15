@@ -69,6 +69,8 @@ Each action must include:
 
 The HTML page should render these actions before the detailed supporting sections so a reviewer can move directly from warning to fix. Action entries do not change gate count or score; they make the current decision more operational.
 
+For `world-class-evidence`, the action should also expose an evidence-step card for every pending evidence key. Each card should show the submission path, template path, blocked source checks, command handoff, first runbook steps, provenance requirements, success checks, evidence artifacts, and privacy boundary. These cards are collection guidance only; they must not count as accepted evidence or change world-class readiness.
+
 ## Review Annotations
 
 `reports/review_annotations.json` is the structured ledger, and `reports/review_annotations.md` is the human-readable review note surface. Each annotation should include:

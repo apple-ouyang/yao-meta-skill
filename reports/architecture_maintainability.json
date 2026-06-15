@@ -52,7 +52,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 803,
+      "lines": 816,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -100,9 +100,9 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/review_studio_layout.py",
-      "lines": 703,
-      "kind": "internal-module",
+      "path": "scripts/render_world_class_preflight.py",
+      "lines": 693,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
@@ -138,7 +138,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 803,
+      "lines": 816,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

@@ -272,6 +272,7 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/review-studio.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -325,7 +326,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           }
         },
@@ -596,7 +597,7 @@
             "counts": {
               "references": 35,
               "scripts": 121,
-              "assets": 4,
+              "assets": 5,
               "reports": 43
             },
             "generated_files": [
@@ -850,7 +851,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           },
           "generated_files": [
@@ -1189,6 +1190,7 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/review-studio.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -1242,7 +1244,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           }
         },
@@ -1513,7 +1515,7 @@
             "counts": {
               "references": 35,
               "scripts": 121,
-              "assets": 4,
+              "assets": 5,
               "reports": 43
             },
             "generated_files": [
@@ -1767,7 +1769,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           },
           "generated_files": [
@@ -2106,6 +2108,7 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/review-studio.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -2159,7 +2162,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           }
         },
@@ -2430,7 +2433,7 @@
             "counts": {
               "references": 35,
               "scripts": 121,
-              "assets": 4,
+              "assets": 5,
               "reports": 43
             },
             "generated_files": [
@@ -2677,7 +2680,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           },
           "generated_files": [
@@ -3007,6 +3010,7 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/review-studio.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -3060,7 +3064,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           }
         },
@@ -3331,7 +3335,7 @@
             "counts": {
               "references": 35,
               "scripts": 121,
-              "assets": 4,
+              "assets": 5,
               "reports": 43
             },
             "generated_files": [
@@ -3578,7 +3582,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           },
           "generated_files": [
@@ -3908,6 +3912,7 @@
             "scripts/yao_cli_telemetry.py"
           ],
           "assets": [
+            "assets/review-studio.css",
             "assets/skill-overview.css",
             "assets/skill-overview.js",
             "templates/basic_skill.md.j2",
@@ -3961,7 +3966,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           }
         },
@@ -4232,7 +4237,7 @@
             "counts": {
               "references": 35,
               "scripts": 121,
-              "assets": 4,
+              "assets": 5,
               "reports": 43
             },
             "generated_files": [
@@ -4483,7 +4488,7 @@
           "counts": {
             "references": 35,
             "scripts": 121,
-            "assets": 4,
+            "assets": 5,
             "reports": 43
           },
           "generated_files": [

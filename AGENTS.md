@@ -104,7 +104,7 @@ Clean test-only scratch directories after verification with `find tests -maxdept
 - `scripts/render_skill_overview.py`: v2 bilingual skill overview report. Preserve `reports/skill-overview.html` / `.json`, `body data-report-lang="zh-CN"`, default Simplified Chinese, English switch, and inline-chart/no-external-dependency behavior.
 - `scripts/skill_report_layout.py` plus `assets/skill-overview.css` / `assets/skill-overview.js`: overview report layout contract and inline assets. Keep the generated report single-file at render time, but keep long CSS/JS source in `assets/` instead of embedding it inside Python.
 - `scripts/render_review_studio.py`: Review Studio gate orchestration. Keep gate scoring, evidence links, and action generation separate from layout helpers.
-- `scripts/review_studio_layout.py`: Review Studio static layout and CSS contract.
+- `scripts/review_studio_layout.py` plus `assets/review-studio.css`: Review Studio static layout and CSS contract. Keep the generated report single-file at render time, but keep long CSS source in `assets/` instead of embedding it inside Python.
 - `scripts/review_studio_formatting.py`: Review Studio dictionary-to-panel formatting and Chinese metric labels.
 - `scripts/review_studio_gates.py`: Review Studio gate evaluation, release decision scoring, and gate status labels.
 - `scripts/render_skill_os2_audit.py`: requirement-by-requirement Skill OS 2.0 completion audit. Keep local evidence, human-required gaps, and external-required gaps separate so reports do not overclaim world-class readiness.

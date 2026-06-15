@@ -540,6 +540,10 @@ def main() -> None:
     assert any("world-class-intake" in item["command"] for item in provider_action_step["commands"]), provider_action_step
     assert any("world-class-ledger" in item["command"] for item in provider_action_step["commands"]), provider_action_step
     assert any("output-exec --provider-runner openai" in item for item in provider_action_step["runbook"]), provider_action_step
+    assert "provider-backed model run" in provider_action_step["provenance_requirements"], provider_action_step
+    assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_action_step["success_checks"], provider_action_step
+    assert "reports/output_execution_runs.json" in provider_action_step["evidence_artifacts"], provider_action_step
+    assert any("provider credentials" in item for item in provider_action_step["privacy_contract"]), provider_action_step
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_submission_review"]
@@ -662,6 +666,12 @@ def main() -> None:
     assert "action-evidence-checks" in html, html
     assert "action-command-list" in html, html
     assert "action-runbook-list" in html, html
+    assert "采集契约" in html, html
+    assert "action-collection-grid" in html, html
+    assert "来源要求" in html, html
+    assert "通过条件" in html, html
+    assert "证据资产" in html, html
+    assert "隐私边界" in html, html
     assert "世界证据" in html, html
     assert "证据台账" in html, html
     assert "证据入口" in html, html
@@ -793,6 +803,9 @@ def main() -> None:
     assert len(review_layout.REVIEW_STUDIO_NAV) == 16, review_layout.REVIEW_STUDIO_NAV
     assert ("#world-class", "世界证据") in review_layout.REVIEW_STUDIO_NAV, review_layout.REVIEW_STUDIO_NAV
     assert "position: sticky" in review_layout.review_studio_css(), review_layout.review_studio_css()[:400]
+    assert review_layout.review_studio_css() == (ROOT / "assets" / "review-studio.css").read_text(
+        encoding="utf-8"
+    ).strip()
     assert "#overview" in review_layout.render_review_nav(), review_layout.render_review_nav()
     assert "审查总览" in review_layout.render_review_nav(), review_layout.render_review_nav()
     assert review_layout.render_review_nav([]) == ""

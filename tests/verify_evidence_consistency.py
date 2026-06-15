@@ -55,7 +55,6 @@ def copy_reports(dst: Path) -> None:
 def refresh_embedded_reports() -> None:
     script_names = [
         "render_context_reports.py",
-        "render_benchmark_reproducibility.py",
         "render_skill_os2_coverage.py",
         "render_world_class_evidence_plan.py",
         "render_world_class_evidence_ledger.py",
@@ -64,6 +63,7 @@ def refresh_embedded_reports() -> None:
         "render_world_class_submission_review.py",
         "render_world_class_operator_runbook.py",
         "render_world_class_claim_guard.py",
+        "render_benchmark_reproducibility.py",
         "render_skill_overview.py",
         "render_skill_interpretation.py",
         "render_review_viewer.py",
