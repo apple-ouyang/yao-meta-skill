@@ -11,6 +11,9 @@ ROOT = Path(__file__).resolve().parent.parent
 SCRIPT = ROOT / "scripts" / "render_world_class_evidence_intake.py"
 KIT_SCRIPT = ROOT / "scripts" / "prepare_world_class_submission_kit.py"
 TMP = ROOT / "tests" / "tmp_world_class_evidence_intake"
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from world_class_evidence_contract import validate_payload  # noqa: E402
 
 
 def sha256_file(path: Path) -> str:
@@ -100,6 +103,162 @@ def provider_submission(*, valid: bool, artifact_path: str = "reports/output_exe
     }
 
 
+def write_json(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def write_human_artifacts(skill_root: Path, *, complete: bool = True, reviewer: str = "Yao QA") -> None:
+    reviewed_at = "2026-06-14"
+    if complete:
+        summary = {
+            "pair_count": 2,
+            "judgment_count": 2,
+            "pending_count": 0,
+            "agreement_count": 2,
+            "disagreement_count": 0,
+            "invalid_decision_count": 0,
+            "answer_revealed_count": 2,
+            "pending_answer_hidden_count": 0,
+            "agreement_rate": 100.0,
+            "needs_review": False,
+            "failure_count": 0,
+        }
+        decisions = [
+            {"case_id": "case-a", "winner_variant": "A", "confidence": 0.9, "reason": "Variant A follows the rubric."},
+            {"case_id": "case-b", "winner_variant": "B", "confidence": 0.8, "reason": "Variant B handles the boundary."},
+        ]
+    else:
+        summary = {
+            "pair_count": 2,
+            "judgment_count": 1,
+            "pending_count": 1,
+            "agreement_count": 1,
+            "disagreement_count": 0,
+            "invalid_decision_count": 0,
+            "answer_revealed_count": 1,
+            "pending_answer_hidden_count": 1,
+            "agreement_rate": 100.0,
+            "needs_review": True,
+            "failure_count": 0,
+        }
+        decisions = [
+            {"case_id": "case-a", "winner_variant": "A", "confidence": 0.9, "reason": "Variant A follows the rubric."},
+            {"case_id": "case-b", "winner_variant": "", "confidence": None, "reason": ""},
+        ]
+    write_json(
+        skill_root / "reports" / "output_review_adjudication.json",
+        {
+            "schema_version": "1.0",
+            "ok": True,
+            "summary": summary,
+            "reviewer": reviewer,
+            "reviewed_at": reviewed_at,
+            "pairs": [],
+            "failures": [],
+        },
+    )
+    write_json(
+        skill_root / "reports" / "output_review_decisions.json",
+        {
+            "schema_version": "1.0",
+            "reviewer": reviewer,
+            "reviewed_at": reviewed_at,
+            "decisions": decisions,
+        },
+    )
+
+
+def human_submission(skill_root: Path, *, reviewer: str = "Yao QA") -> dict:
+    return {
+        "schema_version": "1.0",
+        "evidence_key": "human-adjudication",
+        "template_only": False,
+        "category": "human",
+        "source_type": "blind-ab-review",
+        "submitted_by": reviewer,
+        "submitted_at": "2026-06-14",
+        "summary": "Completed blind A/B reviewer decisions for ledger review.",
+        "artifact_refs": [
+            {
+                "path": "reports/output_review_adjudication.json",
+                "kind": "adjudication-report",
+                "contains_raw_content": False,
+                "sha256": sha256_file(skill_root / "reports" / "output_review_adjudication.json"),
+            },
+            {
+                "path": "reports/output_review_decisions.json",
+                "kind": "review-decisions",
+                "contains_raw_content": False,
+                "sha256": sha256_file(skill_root / "reports" / "output_review_decisions.json"),
+            },
+        ],
+        "provenance": {
+            "reviewer": reviewer,
+            "blind_pack_path": "reports/output_blind_review_pack.md",
+            "answer_key_opened_after_decisions": True,
+        },
+        "privacy": {
+            "raw_user_content_included": False,
+            "raw_provider_prompt_included": False,
+            "credentials_included": False,
+            "secrets_included": False,
+        },
+        "anti_overclaim": {
+            "planned_work_counts_as_evidence": False,
+            "metadata_fallback_counts_as_native_enforcement": False,
+            "pending_review_counts_as_human_decision": False,
+            "local_command_runner_counts_as_provider_model": False,
+        },
+        "attestation": {
+            "real_external_or_human_evidence": True,
+            "reviewer_or_operator_identity_present": True,
+            "artifact_refs_reviewed": True,
+            "privacy_contract_satisfied": True,
+        },
+    }
+
+
+def assert_human_contract_artifact_validation() -> None:
+    entry = {"key": "human-adjudication", "category": "human"}
+    skill_root = TMP / "human_contract_root"
+    write_human_artifacts(skill_root, complete=True)
+    valid_result = validate_payload(
+        human_submission(skill_root),
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert valid_result["status"] == "pass", valid_result
+    assert valid_result["artifact_integrity"]["required_artifact_verified_count"] == 2, valid_result
+
+    write_human_artifacts(skill_root, complete=False)
+    pending_result = validate_payload(
+        human_submission(skill_root),
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert pending_result["status"] == "fail", pending_result
+    assert any("summary.pending_count must be 0" in error for error in pending_result["errors"]), pending_result["errors"]
+    assert any("summary.judgment_count must equal" in error for error in pending_result["errors"]), pending_result["errors"]
+    assert any("summary.needs_review must be false" in error for error in pending_result["errors"]), pending_result["errors"]
+    assert any("A/B winner_variant" in error for error in pending_result["errors"]), pending_result["errors"]
+
+    write_human_artifacts(skill_root, complete=True, reviewer="Yao QA")
+    mismatch_result = validate_payload(
+        human_submission(skill_root, reviewer="Different Reviewer"),
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert mismatch_result["status"] == "fail", mismatch_result
+    assert any("provenance.reviewer must match decisions.reviewer" in error for error in mismatch_result["errors"]), mismatch_result["errors"]
+
+
 def assert_documented_submission_commands() -> None:
     expected_fragments = [
         'SUBMISSIONS_DIR="${SUBMISSIONS_DIR:-evidence/world_class/submissions}"',
@@ -122,6 +281,7 @@ def main() -> None:
     assert_documented_submission_commands()
     default_json = TMP / "world_class_evidence_intake.json"
     default_md = TMP / "world_class_evidence_intake.md"
+    assert_human_contract_artifact_validation()
     payload = run_intake("--output-json", str(default_json), "--output-md", str(default_md))
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload

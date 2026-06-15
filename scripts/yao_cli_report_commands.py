@@ -80,6 +80,7 @@ def command_report(args: argparse.Namespace) -> int:
             run_script("render_benchmark_reproducibility.py", [str(ROOT)]),
             run_script("render_skill_overview.py", [str(ROOT)]),
             run_script("render_skill_interpretation.py", [str(ROOT)]),
+            run_script("render_review_studio.py", [str(ROOT)]),
             run_script("render_evidence_consistency.py", [str(ROOT)]),
             run_script("render_review_viewer.py", [str(ROOT)]),
         ]
@@ -124,6 +125,8 @@ def command_report(args: argparse.Namespace) -> int:
             "skill_overview": "reports/skill-overview.json",
             "skill_interpretation": "reports/skill-interpretation.json",
             "skill_interpretation_html": "reports/skill-interpretation.html",
+            "review_studio": "reports/review-studio.json",
+            "review_studio_html": "reports/review-studio.html",
             "evidence_consistency": "reports/evidence_consistency.json",
             "review_viewer": "reports/review-viewer.json",
             "review_viewer_html": "reports/review-viewer.html",

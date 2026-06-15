@@ -5,7 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parent.parent
 CLI = ROOT / "scripts" / "yao.py"
 BENCHMARK_FIXTURE_DIR = ROOT / "tests" / "fixtures" / "github_benchmark_scan"
@@ -767,6 +766,7 @@ def main() -> None:
     assert report_result["payload"]["artifacts"]["skill_overview"] == "reports/skill-overview.json", report_result
     assert report_result["payload"]["artifacts"]["skill_interpretation"] == "reports/skill-interpretation.json", report_result
     assert report_result["payload"]["artifacts"]["skill_interpretation_html"] == "reports/skill-interpretation.html", report_result
+    assert (report_result["payload"]["artifacts"]["review_studio"], report_result["payload"]["artifacts"]["review_studio_html"]) == ("reports/review-studio.json", "reports/review-studio.html"), report_result
     assert report_result["payload"]["artifacts"]["review_viewer"] == "reports/review-viewer.json", report_result
     assert report_result["payload"]["artifacts"]["review_viewer_html"] == "reports/review-viewer.html", report_result
     report_output_execution = json.loads((ROOT / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))

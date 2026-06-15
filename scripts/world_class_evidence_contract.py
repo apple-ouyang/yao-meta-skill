@@ -222,6 +222,125 @@ def validate_artifact_refs(
     return stats
 
 
+def artifact_ref_path_map(payload: dict[str, Any], root: Path) -> dict[str, Path]:
+    refs = payload.get("artifact_refs", [])
+    if not isinstance(refs, list):
+        return {}
+    paths: dict[str, Path] = {}
+    for ref in refs:
+        if not isinstance(ref, dict):
+            continue
+        path_text = str(ref.get("path", "")).strip()
+        if not path_text:
+            continue
+        resolved, path_error = resolve_artifact_path(path_text, root)
+        if path_error or resolved is None:
+            continue
+        paths[rel_path(resolved, root)] = resolved
+    return paths
+
+
+def real_int(value: Any) -> int | None:
+    return value if isinstance(value, int) else None
+
+
+def validate_human_adjudication_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:
+    paths = artifact_ref_path_map(payload, root)
+    adjudication = load_json(paths.get("reports/output_review_adjudication.json", root / "__missing__"))
+    decisions = load_json(paths.get("reports/output_review_decisions.json", root / "__missing__"))
+    if not adjudication or not decisions:
+        return
+
+    summary = adjudication.get("summary", {}) if isinstance(adjudication.get("summary", {}), dict) else {}
+    pair_count = real_int(summary.get("pair_count"))
+    judgment_count = real_int(summary.get("judgment_count"))
+    pending_count = real_int(summary.get("pending_count"))
+    invalid_decision_count = real_int(summary.get("invalid_decision_count"))
+    answer_revealed_count = real_int(summary.get("answer_revealed_count"))
+    pending_answer_hidden_count = real_int(summary.get("pending_answer_hidden_count"))
+    add_error(errors, bool(pair_count and pair_count > 0), "human-adjudication adjudication summary.pair_count must be >0")
+    add_error(
+        errors,
+        bool(pair_count and judgment_count == pair_count),
+        "human-adjudication adjudication summary.judgment_count must equal summary.pair_count",
+    )
+    add_error(errors, pending_count == 0, "human-adjudication adjudication summary.pending_count must be 0")
+    add_error(
+        errors,
+        invalid_decision_count == 0,
+        "human-adjudication adjudication summary.invalid_decision_count must be 0",
+    )
+    add_error(
+        errors,
+        bool(pair_count and answer_revealed_count == pair_count),
+        "human-adjudication adjudication summary.answer_revealed_count must equal summary.pair_count",
+    )
+    add_error(
+        errors,
+        pending_answer_hidden_count == 0,
+        "human-adjudication adjudication summary.pending_answer_hidden_count must be 0",
+    )
+    add_error(errors, summary.get("needs_review") is False, "human-adjudication adjudication summary.needs_review must be false")
+
+    decision_rows = decisions.get("decisions", [])
+    add_error(errors, decisions.get("schema_version") == "1.0", "human-adjudication decisions.schema_version must be 1.0")
+    reviewer = str(decisions.get("reviewer", "")).strip()
+    reviewed_at = str(decisions.get("reviewed_at", "")).strip()
+    require_real_text(errors, reviewer, "human-adjudication decisions.reviewer")
+    add_error(
+        errors,
+        bool(SUBMITTED_AT_RE.match(reviewed_at)),
+        "human-adjudication decisions.reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
+    )
+    add_error(
+        errors,
+        isinstance(decision_rows, list) and bool(pair_count and len(decision_rows) == pair_count),
+        "human-adjudication decisions count must equal adjudication summary.pair_count",
+    )
+    if isinstance(decision_rows, list):
+        invalid_winners = [
+            str(item.get("case_id", index + 1))
+            for index, item in enumerate(decision_rows)
+            if not isinstance(item, dict) or str(item.get("winner_variant", "")).strip().upper() not in {"A", "B"}
+        ]
+        missing_reasons = [
+            str(item.get("case_id", index + 1))
+            for index, item in enumerate(decision_rows)
+            if not isinstance(item, dict) or not str(item.get("reason", "")).strip()
+        ]
+        add_error(
+            errors,
+            not invalid_winners,
+            "human-adjudication decisions must include A/B winner_variant for every case",
+        )
+        add_error(errors, not missing_reasons, "human-adjudication decisions must include reviewer reason for every case")
+
+    provenance = payload.get("provenance", {}) if isinstance(payload.get("provenance", {}), dict) else {}
+    provenance_reviewer = str(provenance.get("reviewer", "")).strip()
+    add_error(
+        errors,
+        bool(reviewer and provenance_reviewer and reviewer == provenance_reviewer),
+        "human-adjudication provenance.reviewer must match decisions.reviewer",
+    )
+    add_error(
+        errors,
+        adjudication.get("reviewer") == reviewer,
+        "human-adjudication adjudication reviewer must match decisions.reviewer",
+    )
+    add_error(
+        errors,
+        adjudication.get("reviewed_at") == reviewed_at,
+        "human-adjudication adjudication reviewed_at must match decisions.reviewed_at",
+    )
+
+
+def validate_real_artifact_payloads(payload: dict[str, Any], errors: list[str], root: Path, template_expected: bool) -> None:
+    if template_expected:
+        return
+    if str(payload.get("evidence_key", "")) == "human-adjudication":
+        validate_human_adjudication_artifacts(payload, errors, root)
+
+
 def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> None:
     key = str(payload.get("evidence_key", ""))
     template_expected = payload.get("template_only") is True
@@ -331,6 +450,7 @@ def validate_payload(
     if not template_expected:
         for key in REQUIRED_ATTESTATION_TRUE:
             add_error(errors, attestation.get(key) is True, f"attestation.{key} must be true for a real submission")
+    validate_real_artifact_payloads(payload, errors, root, template_expected)
     return {
         "path": rel_path(path, root),
         "evidence_key": evidence_key,
