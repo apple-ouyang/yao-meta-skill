@@ -3,24 +3,15 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+  "commit": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 55,
+    "changed_file_count": 3,
     "sample": [
-      " M assets/review-studio.css",
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/compiled_targets.json",
       " M reports/context_budget.json",
       " M reports/context_budget.md",
-      " M reports/context_budget_summary.json",
-      " M reports/evidence_consistency.json"
+      " M reports/context_budget_summary.json"
     ],
     "scope": "generation-time status before this report is written"
   },
@@ -52,7 +43,7 @@
     "public_claim_ready": false,
     "public_claim_blocker_count": 5,
     "working_tree_dirty": true,
-    "changed_file_count": 55
+    "changed_file_count": 3
   },
   "public_claim": {
     "ready": false,
@@ -68,7 +59,7 @@
   },
   "release_lock": {
     "ready": false,
-    "commit": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+    "commit": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
     "status_scope": "generation-time status before this report is written",
     "reason": "working tree was dirty at generation time"
   },

@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 484698/120000; top deferred scripts 424733; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 484717/120000; top deferred scripts 424739; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -1948,9 +1948,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 55
+          "changed_file_count": 3
         },
-        "commit": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+        "commit": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5556,24 +5556,15 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+      "commit": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 55,
+        "changed_file_count": 3,
         "sample": [
-          " M assets/review-studio.css",
-          " M registry/index.json",
-          " M registry/packages/yao-meta-skill.json",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json",
           " M reports/context_budget.json",
           " M reports/context_budget.md",
-          " M reports/context_budget_summary.json",
-          " M reports/evidence_consistency.json"
+          " M reports/context_budget_summary.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5605,7 +5596,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 55
+        "changed_file_count": 3
       },
       "public_claim": {
         "ready": false,
@@ -5621,7 +5612,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+        "commit": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -16369,15 +16360,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1045217,
+        "other_text_tokens": 1045271,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1046014,
-        "deferred_resource_tokens": 484698,
+        "estimated_total_text_tokens": 1046068,
+        "deferred_resource_tokens": 484717,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 424733,
+            "estimated_tokens": 424739,
             "file_count": 122
           },
           {
@@ -16392,14 +16383,14 @@
           },
           {
             "path": "assets",
-            "estimated_tokens": 10031,
+            "estimated_tokens": 10044,
             "file_count": 3
           }
         ],
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 424733,
+            "estimated_tokens": 424739,
             "file_count": 122
           }
         ],
@@ -16422,7 +16413,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 424733,
+              "estimated_tokens": 424739,
               "file_count": 122,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -18410,11 +18401,11 @@
       "pending_review_count": 0,
       "applied_count": 0,
       "rollback_count": 0,
-      "local_blueprint_ready": true,
+      "local_blueprint_ready": false,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "release_lock_ready": false,
-      "evidence_consistency_ok": false,
+      "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
       "failure_count": 0,
@@ -18427,11 +18418,11 @@
         "pending_review_count": 0,
         "applied_count": 0,
         "rollback_count": 0,
-        "local_blueprint_ready": true,
+        "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
         "failure_count": 0
@@ -18876,11 +18867,11 @@
         "rollback_count": 0
       },
       "release_state": {
-        "local_blueprint_ready": true,
+        "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "release_lock_ready": false,
-        "evidence_consistency_ok": false
+        "evidence_consistency_ok": true
       },
       "actions": [
         {
@@ -18892,11 +18883,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence-consistency before using this report for release decisions."
         }
       ],
       "failures": [],
@@ -18934,7 +18920,7 @@
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
       "release_lock_ready": false,
-      "evidence_consistency_ok": false,
+      "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "writes_source_files": false,
@@ -18954,7 +18940,7 @@
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
         "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "writes_source_files": false,
@@ -19206,7 +19192,7 @@
       },
       "release_state": {
         "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
       },
@@ -19220,11 +19206,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence consistency before using this curator report for release decisions."
         }
       ],
       "failures": [],

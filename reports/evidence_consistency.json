@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 484698/120000; top deferred scripts 424733; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 484717/120000; top deferred scripts 424739; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 484698/120000; top deferred scripts 424733; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 484717/120000; top deferred scripts 424739; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
-      "actual": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+      "expected": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
+      "actual": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
-      "actual": "a441abf61becd4fd4f1a0031a8ba18d6feac95ce",
+      "expected": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
+      "actual": "5517bcf7a4ab72b344d38804c97be5dd6acc4514",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
