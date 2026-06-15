@@ -565,10 +565,15 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "html_report": "reports/world_class_evidence_preflight.html",
             "html_exists": True,
             "prepare_submission": f"python3 scripts/yao.py world-class-submission-kit . --output-dir {default_submissions_dir}",
+            "prepare_prefilled_submission": (
+                f"python3 scripts/yao.py world-class-submission-kit . --output-dir {default_submissions_dir} "
+                "--prefill-artifacts"
+            ),
             "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {default_submissions_dir}",
             "submission_review": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {default_submissions_dir}",
             "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {default_submissions_dir}",
             "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
+            "artifact_prefill_counts_as_evidence": False,
         }
         actual_preflight_handoff = {
             "directory": preflight_submissions.get("directory"),
@@ -581,10 +586,14 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             else None,
             "html_exists": (skill_dir / "reports" / "world_class_evidence_preflight.html").exists(),
             "prepare_submission": preflight_commands.get("prepare_submission"),
+            "prepare_prefilled_submission": preflight_commands.get("prepare_prefilled_submission"),
             "validate_intake": preflight_commands.get("validate_intake"),
             "submission_review": preflight_commands.get("submission_review"),
             "refresh_ledger": preflight_commands.get("refresh_ledger"),
             "guard_claim": preflight_commands.get("guard_claim"),
+            "artifact_prefill_counts_as_evidence": preflight_submissions.get(
+                "artifact_prefill_counts_as_evidence"
+            ),
         }
         compare_values(
             checks,
@@ -594,8 +603,8 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             actual=actual_preflight_handoff,
             paths=[REQUIRED_REPORTS["world_class_preflight"], "reports/world_class_evidence_preflight.html"],
             detail=(
-                "Preflight must give operators the exact draft, intake, review, ledger, and claim-guard commands "
-                "without letting drafts or submissions count as accepted evidence."
+                "Preflight must give operators the exact draft, SHA-prefill, intake, review, ledger, "
+                "and claim-guard commands without letting drafts, prefill, or submissions count as accepted evidence."
             ),
         )
 

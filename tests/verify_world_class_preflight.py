@@ -85,11 +85,20 @@ def main() -> None:
         "python3 scripts/yao.py world-class-submission-kit . "
         "--output-dir evidence/world_class/submissions"
     ), payload["submissions"]
+    assert payload["submissions"]["submission_kit_prefill_command"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--output-dir evidence/world_class/submissions --prefill-artifacts"
+    ), payload["submissions"]
+    assert payload["submissions"]["artifact_prefill_counts_as_evidence"] is False, payload
     assert payload["artifacts"]["html"] == "reports/world_class_evidence_preflight.html", payload["artifacts"]
     submission_commands = payload["submissions"]["commands"]
     assert submission_commands["prepare_submission"] == (
         "python3 scripts/yao.py world-class-submission-kit . "
         "--output-dir evidence/world_class/submissions"
+    ), submission_commands
+    assert submission_commands["prepare_prefilled_submission"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--output-dir evidence/world_class/submissions --prefill-artifacts"
     ), submission_commands
     assert submission_commands["validate_intake"] == (
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -108,7 +117,13 @@ def main() -> None:
         "python3 scripts/yao.py world-class-submission-kit . "
         "--evidence-key provider-holdout --output-dir evidence/world_class/submissions"
     ), provider
+    assert provider["commands"]["prepare_prefilled_submission"] == (
+        "python3 scripts/yao.py world-class-submission-kit . "
+        "--evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts"
+    ), provider
     assert provider["submission_kit"]["drafts_count_as_evidence"] is False, provider
+    assert provider["submission_kit"]["artifact_prefill_counts_as_evidence"] is False, provider
+    assert provider["submission_kit"]["prefill_command"] == provider["commands"]["prepare_prefilled_submission"], provider
     assert provider["submission_kit"]["output_dir"] == "evidence/world_class/submissions", provider
     assert provider["submission_kit"]["draft_path"] == "evidence/world_class/submissions/provider-holdout.json", provider
     provider_checks = {item["key"]: item for item in provider["prechecks"]}
@@ -137,8 +152,12 @@ def main() -> None:
     assert "credential value exposed: `false`" in markdown, markdown
     assert "Submission Kit Handoff" in markdown, markdown
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in markdown, markdown
+    assert "world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts" in markdown, markdown
     assert "world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions" in markdown, markdown
+    assert "world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions --prefill-artifacts" in markdown, markdown
     assert "drafts count as evidence: `false`" in markdown, markdown
+    assert "artifact prefill counts as evidence: `false`" in markdown, markdown
+    assert "does not make a draft count as evidence" in markdown, markdown
     assert "values are never printed" in markdown, markdown
     html = output_html.read_text(encoding="utf-8")
     assert "<title>World-Class Evidence Preflight</title>" in html, html
@@ -146,7 +165,10 @@ def main() -> None:
     assert "Evidence Queue" in html, html
     assert "Submission Kit" in html, html
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in html, html
+    assert "world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts" in html, html
     assert "provider-holdout" in html, html
+    assert "Artifact prefill is convenience data only." in html, html
+    assert "artifact prefill counts as evidence" in html, html
     assert "Source Checks" in html, html
     assert "ready_to_claim_world_class" in html, html
     assert "Environment variables are displayed only as set or not-set" in html, html
@@ -187,7 +209,9 @@ def main() -> None:
     spaced_payload = json.loads(spaced_proc.stdout)
     quoted_spaced = "'tests/tmp_world_class_preflight/submission kit spaced'"
     assert quoted_spaced in spaced_payload["submissions"]["commands"]["prepare_submission"], spaced_payload["submissions"]
+    assert quoted_spaced in spaced_payload["submissions"]["commands"]["prepare_prefilled_submission"], spaced_payload["submissions"]
     assert quoted_spaced in by_key(spaced_payload["items"], "provider-holdout")["commands"]["prepare_submission"], spaced_payload["items"]
+    assert quoted_spaced in by_key(spaced_payload["items"], "provider-holdout")["commands"]["prepare_prefilled_submission"], spaced_payload["items"]
 
     cli_proc = run_cli(
         "--output-json",

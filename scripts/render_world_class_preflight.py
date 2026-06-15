@@ -148,8 +148,10 @@ def build_submission_commands(skill_dir: Path, submissions_dir: Path, evidence_k
     prepare = f"python3 scripts/yao.py world-class-submission-kit . --output-dir {output_dir}"
     if evidence_key:
         prepare = f"python3 scripts/yao.py world-class-submission-kit . --evidence-key {evidence_key} --output-dir {output_dir}"
+    prefilled_prepare = f"{prepare} --prefill-artifacts"
     return {
         "prepare_submission": prepare,
+        "prepare_prefilled_submission": prefilled_prepare,
         "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {output_dir}",
         "submission_review": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {output_dir}",
         "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {output_dir}",
@@ -275,10 +277,12 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
             "commands": item_commands,
             "submission_kit": {
                 "prepare_command": item_commands["prepare_submission"],
+                "prefill_command": item_commands["prepare_prefilled_submission"],
                 "output_dir": rel_path(submissions_dir, skill_dir),
                 "draft_path": intake_by_key.get(key, {}).get("submission_path", ""),
                 "template_path": intake_by_key.get(key, {}).get("template_path", ""),
                 "drafts_count_as_evidence": False,
+                "artifact_prefill_counts_as_evidence": False,
             },
             "runbook": entry.get("runbook", []),
         }
@@ -325,8 +329,12 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
             "directory": rel_path(submissions_dir, skill_dir),
             "commands": build_submission_commands(skill_dir, submissions_dir),
             "submission_kit_command": build_submission_commands(skill_dir, submissions_dir)["prepare_submission"],
+            "submission_kit_prefill_command": build_submission_commands(skill_dir, submissions_dir)[
+                "prepare_prefilled_submission"
+            ],
             "preflight_counts_submission_as_completion": False,
             "drafts_count_as_evidence": False,
+            "artifact_prefill_counts_as_evidence": False,
         },
         "source_reports": {
             "ledger": "reports/world_class_evidence_ledger.json",
@@ -365,13 +373,15 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         f"- submissions directory: `{report['submissions']['directory']}`",
         f"- prepare drafts: `{report['submissions']['commands']['prepare_submission']}`",
+        f"- prepare drafts with artifact SHA prefill: `{report['submissions']['commands']['prepare_prefilled_submission']}`",
         f"- validate intake: `{report['submissions']['commands']['validate_intake']}`",
         f"- review queue: `{report['submissions']['commands']['submission_review']}`",
         f"- refresh ledger: `{report['submissions']['commands']['refresh_ledger']}`",
         f"- guard claims: `{report['submissions']['commands']['guard_claim']}`",
         f"- drafts count as evidence: `{str(report['submissions']['drafts_count_as_evidence']).lower()}`",
+        f"- artifact prefill counts as evidence: `{str(report['submissions']['artifact_prefill_counts_as_evidence']).lower()}`",
         "",
-        "Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests.",
+        "Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests. The prefill command only inserts local artifact SHA-256 digests; it does not make a draft count as evidence.",
         "",
         "## Evidence Items",
         "",
@@ -393,6 +403,7 @@ def render_markdown(report: dict[str, Any]) -> str:
                 f"- ledger: `{item['ledger_status']}`",
                 f"- submission: `{item.get('submission_path') or 'missing'}`",
                 f"- prepare draft: `{item['commands']['prepare_submission']}`",
+                f"- prepare draft with artifact SHA prefill: `{item['commands']['prepare_prefilled_submission']}`",
                 "",
                 "### Prechecks",
                 "",
@@ -519,6 +530,7 @@ def render_html_item(item: dict[str, Any]) -> str:
           <h4>Next Action</h4>
           <p>{html_text(item.get('next_action', ''))}</p>
           <code>{html_text(item.get('commands', {}).get('prepare_submission', ''))}</code>
+          <code>{html_text(item.get('commands', {}).get('prepare_prefilled_submission', ''))}</code>
         </section>
         <section class="check-section">
           <h4>Prechecks</h4>
@@ -595,6 +607,7 @@ def render_html(report: dict[str, Any]) -> str:
     code {{ font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }}
     .next-action, .runbook {{ background:var(--soft); border-radius:8px; padding:14px; margin:14px 0; }}
     .next-action p {{ margin-top:0; }}
+    .next-action code {{ display:block; margin-top:8px; }}
     .check-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }}
     .check-row {{ padding:14px; min-width:0; }}
     .check-section {{ margin-top:16px; }}
@@ -615,10 +628,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section class="section two-col" id="handoff">
       <article class="panel">
         <h2>Submission Kit</h2>
-        <p class="muted">Generate drafts only after real provider, human-review, native-permission, or native-client work exists. Drafts remain non-evidence until valid aggregate artifact refs and SHA-256 digests are supplied.</p>
+        <p class="muted">Generate drafts only after real provider, human-review, native-permission, or native-client work exists. Drafts remain non-evidence until valid aggregate artifact refs and SHA-256 digests are supplied. Artifact prefill is convenience data only.</p>
         <ul>
           <li>submissions directory: <code>{html_text(report['submissions']['directory'])}</code></li>
           <li>drafts count as evidence: <code>{html_text(str(report['submissions']['drafts_count_as_evidence']).lower())}</code></li>
+          <li>artifact prefill counts as evidence: <code>{html_text(str(report['submissions']['artifact_prefill_counts_as_evidence']).lower())}</code></li>
           <li>preflight accepts evidence: <code>{html_text(str(report['summary']['preflight_counts_as_evidence']).lower())}</code></li>
         </ul>
       </article>
