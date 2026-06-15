@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
+  "commit": "71f1ebea17749e6bf7c4e06d5134d436fc487257",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,9 +17,9 @@
     "methodology_complete": true,
     "required_artifact_count": 24,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "0aaeb5d70b7960e7911e47bf0715038b6e84f0411bf4db592d0d3d73c20dbb04",
-    "source_contract_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
-    "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
+    "evidence_bundle_sha256": "aac232dbeab719adeffe4c50767d6207f95576e2e34405e02d3b62d7ed2619ee",
+    "source_contract_sha256": "85e86b1f0f774b8f04a45d0665553bdbacca16655d0a28d16577f53bac48535a",
+    "archive_sha256": "052aea12dfd456a03c6f0a260a59098da036209eea6a8d5109b951005c29f9d9",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
     "command_count": 22,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
+    "commit": "71f1ebea17749e6bf7c4e06d5134d436fc487257",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 24,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "0aaeb5d70b7960e7911e47bf0715038b6e84f0411bf4db592d0d3d73c20dbb04"
+    "sha256": "aac232dbeab719adeffe4c50767d6207f95576e2e34405e02d3b62d7ed2619ee"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -137,8 +137,8 @@
       "label": "output_execution",
       "path": "reports/output_execution_runs.json",
       "exists": true,
-      "bytes": 7967,
-      "sha256": "a4c8cacaab5d2f5178513e20cfbb58787052e82607b9ec4fe3eaeae58d7509c8"
+      "bytes": 7966,
+      "sha256": "fd7ff9272fce16597e0523309031e0af258f03f3d95962ea8253b8b52fe2c7d0"
     },
     {
       "label": "blind_review",
@@ -173,7 +173,7 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 109099,
-      "sha256": "9844571e7e9b8bcd8fbd4adc4553b69c8f218170194d5dc923c88141ff8d0de4"
+      "sha256": "cd5164ceec4c51768492886e5cddcb30da79a9a7e5d56ea3249b2aadf8dbe026"
     },
     {
       "label": "python_compatibility",
@@ -187,21 +187,21 @@
       "path": "reports/registry_audit.json",
       "exists": true,
       "bytes": 3183,
-      "sha256": "c88c317dd1fb042caa85676e707c72953f80afe88ff83d6a37906992d2bc8854"
+      "sha256": "19e89a9fcc9093bbfe59ca9747a3f9a358b3081c80ef16b9ee252cdb565a6505"
     },
     {
       "label": "package_verification",
       "path": "reports/package_verification.json",
       "exists": true,
       "bytes": 19338,
-      "sha256": "c7f40a5077e3fcc8165db711a647315774ee1121fdaa28b44e9bff1005a76293"
+      "sha256": "7f80da575f1f076df25ef0633b37daaa5790408009b48abeefeebcb2aed6ee35"
     },
     {
       "label": "install_simulation",
       "path": "reports/install_simulation.json",
       "exists": true,
-      "bytes": 8557,
-      "sha256": "fc4522d78fc4d170aadb9995ddd735e02cb6b9801c5d0211f20ba45c1e935046"
+      "bytes": 8604,
+      "sha256": "28ceb014e202269bb96628391d056234794b3570ff25de0ef9bdfd7f755fd85f"
     },
     {
       "label": "skill_os2_audit",
@@ -215,42 +215,42 @@
       "path": "reports/world_class_evidence_plan.json",
       "exists": true,
       "bytes": 19940,
-      "sha256": "933cdb0021818c0a8c5fc199af7dfa7879777ebf7959ed3a36bba52a0aed9c6c"
+      "sha256": "76a3f8e2b12b9ace575f3465bcee7697ddffb3440eed7ca3c3bb0becc61e1ab7"
     },
     {
       "label": "world_class_evidence_ledger",
       "path": "reports/world_class_evidence_ledger.json",
       "exists": true,
       "bytes": 21280,
-      "sha256": "d2b106811b29a23411459acab45f9373f9654c9d2b70864d5dff0626992f9c3a"
+      "sha256": "1cb74eaa978b8a4aee3a95c4459bffb4092f2de8476fd18acce4b943687481b6"
     },
     {
       "label": "world_class_evidence_intake",
       "path": "reports/world_class_evidence_intake.json",
       "exists": true,
       "bytes": 18865,
-      "sha256": "b10e1ce0a5a17df72462ce8f0c468356f58ff88bd7ceab349c82a1fb3b6697ef"
+      "sha256": "99a0ba234d59c0329d4645064bd67508c3057cbcc684016437bd0c7f4d9c3b2a"
     },
     {
       "label": "world_class_submission_review",
       "path": "reports/world_class_submission_review.json",
       "exists": true,
       "bytes": 13553,
-      "sha256": "98fc54e7f109f33b08d0775338478b77580570e3a7a4c3e1924d97e0e87e5ea8"
+      "sha256": "b8317119e9cd19044bac24f9ff5f5ea7def5f7c782b0bb93b9ba4aa554d6fee6"
     },
     {
       "label": "world_class_operator_runbook",
       "path": "reports/world_class_operator_runbook.json",
       "exists": true,
       "bytes": 24021,
-      "sha256": "d377b8d99831ce297011e4e270fc7287a53727500f5d503dd3dc4b984d26f0ad"
+      "sha256": "f5ca32d5ea8bae74fccd5a574d6bbd3cad46d0950b73d522e66b0a439a433860"
     },
     {
       "label": "world_class_operator_runbook_markdown",
       "path": "reports/world_class_operator_runbook.md",
       "exists": true,
       "bytes": 15080,
-      "sha256": "9f141f09bf485a4299b37eb8c21ebab9f212ea130a0daea8b0d7d5bd7ab020aa"
+      "sha256": "260d5e03c52edefd8640c2bb2a0d8ee2c4f6d4e964f925128d4ffdd5563db4ec"
     },
     {
       "label": "world_class_operator_runbook_html",
@@ -264,7 +264,7 @@
       "path": "reports/world_class_claim_guard.json",
       "exists": true,
       "bytes": 8911,
-      "sha256": "f98d227cfa46e7871ee23453a0de8c03b730546740f9a3bb435dc03fa0d61003"
+      "sha256": "9deabb025d111a7f00d5a97fe691c7297de45a97057a0f2792be93d9a8059b3b"
     }
   ],
   "missing_artifacts": [],
