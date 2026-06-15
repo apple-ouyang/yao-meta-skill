@@ -1,6 +1,6 @@
 # Skill OS 2.0 Blueprint Coverage
 
-Generated at: `2026-06-15`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -10,6 +10,10 @@ Generated at: `2026-06-15`
 - pass: `20` / `20`
 - missing: `0`
 - warn: `0`
+- reference extensions: `2`
+- extension partial: `1`
+- extension planned: `1`
+- adaptive extension ready: `false`
 - world-class evidence pending: `4`
 
 This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts, commands, and tests. It does not count pending human review, provider runs, metadata fallbacks, or planned work as public world-class evidence.
@@ -44,9 +48,20 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Review Studio 2.0 | `pass` | 16 review gates | `make ci-test` | `tests/verify_review_studio.py` |
 | Migration V2 Docs | `pass` | migration guide present | `make ci-test` | `docs review` |
 
+## Reference Extension Tracks
+
+| Track | Status | Current | Target | Next action |
+| --- | --- | --- | --- | --- |
+| Skill Interpretation Report | `partial` | Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/MD/HTML artifacts are not first-class yet. | Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests. | Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests. |
+| Adaptive Self-Iteration | `planned` | The repo has feedback, iteration, telemetry, and review artifacts, but no adapt-scan/adapt-propose/adapt-apply approval loop and no user-memory policy. | Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan. | Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path. |
+
+These extension tracks come from the user-supplied 2.0 reference plan. They are tracked separately from the formal Skill OS blueprint so the report can distinguish landed local architecture from planned explainer/adaptor evolution.
+
 ## Next Highest-Leverage Moves
 
 - Close the four world-class evidence ledger entries with accepted human or external evidence.
+- Clarify whether Skill Overview v2 is the canonical interpretation report or split a dedicated skill-interpretation renderer.
+- Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.
 - Keep the blueprint coverage report in CI so 2.0 plan drift is visible.
 
 ## Evidence Detail
@@ -190,3 +205,19 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 - status: `pass`
 - existing evidence: `docs/migration-v2.md`, `reports/skill-os-2-review.md`, `README.md`
 - next action: Keep this item covered as the implementation evolves.
+
+### Skill Interpretation Report
+
+- objective: User-facing deep interpretation report explains use cases, triggers, inputs, outputs, workflow, principles, boundaries, quality gates, examples, and next iterations.
+- status: `partial`
+- existing evidence: `reports/skill-overview.html`, `reports/skill-overview.json`, `scripts/render_skill_overview.py`
+- missing evidence: `scripts/render_skill_interpretation.py`, `schemas/skill-interpretation.schema.json`, `tests/verify_skill_interpretation.py`
+- next action: Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests.
+
+### Adaptive Self-Iteration
+
+- objective: Local-first preference memory, repeated-signal extraction, adaptation proposals, approval, patch application, regression evidence, and rollback.
+- status: `planned`
+- existing evidence: `reports/iteration-directions.md`, `reports/adoption_drift_report.md`
+- missing evidence: `references/autonomous-adaptation.md`, `references/user-memory-policy.md`, `schemas/adaptation-proposal.schema.json`, `scripts/summarize_user_signals.py`, `scripts/propose_adaptation.py`, `scripts/apply_adaptation.py`, `tests/verify_adaptation_safety.py`
+- next action: Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path.

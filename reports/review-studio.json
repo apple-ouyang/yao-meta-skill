@@ -43,7 +43,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 960/1000; deferred 404827/120000; top deferred scripts 357091; resource governance governed; quality density 135.4",
+      "detail": "initial load 960/1000; deferred 406347/120000; top deferred scripts 358611; resource governance governed; quality density 135.4",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -1672,12 +1672,12 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 24,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "dccce4bcf5fee2f76a6c3fcdfceafada3bdadf67371edaafebcd69208194e021",
-          "source_contract_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822",
+          "evidence_bundle_sha256": "6e9d4ffd08e1345536b2b8a017761e75d11d8b4b7a9d86703a081fccaa10ba2d",
+          "source_contract_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5",
           "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -1696,11 +1696,11 @@
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
-          "working_tree_dirty": false,
-          "changed_file_count": 0
+          "public_claim_blocker_count": 5,
+          "working_tree_dirty": true,
+          "changed_file_count": 34
         },
-        "commit": "5f187cdb46510a6881a8353c0c1744b90e0b05bd",
+        "commit": "7acc6d9cf780e38570c20813186d0efea5ac8ad0",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1805,7 +1805,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 186,
-        "package_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822"
+        "package_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -1843,7 +1843,7 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822",
+            "package_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5",
             "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc"
           },
           "compatibility": {
@@ -1880,7 +1880,7 @@
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
           },
-          "generated_at": "2026-06-15"
+          "generated_at": "2026-06-13"
         },
         "failures": [],
         "warnings": []
@@ -1975,7 +1975,7 @@
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822"
+              "to": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5"
             }
           ]
         },
@@ -4342,7 +4342,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 33.02,
+          "duration_ms": 33.2,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4370,7 +4370,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.88,
+          "duration_ms": 32.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4393,7 +4393,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 36.03,
+          "duration_ms": 33.01,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4421,7 +4421,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.76,
+          "duration_ms": 32.83,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4444,7 +4444,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.27,
+          "duration_ms": 30.81,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4472,7 +4472,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 32.3,
+          "duration_ms": 35.47,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4495,7 +4495,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.36,
+          "duration_ms": 31.19,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4522,7 +4522,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.3,
+          "duration_ms": 29.94,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4545,7 +4545,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.1,
+          "duration_ms": 30.34,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4574,7 +4574,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.83,
+          "duration_ms": 30.94,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5295,22 +5295,35 @@
       "ok": true,
       "generated_at": "2026-06-15",
       "skill_dir": ".",
-      "commit": "5f187cdb46510a6881a8353c0c1744b90e0b05bd",
+      "commit": "7acc6d9cf780e38570c20813186d0efea5ac8ad0",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 34,
+        "sample": [
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
+          " M reports/adoption_drift_report.json",
+          " M reports/architecture_maintainability.json",
+          " M reports/architecture_maintainability.md",
+          " M reports/context_budget.json",
+          " M reports/context_budget.md",
+          " M reports/context_budget_summary.json",
+          " M reports/install_simulation.json",
+          " M reports/install_simulation.md",
+          " M reports/output_execution_runs.json",
+          " M reports/output_execution_runs.md"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "dccce4bcf5fee2f76a6c3fcdfceafada3bdadf67371edaafebcd69208194e021",
-        "source_contract_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822",
+        "evidence_bundle_sha256": "6e9d4ffd08e1345536b2b8a017761e75d11d8b4b7a9d86703a081fccaa10ba2d",
+        "source_contract_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5",
         "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5329,14 +5342,15 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 34
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -5345,10 +5359,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "5f187cdb46510a6881a8353c0c1744b90e0b05bd",
+        "ready": false,
+        "commit": "7acc6d9cf780e38570c20813186d0efea5ac8ad0",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5356,7 +5370,7 @@
         "existing_count": 24,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "dccce4bcf5fee2f76a6c3fcdfceafada3bdadf67371edaafebcd69208194e021"
+        "sha256": "6e9d4ffd08e1345536b2b8a017761e75d11d8b4b7a9d86703a081fccaa10ba2d"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5429,8 +5443,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7964,
-          "sha256": "ebef496866a9d52e5a4cef5a855a997915b820612d87c777b85e3ed1f0458efc"
+          "bytes": 7966,
+          "sha256": "3d279da7e011bd3ed71c389195c0490f7dbb011dff90ebe99ff3db133f4a9fd6"
         },
         {
           "label": "blind_review",
@@ -5465,7 +5479,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 101852,
-          "sha256": "abe52fcdab2d2345783e353644acd66913995cc9048b3f3e0c758c5fca43672f"
+          "sha256": "3cd8c1c2d119e2db480411a9839281e0a9e1b03eb4d9d535c9b0138ef72ba6e4"
         },
         {
           "label": "python_compatibility",
@@ -5479,7 +5493,7 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "e97001fe6bf7553dfc3f748d67146284d5e363336954bec7991dd0d6add240cb"
+          "sha256": "9b8e6521f9455e654850975e3625132fb998ba4e03f7ceebaf4eded9ccd32bb5"
         },
         {
           "label": "package_verification",
@@ -5492,15 +5506,15 @@
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
-          "bytes": 8604,
-          "sha256": "d6972a9ab9966a8eff922b175f885b953c6300afd55bd4dc08b5baf20a518c20"
+          "bytes": 8758,
+          "sha256": "ee7554d8362d05f2bf6e7389e0524cd6336d42312ab7a05b9c0c6ddacdb0e339"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14310,
-          "sha256": "cbce716b87a924ea08161d75851d14acb4ce76099f63ae4bc4f7bdf967f9f2fa"
+          "sha256": "8a7f73832d4da2f63856d7f5be02488db6eac72a3a6149aa26a39c7a15a27053"
         },
         {
           "label": "world_class_evidence_plan",
@@ -5695,6 +5709,11 @@
         "pass_count": 20,
         "warn_count": 0,
         "missing_count": 0,
+        "extension_track_count": 2,
+        "extension_partial_count": 1,
+        "extension_planned_count": 1,
+        "extension_covered_count": 0,
+        "adaptive_extension_ready": false,
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_evidence_pending_count": 4,
@@ -5704,6 +5723,10 @@
         "pass": 20,
         "warn": 0,
         "missing": 0
+      },
+      "extension_status_counts": {
+        "partial": 1,
+        "planned": 1
       },
       "modules": [
         {
@@ -6285,14 +6308,105 @@
           "next_action": "Keep this item covered as the implementation evolves."
         }
       ],
+      "reference_extension_tracks": [
+        {
+          "key": "skill-interpretation-report",
+          "label": "Skill Interpretation Report",
+          "status": "partial",
+          "objective": "User-facing deep interpretation report explains use cases, triggers, inputs, outputs, workflow, principles, boundaries, quality gates, examples, and next iterations.",
+          "current": "Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/MD/HTML artifacts are not first-class yet.",
+          "target": "Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests.",
+          "evidence": [
+            {
+              "path": "reports/skill-overview.html",
+              "exists": true
+            },
+            {
+              "path": "reports/skill-overview.json",
+              "exists": true
+            },
+            {
+              "path": "scripts/render_skill_overview.py",
+              "exists": true
+            },
+            {
+              "path": "scripts/render_skill_interpretation.py",
+              "exists": false
+            },
+            {
+              "path": "schemas/skill-interpretation.schema.json",
+              "exists": false
+            },
+            {
+              "path": "tests/verify_skill_interpretation.py",
+              "exists": false
+            }
+          ],
+          "next_action": "Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests."
+        },
+        {
+          "key": "adaptive-self-iteration",
+          "label": "Adaptive Self-Iteration",
+          "status": "planned",
+          "objective": "Local-first preference memory, repeated-signal extraction, adaptation proposals, approval, patch application, regression evidence, and rollback.",
+          "current": "The repo has feedback, iteration, telemetry, and review artifacts, but no adapt-scan/adapt-propose/adapt-apply approval loop and no user-memory policy.",
+          "target": "Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan.",
+          "evidence": [
+            {
+              "path": "references/autonomous-adaptation.md",
+              "exists": false
+            },
+            {
+              "path": "references/user-memory-policy.md",
+              "exists": false
+            },
+            {
+              "path": "schemas/adaptation-proposal.schema.json",
+              "exists": false
+            },
+            {
+              "path": "scripts/summarize_user_signals.py",
+              "exists": false
+            },
+            {
+              "path": "scripts/propose_adaptation.py",
+              "exists": false
+            },
+            {
+              "path": "scripts/apply_adaptation.py",
+              "exists": false
+            },
+            {
+              "path": "tests/verify_adaptation_safety.py",
+              "exists": false
+            },
+            {
+              "path": "reports/iteration-directions.md",
+              "exists": true
+            },
+            {
+              "path": "reports/adoption_drift_report.md",
+              "exists": true
+            }
+          ],
+          "next_action": "Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path."
+        }
+      ],
       "next_highest_leverage": [
         "Close the four world-class evidence ledger entries with accepted human or external evidence.",
+        "Clarify whether Skill Overview v2 is the canonical interpretation report or split a dedicated skill-interpretation renderer.",
+        "Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.",
         "Keep the blueprint coverage report in CI so 2.0 plan drift is visible."
       ],
       "source_blueprint": {
         "title": "Skill Overview / Skill OS 2.0 upgrade plan",
         "core_module_count": 8,
-        "recommended_pr_count": 12
+        "recommended_pr_count": 12,
+        "reference_extension_count": 2,
+        "reference_extensions": [
+          "Skill interpretation report",
+          "Adaptive self-iteration with local preference memory and approval gates"
+        ]
       },
       "artifacts": {
         "json": "reports/skill_os2_coverage.json",
@@ -10776,7 +10890,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "package_dir": "dist",
+      "package_dir": "tests/tmp_review_studio/dist",
       "expected_capabilities": [
         "file_write",
         "network",
@@ -10816,7 +10930,7 @@
         {
           "target": "openai",
           "status": "pass",
-          "adapter": "dist/targets/openai/adapter.json",
+          "adapter": "tests/tmp_review_studio/dist/targets/openai/adapter.json",
           "permission_model": "metadata-only",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -10913,7 +11027,7 @@
         {
           "target": "claude",
           "status": "pass",
-          "adapter": "dist/targets/claude/adapter.json",
+          "adapter": "tests/tmp_review_studio/dist/targets/claude/adapter.json",
           "permission_model": "neutral-source-plus-adapter",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -10995,7 +11109,7 @@
         {
           "target": "generic",
           "status": "pass",
-          "adapter": "dist/targets/generic/adapter.json",
+          "adapter": "tests/tmp_review_studio/dist/targets/generic/adapter.json",
           "permission_model": "agent-skills-compatible-metadata",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -11077,7 +11191,7 @@
         {
           "target": "vscode",
           "status": "pass",
-          "adapter": "dist/targets/vscode/adapter.json",
+          "adapter": "tests/tmp_review_studio/dist/targets/vscode/adapter.json",
           "permission_model": "vscode-workspace-trust-plus-metadata",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -11188,7 +11302,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 186,
-        "package_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822"
+        "package_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5"
       },
       "failures": [],
       "warnings": [],
@@ -14797,6 +14911,13 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "tests/verify_review_studio.py",
+          "lines": 745,
+          "kind": "test",
+          "severity": "pass",
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
           "path": "scripts/yao_cli_parser.py",
           "lines": 741,
           "kind": "internal-module",
@@ -14809,13 +14930,6 @@
           "kind": "cli-script",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
-          "path": "tests/verify_review_studio.py",
-          "lines": 734,
-          "kind": "test",
-          "severity": "pass",
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
         },
         {
           "path": "scripts/build_skill_atlas.py",
@@ -14868,15 +14982,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 767,
-        "other_text_tokens": 1260693,
+        "other_text_tokens": 1265424,
         "estimated_initial_load_tokens": 960,
-        "estimated_total_text_tokens": 1261460,
-        "deferred_resource_tokens": 404827,
+        "estimated_total_text_tokens": 1266191,
+        "deferred_resource_tokens": 406347,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 357091,
+            "estimated_tokens": 358611,
             "file_count": 102
           },
           {
@@ -14893,7 +15007,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 357091,
+            "estimated_tokens": 358611,
             "file_count": 102
           }
         ],
@@ -14916,7 +15030,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 357091,
+              "estimated_tokens": 358611,
               "file_count": 102,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -15767,7 +15881,7 @@
       },
       "catalog": {
         "workspace_root": ".",
-        "generated_at": "2026-06-15",
+        "generated_at": "2026-06-13",
         "skills": [
           {
             "name": "yao-meta-skill",
@@ -15952,8 +16066,8 @@
               "report": "reports/adoption_drift_report.json",
               "risk_band": "low",
               "event_count": 1,
-              "adoption_sample_count": 0,
-              "adoption_rate": 0,
+              "adoption_sample_count": 1,
+              "adoption_rate": 100.0,
               "candidate_count": 0
             }
           },
@@ -16616,7 +16730,7 @@
           "name": "incident-command-governor",
           "path": "examples/governed-incident-command/generated-skill",
           "reason": "review overdue by cadence monthly",
-          "age_days": 76,
+          "age_days": 74,
           "allowed_days": 31,
           "actionable": false,
           "scope": "example"
@@ -16784,7 +16898,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-14T07:17:33Z",
+      "generated_at": "2026-06-15T11:05:04Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -16869,7 +16983,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "generated_at": "2026-06-14",
+      "generated_at": "2026-06-15",
       "summary": {
         "waiver_count": 0,
         "active_count": 0,
@@ -16919,7 +17033,7 @@
             "Reviewer links output_review_adjudication or output_execution evidence."
           ],
           "suggested_evidence": "reports/output_review_adjudication.md",
-          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-14 --evidence reports/output_review_adjudication.md",
+          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-15 --evidence reports/output_review_adjudication.md",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
         },
         {
@@ -19020,7 +19134,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822",
+          "package_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5",
           "archive_sha256": "6852cf91a74d232c32d732b7c159c971827abf23af50153987193b084ad3b5cc"
         },
         "compatibility": {
@@ -19057,11 +19171,11 @@
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
         },
-        "generated_at": "2026-06-15"
+        "generated_at": "2026-06-13"
       },
       "index": {
         "schema_version": "2.0",
-        "generated_at": "2026-06-15",
+        "generated_at": "2026-06-13",
         "package_count": 1,
         "packages": [
           {
@@ -19077,7 +19191,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822"
+            "package_sha256": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5"
           }
         ]
       },
@@ -19759,11 +19873,11 @@
     "install_simulation": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-15",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
-      "package_dir": "dist",
-      "install_root": "dist/install-simulation/simulate-yao-meta-skill",
-      "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
+      "package_dir": "tests/tmp_review_studio/dist",
+      "install_root": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill",
+      "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
         "archive_entry_count": 586,
@@ -19784,7 +19898,7 @@
         {
           "id": "archive-present",
           "status": "pass",
-          "detail": "Package archive exists: dist/yao-meta-skill.zip"
+          "detail": "Package archive exists: tests/tmp_review_studio/dist/yao-meta-skill.zip"
         },
         {
           "id": "archive-safe-paths",
@@ -20030,16 +20144,16 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "archive": "dist/yao-meta-skill.zip",
-        "package_manifest": "dist/manifest.json",
-        "json": "reports/install_simulation.json",
-        "markdown": "reports/install_simulation.md"
+        "archive": "tests/tmp_review_studio/dist/yao-meta-skill.zip",
+        "package_manifest": "tests/tmp_review_studio/dist/manifest.json",
+        "json": "tests/tmp_review_studio/install_simulation.json",
+        "markdown": "tests/tmp_review_studio/install_simulation.md"
       }
     },
     "upgrade_check": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-15",
+      "generated_at": "2026-06-13",
       "previous": {
         "name": "yao-meta-skill",
         "version": "1.0.0",
@@ -20113,7 +20227,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "0a4768c86c9af215719c0b76036499fc1b2324a0045914d54f3df1e2860fb822"
+            "to": "fe193ec81d0e9ce9e1eeed5ea6d8aa0dcf63506ce4f3e92b93da93536644c4f5"
           }
         ]
       },
@@ -20128,8 +20242,8 @@
       "artifacts": {
         "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
         "current_package": "reports/registry_audit.json",
-        "json": "reports/upgrade_check.json",
-        "markdown": "reports/upgrade_check.md"
+        "json": "tests/tmp_review_studio/upgrade_check.json",
+        "markdown": "tests/tmp_review_studio/upgrade_check.md"
       }
     },
     "manifest": {

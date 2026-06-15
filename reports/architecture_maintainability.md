@@ -1,6 +1,6 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-15`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -29,9 +29,9 @@ No file-size hotspots found.
 | `scripts/yao.py` | `881` | `cli-script` | `pass` |
 | `scripts/skill_report_layout.py` | `805` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
+| `tests/verify_review_studio.py` | `745` | `test` | `pass` |
 | `scripts/yao_cli_parser.py` | `741` | `internal-module` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
-| `tests/verify_review_studio.py` | `734` | `test` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |

@@ -147,6 +147,8 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     output_review = data["output_review_adjudication"].get("summary", {})
     benchmark = data["benchmark_reproducibility"].get("summary", {})
     blueprint = data["skill_os2_coverage"].get("summary", {})
+    extension_partial = int(blueprint.get("extension_partial_count", 0) or 0)
+    extension_planned = int(blueprint.get("extension_planned_count", 0) or 0)
     compiled = data["compiled_targets"].get("summary", {})
     conformance = data["conformance"].get("summary", {})
     runtime_permissions = data["runtime_permissions"].get("summary", {})
@@ -211,7 +213,10 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
         {
             "label": "Blueprint",
             "value": f"{blueprint.get('pass_count', 0)}/{blueprint.get('item_count', 0)}",
-            "detail": f"2.0 coverage; evidence pending {blueprint.get('world_class_evidence_pending_count', 0)}",
+            "detail": (
+                f"2.0 coverage; extensions partial {extension_partial}, "
+                f"planned {extension_planned}; evidence pending {blueprint.get('world_class_evidence_pending_count', 0)}"
+            ),
         },
         {
             "label": "Runtime",

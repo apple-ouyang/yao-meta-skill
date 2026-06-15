@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "python_file_count": 162,
@@ -47,6 +47,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "tests/verify_review_studio.py",
+      "lines": 745,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/yao_cli_parser.py",
       "lines": 741,
       "kind": "internal-module",
@@ -59,13 +66,6 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "tests/verify_review_studio.py",
-      "lines": 734,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/build_skill_atlas.py",

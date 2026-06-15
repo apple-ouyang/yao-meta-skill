@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "item_count": 20,
@@ -10,6 +10,11 @@
     "pass_count": 20,
     "warn_count": 0,
     "missing_count": 0,
+    "extension_track_count": 2,
+    "extension_partial_count": 1,
+    "extension_planned_count": 1,
+    "extension_covered_count": 0,
+    "adaptive_extension_ready": false,
     "local_blueprint_ready": true,
     "public_world_class_ready": false,
     "world_class_evidence_pending_count": 4,
@@ -19,6 +24,10 @@
     "pass": 20,
     "warn": 0,
     "missing": 0
+  },
+  "extension_status_counts": {
+    "partial": 1,
+    "planned": 1
   },
   "modules": [
     {
@@ -600,14 +609,105 @@
       "next_action": "Keep this item covered as the implementation evolves."
     }
   ],
+  "reference_extension_tracks": [
+    {
+      "key": "skill-interpretation-report",
+      "label": "Skill Interpretation Report",
+      "status": "partial",
+      "objective": "User-facing deep interpretation report explains use cases, triggers, inputs, outputs, workflow, principles, boundaries, quality gates, examples, and next iterations.",
+      "current": "Skill Overview v2 already covers much of the explainer experience, but dedicated skill-interpretation JSON/MD/HTML artifacts are not first-class yet.",
+      "target": "Either keep skill-overview as the canonical interpretation report with an explicit contract, or split a dedicated reports/skill-interpretation.* renderer and tests.",
+      "evidence": [
+        {
+          "path": "reports/skill-overview.html",
+          "exists": true
+        },
+        {
+          "path": "reports/skill-overview.json",
+          "exists": true
+        },
+        {
+          "path": "scripts/render_skill_overview.py",
+          "exists": true
+        },
+        {
+          "path": "scripts/render_skill_interpretation.py",
+          "exists": false
+        },
+        {
+          "path": "schemas/skill-interpretation.schema.json",
+          "exists": false
+        },
+        {
+          "path": "tests/verify_skill_interpretation.py",
+          "exists": false
+        }
+      ],
+      "next_action": "Decide whether overview v2 is the canonical interpretation surface; if not, add a dedicated schema, renderer, and CJK/path-safety tests."
+    },
+    {
+      "key": "adaptive-self-iteration",
+      "label": "Adaptive Self-Iteration",
+      "status": "planned",
+      "objective": "Local-first preference memory, repeated-signal extraction, adaptation proposals, approval, patch application, regression evidence, and rollback.",
+      "current": "The repo has feedback, iteration, telemetry, and review artifacts, but no adapt-scan/adapt-propose/adapt-apply approval loop and no user-memory policy.",
+      "target": "Proposal-only adaptation with explicit input source, redaction, allowlisted write targets, approval ledger, regression report, and rollback plan.",
+      "evidence": [
+        {
+          "path": "references/autonomous-adaptation.md",
+          "exists": false
+        },
+        {
+          "path": "references/user-memory-policy.md",
+          "exists": false
+        },
+        {
+          "path": "schemas/adaptation-proposal.schema.json",
+          "exists": false
+        },
+        {
+          "path": "scripts/summarize_user_signals.py",
+          "exists": false
+        },
+        {
+          "path": "scripts/propose_adaptation.py",
+          "exists": false
+        },
+        {
+          "path": "scripts/apply_adaptation.py",
+          "exists": false
+        },
+        {
+          "path": "tests/verify_adaptation_safety.py",
+          "exists": false
+        },
+        {
+          "path": "reports/iteration-directions.md",
+          "exists": true
+        },
+        {
+          "path": "reports/adoption_drift_report.md",
+          "exists": true
+        }
+      ],
+      "next_action": "Start with policy and read-only scan tests; do not read shell history or private logs unless the user provides an explicit source path."
+    }
+  ],
   "next_highest_leverage": [
     "Close the four world-class evidence ledger entries with accepted human or external evidence.",
+    "Clarify whether Skill Overview v2 is the canonical interpretation report or split a dedicated skill-interpretation renderer.",
+    "Start adaptive self-iteration as explicit-source, proposal-only, approval-gated work; do not scan private logs by default.",
     "Keep the blueprint coverage report in CI so 2.0 plan drift is visible."
   ],
   "source_blueprint": {
     "title": "Skill Overview / Skill OS 2.0 upgrade plan",
     "core_module_count": 8,
-    "recommended_pr_count": 12
+    "recommended_pr_count": 12,
+    "reference_extension_count": 2,
+    "reference_extensions": [
+      "Skill interpretation report",
+      "Adaptive self-iteration with local preference memory and approval gates"
+    ]
   },
   "artifacts": {
     "json": "reports/skill_os2_coverage.json",
