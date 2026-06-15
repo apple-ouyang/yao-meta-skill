@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
     "item_count": 15,
@@ -285,7 +285,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 579; install failures 0; permission failures 0",
+      "current": "zip entries 583; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {

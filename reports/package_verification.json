@@ -1,15 +1,15 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-15",
   "skill_dir": ".",
   "package_dir": "dist",
   "summary": {
     "target_count": 4,
     "adapter_count": 4,
     "archive_present": true,
-    "archive_sha256": "2c14cc8b28121502add432260373fa1e70797948925ac82a34b60a08fb9f12ea",
-    "archive_entry_count": 579,
+    "archive_sha256": "aa18ef86cc9442ce2c4bb3b89e1371c75e6f076db7e1ffc8f336616349122b34",
+    "archive_entry_count": 583,
     "failure_count": 0,
     "warning_count": 0
   },
@@ -617,7 +617,7 @@
     {
       "id": "archive-excludes-generated",
       "status": "pass",
-      "detail": "Archive excludes generated dist/ and tests/tmp* contents"
+      "detail": "Archive excludes generated dist/, .previews/, and tests/tmp* contents"
     },
     {
       "id": "registry-ok",

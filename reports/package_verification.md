@@ -4,7 +4,7 @@
 - Package directory: `dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `2c14cc8b28121502add432260373fa1e70797948925ac82a34b60a08fb9f12ea`
+- Archive SHA256: `aa18ef86cc9442ce2c4bb3b89e1371c75e6f076db7e1ffc8f336616349122b34`
 - Failures: `0`
 - Warnings: `0`
 
@@ -132,7 +132,7 @@
 | `archive-entry-yao-meta-skill/SKILL.md` | `pass` | Archive contains yao-meta-skill/SKILL.md |
 | `archive-entry-yao-meta-skill/manifest.json` | `pass` | Archive contains yao-meta-skill/manifest.json |
 | `archive-entry-yao-meta-skill/agents/interface.yaml` | `pass` | Archive contains yao-meta-skill/agents/interface.yaml |
-| `archive-excludes-generated` | `pass` | Archive excludes generated dist/ and tests/tmp* contents |
+| `archive-excludes-generated` | `pass` | Archive excludes generated dist/, .previews/, and tests/tmp* contents |
 | `registry-ok` | `pass` | Registry audit is OK |
 | `registry-name-match` | `pass` | Registry package name matches package manifest |
 | `registry-version-match` | `pass` | Registry package version matches package manifest |

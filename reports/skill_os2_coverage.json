@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-14",
+  "generated_at": "2026-06-15",
   "skill_dir": ".",
   "summary": {
     "item_count": 20,
@@ -196,7 +196,7 @@
       "label": "Registry Distribution",
       "status": "pass",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 579; install failures 0",
+      "current": "archive entries 583; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
