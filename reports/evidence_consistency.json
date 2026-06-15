@@ -48,8 +48,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
-      "actual": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
+      "expected": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
+      "actual": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -64,8 +64,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
-        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+        "source_contract_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
+        "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -77,8 +77,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
-        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+        "source_contract_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
+        "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -194,8 +194,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
-      "actual": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
+      "expected": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
+      "actual": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -210,8 +210,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
-        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+        "source_contract_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
+        "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -223,8 +223,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
-        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+        "source_contract_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
+        "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -1470,7 +1470,7 @@
             "actions": [
               "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
               "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
-              "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+              "按 ledger 总量继续补齐 4 项待补证据（外部 3 项、人工 1 项；未展开 2 项），并保持 claim guard 为 pending 状态。"
             ],
             "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
             "source": "world_class_evidence_ledger"
@@ -1505,7 +1505,7 @@
             "actions": [
               "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
               "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
-              "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+              "按 ledger 总量继续补齐 4 项待补证据（外部 3 项、人工 1 项；未展开 2 项），并保持 claim guard 为 pending 状态。"
             ],
             "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
             "source": "world_class_evidence_ledger"

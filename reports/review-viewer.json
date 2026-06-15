@@ -573,7 +573,7 @@
           "actions": [
             "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
             "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
-            "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+            "按 ledger 总量继续补齐 4 项待补证据（外部 3 项、人工 1 项；未展开 2 项），并保持 claim guard 为 pending 状态。"
           ],
           "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
           "source": "world_class_evidence_ledger"
@@ -763,7 +763,7 @@
         "actions": [
           "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
           "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
-          "继续补齐剩余 2 项外部/人工证据，并保持 claim guard 为 pending 状态。"
+          "按 ledger 总量继续补齐 4 项待补证据（外部 3 项、人工 1 项；未展开 2 项），并保持 claim guard 为 pending 状态。"
         ],
         "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
         "source": "world_class_evidence_ledger"
@@ -1000,9 +1000,9 @@
         "methodology_complete": true,
         "required_artifact_count": 24,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef2f46378e0",
-        "source_contract_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
-        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+        "evidence_bundle_sha256": "0aaeb5d70b7960e7911e47bf0715038b6e84f0411bf4db592d0d3d73c20dbb04",
+        "source_contract_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
+        "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 22,
@@ -1024,7 +1024,7 @@
         "working_tree_dirty": false,
         "changed_file_count": 0
       },
-      "commit": "dc7cc48a1d6102af1667986409bc88644b3ff5b1",
+      "commit": "2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1129,7 +1129,7 @@
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
       "package_hash_file_count": 197,
-      "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773"
+      "package_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94"
     },
     "skill_atlas": {
       "skill_count": 12,
@@ -1167,8 +1167,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "b95bef623d392ba57c1e564a3befc73ab46930fbb963a066b3077d7b60b93773",
-          "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4"
+          "package_sha256": "8d10541e71582662420071a94aee0ac44c70dcb2d28627c19c79d46fb6b88d94",
+          "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a"
         },
         "compatibility": {
           "openai": "pass",
@@ -1199,7 +1199,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+          "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1215,7 +1215,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "f19e7330e1d7daaf649df480985eb0dfa07c1622aca7ac135c4aa763d6258eb4",
+        "archive_sha256": "7f460d3d56344815baba659ce233ccbff091f2c91f9d4a908776cfbed90c789a",
         "archive_entry_count": 613,
         "failure_count": 0,
         "warning_count": 0

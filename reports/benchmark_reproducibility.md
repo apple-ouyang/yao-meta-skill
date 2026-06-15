@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-15`
-Commit: `dc7cc48a1d6102af1667986409bc88644b3ff5b1`
+Commit: `2204e7ce7ff1b8c8ca22aaf5cc59b3bd1edd893b`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef2f46378e0`
+Evidence bundle SHA256: `0aaeb5d70b7960e7911e47bf0715038b6e84f0411bf4db592d0d3d73c20dbb04`
 
 ## Summary
 
@@ -12,8 +12,8 @@ Evidence bundle SHA256: `a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef
 - methodology complete: `true`
 - required artifacts: `24`
 - missing artifacts: `0`
-- source contract sha256: `b95bef623d39`
-- archive sha256: `f19e7330e1d7`
+- source contract sha256: `8d10541e7158`
+- archive sha256: `7f460d3d5634`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `22`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `24` / `24`
-- sha256: `a11d5c9221a33b6246cd4d8cb3cee0df7fab09e111ad882f6c061ef2f46378e0`
+- sha256: `0aaeb5d70b7960e7911e47bf0715038b6e84f0411bf4db592d0d3d73c20dbb04`
 
 ## Methodology Sections
 
@@ -77,10 +77,10 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `240485a721af` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `4dc1060cb414` |
+| trust_report | `reports/security_trust_report.json` | present | `9844571e7e9b` |
 | python_compatibility | `reports/python_compatibility.json` | present | `471c481ff9f9` |
-| registry_audit | `reports/registry_audit.json` | present | `3c7a15dabfc3` |
-| package_verification | `reports/package_verification.json` | present | `8f4157a51fa6` |
+| registry_audit | `reports/registry_audit.json` | present | `c88c317dd1fb` |
+| package_verification | `reports/package_verification.json` | present | `c7f40a5077e3` |
 | install_simulation | `reports/install_simulation.json` | present | `fc4522d78fc4` |
 | skill_os2_audit | `reports/skill_os2_audit.json` | present | `57536bc67370` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `933cdb002181` |
