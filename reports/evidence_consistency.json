@@ -4,14 +4,14 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "check_count": 31,
-    "pass_count": 31,
+    "check_count": 32,
+    "pass_count": 32,
     "warn_count": 0,
     "fail_count": 0,
     "decision": "consistent"
   },
   "status_counts": {
-    "pass": 31,
+    "pass": 32,
     "warn": 0,
     "fail": 0
   },
@@ -121,8 +121,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "959fcaee0893a21850d82acccd9d630f3f1bd495",
-      "actual": "959fcaee0893a21850d82acccd9d630f3f1bd495",
+      "expected": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
+      "actual": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -137,8 +137,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
-        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
+        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
+        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -150,8 +150,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
-        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
+        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
+        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -267,8 +267,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "959fcaee0893a21850d82acccd9d630f3f1bd495",
-      "actual": "959fcaee0893a21850d82acccd9d630f3f1bd495",
+      "expected": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
+      "actual": "713831ab3a682d2bd0aa49e2c20ce90ce0f45e57",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -283,8 +283,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
-        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
+        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
+        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -296,8 +296,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fa285e57f36fb8f33b0c9cdc5de924532a4ec3f30be5880fd3bcde6d53d363ee",
-        "archive_sha256": "19810129f02c71eb00d04a5eb9c9570febded99beac0230de82a09610e027050",
+        "source_contract_sha256": "e44836d63020474dc3343d6325d80ea05d62c581ffe16223411e8ca36362bc6d",
+        "archive_sha256": "0709752db84703b213aa24bf92dedf83761571f92dc94221ae1d420f5f62e903",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 6,
@@ -1728,6 +1728,35 @@
         "reports/world_class_evidence_preflight.json"
       ],
       "detail": "Collection preflight may help operators gather evidence, but it must not print secrets or change world-class readiness."
+    },
+    {
+      "key": "preflight-submission-kit-handoff",
+      "label": "Preflight exposes a safe submission-kit handoff",
+      "status": "pass",
+      "expected": {
+        "directory": "evidence/world_class/submissions",
+        "drafts_count_as_evidence": false,
+        "preflight_counts_submission_as_completion": false,
+        "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions",
+        "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
+        "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+        "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
+        "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
+      },
+      "actual": {
+        "directory": "evidence/world_class/submissions",
+        "drafts_count_as_evidence": false,
+        "preflight_counts_submission_as_completion": false,
+        "prepare_submission": "python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions",
+        "validate_intake": "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions",
+        "submission_review": "python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions",
+        "refresh_ledger": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions",
+        "guard_claim": "python3 scripts/yao.py world-class-claim-guard ."
+      },
+      "paths": [
+        "reports/world_class_evidence_preflight.json"
+      ],
+      "detail": "Preflight must give operators the exact draft, intake, review, ledger, and claim-guard commands without letting drafts or submissions count as accepted evidence."
     },
     {
       "key": "review-studio-no-overclaim",
