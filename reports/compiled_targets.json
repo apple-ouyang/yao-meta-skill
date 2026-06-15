@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
     "target_count": 5,
@@ -387,9 +387,10 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 68,
+              "script_count": 69,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
+                "scripts/apply_adaptation.py",
                 "scripts/build_confusion_matrix.py",
                 "scripts/build_skill_atlas.py",
                 "scripts/check_update.py",
@@ -462,8 +463,9 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 9,
+              "script_count": 10,
               "scripts": [
+                "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -495,15 +497,15 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 81,
+            "checked_count": 82,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 68,
-            "subprocess_script_count": 9,
+            "file_write_script_count": 69,
+            "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -524,8 +526,8 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 68,
-            "subprocess": 9,
+            "file_write": 69,
+            "subprocess": 10,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -637,9 +639,10 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 68,
+            "script_count": 69,
             "scripts": [
               "scripts/adjudicate_output_review.py",
+              "scripts/apply_adaptation.py",
               "scripts/build_confusion_matrix.py",
               "scripts/build_skill_atlas.py",
               "scripts/check_update.py",
@@ -712,8 +715,9 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 9,
+            "script_count": 10,
             "scripts": [
+              "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -745,15 +749,15 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 81,
+          "checked_count": 82,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 68,
-          "subprocess_script_count": 9,
+          "file_write_script_count": 69,
+          "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -772,8 +776,8 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 68,
-          "subprocess": 9,
+          "file_write": 69,
+          "subprocess": 10,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -1248,9 +1252,10 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 68,
+              "script_count": 69,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
+                "scripts/apply_adaptation.py",
                 "scripts/build_confusion_matrix.py",
                 "scripts/build_skill_atlas.py",
                 "scripts/check_update.py",
@@ -1323,8 +1328,9 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 9,
+              "script_count": 10,
               "scripts": [
+                "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -1356,15 +1362,15 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 81,
+            "checked_count": 82,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 68,
-            "subprocess_script_count": 9,
+            "file_write_script_count": 69,
+            "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -1385,8 +1391,8 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 68,
-            "subprocess": 9,
+            "file_write": 69,
+            "subprocess": 10,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -1498,9 +1504,10 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 68,
+            "script_count": 69,
             "scripts": [
               "scripts/adjudicate_output_review.py",
+              "scripts/apply_adaptation.py",
               "scripts/build_confusion_matrix.py",
               "scripts/build_skill_atlas.py",
               "scripts/check_update.py",
@@ -1573,8 +1580,9 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 9,
+            "script_count": 10,
             "scripts": [
+              "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -1606,15 +1614,15 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 81,
+          "checked_count": 82,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 68,
-          "subprocess_script_count": 9,
+          "file_write_script_count": 69,
+          "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -1633,8 +1641,8 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 68,
-          "subprocess": 9,
+          "file_write": 69,
+          "subprocess": 10,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2109,9 +2117,10 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 68,
+              "script_count": 69,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
+                "scripts/apply_adaptation.py",
                 "scripts/build_confusion_matrix.py",
                 "scripts/build_skill_atlas.py",
                 "scripts/check_update.py",
@@ -2184,8 +2193,9 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 9,
+              "script_count": 10,
               "scripts": [
+                "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -2217,15 +2227,15 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 81,
+            "checked_count": 82,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 68,
-            "subprocess_script_count": 9,
+            "file_write_script_count": 69,
+            "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -2246,8 +2256,8 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 68,
-            "subprocess": 9,
+            "file_write": 69,
+            "subprocess": 10,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -2352,9 +2362,10 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 68,
+            "script_count": 69,
             "scripts": [
               "scripts/adjudicate_output_review.py",
+              "scripts/apply_adaptation.py",
               "scripts/build_confusion_matrix.py",
               "scripts/build_skill_atlas.py",
               "scripts/check_update.py",
@@ -2427,8 +2438,9 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 9,
+            "script_count": 10,
             "scripts": [
+              "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -2460,15 +2472,15 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 81,
+          "checked_count": 82,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 68,
-          "subprocess_script_count": 9,
+          "file_write_script_count": 69,
+          "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -2487,8 +2499,8 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 68,
-          "subprocess": 9,
+          "file_write": 69,
+          "subprocess": 10,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2954,9 +2966,10 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 68,
+              "script_count": 69,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
+                "scripts/apply_adaptation.py",
                 "scripts/build_confusion_matrix.py",
                 "scripts/build_skill_atlas.py",
                 "scripts/check_update.py",
@@ -3029,8 +3042,9 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 9,
+              "script_count": 10,
               "scripts": [
+                "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -3062,15 +3076,15 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 81,
+            "checked_count": 82,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 68,
-            "subprocess_script_count": 9,
+            "file_write_script_count": 69,
+            "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -3091,8 +3105,8 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 68,
-            "subprocess": 9,
+            "file_write": 69,
+            "subprocess": 10,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -3197,9 +3211,10 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 68,
+            "script_count": 69,
             "scripts": [
               "scripts/adjudicate_output_review.py",
+              "scripts/apply_adaptation.py",
               "scripts/build_confusion_matrix.py",
               "scripts/build_skill_atlas.py",
               "scripts/check_update.py",
@@ -3272,8 +3287,9 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 9,
+            "script_count": 10,
             "scripts": [
+              "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -3305,15 +3321,15 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 81,
+          "checked_count": 82,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 68,
-          "subprocess_script_count": 9,
+          "file_write_script_count": 69,
+          "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -3332,8 +3348,8 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 68,
-          "subprocess": 9,
+          "file_write": 69,
+          "subprocess": 10,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -3799,9 +3815,10 @@
             },
             "file_write": {
               "required": true,
-              "script_count": 68,
+              "script_count": 69,
               "scripts": [
                 "scripts/adjudicate_output_review.py",
+                "scripts/apply_adaptation.py",
                 "scripts/build_confusion_matrix.py",
                 "scripts/build_skill_atlas.py",
                 "scripts/check_update.py",
@@ -3874,8 +3891,9 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 9,
+              "script_count": 10,
               "scripts": [
+                "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -3907,15 +3925,15 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 81,
+            "checked_count": 82,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 3,
-            "file_write_script_count": 68,
-            "subprocess_script_count": 9,
+            "file_write_script_count": 69,
+            "subprocess_script_count": 10,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -3936,8 +3954,8 @@
           ],
           "capability_counts": {
             "network": 3,
-            "file_write": 68,
-            "subprocess": 9,
+            "file_write": 69,
+            "subprocess": 10,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -4046,9 +4064,10 @@
           },
           "file_write": {
             "required": true,
-            "script_count": 68,
+            "script_count": 69,
             "scripts": [
               "scripts/adjudicate_output_review.py",
+              "scripts/apply_adaptation.py",
               "scripts/build_confusion_matrix.py",
               "scripts/build_skill_atlas.py",
               "scripts/check_update.py",
@@ -4121,8 +4140,9 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 9,
+            "script_count": 10,
             "scripts": [
+              "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -4154,15 +4174,15 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 81,
+          "checked_count": 82,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 3,
-          "file_write_script_count": 68,
-          "subprocess_script_count": 9,
+          "file_write_script_count": 69,
+          "subprocess_script_count": 10,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -4181,8 +4201,8 @@
         ],
         "capability_counts": {
           "network": 3,
-          "file_write": 68,
-          "subprocess": 9,
+          "file_write": 69,
+          "subprocess": 10,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",

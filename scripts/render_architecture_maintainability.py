@@ -87,6 +87,7 @@ def count_cli_command_handlers(skill_dir: Path) -> int:
 
 def build_report(skill_dir: Path, warn_lines: int, block_lines: int, generated_at: str) -> dict[str, Any]:
     files = iter_python_files(skill_dir)
+    watch_lines = max(1, int(warn_lines * 0.8))
     records: list[dict[str, Any]] = []
     internal_count = 0
     cli_count = 0
@@ -121,6 +122,7 @@ def build_report(skill_dir: Path, warn_lines: int, block_lines: int, generated_a
         )
     records.sort(key=lambda item: (-int(item["lines"]), str(item["path"])))
     hotspots = [item for item in records if item["severity"] in {"warn", "block"}]
+    watchlist = [item for item in records if item["severity"] == "pass" and int(item["lines"]) >= watch_lines]
     blockers = [item for item in records if item["severity"] == "block"]
     summary = {
         "python_file_count": len(records),
@@ -132,8 +134,10 @@ def build_report(skill_dir: Path, warn_lines: int, block_lines: int, generated_a
         "entrypoint_command_handler_count": count_handlers_in_file(skill_dir / "scripts" / "yao.py"),
         "command_module_count": len(command_module_paths(skill_dir)),
         "warn_line_threshold": warn_lines,
+        "watch_line_threshold": watch_lines,
         "block_line_threshold": block_lines,
         "largest_file_lines": records[0]["lines"] if records else 0,
+        "watchlist_count": len(watchlist),
         "hotspot_count": len(hotspots),
         "blocker_count": len(blockers),
         "decision": "block-maintainability" if blockers else ("watch-maintainability-hotspots" if hotspots else "pass"),
@@ -145,6 +149,7 @@ def build_report(skill_dir: Path, warn_lines: int, block_lines: int, generated_a
         "skill_dir": ".",
         "summary": summary,
         "largest_files": records[:12],
+        "watchlist": watchlist[:12],
         "hotspots": hotspots,
         "actions": [
             {
@@ -180,6 +185,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- entrypoint command handlers: `{summary['entrypoint_command_handler_count']}`",
         f"- command modules: `{summary['command_module_count']}`",
         f"- largest file lines: `{summary['largest_file_lines']}`",
+        f"- watch threshold lines: `{summary['watch_line_threshold']}`",
+        f"- watchlist: `{summary['watchlist_count']}`",
         f"- hotspots: `{summary['hotspot_count']}`",
         f"- blockers: `{summary['blocker_count']}`",
         "",
@@ -197,6 +204,14 @@ def render_markdown(report: dict[str, Any]) -> str:
             )
     else:
         lines.append("No file-size hotspots found.")
+    lines.extend(["", "## Watchlist", ""])
+    watchlist = report.get("watchlist", [])
+    if watchlist:
+        lines.extend(["| File | Lines | Kind | Recommended next split |", "| --- | ---: | --- | --- |"])
+        for item in watchlist:
+            lines.append(f"| `{item['path']}` | `{item['lines']}` | `{item['kind']}` | {item['recommendation']} |")
+    else:
+        lines.append("No near-threshold files found.")
     lines.extend(["", "## Largest Files", ""])
     if report.get("largest_files"):
         lines.extend(["| File | Lines | Kind | Severity |", "| --- | ---: | --- | --- |"])

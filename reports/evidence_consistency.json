@@ -1329,10 +1329,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 218
+            "file_count": 222
           }
         ],
-        "file_count": 395,
+        "file_count": 399,
         "folder_count": 4,
         "distribution": [
           {
@@ -1365,7 +1365,7 @@
           },
           {
             "label": "reports",
-            "value": 218
+            "value": 222
           }
         ]
       },
@@ -1417,10 +1417,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 218
+            "file_count": 222
           }
         ],
-        "file_count": 395,
+        "file_count": 399,
         "folder_count": 4,
         "distribution": [
           {
@@ -1453,7 +1453,7 @@
           },
           {
             "label": "reports",
-            "value": 218
+            "value": 222
           }
         ]
       },
@@ -1655,8 +1655,8 @@
         "`3` warnings",
         "`28` declared internal modules",
         "`82 / 82` CLI help smoke checks passing across `110` scripts",
-        "`613` zip entries",
-        "archive with `613` entries",
+        "`617` zip entries",
+        "archive with `617` entries",
         "`12` installer permission checks enforced",
         "`0` permission failures",
         "`24` required artifacts",

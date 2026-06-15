@@ -1,6 +1,6 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-15`
+Generated at: `2026-06-16`
 
 ## Summary
 
@@ -14,6 +14,8 @@ Generated at: `2026-06-15`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `899`
+- watch threshold lines: `720`
+- watchlist: `8`
 - hotspots: `0`
 - blockers: `0`
 
@@ -23,6 +25,19 @@ This report keeps maintainability risk visible before the Meta Skill grows more 
 
 No file-size hotspots found.
 
+## Watchlist
+
+| File | Lines | Kind | Recommended next split |
+| --- | ---: | --- | --- |
+| `tests/verify_yao_cli.py` | `899` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `scripts/yao_cli_parser.py` | `810` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/skill_report_layout.py` | `808` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/skill_report_model.py` | `801` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `tests/verify_review_studio.py` | `763` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `scripts/compile_skill.py` | `734` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `scripts/optimize_description.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+
 ## Largest Files
 
 | File | Lines | Kind | Severity |
@@ -31,7 +46,7 @@ No file-size hotspots found.
 | `scripts/yao_cli_parser.py` | `810` | `internal-module` | `pass` |
 | `scripts/skill_report_layout.py` | `808` | `internal-module` | `pass` |
 | `scripts/skill_report_model.py` | `801` | `internal-module` | `pass` |
-| `tests/verify_review_studio.py` | `760` | `test` | `pass` |
+| `tests/verify_review_studio.py` | `763` | `test` | `pass` |
 | `scripts/compile_skill.py` | `734` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |

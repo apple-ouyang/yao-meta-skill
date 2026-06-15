@@ -347,6 +347,7 @@ def main() -> None:
     architecture_gate = next(item for item in payload["gates"] if item["key"] == "architecture-maintainability")
     assert architecture_gate["status"] == "pass", architecture_gate
     assert "0 hotspots" in architecture_gate["detail"], architecture_gate
+    assert "watchlist files" in architecture_gate["detail"], architecture_gate
     assert "0 blockers" in architecture_gate["detail"], architecture_gate
     assert "CLI handlers" in architecture_gate["detail"], architecture_gate
     assert architecture_gate["evidence"] == "reports/architecture_maintainability.json", architecture_gate
@@ -474,6 +475,7 @@ def main() -> None:
     assert full_payload["data"]["python_compatibility"]["summary"]["target_python"] == "3.11", full_payload["data"]["python_compatibility"]
     assert full_payload["data"]["python_compatibility"]["summary"]["issue_count"] == 0, full_payload["data"]["python_compatibility"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] == 0, full_payload["data"]["architecture_maintainability"]
+    assert full_payload["data"]["architecture_maintainability"]["summary"]["watchlist_count"] > 0, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["blocker_count"] == 0, full_payload["data"]["architecture_maintainability"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
@@ -722,6 +724,7 @@ def main() -> None:
     assert "Arch Debt" in html, html
     assert "reports/architecture_maintainability.md" in html, html
     assert "0 hotspots" in html, html
+    assert "watchlist files" in html, html
     assert "kv-grid" in html, html
     assert "案例数" in html, html
     assert "命令执行" in html, html

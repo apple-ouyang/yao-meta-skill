@@ -204,10 +204,10 @@ def main() -> None:
     )
     assert architecture_result["ok"], architecture_result
     assert architecture_result["payload"]["summary"]["hotspot_count"] == 0, architecture_result
+    assert architecture_result["payload"]["summary"]["watchlist_count"] > 0, architecture_result
     assert architecture_result["payload"]["summary"]["blocker_count"] == 0, architecture_result
     assert architecture_result["payload"]["summary"]["command_handler_count"] >= 60, architecture_result
     assert architecture_result["payload"]["summary"]["entrypoint_command_handler_count"] < 30, architecture_result
-
     world_class_evidence_result = run(
         "world-class-evidence",
         str(ROOT),

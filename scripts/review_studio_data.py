@@ -252,6 +252,7 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "value": str(architecture.get("hotspot_count", 0)),
             "detail": (
                 f"{architecture.get('largest_file_lines', 0)} largest lines; "
+                f"{architecture.get('watchlist_count', 0)} watchlist; "
                 f"{architecture.get('command_handler_count', 0)} CLI handlers; "
                 f"{architecture.get('entrypoint_command_handler_count', 0)} in entrypoint"
             ),

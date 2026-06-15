@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-15",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
     "python_file_count": 173,
@@ -13,8 +13,10 @@
     "entrypoint_command_handler_count": 18,
     "command_module_count": 6,
     "warn_line_threshold": 900,
+    "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 899,
+    "watchlist_count": 8,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -50,7 +52,7 @@
     },
     {
       "path": "tests/verify_review_studio.py",
-      "lines": 760,
+      "lines": 763,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -103,6 +105,64 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
+    }
+  ],
+  "watchlist": [
+    {
+      "path": "tests/verify_yao_cli.py",
+      "lines": 899,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/yao_cli_parser.py",
+      "lines": 810,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/skill_report_layout.py",
+      "lines": 808,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/skill_report_model.py",
+      "lines": 801,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "tests/verify_review_studio.py",
+      "lines": 763,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/compile_skill.py",
+      "lines": 734,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/build_skill_atlas.py",
+      "lines": 730,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/optimize_description.py",
+      "lines": 723,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "hotspots": [],
