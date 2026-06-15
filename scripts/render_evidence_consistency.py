@@ -222,6 +222,16 @@ def compare_summary_keys(
     )
 
 
+def gate_by_key(review_studio: dict[str, Any], key: str) -> dict[str, Any]:
+    gates = review_studio.get("gates")
+    if not isinstance(gates, list):
+        return {}
+    for item in gates:
+        if isinstance(item, dict) and item.get("key") == key:
+            return item
+    return {}
+
+
 def report_contract(payload: dict[str, Any]) -> dict[str, Any]:
     contract = payload.get("report_contract")
     return contract if isinstance(contract, dict) else {}
@@ -283,6 +293,48 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
     context_stats = nested(context_budget, ["stats"], {})
     claim_guard_summary = nested(claim_guard, ["summary"], {})
     preflight_summary = nested(world_class_preflight, ["summary"], {})
+    context_governance = (
+        context_stats.get("deferred_resource_governance", {}) if isinstance(context_stats, dict) else {}
+    )
+    if not isinstance(context_governance, dict):
+        context_governance = {}
+    large_deferred_dirs = context_stats.get("large_deferred_resource_dirs", []) if isinstance(context_stats, dict) else []
+    top_deferred = "none"
+    if isinstance(large_deferred_dirs, list) and large_deferred_dirs:
+        first = large_deferred_dirs[0] if isinstance(large_deferred_dirs[0], dict) else {}
+        top_deferred = f"{first.get('path', 'resource')} {first.get('estimated_tokens', 'n/a')}"
+    context_expected_status = "pass" if context_budget.get("ok") else "block"
+    if context_budget.get("warnings") and context_expected_status == "pass":
+        context_expected_status = "warn"
+    context_expected_detail = (
+        f"initial load {context_stats.get('estimated_initial_load_tokens', 'n/a')}/"
+        f"{context_stats.get('context_budget_limit', 'n/a')}; "
+        f"deferred {context_stats.get('deferred_resource_tokens', 'n/a')}/"
+        f"{context_stats.get('deferred_resource_warn_threshold', 'n/a')}; "
+        f"top deferred {top_deferred}; "
+        f"resource governance {context_governance.get('status', 'unknown')}; "
+        f"quality density {context_stats.get('quality_density', 'n/a')}"
+    )
+    context_gate = gate_by_key(review_studio, "context-budget")
+    compare_values(
+        checks,
+        key="review-studio-context-budget-mirror",
+        label="Review Studio mirrors context budget governance",
+        expected={
+            "status": context_expected_status,
+            "detail": context_expected_detail,
+            "evidence": REQUIRED_REPORTS["context_budget"],
+        },
+        actual={
+            "status": context_gate.get("status"),
+            "detail": context_gate.get("detail"),
+            "evidence": context_gate.get("evidence"),
+        },
+        paths=[REQUIRED_REPORTS["context_budget"], REQUIRED_REPORTS["review_studio"]],
+        detail=(
+            "Review Studio must not keep stale context warnings after context reports prove large deferred resources are governed."
+        ),
+    )
     if isinstance(benchmark_summary, dict):
         compare_values(
             checks,

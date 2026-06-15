@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 899,
-    "watchlist_count": 8,
+    "watchlist_count": 9,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -40,6 +40,13 @@
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 804,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
@@ -86,13 +93,6 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 707,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/apply_adaptation.py",
       "lines": 706,
       "kind": "cli-script",
@@ -126,6 +126,13 @@
       "path": "scripts/skill_report_layout.py",
       "lines": 808,
       "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 804,
+      "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },

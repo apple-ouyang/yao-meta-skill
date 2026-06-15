@@ -245,7 +245,7 @@
       "label": "Review Studio",
       "status": "pass",
       "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-      "current": "16 gates; decision review; warnings 4",
+      "current": "16 gates; decision review; warnings 3",
       "command": "python3 scripts/yao.py review-studio .",
       "test": "python3 tests/verify_review_studio.py",
       "evidence": [
@@ -613,7 +613,7 @@
       "label": "Evidence Consistency",
       "status": "pass",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-      "current": "31 consistency checks",
+      "current": "33 consistency checks",
       "command": "make ci-test",
       "test": "tests/verify_evidence_consistency.py",
       "evidence": [

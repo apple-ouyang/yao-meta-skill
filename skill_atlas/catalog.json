@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -21,6 +21,7 @@
       ],
       "resources": [
         "scripts/adjudicate_output_review.py",
+        "scripts/apply_adaptation.py",
         "scripts/build_confusion_matrix.py",
         "scripts/build_skill_atlas.py",
         "scripts/check_update.py",
@@ -32,6 +33,8 @@
         "scripts/cross_packager.py",
         "scripts/diff_eval.py",
         "scripts/emit_telemetry_event.py",
+        "scripts/evidence_consistency_release.py",
+        "scripts/evidence_consistency_world_class.py",
         "scripts/export_skill_ir.py",
         "scripts/github_benchmark_scan.py",
         "scripts/governance_check.py",
@@ -85,6 +88,7 @@
         "scripts/render_world_class_evidence_ledger.py",
         "scripts/render_world_class_evidence_plan.py",
         "scripts/render_world_class_operator_runbook.py",
+        "scripts/render_world_class_preflight.py",
         "scripts/render_world_class_submission_review.py",
         "scripts/resource_boundary_check.py",
         "scripts/review_studio_action_evidence.py",
@@ -123,6 +127,8 @@
         "scripts/yao_cli_adaptation_commands.py",
         "scripts/yao_cli_config.py",
         "scripts/yao_cli_create_commands.py",
+        "scripts/yao_cli_distribution_commands.py",
+        "scripts/yao_cli_output_commands.py",
         "scripts/yao_cli_parser.py",
         "scripts/yao_cli_report_commands.py",
         "scripts/yao_cli_runtime.py",
@@ -192,8 +198,8 @@
         "report": "reports/adoption_drift_report.json",
         "risk_band": "low",
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "adoption_rate": 0,
         "candidate_count": 0
       }
     },

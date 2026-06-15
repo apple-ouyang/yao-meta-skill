@@ -10,6 +10,7 @@ CLEAN_LOCK_HEADER = "For final release evidence"
 CLEAN_LOCK_END = "If `reports/benchmark_reproducibility.json`"
 
 SOURCE_REFRESH_REPORT_COMMANDS = [
+    'python3 scripts/render_context_reports.py --generated-at "$GENERATED_AT"',
     'python3 scripts/render_benchmark_reproducibility.py . --generated-at "$GENERATED_AT"',
     "python3 scripts/render_skill_overview.py .",
     "python3 scripts/render_skill_interpretation.py .",
@@ -61,6 +62,8 @@ def build_release_evidence_flow_check(skill_dir: Path) -> dict[str, Any]:
         "actual": actual,
         "paths": [
             "AGENTS.md",
+            "reports/context_budget.json",
+            "reports/context_budget_summary.json",
             "reports/benchmark_reproducibility.json",
             "reports/skill-overview.json",
             "reports/skill-interpretation.json",

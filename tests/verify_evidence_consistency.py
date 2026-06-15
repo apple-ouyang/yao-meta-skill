@@ -49,6 +49,7 @@ def copy_reports(dst: Path) -> None:
 
 def refresh_embedded_reports() -> None:
     script_names = [
+        "render_context_reports.py",
         "render_benchmark_reproducibility.py",
         "render_skill_os2_coverage.py",
         "render_world_class_evidence_plan.py",
@@ -60,10 +61,15 @@ def refresh_embedded_reports() -> None:
         "render_world_class_claim_guard.py",
         "render_skill_overview.py",
         "render_skill_interpretation.py",
+        "render_review_viewer.py",
+        "render_review_studio.py",
     ]
     for script_name in script_names:
+        command = [sys.executable, str(ROOT / "scripts" / script_name)]
+        if script_name != "render_context_reports.py":
+            command.append(str(ROOT))
         subprocess.run(
-            [sys.executable, str(ROOT / "scripts" / script_name), str(ROOT)],
+            command,
             cwd=ROOT,
             check=True,
             capture_output=True,
@@ -109,6 +115,7 @@ def assert_release_evidence_instructions_cover_first_class_reports() -> None:
     source_refresh = agents_text.split(source_refresh_header, 1)[1].split(clean_lock_header, 1)[0]
     clean_lock = agents_text.split(clean_lock_header, 1)[1].split("If `reports/benchmark_reproducibility.json`", 1)[0]
     for block in [source_refresh, clean_lock]:
+        assert "python3 scripts/render_context_reports.py --generated-at \"$GENERATED_AT\"" in block, block
         assert benchmark_command in block, block
         assert "python3 scripts/render_skill_interpretation.py ." in block, block
         assert "python3 scripts/render_world_class_preflight.py . --generated-at \"$GENERATED_AT\"" in block, block
@@ -146,6 +153,9 @@ def main() -> None:
     checks = {item["key"]: item for item in payload["checks"]}
     assert checks["release-evidence-flow-covers-first-class-reports"]["status"] == "pass", checks[
         "release-evidence-flow-covers-first-class-reports"
+    ]
+    assert checks["review-studio-context-budget-mirror"]["status"] == "pass", checks[
+        "review-studio-context-budget-mirror"
     ]
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
@@ -304,6 +314,33 @@ def main() -> None:
     release_flow_drift_checks = {item["key"]: item for item in release_flow_drift_payload["checks"]}
     assert release_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]["status"] == "fail", (
         release_flow_drift_checks["release-evidence-flow-covers-first-class-reports"]
+    )
+
+    context_drift_root = TMP / "context-drift-skill"
+    copy_reports(context_drift_root)
+    context_path = context_drift_root / "reports" / "context_budget.json"
+    context_payload = json.loads(context_path.read_text(encoding="utf-8"))
+    context_payload["warnings"] = ["Deferred resource footprint is high: stale test warning."]
+    context_payload["stats"]["deferred_resource_governance"]["status"] = "needs-review"
+    context_path.write_text(json.dumps(context_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    context_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(context_drift_root),
+            "--output-json",
+            str(TMP / "context_drift.json"),
+            "--output-md",
+            str(TMP / "context_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert context_drift_proc.returncode == 2, context_drift_proc.stdout
+    context_drift_payload = json.loads(context_drift_proc.stdout)
+    context_drift_checks = {item["key"]: item for item in context_drift_payload["checks"]}
+    assert context_drift_checks["review-studio-context-budget-mirror"]["status"] == "fail", (
+        context_drift_checks["review-studio-context-budget-mirror"]
     )
 
     benchmark_flow_drift_root = TMP / "benchmark-flow-drift-skill"

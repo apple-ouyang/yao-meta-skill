@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-31",
+  "generated_at": "2026-06-16",
   "targets": [
     {
       "label": "root",
@@ -8,47 +8,44 @@
       "budget_limit": 1000,
       "initial_tokens": 960,
       "skill_body_tokens": 767,
-      "deferred_resource_tokens": 442670,
+      "deferred_resource_tokens": 444818,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
-          "estimated_tokens": 393459,
+          "estimated_tokens": 395607,
           "file_count": 113
         }
       ],
       "deferred_resource_governance": {
-        "status": "needs-review",
+        "status": "governed",
         "large_dir_count": 1,
-        "governed_large_dir_count": 0,
+        "governed_large_dir_count": 1,
         "directories": [
           {
-            "status": "needs-review",
+            "status": "governed",
             "evidence": [
               "reports/security_trust_report.json",
               "reports/architecture_maintainability.json",
               "reports/python_compatibility.json"
             ],
             "reasons": [
+              "trust report covers scripts",
               "architecture report has no script hotspots or blockers",
               "Python compatibility report has no issues"
             ],
-            "missing": [
-              "trust report covers scripts"
-            ],
+            "missing": [],
             "path": "scripts",
-            "estimated_tokens": 393459,
+            "estimated_tokens": 395607,
             "file_count": 113,
             "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
           }
         ],
-        "summary": "One or more large deferred resource directories still need explicit governance evidence."
+        "summary": "Large deferred resources are indexed and backed by evidence."
       },
       "quality_density": 135.4,
       "unused_resource_dirs": [],
       "ok": true,
-      "warnings": [
-        "Deferred resource footprint is high: 442670 estimated tokens across references/scripts/evals. Keep Review Studio warnings visible until the largest resource dirs are split, archived, or justified."
-      ]
+      "warnings": []
     },
     {
       "label": "complex-release-orchestrator",
