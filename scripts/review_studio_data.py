@@ -29,6 +29,33 @@ def load_json(path: Path) -> dict[str, Any]:
     return payload if isinstance(payload, dict) else {}
 
 
+def latest_json_report(directory: Path) -> dict[str, Any]:
+    if not directory.exists():
+        return {}
+    candidates = sorted(path for path in directory.glob("*.json") if path.is_file())
+    if not candidates:
+        return {}
+    payload = load_json(candidates[-1])
+    if payload:
+        try:
+            payload.setdefault("source_path", str(candidates[-1].resolve().relative_to(directory.parent.parent.parent.resolve())))
+        except ValueError:
+            payload.setdefault("source_path", str(candidates[-1]))
+    return payload
+
+
+def latest_report_path(skill_dir: Path, directory: Path, suffix: str) -> str:
+    if not directory.exists():
+        return ""
+    candidates = sorted(path for path in directory.glob(f"*{suffix}") if path.is_file())
+    if not candidates:
+        return ""
+    try:
+        return str(candidates[-1].resolve().relative_to(skill_dir.resolve()))
+    except ValueError:
+        return str(candidates[-1])
+
+
 def load_yaml(path: Path) -> dict[str, Any]:
     if not path.exists() or yaml is None:
         return {}
@@ -107,6 +134,12 @@ def evidence_paths(skill_dir: Path) -> dict[str, str]:
     skill_ir_path = find_skill_ir_path(skill_dir)
     if skill_ir_path:
         rels["skill_ir"] = skill_ir_path
+    daily_md = latest_report_path(skill_dir, skill_dir / "reports" / "skillops" / "daily", ".md")
+    weekly_md = latest_report_path(skill_dir, skill_dir / "reports" / "skillops" / "weekly", ".md")
+    if daily_md:
+        rels["daily_skillops"] = daily_md
+    if weekly_md:
+        rels["weekly_curator"] = weekly_md
     return {key: rel for key, rel in rels.items() if (skill_dir / rel).exists() or (ROOT / rel).exists()}
 
 
@@ -134,6 +167,8 @@ def load_review_data(skill_dir: Path) -> dict[str, dict[str, Any]]:
         "promotion": load_json(reports / "promotion_decisions.json"),
         "atlas": load_json(reports / "skill_atlas.json"),
         "adoption_drift": load_json(reports / "adoption_drift_report.json"),
+        "daily_skillops": latest_json_report(reports / "skillops" / "daily"),
+        "weekly_curator": latest_json_report(reports / "skillops" / "weekly"),
         "review_waivers": load_json(reports / "review_waivers.json"),
         "review_annotations": load_json(reports / "review_annotations.json"),
         "adaptation_proposals": load_json(reports / "adaptation_proposals.json"),
@@ -173,6 +208,8 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
     architecture = data["architecture_maintainability"].get("summary", {})
     atlas = data["atlas"].get("summary", {})
     adoption = data["adoption_drift"].get("summary", {})
+    daily_skillops = data["daily_skillops"].get("summary", {})
+    weekly_curator = data["weekly_curator"].get("summary", {})
     waivers = data["review_waivers"].get("summary", {})
     annotations = data["review_annotations"].get("summary", {})
     intake = data["world_class_evidence_intake"].get("summary", {})
@@ -276,6 +313,24 @@ def insight_cards(data: dict[str, dict[str, Any]]) -> list[dict[str, str]]:
             "label": "Drift",
             "value": str(adoption.get("risk_band", "n/a")),
             "detail": f"{adoption.get('event_count', 0)} metadata events; {adoption.get('missed_trigger_count', 0)} missed triggers",
+        },
+        {
+            "label": "Daily Ops",
+            "value": str(daily_skillops.get("proposal_count", 0)),
+            "detail": (
+                f"{daily_skillops.get('decision', 'missing')}; "
+                f"approval {daily_skillops.get('approval_count', 0)}; "
+                f"release lock {str(daily_skillops.get('release_lock_ready', False)).lower()}"
+            ),
+        },
+        {
+            "label": "Weekly Queue",
+            "value": str(weekly_curator.get("unique_opportunity_count", 0)),
+            "detail": (
+                f"{weekly_curator.get('decision', 'missing')}; "
+                f"ready {weekly_curator.get('ready_for_approval_review_count', 0)}; "
+                f"top score {weekly_curator.get('top_score', 0)}"
+            ),
         },
         {
             "label": "Waivers",

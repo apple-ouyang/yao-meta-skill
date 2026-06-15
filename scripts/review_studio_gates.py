@@ -438,6 +438,10 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
 
     adoption = data["adoption_drift"]
     adoption_summary = adoption.get("summary", {})
+    daily_skillops = data.get("daily_skillops", {})
+    weekly_curator = data.get("weekly_curator", {})
+    daily_summary = daily_skillops.get("summary", {}) if isinstance(daily_skillops, dict) else {}
+    weekly_summary = weekly_curator.get("summary", {}) if isinstance(weekly_curator, dict) else {}
     if not adoption:
         adoption_status = "warn"
         adoption_detail = "adoption drift report is missing; real usage impact is unknown"
@@ -454,13 +458,43 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
             f"bad-output {adoption_summary.get('bad_output_count', 0)}; "
             f"risk {risk_band}"
         )
+    skillops_parts = []
+    skillops_blocked = False
+    for label, report, summary in [
+        ("daily", daily_skillops, daily_summary),
+        ("weekly", weekly_curator, weekly_summary),
+    ]:
+        if not report:
+            continue
+        writes_source = bool(summary.get("writes_source_files") or report.get("writes_source_files"))
+        auto_patch = bool(summary.get("auto_patch_enabled") or report.get("auto_patch_enabled"))
+        failure_count = int(summary.get("failure_count", 0) or 0)
+        if writes_source or auto_patch or failure_count:
+            skillops_blocked = True
+        if label == "daily":
+            skillops_parts.append(
+                f"daily proposals {summary.get('proposal_count', 0)}; "
+                f"daily decision {summary.get('decision', report.get('decision', 'unknown'))}; "
+                f"daily release lock {str(summary.get('release_lock_ready', False)).lower()}"
+            )
+        else:
+            skillops_parts.append(
+                f"weekly queue {summary.get('unique_opportunity_count', 0)} unique; "
+                f"weekly ready {summary.get('ready_for_approval_review_count', 0)}; "
+                f"weekly top {summary.get('top_score', 0)}; "
+                f"weekly release lock {str(summary.get('release_lock_ready', False)).lower()}"
+            )
+    if skillops_blocked:
+        adoption_status = "block"
+    if skillops_parts:
+        adoption_detail = adoption_detail + "; " + "; ".join(skillops_parts)
     gates.append(
         gate(
             "operations-loop",
             "运营回路",
             adoption_status,
             adoption_detail,
-            "reports/adoption_drift_report.json",
+            "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
             _report_link(output_html, skill_dir, "reports/adoption_drift_report.md"),
         )
     )

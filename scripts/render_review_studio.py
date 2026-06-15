@@ -142,6 +142,8 @@ def render_html(report: dict[str, Any]) -> str:
     runtime_permissions_summary = report["data"]["runtime_permissions"].get("summary", {})
     atlas_summary = report["data"]["atlas"].get("summary", {})
     adoption_summary = report["data"]["adoption_drift"].get("summary", {})
+    daily_skillops_summary = report["data"]["daily_skillops"].get("summary", {})
+    weekly_curator_summary = report["data"]["weekly_curator"].get("summary", {})
     waiver_summary = report["data"]["review_waivers"].get("summary", {})
     world_class_ledger = report["data"].get("world_class_evidence_ledger", {})
     world_class_summary = world_class_ledger.get("summary", {})
@@ -290,6 +292,36 @@ def render_html(report: dict[str, Any]) -> str:
         adoption_summary,
         ["event_count", "adoption_rate", "missed_trigger_count", "bad_output_count", "risk_band"],
         "no adoption drift summary",
+    )
+    daily_skillops_panel = render_kv_grid(
+        daily_skillops_summary,
+        [
+            "decision",
+            "proposal_count",
+            "approval_count",
+            "pending_review_count",
+            "release_lock_ready",
+            "public_world_class_ready",
+            "writes_source_files",
+            "auto_patch_enabled",
+        ],
+        "no daily SkillOps summary",
+    )
+    weekly_curator_panel = render_kv_grid(
+        weekly_curator_summary,
+        [
+            "decision",
+            "week_id",
+            "daily_report_count",
+            "unique_opportunity_count",
+            "ready_for_approval_review_count",
+            "proposal_review_count",
+            "top_score",
+            "release_lock_ready",
+            "writes_source_files",
+            "auto_patch_enabled",
+        ],
+        "no weekly curator summary",
     )
     waiver_panel = render_kv_grid(
         waiver_summary,
@@ -502,6 +534,11 @@ def render_html(report: dict[str, Any]) -> str:
     <section id="telemetry" class="twocol">
       <div class="panel"><h2>运营回路</h2><p>{html.escape(gate_details.get('operations-loop', 'adoption drift report missing'))}</p></div>
       <div class="panel"><h2>漂移信号</h2>{adoption_panel}</div>
+    </section>
+
+    <section class="twocol">
+      <div class="panel"><h2>日常运维</h2>{daily_skillops_panel}</div>
+      <div class="panel"><h2>周度队列</h2>{weekly_curator_panel}</div>
     </section>
 
     <section id="waivers">

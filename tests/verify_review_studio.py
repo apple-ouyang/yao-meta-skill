@@ -370,7 +370,11 @@ def main() -> None:
     assert operations_gate["status"] == "pass", operations_gate
     assert "metadata events" in operations_gate["detail"], operations_gate
     assert "risk low" in operations_gate["detail"], operations_gate
+    assert "daily proposals" in operations_gate["detail"], operations_gate
+    assert "weekly queue" in operations_gate["detail"], operations_gate
     assert "reports/adoption_drift_report.json" in operations_gate["evidence"], operations_gate
+    assert "reports/skillops/daily" in operations_gate["evidence"], operations_gate
+    assert "reports/skillops/weekly" in operations_gate["evidence"], operations_gate
     waivers_gate = next(item for item in payload["gates"] if item["key"] == "review-waivers")
     assert waivers_gate["status"] == "warn", waivers_gate
     assert "1 warning gates still need reviewer decision" in waivers_gate["detail"], waivers_gate
@@ -408,6 +412,8 @@ def main() -> None:
         assert full_payload["evidence_paths"]["benchmark_reproducibility"] == "reports/benchmark_reproducibility.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "skill_os2_coverage.md").exists():
         assert full_payload["evidence_paths"]["skill_os2_coverage"] == "reports/skill_os2_coverage.md", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["daily_skillops"].startswith("reports/skillops/daily/"), full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["weekly_curator"].startswith("reports/skillops/weekly/"), full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["review_annotations"] == "reports/review_annotations.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["adaptation_proposals"] == "reports/adaptation_proposals.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["adaptation_approval_ledger"] == "reports/adaptation_approval_ledger.json", full_payload["evidence_paths"]
@@ -451,6 +457,13 @@ def main() -> None:
     assert all(not item["answer_key_visible"] for item in output_review_checklist), output_review_checklist
     assert output_review_checklist[0]["commands"]["adjudicate"] == "python3 scripts/yao.py output-review", output_review_checklist[0]
     assert full_payload["data"]["review_annotations"]["summary"]["annotation_count"] == 0, full_payload["data"]["review_annotations"]
+    daily_skillops_summary = full_payload["data"]["daily_skillops"]["summary"]
+    assert daily_skillops_summary["writes_source_files"] is False, daily_skillops_summary
+    assert daily_skillops_summary["auto_patch_enabled"] is False, daily_skillops_summary
+    weekly_curator_summary = full_payload["data"]["weekly_curator"]["summary"]
+    assert weekly_curator_summary["unique_opportunity_count"] >= 1, weekly_curator_summary
+    assert weekly_curator_summary["writes_source_files"] is False, weekly_curator_summary
+    assert weekly_curator_summary["auto_patch_enabled"] is False, weekly_curator_summary
     assert full_payload["data"]["adaptation_proposals"]["report_contract"]["contract"] == "adaptation-proposals", full_payload["data"]["adaptation_proposals"]
     assert full_payload["data"]["adaptation_proposals"]["proposal_count"] == full_payload["data"]["adaptation_proposals"]["summary"]["proposal_count"], full_payload["data"]["adaptation_proposals"]
     assert full_payload["data"]["adaptation_approval_ledger"]["report_contract"]["contract"] == "adaptation-approval-ledger", full_payload["data"]["adaptation_approval_ledger"]
@@ -651,6 +664,9 @@ def main() -> None:
     assert "reports/world_class_evidence_intake.md" in html, html
     assert "reports/world_class_operator_runbook.html" in html, html
     assert "reports/world_class_claim_guard.md" in html, html
+    assert "日常运维" in html, html
+    assert "周度队列" in html, html
+    assert "Weekly Queue" in html, html
     assert "英文完成断言、true 状态声明或中文完成态" in html, html
     assert "world-evidence-grid" in html, html
     assert "Provider Holdout" in html, html
