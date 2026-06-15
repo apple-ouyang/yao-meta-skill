@@ -405,6 +405,9 @@ def main() -> None:
     if (ROOT / "reports" / "skill_os2_coverage.md").exists():
         assert full_payload["evidence_paths"]["skill_os2_coverage"] == "reports/skill_os2_coverage.md", full_payload["evidence_paths"]
     assert full_payload["evidence_paths"]["review_annotations"] == "reports/review_annotations.md", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["adaptation_proposals"] == "reports/adaptation_proposals.md", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["adaptation_approval_ledger"] == "reports/adaptation_approval_ledger.json", full_payload["evidence_paths"]
+    assert full_payload["evidence_paths"]["adaptation_regression"] == "reports/adaptation_regression_report.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_plan.md").exists():
         assert full_payload["evidence_paths"]["world_class_evidence_plan"] == "reports/world_class_evidence_plan.md", full_payload["evidence_paths"]
     if (ROOT / "reports" / "world_class_evidence_ledger.md").exists():
@@ -444,6 +447,12 @@ def main() -> None:
     assert all(not item["answer_key_visible"] for item in output_review_checklist), output_review_checklist
     assert output_review_checklist[0]["commands"]["adjudicate"] == "python3 scripts/yao.py output-review", output_review_checklist[0]
     assert full_payload["data"]["review_annotations"]["summary"]["annotation_count"] == 0, full_payload["data"]["review_annotations"]
+    assert full_payload["data"]["adaptation_proposals"]["report_contract"]["contract"] == "adaptation-proposals", full_payload["data"]["adaptation_proposals"]
+    assert full_payload["data"]["adaptation_proposals"]["proposal_count"] == full_payload["data"]["adaptation_proposals"]["summary"]["proposal_count"], full_payload["data"]["adaptation_proposals"]
+    assert full_payload["data"]["adaptation_approval_ledger"]["report_contract"]["contract"] == "adaptation-approval-ledger", full_payload["data"]["adaptation_approval_ledger"]
+    assert full_payload["data"]["adaptation_approval_ledger"]["pending_review_count"] == 0, full_payload["data"]["adaptation_approval_ledger"]
+    assert full_payload["data"]["adaptation_regression"]["report_contract"]["contract"] == "adaptation-regression-report", full_payload["data"]["adaptation_regression"]
+    assert full_payload["data"]["adaptation_regression"]["approval_draft_supported"] is True, full_payload["data"]["adaptation_regression"]
     waiver_summary = full_payload["data"]["review_waivers"]["summary"]
     assert waiver_summary["waiver_candidate_count"] == 2, waiver_summary
     assert waiver_summary["waiverable_open_count"] == 1, waiver_summary
