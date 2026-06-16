@@ -207,8 +207,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": false,
-      "actual": false,
+      "expected": true,
+      "actual": true,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "6a879132211add348540043cc2ff2c87cf2a50e6",
-      "actual": "6a879132211add348540043cc2ff2c87cf2a50e6",
+      "expected": "499214b052869193d96cdd7e73f537a57eb7bb8d",
+      "actual": "499214b052869193d96cdd7e73f537a57eb7bb8d",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -261,7 +261,7 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642",
@@ -271,10 +271,10 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "actual": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642",
@@ -284,7 +284,7 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "6a879132211add348540043cc2ff2c87cf2a50e6",
-      "actual": "6a879132211add348540043cc2ff2c87cf2a50e6",
+      "expected": "499214b052869193d96cdd7e73f537a57eb7bb8d",
+      "actual": "499214b052869193d96cdd7e73f537a57eb7bb8d",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -407,7 +407,7 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642",
@@ -417,10 +417,10 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "actual": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "1e466c4508d6ebb845923331fe534197df4fddf9e3b778c789ce8d349a555642",
@@ -430,7 +430,7 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
