@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `213`
-- Scripts: `122`
-- Internal script modules: `36`
+- Scanned files: `214`
+- Scripts: `123`
+- Internal script modules: `37`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `213`
-- Package SHA256: `1e5b2ced62c29f6d23ad88f576df6f278bfc0582382c11f834f56b64a686ed80`
+- Package hash files: `214`
+- Package SHA256: `fff0128c207f049457233ff2aaf20ce640e1c43beed6925cbbd4bf4900bbb05e`
 
 ## Failures
 
@@ -181,6 +181,7 @@
 | scripts/yao_cli_distribution_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep distribution and runtime gate handlers outside the thin CLI orchestrator. |
 | scripts/yao_cli_output_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep output evaluation and review handlers outside the thin CLI orchestrator. |
 | scripts/yao_cli_parser.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep CLI parser declarations separate from command orchestration. |
+| scripts/yao_cli_parser_evidence.py | internal-module | True | True | False | False | False | False | False | Imported by yao_cli_parser.py to keep evidence command declarations out of the main parser module. |
 | scripts/yao_cli_report_commands.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to keep report and evidence command handlers out of the CLI orchestrator. |
 | scripts/yao_cli_runtime.py | internal-module | True | False | False | False | False | False | True | Imported by yao.py and command modules for shared subprocess execution and JSON payload parsing. |
 | scripts/yao_cli_telemetry.py | internal-module | True | True | False | False | False | False | False | Imported by yao.py to record opt-in metadata-only CLI run telemetry. |

@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 213,
-    "script_count": 122,
-    "internal_module_count": 36,
+    "scanned_files": 214,
+    "script_count": 123,
+    "internal_module_count": 37,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 213,
-    "package_sha256": "1e5b2ced62c29f6d23ad88f576df6f278bfc0582382c11f834f56b64a686ed80"
+    "package_hash_file_count": 214,
+    "package_sha256": "fff0128c207f049457233ff2aaf20ce640e1c43beed6925cbbd4bf4900bbb05e"
   },
   "failures": [],
   "warnings": [],
@@ -1713,6 +1713,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/yao_cli_parser_evidence.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by yao_cli_parser.py to keep evidence command declarations out of the main parser module.",
+      "has_argparse": true,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/yao_cli_report_commands.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1789,7 +1803,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 36,
+    "skipped_count": 37,
     "failed_scripts": [],
     "results": [
       {
@@ -2784,6 +2798,10 @@
       },
       {
         "path": "scripts/yao_cli_parser.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/yao_cli_parser_evidence.py",
         "reason": "internal module"
       },
       {

@@ -15,6 +15,7 @@ import yao_cli_config  # noqa: E402
 import yao_cli_distribution_commands  # noqa: E402
 import yao_cli_output_commands  # noqa: E402
 import yao_cli_parser  # noqa: E402
+import yao_cli_parser_evidence  # noqa: E402
 import yao_cli_report_commands  # noqa: E402
 import yao_cli_runtime  # noqa: E402
 from yao_cli_report_refresh import refresh_root_report_consistency_inputs  # noqa: E402
@@ -73,7 +74,15 @@ def main() -> None:
     assert "--entry" in yao_cli_config.baseline_compare_args()
     assert "scripts/provider_output_eval_runner.py" in yao_cli_config.provider_output_runner_command("openai")
     assert "--allow-custom-base-url" in yao_cli_config.provider_output_runner_command("openai", allow_custom_base_url=True)
-    for module in (yao_cli_parser, yao_cli_runtime, yao_cli_adaptation_commands, yao_cli_distribution_commands, yao_cli_output_commands, yao_cli_report_commands):
+    for module in (
+        yao_cli_parser,
+        yao_cli_parser_evidence,
+        yao_cli_runtime,
+        yao_cli_adaptation_commands,
+        yao_cli_distribution_commands,
+        yao_cli_output_commands,
+        yao_cli_report_commands,
+    ):
         assert module.SCRIPT_INTERFACE == "internal-module"
     assert callable(yao_cli_module.command_review_studio)
     parser_help = yao_cli_module.build_parser().format_help()
