@@ -169,6 +169,22 @@ def render_kv_grid(
     return "<dl class='kv-grid'>" + "".join(rows) + "</dl>"
 
 
+def render_gate_contract_panel(contract: dict[str, Any]) -> str:
+    return render_kv_grid(
+        contract,
+        [
+            "ok",
+            "expected_gate_count",
+            "actual_gate_count",
+            "missing_gate_keys",
+            "unknown_gate_keys",
+            "duplicate_gate_keys",
+            "unweighted_gate_keys",
+        ],
+        "gate contract missing",
+    )
+
+
 def registry_package_summary(package: dict[str, Any]) -> dict[str, Any]:
     if not package:
         return {}

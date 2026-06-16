@@ -7,7 +7,7 @@ from typing import Any
 
 from review_studio_actions import build_review_actions, render_review_actions
 from review_studio_data import evidence_paths, insight_cards, load_review_data
-from review_studio_formatting import registry_package_summary, render_kv_grid
+from review_studio_formatting import registry_package_summary, render_gate_contract_panel, render_kv_grid
 from review_studio_gates import add_blockers_from_gate, build_gates, gate_contract, status_label, weighted_score
 from review_studio_layout import render_review_nav, review_studio_css
 from review_studio_output_review import render_output_review_section
@@ -123,19 +123,7 @@ def render_html(report: dict[str, Any]) -> str:
     description = overview.get("description") or frontmatter.get("description", "")
     nav_html = render_review_nav()
     gates_html = render_gate_list(gates)
-    gate_contract_panel = render_kv_grid(
-        report.get("gate_contract", {}),
-        [
-            "ok",
-            "expected_gate_count",
-            "actual_gate_count",
-            "missing_gate_keys",
-            "unknown_gate_keys",
-            "duplicate_gate_keys",
-            "unweighted_gate_keys",
-        ],
-        "gate contract missing",
-    )
+    gate_contract_panel = render_gate_contract_panel(report.get("gate_contract", {}))
     metrics_html = render_insights(insights)
     blockers_html = render_issue_list("阻断事项", blockers)
     warnings_html = render_issue_list("关注事项", warnings)
