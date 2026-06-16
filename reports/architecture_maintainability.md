@@ -5,17 +5,17 @@ Generated at: `2026-06-13`
 ## Summary
 
 - decision: `pass`
-- python files: `227`
-- scripts: `151`
+- python files: `228`
+- scripts: `152`
 - tests: `76`
-- internal modules: `67`
+- internal modules: `68`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `696`
 - early watch threshold lines: `600`
-- early watchlist: `2`
+- early watchlist: `3`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -37,6 +37,7 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `tests/verify_world_class_evidence_intake.py` | `690` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `tests/verify_evidence_consistency.py` | `609` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 
 ## Largest Files
 
@@ -44,16 +45,16 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `690` | `test` | `pass` |
+| `tests/verify_evidence_consistency.py` | `609` | `test` | `pass` |
 | `tests/verify_output_review_adjudication.py` | `599` | `test` | `pass` |
 | `scripts/render_skill_overview.py` | `588` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |
+| `scripts/render_evidence_consistency.py` | `579` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_ledger.py` | `579` | `test` | `pass` |
 | `scripts/world_class_submission_kit_rendering.py` | `576` | `internal-module` | `pass` |
-| `scripts/render_evidence_consistency.py` | `571` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `568` | `cli-script` | `pass` |
-| `scripts/adjudicate_output_review.py` | `566` | `cli-script` | `pass` |
 
 ## Release Rule
 

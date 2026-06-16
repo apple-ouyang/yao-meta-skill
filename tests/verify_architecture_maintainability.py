@@ -78,7 +78,7 @@ def main() -> None:
     assert "No file-size hotspots found." in markdown, markdown
     assert "No near-threshold files found." in markdown, markdown
     assert "## Early Watchlist" in markdown, markdown
-    assert "- early watchlist: `2`" in markdown, markdown
+    assert f"- early watchlist: `{payload['summary']['early_watchlist_count']}`" in markdown, markdown
     early_watch_markdown = markdown.split("## Early Watchlist", 1)[1].split("## Largest Files", 1)[0]
     assert "scripts/render_review_viewer.py" not in markdown, markdown
     assert "scripts/render_skill_os2_coverage.py" not in markdown, markdown

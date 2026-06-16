@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 511351/120000; top deferred scripts 450048; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 512782/120000; top deferred scripts 451479; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -60,7 +60,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 151 scripts; 3 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 152 scripts; 3 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md"
     },
@@ -68,7 +68,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 230 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 231 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md"
     },
@@ -76,7 +76,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "227 Python files; 0 hotspots; 0 watchlist files; 2 early watch files; 0 blockers; largest 696 lines; 68 CLI handlers; 18 in entrypoint",
+      "detail": "228 Python files; 0 hotspots; 0 watchlist files; 3 early watch files; 0 blockers; largest 696 lines; 68 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -108,7 +108,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock true; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock true",
+      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock false; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock false",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md"
     },
@@ -1871,7 +1871,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 151
+            "file_count": 152
           },
           {
             "path": "evals",
@@ -1886,7 +1886,7 @@
             "file_count": 235
           }
         ],
-        "file_count": 454,
+        "file_count": 455,
         "folder_count": 4,
         "distribution": [
           {
@@ -1911,7 +1911,7 @@
           },
           {
             "label": "scripts",
-            "value": 151
+            "value": 152
           },
           {
             "label": "evals",
@@ -2041,7 +2041,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 151
+          "file_count": 152
         },
         {
           "path": "evals",
@@ -2363,12 +2363,12 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "70140015193af060a6a111a5f18e5b069a16e8b2a47de84776c564d640830f93",
-          "source_contract_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
+          "evidence_bundle_sha256": "0cb0e7e0eea477ba17f31508bcac41bd049cfeda2fc9fe16a46e7e89f6c024cd",
+          "source_contract_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
           "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -2387,15 +2387,15 @@
           "world_class_source_pass_count": 10,
           "world_class_source_blocked_count": 9,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
+          "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 17,
-          "source_tree_dirty": false,
-          "source_changed_file_count": 0,
+          "changed_file_count": 64,
+          "source_tree_dirty": true,
+          "source_changed_file_count": 4,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 17
+          "generated_changed_file_count": 60
         },
-        "commit": "0f97b66ed83c74eb82198744292b8da166612d78",
+        "commit": "c30882468f45c7e78bef73e0ada161fd1fbaef79",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -2479,9 +2479,9 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 243,
-        "script_count": 151,
-        "internal_module_count": 65,
+        "scanned_files": 244,
+        "script_count": 152,
+        "internal_module_count": 66,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -2499,8 +2499,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 243,
-        "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
+        "package_hash_file_count": 244,
+        "package_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -2538,7 +2538,7 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
+            "package_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
             "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
           },
           "compatibility": {
@@ -2598,7 +2598,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 690,
+          "archive_entry_count": 691,
           "archive_extracted": true,
           "entrypoint_loaded": true,
           "manifest_loaded": true,
@@ -2670,7 +2670,7 @@
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
+              "to": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d"
             }
           ]
         },
@@ -5184,7 +5184,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 35.1,
+          "duration_ms": 31.72,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5212,7 +5212,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 45.06,
+          "duration_ms": 28.31,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5235,7 +5235,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 40.46,
+          "duration_ms": 28.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5263,7 +5263,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 36.35,
+          "duration_ms": 27.92,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5286,7 +5286,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 34.09,
+          "duration_ms": 28.16,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5314,7 +5314,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 37.27,
+          "duration_ms": 28.43,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5337,7 +5337,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 36.32,
+          "duration_ms": 28.62,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5364,7 +5364,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 36.26,
+          "duration_ms": 27.78,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5387,7 +5387,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.5,
+          "duration_ms": 27.76,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5416,7 +5416,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.55,
+          "duration_ms": 27.99,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -6197,43 +6197,48 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "0f97b66ed83c74eb82198744292b8da166612d78",
+      "commit": "c30882468f45c7e78bef73e0ada161fd1fbaef79",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 17,
+        "changed_file_count": 64,
         "generated_dirty": true,
-        "generated_changed_file_count": 17,
-        "source_dirty": false,
-        "source_changed_file_count": 0,
+        "generated_changed_file_count": 60,
+        "source_dirty": true,
+        "source_changed_file_count": 4,
         "sample": [
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
+          " M reports/adoption_drift_report.json",
+          " M reports/architecture_maintainability.json",
+          " M reports/architecture_maintainability.md",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
           " M reports/context_budget.json",
-          " M reports/evidence_consistency.json",
-          " M reports/output_execution_runs.json",
-          " M reports/output_execution_runs.md",
-          " M reports/review-studio.html",
-          " M reports/review-studio.json",
-          " M reports/review-viewer.json",
-          " M reports/skill-interpretation.json"
+          " M reports/context_budget.md"
         ],
-        "source_sample": [],
+        "source_sample": [
+          " M scripts/render_evidence_consistency.py",
+          " M tests/verify_architecture_maintainability.py",
+          " M tests/verify_evidence_consistency.py",
+          "?? scripts/evidence_consistency_phase_queue.py"
+        ],
         "generated_sample": [
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
           " M reports/adaptation_proposals.json",
           " M reports/adaptation_proposals.md",
+          " M reports/adoption_drift_report.json",
+          " M reports/architecture_maintainability.json",
+          " M reports/architecture_maintainability.md",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
           " M reports/context_budget.json",
-          " M reports/evidence_consistency.json",
-          " M reports/output_execution_runs.json",
-          " M reports/output_execution_runs.md",
-          " M reports/review-studio.html",
-          " M reports/review-studio.json",
-          " M reports/review-viewer.json",
-          " M reports/skill-interpretation.json"
+          " M reports/context_budget.md"
         ],
         "generated_dirty_prefixes": [
           "dist/",
@@ -6247,12 +6252,12 @@
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "70140015193af060a6a111a5f18e5b069a16e8b2a47de84776c564d640830f93",
-        "source_contract_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
+        "evidence_bundle_sha256": "0cb0e7e0eea477ba17f31508bcac41bd049cfeda2fc9fe16a46e7e89f6c024cd",
+        "source_contract_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -6271,18 +6276,19 @@
         "world_class_source_pass_count": 10,
         "world_class_source_blocked_count": 9,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
+        "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 17,
-        "source_tree_dirty": false,
-        "source_changed_file_count": 0,
+        "changed_file_count": 64,
+        "source_tree_dirty": true,
+        "source_changed_file_count": 4,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 17
+        "generated_changed_file_count": 60
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -6291,12 +6297,12 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "0f97b66ed83c74eb82198744292b8da166612d78",
+        "ready": false,
+        "commit": "c30882468f45c7e78bef73e0ada161fd1fbaef79",
         "status_scope": "generation-time status before this report is written",
-        "source_changed_file_count": 0,
-        "generated_changed_file_count": 17,
-        "reason": "only generated evidence artifacts were dirty at generation time"
+        "source_changed_file_count": 4,
+        "generated_changed_file_count": 60,
+        "reason": "source files were dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -6304,7 +6310,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "70140015193af060a6a111a5f18e5b069a16e8b2a47de84776c564d640830f93"
+        "sha256": "0cb0e7e0eea477ba17f31508bcac41bd049cfeda2fc9fe16a46e7e89f6c024cd"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6377,8 +6383,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7965,
-          "sha256": "428b1ecabe160d6185bb8eaece93563d9f4aa6091b484fb7e3552f51c29166af"
+          "bytes": 7967,
+          "sha256": "615d4b9ec6fb8d487c98e06ffb8cdbe7d34b08b07a2d9ea069eee3cdd4edc0a9"
         },
         {
           "label": "blind_review",
@@ -6412,22 +6418,22 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 136375,
-          "sha256": "08c2d3659e8a3a05ddc4be6da0a533970b09f6017efbe508ed311d189fe69726"
+          "bytes": 136999,
+          "sha256": "a44deb1fb680973315225900381bb1d09b71352fca1bed3a99df60393340c6fc"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 29848,
-          "sha256": "4dc6cc6e37038493bdd01df3ecc043c90efefc0a4d4932525adc8f4053c1affc"
+          "bytes": 29983,
+          "sha256": "cb95afb7d7cc89ec865364f28ef499acadad39afafb9a1494acc118def9201a0"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "c5dd375176e01291baf0bbcb1dc5c7eb65a3ce59c4ebcd655c94b91481983380"
+          "sha256": "af63529bb20c444d93b81a278be60ff89b2f49245f0c557cf574cc2dfd6d1e2e"
         },
         {
           "label": "package_verification",
@@ -6441,14 +6447,14 @@
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 8758,
-          "sha256": "f71d25a6ac3e731412f435fd722b343e616def12c013a07f87e57ea4a7551a96"
+          "sha256": "d2bea19ea46f3eff07ad50cd76b82816983c065db59bf0ae35ac1fa418206db0"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14466,
-          "sha256": "432b795c6ccc1db3c2815b97220675a7c27facbe9c8334ed0158627b7f2214b7"
+          "sha256": "ad57230481ed929c651fcc1087f20ec2e6c036d7cfe85817f7709c030c5b3b32"
         },
         {
           "label": "world_class_evidence_plan",
@@ -6780,7 +6786,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "151 scripts; secrets 0; help failures 0",
+          "current": "152 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -7263,7 +7269,7 @@
           "label": "Evidence Consistency",
           "status": "pass",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-          "current": "36 consistency checks",
+          "current": "37 consistency checks",
           "command": "make ci-test",
           "test": "tests/verify_evidence_consistency.py",
           "evidence": [
@@ -7633,6 +7639,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/evidence_consistency_artifact_roles.py",
                 "scripts/evidence_consistency_core.py",
+                "scripts/evidence_consistency_phase_queue.py",
                 "scripts/evidence_consistency_release.py",
                 "scripts/evidence_consistency_skill_os2_review.py",
                 "scripts/evidence_consistency_world_class.py",
@@ -7817,7 +7824,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               }
@@ -8090,7 +8097,7 @@
                 "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
                 "counts": {
                   "references": 35,
-                  "scripts": 151,
+                  "scripts": 152,
                   "assets": 6,
                   "reports": 43
                 },
@@ -8101,7 +8108,7 @@
               },
               "scripts": {
                 "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-                "script_count": 151,
+                "script_count": 152,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -8346,7 +8353,7 @@
               "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               },
@@ -8357,7 +8364,7 @@
             },
             "scripts": {
               "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-              "script_count": 151,
+              "script_count": 152,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8586,6 +8593,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/evidence_consistency_artifact_roles.py",
                 "scripts/evidence_consistency_core.py",
+                "scripts/evidence_consistency_phase_queue.py",
                 "scripts/evidence_consistency_release.py",
                 "scripts/evidence_consistency_skill_os2_review.py",
                 "scripts/evidence_consistency_world_class.py",
@@ -8770,7 +8778,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               }
@@ -9043,7 +9051,7 @@
                 "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
                 "counts": {
                   "references": 35,
-                  "scripts": 151,
+                  "scripts": 152,
                   "assets": 6,
                   "reports": 43
                 },
@@ -9054,7 +9062,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-                "script_count": 151,
+                "script_count": 152,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -9299,7 +9307,7 @@
               "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               },
@@ -9310,7 +9318,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-              "script_count": 151,
+              "script_count": 152,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -9539,6 +9547,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/evidence_consistency_artifact_roles.py",
                 "scripts/evidence_consistency_core.py",
+                "scripts/evidence_consistency_phase_queue.py",
                 "scripts/evidence_consistency_release.py",
                 "scripts/evidence_consistency_skill_os2_review.py",
                 "scripts/evidence_consistency_world_class.py",
@@ -9723,7 +9732,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               }
@@ -9996,7 +10005,7 @@
                 "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
                 "counts": {
                   "references": 35,
-                  "scripts": 151,
+                  "scripts": 152,
                   "assets": 6,
                   "reports": 43
                 },
@@ -10006,7 +10015,7 @@
               },
               "scripts": {
                 "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-                "script_count": 151,
+                "script_count": 152,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -10245,7 +10254,7 @@
               "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               },
@@ -10255,7 +10264,7 @@
             },
             "scripts": {
               "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-              "script_count": 151,
+              "script_count": 152,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -10476,6 +10485,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/evidence_consistency_artifact_roles.py",
                 "scripts/evidence_consistency_core.py",
+                "scripts/evidence_consistency_phase_queue.py",
                 "scripts/evidence_consistency_release.py",
                 "scripts/evidence_consistency_skill_os2_review.py",
                 "scripts/evidence_consistency_world_class.py",
@@ -10660,7 +10670,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               }
@@ -10933,7 +10943,7 @@
                 "strategy": "Keep optional directories as relative resources next to SKILL.md.",
                 "counts": {
                   "references": 35,
-                  "scripts": 151,
+                  "scripts": 152,
                   "assets": 6,
                   "reports": 43
                 },
@@ -10944,7 +10954,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-                "script_count": 151,
+                "script_count": 152,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -11182,7 +11192,7 @@
               "strategy": "Keep optional directories as relative resources next to SKILL.md.",
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               },
@@ -11193,7 +11203,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-              "script_count": 151,
+              "script_count": 152,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -11413,6 +11423,7 @@
                 "scripts/emit_telemetry_event.py",
                 "scripts/evidence_consistency_artifact_roles.py",
                 "scripts/evidence_consistency_core.py",
+                "scripts/evidence_consistency_phase_queue.py",
                 "scripts/evidence_consistency_release.py",
                 "scripts/evidence_consistency_skill_os2_review.py",
                 "scripts/evidence_consistency_world_class.py",
@@ -11597,7 +11608,7 @@
               ],
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               }
@@ -11870,7 +11881,7 @@
                 "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
                 "counts": {
                   "references": 35,
-                  "scripts": 151,
+                  "scripts": 152,
                   "assets": 6,
                   "reports": 43
                 },
@@ -11881,7 +11892,7 @@
               },
               "scripts": {
                 "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-                "script_count": 151,
+                "script_count": 152,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -12123,7 +12134,7 @@
               "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
               "counts": {
                 "references": 35,
-                "scripts": 151,
+                "scripts": 152,
                 "assets": 6,
                 "reports": 43
               },
@@ -12134,7 +12145,7 @@
             },
             "scripts": {
               "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-              "script_count": 151,
+              "script_count": 152,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -12842,9 +12853,9 @@
       "ok": true,
       "skill_dir": ".",
       "summary": {
-        "scanned_files": 243,
-        "script_count": 151,
-        "internal_module_count": 65,
+        "scanned_files": 244,
+        "script_count": 152,
+        "internal_module_count": 66,
         "secret_findings": 0,
         "dependency_files": [
           "requirements-ci.txt"
@@ -12862,8 +12873,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 243,
-        "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
+        "package_hash_file_count": 244,
+        "package_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d"
       },
       "failures": [],
       "warnings": [],
@@ -13187,6 +13198,20 @@
           "interface": "internal-module",
           "interface_declared": true,
           "interface_reason": "Imported by render_evidence_consistency.py for shared report loading, comparison, and Markdown rendering helpers.",
+          "has_argparse": false,
+          "has_main_guard": false,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/evidence_consistency_phase_queue.py",
+          "interface": "internal-module",
+          "interface_declared": true,
+          "interface_reason": "Imported by render_evidence_consistency.py to prevent preflight and Review Studio phase-queue drift.",
           "has_argparse": false,
           "has_main_guard": false,
           "uses_input": false,
@@ -15035,7 +15060,7 @@
         "checked_count": 86,
         "passed_count": 86,
         "failed_count": 0,
-        "skipped_count": 65,
+        "skipped_count": 66,
         "failed_scripts": [],
         "results": [
           {
@@ -15941,6 +15966,10 @@
             "reason": "internal module"
           },
           {
+            "path": "scripts/evidence_consistency_phase_queue.py",
+            "reason": "internal module"
+          },
+          {
             "path": "scripts/evidence_consistency_release.py",
             "reason": "internal module"
           },
@@ -16357,7 +16386,7 @@
       "root": ".",
       "summary": {
         "target_python": "3.11",
-        "file_count": 230,
+        "file_count": 231,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -16526,6 +16555,12 @@
         },
         {
           "path": "scripts/evidence_consistency_core.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
+          "path": "scripts/evidence_consistency_phase_queue.py",
           "ok": true,
           "issue_count": 0,
           "issues": []
@@ -17767,10 +17802,10 @@
       "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 227,
-        "script_file_count": 151,
+        "python_file_count": 228,
+        "script_file_count": 152,
         "test_file_count": 76,
-        "internal_module_count": 67,
+        "internal_module_count": 68,
         "cli_script_count": 86,
         "command_handler_count": 68,
         "entrypoint_command_handler_count": 18,
@@ -17781,7 +17816,7 @@
         "block_line_threshold": 1500,
         "largest_file_lines": 696,
         "watchlist_count": 0,
-        "early_watchlist_count": 2,
+        "early_watchlist_count": 3,
         "hotspot_count": 0,
         "blocker_count": 0,
         "decision": "pass"
@@ -17798,6 +17833,14 @@
         {
           "path": "tests/verify_world_class_evidence_intake.py",
           "lines": 690,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": true,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "tests/verify_evidence_consistency.py",
+          "lines": 609,
           "kind": "test",
           "severity": "pass",
           "early_watch": true,
@@ -17844,6 +17887,14 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "scripts/render_evidence_consistency.py",
+          "lines": 579,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
           "path": "tests/verify_world_class_evidence_ledger.py",
           "lines": 579,
           "kind": "test",
@@ -17860,28 +17911,12 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
-          "path": "scripts/render_evidence_consistency.py",
-          "lines": 571,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
           "path": "scripts/render_review_studio.py",
           "lines": 568,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
-        },
-        {
-          "path": "scripts/adjudicate_output_review.py",
-          "lines": 566,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
       "watchlist": [],
@@ -17897,6 +17932,14 @@
         {
           "path": "tests/verify_world_class_evidence_intake.py",
           "lines": 690,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": true,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "tests/verify_evidence_consistency.py",
+          "lines": 609,
           "kind": "test",
           "severity": "pass",
           "early_watch": true,
@@ -17918,16 +17961,16 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1118744,
+        "other_text_tokens": 1121236,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1119541,
-        "deferred_resource_tokens": 511351,
+        "estimated_total_text_tokens": 1122033,
+        "deferred_resource_tokens": 512782,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 450048,
-            "file_count": 151
+            "estimated_tokens": 451479,
+            "file_count": 152
           },
           {
             "path": "references",
@@ -17948,8 +17991,8 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 450048,
-            "file_count": 151
+            "estimated_tokens": 451479,
+            "file_count": 152
           }
         ],
         "deferred_resource_governance": {
@@ -17971,14 +18014,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 450048,
-              "file_count": 151,
+              "estimated_tokens": 451479,
+              "file_count": 152,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 708,
+        "relevant_file_count": 710,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.3
@@ -18865,6 +18908,7 @@
               "scripts/emit_telemetry_event.py",
               "scripts/evidence_consistency_artifact_roles.py",
               "scripts/evidence_consistency_core.py",
+              "scripts/evidence_consistency_phase_queue.py",
               "scripts/evidence_consistency_release.py",
               "scripts/evidence_consistency_skill_os2_review.py",
               "scripts/evidence_consistency_world_class.py",
@@ -19895,7 +19939,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-16T20:47:11Z",
+      "generated_at": "2026-06-16T20:58:58Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -19992,7 +20036,7 @@
       "local_blueprint_ready": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
@@ -20009,7 +20053,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
@@ -20458,7 +20502,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true
       },
       "actions": [
@@ -20493,7 +20537,7 @@
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-16T20:58:28Z",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
@@ -20507,7 +20551,7 @@
       "top_score": 88,
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
@@ -20527,7 +20571,7 @@
         "top_score": 88,
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
@@ -20780,7 +20824,7 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
@@ -20958,7 +21002,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-16T20:58:28Z",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
@@ -26322,7 +26366,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
+          "package_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
           "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
         },
         "compatibility": {
@@ -26379,7 +26423,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
+            "package_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d"
           }
         ]
       },
@@ -27068,7 +27112,7 @@
       "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 690,
+        "archive_entry_count": 691,
         "archive_extracted": true,
         "entrypoint_loaded": true,
         "manifest_loaded": true,
@@ -27415,7 +27459,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
+            "to": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d"
           }
         ]
       },

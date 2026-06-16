@@ -27,6 +27,7 @@ from evidence_consistency_core import (
     report_contract,
     scanned_surface_paths,
 )
+from evidence_consistency_phase_queue import build_phase_queue_consistency_check
 from evidence_consistency_release import build_release_evidence_flow_check
 from evidence_consistency_skill_os2_review import build_skill_os2_review_current_evidence_check
 from evidence_consistency_world_class import build_world_class_workflow_check
@@ -395,6 +396,13 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         checks.extend(
             build_preflight_artifact_role_handoff_checks(
                 skill_dir=skill_dir,
+                world_class_preflight=world_class_preflight,
+                review_studio=review_studio,
+                report_paths=REQUIRED_REPORTS,
+            )
+        )
+        checks.append(
+            build_phase_queue_consistency_check(
                 world_class_preflight=world_class_preflight,
                 review_studio=review_studio,
                 report_paths=REQUIRED_REPORTS,

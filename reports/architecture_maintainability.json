@@ -4,10 +4,10 @@
   "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 227,
-    "script_file_count": 151,
+    "python_file_count": 228,
+    "script_file_count": 152,
     "test_file_count": 76,
-    "internal_module_count": 67,
+    "internal_module_count": 68,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -18,7 +18,7 @@
     "block_line_threshold": 1500,
     "largest_file_lines": 696,
     "watchlist_count": 0,
-    "early_watchlist_count": 2,
+    "early_watchlist_count": 3,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -35,6 +35,14 @@
     {
       "path": "tests/verify_world_class_evidence_intake.py",
       "lines": 690,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_evidence_consistency.py",
+      "lines": 609,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -81,6 +89,14 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/render_evidence_consistency.py",
+      "lines": 579,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "tests/verify_world_class_evidence_ledger.py",
       "lines": 579,
       "kind": "test",
@@ -97,28 +113,12 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 571,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
       "path": "scripts/render_review_studio.py",
       "lines": 568,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
-    },
-    {
-      "path": "scripts/adjudicate_output_review.py",
-      "lines": 566,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [],
@@ -134,6 +134,14 @@
     {
       "path": "tests/verify_world_class_evidence_intake.py",
       "lines": 690,
+      "kind": "test",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "tests/verify_evidence_consistency.py",
+      "lines": 609,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,

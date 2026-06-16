@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `243`
-- Scripts: `151`
-- Internal script modules: `65`
+- Scanned files: `244`
+- Scripts: `152`
+- Internal script modules: `66`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `243`
-- Package SHA256: `453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc`
+- Package hash files: `244`
+- Package SHA256: `5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d`
 
 ## Failures
 
@@ -85,6 +85,7 @@
 | scripts/emit_telemetry_event.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/evidence_consistency_artifact_roles.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to compare preflight and Review Studio artifact-role contracts. |
 | scripts/evidence_consistency_core.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py for shared report loading, comparison, and Markdown rendering helpers. |
+| scripts/evidence_consistency_phase_queue.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to prevent preflight and Review Studio phase-queue drift. |
 | scripts/evidence_consistency_release.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to verify release evidence refresh instructions. |
 | scripts/evidence_consistency_skill_os2_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to keep Skill OS 2.0 review summary drift checks out of the main consistency renderer. |
 | scripts/evidence_consistency_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to isolate world-class evidence workflow consistency checks. |

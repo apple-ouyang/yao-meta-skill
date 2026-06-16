@@ -182,6 +182,22 @@ def main() -> None:
     assert checks["review-studio-preflight-artifact-role-handoff"]["status"] == "pass", checks[
         "review-studio-preflight-artifact-role-handoff"
     ]
+    assert checks["world-class-phase-queue-consistency"]["status"] == "pass", checks[
+        "world-class-phase-queue-consistency"
+    ]
+    phase_queue_actual = checks["world-class-phase-queue-consistency"]["actual"]
+    assert phase_queue_actual["summary"]["phase_queue_count"] == 2, phase_queue_actual
+    assert phase_queue_actual["summary"]["phase_queue_row_count"] == 13, phase_queue_actual
+    assert phase_queue_actual["phase_queue_counts_as_completion"] is False, phase_queue_actual
+    assert set(phase_queue_actual["item_phase_queues"]) == {
+        "provider-holdout",
+        "human-adjudication",
+        "native-permission-enforcement",
+        "native-client-telemetry",
+    }, phase_queue_actual
+    assert phase_queue_actual["review_studio_phase_queues"] == phase_queue_actual["item_phase_queues"], (
+        phase_queue_actual
+    )
     role_handoff = checks["review-studio-preflight-artifact-role-handoff"]["actual"]
     assert role_handoff["provider-holdout"]["role_source"] == "world-class-submission-kit", role_handoff
     assert role_handoff["provider-holdout"]["submission_ref_total_count"] == 1, role_handoff
@@ -337,6 +353,34 @@ def main() -> None:
         preflight_handoff_drift_checks["preflight-submission-kit-handoff"]
     )
 
+    phase_queue_drift_root = TMP / "phase-queue-drift-skill"
+    copy_reports(phase_queue_drift_root)
+    phase_queue_path = phase_queue_drift_root / "reports" / "world_class_evidence_preflight.json"
+    phase_queue_payload = json.loads(phase_queue_path.read_text(encoding="utf-8"))
+    phase_queue_payload["summary"]["phase_queue_row_count"] = 1
+    phase_queue_payload["phase_queue"][0]["counts_as_completion"] = True
+    phase_queue_payload["items"][0]["phase_queue"][0]["row_count"] = 999
+    phase_queue_path.write_text(json.dumps(phase_queue_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    phase_queue_drift_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(phase_queue_drift_root),
+            "--output-json",
+            str(TMP / "phase_queue_drift.json"),
+            "--output-md",
+            str(TMP / "phase_queue_drift.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    assert phase_queue_drift_proc.returncode == 2, phase_queue_drift_proc.stdout
+    phase_queue_drift_payload = json.loads(phase_queue_drift_proc.stdout)
+    phase_queue_drift_checks = {item["key"]: item for item in phase_queue_drift_payload["checks"]}
+    assert phase_queue_drift_checks["world-class-phase-queue-consistency"]["status"] == "fail", (
+        phase_queue_drift_checks["world-class-phase-queue-consistency"]
+    )
+
     release_flow_drift_root = TMP / "release-flow-drift-skill"
     copy_reports(release_flow_drift_root)
     agents_path = release_flow_drift_root / "AGENTS.md"
@@ -370,7 +414,8 @@ def main() -> None:
     context_path = context_drift_root / "reports" / "context_budget.json"
     context_payload = json.loads(context_path.read_text(encoding="utf-8"))
     context_payload["warnings"] = ["Deferred resource footprint is high: stale test warning."]
-    context_payload["stats"]["deferred_resource_governance"]["status"] = "needs-review"
+    context_payload["stats"]["deferred_resource_tokens"] = 1
+    context_payload["stats"]["deferred_resource_governance"]["status"] = "pass"
     context_path.write_text(json.dumps(context_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     context_drift_proc = run(
         [
