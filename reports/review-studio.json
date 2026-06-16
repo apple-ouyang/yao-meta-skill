@@ -1948,9 +1948,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 71
+          "changed_file_count": 1
         },
-        "commit": "7f8942327ab5572f808c8b0319e4a6400367c925",
+        "commit": "9e02e6f5090a1dc212c82acf534b25b0e3975177",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5560,24 +5560,13 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "7f8942327ab5572f808c8b0319e4a6400367c925",
+      "commit": "9e02e6f5090a1dc212c82acf534b25b0e3975177",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 71,
+        "changed_file_count": 1,
         "sample": [
-          " M Makefile",
-          " M registry/index.json",
-          " M registry/packages/yao-meta-skill.json",
-          " M reports/adaptation_proposals.json",
-          " M reports/adaptation_proposals.md",
-          " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json"
+          " M reports/context_budget_summary.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5609,7 +5598,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 71
+        "changed_file_count": 1
       },
       "public_claim": {
         "ready": false,
@@ -5625,7 +5614,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "7f8942327ab5572f808c8b0319e4a6400367c925",
+        "commit": "9e02e6f5090a1dc212c82acf534b25b0e3975177",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -18409,7 +18398,7 @@
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T01:19:24Z",
+      "generated_at": "2026-06-16",
       "skill_dir": ".",
       "decision": "proposal-review",
       "source_supplied": false,
@@ -18923,7 +18912,7 @@
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T01:19:24Z",
+      "generated_at": "2026-06-16",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
@@ -19347,7 +19336,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T01:19:24Z",
+      "generated_at": "2026-06-16",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
