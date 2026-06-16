@@ -68,6 +68,23 @@ def main() -> None:
     )
     assert en_for("交付结果：SKILL.md, agents/interface.yaml") == "Deliverables: SKILL.md, agents/interface.yaml"
     assert en_for("已生成 12 / 20 类报告证据。") == "Generated 12 / 20 evidence report types."
+    assert en_for("skill-ir.json 已存在。") == "skill-ir.json exists."
+    assert en_for("compiled_targets.json 已存在。") == "compiled_targets.json exists."
+    assert en_for("reports 未发现或为空，完整度扣分。") == (
+        "reports was not found or is empty, reducing completeness."
+    )
+    assert en_for("evals/ 证据不足。") == "evals/ evidence is insufficient."
+    assert en_for("用户提供的工作流、提示词、文档、记录或散乱笔记") == (
+        "User-provided workflows, prompts, documents, records, or rough notes."
+    )
+    assert en_for("期望沉淀的复用场景、排除项、约束和质量标准") == (
+        "The reusable scenario, exclusions, constraints, and quality standards to capture."
+    )
+    assert en_for("可路由的 SKILL.md") == "A routeable SKILL.md."
+    assert en_for("agents/interface.yaml 元数据") == "agents/interface.yaml metadata."
+    assert en_for("必要的 references、scripts、evals、reports 证据") == (
+        "Necessary references, scripts, evals, and reports evidence."
+    )
     assert en_for("入口约 864 个词/字，references 约 565 个词/字。") == (
         "Entrypoint is about 864 words/characters; references are about 565."
     )
@@ -210,6 +227,7 @@ def main() -> None:
     assert directions_json["directions"][0]["title"] in initial_report_html, initial_report_html[:5000]
     assert "世界证据" in initial_report_html, initial_report_html
     assert "No world-class ledger has been generated" in initial_report_html, initial_report_html
+    assert "Skill-specific source text is authored in Chinese" not in initial_report_html, initial_report_html
 
     sample_ledger = {
         "schema_version": "1.0",

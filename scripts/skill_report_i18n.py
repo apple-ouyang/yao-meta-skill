@@ -106,16 +106,26 @@ TEXT_EN = {
     "frontmatter description 已存在，具备基础路由面。": "The frontmatter description exists, giving the skill a basic routing surface.",
     "description 有足够长度说明任务边界。": "The description is long enough to explain the task boundary.",
     "description 已包含使用场景或排除边界信号。": "The description includes usage-scenario or exclusion-boundary signals.",
+    "description 证据不足，触发边界不稳定。": "Description evidence is insufficient, so the trigger boundary is unstable.",
+    "description 偏短，建议补充输入、输出或非目标。": "The description is short; add inputs, outputs, or non-goals.",
+    "description 缺少明确使用场景或排除边界。": "The description lacks clear usage scenarios or exclusion boundaries.",
     "evals/ 已存在，可承载触发样例或质量检查。": "evals/ exists and can hold trigger examples or quality checks.",
+    "evals/ 证据不足，误触发检查仍偏弱。": "evals/ evidence is insufficient, so accidental-trigger checks remain weak.",
     "intent-confidence 报告已生成，可辅助判断触发稳定性。": "The intent-confidence report exists and helps judge trigger stability.",
+    "intent-confidence 证据不足。": "intent-confidence evidence is insufficient.",
     "入口文件保持克制，可维护性较好。": "The entrypoint stays restrained, which supports maintainability.",
+    "入口文件偏长，建议继续拆到 references/。": "The entrypoint is long; continue splitting durable guidance into references/.",
     "references/ 已承载扩展指导。": "references/ carries extended guidance.",
+    "references/ 证据不足，长指导可能堆在入口。": "references/ evidence is insufficient; long guidance may still be crowded into the entrypoint.",
     "scripts/ 已承载确定性逻辑。": "scripts/ carries deterministic logic.",
+    "scripts/ 证据不足，重复执行逻辑可能仍靠人工。": "scripts/ evidence is insufficient; repeated execution may still rely on manual work.",
     "evals/ 已承载可迁移检查。": "evals/ carries portable checks.",
     "agents/interface.yaml 已存在。": "agents/interface.yaml exists.",
     "manifest.json 已存在。": "manifest.json exists.",
     "目标平台或 adapter target 已声明。": "Target platforms or adapter targets are declared.",
+    "目标平台证据不足。": "Target-platform evidence is insufficient.",
     "入口文件未发现明显私有绝对路径。": "No obvious private absolute paths were found in the entrypoint.",
+    "入口文件含私有绝对路径，迁移风险较高。": "The entrypoint contains private absolute paths, increasing portability risk.",
     "分数越高代表上下文成本越低。": "A higher score means lower context cost.",
     "上下文成本处于可控区间。": "Context cost is within a controlled range.",
     "上下文成本偏高，建议压缩入口或拆分 references。": "Context cost is high; compress the entrypoint or split references further.",
@@ -123,7 +133,12 @@ TEXT_EN = {
     "跨平台": "Cross-platform",
     "本地复用": "Local reuse",
     "输入材料": "Input material",
+    "用户提供的工作流、提示词、文档、记录或散乱笔记": "User-provided workflows, prompts, documents, records, or rough notes.",
+    "期望沉淀的复用场景、排除项、约束和质量标准": "The reusable scenario, exclusions, constraints, and quality standards to capture.",
     "Skill 包体": "Skill package",
+    "可路由的 SKILL.md": "A routeable SKILL.md.",
+    "agents/interface.yaml 元数据": "agents/interface.yaml metadata.",
+    "必要的 references、scripts、evals、reports 证据": "Necessary references, scripts, evals, and reports evidence.",
     "可复用能力": "Reusable capability",
     "入口层": "Entrypoint layer",
     "参考层": "Reference layer",
@@ -314,6 +329,15 @@ def en_for(text: str) -> str:
     match = re.match(r"^已生成\s+(\d+)\s+/\s+(\d+)\s+类报告证据。$", value)
     if match:
         return f"Generated {match.group(1)} / {match.group(2)} evidence report types."
+    match = re.match(r"^(.+?)\s+已存在。$", value)
+    if match:
+        return f"{match.group(1)} exists."
+    match = re.match(r"^(.+?)\s+未发现或为空，完整度扣分。$", value)
+    if match:
+        return f"{match.group(1)} was not found or is empty, reducing completeness."
+    match = re.match(r"^(.+?)\s+证据不足。$", value)
+    if match:
+        return f"{match.group(1)} evidence is insufficient."
     match = re.match(r"^SKILL\.md 约\s+(.+?)\s+个词/字。$", value)
     if match:
         return f"SKILL.md is about {match.group(1)} words/characters."
