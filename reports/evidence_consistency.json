@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 496240/120000; top deferred scripts 435346; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 498644/120000; top deferred scripts 437614; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 496240/120000; top deferred scripts 435346; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 498644/120000; top deferred scripts 437614; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 30
+        "changed_file_count": 9
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -263,8 +263,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "61898d145c9ca6a20a27faa28708781625757b86",
-      "actual": "61898d145c9ca6a20a27faa28708781625757b86",
+      "expected": "d709f043a2c286646a5c72d7345faaed932200de",
+      "actual": "d709f043a2c286646a5c72d7345faaed932200de",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -282,8 +282,8 @@
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 16,
-        "world_class_source_pass_count": 8,
+        "world_class_source_check_count": 17,
+        "world_class_source_pass_count": 9,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
         "public_claim_blocker_count": 4
@@ -295,8 +295,8 @@
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 16,
-        "world_class_source_pass_count": 8,
+        "world_class_source_check_count": 17,
+        "world_class_source_pass_count": 9,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
         "public_claim_blocker_count": 4
@@ -355,8 +355,8 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
@@ -367,8 +367,8 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
@@ -388,16 +388,16 @@
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 16,
-        "source_pass_count": 8
+        "source_check_count": 17,
+        "source_pass_count": 9
       },
       "actual": {
         "ready": false,
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 16,
-        "source_pass_count": 8
+        "source_check_count": 17,
+        "source_pass_count": 9
       },
       "paths": [
         "reports/world_class_evidence_ledger.json",
@@ -409,8 +409,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "61898d145c9ca6a20a27faa28708781625757b86",
-      "actual": "61898d145c9ca6a20a27faa28708781625757b86",
+      "expected": "d709f043a2c286646a5c72d7345faaed932200de",
+      "actual": "d709f043a2c286646a5c72d7345faaed932200de",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -428,8 +428,8 @@
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 16,
-        "world_class_source_pass_count": 8,
+        "world_class_source_check_count": 17,
+        "world_class_source_pass_count": 9,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
         "public_claim_blocker_count": 4
@@ -441,8 +441,8 @@
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 16,
-        "world_class_source_pass_count": 8,
+        "world_class_source_check_count": 17,
+        "world_class_source_pass_count": 9,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
         "public_claim_blocker_count": 4
@@ -501,8 +501,8 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
@@ -513,8 +513,8 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
@@ -534,16 +534,16 @@
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 16,
-        "source_pass_count": 8
+        "source_check_count": 17,
+        "source_pass_count": 9
       },
       "actual": {
         "ready": false,
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 16,
-        "source_pass_count": 8
+        "source_check_count": 17,
+        "source_pass_count": 9
       },
       "paths": [
         "reports/world_class_evidence_ledger.json",
@@ -1341,8 +1341,8 @@
         "accepted_count": 0,
         "external_pending_count": 3,
         "human_pending_count": 1,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1415,8 +1415,8 @@
         "accepted_count": 0,
         "external_pending_count": 3,
         "human_pending_count": 1,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1825,15 +1825,15 @@
       "status": "pass",
       "expected": {
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 16,
-        "world_class_source_pass_count": 8,
+        "world_class_source_check_count": 17,
+        "world_class_source_pass_count": 9,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false
       },
       "actual": {
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 16,
-        "world_class_source_pass_count": 8,
+        "world_class_source_check_count": 17,
+        "world_class_source_pass_count": 9,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false
       },
@@ -1849,8 +1849,8 @@
       "status": "pass",
       "expected": {
         "pending_count": 4,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "preflight_counts_as_evidence": false,
@@ -1858,8 +1858,8 @@
       },
       "actual": {
         "pending_count": 4,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "preflight_counts_as_evidence": false,
@@ -2113,8 +2113,8 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "plan_keys": [
           "human-adjudication",
@@ -2262,8 +2262,8 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 16,
-        "source_pass_count": 8,
+        "source_check_count": 17,
+        "source_pass_count": 9,
         "source_blocked_count": 8,
         "plan_keys": [
           "human-adjudication",
