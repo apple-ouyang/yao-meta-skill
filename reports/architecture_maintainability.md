@@ -5,17 +5,17 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `201`
-- scripts: `130`
+- python files: `202`
+- scripts: `131`
 - tests: `71`
-- internal modules: `47`
+- internal modules: `48`
 - CLI scripts: `85`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `852`
 - watch threshold lines: `720`
-- watchlist: `3`
+- watchlist: `2`
 - hotspots: `0`
 - blockers: `0`
 
@@ -31,7 +31,6 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_review_studio.py` | `852` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `tests/verify_yao_cli.py` | `787` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/optimize_description.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 
 ## Largest Files
 
@@ -39,7 +38,6 @@ No file-size hotspots found.
 | --- | ---: | --- | --- |
 | `tests/verify_review_studio.py` | `852` | `test` | `pass` |
 | `tests/verify_yao_cli.py` | `787` | `test` | `pass` |
-| `scripts/optimize_description.py` | `723` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/review_studio_gates.py` | `707` | `internal-module` | `pass` |
 | `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
@@ -49,6 +47,7 @@ No file-size hotspots found.
 | `tests/verify_world_class_evidence_intake.py` | `660` | `test` | `pass` |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
+| `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
 
 ## Release Rule
 

@@ -33,6 +33,7 @@
         "scripts/context_sizer.py",
         "scripts/create_iteration_snapshot.py",
         "scripts/cross_packager.py",
+        "scripts/description_optimizer_reporting.py",
         "scripts/diff_eval.py",
         "scripts/emit_telemetry_event.py",
         "scripts/evidence_consistency_artifact_roles.py",

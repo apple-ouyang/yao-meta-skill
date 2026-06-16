@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 221,
-    "script_count": 130,
-    "internal_module_count": 44,
+    "scanned_files": 222,
+    "script_count": 131,
+    "internal_module_count": 45,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 221,
-    "package_sha256": "e30f37d1ae301f3d696a70e1fed375ba2e0bb2cfc26a1484c202143842817565"
+    "package_hash_file_count": 222,
+    "package_sha256": "a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad"
   },
   "failures": [],
   "warnings": [],
@@ -212,6 +212,20 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/description_optimizer_reporting.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by optimize_description.py to render description optimization reports.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
@@ -1901,7 +1915,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 44,
+    "skipped_count": 45,
     "failed_scripts": [],
     "results": [
       {
@@ -2772,6 +2786,10 @@
       },
       {
         "path": "scripts/compile_skill_targets.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/description_optimizer_reporting.py",
         "reason": "internal module"
       },
       {

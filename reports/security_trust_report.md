@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `221`
-- Scripts: `130`
-- Internal script modules: `44`
+- Scanned files: `222`
+- Scripts: `131`
+- Internal script modules: `45`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `221`
-- Package SHA256: `e30f37d1ae301f3d696a70e1fed375ba2e0bb2cfc26a1484c202143842817565`
+- Package hash files: `222`
+- Package SHA256: `a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad`
 
 ## Failures
 
@@ -75,6 +75,7 @@
 | scripts/context_sizer.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/create_iteration_snapshot.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/cross_packager.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/description_optimizer_reporting.py | internal-module | True | False | False | False | False | False | False | Imported by optimize_description.py to render description optimization reports. |
 | scripts/diff_eval.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/emit_telemetry_event.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/evidence_consistency_artifact_roles.py | internal-module | True | False | False | False | False | False | False | Imported by render_evidence_consistency.py to compare preflight and Review Studio artifact-role contracts. |
