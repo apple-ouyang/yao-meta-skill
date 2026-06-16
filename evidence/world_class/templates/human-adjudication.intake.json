@@ -23,6 +23,7 @@
   ],
   "provenance": {
     "reviewer": "name or team handle",
+    "reviewed_at": "YYYY-MM-DD",
     "blind_pack_path": "reports/output_blind_review_pack.md",
     "answer_key_opened_after_decisions": true,
     "decision_fields": [

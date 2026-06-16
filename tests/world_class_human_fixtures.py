@@ -49,8 +49,11 @@ def human_submission(skill_root: Path, *, reviewer: str = "Yao QA") -> dict:
         ],
         "provenance": {
             "reviewer": reviewer,
+            "reviewed_at": "2026-06-14",
             "blind_pack_path": "reports/output_blind_review_pack.md",
             "answer_key_opened_after_decisions": True,
+            "decision_fields": ["case_id", "winner_variant", "confidence", "reason"],
+            "reviewer_reason_required": True,
         },
         "privacy": {
             "raw_user_content_included": False,
@@ -130,6 +133,11 @@ def write_human_artifacts(skill_root: Path, *, complete: bool = True, reviewer: 
         "agreement_rate": 100.0,
         "needs_review": not complete,
         "failure_count": 0,
+        "reviewer_metadata_present": complete,
+        "reason_required": True,
+        "ready_for_human_evidence": complete,
+        "reviewer_checklist_count": 2,
+        "reviewer_checklist_ready_count": 2 if complete else 1,
     }
     decisions = [
         {"case_id": "case-a", "winner_variant": "A", "confidence": 0.9, "reason": "Variant A follows the rubric."},
@@ -225,6 +233,55 @@ def assert_human_contract_artifact_validation() -> None:
     )
     assert mismatch_result["status"] == "fail", mismatch_result
     assert any("provenance.reviewer must match decisions.reviewer" in error for error in mismatch_result["errors"]), mismatch_result["errors"]
+
+    reviewed_at_mismatch = human_submission(skill_root, reviewer="Yao QA")
+    reviewed_at_mismatch["provenance"]["reviewed_at"] = "2026-06-15"
+    reviewed_at_result = validate_payload(
+        reviewed_at_mismatch,
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert reviewed_at_result["status"] == "fail", reviewed_at_result
+    assert any("provenance.reviewed_at must match decisions.reviewed_at" in error for error in reviewed_at_result["errors"]), (
+        reviewed_at_result["errors"]
+    )
+
+    answer_key_order = human_submission(skill_root, reviewer="Yao QA")
+    answer_key_order["provenance"]["answer_key_opened_after_decisions"] = False
+    answer_key_result = validate_payload(
+        answer_key_order,
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert answer_key_result["status"] == "fail", answer_key_result
+    assert any("answer_key_opened_after_decisions" in error for error in answer_key_result["errors"]), answer_key_result["errors"]
+
+    missing_reason_contract = human_submission(skill_root, reviewer="Yao QA")
+    missing_reason_contract["provenance"]["reviewer_reason_required"] = False
+    missing_reason_contract["provenance"]["decision_fields"] = ["case_id", "winner_variant", "confidence"]
+    reason_contract_result = validate_payload(
+        missing_reason_contract,
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert reason_contract_result["status"] == "fail", reason_contract_result
+    assert any("reviewer_reason_required" in error for error in reason_contract_result["errors"]), reason_contract_result["errors"]
+    assert any("decision_fields must include" in error for error in reason_contract_result["errors"]), reason_contract_result["errors"]
+
+    forged_adjudication = json.loads((skill_root / "reports" / "output_review_adjudication.json").read_text(encoding="utf-8"))
+    forged_adjudication["summary"]["ready_for_human_evidence"] = False
+    forged_adjudication["summary"]["reviewer_metadata_present"] = False
+    forged_adjudication["summary"]["reason_required"] = False
+    write_json(skill_root / "reports" / "output_review_adjudication.json", forged_adjudication)
+    assert_human_submission_error(skill_root, entry, "summary.ready_for_human_evidence must be true")
+    assert_human_submission_error(skill_root, entry, "summary.reviewer_metadata_present must be true")
+    assert_human_submission_error(skill_root, entry, "summary.reason_required must be true")
 
     write_human_artifacts(skill_root, complete=True, reviewer="Yao QA")
     forged_decisions = json.loads((skill_root / "reports" / "output_review_decisions.json").read_text(encoding="utf-8"))

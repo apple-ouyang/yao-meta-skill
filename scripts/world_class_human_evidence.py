@@ -145,6 +145,21 @@ def validate_human_adjudication_report(
     )
     add_error(errors, pending_answer_hidden_count == 0, "human-adjudication adjudication summary.pending_answer_hidden_count must be 0")
     add_error(errors, summary.get("needs_review") is False, "human-adjudication adjudication summary.needs_review must be false")
+    add_error(
+        errors,
+        summary.get("reviewer_metadata_present") is True,
+        "human-adjudication adjudication summary.reviewer_metadata_present must be true",
+    )
+    add_error(
+        errors,
+        summary.get("reason_required") is True,
+        "human-adjudication adjudication summary.reason_required must be true",
+    )
+    add_error(
+        errors,
+        summary.get("ready_for_human_evidence") is True,
+        "human-adjudication adjudication summary.ready_for_human_evidence must be true",
+    )
     if checklist_count is not None or checklist_ready_count is not None:
         add_error(
             errors,
@@ -173,10 +188,33 @@ def validate_human_adjudication_report(
     validate_decision_rows(decision_rows, expected_case_ids, errors)
 
     provenance_reviewer = str(provenance.get("reviewer", "")).strip()
+    provenance_reviewed_at = str(provenance.get("reviewed_at", "")).strip()
     add_error(
         errors,
         bool(reviewer and provenance_reviewer and reviewer == provenance_reviewer),
         "human-adjudication provenance.reviewer must match decisions.reviewer",
+    )
+    add_error(
+        errors,
+        bool(reviewed_at and provenance_reviewed_at and provenance_reviewed_at == reviewed_at),
+        "human-adjudication provenance.reviewed_at must match decisions.reviewed_at",
+    )
+    add_error(
+        errors,
+        provenance.get("answer_key_opened_after_decisions") is True,
+        "human-adjudication provenance.answer_key_opened_after_decisions must be true",
+    )
+    add_error(
+        errors,
+        provenance.get("reviewer_reason_required") is True,
+        "human-adjudication provenance.reviewer_reason_required must be true",
+    )
+    decision_fields = provenance.get("decision_fields", [])
+    required_decision_fields = {"case_id", "winner_variant", "reason"}
+    add_error(
+        errors,
+        isinstance(decision_fields, list) and required_decision_fields <= {str(item) for item in decision_fields},
+        "human-adjudication provenance.decision_fields must include case_id, winner_variant, and reason",
     )
     add_error(errors, adjudication.get("reviewer") == reviewer, "human-adjudication adjudication reviewer must match decisions.reviewer")
     add_error(

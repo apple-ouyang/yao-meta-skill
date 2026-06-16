@@ -404,12 +404,23 @@ def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> No
         )
     elif key == "human-adjudication":
         add_error(errors, bool(str(provenance.get("reviewer", "")).strip()), "human-adjudication provenance.reviewer is required")
+        add_error(errors, bool(str(provenance.get("reviewed_at", "")).strip()), "human-adjudication provenance.reviewed_at is required")
         if not template_expected:
             require_real_text(errors, provenance.get("reviewer", ""), "human-adjudication provenance.reviewer")
+            add_error(
+                errors,
+                bool(SUBMITTED_AT_RE.match(str(provenance.get("reviewed_at", "")).strip())),
+                "human-adjudication provenance.reviewed_at must use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ",
+            )
         add_error(
             errors,
             provenance.get("answer_key_opened_after_decisions") is True,
             "human-adjudication must attest answer_key_opened_after_decisions is true",
+        )
+        add_error(
+            errors,
+            provenance.get("reviewer_reason_required") is True,
+            "human-adjudication must attest reviewer_reason_required is true",
         )
     elif key == "native-permission-enforcement":
         add_error(errors, bool(str(provenance.get("target", "")).strip()), "native-permission-enforcement provenance.target is required")
