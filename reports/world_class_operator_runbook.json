@@ -12,8 +12,8 @@
     "valid_packet_source_incomplete_count": 0,
     "invalid_submission_count": 0,
     "source_check_count": 13,
-    "source_pass_count": 6,
-    "source_blocked_count": 7,
+    "source_pass_count": 7,
+    "source_blocked_count": 6,
     "ready_to_claim_world_class": false,
     "runbook_counts_as_completion": false,
     "decision": "collect-evidence"
@@ -35,7 +35,9 @@
       "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
       "current": "model-executed 0; token-observed 0",
       "execution_runbook": [
-        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+        "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
+        "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
+        "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -397,7 +399,7 @@
       "review_state": "awaiting-submission",
       "source_accepted": false,
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "execution_runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
         "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
@@ -445,7 +447,7 @@
       ],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 0,
+        "adoption_sample_count": 1,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
@@ -466,8 +468,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 0,
-          "status": "blocked",
+          "actual": 1,
+          "status": "pass",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -482,10 +484,9 @@
           "next_action": "Telemetry must stay metadata-only."
         }
       ],
-      "blocked_source_check_count": 2,
+      "blocked_source_check_count": 1,
       "next_source_actions": [
-        "Import at least one metadata-only event from a real client.",
-        "Telemetry must include adoption outcome evidence."
+        "Import at least one metadata-only event from a real client."
       ],
       "submission_state": {
         "status": "missing",

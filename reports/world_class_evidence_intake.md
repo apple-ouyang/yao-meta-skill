@@ -83,7 +83,9 @@ This report validates the intake contract for human and external evidence. A val
 
 #### Source Runbook
 
-- `YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
+- Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.
+- `export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}`
+- `python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
 - `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`

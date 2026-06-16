@@ -122,6 +122,7 @@ def main() -> None:
     assert provider["source_accepted"] is False, provider
     assert provider["blocked_source_check_count"] == 2, provider
     assert any("output-exec --provider-runner openai" in step for step in provider["execution_runbook"]), provider
+    assert not any("<redacted>" in step or "OPENAI_API_KEY=" in step for step in provider["execution_runbook"]), provider
     assert "Run provider-backed output-exec with real credentials." in provider["next_source_actions"], provider
     assert "Provider execution should return non-estimated token usage." in provider["next_source_actions"], provider
     assert provider["commands"]["prepare_submission"].startswith("python3 scripts/yao.py world-class-submission-kit"), provider
@@ -143,6 +144,8 @@ def main() -> None:
     assert "| `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials." in markdown, markdown
     assert "Source Runbook" in markdown, markdown
     assert "output-exec --provider-runner openai" in markdown, markdown
+    assert "<redacted>" not in markdown, markdown
+    assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
     assert "### Next Source Actions" in markdown, markdown
     assert "- Provider execution should return non-estimated token usage." in markdown, markdown
     assert "Source Evidence Snapshot" in markdown, markdown
@@ -159,6 +162,8 @@ def main() -> None:
     assert "Next Source Actions" in html, html
     assert "Source Runbook" in html, html
     assert "output-exec --provider-runner openai" in html, html
+    assert "&lt;redacted&gt;" not in html and "<redacted>" not in html, html
+    assert "OPENAI_API_KEY=&lt;redacted&gt;" not in html, html
     assert "Source Evidence Snapshot" in html, html
     assert "model_executed_count" in html, html
     assert "model_executed_count: 0 / &gt;0" in html, html

@@ -14,8 +14,8 @@
     "collection_ready_count": 1,
     "collection_blocked_count": 3,
     "source_check_count": 13,
-    "source_pass_count": 6,
-    "source_blocked_count": 7,
+    "source_pass_count": 7,
+    "source_blocked_count": 6,
     "pending_count": 4,
     "ready_to_claim_world_class": false,
     "credential_value_exposed": false,
@@ -173,7 +173,9 @@
         "artifact_prefill_counts_as_evidence": false
       },
       "runbook": [
-        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+        "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
+        "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
+        "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -533,8 +535,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 0,
-          "status": "blocked",
+          "actual": 1,
+          "status": "pass",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -889,8 +891,8 @@
       "label": "Adoption sample",
       "field": "adoption_sample_count",
       "expected": ">0",
-      "actual": 0,
-      "status": "blocked",
+      "actual": 1,
+      "status": "pass",
       "source_accepted": false,
       "next_action": "Telemetry must include adoption outcome evidence."
     },

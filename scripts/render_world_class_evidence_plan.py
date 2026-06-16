@@ -17,7 +17,9 @@ TASK_TEMPLATES: dict[str, dict[str, Any]] = {
         "owner": "operator with provider credentials",
         "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
         "runbook": [
-            "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+            "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
+            "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
+            "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         ],
         "success_checks": [

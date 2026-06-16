@@ -122,6 +122,7 @@ def main() -> None:
     }, entries
     assert entries["provider-holdout"]["observed_state"]["model_executed_count"] == 0, entries["provider-holdout"]
     assert any("output-exec --provider-runner openai" in step for step in entries["provider-holdout"]["runbook"]), entries["provider-holdout"]
+    assert not any("<redacted>" in step or "OPENAI_API_KEY=" in step for step in entries["provider-holdout"]["runbook"]), entries["provider-holdout"]
     provider_source = {item["field"]: item for item in entries["provider-holdout"]["source_checklist"]}
     assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
     assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
@@ -147,6 +148,8 @@ def main() -> None:
     assert "source checks:" in markdown, markdown
     assert "Source Runbook" in markdown, markdown
     assert "output-exec --provider-runner openai" in markdown, markdown
+    assert "<redacted>" not in markdown, markdown
+    assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
     assert "Source Evidence Checks" in markdown, markdown
     assert "| Provider model run | `0` | `>0` | `blocked` |" in markdown, markdown
     assert "`provider-holdout`" in markdown, markdown

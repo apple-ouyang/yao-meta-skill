@@ -18,7 +18,10 @@
   "provenance": {
     "provider": "openai",
     "model": "gpt-4.1-mini",
-    "run_command": "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+    "run_command": "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+    "credential_env": "OPENAI_API_KEY",
+    "model_env": "YAO_OUTPUT_EVAL_MODEL",
+    "model_default": "gpt-4.1-mini",
     "credential_material_committed": false
   },
   "privacy": {

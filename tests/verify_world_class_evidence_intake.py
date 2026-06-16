@@ -604,6 +604,8 @@ def main() -> None:
     assert "`python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions`" in markdown, markdown
     assert "Source Runbook" in markdown, markdown
     assert "output-exec --provider-runner openai" in markdown, markdown
+    assert "<redacted>" not in markdown, markdown
+    assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
     assert "Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests." in markdown, markdown
     assert "Real submissions must replace template submitter, date, and provenance placeholders with concrete evidence metadata." in markdown, markdown
@@ -669,6 +671,9 @@ def main() -> None:
     assert kit_draft["template_only"] is True, kit_draft
     assert kit_draft["attestation"]["real_external_or_human_evidence"] is False, kit_draft
     assert "sha256" not in kit_draft["artifact_refs"][0], kit_draft
+    assert kit_draft["provenance"]["run_command"] == "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60", kit_draft
+    assert kit_draft["provenance"]["credential_env"] == "OPENAI_API_KEY", kit_draft
+    assert "<redacted>" not in json.dumps(kit_draft), kit_draft
     kit_manifest = json.loads((kit_dir / "submission_manifest.json").read_text(encoding="utf-8"))
     assert kit_manifest["summary"]["ledger_counts_submission_as_completion"] is False, kit_manifest["summary"]
     assert kit_manifest["summary"]["artifact_prefill_enabled"] is False, kit_manifest["summary"]
@@ -680,6 +685,7 @@ def main() -> None:
     assert "Drafts are not accepted evidence." in kit_readme, kit_readme
     assert "Execution Runbook" in kit_readme, kit_readme
     assert "output-exec --provider-runner openai" in kit_readme, kit_readme
+    assert "<redacted>" not in kit_readme, kit_readme
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
     assert "Evidence Matrix" in kit_readme, kit_readme
@@ -715,6 +721,7 @@ def main() -> None:
     assert "World-Class Evidence Submission Kit" in kit_html, kit_html
     assert "Execution Runbook" in kit_html, kit_html
     assert "output-exec --provider-runner openai" in kit_html, kit_html
+    assert "&lt;redacted&gt;" not in kit_html and "<redacted>" not in kit_html, kit_html
     assert "Do not include credentials, raw prompts, raw outputs, transcripts, notes, or private user content." in kit_html, kit_html
     assert "Rows marked submission-ref are the paths expected in artifact_refs" in kit_html, kit_html
 

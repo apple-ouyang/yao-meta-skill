@@ -26,7 +26,9 @@
       "current": "model-executed 0; token-observed 0",
       "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
       "runbook": [
-        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+        "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
+        "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
+        "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -144,7 +146,7 @@
       "status": "external_required",
       "category": "external",
       "owner": "Browser/Chrome/IDE/provider client integrator",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -187,7 +189,9 @@
       "current": "model-executed 0; token-observed 0",
       "objective": "Collect at least one provider-backed output-eval holdout run with model, timing, and token metadata.",
       "runbook": [
-        "YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
+        "Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.",
+        "export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}",
+        "python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
@@ -305,7 +309,7 @@
       "status": "external_required",
       "category": "external",
       "owner": "Browser/Chrome/IDE/provider client integrator",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",

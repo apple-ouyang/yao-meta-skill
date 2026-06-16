@@ -545,6 +545,7 @@ def main() -> None:
     assert any("world-class-intake" in item["command"] for item in provider_action_step["commands"]), provider_action_step
     assert any("world-class-ledger" in item["command"] for item in provider_action_step["commands"]), provider_action_step
     assert any("output-exec --provider-runner openai" in item for item in provider_action_step["runbook"]), provider_action_step
+    assert not any("<redacted>" in item or "OPENAI_API_KEY=" in item for item in provider_action_step["runbook"]), provider_action_step
     assert "provider-backed model run" in provider_action_step["provenance_requirements"], provider_action_step
     assert "reports/output_execution_runs.json summary.model_executed_count > 0" in provider_action_step["success_checks"], provider_action_step
     assert "reports/output_execution_runs.json" in provider_action_step["evidence_artifacts"], provider_action_step
@@ -727,6 +728,7 @@ def main() -> None:
     assert "计划、metadata fallback、待评审和本地命令不会被当成完成证据" in html, html
     assert "执行步骤" in html, html
     assert "output-exec --provider-runner openai" in html, html
+    assert "&lt;redacted&gt;" not in html and "<redacted>" not in html, html
     assert "world-runbook-panel" in html, html
     assert "源证据检查" in html, html
     assert "world-source-checks" in html, html

@@ -54,7 +54,11 @@ def main() -> None:
         "native-client-telemetry",
     }, tasks
     assert set(requirements) == set(tasks), requirements
-    assert any("--provider-runner openai" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
+    provider_runbook = tasks["provider-holdout"]["runbook"]
+    assert any("--provider-runner openai" in command for command in provider_runbook), tasks["provider-holdout"]
+    assert any(command.startswith("Set OPENAI_API_KEY") for command in provider_runbook), tasks["provider-holdout"]
+    assert any(command.startswith("export YAO_OUTPUT_EVAL_MODEL=") for command in provider_runbook), tasks["provider-holdout"]
+    assert not any("<redacted>" in command or "OPENAI_API_KEY=" in command for command in provider_runbook), tasks["provider-holdout"]
     assert any("world-class-intake . --submissions-dir evidence/world_class/submissions" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert any("evidence/world_class/templates/provider-holdout.intake.json" in command for command in tasks["provider-holdout"]["runbook"]), tasks["provider-holdout"]
     assert "reports/output_review_decisions.json" in tasks["human-adjudication"]["evidence_artifacts"], tasks["human-adjudication"]
@@ -76,6 +80,8 @@ def main() -> None:
     assert "`provider-holdout`" in markdown, markdown
     assert "ready to claim world-class: `false`" in markdown, markdown
     assert "ledger completion required: `true`" in markdown, markdown
+    assert "<redacted>" not in markdown, markdown
+    assert "OPENAI_API_KEY=<redacted>" not in markdown, markdown
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
 

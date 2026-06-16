@@ -28,7 +28,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials. | operator with provider credentials |
 | `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Record a reviewer choice for every pair. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
-| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
+| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
 
 ## Provider Holdout
 
@@ -40,7 +40,9 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 ### Source Runbook
 
-- YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60
+- Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.
+- export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}
+- python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60
 - python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
 - python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions
@@ -242,7 +244,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - blocking reason: No evidence packet has been submitted for review.
-- blocked source checks: `2`
+- blocked source checks: `1`
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - template: `evidence/world_class/templates/native-client-telemetry.intake.json`
 
@@ -295,14 +297,13 @@ This runbook coordinates evidence collection only. It does not accept submission
 ### Next Source Actions
 
 - Import at least one metadata-only event from a real client.
-- Telemetry must include adoption outcome evidence.
 
 ### Source Evidence Snapshot
 
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

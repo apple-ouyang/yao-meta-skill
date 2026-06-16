@@ -22,7 +22,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 | `provider-holdout` | `external_required` | `external` | operator with provider credentials | model-executed 0; token-observed 0 |
 | `human-adjudication` | `human_required` | `human` | human reviewer | 0/5 decisions; pending 5 |
 | `native-permission-enforcement` | `external_required` | `external` | target client or installer integrator | native-enforced targets 0; installer-enforced targets 4 |
-| `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 0 |
+| `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 1 |
 
 ## Provider Holdout
 
@@ -31,7 +31,9 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 
 ### Runbook
 
-- `YAO_OUTPUT_EVAL_MODEL=gpt-4.1-mini OPENAI_API_KEY=<redacted> python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
+- Set OPENAI_API_KEY in the operator shell before running provider evidence; never commit or print the value.
+- `export YAO_OUTPUT_EVAL_MODEL=${YAO_OUTPUT_EVAL_MODEL:-gpt-4.1-mini}`
+- `python3 scripts/yao.py output-exec --provider-runner openai --timeout-seconds 60`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.
 - `python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions`

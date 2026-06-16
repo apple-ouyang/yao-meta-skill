@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-13",
   "skill_dir": ".",
   "summary": {
     "python_file_count": 191,
@@ -30,6 +30,13 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 874,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/yao_cli_parser.py",
       "lines": 870,
       "kind": "internal-module",
@@ -37,15 +44,8 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 867,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
       "path": "tests/verify_review_studio.py",
-      "lines": 834,
+      "lines": 836,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
@@ -116,6 +116,13 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 874,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/yao_cli_parser.py",
       "lines": 870,
       "kind": "internal-module",
@@ -123,15 +130,8 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 867,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
       "path": "tests/verify_review_studio.py",
-      "lines": 834,
+      "lines": 836,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
