@@ -57,6 +57,14 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/render_world_class_preflight.py",
+      "lines": 590,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "tests/verify_review_studio.py",
       "lines": 590,
       "kind": "test",
@@ -111,14 +119,6 @@
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_review_studio.py",
-      "lines": 568,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     }
   ],
   "watchlist": [],

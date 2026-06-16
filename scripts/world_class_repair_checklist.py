@@ -144,6 +144,56 @@ def build_repair_checklist(
     return rows
 
 
+def build_preflight_repair_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Return repair rows from preflight precheck and source-check blockers."""
+    rows: list[dict[str, Any]] = []
+    for item in items:
+        key = str(item.get("evidence_key", "")).strip()
+        if not key:
+            continue
+        for precheck in item.get("prechecks", []):
+            if not isinstance(precheck, dict):
+                continue
+            if precheck.get("required") is not True or precheck.get("status") == "pass":
+                continue
+            target = str(precheck.get("key") or precheck.get("label") or key)
+            rows.append(
+                _repair_row(
+                    evidence_key=key,
+                    repair_type="precheck",
+                    target=target,
+                    status="blocked",
+                    blocking_reason=(
+                        f"Required {precheck.get('kind', 'precheck')} precheck is "
+                        f"{precheck.get('status', 'unknown')}."
+                    ),
+                    next_action=str(precheck.get("next_action") or "Complete the required preflight action."),
+                    source="prechecks",
+                )
+            )
+        for source in item.get("source_checklist", []):
+            if not isinstance(source, dict):
+                continue
+            if source.get("status") == "pass":
+                continue
+            target = str(source.get("field") or source.get("label") or key)
+            rows.append(
+                _repair_row(
+                    evidence_key=key,
+                    repair_type="source-check",
+                    target=target,
+                    status="blocked",
+                    blocking_reason=(
+                        f"Current value {source.get('actual')!r} does not satisfy "
+                        f"{source.get('expected')!r}."
+                    ),
+                    next_action=str(source.get("next_action") or "Collect the required source evidence."),
+                    source="source_checklist",
+                )
+            )
+    return rows
+
+
 def summarize_repair_checklist(rows: list[dict[str, Any]]) -> dict[str, Any]:
     blocked_count = sum(1 for row in rows if row.get("status") != "ready")
     return {

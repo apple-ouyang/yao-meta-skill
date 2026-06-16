@@ -16,6 +16,10 @@
     "source_check_count": 19,
     "source_pass_count": 9,
     "source_blocked_count": 10,
+    "repair_checklist_count": 14,
+    "repair_blocked_count": 14,
+    "repair_ready_count": 0,
+    "repair_counts_as_completion": false,
     "pending_count": 4,
     "ready_to_claim_world_class": false,
     "credential_value_exposed": false,
@@ -179,6 +183,38 @@
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
+      "repair_checklist": [
+        {
+          "evidence_key": "provider-holdout",
+          "repair_type": "precheck",
+          "target": "openai-api-key",
+          "status": "blocked",
+          "blocking_reason": "Required env precheck is missing.",
+          "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "repair_type": "source-check",
+          "target": "model_executed_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Run provider-backed output-exec with real credentials.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "repair_type": "source-check",
+          "target": "token_observed_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Provider execution should return non-estimated token usage.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        }
       ]
     },
     {
@@ -396,6 +432,68 @@
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
+      "repair_checklist": [
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "precheck",
+          "target": "human-reviewer",
+          "status": "blocked",
+          "blocking_reason": "Required human precheck is human-required.",
+          "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "pending_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 5 does not satisfy '==0'.",
+          "next_action": "Record a reviewer choice and reason for every pair.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "judgment_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '==pair_count'.",
+          "next_action": "Every pair needs one valid human judgment.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "reviewer_metadata_present",
+          "status": "blocked",
+          "blocking_reason": "Current value False does not satisfy 'true'.",
+          "next_action": "Record reviewer and reviewed_at before adjudication can count.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "blind_review_attested",
+          "status": "blocked",
+          "blocking_reason": "Current value False does not satisfy 'true'.",
+          "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "ready_for_human_evidence",
+          "status": "blocked",
+          "blocking_reason": "Current value False does not satisfy 'true'.",
+          "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        }
       ]
     },
     {
@@ -530,6 +628,28 @@
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
+      "repair_checklist": [
+        {
+          "evidence_key": "native-permission-enforcement",
+          "repair_type": "precheck",
+          "target": "native-guard",
+          "status": "blocked",
+          "blocking_reason": "Required external precheck is external-required.",
+          "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "repair_type": "source-check",
+          "target": "native_enforcement_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Collect real target-client or external runtime guard proof.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        }
       ]
     },
     {
@@ -663,6 +783,38 @@
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
         "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+      ],
+      "repair_checklist": [
+        {
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "precheck",
+          "target": "external-client",
+          "status": "blocked",
+          "blocking_reason": "Required external precheck is external-required.",
+          "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "source-check",
+          "target": "external_source_events",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Import at least one metadata-only event from a real client.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "source-check",
+          "target": "adoption_sample_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Telemetry must include adoption outcome evidence.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        }
       ]
     }
   ],
@@ -1025,6 +1177,148 @@
       "status": "pass",
       "source_accepted": false,
       "next_action": "Telemetry must stay metadata-only."
+    }
+  ],
+  "repair_checklist": [
+    {
+      "evidence_key": "provider-holdout",
+      "repair_type": "precheck",
+      "target": "openai-api-key",
+      "status": "blocked",
+      "blocking_reason": "Required env precheck is missing.",
+      "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+      "source": "prechecks",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "repair_type": "source-check",
+      "target": "model_executed_count",
+      "status": "blocked",
+      "blocking_reason": "Current value 0 does not satisfy '>0'.",
+      "next_action": "Run provider-backed output-exec with real credentials.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "provider-holdout",
+      "repair_type": "source-check",
+      "target": "token_observed_count",
+      "status": "blocked",
+      "blocking_reason": "Current value 0 does not satisfy '>0'.",
+      "next_action": "Provider execution should return non-estimated token usage.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "repair_type": "precheck",
+      "target": "human-reviewer",
+      "status": "blocked",
+      "blocking_reason": "Required human precheck is human-required.",
+      "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+      "source": "prechecks",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "repair_type": "source-check",
+      "target": "pending_count",
+      "status": "blocked",
+      "blocking_reason": "Current value 5 does not satisfy '==0'.",
+      "next_action": "Record a reviewer choice and reason for every pair.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "repair_type": "source-check",
+      "target": "judgment_count",
+      "status": "blocked",
+      "blocking_reason": "Current value 0 does not satisfy '==pair_count'.",
+      "next_action": "Every pair needs one valid human judgment.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "repair_type": "source-check",
+      "target": "reviewer_metadata_present",
+      "status": "blocked",
+      "blocking_reason": "Current value False does not satisfy 'true'.",
+      "next_action": "Record reviewer and reviewed_at before adjudication can count.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "repair_type": "source-check",
+      "target": "blind_review_attested",
+      "status": "blocked",
+      "blocking_reason": "Current value False does not satisfy 'true'.",
+      "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "repair_type": "source-check",
+      "target": "ready_for_human_evidence",
+      "status": "blocked",
+      "blocking_reason": "Current value False does not satisfy 'true'.",
+      "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "repair_type": "precheck",
+      "target": "native-guard",
+      "status": "blocked",
+      "blocking_reason": "Required external precheck is external-required.",
+      "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+      "source": "prechecks",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "repair_type": "source-check",
+      "target": "native_enforcement_count",
+      "status": "blocked",
+      "blocking_reason": "Current value 0 does not satisfy '>0'.",
+      "next_action": "Collect real target-client or external runtime guard proof.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "repair_type": "precheck",
+      "target": "external-client",
+      "status": "blocked",
+      "blocking_reason": "Required external precheck is external-required.",
+      "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+      "source": "prechecks",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "repair_type": "source-check",
+      "target": "external_source_events",
+      "status": "blocked",
+      "blocking_reason": "Current value 0 does not satisfy '>0'.",
+      "next_action": "Import at least one metadata-only event from a real client.",
+      "source": "source_checklist",
+      "counts_as_completion": false
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "repair_type": "source-check",
+      "target": "adoption_sample_count",
+      "status": "blocked",
+      "blocking_reason": "Current value 0 does not satisfy '>0'.",
+      "next_action": "Telemetry must include adoption outcome evidence.",
+      "source": "source_checklist",
+      "counts_as_completion": false
     }
   ],
   "submissions": {

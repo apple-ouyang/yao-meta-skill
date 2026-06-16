@@ -79,6 +79,34 @@ def render_html_source_checks(rows: list[dict[str, Any]]) -> str:
     )
 
 
+def render_html_repair_rows(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">No repair rows listed.</p>"
+    return "".join(
+        """
+        <article class="repair-row {status}">
+          <div>
+            <span>{repair_type}</span>
+            <strong>{target}</strong>
+          </div>
+          <dl>
+            <dt>Status</dt><dd>{status}</dd>
+            <dt>Reason</dt><dd>{reason}</dd>
+            <dt>Action</dt><dd>{action}</dd>
+            <dt>Evidence</dt><dd>does not count as completion</dd>
+          </dl>
+        </article>
+        """.format(
+            status=html_text(row.get("status", "")),
+            repair_type=html_text(row.get("repair_type", "")),
+            target=html_text(row.get("target", "")),
+            reason=html_text(row.get("blocking_reason", "")),
+            action=html_text(row.get("next_action", "")),
+        )
+        for row in rows
+    )
+
+
 def render_html_artifact_roles(contract: dict[str, Any]) -> str:
     cards = []
     for role in contract.get("roles", []):
@@ -143,6 +171,10 @@ def render_html_item(item: dict[str, Any]) -> str:
           <h4>Source Checks</h4>
           <div class="check-grid">{render_html_source_checks(item.get('source_checklist', []))}</div>
         </section>
+        <section class="check-section">
+          <h4>Repair Rows</h4>
+          <div class="repair-grid compact">{render_html_repair_rows(item.get('repair_checklist', []))}</div>
+        </section>
         <section class="runbook">
           <h4>Runbook</h4>
           <ul>{html_list(item.get('runbook', []), 'No runbook steps listed.')}</ul>
@@ -159,6 +191,7 @@ def render_html(report: dict[str, Any]) -> str:
         ("Ready", summary["collection_ready_count"]),
         ("Blocked", summary["collection_blocked_count"]),
         ("Source", f"{summary['source_pass_count']}/{summary['source_check_count']}"),
+        ("Repairs", f"{summary.get('repair_blocked_count', 0)}/{summary.get('repair_checklist_count', 0)}"),
     ]
     stat_html = "".join(
         f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>"
@@ -189,10 +222,10 @@ def render_html(report: dict[str, Any]) -> str:
     h3 {{ margin:4px 0 10px; font-size:22px; letter-spacing:0; }}
     h4 {{ margin:0 0 8px; font-size:16px; letter-spacing:0; }}
     .lede {{ max-width:820px; color:var(--muted); font-size:20px; }}
-    .stats {{ display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
-    .stats article, .panel, .evidence-card, .check-row {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .stats {{ display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
+    .stats article, .panel, .evidence-card, .check-row, .repair-row {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .stats article {{ padding:16px; }}
-    .stats span, .muted, .evidence-card header span, .check-row span {{ color:var(--muted); }}
+    .stats span, .muted, .evidence-card header span, .check-row span, .repair-row span {{ color:var(--muted); }}
     .stats strong {{ display:block; color:var(--ink); font-size:28px; line-height:1.15; overflow-wrap:anywhere; }}
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .two-col {{ display:grid; grid-template-columns:minmax(0,.45fr) minmax(0,1fr); gap:18px; align-items:start; }}
@@ -209,9 +242,9 @@ def render_html(report: dict[str, Any]) -> str:
     .evidence-grid {{ display:grid; gap:18px; }}
     .evidence-card {{ padding:20px; min-width:0; }}
     .evidence-card.blocked {{ border-left:4px solid var(--block); }}
-    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked {{ border-left:4px solid var(--warn); }}
-    .evidence-card.ready-for-submission, .check-row.pass {{ border-left:4px solid var(--pass); }}
-    .meta, .check-row dl {{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }}
+    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked, .repair-row.blocked {{ border-left:4px solid var(--warn); }}
+    .evidence-card.ready-for-submission, .check-row.pass, .repair-row.ready {{ border-left:4px solid var(--pass); }}
+    .meta, .check-row dl, .repair-row dl {{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }}
     dt {{ color:var(--ink); }}
     dd {{ margin:0; min-width:0; overflow-wrap:anywhere; }}
     code {{ font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }}
@@ -219,11 +252,12 @@ def render_html(report: dict[str, Any]) -> str:
     .next-action p {{ margin-top:0; }}
     .next-action code {{ display:block; margin-top:8px; }}
     .check-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }}
-    .check-row {{ padding:14px; min-width:0; }}
+    .repair-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }}
+    .check-row, .repair-row {{ padding:14px; min-width:0; }}
     .check-section {{ margin-top:16px; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     li {{ overflow-wrap:anywhere; }}
-    @media (max-width:820px) {{ .stats, .two-col, .check-grid, .role-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .check-grid, .repair-grid, .role-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>

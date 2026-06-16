@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 503641/120000; top deferred scripts 442611; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 504879/120000; top deferred scripts 443849; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -2011,9 +2011,9 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "53b40cc3b316af766a9b69286dd55f46ce1dfb41f2d3e2af811d34a3f57c5f61",
-          "source_contract_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e",
-          "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365",
+          "evidence_bundle_sha256": "fa79b95f174e1c2b41a83456e6f6d7d15064dfa388f5c2b79ccc12ccefa2d119",
+          "source_contract_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242",
+          "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 23,
@@ -2033,9 +2033,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 51
+          "changed_file_count": 34
         },
-        "commit": "2241b0e344e896e26a1b8264a797e45665613b8b",
+        "commit": "48a503f8f6ea9ed8b39c5f4c6c07adbc94bca3cb",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2140,7 +2140,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 240,
-        "package_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e"
+        "package_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -2178,8 +2178,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e",
-            "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365"
+            "package_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242",
+            "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362"
           },
           "compatibility": {
             "openai": "pass",
@@ -2210,7 +2210,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365",
+            "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -2226,7 +2226,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365",
+          "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362",
           "archive_entry_count": 686,
           "failure_count": 0,
           "warning_count": 0
@@ -2305,12 +2305,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365"
+              "to": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362"
             },
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e"
+              "to": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242"
             }
           ]
         },
@@ -4824,7 +4824,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.64,
+          "duration_ms": 26.73,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4852,7 +4852,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.53,
+          "duration_ms": 25.46,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4875,7 +4875,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.6,
+          "duration_ms": 25.94,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4903,7 +4903,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.48,
+          "duration_ms": 27.74,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4926,7 +4926,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.04,
+          "duration_ms": 28.3,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4954,7 +4954,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.52,
+          "duration_ms": 25.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4977,7 +4977,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.73,
+          "duration_ms": 26.02,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5004,7 +5004,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 35.71,
+          "duration_ms": 25.81,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5027,7 +5027,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.02,
+          "duration_ms": 25.75,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5056,7 +5056,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.32,
+          "duration_ms": 25.57,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5837,24 +5837,24 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "2241b0e344e896e26a1b8264a797e45665613b8b",
+      "commit": "48a503f8f6ea9ed8b39c5f4c6c07adbc94bca3cb",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 51,
+        "changed_file_count": 34,
         "sample": [
           " M registry/index.json",
           " M registry/packages/yao-meta-skill.json",
-          " M reports/adaptation_proposals.json",
-          " M reports/adaptation_proposals.md",
-          " M reports/adoption_drift_report.json",
           " M reports/architecture_maintainability.json",
           " M reports/architecture_maintainability.md",
           " M reports/benchmark_reproducibility.json",
           " M reports/benchmark_reproducibility.md",
           " M reports/context_budget.json",
           " M reports/context_budget.md",
-          " M reports/context_budget_summary.json"
+          " M reports/context_budget_summary.json",
+          " M reports/evidence_consistency.json",
+          " M reports/output_execution_runs.json",
+          " M reports/output_execution_runs.md"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5864,9 +5864,9 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "53b40cc3b316af766a9b69286dd55f46ce1dfb41f2d3e2af811d34a3f57c5f61",
-        "source_contract_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e",
-        "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365",
+        "evidence_bundle_sha256": "fa79b95f174e1c2b41a83456e6f6d7d15064dfa388f5c2b79ccc12ccefa2d119",
+        "source_contract_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242",
+        "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 23,
@@ -5886,7 +5886,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 51
+        "changed_file_count": 34
       },
       "public_claim": {
         "ready": false,
@@ -5902,7 +5902,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "2241b0e344e896e26a1b8264a797e45665613b8b",
+        "commit": "48a503f8f6ea9ed8b39c5f4c6c07adbc94bca3cb",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -5912,7 +5912,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "53b40cc3b316af766a9b69286dd55f46ce1dfb41f2d3e2af811d34a3f57c5f61"
+        "sha256": "fa79b95f174e1c2b41a83456e6f6d7d15064dfa388f5c2b79ccc12ccefa2d119"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5986,7 +5986,7 @@
           "path": "reports/output_execution_runs.json",
           "exists": true,
           "bytes": 7966,
-          "sha256": "baf406c10747ebb03a12f0bc74233c3e98cf1715bebfcdb450286ac1b2f5277f"
+          "sha256": "874d573922462a290776489b7ab760136522b2780339b579e383ab8235af56e8"
         },
         {
           "label": "blind_review",
@@ -6021,7 +6021,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 134467,
-          "sha256": "875af23304269c89191e86f8c41e30cfbf5c9bf9603ae478c03bbc163b2a13ef"
+          "sha256": "d2e8352cae2c29a009d81bfc78ec4478cc36f045022d0803c7b229d6441fe1e9"
         },
         {
           "label": "python_compatibility",
@@ -6035,14 +6035,14 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "8707b96ff516f0e52201e9b2fa3fbbc59fdfb3046d7d5f534eae47c780563a93"
+          "sha256": "d0c088f66524fa16c604b88fcd45010303daed7eb9e5273e439451484c09442e"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "d8595fc2c41a897e607eae7a843bbdc28a2941b04d1e913ac9d2dbae233b7a2a"
+          "sha256": "d18b6336d485f6290b68bf229d491bcd8a08ad872a8e9a53502b996c4f9c1347"
         },
         {
           "label": "install_simulation",
@@ -6056,7 +6056,7 @@
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14466,
-          "sha256": "b1c82626a1611c22c4d4cf3a6caa96a80355e9ecbdaee13a683456e648702406"
+          "sha256": "e6f644b1d2f590e76c7f2dd5a4888efad138bd2a2643c0fa60fe2fea81db55e1"
         },
         {
           "label": "world_class_evidence_plan",
@@ -6083,8 +6083,8 @@
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 46188,
-          "sha256": "0c140e75d4146092b522ec65514d055c9e1cab9f543bc81b828f5a1b6ec712b8"
+          "bytes": 57313,
+          "sha256": "585ec2f93a1dfce5b270af048e3d551676b93231477d7bf4cfe5b08946e82619"
         },
         {
           "label": "world_class_submission_review",
@@ -12441,7 +12441,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 240,
-        "package_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e"
+        "package_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242"
       },
       "failures": [],
       "warnings": [],
@@ -17319,6 +17319,14 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "scripts/render_world_class_preflight.py",
+          "lines": 590,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
           "path": "tests/verify_review_studio.py",
           "lines": 590,
           "kind": "test",
@@ -17373,14 +17381,6 @@
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
-          "path": "scripts/render_review_studio.py",
-          "lines": 568,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
         }
       ],
       "watchlist": [],
@@ -17417,15 +17417,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1105271,
+        "other_text_tokens": 1107027,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1106068,
-        "deferred_resource_tokens": 503641,
+        "estimated_total_text_tokens": 1107824,
+        "deferred_resource_tokens": 504879,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 442611,
+            "estimated_tokens": 443849,
             "file_count": 148
           },
           {
@@ -17447,7 +17447,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 442611,
+            "estimated_tokens": 443849,
             "file_count": 148
           }
         ],
@@ -17470,7 +17470,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 442611,
+              "estimated_tokens": 443849,
               "file_count": 148,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -21867,6 +21867,10 @@
         "source_check_count": 19,
         "source_pass_count": 9,
         "source_blocked_count": 10,
+        "repair_checklist_count": 14,
+        "repair_blocked_count": 14,
+        "repair_ready_count": 0,
+        "repair_counts_as_completion": false,
         "pending_count": 4,
         "ready_to_claim_world_class": false,
         "credential_value_exposed": false,
@@ -22030,6 +22034,38 @@
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
             "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
             "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+          ],
+          "repair_checklist": [
+            {
+              "evidence_key": "provider-holdout",
+              "repair_type": "precheck",
+              "target": "openai-api-key",
+              "status": "blocked",
+              "blocking_reason": "Required env precheck is missing.",
+              "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+              "source": "prechecks",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "repair_type": "source-check",
+              "target": "model_executed_count",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Run provider-backed output-exec with real credentials.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "provider-holdout",
+              "repair_type": "source-check",
+              "target": "token_observed_count",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Provider execution should return non-estimated token usage.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            }
           ]
         },
         {
@@ -22247,6 +22283,68 @@
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
             "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
             "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+          ],
+          "repair_checklist": [
+            {
+              "evidence_key": "human-adjudication",
+              "repair_type": "precheck",
+              "target": "human-reviewer",
+              "status": "blocked",
+              "blocking_reason": "Required human precheck is human-required.",
+              "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+              "source": "prechecks",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "repair_type": "source-check",
+              "target": "pending_count",
+              "status": "blocked",
+              "blocking_reason": "Current value 5 does not satisfy '==0'.",
+              "next_action": "Record a reviewer choice and reason for every pair.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "repair_type": "source-check",
+              "target": "judgment_count",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '==pair_count'.",
+              "next_action": "Every pair needs one valid human judgment.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "repair_type": "source-check",
+              "target": "reviewer_metadata_present",
+              "status": "blocked",
+              "blocking_reason": "Current value False does not satisfy 'true'.",
+              "next_action": "Record reviewer and reviewed_at before adjudication can count.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "repair_type": "source-check",
+              "target": "blind_review_attested",
+              "status": "blocked",
+              "blocking_reason": "Current value False does not satisfy 'true'.",
+              "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "repair_type": "source-check",
+              "target": "ready_for_human_evidence",
+              "status": "blocked",
+              "blocking_reason": "Current value False does not satisfy 'true'.",
+              "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            }
           ]
         },
         {
@@ -22381,6 +22479,28 @@
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
             "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
             "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+          ],
+          "repair_checklist": [
+            {
+              "evidence_key": "native-permission-enforcement",
+              "repair_type": "precheck",
+              "target": "native-guard",
+              "status": "blocked",
+              "blocking_reason": "Required external precheck is external-required.",
+              "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+              "source": "prechecks",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "native-permission-enforcement",
+              "repair_type": "source-check",
+              "target": "native_enforcement_count",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Collect real target-client or external runtime guard proof.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            }
           ]
         },
         {
@@ -22514,6 +22634,38 @@
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
             "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
             "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions"
+          ],
+          "repair_checklist": [
+            {
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "precheck",
+              "target": "external-client",
+              "status": "blocked",
+              "blocking_reason": "Required external precheck is external-required.",
+              "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+              "source": "prechecks",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "source-check",
+              "target": "external_source_events",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Import at least one metadata-only event from a real client.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "source-check",
+              "target": "adoption_sample_count",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Telemetry must include adoption outcome evidence.",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            }
           ]
         }
       ],
@@ -22876,6 +23028,148 @@
           "status": "pass",
           "source_accepted": false,
           "next_action": "Telemetry must stay metadata-only."
+        }
+      ],
+      "repair_checklist": [
+        {
+          "evidence_key": "provider-holdout",
+          "repair_type": "precheck",
+          "target": "openai-api-key",
+          "status": "blocked",
+          "blocking_reason": "Required env precheck is missing.",
+          "next_action": "Set OPENAI_API_KEY in the operator shell; never commit or print the value.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "repair_type": "source-check",
+          "target": "model_executed_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Run provider-backed output-exec with real credentials.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "repair_type": "source-check",
+          "target": "token_observed_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Provider execution should return non-estimated token usage.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "precheck",
+          "target": "human-reviewer",
+          "status": "blocked",
+          "blocking_reason": "Required human precheck is human-required.",
+          "next_action": "Assign a real reviewer identity before claiming human adjudication.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "pending_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 5 does not satisfy '==0'.",
+          "next_action": "Record a reviewer choice and reason for every pair.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "judgment_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '==pair_count'.",
+          "next_action": "Every pair needs one valid human judgment.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "reviewer_metadata_present",
+          "status": "blocked",
+          "blocking_reason": "Current value False does not satisfy 'true'.",
+          "next_action": "Record reviewer and reviewed_at before adjudication can count.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "blind_review_attested",
+          "status": "blocked",
+          "blocking_reason": "Current value False does not satisfy 'true'.",
+          "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "repair_type": "source-check",
+          "target": "ready_for_human_evidence",
+          "status": "blocked",
+          "blocking_reason": "Current value False does not satisfy 'true'.",
+          "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "repair_type": "precheck",
+          "target": "native-guard",
+          "status": "blocked",
+          "blocking_reason": "Required external precheck is external-required.",
+          "next_action": "Attach a real target-client or external installer runtime guard; metadata fallback is not enough.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "repair_type": "source-check",
+          "target": "native_enforcement_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Collect real target-client or external runtime guard proof.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "precheck",
+          "target": "external-client",
+          "status": "blocked",
+          "blocking_reason": "Required external precheck is external-required.",
+          "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
+          "source": "prechecks",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "source-check",
+          "target": "external_source_events",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Import at least one metadata-only event from a real client.",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "source-check",
+          "target": "adoption_sample_count",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Telemetry must include adoption outcome evidence.",
+          "source": "source_checklist",
+          "counts_as_completion": false
         }
       ],
       "submissions": {
@@ -24788,8 +25082,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e",
-          "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365"
+          "package_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242",
+          "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362"
         },
         "compatibility": {
           "openai": "pass",
@@ -24820,7 +25114,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365",
+          "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -24845,7 +25139,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e"
+            "package_sha256": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242"
           }
         ]
       },
@@ -24868,7 +25162,7 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365",
+        "archive_sha256": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362",
         "archive_entry_count": 686,
         "failure_count": 0,
         "warning_count": 0
@@ -25876,12 +26170,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "992401b48ffe5354fc67d493a44a5f6a2e93adf22d26b28d3ad291f5db813365"
+            "to": "b09ad63e1a0cb59beba3ba7f71e285e981b84b3de6d4f9f7404618c25d96c362"
           },
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "6beb1e623996dc21a8b040d894e12a81fc4c70cc82641887f71c19933e34617e"
+            "to": "cc61aeda8a4a7567aca6432c73fc8faf0ed3ed753c8254245d92675edeec5242"
           }
         ]
       },

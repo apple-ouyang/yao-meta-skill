@@ -11,6 +11,7 @@ Generated at: `2026-06-17`
 - collection ready: `1`
 - collection blocked: `3`
 - source checks: `9` pass / `19` total
+- repair rows: `14` blocked / `14` total
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
@@ -45,6 +46,27 @@ Generate the submission kit after the real provider, human, native-permission, o
 | `human-adjudication` | `ready-for-human-review` | `awaiting-submission` | `awaiting-submission` | Assign a real reviewer identity before claiming human adjudication. |
 | `native-permission-enforcement` | `blocked` | `awaiting-submission` | `awaiting-submission` | Attach a real target-client or external installer runtime guard; metadata fallback is not enough. |
 | `native-client-telemetry` | `blocked` | `awaiting-submission` | `awaiting-submission` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
+
+## Repair Checklist
+
+Repair rows convert preflight and source blockers into concrete operator actions. They are guidance only and do not count as completion evidence.
+
+| Evidence | Type | Target | Status | Next action |
+| --- | --- | --- | --- | --- |
+| `provider-holdout` | `precheck` | `openai-api-key` | `blocked` | Set OPENAI_API_KEY in the operator shell; never commit or print the value. |
+| `provider-holdout` | `source-check` | `model_executed_count` | `blocked` | Run provider-backed output-exec with real credentials. |
+| `provider-holdout` | `source-check` | `token_observed_count` | `blocked` | Provider execution should return non-estimated token usage. |
+| `human-adjudication` | `precheck` | `human-reviewer` | `blocked` | Assign a real reviewer identity before claiming human adjudication. |
+| `human-adjudication` | `source-check` | `pending_count` | `blocked` | Record a reviewer choice and reason for every pair. |
+| `human-adjudication` | `source-check` | `judgment_count` | `blocked` | Every pair needs one valid human judgment. |
+| `human-adjudication` | `source-check` | `reviewer_metadata_present` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
+| `human-adjudication` | `source-check` | `blind_review_attested` | `blocked` | Set reviewer_attestation only after choices are completed before opening the answer key. |
+| `human-adjudication` | `source-check` | `ready_for_human_evidence` | `blocked` | Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints. |
+| `native-permission-enforcement` | `precheck` | `native-guard` | `blocked` | Attach a real target-client or external installer runtime guard; metadata fallback is not enough. |
+| `native-permission-enforcement` | `source-check` | `native_enforcement_count` | `blocked` | Collect real target-client or external runtime guard proof. |
+| `native-client-telemetry` | `precheck` | `external-client` | `blocked` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
+| `native-client-telemetry` | `source-check` | `external_source_events` | `blocked` | Import at least one metadata-only event from a real client. |
+| `native-client-telemetry` | `source-check` | `adoption_sample_count` | `blocked` | Telemetry must include adoption outcome evidence. |
 
 ## Provider Holdout
 

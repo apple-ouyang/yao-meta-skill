@@ -79,6 +79,15 @@ def main() -> None:
     assert summary["source_check_count"] >= 13, summary
     assert summary["source_pass_count"] + summary["source_blocked_count"] == summary["source_check_count"], summary
     assert summary["source_blocked_count"] >= 6, summary
+    assert summary["repair_checklist_count"] == (
+        summary["source_blocked_count"]
+        + summary["precheck_missing_count"]
+        + summary["precheck_human_required_count"]
+        + summary["precheck_external_required_count"]
+    ), summary
+    assert summary["repair_blocked_count"] == summary["repair_checklist_count"], summary
+    assert summary["repair_ready_count"] == 0, summary
+    assert summary["repair_counts_as_completion"] is False, summary
     assert payload["submissions"]["preflight_counts_submission_as_completion"] is False, payload
     assert payload["submissions"]["drafts_count_as_evidence"] is False, payload
     assert payload["submissions"]["submission_kit_command"] == (
@@ -147,6 +156,11 @@ def main() -> None:
     assert "sk-test-secret" not in proc.stdout, proc.stdout
     assert "OPENAI_API_KEY" in proc.stdout, proc.stdout
     assert "set OPENAI_API_KEY" not in proc.stdout.lower(), proc.stdout
+    provider_repairs = {item["target"]: item for item in provider["repair_checklist"]}
+    assert provider_repairs["openai-api-key"]["repair_type"] == "precheck", provider_repairs
+    assert provider_repairs["openai-api-key"]["counts_as_completion"] is False, provider_repairs
+    assert provider_repairs["model_executed_count"]["repair_type"] == "source-check", provider_repairs
+    assert provider_repairs["token_observed_count"]["status"] == "blocked", provider_repairs
 
     human = by_key(payload["items"], "human-adjudication")
     assert human["status"] == "ready-for-human-review", human
@@ -156,6 +170,9 @@ def main() -> None:
     assert any("Record a reviewer choice and reason" in row["next_action"] for row in human["source_checklist"]), human
     assert any("required rationale" in item["next_action"] for item in human["prechecks"]), human
     assert any("reviewed_at" in item["next_action"] for item in human["prechecks"]), human
+    human_repairs = {item["target"]: item for item in human["repair_checklist"]}
+    assert human_repairs["human-reviewer"]["repair_type"] == "precheck", human_repairs
+    assert human_repairs["pending_count"]["repair_type"] == "source-check", human_repairs
 
     native = by_key(payload["items"], "native-permission-enforcement")
     assert native["status"] == "blocked", native
@@ -167,6 +184,11 @@ def main() -> None:
     assert "preflight counts as evidence: `false`" in markdown, markdown
     assert "credential value exposed: `false`" in markdown, markdown
     assert "Submission Kit Handoff" in markdown, markdown
+    assert "Repair Checklist" in markdown, markdown
+    assert "Repair rows convert preflight and source blockers" in markdown, markdown
+    assert "repair rows:" in markdown, markdown
+    assert "`openai-api-key`" in markdown, markdown
+    assert "`model_executed_count`" in markdown, markdown
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in markdown, markdown
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts" in markdown, markdown
     assert "world-class-submission-kit . --evidence-key provider-holdout --output-dir evidence/world_class/submissions" in markdown, markdown
@@ -183,6 +205,11 @@ def main() -> None:
     assert "World-Class Evidence Preflight" in html, html
     assert "Evidence Queue" in html, html
     assert "Submission Kit" in html, html
+    assert "Repair Rows" in html, html
+    assert "Repairs" in html, html
+    assert "repair-row blocked" in html, html
+    assert "<strong>openai-api-key</strong>" in html, html
+    assert "<strong>model_executed_count</strong>" in html, html
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions" in html, html
     assert "world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts" in html, html
     assert "provider-holdout" in html, html
@@ -215,6 +242,7 @@ def main() -> None:
     assert "sk-test-secret" not in (TMP / "preflight_with_env.html").read_text(encoding="utf-8"), env_payload
     assert env_payload["summary"]["credential_value_exposed"] is False, env_payload
     assert env_payload["summary"]["ready_to_claim_world_class"] is False, env_payload
+    assert env_payload["summary"]["repair_checklist_count"] == payload["summary"]["repair_checklist_count"] - 1, env_payload
 
     spaced_dir = TMP / "submission kit spaced"
     spaced_proc = run_preflight(

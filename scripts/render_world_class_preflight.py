@@ -13,6 +13,7 @@ from render_world_class_evidence_ledger import build_ledger
 from render_world_class_submission_review import build_submission_review
 from world_class_evidence_contract import rel_path
 from world_class_preflight_layout import render_html
+from world_class_repair_checklist import build_preflight_repair_checklist, summarize_repair_checklist
 from world_class_source_checks import summarize_source_checklist
 
 
@@ -346,11 +347,19 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
         items.append(item)
         precheck_rows.extend(prechecks)
         source_rows.extend(item_source_rows)
+    repair_checklist = build_preflight_repair_checklist(items)
+    repairs_by_key: dict[str, list[dict[str, Any]]] = {}
+    for row in repair_checklist:
+        key = str(row.get("evidence_key", ""))
+        repairs_by_key.setdefault(key, []).append(row)
+    for item in items:
+        item["repair_checklist"] = repairs_by_key.get(str(item.get("evidence_key", "")), [])
     precheck_status_counts: dict[str, int] = {}
     for row in precheck_rows:
         status = str(row.get("status", "unknown"))
         precheck_status_counts[status] = precheck_status_counts.get(status, 0) + 1
     source_summary = summarize_source_checklist(source_rows)
+    repair_summary = summarize_repair_checklist(repair_checklist)
     collection_ready_count = sum(1 for item in items if item["status"] in {"ready-to-collect", "ready-for-human-review", "ready-for-submission"})
     blocked_count = sum(1 for item in items if item["status"] == "blocked")
     ready_to_claim = ledger.get("summary", {}).get("ready_to_claim_world_class") is True
@@ -365,6 +374,7 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
         "collection_ready_count": collection_ready_count,
         "collection_blocked_count": blocked_count,
         **source_summary,
+        **repair_summary,
         "pending_count": ledger.get("summary", {}).get("pending_count", 0),
         "ready_to_claim_world_class": ready_to_claim,
         "credential_value_exposed": False,
@@ -382,6 +392,7 @@ def build_preflight(skill_dir: Path, generated_at: str, submissions_dir: Path | 
         "items": items,
         "prechecks": precheck_rows,
         "source_checklist": source_rows,
+        "repair_checklist": repair_checklist,
         "submissions": {
             "directory": rel_path(submissions_dir, skill_dir),
             "commands": build_submission_commands(skill_dir, submissions_dir),
@@ -425,6 +436,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- collection ready: `{summary['collection_ready_count']}`",
         f"- collection blocked: `{summary['collection_blocked_count']}`",
         f"- source checks: `{summary['source_pass_count']}` pass / `{summary['source_check_count']}` total",
+        f"- repair rows: `{summary['repair_blocked_count']}` blocked / `{summary['repair_checklist_count']}` total",
         "",
         "This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.",
         "",
@@ -474,6 +486,22 @@ def render_markdown(report: dict[str, Any]) -> str:
         next_action = str(item.get("next_action", "")).replace("|", "\\|")
         lines.append(
             f"| `{item['evidence_key']}` | `{item['status']}` | `{item['intake_readiness']}` | `{item['review_state']}` | {next_action} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Repair Checklist",
+            "",
+            "Repair rows convert preflight and source blockers into concrete operator actions. They are guidance only and do not count as completion evidence.",
+            "",
+            "| Evidence | Type | Target | Status | Next action |",
+            "| --- | --- | --- | --- | --- |",
+        ]
+    )
+    for row in report.get("repair_checklist", []):
+        lines.append(
+            f"| `{row['evidence_key']}` | `{row['repair_type']}` | `{row['target']}` | "
+            f"`{row['status']}` | {md_cell(row['next_action'])} |"
         )
     for item in report["items"]:
         lines.extend(
