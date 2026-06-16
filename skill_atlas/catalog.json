@@ -34,6 +34,7 @@
         "scripts/diff_eval.py",
         "scripts/emit_telemetry_event.py",
         "scripts/evidence_consistency_artifact_roles.py",
+        "scripts/evidence_consistency_core.py",
         "scripts/evidence_consistency_release.py",
         "scripts/evidence_consistency_skill_os2_review.py",
         "scripts/evidence_consistency_world_class.py",

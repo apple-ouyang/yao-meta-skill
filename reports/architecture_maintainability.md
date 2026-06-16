@@ -1,21 +1,21 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-16`
 
 ## Summary
 
 - decision: `pass`
-- python files: `196`
-- scripts: `125`
+- python files: `197`
+- scripts: `126`
 - tests: `71`
-- internal modules: `42`
+- internal modules: `43`
 - CLI scripts: `85`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `852`
 - watch threshold lines: `720`
-- watchlist: `8`
+- watchlist: `7`
 - hotspots: `0`
 - blockers: `0`
 
@@ -32,7 +32,6 @@ No file-size hotspots found.
 | `tests/verify_review_studio.py` | `852` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_yao_cli.py` | `785` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/render_evidence_consistency.py` | `766` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/yao_cli_parser.py` | `759` | `internal-module` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `scripts/compile_skill.py` | `723` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
@@ -45,7 +44,6 @@ No file-size hotspots found.
 | `tests/verify_review_studio.py` | `852` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `800` | `internal-module` | `pass` |
 | `tests/verify_yao_cli.py` | `785` | `test` | `pass` |
-| `scripts/render_evidence_consistency.py` | `766` | `cli-script` | `pass` |
 | `scripts/yao_cli_parser.py` | `759` | `internal-module` | `pass` |
 | `scripts/build_skill_atlas.py` | `730` | `cli-script` | `pass` |
 | `scripts/compile_skill.py` | `723` | `cli-script` | `pass` |
@@ -54,6 +52,7 @@ No file-size hotspots found.
 | `scripts/review_studio_gates.py` | `707` | `internal-module` | `pass` |
 | `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
 | `scripts/world_class_evidence_contract.py` | `686` | `internal-module` | `pass` |
+| `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 
 ## Release Rule
 

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 196,
-    "script_file_count": 125,
+    "python_file_count": 197,
+    "script_file_count": 126,
     "test_file_count": 71,
-    "internal_module_count": 42,
+    "internal_module_count": 43,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 852,
-    "watchlist_count": 8,
+    "watchlist_count": 7,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -42,13 +42,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 766,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",
@@ -105,6 +98,13 @@
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/render_review_viewer.py",
+      "lines": 685,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Split viewer data assembly from HTML section rendering."
     }
   ],
   "watchlist": [
@@ -128,13 +128,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/render_evidence_consistency.py",
-      "lines": 766,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/yao_cli_parser.py",
