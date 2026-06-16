@@ -97,9 +97,15 @@ def main() -> None:
     assert kit_payload["summary"]["evidence_matrix_supporting_artifact_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_supporting_artifact_ready_count"] >= 1, kit_payload["summary"]
     assert kit_payload["summary"]["evidence_matrix_counts_as_completion"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["handoff_step_count"] == 7, kit_payload["summary"]
+    assert kit_payload["summary"]["handoff_blocked_count"] == 1, kit_payload["summary"]
+    assert kit_payload["summary"]["handoff_fix_required_count"] == 0, kit_payload["summary"]
+    assert kit_payload["summary"]["handoff_counts_as_completion"] is False, kit_payload["summary"]
     assert kit_payload["summary"]["drafts_count_as_evidence"] is False, kit_payload["summary"]
     assert kit_payload["safety"]["template_only_drafts"] is True, kit_payload["safety"]
     assert kit_payload["safety"]["raw_content_allowed"] is False, kit_payload["safety"]
+    assert kit_payload["safety"]["operator_handoff_counts_as_evidence"] is False, kit_payload["safety"]
+    assert "review_submission" in kit_payload["commands"], kit_payload["commands"]
     assert kit_payload["files"][0]["output_path"].endswith(
         f"tests/{TMP.name}/submission_kit/provider-holdout.json"
     ), kit_payload["files"]
@@ -120,6 +126,23 @@ def main() -> None:
     assert matrix_row["source_blocked_count"] == 2, matrix_row
     assert matrix_row["counts_as_completion"] is False, matrix_row
     assert "real credentials" in matrix_row["next_action"], matrix_row
+
+    handoff_steps = {item["step_id"]: item for item in kit_payload["operator_handoff"]}
+    assert list(handoff_steps) == [
+        "prepare-drafts",
+        "collect-source",
+        "edit-submission",
+        "validate-intake",
+        "review-submission",
+        "refresh-ledger",
+        "guard-claim",
+    ], handoff_steps
+    assert handoff_steps["prepare-drafts"]["status"] == "ready", handoff_steps
+    assert handoff_steps["collect-source"]["status"] == "blocked", handoff_steps
+    assert handoff_steps["collect-source"]["counts_as_completion"] is False, handoff_steps
+    assert "source check" in handoff_steps["collect-source"]["blocking_condition"], handoff_steps
+    assert "world-class-submission-review" in handoff_steps["review-submission"]["command"], handoff_steps
+    assert all(item["counts_as_completion"] is False for item in kit_payload["operator_handoff"]), handoff_steps
 
     artifact_rows = {item["path"]: item for item in kit_payload["artifact_checklist"]}
     assert "reports/output_execution_runs.json" in artifact_rows, artifact_rows
@@ -165,6 +188,9 @@ def main() -> None:
     assert "validate intake" in kit_readme, kit_readme
     assert "Artifact Checklist" in kit_readme, kit_readme
     assert "Evidence Matrix" in kit_readme, kit_readme
+    assert "Operator Handoff" in kit_readme, kit_readme
+    assert "Handoff rows are procedural" in kit_readme, kit_readme
+    assert "`review-submission`" in kit_readme, kit_readme
     assert "Submission refs" in kit_readme, kit_readme
     assert "Supporting assets" in kit_readme, kit_readme
     assert "`submission-ref`" in kit_readme, kit_readme
@@ -181,6 +207,9 @@ def main() -> None:
     assert "provider-holdout" in kit_html, kit_html
     assert "Artifact Checklist" in kit_html, kit_html
     assert "Evidence Matrix" in kit_html, kit_html
+    assert "Operator Handoff" in kit_html, kit_html
+    assert "handoff-card blocked" in kit_html, kit_html
+    assert "does not count as completion" in kit_html, kit_html
     assert "matrix-card collect-source" in kit_html, kit_html
     assert (
         f"<dt>Submission refs</dt><dd>{matrix_row['submission_ref_ready_count']}/{matrix_row['submission_ref_total_count']} ready</dd>"

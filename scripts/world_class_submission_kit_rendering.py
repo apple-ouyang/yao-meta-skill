@@ -31,14 +31,31 @@ def render_readme(report: dict[str, Any]) -> str:
         "## Commands",
         "",
         f"- validate intake: `{commands['validate_intake']}`",
+        f"- review submission: `{commands['review_submission']}`",
         f"- refresh ledger: `{commands['refresh_ledger']}`",
         f"- guard public claims: `{commands['guard_claim']}`",
         "",
+        "## Operator Handoff",
+        "",
+        "Follow these steps in order when handing the kit from operator to reviewer. Handoff rows are procedural and never count as completion evidence.",
+        "",
+        "| Step | Status | Command | Completion signal |",
+        "| --- | --- | --- | --- |",
+    ]
+    for item in report.get("operator_handoff", []):
+        command = item.get("command") or "manual"
+        lines.append(
+            f"| `{item['step_id']}` | `{item['status']}` | `{command}` | {item['completion_signal']} |"
+        )
+    lines.extend(
+        [
+            "",
         "## Drafts",
         "",
         "| Evidence | Draft | Status | Prefilled refs |",
         "| --- | --- | --- | ---: |",
-    ]
+        ]
+    )
     for item in report["files"]:
         lines.append(
             f"| `{item['evidence_key']}` | `{item['output_path']}` | `{item['status']}` | `{item.get('prefilled_artifact_ref_count', 0)}` |"
@@ -259,6 +276,37 @@ def render_html_matrix(items: list[dict[str, Any]]) -> str:
     )
 
 
+def render_html_handoff(items: list[dict[str, Any]]) -> str:
+    if not items:
+        return '<p class="muted">No operator handoff steps were generated.</p>'
+    return "".join(
+        """
+        <article class="handoff-card {status}">
+          <header>
+            <span>{status}</span>
+            <h3>{label}</h3>
+          </header>
+          <dl>
+            <dt>Step</dt><dd><code>{step}</code></dd>
+            <dt>Command</dt><dd><code>{command}</code></dd>
+            <dt>Signal</dt><dd>{signal}</dd>
+            <dt>Evidence</dt><dd>{counts}</dd>
+          </dl>
+          <p>{blocking}</p>
+        </article>
+        """.format(
+            status=html_text(item.get("status", "")),
+            label=html_text(item.get("label", "")),
+            step=html_text(item.get("step_id", "")),
+            command=html_text(item.get("command") or "manual"),
+            signal=html_text(item.get("completion_signal", "")),
+            counts="does not count as completion" if item.get("counts_as_completion") is False else "review required",
+            blocking=html_text(item.get("blocking_condition", "")),
+        )
+        for item in items
+    )
+
+
 def render_html_item(item: dict[str, Any]) -> str:
     must_collect = item.get("must_collect", {}) if isinstance(item.get("must_collect", {}), dict) else {}
     runbook = must_collect.get("runbook", [])
@@ -317,6 +365,7 @@ def render_html(report: dict[str, Any]) -> str:
     )
     evidence_html = "".join(render_html_item(item) for item in report.get("evidence_items", []))
     matrix_html = render_html_matrix(report.get("evidence_matrix", []))
+    handoff_html = render_html_handoff(report.get("operator_handoff", []))
     artifact_html = render_html_artifact_checklist(report.get("artifact_checklist", []))
     source_html = render_html_source_checklist(report.get("source_checklist", []))
     return f"""<!doctype html>
@@ -351,12 +400,14 @@ def render_html(report: dict[str, Any]) -> str:
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .panel {{ padding:20px; }}
     .two-col {{ display:grid; grid-template-columns:minmax(0, .45fr) minmax(0, 1fr); gap:18px; align-items:start; }}
-    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
-    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .handoff-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }}
+    .draft-card, .evidence-card, .artifact-card, .source-card, .matrix-card, .handoff-card {{ padding:18px; min-width:0; border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .draft-card.written, .draft-card.exists {{ border-left:4px solid var(--pass); }}
     .draft-card.skipped {{ border-left:4px solid var(--warn); }}
     .matrix-card.collect-source, .matrix-card.prepare-draft, .matrix-card.fix-artifacts, .matrix-card.fix-draft {{ border-left:4px solid var(--warn); }}
     .matrix-card.validate-packet {{ border-left:4px solid var(--pass); }}
+    .handoff-card.blocked, .handoff-card.fix-required {{ border-left:4px solid var(--warn); }}
+    .handoff-card.ready {{ border-left:4px solid var(--pass); }}
     .evidence-card.awaiting-submission, .evidence-card.fix-submission, .evidence-card.fix-template, .artifact-card.missing, .artifact-card.glob-no-match, .artifact-card.unsafe-path, .artifact-card.raw-content-disallowed {{ border-left:4px solid var(--warn); }}
     .artifact-card.ready {{ border-left:4px solid var(--pass); }}
     .source-card.blocked {{ border-left:4px solid var(--warn); }}
@@ -374,11 +425,11 @@ def render_html(report: dict[str, Any]) -> str:
     .mini-grid li, .runbook-panel li, .notice li {{ overflow-wrap:anywhere; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     .errors {{ color:var(--warn); }}
-    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .draft-grid, .evidence-grid, .artifact-grid, .source-grid, .matrix-grid, .handoff-grid, .mini-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
-  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#matrix">Matrix</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
+  <nav class="topbar"><div class="topbar-inner"><span class="brand">World-Class Kit</span><div class="links"><a href="#workflow">Workflow</a><a href="#handoff">Handoff</a><a href="#matrix">Matrix</a><a href="#drafts">Drafts</a><a href="#artifacts">Artifacts</a><a href="#source">Source</a><a href="#evidence">Evidence</a><a href="#safety">Safety</a></div></div></nav>
   <main class="shell">
     <section class="hero">
       <span class="eyebrow">Evidence Intake</span>
@@ -390,6 +441,7 @@ def render_html(report: dict[str, Any]) -> str:
       <article class="panel"><h2>Workflow</h2><ol><li>Run the real provider, human review, native permission, or native client telemetry work first.</li><li>Edit the matching JSON draft with aggregate artifact references and provenance metadata.</li><li>Set template_only to false only after real evidence exists.</li><li>Use prefilled SHA-256 values as convenience data, not evidence acceptance.</li><li>Validate intake, refresh the ledger, then guard public claims.</li></ol></article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['commands'])}</ul></aside>
     </section>
+    <section class="section" id="handoff"><h2>Operator Handoff</h2><p class="muted">These ordered steps make the operator-to-reviewer handoff auditable. They are procedural guardrails and never count as world-class evidence.</p><div class="handoff-grid">{handoff_html}</div></section>
     <section class="section" id="matrix"><h2>Evidence Matrix</h2><p class="muted">The matrix separates submission artifact_refs from supporting assets, then combines draft status, source checks, and the next operator action. It is guidance only and never counts as accepted evidence.</p><div class="matrix-grid">{matrix_html}</div></section>
     <section class="section" id="drafts"><h2>Drafts</h2><div class="draft-grid">{render_html_files(report['files'])}</div></section>
     <section class="section" id="artifacts"><h2>Artifact Checklist</h2><p class="muted">Rows marked submission-ref are the paths expected in artifact_refs. Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into the submission. Glob patterns are expanded for operator convenience only.</p><div class="artifact-grid">{artifact_html}</div></section>

@@ -299,6 +299,85 @@ def build_artifact_checklist(skill_dir: Path, items: list[dict[str, Any]]) -> li
     return rows
 
 
+def build_handoff_steps(
+    commands: dict[str, str],
+    *,
+    files: list[dict[str, Any]],
+    source_blocked_count: int,
+    invalid_draft_count: int,
+) -> list[dict[str, Any]]:
+    drafts_ready = bool(files) and invalid_draft_count == 0
+    return [
+        {
+            "step_id": "prepare-drafts",
+            "label": "Prepare editable drafts",
+            "status": "ready" if drafts_ready else "fix-required",
+            "command": commands["prepare_submission"],
+            "completion_signal": "JSON drafts, submission_manifest.json, README.md, and index.html are present.",
+            "counts_as_completion": False,
+            "blocking_condition": "One or more drafts were skipped or failed template validation." if invalid_draft_count else "",
+        },
+        {
+            "step_id": "collect-source",
+            "label": "Collect real external or human evidence",
+            "status": "blocked" if source_blocked_count else "ready",
+            "command": "",
+            "completion_signal": "Source aggregate reports satisfy the required provider, human, native, or telemetry checks.",
+            "counts_as_completion": False,
+            "blocking_condition": (
+                f"{source_blocked_count} source check(s) still block ledger review."
+                if source_blocked_count
+                else ""
+            ),
+        },
+        {
+            "step_id": "edit-submission",
+            "label": "Edit submission packet",
+            "status": "manual",
+            "command": "",
+            "completion_signal": "template_only is false only after real evidence exists and all attestation fields are truthful.",
+            "counts_as_completion": False,
+            "blocking_condition": "Raw prompts, outputs, transcripts, credentials, or private content must not be included.",
+        },
+        {
+            "step_id": "validate-intake",
+            "label": "Validate intake contract",
+            "status": "pending",
+            "command": commands["validate_intake"],
+            "completion_signal": "world_class_evidence_intake reports valid submissions and no invalid packets.",
+            "counts_as_completion": False,
+            "blocking_condition": "A valid packet is ready for ledger review but is not accepted evidence by itself.",
+        },
+        {
+            "step_id": "review-submission",
+            "label": "Review submission queue",
+            "status": "pending",
+            "command": commands["review_submission"],
+            "completion_signal": "world_class_submission_review shows ready-for-ledger-review for the submitted key.",
+            "counts_as_completion": False,
+            "blocking_condition": "Reviewer queue output is advisory and cannot accept evidence.",
+        },
+        {
+            "step_id": "refresh-ledger",
+            "label": "Refresh evidence ledger",
+            "status": "pending",
+            "command": commands["refresh_ledger"],
+            "completion_signal": "world_class_evidence_ledger accepts the evidence entry with valid source checks.",
+            "counts_as_completion": False,
+            "blocking_condition": "Ledger remains the only world-class readiness source of truth.",
+        },
+        {
+            "step_id": "guard-claim",
+            "label": "Guard public claim",
+            "status": "pending",
+            "command": commands["guard_claim"],
+            "completion_signal": "world_class_claim_guard allows the public readiness claim.",
+            "counts_as_completion": False,
+            "blocking_condition": "Public world-class claims stay blocked until every ledger entry is accepted.",
+        },
+    ]
+
+
 def build_submission_kit(
     skill_dir: Path,
     output_dir: Path,
@@ -347,6 +426,26 @@ def build_submission_kit(
     source_summary = summarize_source_checklist(source_checklist)
     matrix_summary = summarize_evidence_matrix(evidence_matrix)
     ok = not unknown_keys and skipped_count == 0
+    output_dir_arg = shell_path(output_dir, skill_dir)
+    requested_key_args = " ".join(f"--evidence-key {shlex.quote(key)}" for key in (evidence_keys or []))
+    prepare_command = f"python3 scripts/yao.py world-class-submission-kit . --output-dir {output_dir_arg}"
+    if requested_key_args:
+        prepare_command = f"{prepare_command} {requested_key_args}"
+    if prefill_artifacts:
+        prepare_command = f"{prepare_command} --prefill-artifacts"
+    commands = {
+        "prepare_submission": prepare_command,
+        "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {output_dir_arg}",
+        "review_submission": f"python3 scripts/yao.py world-class-submission-review . --submissions-dir {output_dir_arg}",
+        "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {output_dir_arg}",
+        "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
+    }
+    handoff_steps = build_handoff_steps(
+        commands,
+        files=files,
+        source_blocked_count=source_summary["source_blocked_count"],
+        invalid_draft_count=skipped_count + len(unknown_keys),
+    )
     report = {
         "schema_version": "1.0",
         "ok": ok,
@@ -375,6 +474,10 @@ def build_submission_kit(
             "artifact_ref_unfilled_count": unfilled_artifact_ref_count,
             **source_summary,
             **matrix_summary,
+            "handoff_step_count": len(handoff_steps),
+            "handoff_blocked_count": sum(1 for item in handoff_steps if item["status"] == "blocked"),
+            "handoff_fix_required_count": sum(1 for item in handoff_steps if item["status"] == "fix-required"),
+            "handoff_counts_as_completion": False,
             "drafts_count_as_evidence": False,
             "ledger_counts_submission_as_completion": False,
             "decision": "submission-kit-ready" if ok else "fix-submission-kit",
@@ -384,15 +487,13 @@ def build_submission_kit(
         "artifact_checklist": artifact_checklist,
         "source_checklist": source_checklist,
         "evidence_matrix": evidence_matrix,
+        "operator_handoff": handoff_steps,
         "evidence_items": items,
-        "commands": {
-            "validate_intake": f"python3 scripts/yao.py world-class-intake . --submissions-dir {shell_path(output_dir, skill_dir)}",
-            "refresh_ledger": f"python3 scripts/yao.py world-class-ledger . --submissions-dir {shell_path(output_dir, skill_dir)}",
-            "guard_claim": "python3 scripts/yao.py world-class-claim-guard .",
-        },
+        "commands": commands,
         "safety": {
             "template_only_drafts": True,
             "artifact_prefill_counts_as_evidence": False,
+            "operator_handoff_counts_as_evidence": False,
             "real_evidence_required_before_template_only_false": True,
             "raw_content_allowed": False,
             "credentials_allowed": False,
