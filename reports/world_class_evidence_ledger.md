@@ -8,7 +8,7 @@ Generated at: `2026-06-17`
 - ready to claim world-class: `false`
 - entries: `4`
 - source accepted: `0`
-- source checks: `8` pass / `16` total
+- source checks: `9` pass / `17` total
 - source blocked: `8`
 - accepted: `0`
 - pending: `4`
@@ -79,8 +79,8 @@ This ledger records the current evidence state. It requires both passing source 
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - source status: `human_required`
-- observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "reviewer_metadata_present": false, "reason_required": true, "ready_for_human_evidence": false, "accepted": false}`
-- source checks: `3` pass / `7` total
+- observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "reviewer_metadata_present": false, "reason_required": true, "ready_for_human_evidence": false, "raw_content_allowed": false, "raw_content_path_count": 0, "accepted": false}`
+- source checks: `4` pass / `8` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/human-adjudication.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -111,6 +111,7 @@ This ledger records the current evidence state. It requires both passing source 
 | No invalid decisions | `0` | `==0` | `pass` |
 | Reviewer metadata | `False` | `true` | `blocked` |
 | Reason required | `True` | `true` | `pass` |
+| Raw content blocked | `False` | `false` | `pass` |
 | Human evidence ready | `False` | `true` | `blocked` |
 
 ### Completion Assertions
@@ -119,6 +120,7 @@ This ledger records the current evidence state. It requires both passing source 
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
 - reports/output_review_adjudication.json summary.invalid_decision_count == 0
 - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+- reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text
 - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
 - reports/skill_os2_audit.json item human-adjudication status becomes pass
 
@@ -127,6 +129,7 @@ This ledger records the current evidence state. It requires both passing source 
 - Reviewer decisions should not include raw user data or private customer detail.
 - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
 - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
+- The adjudication evidence stores prompt_sha256 instead of raw prompt text.
 - Keep the answer key separate until after decisions are recorded.
 
 ## Native Permission Enforcement

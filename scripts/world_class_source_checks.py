@@ -21,6 +21,7 @@ SOURCE_CHECK_SPECS = {
         ("No invalid decisions", "invalid_decision_count", "==0", "Fix malformed winner/confidence entries."),
         ("Reviewer metadata", "reviewer_metadata_present", "true", "Record reviewer and reviewed_at before adjudication can count."),
         ("Reason required", "reason_required", "true", "Keep reason mandatory for every imported or direct reviewer decision."),
+        ("Raw content blocked", "raw_content_allowed", "false", "Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages."),
         ("Human evidence ready", "ready_for_human_evidence", "true", "Complete all reviewer decisions with reviewer metadata and rationale."),
     ],
     "native-permission-enforcement": [

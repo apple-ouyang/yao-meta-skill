@@ -13,8 +13,8 @@
     "precheck_external_required_count": 2,
     "collection_ready_count": 1,
     "collection_blocked_count": 3,
-    "source_check_count": 16,
-    "source_pass_count": 8,
+    "source_check_count": 17,
+    "source_pass_count": 9,
     "source_blocked_count": 8,
     "pending_count": 4,
     "ready_to_claim_world_class": false,
@@ -300,6 +300,16 @@
           "status": "pass",
           "source_accepted": false,
           "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Raw content blocked",
+          "field": "raw_content_allowed",
+          "expected": "false",
+          "actual": false,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages."
         },
         {
           "evidence_key": "human-adjudication",
@@ -895,6 +905,16 @@
       "status": "pass",
       "source_accepted": false,
       "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Raw content blocked",
+      "field": "raw_content_allowed",
+      "expected": "false",
+      "actual": false,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages."
     },
     {
       "evidence_key": "human-adjudication",

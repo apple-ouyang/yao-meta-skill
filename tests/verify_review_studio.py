@@ -303,6 +303,9 @@ def main() -> None:
     assert provider_role_rows["submission-ref"]["copy_to_artifact_refs"] is True, provider_role_rows
     assert provider_role_rows["supporting-evidence"]["copy_to_artifact_refs"] is False, provider_role_rows
     assert any("provider credentials" in item for item in provider_action_step["privacy_contract"]), provider_action_step
+    human_action_step = next(item for item in world_class_action["evidence_steps"] if item["key"] == "human-adjudication")
+    assert "prompt_sha256" in " ".join(human_action_step["success_checks"]), human_action_step
+    assert "prompt_sha256" in " ".join(human_action_step["privacy_contract"]), human_action_step
     assert full_payload["data"]["world_class_evidence_ledger"]["summary"]["pending_count"] == 4, full_payload["data"]["world_class_evidence_ledger"]
     assert full_payload["data"]["world_class_evidence_intake"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_evidence_intake"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["decision"] == "awaiting-submissions", full_payload["data"]["world_class_submission_review"]
@@ -310,6 +313,15 @@ def main() -> None:
     assert full_payload["data"]["world_class_submission_review"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["source_check_count"] >= 13, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["source_blocked_count"] >= 6, full_payload["data"]["world_class_submission_review"]
+    human_review_item = next(
+        item
+        for item in full_payload["data"]["world_class_submission_review"]["items"]
+        if item["evidence_key"] == "human-adjudication"
+    )
+    human_review_source = {item["field"]: item for item in human_review_item["source_checklist"]}
+    assert human_review_item["observed_state"]["raw_content_allowed"] is False, human_review_item
+    assert human_review_item["observed_state"]["raw_content_path_count"] == 0, human_review_item
+    assert human_review_source["raw_content_allowed"]["status"] == "pass", human_review_source
     assert full_payload["data"]["world_class_operator_runbook"]["summary"]["decision"] == "collect-evidence", full_payload["data"]["world_class_operator_runbook"]
     assert full_payload["data"]["world_class_operator_runbook"]["summary"]["runbook_counts_as_completion"] is False, full_payload["data"]["world_class_operator_runbook"]
     assert full_payload["data"]["world_class_operator_runbook"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_operator_runbook"]

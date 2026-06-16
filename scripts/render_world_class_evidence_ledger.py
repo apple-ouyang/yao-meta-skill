@@ -5,6 +5,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from output_review_privacy import forbidden_raw_content_field_paths
 from render_world_class_evidence_plan import build_plan
 from world_class_evidence_contract import load_json, load_json_with_status, rel_path, validate_payload
 from world_class_source_checks import build_source_checklist, summarize_source_checklist
@@ -30,7 +31,9 @@ def provider_state(skill_dir: Path) -> dict[str, Any]:
 
 
 def human_state(skill_dir: Path) -> dict[str, Any]:
-    summary = load_json(skill_dir / "reports" / "output_review_adjudication.json").get("summary", {})
+    adjudication = load_json(skill_dir / "reports" / "output_review_adjudication.json")
+    summary = adjudication.get("summary", {})
+    raw_content_paths = forbidden_raw_content_field_paths(adjudication, "output_review_adjudication")
     return {
         "pair_count": summary.get("pair_count", 0),
         "judgment_count": summary.get("judgment_count", 0),
@@ -40,8 +43,11 @@ def human_state(skill_dir: Path) -> dict[str, Any]:
         "reviewer_metadata_present": summary.get("reviewer_metadata_present", False),
         "reason_required": summary.get("reason_required", False),
         "ready_for_human_evidence": summary.get("ready_for_human_evidence", False),
+        "raw_content_allowed": bool(raw_content_paths),
+        "raw_content_path_count": len(raw_content_paths),
         "accepted": (
             summary.get("ready_for_human_evidence") is True
+            and not raw_content_paths
         ),
     }
 

@@ -144,7 +144,11 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                     entry.get("provenance_requirements"),
                     limit=3,
                 ),
-                "success_checks": first_text_items(must_collect.get("success_checks"), entry.get("success_checks")),
+                "success_checks": first_text_items(
+                    must_collect.get("success_checks"),
+                    entry.get("success_checks"),
+                    limit=5,
+                ),
                 "evidence_artifacts": first_text_items(
                     must_collect.get("evidence_artifacts"),
                     entry.get("evidence_artifacts"),
@@ -155,7 +159,11 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                     if isinstance(submission_kit.get("artifact_role_contract", {}), dict)
                     else {}
                 ),
-                "privacy_contract": first_text_items(must_collect.get("privacy_contract"), entry.get("privacy_contract"), limit=3),
+                "privacy_contract": first_text_items(
+                    must_collect.get("privacy_contract"),
+                    entry.get("privacy_contract"),
+                    limit=4,
+                ),
             }
         )
     return steps

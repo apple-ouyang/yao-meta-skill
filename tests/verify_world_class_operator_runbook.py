@@ -139,6 +139,10 @@ def main() -> None:
     assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
     assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
     assert provider_source["token_observed_count"]["status"] == "blocked", provider_source
+    human = items["human-adjudication"]
+    human_source = {item["field"]: item for item in human["source_checklist"]}
+    assert human["observed_state"]["raw_content_allowed"] is False, human
+    assert human_source["raw_content_allowed"]["status"] == "pass", human_source
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Operator Runbook" in markdown, markdown
     assert "runbook counts as completion: `false`" in markdown, markdown

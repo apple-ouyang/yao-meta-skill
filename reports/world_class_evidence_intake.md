@@ -117,6 +117,7 @@ This report validates the intake contract for human and external evidence. A val
   - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
   - reports/output_review_adjudication.json summary.invalid_decision_count == 0
   - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+  - reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text
   - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
   - reports/skill_os2_audit.json item human-adjudication status becomes pass
 - evidence_artifacts:
@@ -134,6 +135,7 @@ This report validates the intake contract for human and external evidence. A val
   - Reviewer decisions should not include raw user data or private customer detail.
   - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
   - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
+  - The adjudication evidence stores prompt_sha256 instead of raw prompt text.
   - Keep the answer key separate until after decisions are recorded.
 
 #### Source Runbook

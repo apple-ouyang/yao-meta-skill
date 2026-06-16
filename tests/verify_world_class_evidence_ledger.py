@@ -170,10 +170,13 @@ def main() -> None:
     assert entries["human-adjudication"]["observed_state"]["pending_count"] == 5, entries["human-adjudication"]
     assert entries["human-adjudication"]["observed_state"]["reviewer_metadata_present"] is False, entries["human-adjudication"]
     assert entries["human-adjudication"]["observed_state"]["reason_required"] is True, entries["human-adjudication"]
+    assert entries["human-adjudication"]["observed_state"]["raw_content_allowed"] is False, entries["human-adjudication"]
+    assert entries["human-adjudication"]["observed_state"]["raw_content_path_count"] == 0, entries["human-adjudication"]
     assert entries["human-adjudication"]["observed_state"]["ready_for_human_evidence"] is False, entries["human-adjudication"]
     human_source = {item["field"]: item for item in entries["human-adjudication"]["source_checklist"]}
     assert human_source["reviewer_metadata_present"]["status"] == "blocked", human_source
     assert human_source["reason_required"]["status"] == "pass", human_source
+    assert human_source["raw_content_allowed"]["status"] == "pass", human_source
     assert human_source["ready_for_human_evidence"]["status"] == "blocked", human_source
     assert "choice and reason" in human_source["pending_count"]["next_action"], human_source
     assert "metadata and rationale" in human_source["ready_for_human_evidence"]["next_action"], human_source

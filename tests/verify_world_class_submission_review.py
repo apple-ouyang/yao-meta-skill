@@ -120,6 +120,13 @@ def main() -> None:
     assert provider_source["model_executed_count"]["status"] == "blocked", provider_source
     assert provider_source["timing_observed_count"]["status"] == "pass", provider_source
     assert provider_source["token_observed_count"]["status"] == "blocked", provider_source
+    human_item = {item["evidence_key"]: item for item in payload["items"]}["human-adjudication"]
+    human_source = {item["field"]: item for item in human_item["source_checklist"]}
+    assert human_item["observed_state"]["raw_content_allowed"] is False, human_item
+    assert human_item["observed_state"]["raw_content_path_count"] == 0, human_item
+    assert human_source["raw_content_allowed"]["status"] == "pass", human_source
+    assert "prompt_sha256" in " ".join(human_item["success_checks"]), human_item
+    assert "prompt_sha256" in " ".join(human_item["privacy_contract"]), human_item
     markdown = output_md.read_text(encoding="utf-8")
     assert "World-Class Submission Review" in markdown, markdown
     assert "review counts submission as completion: `false`" in markdown, markdown

@@ -10,7 +10,7 @@ Generated at: `2026-06-17`
 - credential value exposed: `false`
 - collection ready: `1`
 - collection blocked: `3`
-- source checks: `8` pass / `16` total
+- source checks: `9` pass / `17` total
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
@@ -102,6 +102,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 | Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
 | Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
+| Raw content blocked | `False` | `false` | `pass` | Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages. |
 | Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with reviewer metadata and rationale. |
 
 ## Native Permission Enforcement

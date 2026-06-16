@@ -136,6 +136,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
 - reports/output_review_adjudication.json summary.invalid_decision_count == 0
 - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+- reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text
 - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
 - reports/skill_os2_audit.json item human-adjudication status becomes pass
 
@@ -144,6 +145,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - Reviewer decisions should not include raw user data or private customer detail.
 - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
 - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
+- The adjudication evidence stores prompt_sha256 instead of raw prompt text.
 - Keep the answer key separate until after decisions are recorded.
 
 ### Evidence Artifacts
@@ -176,6 +178,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 | Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
 | Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
+| Raw content blocked | `False` | `false` | `pass` | Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages. |
 | Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with reviewer metadata and rationale. |
 
 ## Native Permission Enforcement
