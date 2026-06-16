@@ -512,7 +512,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 138
+        "file_count": 139
       },
       {
         "path": "evals",
@@ -527,7 +527,7 @@
         "file_count": 229
       }
     ],
-    "file_count": 435,
+    "file_count": 436,
     "folder_count": 4,
     "distribution": [
       {
@@ -552,7 +552,7 @@
       },
       {
         "label": "scripts",
-        "value": 138
+        "value": 139
       },
       {
         "label": "evals",
@@ -682,7 +682,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 138
+      "file_count": 139
     },
     {
       "path": "evals",
@@ -996,12 +996,12 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "a47a7306aa8842b784f5ffbd872386dec9215e0bcd79b0ff7a70e3d8211315d7",
-      "source_contract_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75",
+      "evidence_bundle_sha256": "452acb1d428eeb474ee567de6a5fe28c57bf3e1dc004d7a56249a07d0a2cf5be",
+      "source_contract_sha256": "79e555f12cb95ad51753c69fdb7fce367f3a394c3e55c075ab4754feb6d3200b",
       "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1020,11 +1020,11 @@
       "world_class_source_pass_count": 6,
       "world_class_source_blocked_count": 7,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 5,
+      "working_tree_dirty": true,
+      "changed_file_count": 13
     },
-    "commit": "1be80208f3e24e23fd49d62147fb1940e65b1493",
+    "commit": "03aa6287123b4f47aad2a7abd59bb950e4d577e6",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1108,9 +1108,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 229,
-    "script_count": 138,
-    "internal_module_count": 52,
+    "scanned_files": 230,
+    "script_count": 139,
+    "internal_module_count": 53,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -1128,8 +1128,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 229,
-    "package_sha256": "2bc5e8214814c344534e5155301cd3f86e4ceee351313fb3a538d6fd9d400b75"
+    "package_hash_file_count": 230,
+    "package_sha256": "79e555f12cb95ad51753c69fdb7fce367f3a394c3e55c075ab4754feb6d3200b"
   },
   "skill_atlas": {
     "skill_count": 12,
