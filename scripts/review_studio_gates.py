@@ -3,7 +3,6 @@
 
 import json
 import os
-from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -14,33 +13,22 @@ except ImportError:  # pragma: no cover
     compute_permission_governance_status = None
     trust_script_inventory = None
 
+from review_studio_gate_contract import (
+    GATE_WEIGHTS,
+    REVIEW_STUDIO_GATE_KEYS,
+    add_blockers_from_gate,
+    gate_contract,
+    min_output_cases,
+    status_label,
+    weighted_score,
+)
+
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering."
 
 
 ROOT = Path(__file__).resolve().parent.parent
-
-GATE_WEIGHTS = {
-    "trigger-lab": 15,
-    "output-lab": 20,
-    "context-budget": 10,
-    "runtime-matrix": 10,
-    "trust-report": 10,
-    "python-compat": 10,
-    "architecture-maintainability": 10,
-    "permission-gates": 10,
-    "permission-runtime": 10,
-    "skill-atlas": 10,
-    "operations-loop": 10,
-    "review-waivers": 10,
-    "world-class-evidence": 10,
-    "registry-audit": 10,
-    "release-notes": 10,
-    "intent-canvas": 10,
-}
-REVIEW_STUDIO_GATE_KEYS = frozenset(GATE_WEIGHTS)
-
 
 def _load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
@@ -71,37 +59,6 @@ def gate(key: str, label: str, status: str, detail: str, evidence: str, link: st
     }
 
 
-def status_label(status: str) -> str:
-    return {"pass": "通过", "warn": "关注", "block": "阻断"}.get(status, status)
-
-
-def add_blockers_from_gate(gates: list[dict[str, str]]) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
-    blockers = [item for item in gates if item["status"] == "block"]
-    warnings = [item for item in gates if item["status"] == "warn"]
-    return blockers, warnings
-
-
-def gate_contract(gates: list[dict[str, str]]) -> dict[str, Any]:
-    rendered_gate_keys = [str(item.get("key", "")) for item in gates]
-    rendered_gate_set = set(rendered_gate_keys)
-    expected_gate_set = set(REVIEW_STUDIO_GATE_KEYS)
-    duplicate_gate_keys = sorted(key for key, count in Counter(rendered_gate_keys).items() if count > 1)
-    missing_gate_keys = sorted(expected_gate_set - rendered_gate_set)
-    unknown_gate_keys = sorted(rendered_gate_set - expected_gate_set)
-    unweighted_gate_keys = sorted(rendered_gate_set - set(GATE_WEIGHTS))
-    return {
-        "ok": not (missing_gate_keys or unknown_gate_keys or duplicate_gate_keys or unweighted_gate_keys),
-        "expected_gate_count": len(expected_gate_set),
-        "actual_gate_count": len(rendered_gate_keys),
-        "expected_gate_keys": sorted(expected_gate_set),
-        "rendered_gate_keys": rendered_gate_keys,
-        "missing_gate_keys": missing_gate_keys,
-        "unknown_gate_keys": unknown_gate_keys,
-        "duplicate_gate_keys": duplicate_gate_keys,
-        "unweighted_gate_keys": unweighted_gate_keys,
-    }
-
-
 def target_maturity(skill_dir: Path, overview: dict[str, Any]) -> str:
     manifest = _load_json(skill_dir / "manifest.json")
     if manifest.get("maturity_tier"):
@@ -110,14 +67,6 @@ def target_maturity(skill_dir: Path, overview: dict[str, Any]) -> str:
     if metadata.get("maturity_tier"):
         return str(metadata["maturity_tier"])
     return "scaffold"
-
-
-def min_output_cases(maturity: str) -> int:
-    if maturity in {"library", "governed"}:
-        return 5
-    if maturity == "production":
-        return 3
-    return 1
 
 
 def fallback_permission_governance(skill_dir: Path) -> dict[str, Any]:
@@ -692,16 +641,3 @@ def build_gates(skill_dir: Path, output_html: Path, data: dict[str, dict[str, An
     )
 
     return gates
-
-
-def weighted_score(gates: list[dict[str, str]]) -> int:
-    earned = 0.0
-    total = 0.0
-    for item in gates:
-        weight = GATE_WEIGHTS.get(item["key"], 5)
-        total += weight
-        if item["status"] == "pass":
-            earned += weight
-        elif item["status"] == "warn":
-            earned += weight * 0.6
-    return int(round(earned / total * 100)) if total else 0

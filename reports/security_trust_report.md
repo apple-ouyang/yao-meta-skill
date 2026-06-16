@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `223`
-- Scripts: `132`
-- Internal script modules: `46`
+- Scanned files: `224`
+- Scripts: `133`
+- Internal script modules: `47`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `223`
-- Package SHA256: `9b29a4cc28ab3fb1df2434b22e26b9e92ee04c096f35da350705c4c92307260e`
+- Package hash files: `224`
+- Package SHA256: `c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957`
 
 ## Failures
 
@@ -146,6 +146,7 @@
 | scripts/review_studio_actions.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio action guidance and source refs out of HTML rendering. |
 | scripts/review_studio_data.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to load Review Studio source reports and metric cards. |
 | scripts/review_studio_formatting.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to format report dictionaries as audit UI panels. |
+| scripts/review_studio_gate_contract.py | internal-module | True | False | False | False | False | False | False | Imported by review_studio_gates.py for stable gate scoring and contract checks. |
 | scripts/review_studio_gates.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio gate evaluation separate from HTML rendering. |
 | scripts/review_studio_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to keep Review Studio layout and CSS out of gate logic. |
 | scripts/review_studio_output_review.py | internal-module | True | False | False | False | False | False | False | Imported by render_review_studio.py to render output review checklist cards. |

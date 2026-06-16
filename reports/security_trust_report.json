@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 223,
-    "script_count": 132,
-    "internal_module_count": 46,
+    "scanned_files": 224,
+    "script_count": 133,
+    "internal_module_count": 47,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 223,
-    "package_sha256": "9b29a4cc28ab3fb1df2434b22e26b9e92ee04c096f35da350705c4c92307260e"
+    "package_hash_file_count": 224,
+    "package_sha256": "c74c96a2bc7dfd7e12c89cb475a6853fcd012bcfe7b4a3905007b896ed2cf957"
   },
   "failures": [],
   "warnings": [],
@@ -1223,6 +1223,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/review_studio_gate_contract.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by review_studio_gates.py for stable gate scoring and contract checks.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/review_studio_gates.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1929,7 +1943,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 46,
+    "skipped_count": 47,
     "failed_scripts": [],
     "results": [
       {
@@ -2844,6 +2858,10 @@
       },
       {
         "path": "scripts/review_studio_formatting.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/review_studio_gate_contract.py",
         "reason": "internal module"
       },
       {
