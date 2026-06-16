@@ -130,6 +130,7 @@
         "scripts/skill_report_layout.py",
         "scripts/skill_report_metrics.py",
         "scripts/skill_report_model.py",
+        "scripts/skill_report_sections.py",
         "scripts/skill_report_sources.py",
         "scripts/skill_report_world_class.py",
         "scripts/skillops_opportunity.py",

@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 235,
-    "script_count": 143,
-    "internal_module_count": 57,
+    "scanned_files": 236,
+    "script_count": 144,
+    "internal_module_count": 58,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 235,
-    "package_sha256": "a868eb139efe4af97300ab1e124721d5573c3ac4bfd25f278c4e7f1e349f48a6"
+    "package_hash_file_count": 236,
+    "package_sha256": "b28843624ffa9196da3d65e7f4c9e18d679c4ea41218ea2eeb7f8955b8f3c2de"
   },
   "failures": [],
   "warnings": [],
@@ -1587,6 +1587,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/skill_report_sections.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by skill_report_model.py to assemble overview report quality, risk, and asset sections.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/skill_report_sources.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -2083,7 +2097,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 57,
+    "skipped_count": 58,
     "failed_scripts": [],
     "results": [
       {
@@ -3078,6 +3092,10 @@
       },
       {
         "path": "scripts/skill_report_model.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/skill_report_sections.py",
         "reason": "internal module"
       },
       {

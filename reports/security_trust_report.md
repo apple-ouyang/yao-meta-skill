@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `235`
-- Scripts: `143`
-- Internal script modules: `57`
+- Scanned files: `236`
+- Scripts: `144`
+- Internal script modules: `58`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `235`
-- Package SHA256: `a868eb139efe4af97300ab1e124721d5573c3ac4bfd25f278c4e7f1e349f48a6`
+- Package hash files: `236`
+- Package SHA256: `b28843624ffa9196da3d65e7f4c9e18d679c4ea41218ea2eeb7f8955b8f3c2de`
 
 ## Failures
 
@@ -172,6 +172,7 @@
 | scripts/skill_report_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to keep overview report layout and CSS out of data rendering. |
 | scripts/skill_report_metrics.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to calculate overview report metrics. |
 | scripts/skill_report_model.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to build the v2 report data model. |
+| scripts/skill_report_sections.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to assemble overview report quality, risk, and asset sections. |
 | scripts/skill_report_sources.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to load source files and scan overview package assets. |
 | scripts/skill_report_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to summarize world-class evidence readiness and roadmap actions. |
 | scripts/skillops_opportunity.py | internal-module | True | False | False | False | False | False | False | Imported by render_daily_skillops_report.py to score SkillOps opportunities without writing files. |
