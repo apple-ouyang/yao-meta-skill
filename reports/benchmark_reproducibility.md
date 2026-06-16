@@ -1,9 +1,9 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `001210458f638786162a1ea8300f193ff1fc6160`
+Commit: `63eb98df757757426824621daff81d3c2b3bcddc`
 Working tree dirty at generation: `false`
-Evidence bundle SHA256: `b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5`
+Evidence bundle SHA256: `696a1e270a307ba3089f77ff3f7bae595afe33ab83d569b6d2b988a59ae60ee7`
 
 ## Summary
 
@@ -12,7 +12,7 @@ Evidence bundle SHA256: `b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa6
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `11432d13467e`
+- source contract sha256: `c65410d8e0bb`
 - archive sha256: `5802e5f52255`
 - output cases: `5`
 - disclosed failure cases: `3`
@@ -50,7 +50,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5`
+- sha256: `696a1e270a307ba3089f77ff3f7bae595afe33ab83d569b6d2b988a59ae60ee7`
 
 ## Methodology Sections
 
@@ -77,7 +77,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | review_adjudication | `reports/output_review_adjudication.json` | present | `bb8c72a9291e` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `cd94c895d5d6` |
+| trust_report | `reports/security_trust_report.json` | present | `8e2193210918` |
 | python_compatibility | `reports/python_compatibility.json` | present | `fca6eb5f6f0e` |
 | registry_audit | `reports/registry_audit.json` | present | `e75a341d15e4` |
 | package_verification | `reports/package_verification.json` | present | `a27941fdb865` |

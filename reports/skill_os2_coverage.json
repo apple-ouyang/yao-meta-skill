@@ -130,7 +130,7 @@
       "label": "Trust Security",
       "status": "pass",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "131 scripts; secrets 0; help failures 0",
+      "current": "135 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust .",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [

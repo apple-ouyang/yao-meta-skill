@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 487673/120000; top deferred scripts 427575; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 489507/120000; top deferred scripts 429409; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -1972,8 +1972,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5",
-          "source_contract_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab",
+          "evidence_bundle_sha256": "696a1e270a307ba3089f77ff3f7bae595afe33ab83d569b6d2b988a59ae60ee7",
+          "source_contract_sha256": "c65410d8e0bb1ea55fc52ea0b2c557f9590b232722b51e77e059595f64bf668f",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -1996,7 +1996,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "001210458f638786162a1ea8300f193ff1fc6160",
+        "commit": "63eb98df757757426824621daff81d3c2b3bcddc",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2101,7 +2101,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 226,
-        "package_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab"
+        "package_sha256": "c65410d8e0bb1ea55fc52ea0b2c557f9590b232722b51e77e059595f64bf668f"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -5646,7 +5646,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "001210458f638786162a1ea8300f193ff1fc6160",
+      "commit": "63eb98df757757426824621daff81d3c2b3bcddc",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5660,8 +5660,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5",
-        "source_contract_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab",
+        "evidence_bundle_sha256": "696a1e270a307ba3089f77ff3f7bae595afe33ab83d569b6d2b988a59ae60ee7",
+        "source_contract_sha256": "c65410d8e0bb1ea55fc52ea0b2c557f9590b232722b51e77e059595f64bf668f",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5697,7 +5697,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "001210458f638786162a1ea8300f193ff1fc6160",
+        "commit": "63eb98df757757426824621daff81d3c2b3bcddc",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5707,7 +5707,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "b28ee4d670b9f3b084f3550d6b9fd45d13db56a8c0ed32c568eeaa613a4628d5"
+        "sha256": "696a1e270a307ba3089f77ff3f7bae595afe33ab83d569b6d2b988a59ae60ee7"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5816,7 +5816,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 126302,
-          "sha256": "cd94c895d5d69c6de3b751c6db885d9e9083c4956eb8acc8b66a50e5563301f2"
+          "sha256": "8e21932109181cee66f7829ab1c175a82d3ba5e97ac98e68ce6e474650326470"
         },
         {
           "label": "python_compatibility",
@@ -6183,7 +6183,7 @@
           "label": "Trust Security",
           "status": "pass",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "131 scripts; secrets 0; help failures 0",
+          "current": "135 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust .",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -12091,7 +12091,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 226,
-        "package_sha256": "11432d13467e6822ac0fff5d8bde27fdf326322dfed62aca7cb9ad5ee1a706ab"
+        "package_sha256": "c65410d8e0bb1ea55fc52ea0b2c557f9590b232722b51e77e059595f64bf668f"
       },
       "failures": [],
       "warnings": [],
@@ -16710,15 +16710,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1053172,
+        "other_text_tokens": 1055458,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1053969,
-        "deferred_resource_tokens": 487673,
+        "estimated_total_text_tokens": 1056255,
+        "deferred_resource_tokens": 489507,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 427575,
+            "estimated_tokens": 429409,
             "file_count": 135
           },
           {
@@ -16740,7 +16740,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 427575,
+            "estimated_tokens": 429409,
             "file_count": 135
           }
         ],
@@ -16763,14 +16763,14 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 427575,
+              "estimated_tokens": 429409,
               "file_count": 135,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
           ],
           "summary": "Large deferred resources are indexed and backed by evidence."
         },
-        "relevant_file_count": 662,
+        "relevant_file_count": 663,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 131.3
