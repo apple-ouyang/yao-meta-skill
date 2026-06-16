@@ -153,7 +153,9 @@ def main() -> None:
     human_checks = {item["key"]: item for item in human["prechecks"]}
     assert human_checks["human-reviewer"]["status"] == "human-required", human_checks
     assert "reviewer identity" in human["next_action"], human
-    assert any("Record a reviewer choice" in row["next_action"] for row in human["source_checklist"]), human
+    assert any("Record a reviewer choice and reason" in row["next_action"] for row in human["source_checklist"]), human
+    assert any("required rationale" in item["next_action"] for item in human["prechecks"]), human
+    assert any("reviewed_at" in item["next_action"] for item in human["prechecks"]), human
 
     native = by_key(payload["items"], "native-permission-enforcement")
     assert native["status"] == "blocked", native

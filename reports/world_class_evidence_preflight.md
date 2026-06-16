@@ -87,8 +87,8 @@ Generate the submission kit after the real provider, human, native-permission, o
 
 | Check | Kind | Current | Status | Next action |
 | --- | --- | --- | --- | --- |
-| Blind review kit | `file` | `present` | `pass` | Open the blind review kit and record real reviewer choices. |
-| Decision template | `file` | `present` | `pass` | Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`. |
+| Blind review kit | `file` | `present` | `pass` | Open the blind review kit and record real reviewer choices with required rationale. |
+| Decision template | `file` | `present` | `pass` | Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`. |
 | Decision importer | `file` | `present` | `pass` | Use the importer to reject raw content fields and normalize reviewer decisions before adjudication. |
 | Human reviewer | `human` | `external-human-action` | `human-required` | Assign a real reviewer identity before claiming human adjudication. |
 
@@ -97,12 +97,12 @@ Generate the submission kit after the real provider, human, native-permission, o
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | Review pairs exist | `5` | `>0` | `pass` | Generate the blind A/B review pack. |
-| No pending decisions | `5` | `==0` | `blocked` | Record a reviewer choice for every pair. |
+| No pending decisions | `5` | `==0` | `blocked` | Record a reviewer choice and reason for every pair. |
 | Judgments complete | `0` | `==pair_count` | `blocked` | Every pair needs one valid human judgment. |
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 | Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
 | Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
-| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with metadata and rationale. |
+| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with reviewer metadata and rationale. |
 
 ## Native Permission Enforcement
 

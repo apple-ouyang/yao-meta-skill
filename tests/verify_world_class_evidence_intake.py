@@ -499,6 +499,13 @@ def main() -> None:
         "native-client-telemetry",
     }, payload["templates"]
     assert all(item["status"] == "pass" and item["template_only"] is True for item in payload["templates"]), payload["templates"]
+    human_template = json.loads((ROOT / "evidence" / "world_class" / "templates" / "human-adjudication.intake.json").read_text(encoding="utf-8"))
+    decision_ref = next(item for item in human_template["artifact_refs"] if item["path"] == "reports/output_review_decisions.json")
+    assert "required reason" in decision_ref["note"], human_template
+    assert human_template["provenance"]["reviewer_reason_required"] is True, human_template
+    assert "reason" in human_template["provenance"]["decision_fields"], human_template
+    assert "visible rubric" in human_template["privacy"]["notes"], human_template
+    assert "private customer data" in human_template["privacy"]["notes"], human_template
     checklist = {item["evidence_key"]: item for item in payload["operator_checklist"]}
     assert set(checklist) == {
         "provider-holdout",

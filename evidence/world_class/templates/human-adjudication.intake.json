@@ -18,20 +18,27 @@
       "path": "reports/output_review_decisions.json",
       "kind": "review-decisions",
       "contains_raw_content": false,
-      "note": "Reviewer identity and winner_variant decisions only."
+      "note": "Reviewer identity, reviewed_at, winner_variant, confidence, and required reason only."
     }
   ],
   "provenance": {
     "reviewer": "name or team handle",
     "blind_pack_path": "reports/output_blind_review_pack.md",
-    "answer_key_opened_after_decisions": true
+    "answer_key_opened_after_decisions": true,
+    "decision_fields": [
+      "case_id",
+      "winner_variant",
+      "confidence",
+      "reason"
+    ],
+    "reviewer_reason_required": true
   },
   "privacy": {
     "raw_user_content_included": false,
     "raw_provider_prompt_included": false,
     "credentials_included": false,
     "secrets_included": false,
-    "notes": "Reviewer notes must not include private customer data."
+    "notes": "Reviewer reasons must be based on the visible rubric and must not include private customer data."
   },
   "anti_overclaim": {
     "planned_work_counts_as_evidence": false,

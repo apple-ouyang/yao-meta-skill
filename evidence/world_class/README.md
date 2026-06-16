@@ -26,6 +26,7 @@ The intake validator checks:
 - real submissions use the canonical `<evidence-key>.json` filename expected by the ledger
 - credentials, secrets, raw user content, and raw provider prompts are explicitly excluded
 - raw prompt, output, transcript, message, credential, secret, token, and API-key fields are rejected even when nested
+- human adjudication packets must preserve reviewer identity, review date, A/B winner, confidence, and a required rationale before answer-key reveal can count
 - planned work, local command-only output, and metadata fallback are not claimed as completion evidence
 
 Run `world-class-preflight` before assigning external or human work. It checks local files, redacted environment readiness, human/external prerequisites, and source-evidence blockers without accepting evidence or printing secrets.

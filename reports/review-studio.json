@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 496240/120000; top deferred scripts 435346; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 497092/120000; top deferred scripts 436062; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -613,7 +613,7 @@
               "actual": 5,
               "expected": "==0",
               "status": "blocked",
-              "next_action": "Record a reviewer choice for every pair."
+              "next_action": "Record a reviewer choice and reason for every pair."
             },
             {
               "label": "Judgments complete",
@@ -637,7 +637,7 @@
               "actual": false,
               "expected": "true",
               "status": "blocked",
-              "next_action": "Complete all reviewer decisions with metadata and rationale."
+              "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
             }
           ],
           "commands": [
@@ -681,7 +681,7 @@
             "reports/output_review_adjudication.json summary.pending_count == 0",
             "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
             "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
-            "reports/skill_os2_audit.json item human-adjudication status becomes pass"
+            "reports/output_review_adjudication.json summary.reviewer_metadata_present is true"
           ],
           "evidence_artifacts": [
             "reports/output_blind_review_pack.md",
@@ -719,8 +719,8 @@
           },
           "privacy_contract": [
             "Reviewer decisions should not include raw user data or private customer detail.",
-            "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
-            "Keep the answer key separate until after decisions are recorded."
+            "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
+            "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields."
           ]
         },
         {
@@ -1081,7 +1081,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 360 个词/字，references 约 16914 个词/字。",
+            "入口约 360 个词/字，references 约 16934 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -1185,7 +1185,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 360 个词/字，references 约 16914 个词/字。"
+          "上下文成本需要补强：入口约 360 个词/字，references 约 16934 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1983,8 +1983,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "9d03968f23eecd08b1859a82d97eac74fedf3aee8b0801962226e8a40ec51bf1",
-          "source_contract_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58",
+          "evidence_bundle_sha256": "f53b2ecd4e42a3d09c7d454d210aeb647e5c2d47dc0dbe77f5e4628ff6635478",
+          "source_contract_sha256": "cb0a16d88e6cb8b57657714ea2ecc72ace64164de63aa1903b86b545ba20e8fc",
           "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -2005,9 +2005,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 32
+          "changed_file_count": 55
         },
-        "commit": "61898d145c9ca6a20a27faa28708781625757b86",
+        "commit": "f9fc7d333b5308e4530041972df14434b23e5a02",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2112,7 +2112,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 239,
-        "package_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58"
+        "package_sha256": "cb0a16d88e6cb8b57657714ea2ecc72ace64164de63aa1903b86b545ba20e8fc"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -2502,7 +2502,7 @@
               "python3 scripts/yao.py output-review-kit --write-template",
               "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
               "python3 scripts/adjudicate_output_review.py --write-template",
-              "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+              "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
               "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
               "python3 scripts/yao.py output-review",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -2513,6 +2513,8 @@
               "reports/output_review_adjudication.json summary.pending_count == 0",
               "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
               "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
+              "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+              "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
               "reports/skill_os2_audit.json item human-adjudication status becomes pass"
             ],
             "evidence_artifacts": [
@@ -2529,6 +2531,7 @@
             ],
             "privacy_contract": [
               "Reviewer decisions should not include raw user data or private customer detail.",
+              "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
               "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
               "Keep the answer key separate until after decisions are recorded."
             ],
@@ -2760,7 +2763,7 @@
               "python3 scripts/yao.py output-review-kit --write-template",
               "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
               "python3 scripts/adjudicate_output_review.py --write-template",
-              "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+              "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
               "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
               "python3 scripts/yao.py output-review",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -2776,6 +2779,8 @@
               "reports/output_review_adjudication.json summary.pending_count == 0",
               "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
               "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
+              "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+              "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
               "reports/skill_os2_audit.json item human-adjudication status becomes pass"
             ],
             "evidence_artifacts": [
@@ -2792,6 +2797,7 @@
             ],
             "privacy_contract": [
               "Reviewer decisions should not include raw user data or private customer detail.",
+              "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
               "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
               "Keep the answer key separate until after decisions are recorded."
             ],
@@ -2825,7 +2831,7 @@
                 "actual": 5,
                 "status": "blocked",
                 "source_accepted": false,
-                "next_action": "Record a reviewer choice for every pair."
+                "next_action": "Record a reviewer choice and reason for every pair."
               },
               {
                 "evidence_key": "human-adjudication",
@@ -2875,7 +2881,7 @@
                 "actual": false,
                 "status": "blocked",
                 "source_accepted": false,
-                "next_action": "Complete all reviewer decisions with metadata and rationale."
+                "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
               }
             ],
             "source_check_count": 7,
@@ -4745,7 +4751,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.9,
+          "duration_ms": 27.23,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4773,7 +4779,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.49,
+          "duration_ms": 26.39,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4796,7 +4802,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.48,
+          "duration_ms": 26.95,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4824,7 +4830,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.61,
+          "duration_ms": 26.29,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4847,7 +4853,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.59,
+          "duration_ms": 26.67,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4875,7 +4881,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.16,
+          "duration_ms": 28.71,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4898,7 +4904,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.0,
+          "duration_ms": 28.35,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4925,7 +4931,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.3,
+          "duration_ms": 28.05,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4948,7 +4954,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.82,
+          "duration_ms": 28.38,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4977,7 +4983,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.81,
+          "duration_ms": 28.42,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5716,22 +5722,35 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "61898d145c9ca6a20a27faa28708781625757b86",
+      "commit": "f9fc7d333b5308e4530041972df14434b23e5a02",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 55,
+        "sample": [
+          " M evidence/world_class/README.md",
+          " M evidence/world_class/templates/human-adjudication.intake.json",
+          " M references/output-eval-method.md",
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
+          " M reports/adoption_drift_report.json",
+          " M reports/architecture_maintainability.json",
+          " M reports/architecture_maintainability.md",
+          " M reports/compiled_targets.json",
+          " M reports/context_budget.json",
+          " M reports/context_budget.md",
+          " M reports/context_budget_summary.json"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "55b50f5f8c8f4f305f9930044f132bde0b216f6556febcb5b530655b17b64702",
-        "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
+        "evidence_bundle_sha256": "f53b2ecd4e42a3d09c7d454d210aeb647e5c2d47dc0dbe77f5e4628ff6635478",
+        "source_contract_sha256": "cb0a16d88e6cb8b57657714ea2ecc72ace64164de63aa1903b86b545ba20e8fc",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5750,14 +5769,15 @@
         "world_class_source_pass_count": 8,
         "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 55
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -5766,10 +5786,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "61898d145c9ca6a20a27faa28708781625757b86",
+        "ready": false,
+        "commit": "f9fc7d333b5308e4530041972df14434b23e5a02",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5777,7 +5797,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "55b50f5f8c8f4f305f9930044f132bde0b216f6556febcb5b530655b17b64702"
+        "sha256": "f53b2ecd4e42a3d09c7d454d210aeb647e5c2d47dc0dbe77f5e4628ff6635478"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5850,8 +5870,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7964,
-          "sha256": "282122e93b08d73b0c199715c51bc619a95af47d315047fc41dceb31f56a3293"
+          "bytes": 7967,
+          "sha256": "900cea9f26483ae1ce0fe823e771565111fd88942e9e910232a825c45b838ed4"
         },
         {
           "label": "blind_review",
@@ -5886,21 +5906,21 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 133860,
-          "sha256": "d865e5cc97a3b92e1332366c5c780354afb46038ba1c6ef152a61cc8407a19bc"
+          "sha256": "bb151a6e5d70e606c167e1010c8029d4e22e676d60f3e3f613fccd9971007bfd"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
           "bytes": 29196,
-          "sha256": "f8e498d295db139c49e2ea51bd2cbdd52db61fa2b0bd008ef74135601d691895"
+          "sha256": "636583616dbcc15fe06d582ff0eda17c08a3d37eae618b03e1ca9c666c5276d2"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "88c94a496b941ef0538a7bab550c85d2fc07487edf35e4cd39bde14b1475108c"
+          "sha256": "c28991bdf087bb31370774c1dcce9987ed41eac46b2415eecda092692b9dd915"
         },
         {
           "label": "package_verification",
@@ -5913,71 +5933,71 @@
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
-          "bytes": 8604,
-          "sha256": "044b2cf73dd4559a2a0b2f6cbb5560677d409d4716d135261fac6399012d1abb"
+          "bytes": 8758,
+          "sha256": "c91884a915384363d4ea0339de5c9a3e37ede4356ad1069edf0ae6f880366cc7"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14310,
-          "sha256": "e63bc60e69cdc0e613983edea2a66f6c80d0e4da92efd6f90203c390b813350d"
+          "sha256": "4f193d15332d6ae7c6df397b0c777219fc9627b61c176ca70f66e43b4e94d08e"
         },
         {
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
-          "bytes": 20828,
-          "sha256": "9b74155fb9bfe44ba838d64b1a31768b83978b154bdd8eaa606f494c816f189f"
+          "bytes": 21486,
+          "sha256": "77622be0b25febff4ff886f85fdc2dec3406975490e41716cd495c64c12b927a"
         },
         {
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 23509,
-          "sha256": "9e4c98e43356fdf891ad35fb220abee9f9688aa58c63da6513b057cf4da3dc3f"
+          "bytes": 23858,
+          "sha256": "7aaea28929e3654ef89812d69971a88cded3f2238f48d8898499ecdd7edee681"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
-          "bytes": 19319,
-          "sha256": "46f801051ec075725059e4e2682ef2162fd892b5e7255c8d5121d7b24dcc7f2c"
+          "bytes": 19774,
+          "sha256": "77900993d9d4ccb81b8e9a0ce82e74474821a9dea6aea01bf423bd26bdb76e71"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 43290,
-          "sha256": "ca5509a680f94deb6583fcbb1d4e0568d2632d4ff0656b89eddc048a589b275d"
+          "bytes": 43542,
+          "sha256": "f5a6849d6db00fe6f4cab8cd9991513f93346aaae31a234c694da8b1ac83426f"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 14879,
-          "sha256": "95ccf9e35708a5c290a75734632d9f76ef3a4a668d8ed6d52d2c6dabf7a85a1f"
+          "bytes": 15196,
+          "sha256": "cd17178abdd7a4e285636ad65eacbdb4e177814f6fc419b16fbe3a5c98497477"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 26205,
-          "sha256": "1bba953cccaed91f75e55a9f01c0877cfb3815646ea1a7d0a0e5d6e110cca9b1"
+          "bytes": 26580,
+          "sha256": "366f1555ee00b960043243f9013e981fd89d0672916b167ab0ec0e0c3fd5eae3"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 15908,
-          "sha256": "e876eef61d56ab7d591b57372c75ab89a60bdfd6cb5a9bdeb845025fc1781659"
+          "bytes": 16261,
+          "sha256": "0f40db69f39c378c44a226aa643f61e3030b6aef223c903d37f896b8f20e6850"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 22070,
-          "sha256": "f448c426d9eae788c50a96ec88632be392c7de38199248cae28005d27a1b3fac"
+          "bytes": 22430,
+          "sha256": "7dbdd3bcf414992846ddfb60fb7c99a53df64eb805d8ab3f3086b5223e18e541"
         },
         {
           "label": "world_class_claim_guard",
@@ -6935,7 +6955,7 @@
     "compiled_targets": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "target_count": 5,
@@ -12306,7 +12326,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 239,
-        "package_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995"
+        "package_sha256": "cb0a16d88e6cb8b57657714ea2ecc72ace64164de63aa1903b86b545ba20e8fc"
       },
       "failures": [],
       "warnings": [],
@@ -15723,7 +15743,7 @@
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "root": ".",
       "summary": {
         "target_python": "3.11",
@@ -17104,7 +17124,7 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "python_file_count": 222,
@@ -17137,7 +17157,7 @@
         },
         {
           "path": "tests/verify_world_class_evidence_intake.py",
-          "lines": 628,
+          "lines": 635,
           "kind": "test",
           "severity": "pass",
           "early_watch": true,
@@ -17146,6 +17166,22 @@
         {
           "path": "scripts/render_benchmark_reproducibility.py",
           "lines": 595,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "tests/verify_output_review_adjudication.py",
+          "lines": 595,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "scripts/render_skill_overview.py",
+          "lines": 588,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -17168,14 +17204,6 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
-          "path": "scripts/render_skill_overview.py",
-          "lines": 584,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
           "path": "tests/verify_review_studio.py",
           "lines": 584,
           "kind": "test",
@@ -17192,6 +17220,14 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "tests/verify_world_class_evidence_ledger.py",
+          "lines": 576,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
           "path": "scripts/render_evidence_consistency.py",
           "lines": 568,
           "kind": "cli-script",
@@ -17206,22 +17242,6 @@
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
-        },
-        {
-          "path": "tests/verify_world_class_evidence_ledger.py",
-          "lines": 567,
-          "kind": "test",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-        },
-        {
-          "path": "scripts/render_world_class_preflight.py",
-          "lines": 562,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
       "watchlist": [],
@@ -17236,7 +17256,7 @@
         },
         {
           "path": "tests/verify_world_class_evidence_intake.py",
-          "lines": 628,
+          "lines": 635,
           "kind": "test",
           "severity": "pass",
           "early_watch": true,
@@ -17258,20 +17278,20 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1083667,
+        "other_text_tokens": 1089296,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1084464,
-        "deferred_resource_tokens": 496240,
+        "estimated_total_text_tokens": 1090093,
+        "deferred_resource_tokens": 497092,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 435346,
+            "estimated_tokens": 436062,
             "file_count": 147
           },
           {
             "path": "references",
-            "estimated_tokens": 28248,
+            "estimated_tokens": 28292,
             "file_count": 35
           },
           {
@@ -17281,14 +17301,14 @@
           },
           {
             "path": "assets",
-            "estimated_tokens": 10811,
+            "estimated_tokens": 10903,
             "file_count": 4
           }
         ],
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 435346,
+            "estimated_tokens": 436062,
             "file_count": 147
           }
         ],
@@ -17311,7 +17331,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 435346,
+              "estimated_tokens": 436062,
               "file_count": 147,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -18162,7 +18182,7 @@
       },
       "catalog": {
         "workspace_root": ".",
-        "generated_at": "2026-06-17",
+        "generated_at": "2026-06-13",
         "skills": [
           {
             "name": "yao-meta-skill",
@@ -19063,7 +19083,7 @@
           "name": "incident-command-governor",
           "path": "examples/governed-incident-command/generated-skill",
           "reason": "review overdue by cadence monthly",
-          "age_days": 78,
+          "age_days": 74,
           "allowed_days": 31,
           "actionable": false,
           "scope": "example"
@@ -19231,7 +19251,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-16T17:53:31Z",
+      "generated_at": "2026-06-16T18:27:57Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -20875,7 +20895,7 @@
             "python3 scripts/yao.py output-review-kit --write-template",
             "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
             "python3 scripts/adjudicate_output_review.py --write-template",
-            "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+            "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
             "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
             "python3 scripts/yao.py output-review",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -20891,6 +20911,8 @@
             "reports/output_review_adjudication.json summary.pending_count == 0",
             "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
             "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
+            "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+            "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
             "reports/skill_os2_audit.json item human-adjudication status becomes pass"
           ],
           "evidence_artifacts": [
@@ -20907,6 +20929,7 @@
           ],
           "privacy_contract": [
             "Reviewer decisions should not include raw user data or private customer detail.",
+            "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
             "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
             "Keep the answer key separate until after decisions are recorded."
           ],
@@ -20940,7 +20963,7 @@
               "actual": 5,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Record a reviewer choice for every pair."
+              "next_action": "Record a reviewer choice and reason for every pair."
             },
             {
               "evidence_key": "human-adjudication",
@@ -20990,7 +21013,7 @@
               "actual": false,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Complete all reviewer decisions with metadata and rationale."
+              "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
             }
           ],
           "source_check_count": 7,
@@ -21414,6 +21437,9 @@
             "pending_count": 5,
             "invalid_decision_count": 0,
             "answer_revealed_count": 0,
+            "reviewer_metadata_present": false,
+            "reason_required": true,
+            "ready_for_human_evidence": false,
             "accepted": false
           },
           "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
@@ -21435,7 +21461,7 @@
               "python3 scripts/yao.py output-review-kit --write-template",
               "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
               "python3 scripts/adjudicate_output_review.py --write-template",
-              "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+              "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
               "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
               "python3 scripts/yao.py output-review",
               "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -21446,6 +21472,8 @@
               "reports/output_review_adjudication.json summary.pending_count == 0",
               "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
               "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
+              "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+              "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
               "reports/skill_os2_audit.json item human-adjudication status becomes pass"
             ],
             "evidence_artifacts": [
@@ -21462,6 +21490,7 @@
             ],
             "privacy_contract": [
               "Reviewer decisions should not include raw user data or private customer detail.",
+              "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
               "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
               "Keep the answer key separate until after decisions are recorded."
             ]
@@ -21830,7 +21859,7 @@
               "label": "Blind review kit",
               "kind": "file",
               "required": true,
-              "next_action": "Open the blind review kit and record real reviewer choices.",
+              "next_action": "Open the blind review kit and record real reviewer choices with required rationale.",
               "secret_value_redacted": false,
               "path": "reports/output_review_kit.html",
               "status": "pass",
@@ -21842,7 +21871,7 @@
               "label": "Decision template",
               "kind": "file",
               "required": true,
-              "next_action": "Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+              "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
               "secret_value_redacted": false,
               "path": "reports/output_review_decisions.json",
               "status": "pass",
@@ -21891,7 +21920,7 @@
               "actual": 5,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Record a reviewer choice for every pair."
+              "next_action": "Record a reviewer choice and reason for every pair."
             },
             {
               "evidence_key": "human-adjudication",
@@ -21941,7 +21970,7 @@
               "actual": false,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Complete all reviewer decisions with metadata and rationale."
+              "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
             }
           ],
           "next_action": "Assign a real reviewer identity before claiming human adjudication.",
@@ -21992,7 +22021,7 @@
             "python3 scripts/yao.py output-review-kit --write-template",
             "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
             "python3 scripts/adjudicate_output_review.py --write-template",
-            "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+            "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
             "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
             "python3 scripts/yao.py output-review",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -22325,7 +22354,7 @@
           "label": "Blind review kit",
           "kind": "file",
           "required": true,
-          "next_action": "Open the blind review kit and record real reviewer choices.",
+          "next_action": "Open the blind review kit and record real reviewer choices with required rationale.",
           "secret_value_redacted": false,
           "path": "reports/output_review_kit.html",
           "status": "pass",
@@ -22337,7 +22366,7 @@
           "label": "Decision template",
           "kind": "file",
           "required": true,
-          "next_action": "Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+          "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
           "secret_value_redacted": false,
           "path": "reports/output_review_decisions.json",
           "status": "pass",
@@ -22486,7 +22515,7 @@
           "actual": 5,
           "status": "blocked",
           "source_accepted": false,
-          "next_action": "Record a reviewer choice for every pair."
+          "next_action": "Record a reviewer choice and reason for every pair."
         },
         {
           "evidence_key": "human-adjudication",
@@ -22536,7 +22565,7 @@
           "actual": false,
           "status": "blocked",
           "source_accepted": false,
-          "next_action": "Complete all reviewer decisions with metadata and rationale."
+          "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
         },
         {
           "evidence_key": "native-permission-enforcement",
@@ -22828,7 +22857,7 @@
               "actual": 5,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Record a reviewer choice for every pair."
+              "next_action": "Record a reviewer choice and reason for every pair."
             },
             {
               "evidence_key": "human-adjudication",
@@ -22878,7 +22907,7 @@
               "actual": false,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Complete all reviewer decisions with metadata and rationale."
+              "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
             }
           ],
           "source_check_count": 7,
@@ -22888,10 +22917,13 @@
             "reports/output_review_adjudication.json summary.pending_count == 0",
             "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
             "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
+            "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+            "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
             "reports/skill_os2_audit.json item human-adjudication status becomes pass"
           ],
           "privacy_contract": [
             "Reviewer decisions should not include raw user data or private customer detail.",
+            "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
             "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
             "Keep the answer key separate until after decisions are recorded."
           ],
@@ -23206,7 +23238,7 @@
             "python3 scripts/yao.py output-review-kit --write-template",
             "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
             "python3 scripts/adjudicate_output_review.py --write-template",
-            "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+            "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
             "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
             "python3 scripts/yao.py output-review",
             "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -23233,10 +23265,13 @@
               "reports/output_review_adjudication.json summary.pending_count == 0",
               "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
               "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
+              "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+              "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
               "reports/skill_os2_audit.json item human-adjudication status becomes pass"
             ],
             "privacy_contract": [
               "Reviewer decisions should not include raw user data or private customer detail.",
+              "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
               "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
               "Keep the answer key separate until after decisions are recorded."
             ]
@@ -23283,7 +23318,7 @@
               "actual": 5,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Record a reviewer choice for every pair."
+              "next_action": "Record a reviewer choice and reason for every pair."
             },
             {
               "evidence_key": "human-adjudication",
@@ -23333,15 +23368,15 @@
               "actual": false,
               "status": "blocked",
               "source_accepted": false,
-              "next_action": "Complete all reviewer decisions with metadata and rationale."
+              "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
             }
           ],
           "blocked_source_check_count": 4,
           "next_source_actions": [
-            "Record a reviewer choice for every pair.",
+            "Record a reviewer choice and reason for every pair.",
             "Every pair needs one valid human judgment.",
             "Record reviewer and reviewed_at before adjudication can count.",
-            "Complete all reviewer decisions with metadata and rationale."
+            "Complete all reviewer decisions with reviewer metadata and rationale."
           ],
           "submission_state": {
             "status": "missing",
@@ -24458,11 +24493,11 @@
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
         },
-        "generated_at": "2026-06-17"
+        "generated_at": "2026-06-13"
       },
       "index": {
         "schema_version": "2.0",
-        "generated_at": "2026-06-17",
+        "generated_at": "2026-06-13",
         "package_count": 1,
         "packages": [
           {
@@ -25160,11 +25195,11 @@
     "install_simulation": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
-      "package_dir": "dist",
-      "install_root": "dist/install-simulation/simulate-yao-meta-skill",
-      "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
+      "package_dir": "tests/tmp_review_studio/dist",
+      "install_root": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill",
+      "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
         "archive_entry_count": 685,
@@ -25185,7 +25220,7 @@
         {
           "id": "archive-present",
           "status": "pass",
-          "detail": "Package archive exists: dist/yao-meta-skill.zip"
+          "detail": "Package archive exists: tests/tmp_review_studio/dist/yao-meta-skill.zip"
         },
         {
           "id": "archive-safe-paths",
@@ -25431,16 +25466,16 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "archive": "dist/yao-meta-skill.zip",
-        "package_manifest": "dist/manifest.json",
-        "json": "reports/install_simulation.json",
-        "markdown": "reports/install_simulation.md"
+        "archive": "tests/tmp_review_studio/dist/yao-meta-skill.zip",
+        "package_manifest": "tests/tmp_review_studio/dist/manifest.json",
+        "json": "tests/tmp_review_studio/install_simulation.json",
+        "markdown": "tests/tmp_review_studio/install_simulation.md"
       }
     },
     "upgrade_check": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "previous": {
         "name": "yao-meta-skill",
         "version": "1.0.0",
@@ -25529,8 +25564,8 @@
       "artifacts": {
         "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
         "current_package": "reports/registry_audit.json",
-        "json": "reports/upgrade_check.json",
-        "markdown": "reports/upgrade_check.md"
+        "json": "tests/tmp_review_studio/upgrade_check.json",
+        "markdown": "tests/tmp_review_studio/upgrade_check.md"
       }
     },
     "manifest": {

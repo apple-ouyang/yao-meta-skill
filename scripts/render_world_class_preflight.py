@@ -65,7 +65,7 @@ PREFLIGHT_SPECS: dict[str, list[dict[str, Any]]] = {
             "kind": "file",
             "path": "reports/output_review_kit.html",
             "required": True,
-            "next_action": "Open the blind review kit and record real reviewer choices.",
+            "next_action": "Open the blind review kit and record real reviewer choices with required rationale.",
         },
         {
             "key": "decision-template",
@@ -73,7 +73,7 @@ PREFLIGHT_SPECS: dict[str, list[dict[str, Any]]] = {
             "kind": "file",
             "path": "reports/output_review_decisions.json",
             "required": True,
-            "next_action": "Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+            "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
         },
         {
             "key": "decision-importer",

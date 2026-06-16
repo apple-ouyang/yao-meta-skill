@@ -287,7 +287,7 @@
           <dl>
             <dt>Current</dt><dd><code>present</code></dd>
             <dt>Status</dt><dd>pass</dd>
-            <dt>Action</dt><dd>Open the blind review kit and record real reviewer choices.</dd>
+            <dt>Action</dt><dd>Open the blind review kit and record real reviewer choices with required rationale.</dd>
           </dl>
         </article>
 
@@ -299,7 +299,7 @@
           <dl>
             <dt>Current</dt><dd><code>present</code></dd>
             <dt>Status</dt><dd>pass</dd>
-            <dt>Action</dt><dd>Import real A/B decisions with `python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication`.</dd>
+            <dt>Action</dt><dd>Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication`.</dd>
           </dl>
         </article>
 
@@ -353,7 +353,7 @@
             <dt>Current</dt><dd><code>5</code></dd>
             <dt>Expected</dt><dd><code>==0</code></dd>
             <dt>Status</dt><dd>blocked</dd>
-            <dt>Action</dt><dd>Record a reviewer choice for every pair.</dd>
+            <dt>Action</dt><dd>Record a reviewer choice and reason for every pair.</dd>
           </dl>
         </article>
 
@@ -418,14 +418,14 @@
             <dt>Current</dt><dd><code>False</code></dd>
             <dt>Expected</dt><dd><code>true</code></dd>
             <dt>Status</dt><dd>blocked</dd>
-            <dt>Action</dt><dd>Complete all reviewer decisions with metadata and rationale.</dd>
+            <dt>Action</dt><dd>Complete all reviewer decisions with reviewer metadata and rationale.</dd>
           </dl>
         </article>
         </div>
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
-          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.</li><li>python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.</li><li>python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
 

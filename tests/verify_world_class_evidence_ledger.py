@@ -175,6 +175,8 @@ def main() -> None:
     assert human_source["reviewer_metadata_present"]["status"] == "blocked", human_source
     assert human_source["reason_required"]["status"] == "pass", human_source
     assert human_source["ready_for_human_evidence"]["status"] == "blocked", human_source
+    assert "choice and reason" in human_source["pending_count"]["next_action"], human_source
+    assert "metadata and rationale" in human_source["ready_for_human_evidence"]["next_action"], human_source
     assert entries["native-permission-enforcement"]["observed_state"]["native_enforcement_count"] == 0, entries["native-permission-enforcement"]
     assert entries["native-permission-enforcement"]["observed_state"]["installer_enforcement_pass_count"] >= 0, entries["native-permission-enforcement"]
     assert any("summary.failure_count == 0" in check for check in entries["native-permission-enforcement"]["success_checks"]), entries["native-permission-enforcement"]

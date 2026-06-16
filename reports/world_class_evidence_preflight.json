@@ -198,7 +198,7 @@
           "label": "Blind review kit",
           "kind": "file",
           "required": true,
-          "next_action": "Open the blind review kit and record real reviewer choices.",
+          "next_action": "Open the blind review kit and record real reviewer choices with required rationale.",
           "secret_value_redacted": false,
           "path": "reports/output_review_kit.html",
           "status": "pass",
@@ -210,7 +210,7 @@
           "label": "Decision template",
           "kind": "file",
           "required": true,
-          "next_action": "Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+          "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
           "secret_value_redacted": false,
           "path": "reports/output_review_decisions.json",
           "status": "pass",
@@ -259,7 +259,7 @@
           "actual": 5,
           "status": "blocked",
           "source_accepted": false,
-          "next_action": "Record a reviewer choice for every pair."
+          "next_action": "Record a reviewer choice and reason for every pair."
         },
         {
           "evidence_key": "human-adjudication",
@@ -309,7 +309,7 @@
           "actual": false,
           "status": "blocked",
           "source_accepted": false,
-          "next_action": "Complete all reviewer decisions with metadata and rationale."
+          "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
         }
       ],
       "next_action": "Assign a real reviewer identity before claiming human adjudication.",
@@ -360,7 +360,7 @@
         "python3 scripts/yao.py output-review-kit --write-template",
         "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
         "python3 scripts/adjudicate_output_review.py --write-template",
-        "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.",
+        "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
         "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
         "python3 scripts/yao.py output-review",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
@@ -693,7 +693,7 @@
       "label": "Blind review kit",
       "kind": "file",
       "required": true,
-      "next_action": "Open the blind review kit and record real reviewer choices.",
+      "next_action": "Open the blind review kit and record real reviewer choices with required rationale.",
       "secret_value_redacted": false,
       "path": "reports/output_review_kit.html",
       "status": "pass",
@@ -705,7 +705,7 @@
       "label": "Decision template",
       "kind": "file",
       "required": true,
-      "next_action": "Import real A/B decisions with `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+      "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
       "secret_value_redacted": false,
       "path": "reports/output_review_decisions.json",
       "status": "pass",
@@ -854,7 +854,7 @@
       "actual": 5,
       "status": "blocked",
       "source_accepted": false,
-      "next_action": "Record a reviewer choice for every pair."
+      "next_action": "Record a reviewer choice and reason for every pair."
     },
     {
       "evidence_key": "human-adjudication",
@@ -904,7 +904,7 @@
       "actual": false,
       "status": "blocked",
       "source_accepted": false,
-      "next_action": "Complete all reviewer decisions with metadata and rationale."
+      "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
     },
     {
       "evidence_key": "native-permission-enforcement",

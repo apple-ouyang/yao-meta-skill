@@ -116,6 +116,8 @@ This report validates the intake contract for human and external evidence. A val
   - reports/output_review_adjudication.json summary.pending_count == 0
   - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
   - reports/output_review_adjudication.json summary.invalid_decision_count == 0
+  - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+  - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
   - reports/skill_os2_audit.json item human-adjudication status becomes pass
 - evidence_artifacts:
   - reports/output_blind_review_pack.md
@@ -130,6 +132,7 @@ This report validates the intake contract for human and external evidence. A val
   - reports/world_class_evidence_intake.md
 - privacy_contract:
   - Reviewer decisions should not include raw user data or private customer detail.
+  - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
   - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
   - Keep the answer key separate until after decisions are recorded.
 
@@ -138,7 +141,7 @@ This report validates the intake contract for human and external evidence. A val
 - `python3 scripts/yao.py output-review-kit --write-template`
 - Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - `python3 scripts/adjudicate_output_review.py --write-template`
-- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.
+- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.
 - `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
 - `python3 scripts/yao.py output-review`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`

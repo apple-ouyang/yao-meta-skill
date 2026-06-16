@@ -91,7 +91,7 @@ The review pack must hide whether Variant A or Variant B came from the baseline 
 
 ## Reviewer Adjudication
 
-After blind review, record reviewer choices in `reports/output_review_decisions.json` and run:
+After blind review, record reviewer choices in `reports/output_review_decisions.json` with `reviewer`, `reviewed_at`, `winner_variant`, optional `confidence`, and a required rubric-based `reason`, then run:
 
 ```bash
 python3 scripts/adjudicate_output_review.py --write-template
@@ -104,9 +104,9 @@ The adjudication report writes:
 - `reports/output_review_adjudication.json`
 - `reports/output_review_adjudication.md`
 
-When no reviewer decisions exist, the report should say the cases are pending and Review Studio should link to the decisions template. Do not count pending cases as human agreement. Only a real `winner_variant` of `A` or `B` should contribute to agreement rate, disagreement count, and reviewer judgment count.
+When no reviewer decisions exist, the report should say the cases are pending and Review Studio should link to the decisions template. Do not count pending cases as human agreement. Only a real `winner_variant` of `A` or `B` with reviewer metadata and a non-empty `reason` should contribute to agreement rate, disagreement count, and reviewer judgment count.
 
-The adjudication report must preserve blind-review integrity: pending and invalid decisions should show the expected winner as hidden. Only reveal `expected_winner_variant` after a valid reviewer decision exists for that case.
+The adjudication report must preserve blind-review integrity: pending and invalid decisions should show the expected winner as hidden. Only reveal `expected_winner_variant` after a valid reviewer decision with rationale exists for that case.
 
 ## Anti-Overfitting
 

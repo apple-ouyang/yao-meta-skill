@@ -26,7 +26,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |
 | --- | --- | --- | --- | ---: | --- | --- |
 | `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials. | operator with provider credentials |
-| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `4` | Record a reviewer choice for every pair. | human reviewer |
+| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `4` | Record a reviewer choice and reason for every pair. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
 | `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
 
@@ -109,7 +109,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - python3 scripts/yao.py output-review-kit --write-template
 - Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - python3 scripts/adjudicate_output_review.py --write-template
-- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with case_id, winner_variant, confidence, and reason only.
+- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.
 - python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication
 - python3 scripts/yao.py output-review
 - python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
@@ -135,11 +135,14 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/output_review_adjudication.json summary.pending_count == 0
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
 - reports/output_review_adjudication.json summary.invalid_decision_count == 0
+- reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+- reports/output_review_adjudication.json summary.ready_for_human_evidence is true
 - reports/skill_os2_audit.json item human-adjudication status becomes pass
 
 ### Privacy Contract
 
 - Reviewer decisions should not include raw user data or private customer detail.
+- Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
 - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
 - Keep the answer key separate until after decisions are recorded.
 
@@ -158,22 +161,22 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 ### Next Source Actions
 
-- Record a reviewer choice for every pair.
+- Record a reviewer choice and reason for every pair.
 - Every pair needs one valid human judgment.
 - Record reviewer and reviewed_at before adjudication can count.
-- Complete all reviewer decisions with metadata and rationale.
+- Complete all reviewer decisions with reviewer metadata and rationale.
 
 ### Source Evidence Snapshot
 
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | Review pairs exist | `5` | `>0` | `pass` | Generate the blind A/B review pack. |
-| No pending decisions | `5` | `==0` | `blocked` | Record a reviewer choice for every pair. |
+| No pending decisions | `5` | `==0` | `blocked` | Record a reviewer choice and reason for every pair. |
 | Judgments complete | `0` | `==pair_count` | `blocked` | Every pair needs one valid human judgment. |
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 | Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
 | Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
-| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with metadata and rationale. |
+| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with reviewer metadata and rationale. |
 
 ## Native Permission Enforcement
 

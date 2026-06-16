@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 8
+        "changed_file_count": 30
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -613,7 +613,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 360 个词/字，references 约 16914 个词/字。",
+            "入口约 360 个词/字，references 约 16934 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -677,7 +677,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 360 个词/字，references 约 16914 个词/字。",
+            "入口约 360 个词/字，references 约 16934 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -909,7 +909,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 360 个词/字，references 约 16914 个词/字。"
+          "上下文成本需要补强：入口约 360 个词/字，references 约 16934 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -957,7 +957,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 360 个词/字，references 约 16914 个词/字。"
+          "上下文成本需要补强：入口约 360 个词/字，references 约 16934 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",

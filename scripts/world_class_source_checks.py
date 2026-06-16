@@ -16,12 +16,12 @@ SOURCE_CHECK_SPECS = {
     ],
     "human-adjudication": [
         ("Review pairs exist", "pair_count", ">0", "Generate the blind A/B review pack."),
-        ("No pending decisions", "pending_count", "==0", "Record a reviewer choice for every pair."),
+        ("No pending decisions", "pending_count", "==0", "Record a reviewer choice and reason for every pair."),
         ("Judgments complete", "judgment_count", "==pair_count", "Every pair needs one valid human judgment."),
         ("No invalid decisions", "invalid_decision_count", "==0", "Fix malformed winner/confidence entries."),
         ("Reviewer metadata", "reviewer_metadata_present", "true", "Record reviewer and reviewed_at before adjudication can count."),
         ("Reason required", "reason_required", "true", "Keep reason mandatory for every imported or direct reviewer decision."),
-        ("Human evidence ready", "ready_for_human_evidence", "true", "Complete all reviewer decisions with metadata and rationale."),
+        ("Human evidence ready", "ready_for_human_evidence", "true", "Complete all reviewer decisions with reviewer metadata and rationale."),
     ],
     "native-permission-enforcement": [
         ("Native enforcement", "native_enforcement_count", ">0", "Collect real target-client or external runtime guard proof."),
