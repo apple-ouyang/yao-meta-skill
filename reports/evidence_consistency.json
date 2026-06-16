@@ -207,8 +207,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": false,
-      "actual": false,
+      "expected": true,
+      "actual": true,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "e74ebe23595710a237e83de176d4fd2e46067824",
-      "actual": "e74ebe23595710a237e83de176d4fd2e46067824",
+      "expected": "7c44c9af88f0e89fa5be795db91db170f826bf3e",
+      "actual": "7c44c9af88f0e89fa5be795db91db170f826bf3e",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -261,30 +261,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a5f307ba8e89acb55d03b1bcee3e0ea50471af388511f2e53c73aff6d96ffb7f",
+        "source_contract_sha256": "5599cd15154d9fa948e9907f5ada8e22486166be102739eed26e0a1fdad3a326",
         "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
         "world_class_source_blocked_count": 6,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "actual": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a5f307ba8e89acb55d03b1bcee3e0ea50471af388511f2e53c73aff6d96ffb7f",
+        "source_contract_sha256": "5599cd15154d9fa948e9907f5ada8e22486166be102739eed26e0a1fdad3a326",
         "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
         "world_class_source_blocked_count": 6,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "e74ebe23595710a237e83de176d4fd2e46067824",
-      "actual": "e74ebe23595710a237e83de176d4fd2e46067824",
+      "expected": "7c44c9af88f0e89fa5be795db91db170f826bf3e",
+      "actual": "7c44c9af88f0e89fa5be795db91db170f826bf3e",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -407,30 +407,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a5f307ba8e89acb55d03b1bcee3e0ea50471af388511f2e53c73aff6d96ffb7f",
+        "source_contract_sha256": "5599cd15154d9fa948e9907f5ada8e22486166be102739eed26e0a1fdad3a326",
         "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
         "world_class_source_blocked_count": 6,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "actual": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a5f307ba8e89acb55d03b1bcee3e0ea50471af388511f2e53c73aff6d96ffb7f",
+        "source_contract_sha256": "5599cd15154d9fa948e9907f5ada8e22486166be102739eed26e0a1fdad3a326",
         "archive_sha256": "996e36863203c30d3c518e0d635be054177dc5b774c9cd3d8311f77d69013a81",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
         "world_class_source_pass_count": 7,
         "world_class_source_blocked_count": 6,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5
+        "public_claim_blocker_count": 4
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
