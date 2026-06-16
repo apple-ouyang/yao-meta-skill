@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 489692/120000; top deferred scripts 429594; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 489964/120000; top deferred scripts 429866; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -76,7 +76,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "208 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 696 lines; 68 CLI handlers; 18 in entrypoint",
+      "detail": "208 Python files; 0 hotspots; 0 watchlist files; 0 blockers; largest 700 lines; 68 CLI handlers; 18 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md"
     },
@@ -1972,8 +1972,8 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "e3146f35d98391ddc8fbfad3eb08c8ce03ca6c3c055b507cd0e2c756430ff41b",
-          "source_contract_sha256": "95b883a7258f8b201a7f94b47a35fa3f665ac65160def6d41764f20e2cdb5e4d",
+          "evidence_bundle_sha256": "44a39ad8cf67fc298645856ba18644b083c014d9c9250ec29a8df0cf7b5ab1b5",
+          "source_contract_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -1996,7 +1996,7 @@
           "working_tree_dirty": false,
           "changed_file_count": 0
         },
-        "commit": "a5bdd57ea1005419464b6b84d7674fccee923e5a",
+        "commit": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2101,7 +2101,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 226,
-        "package_sha256": "95b883a7258f8b201a7f94b47a35fa3f665ac65160def6d41764f20e2cdb5e4d"
+        "package_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -2723,6 +2723,8 @@
               "attested_real_evidence": false,
               "privacy_contract_satisfied": false,
               "ledger_reviewer_approved": false,
+              "ledger_reviewer": "",
+              "ledger_reviewed_at": "",
               "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
@@ -2842,6 +2844,8 @@
               "attested_real_evidence": false,
               "privacy_contract_satisfied": false,
               "ledger_reviewer_approved": false,
+              "ledger_reviewer": "",
+              "ledger_reviewed_at": "",
               "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
@@ -2951,6 +2955,8 @@
               "attested_real_evidence": false,
               "privacy_contract_satisfied": false,
               "ledger_reviewer_approved": false,
+              "ledger_reviewer": "",
+              "ledger_reviewed_at": "",
               "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
@@ -3053,6 +3059,8 @@
               "attested_real_evidence": false,
               "privacy_contract_satisfied": false,
               "ledger_reviewer_approved": false,
+              "ledger_reviewer": "",
+              "ledger_reviewed_at": "",
               "ledger_counts_as_completion": false
             },
             "anti_overclaim": {
@@ -5651,7 +5659,7 @@
       "ok": true,
       "generated_at": "2026-06-16",
       "skill_dir": ".",
-      "commit": "a5bdd57ea1005419464b6b84d7674fccee923e5a",
+      "commit": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
       "git_status": {
         "available": true,
         "dirty": false,
@@ -5665,8 +5673,8 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "e3146f35d98391ddc8fbfad3eb08c8ce03ca6c3c055b507cd0e2c756430ff41b",
-        "source_contract_sha256": "95b883a7258f8b201a7f94b47a35fa3f665ac65160def6d41764f20e2cdb5e4d",
+        "evidence_bundle_sha256": "44a39ad8cf67fc298645856ba18644b083c014d9c9250ec29a8df0cf7b5ab1b5",
+        "source_contract_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895",
         "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5702,7 +5710,7 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "a5bdd57ea1005419464b6b84d7674fccee923e5a",
+        "commit": "4f3d9af19f2eb5be2564f5ef88272e1e82c17096",
         "status_scope": "generation-time status before this report is written",
         "reason": "clean generation-time HEAD"
       },
@@ -5712,7 +5720,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "e3146f35d98391ddc8fbfad3eb08c8ce03ca6c3c055b507cd0e2c756430ff41b"
+        "sha256": "44a39ad8cf67fc298645856ba18644b083c014d9c9250ec29a8df0cf7b5ab1b5"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5821,7 +5829,7 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 126302,
-          "sha256": "63e09a0238696ea3e85fec120f710c493092617451850628cd5cc99bb60dbbb3"
+          "sha256": "8d944c67b09286d14fc81fd7151e06387e6dc3e4d7bcf414d07185b05a174ec6"
         },
         {
           "label": "python_compatibility",
@@ -5869,8 +5877,8 @@
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 22028,
-          "sha256": "43da0b8f6283e1fac4f4a3acefec6d716bfc53c2bd24f1c0f2bd9c5ea2677eb4"
+          "bytes": 22288,
+          "sha256": "75569fdccc5b26ea72b847b4e4d963f9719cd23259991c7e17d6e53e65af56c3"
         },
         {
           "label": "world_class_evidence_intake",
@@ -5897,8 +5905,8 @@
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 24639,
-          "sha256": "5cc9b1e636da2c2c27f0588f7b9fabf46d5ff7f3e375d140486e30d51671dd20"
+          "bytes": 24899,
+          "sha256": "af89218e3dfc2d1bfd8d7455e078463363ac7c3af017622db6701b8d975c69ec"
         },
         {
           "label": "world_class_operator_runbook_markdown",
@@ -12096,7 +12104,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 226,
-        "package_sha256": "95b883a7258f8b201a7f94b47a35fa3f665ac65160def6d41764f20e2cdb5e4d"
+        "package_sha256": "a19c34849f99fe3f9166f7ba13c54d9ca709e1cec205ad3a1e82e8f1eb30d895"
       },
       "failures": [],
       "warnings": [],
@@ -16607,7 +16615,7 @@
         "warn_line_threshold": 900,
         "watch_line_threshold": 720,
         "block_line_threshold": 1500,
-        "largest_file_lines": 696,
+        "largest_file_lines": 700,
         "watchlist_count": 0,
         "hotspot_count": 0,
         "blocker_count": 0,
@@ -16615,18 +16623,18 @@
       },
       "largest_files": [
         {
+          "path": "scripts/world_class_evidence_contract.py",
+          "lines": 700,
+          "kind": "internal-module",
+          "severity": "pass",
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
           "path": "tests/verify_yao_cli.py",
           "lines": 696,
           "kind": "test",
           "severity": "pass",
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-        },
-        {
-          "path": "scripts/world_class_evidence_contract.py",
-          "lines": 687,
-          "kind": "internal-module",
-          "severity": "pass",
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
           "path": "scripts/render_review_viewer.py",
@@ -16636,18 +16644,18 @@
           "recommendation": "Split viewer data assembly from HTML section rendering."
         },
         {
+          "path": "tests/verify_world_class_evidence_intake.py",
+          "lines": 669,
+          "kind": "test",
+          "severity": "pass",
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
           "path": "scripts/skill_report_model.py",
           "lines": 665,
           "kind": "internal-module",
           "severity": "pass",
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
-          "path": "tests/verify_world_class_evidence_intake.py",
-          "lines": 663,
-          "kind": "test",
-          "severity": "pass",
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
         },
         {
           "path": "scripts/render_skill_os2_coverage.py",
@@ -16715,15 +16723,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1056256,
+        "other_text_tokens": 1057945,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1057053,
-        "deferred_resource_tokens": 489692,
+        "estimated_total_text_tokens": 1058742,
+        "deferred_resource_tokens": 489964,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 429594,
+            "estimated_tokens": 429866,
             "file_count": 135
           },
           {
@@ -16745,7 +16753,7 @@
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 429594,
+            "estimated_tokens": 429866,
             "file_count": 135
           }
         ],
@@ -16768,7 +16776,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 429594,
+              "estimated_tokens": 429866,
               "file_count": 135,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -20288,6 +20296,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -20407,6 +20417,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -20516,6 +20528,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -20618,6 +20632,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -22485,6 +22501,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -22618,6 +22636,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -22740,6 +22760,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
@@ -22856,6 +22878,8 @@
             "attested_real_evidence": false,
             "privacy_contract_satisfied": false,
             "ledger_reviewer_approved": false,
+            "ledger_reviewer": "",
+            "ledger_reviewed_at": "",
             "ledger_counts_as_completion": false
           },
           "anti_overclaim": {
