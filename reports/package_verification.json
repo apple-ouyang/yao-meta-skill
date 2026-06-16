@@ -1,15 +1,15 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-06-16",
+  "generated_at": "2026-06-17",
   "skill_dir": ".",
   "package_dir": "dist",
   "summary": {
     "target_count": 4,
     "adapter_count": 4,
     "archive_present": true,
-    "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
-    "archive_entry_count": 658,
+    "archive_sha256": "4195938709645eeb7c7a26afbd28b0a29a9162c61a15a1e003a42159a6c13fe7",
+    "archive_entry_count": 677,
     "failure_count": 0,
     "warning_count": 0
   },

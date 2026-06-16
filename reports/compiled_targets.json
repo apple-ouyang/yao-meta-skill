@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skill_dir": ".",
   "summary": {
     "target_count": 5,
@@ -512,12 +512,13 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 10,
+              "script_count": 11,
               "scripts": [
                 "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
+                "scripts/render_evidence_consistency.py",
                 "scripts/run_eval_suite.py",
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
@@ -554,7 +555,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 10,
+            "subprocess_script_count": 11,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -576,7 +577,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 10,
+            "subprocess": 11,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -768,12 +769,13 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 10,
+            "script_count": 11,
             "scripts": [
               "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
+              "scripts/render_evidence_consistency.py",
               "scripts/run_eval_suite.py",
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
@@ -810,7 +812,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 10,
+          "subprocess_script_count": 11,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -830,7 +832,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 10,
+          "subprocess": 11,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -1430,12 +1432,13 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 10,
+              "script_count": 11,
               "scripts": [
                 "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
+                "scripts/render_evidence_consistency.py",
                 "scripts/run_eval_suite.py",
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
@@ -1472,7 +1475,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 10,
+            "subprocess_script_count": 11,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -1494,7 +1497,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 10,
+            "subprocess": 11,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -1686,12 +1689,13 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 10,
+            "script_count": 11,
             "scripts": [
               "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
+              "scripts/render_evidence_consistency.py",
               "scripts/run_eval_suite.py",
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
@@ -1728,7 +1732,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 10,
+          "subprocess_script_count": 11,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -1748,7 +1752,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 10,
+          "subprocess": 11,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2348,12 +2352,13 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 10,
+              "script_count": 11,
               "scripts": [
                 "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
+                "scripts/render_evidence_consistency.py",
                 "scripts/run_eval_suite.py",
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
@@ -2390,7 +2395,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 10,
+            "subprocess_script_count": 11,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -2412,7 +2417,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 10,
+            "subprocess": 11,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -2597,12 +2602,13 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 10,
+            "script_count": 11,
             "scripts": [
               "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
+              "scripts/render_evidence_consistency.py",
               "scripts/run_eval_suite.py",
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
@@ -2639,7 +2645,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 10,
+          "subprocess_script_count": 11,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -2659,7 +2665,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 10,
+          "subprocess": 11,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -3250,12 +3256,13 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 10,
+              "script_count": 11,
               "scripts": [
                 "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
+                "scripts/render_evidence_consistency.py",
                 "scripts/run_eval_suite.py",
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
@@ -3292,7 +3299,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 10,
+            "subprocess_script_count": 11,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -3314,7 +3321,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 10,
+            "subprocess": 11,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -3499,12 +3506,13 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 10,
+            "script_count": 11,
             "scripts": [
               "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
+              "scripts/render_evidence_consistency.py",
               "scripts/run_eval_suite.py",
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
@@ -3541,7 +3549,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 10,
+          "subprocess_script_count": 11,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -3561,7 +3569,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 10,
+          "subprocess": 11,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -4152,12 +4160,13 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 10,
+              "script_count": 11,
               "scripts": [
                 "scripts/apply_adaptation.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
+                "scripts/render_evidence_consistency.py",
                 "scripts/run_eval_suite.py",
                 "scripts/run_output_execution.py",
                 "scripts/sync_local_install.py",
@@ -4194,7 +4203,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 10,
+            "subprocess_script_count": 11,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -4216,7 +4225,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 10,
+            "subprocess": 11,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -4405,12 +4414,13 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 10,
+            "script_count": 11,
             "scripts": [
               "scripts/apply_adaptation.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
+              "scripts/render_evidence_consistency.py",
               "scripts/run_eval_suite.py",
               "scripts/run_output_execution.py",
               "scripts/sync_local_install.py",
@@ -4447,7 +4457,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 10,
+          "subprocess_script_count": 11,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -4467,7 +4477,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 10,
+          "subprocess": 11,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",

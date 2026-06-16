@@ -108,7 +108,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock true; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock true",
+      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock false; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock false",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md"
     },
@@ -124,7 +124,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 7/13 pass; 6 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 6/13 pass; 7 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md"
     },
@@ -212,7 +212,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 7/13 pass; 6 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 6/13 pass; 7 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md"
     }
@@ -817,12 +817,12 @@
           "category": "external",
           "status": "pending",
           "readiness": "awaiting-submission",
-          "current": "external source events 0; adoption samples 1",
+          "current": "external source events 0; adoption samples 0",
           "next_action": "Install a real client against the native host and import production metadata-only events.",
           "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
           "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
-          "source_pass_count": 2,
-          "source_blocked_count": 1,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "blocked_checks": [
             {
               "label": "External events",
@@ -831,6 +831,14 @@
               "expected": ">0",
               "status": "blocked",
               "next_action": "Import at least one metadata-only event from a real client."
+            },
+            {
+              "label": "Adoption sample",
+              "field": "adoption_sample_count",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Telemetry must include adoption outcome evidence."
             }
           ],
           "commands": [
@@ -1375,7 +1383,7 @@
         "external_pending_count": 3,
         "human_pending_count": 1,
         "source_check_count": 13,
-        "source_pass_count": 7,
+        "source_pass_count": 6,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1434,7 +1442,8 @@
             "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
             "summary_en": "Real external-client metadata-only events have not been imported yet.",
             "blocked_checks": [
-              "External events"
+              "External events",
+              "Adoption sample"
             ]
           }
         ]
@@ -1959,13 +1968,13 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "c31f7210165c76ab9b288c6c7d5d228fd46c8c8627cd86ca095cc1033607e34f",
+          "evidence_bundle_sha256": "733cfff69f5bb93eb87cce2bd17695d88a40e88f9feca7db8a3d125128df5379",
           "source_contract_sha256": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b",
-          "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
+          "archive_sha256": "4195938709645eeb7c7a26afbd28b0a29a9162c61a15a1e003a42159a6c13fe7",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
           "command_count": 23,
@@ -1980,14 +1989,14 @@
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "world_class_source_check_count": 13,
-          "world_class_source_pass_count": 7,
-          "world_class_source_blocked_count": 6,
+          "world_class_source_pass_count": 6,
+          "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
-          "working_tree_dirty": false,
-          "changed_file_count": 0
+          "public_claim_blocker_count": 5,
+          "working_tree_dirty": true,
+          "changed_file_count": 56
         },
-        "commit": "b6ded57f9cc65b1dd7dbbac9c394647dadc131d7",
+        "commit": "67058cecebd13cd6e6fa54c009300cc145e8e999",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2130,7 +2139,7 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69",
+            "package_sha256": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b",
             "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b"
           },
           "compatibility": {
@@ -2178,8 +2187,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
-          "archive_entry_count": 658,
+          "archive_sha256": "4195938709645eeb7c7a26afbd28b0a29a9162c61a15a1e003a42159a6c13fe7",
+          "archive_entry_count": 677,
           "failure_count": 0,
           "warning_count": 0
         },
@@ -2262,7 +2271,7 @@
             {
               "field": "package_sha256",
               "from": "0000000000000000000000000000000000000000000000000000000000000000",
-              "to": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69"
+              "to": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b"
             }
           ]
         },
@@ -2279,14 +2288,14 @@
         "ok": true,
         "summary": {
           "event_count": 1,
-          "adoption_sample_count": 1,
-          "activation_count": 1,
-          "accepted_count": 1,
+          "adoption_sample_count": 0,
+          "activation_count": 0,
+          "accepted_count": 0,
           "edited_count": 0,
           "rejected_count": 0,
           "missed_count": 0,
           "failed_count": 0,
-          "adoption_rate": 100.0,
+          "adoption_rate": 0,
           "missed_trigger_count": 0,
           "wrong_trigger_count": 0,
           "bad_output_count": 0,
@@ -2295,7 +2304,7 @@
           "review_overdue_count": 0,
           "risk_band": "low",
           "event_types": {
-            "skill_activation": 1
+            "review_event": 1
           },
           "failure_types": {},
           "source_types": {
@@ -2562,7 +2571,7 @@
             "status": "external_required",
             "category": "external",
             "owner": "Browser/Chrome/IDE/provider client integrator",
-            "current": "external source events 0; adoption samples 1",
+            "current": "external source events 0; adoption samples 0",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -2615,8 +2624,8 @@
           "missing_submission_count": 4,
           "invalid_submission_count": 0,
           "source_check_count": 13,
-          "source_pass_count": 7,
-          "source_blocked_count": 6,
+          "source_pass_count": 6,
+          "source_blocked_count": 7,
           "submitted_but_pending_count": 0,
           "source_accepted_without_valid_submission_count": 0,
           "overclaim_guard_active": true,
@@ -2966,7 +2975,7 @@
             "status": "pending",
             "source_status": "external_required",
             "source_accepted": false,
-            "current": "external source events 0; adoption samples 1",
+            "current": "external source events 0; adoption samples 0",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -3003,7 +3012,7 @@
             ],
             "observed_state": {
               "external_source_events": 0,
-              "adoption_sample_count": 1,
+              "adoption_sample_count": 0,
               "raw_content_allowed": false,
               "risk_band": "low",
               "accepted": false
@@ -3024,8 +3033,8 @@
                 "label": "Adoption sample",
                 "field": "adoption_sample_count",
                 "expected": ">0",
-                "actual": 1,
-                "status": "pass",
+                "actual": 0,
+                "status": "blocked",
                 "source_accepted": false,
                 "next_action": "Telemetry must include adoption outcome evidence."
               },
@@ -3041,8 +3050,8 @@
               }
             ],
             "source_check_count": 3,
-            "source_pass_count": 2,
-            "source_blocked_count": 1,
+            "source_pass_count": 1,
+            "source_blocked_count": 2,
             "submission_state": {
               "status": "missing",
               "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -4692,7 +4701,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.12,
+          "duration_ms": 27.03,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4720,7 +4729,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.28,
+          "duration_ms": 25.75,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4743,7 +4752,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.37,
+          "duration_ms": 25.71,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4771,7 +4780,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.8,
+          "duration_ms": 27.67,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4794,7 +4803,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 29.59,
+          "duration_ms": 28.25,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4822,7 +4831,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.55,
+          "duration_ms": 26.51,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4845,7 +4854,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.89,
+          "duration_ms": 34.54,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4872,7 +4881,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.9,
+          "duration_ms": 30.74,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4895,7 +4904,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.03,
+          "duration_ms": 27.88,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4924,7 +4933,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.51,
+          "duration_ms": 26.38,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5650,23 +5659,36 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "b6ded57f9cc65b1dd7dbbac9c394647dadc131d7",
+      "commit": "67058cecebd13cd6e6fa54c009300cc145e8e999",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 56,
+        "sample": [
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
+          " M reports/adoption_drift_report.json",
+          " M reports/adoption_drift_report.md",
+          " M reports/benchmark_reproducibility.json",
+          " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
+          " M reports/context_budget.json",
+          " M reports/context_budget_summary.json",
+          " M reports/evidence_consistency.json",
+          " M reports/evidence_consistency.md",
+          " M reports/install_simulation.json"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "c31f7210165c76ab9b288c6c7d5d228fd46c8c8627cd86ca095cc1033607e34f",
+        "evidence_bundle_sha256": "733cfff69f5bb93eb87cce2bd17695d88a40e88f9feca7db8a3d125128df5379",
         "source_contract_sha256": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b",
-        "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
+        "archive_sha256": "4195938709645eeb7c7a26afbd28b0a29a9162c61a15a1e003a42159a6c13fe7",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
         "command_count": 23,
@@ -5681,29 +5703,30 @@
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_pass_count": 6,
+        "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 56
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
-          "world-class source checks are not all accepted (7/13 pass, 6 blocked)"
+          "world-class source checks are not all accepted (6/13 pass, 7 blocked)"
         ],
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "b6ded57f9cc65b1dd7dbbac9c394647dadc131d7",
+        "ready": false,
+        "commit": "67058cecebd13cd6e6fa54c009300cc145e8e999",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5711,7 +5734,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "c31f7210165c76ab9b288c6c7d5d228fd46c8c8627cd86ca095cc1033607e34f"
+        "sha256": "733cfff69f5bb93eb87cce2bd17695d88a40e88f9feca7db8a3d125128df5379"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5784,8 +5807,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7965,
-          "sha256": "6334c2f0261c2c978ebcb518cdac4ddf409f41e3732b08998c8e4b80529e446d"
+          "bytes": 7967,
+          "sha256": "6450488d6ac4f80b0160161d5385bbf2f6aec2856076621a81027ae5c89fa38a"
         },
         {
           "label": "blind_review",
@@ -5834,84 +5857,84 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "dfd07c1825de99435bd661e2663ae74251bbe03cb5ddda66d268efb6a872eb31"
+          "sha256": "8683ab3f627c2fe16c77dabe34798d2fb6942bb05c636cc35e4f6edd617c79d5"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 19338,
-          "sha256": "a27941fdb8651371fc7abc69247e15cf8e2863d5805b0538d67c326d4095148f"
+          "sha256": "1372317d59e9ff19cfa4f69bfcfb5ddb9a9770f5628d9454a8f165e363c5b95b"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
-          "bytes": 8758,
-          "sha256": "5269d6e6364aaa39e935cbf02df7569a6a88d2653120bc6e3e34d3684a73639d"
+          "bytes": 8604,
+          "sha256": "3a707c08d4b0df167b835215f0f7696568a5a1e4099854d8a02647cdcd5b8b37"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14310,
-          "sha256": "390d0bb42652e9f84fcab195de1da3c9cda213c254fd9319d31c54dd8429aee7"
+          "sha256": "453a86240e7fe1a703615ba3ce9a97d940e9c552ee9e39d5cccbf7c3481dd507"
         },
         {
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
           "bytes": 20828,
-          "sha256": "9b74155fb9bfe44ba838d64b1a31768b83978b154bdd8eaa606f494c816f189f"
+          "sha256": "0a836a86ad6c648d8c442a16cae7cdb17d3640a0ba6ec69c1290825ede6d152a"
         },
         {
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 22285,
-          "sha256": "f6e1a69b0359c28c88e9e9e69ff66763c721ac8a112a43a673ce98cd9d3bce41"
+          "bytes": 22288,
+          "sha256": "fe81833eab69292525975b347177bc7fcda6410f493fc60bd840a20e86ca0039"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
           "bytes": 19319,
-          "sha256": "46f801051ec075725059e4e2682ef2162fd892b5e7255c8d5121d7b24dcc7f2c"
+          "sha256": "4506c836338c65a3a01b15b1f26a1fdd0a8ef520a1e5f1574ee89ce9d3bbeb29"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 41202,
-          "sha256": "b7fd72d7e75486612f65a9bb73b1ab59106103ebf3ad10dd446cd80903088454"
+          "bytes": 41208,
+          "sha256": "725d10a6f951ab1e64f4e6a1cfa907404b51f598a753b5a0351e1381fef7cd9e"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 13655,
-          "sha256": "9fbd4cd437986fca9a043cbab24aec7d575aaf166a8d9365c79c56f093cab5b8"
+          "bytes": 13658,
+          "sha256": "7693638c2e8369a8a179b3420c11090668f8f104f452dc370082dc9ebafe882d"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 24835,
-          "sha256": "2d32a2e917b7215afe7a7a93ca8bacffa540a245953aa39e2ee47eea1b169d17"
+          "bytes": 24899,
+          "sha256": "f90d59c3e5866da33138869c1c5299350a43389d81e84ba466df794befb494fa"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 15424,
-          "sha256": "00d8ebabb91e14a06cacdb212f448668aa1e47b72587448e30681fc53acaad9a"
+          "bytes": 15479,
+          "sha256": "be79ee0f70a3ceed473c481562c5fddaee6cfb36c960ba15ae10c846d5809650"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 21348,
-          "sha256": "ca72c65b437b2211d08b9d463c9a33a7993b4e388bb75f62757ead4dfcf81a49"
+          "bytes": 21409,
+          "sha256": "9a7be02a6990245c9dd1f72ced5928d80a3aaebea4647737c2aaf0b0a2f798df"
         },
         {
           "label": "world_class_claim_guard",
@@ -6064,22 +6087,22 @@
         "item_count": 21,
         "module_count": 8,
         "recommended_pr_count": 13,
-        "pass_count": 20,
-        "warn_count": 1,
+        "pass_count": 21,
+        "warn_count": 0,
         "missing_count": 0,
         "extension_track_count": 4,
         "extension_partial_count": 0,
         "extension_planned_count": 0,
         "extension_covered_count": 4,
         "adaptive_extension_ready": true,
-        "local_blueprint_ready": false,
+        "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_evidence_pending_count": 4,
-        "decision": "continue-implementation"
+        "decision": "local-blueprint-covered-evidence-pending"
       },
       "status_counts": {
-        "pass": 20,
-        "warn": 1,
+        "pass": 21,
+        "warn": 0,
         "missing": 0
       },
       "extension_status_counts": {
@@ -6261,7 +6284,7 @@
           "label": "Registry Distribution",
           "status": "pass",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 658; install failures 0",
+          "current": "archive entries 677; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip && python3 scripts/yao.py registry-audit .",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -6668,7 +6691,7 @@
           "key": "evidence-consistency",
           "category": "recommended-pr",
           "label": "Evidence Consistency",
-          "status": "warn",
+          "status": "pass",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
           "current": "36 consistency checks",
           "command": "make ci-test",
@@ -6869,7 +6892,7 @@
     "compiled_targets": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "summary": {
         "target_count": 5,
@@ -7380,12 +7403,13 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 10,
+                  "script_count": 11,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
                     "scripts/render_eval_dashboard.py",
+                    "scripts/render_evidence_consistency.py",
                     "scripts/run_eval_suite.py",
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
@@ -7422,7 +7446,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 73,
-                "subprocess_script_count": 10,
+                "subprocess_script_count": 11,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -7444,7 +7468,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 73,
-                "subprocess": 10,
+                "subprocess": 11,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -7636,12 +7660,13 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 10,
+                "script_count": 11,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
                   "scripts/render_eval_dashboard.py",
+                  "scripts/render_evidence_consistency.py",
                   "scripts/run_eval_suite.py",
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
@@ -7678,7 +7703,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 73,
-              "subprocess_script_count": 10,
+              "subprocess_script_count": 11,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -7698,7 +7723,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 73,
-              "subprocess": 10,
+              "subprocess": 11,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -8298,12 +8323,13 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 10,
+                  "script_count": 11,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
                     "scripts/render_eval_dashboard.py",
+                    "scripts/render_evidence_consistency.py",
                     "scripts/run_eval_suite.py",
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
@@ -8340,7 +8366,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 73,
-                "subprocess_script_count": 10,
+                "subprocess_script_count": 11,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -8362,7 +8388,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 73,
-                "subprocess": 10,
+                "subprocess": 11,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -8554,12 +8580,13 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 10,
+                "script_count": 11,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
                   "scripts/render_eval_dashboard.py",
+                  "scripts/render_evidence_consistency.py",
                   "scripts/run_eval_suite.py",
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
@@ -8596,7 +8623,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 73,
-              "subprocess_script_count": 10,
+              "subprocess_script_count": 11,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -8616,7 +8643,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 73,
-              "subprocess": 10,
+              "subprocess": 11,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -9216,12 +9243,13 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 10,
+                  "script_count": 11,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
                     "scripts/render_eval_dashboard.py",
+                    "scripts/render_evidence_consistency.py",
                     "scripts/run_eval_suite.py",
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
@@ -9258,7 +9286,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 73,
-                "subprocess_script_count": 10,
+                "subprocess_script_count": 11,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -9280,7 +9308,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 73,
-                "subprocess": 10,
+                "subprocess": 11,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -9465,12 +9493,13 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 10,
+                "script_count": 11,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
                   "scripts/render_eval_dashboard.py",
+                  "scripts/render_evidence_consistency.py",
                   "scripts/run_eval_suite.py",
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
@@ -9507,7 +9536,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 73,
-              "subprocess_script_count": 10,
+              "subprocess_script_count": 11,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -9527,7 +9556,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 73,
-              "subprocess": 10,
+              "subprocess": 11,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -10118,12 +10147,13 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 10,
+                  "script_count": 11,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
                     "scripts/render_eval_dashboard.py",
+                    "scripts/render_evidence_consistency.py",
                     "scripts/run_eval_suite.py",
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
@@ -10160,7 +10190,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 73,
-                "subprocess_script_count": 10,
+                "subprocess_script_count": 11,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -10182,7 +10212,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 73,
-                "subprocess": 10,
+                "subprocess": 11,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -10367,12 +10397,13 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 10,
+                "script_count": 11,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
                   "scripts/render_eval_dashboard.py",
+                  "scripts/render_evidence_consistency.py",
                   "scripts/run_eval_suite.py",
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
@@ -10409,7 +10440,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 73,
-              "subprocess_script_count": 10,
+              "subprocess_script_count": 11,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -10429,7 +10460,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 73,
-              "subprocess": 10,
+              "subprocess": 11,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -11020,12 +11051,13 @@
                 },
                 "subprocess": {
                   "required": true,
-                  "script_count": 10,
+                  "script_count": 11,
                   "scripts": [
                     "scripts/apply_adaptation.py",
                     "scripts/ci_test.py",
                     "scripts/render_benchmark_reproducibility.py",
                     "scripts/render_eval_dashboard.py",
+                    "scripts/render_evidence_consistency.py",
                     "scripts/run_eval_suite.py",
                     "scripts/run_output_execution.py",
                     "scripts/sync_local_install.py",
@@ -11062,7 +11094,7 @@
                 "secret_findings": 0,
                 "network_script_count": 3,
                 "file_write_script_count": 73,
-                "subprocess_script_count": 10,
+                "subprocess_script_count": 11,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
               }
@@ -11084,7 +11116,7 @@
               "capability_counts": {
                 "network": 3,
                 "file_write": 73,
-                "subprocess": 10,
+                "subprocess": 11,
                 "interactive": 0
               },
               "evidence": "reports/security_trust_report.json",
@@ -11273,12 +11305,13 @@
               },
               "subprocess": {
                 "required": true,
-                "script_count": 10,
+                "script_count": 11,
                 "scripts": [
                   "scripts/apply_adaptation.py",
                   "scripts/ci_test.py",
                   "scripts/render_benchmark_reproducibility.py",
                   "scripts/render_eval_dashboard.py",
+                  "scripts/render_evidence_consistency.py",
                   "scripts/run_eval_suite.py",
                   "scripts/run_output_execution.py",
                   "scripts/sync_local_install.py",
@@ -11315,7 +11348,7 @@
               "secret_findings": 0,
               "network_script_count": 3,
               "file_write_script_count": 73,
-              "subprocess_script_count": 10,
+              "subprocess_script_count": 11,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
             }
@@ -11335,7 +11368,7 @@
             "capability_counts": {
               "network": 3,
               "file_write": 73,
-              "subprocess": 10,
+              "subprocess": 11,
               "interactive": 0
             },
             "evidence": "reports/security_trust_report.json",
@@ -11683,7 +11716,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "package_dir": "tests/tmp_review_studio/dist",
+      "package_dir": "dist",
       "expected_capabilities": [
         "file_write",
         "network",
@@ -11723,7 +11756,7 @@
         {
           "target": "openai",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/openai/adapter.json",
+          "adapter": "dist/targets/openai/adapter.json",
           "permission_model": "metadata-only",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -11820,7 +11853,7 @@
         {
           "target": "claude",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/claude/adapter.json",
+          "adapter": "dist/targets/claude/adapter.json",
           "permission_model": "neutral-source-plus-adapter",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -11902,7 +11935,7 @@
         {
           "target": "generic",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/generic/adapter.json",
+          "adapter": "dist/targets/generic/adapter.json",
           "permission_model": "agent-skills-compatible-metadata",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -11984,7 +12017,7 @@
         {
           "target": "vscode",
           "status": "pass",
-          "adapter": "tests/tmp_review_studio/dist/targets/vscode/adapter.json",
+          "adapter": "dist/targets/vscode/adapter.json",
           "permission_model": "vscode-workspace-trust-plus-metadata",
           "native_enforcement": false,
           "metadata_fallback_explicit": true,
@@ -16847,9 +16880,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1078122,
+        "other_text_tokens": 1078201,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1078919,
+        "estimated_total_text_tokens": 1078998,
         "deferred_resource_tokens": 495718,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -17980,8 +18013,8 @@
               "report": "reports/adoption_drift_report.json",
               "risk_band": "low",
               "event_count": 1,
-              "adoption_sample_count": 1,
-              "adoption_rate": 100.0,
+              "adoption_sample_count": 0,
+              "adoption_rate": 0,
               "candidate_count": 0
             }
           },
@@ -18812,7 +18845,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-16T16:15:39Z",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -18836,14 +18869,14 @@
       },
       "summary": {
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "activation_count": 1,
-        "accepted_count": 1,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
         "edited_count": 0,
         "rejected_count": 0,
         "missed_count": 0,
         "failed_count": 0,
-        "adoption_rate": 100.0,
+        "adoption_rate": 0,
         "missed_trigger_count": 0,
         "wrong_trigger_count": 0,
         "bad_output_count": 0,
@@ -18852,7 +18885,7 @@
         "review_overdue_count": 0,
         "risk_band": "low",
         "event_types": {
-          "skill_activation": 1
+          "review_event": 1
         },
         "failure_types": {},
         "source_types": {
@@ -18864,31 +18897,31 @@
         {
           "skill": "yao-meta-skill",
           "events": 1,
-          "adoption_events": 1,
-          "accepted": 1,
+          "adoption_events": 0,
+          "accepted": 0,
           "edited": 0,
           "rejected": 0,
           "missed": 0,
-          "adoption_rate": 100.0
+          "adoption_rate": 0
         }
       ],
       "next_iteration_candidates": [],
       "recent_events": [
         {
           "command": "unknown",
-          "event": "skill_activation",
+          "event": "review_event",
           "skill": "yao-meta-skill",
           "source": "manual",
           "version": "1.1.0",
-          "activation_type": "explicit",
-          "outcome": "accepted",
+          "activation_type": "manual",
+          "outcome": "reviewed",
           "failure_type": "none",
-          "timestamp": "2026-06-13T10:00:00Z"
+          "timestamp": "2026-06-13T12:00:00Z"
         }
       ],
       "failures": [],
       "artifacts": {
-        "events_jsonl": "tests/tmp_review_studio/telemetry_events.jsonl",
+        "events_jsonl": "reports/telemetry_events.jsonl",
         "json": "reports/adoption_drift_report.json",
         "markdown": "reports/adoption_drift_report.md"
       }
@@ -18909,7 +18942,7 @@
       "local_blueprint_ready": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
@@ -18926,7 +18959,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
@@ -19375,7 +19408,7 @@
         "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true
       },
       "actions": [
@@ -19424,7 +19457,7 @@
       "top_score": 88,
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
@@ -19444,7 +19477,7 @@
         "top_score": 88,
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
@@ -19697,7 +19730,7 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
@@ -19732,7 +19765,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "summary": {
         "waiver_count": 0,
         "active_count": 0,
@@ -19822,7 +19855,7 @@
             "Reviewer links output_review_adjudication or output_execution evidence."
           ],
           "suggested_evidence": "reports/output_review_adjudication.md",
-          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-13 --evidence reports/output_review_adjudication.md",
+          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-06-17 --evidence reports/output_review_adjudication.md",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
         },
         {
@@ -19852,7 +19885,7 @@
       "schema_version": "1.0",
       "ok": true,
       "skill_dir": ".",
-      "source": "tests/tmp_review_studio/empty_review_annotations_input.json",
+      "source": "reports/review_annotations_input.json",
       "summary": {
         "annotation_count": 0,
         "open_count": 0,
@@ -20288,8 +20321,8 @@
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "source_check_count": 13,
-      "source_pass_count": 7,
-      "source_blocked_count": 6,
+      "source_pass_count": 6,
+      "source_blocked_count": 7,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
@@ -20305,8 +20338,8 @@
         "missing_submission_count": 4,
         "invalid_submission_count": 0,
         "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "submitted_but_pending_count": 0,
         "source_accepted_without_valid_submission_count": 0,
         "overclaim_guard_active": true,
@@ -20682,7 +20715,7 @@
           "status": "pending",
           "source_status": "external_required",
           "source_accepted": false,
-          "current": "external source events 0; adoption samples 1",
+          "current": "external source events 0; adoption samples 0",
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
           "runbook": [
             "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -20719,7 +20752,7 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -20740,8 +20773,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -20757,8 +20790,8 @@
             }
           ],
           "source_check_count": 3,
-          "source_pass_count": 2,
-          "source_blocked_count": 1,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -21110,7 +21143,7 @@
           "source_accepted": false,
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -21194,8 +21227,8 @@
         "collection_ready_count": 1,
         "collection_blocked_count": 3,
         "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "pending_count": 4,
         "ready_to_claim_world_class": false,
         "credential_value_exposed": false,
@@ -21715,8 +21748,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -22071,8 +22104,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -22155,8 +22188,8 @@
       "unmatched_submission_count": 0,
       "invalid_submission_count": 0,
       "source_check_count": 13,
-      "source_pass_count": 7,
-      "source_blocked_count": 6,
+      "source_pass_count": 6,
+      "source_blocked_count": 7,
       "review_counts_submission_as_completion": false,
       "summary": {
         "review_item_count": 4,
@@ -22168,8 +22201,8 @@
         "unmatched_submission_count": 0,
         "invalid_submission_count": 0,
         "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "ready_to_claim_world_class": false,
         "review_counts_submission_as_completion": false,
         "decision": "awaiting-submissions"
@@ -22443,7 +22476,7 @@
           "intake_errors": [],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -22464,8 +22497,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -22481,8 +22514,8 @@
             }
           ],
           "source_check_count": 3,
-          "source_pass_count": 2,
-          "source_blocked_count": 1,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "success_checks": [
             "reports/adoption_drift_report.json summary.source_types.external > 0",
             "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
@@ -22519,8 +22552,8 @@
         "valid_packet_source_incomplete_count": 0,
         "invalid_submission_count": 0,
         "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_pass_count": 6,
+        "source_blocked_count": 7,
         "ready_to_claim_world_class": false,
         "runbook_counts_as_completion": false,
         "decision": "collect-evidence"
@@ -22915,7 +22948,7 @@
           "review_state": "awaiting-submission",
           "source_accepted": false,
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
-          "current": "external source events 0; adoption samples 1",
+          "current": "external source events 0; adoption samples 0",
           "execution_runbook": [
             "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
             "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
@@ -22963,7 +22996,7 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
             "risk_band": "low",
             "accepted": false
@@ -22984,8 +23017,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -23000,9 +23033,10 @@
               "next_action": "Telemetry must stay metadata-only."
             }
           ],
-          "blocked_source_check_count": 1,
+          "blocked_source_check_count": 2,
           "next_source_actions": [
-            "Import at least one metadata-only event from a real client."
+            "Import at least one metadata-only event from a real client.",
+            "Telemetry must include adoption outcome evidence."
           ],
           "submission_state": {
             "status": "missing",
@@ -23841,7 +23875,7 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69",
+          "package_sha256": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b",
           "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b"
         },
         "compatibility": {
@@ -23898,7 +23932,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/yao-meta-skill.json",
-            "package_sha256": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69"
+            "package_sha256": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b"
           }
         ]
       },
@@ -23914,15 +23948,15 @@
     "package_verification": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-16",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "package_dir": "dist",
       "summary": {
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
-        "archive_entry_count": 658,
+        "archive_sha256": "4195938709645eeb7c7a26afbd28b0a29a9162c61a15a1e003a42159a6c13fe7",
+        "archive_entry_count": 677,
         "failure_count": 0,
         "warning_count": 0
       },
@@ -24580,11 +24614,11 @@
     "install_simulation": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "package_dir": "tests/tmp_review_studio/dist",
-      "install_root": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill",
-      "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
+      "package_dir": "dist",
+      "install_root": "dist/install-simulation/simulate-yao-meta-skill",
+      "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
         "archive_entry_count": 677,
@@ -24605,7 +24639,7 @@
         {
           "id": "archive-present",
           "status": "pass",
-          "detail": "Package archive exists: tests/tmp_review_studio/dist/yao-meta-skill.zip"
+          "detail": "Package archive exists: dist/yao-meta-skill.zip"
         },
         {
           "id": "archive-safe-paths",
@@ -24851,16 +24885,16 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "archive": "tests/tmp_review_studio/dist/yao-meta-skill.zip",
-        "package_manifest": "tests/tmp_review_studio/dist/manifest.json",
-        "json": "tests/tmp_review_studio/install_simulation.json",
-        "markdown": "tests/tmp_review_studio/install_simulation.md"
+        "archive": "dist/yao-meta-skill.zip",
+        "package_manifest": "dist/manifest.json",
+        "json": "reports/install_simulation.json",
+        "markdown": "reports/install_simulation.md"
       }
     },
     "upgrade_check": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "previous": {
         "name": "yao-meta-skill",
         "version": "1.0.0",
@@ -24934,7 +24968,7 @@
           {
             "field": "package_sha256",
             "from": "0000000000000000000000000000000000000000000000000000000000000000",
-            "to": "d50f6ac9714b62b985f9f9edb181f87bb57246be1e4249cb92e7e4a87ae5aa69"
+            "to": "9cb9a19e774540e721b143a240baf41b41c32b9f10df532eb4a7d1cf7a2fe67b"
           }
         ]
       },
@@ -24949,8 +24983,8 @@
       "artifacts": {
         "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
         "current_package": "reports/registry_audit.json",
-        "json": "tests/tmp_review_studio/upgrade_check.json",
-        "markdown": "tests/tmp_review_studio/upgrade_check.md"
+        "json": "reports/upgrade_check.json",
+        "markdown": "reports/upgrade_check.md"
       }
     },
     "manifest": {
