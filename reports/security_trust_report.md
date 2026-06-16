@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `238`
-- Scripts: `146`
-- Internal script modules: `60`
+- Scanned files: `239`
+- Scripts: `147`
+- Internal script modules: `61`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `238`
-- Package SHA256: `58b8388686e47011bcd943ed528b172b2f5991430fcc41eb3f86146f47498652`
+- Package hash files: `239`
+- Package SHA256: `e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995`
 
 ## Failures
 
@@ -78,6 +78,7 @@
 | scripts/context_sizer.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/create_iteration_snapshot.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/cross_packager.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/cross_packager_contracts.py | internal-module | True | False | False | False | False | False | False | Imported by cross_packager.py to keep platform contract data separate from packaging flow. |
 | scripts/description_optimizer_reporting.py | internal-module | True | False | False | False | False | False | False | Imported by optimize_description.py to render description optimization reports. |
 | scripts/diff_eval.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/emit_telemetry_event.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

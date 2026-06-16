@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skill_dir": ".",
   "summary": {
     "target_count": 5,
@@ -165,6 +165,7 @@
             "scripts/context_sizer.py",
             "scripts/create_iteration_snapshot.py",
             "scripts/cross_packager.py",
+            "scripts/cross_packager_contracts.py",
             "scripts/description_optimizer_reporting.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
@@ -351,7 +352,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           }
@@ -623,7 +624,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 35,
-              "scripts": 146,
+              "scripts": 147,
               "assets": 6,
               "reports": 43
             },
@@ -634,7 +635,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 146,
+            "script_count": 147,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -878,7 +879,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           },
@@ -889,7 +890,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 146,
+          "script_count": 147,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1111,6 +1112,7 @@
             "scripts/context_sizer.py",
             "scripts/create_iteration_snapshot.py",
             "scripts/cross_packager.py",
+            "scripts/cross_packager_contracts.py",
             "scripts/description_optimizer_reporting.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
@@ -1297,7 +1299,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           }
@@ -1569,7 +1571,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 35,
-              "scripts": 146,
+              "scripts": 147,
               "assets": 6,
               "reports": 43
             },
@@ -1580,7 +1582,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 146,
+            "script_count": 147,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1824,7 +1826,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           },
@@ -1835,7 +1837,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 146,
+          "script_count": 147,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2057,6 +2059,7 @@
             "scripts/context_sizer.py",
             "scripts/create_iteration_snapshot.py",
             "scripts/cross_packager.py",
+            "scripts/cross_packager_contracts.py",
             "scripts/description_optimizer_reporting.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
@@ -2243,7 +2246,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           }
@@ -2515,7 +2518,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 35,
-              "scripts": 146,
+              "scripts": 147,
               "assets": 6,
               "reports": 43
             },
@@ -2525,7 +2528,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 146,
+            "script_count": 147,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2763,7 +2766,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           },
@@ -2773,7 +2776,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 146,
+          "script_count": 147,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2987,6 +2990,7 @@
             "scripts/context_sizer.py",
             "scripts/create_iteration_snapshot.py",
             "scripts/cross_packager.py",
+            "scripts/cross_packager_contracts.py",
             "scripts/description_optimizer_reporting.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
@@ -3173,7 +3177,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           }
@@ -3445,7 +3449,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 35,
-              "scripts": 146,
+              "scripts": 147,
               "assets": 6,
               "reports": 43
             },
@@ -3456,7 +3460,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 146,
+            "script_count": 147,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3693,7 +3697,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           },
@@ -3704,7 +3708,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 146,
+          "script_count": 147,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3917,6 +3921,7 @@
             "scripts/context_sizer.py",
             "scripts/create_iteration_snapshot.py",
             "scripts/cross_packager.py",
+            "scripts/cross_packager_contracts.py",
             "scripts/description_optimizer_reporting.py",
             "scripts/diff_eval.py",
             "scripts/emit_telemetry_event.py",
@@ -4103,7 +4108,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           }
@@ -4375,7 +4380,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 35,
-              "scripts": 146,
+              "scripts": 147,
               "assets": 6,
               "reports": 43
             },
@@ -4386,7 +4391,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 146,
+            "script_count": 147,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -4627,7 +4632,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 35,
-            "scripts": 146,
+            "scripts": 147,
             "assets": 6,
             "reports": 43
           },
@@ -4638,7 +4643,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 146,
+          "script_count": 147,
           "help_smoke_failed_count": 0
         },
         "permissions": {

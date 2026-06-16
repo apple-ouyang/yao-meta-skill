@@ -1,21 +1,21 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-13`
+Generated at: `2026-06-17`
 
 ## Summary
 
 - decision: `pass`
-- python files: `221`
-- scripts: `146`
+- python files: `222`
+- scripts: `147`
 - tests: `75`
-- internal modules: `62`
+- internal modules: `63`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
 - largest file lines: `696`
 - early watch threshold lines: `600`
-- early watchlist: `3`
+- early watchlist: `2`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -36,7 +36,6 @@ No near-threshold files found.
 | File | Lines | Kind | Recommended next split |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/cross_packager.py` | `638` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 | `tests/verify_world_class_evidence_intake.py` | `628` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 
 ## Largest Files
@@ -44,7 +43,6 @@ No near-threshold files found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
-| `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `628` | `test` | `pass` |
 | `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
@@ -55,6 +53,7 @@ No near-threshold files found.
 | `scripts/render_evidence_consistency.py` | `568` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `568` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_ledger.py` | `567` | `test` | `pass` |
+| `scripts/render_world_class_preflight.py` | `562` | `cli-script` | `pass` |
 
 ## Release Rule
 

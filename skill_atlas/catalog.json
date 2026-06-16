@@ -1,6 +1,6 @@
 {
   "workspace_root": ".",
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "skills": [
     {
       "name": "yao-meta-skill",
@@ -36,6 +36,7 @@
         "scripts/context_sizer.py",
         "scripts/create_iteration_snapshot.py",
         "scripts/cross_packager.py",
+        "scripts/cross_packager_contracts.py",
         "scripts/description_optimizer_reporting.py",
         "scripts/diff_eval.py",
         "scripts/emit_telemetry_event.py",

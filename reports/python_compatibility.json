@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-06-13",
+  "generated_at": "2026-06-17",
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 224,
+    "file_count": 225,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -132,6 +132,12 @@
     },
     {
       "path": "scripts/cross_packager.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/cross_packager_contracts.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

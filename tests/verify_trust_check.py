@@ -99,6 +99,7 @@ def main() -> None:
         "scripts/build_skill_atlas_layout.py",
         "scripts/build_skill_atlas_opportunities.py",
         "scripts/compile_skill_targets.py",
+        "scripts/cross_packager_contracts.py",
         "scripts/description_optimizer_reporting.py",
         "scripts/reference_synthesis_markdown.py",
         "scripts/review_studio_formatting.py",
@@ -141,6 +142,7 @@ def main() -> None:
     assert "build_skill_atlas_layout.py" not in warning_text, payload["warnings"]
     assert "build_skill_atlas_opportunities.py" not in warning_text, payload["warnings"]
     assert "compile_skill_targets.py" not in warning_text, payload["warnings"]
+    assert "cross_packager_contracts.py" not in warning_text, payload["warnings"]
     assert "description_optimizer_reporting.py" not in warning_text, payload["warnings"]
     assert "reference_synthesis_markdown.py" not in warning_text, payload["warnings"]
     assert "review_studio_formatting.py" not in warning_text, payload["warnings"]
