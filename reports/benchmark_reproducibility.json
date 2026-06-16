@@ -3,35 +3,22 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "03aa6287123b4f47aad2a7abd59bb950e4d577e6",
+  "commit": "53ef4d394c7c1251a58fa19e809004c1bdc8a64f",
   "git_status": {
     "available": true,
-    "dirty": true,
-    "changed_file_count": 13,
-    "sample": [
-      " M reports/benchmark_reproducibility.json",
-      " M reports/benchmark_reproducibility.md",
-      " M reports/context_budget_summary.json",
-      " M reports/evidence_consistency.json",
-      " M reports/python_compatibility.json",
-      " M reports/python_compatibility.md",
-      " M reports/review-studio.html",
-      " M reports/review-studio.json",
-      " M reports/review-viewer.json",
-      " M reports/skill-interpretation.html",
-      " M reports/skill-interpretation.json",
-      " M reports/skill-overview.html"
-    ],
+    "dirty": false,
+    "changed_file_count": 0,
+    "sample": [],
     "scope": "generation-time status before this report is written"
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "452acb1d428eeb474ee567de6a5fe28c57bf3e1dc004d7a56249a07d0a2cf5be",
-    "source_contract_sha256": "79e555f12cb95ad51753c69fdb7fce367f3a394c3e55c075ab4754feb6d3200b",
+    "evidence_bundle_sha256": "252db82fc070cf1a69105b96a1dd3d16b5b7542b0ac3e6cc57643e841519e3eb",
+    "source_contract_sha256": "3335b896135939f1438e6bfe8b56dc050a1d95bcb1807986c9146f24725b97d6",
     "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
     "output_case_count": 5,
     "failure_disclosure_count": 3,
@@ -50,15 +37,14 @@
     "world_class_source_pass_count": 6,
     "world_class_source_blocked_count": 7,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 5,
-    "working_tree_dirty": true,
-    "changed_file_count": 13
+    "public_claim_blocker_count": 4,
+    "working_tree_dirty": false,
+    "changed_file_count": 0
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -67,10 +53,10 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "03aa6287123b4f47aad2a7abd59bb950e4d577e6",
+    "ready": true,
+    "commit": "53ef4d394c7c1251a58fa19e809004c1bdc8a64f",
     "status_scope": "generation-time status before this report is written",
-    "reason": "working tree was dirty at generation time"
+    "reason": "clean generation-time HEAD"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -78,7 +64,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "452acb1d428eeb474ee567de6a5fe28c57bf3e1dc004d7a56249a07d0a2cf5be"
+    "sha256": "252db82fc070cf1a69105b96a1dd3d16b5b7542b0ac3e6cc57643e841519e3eb"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -187,14 +173,14 @@
       "path": "reports/security_trust_report.json",
       "exists": true,
       "bytes": 128859,
-      "sha256": "276120363b8bbd3c26066dd8fc0b193558131a8dad71dede96d40baa35877f29"
+      "sha256": "9935ac49f31714c93f39727773ba449a9a3eb5089bd75b399e6e814d2a36e93b"
     },
     {
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
       "bytes": 28174,
-      "sha256": "edcaee0744806a906f82681dabd0c721908a3b98cbd743f932fd4896bdb1275b"
+      "sha256": "ce710137749416b7c0694ffbe48f1a680882a6cf97e520f3ba13a4f65b747f79"
     },
     {
       "label": "registry_audit",
