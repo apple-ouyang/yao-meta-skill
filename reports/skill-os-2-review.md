@@ -66,8 +66,8 @@ This is still not the final world-class state. Target-native behavior contracts 
 | Skill OS 2.0 Audit | `scripts/render_skill_os2_audit.py`, `reports/skill_os2_audit.md`, `tests/verify_skill_os2_audit.py` | v0 landed |
 | World-Class Evidence Plan | `scripts/render_world_class_evidence_plan.py`, `reports/world_class_evidence_plan.md`, `tests/verify_world_class_evidence_plan.py` | v0 landed |
 | World-Class Evidence Ledger | `scripts/render_world_class_evidence_ledger.py`, `reports/world_class_evidence_ledger.md`, `tests/verify_world_class_evidence_ledger.py` | v0 landed |
-| World-Class Evidence Intake | `scripts/world_class_evidence_contract.py`, `scripts/render_world_class_evidence_intake.py`, `evidence/world_class/intake.schema.json`, `tests/verify_world_class_evidence_intake.py` with canonical filename and nested raw-field rejection | v0 landed |
-| World-Class Submission Kit | `scripts/prepare_world_class_submission_kit.py`, `scripts/world_class_submission_matrix.py`, `scripts/world_class_submission_kit_rendering.py`, `tests/verify_world_class_evidence_intake.py` with draft, artifact, source-check, next-action matrix evidence, and separated Markdown/HTML rendering | v0 landed |
+| World-Class Evidence Intake | `scripts/world_class_evidence_contract.py`, `scripts/render_world_class_evidence_intake.py`, `evidence/world_class/intake.schema.json`, `tests/verify_world_class_evidence_intake.py` with canonical filename, source-artifact validation, and nested raw-field rejection | v0 landed |
+| World-Class Submission Kit | `scripts/prepare_world_class_submission_kit.py`, `scripts/world_class_submission_matrix.py`, `scripts/world_class_submission_kit_rendering.py`, `tests/verify_world_class_submission_kit.py` with draft, artifact, source-check, next-action matrix evidence, and separated Markdown/HTML rendering | v0 landed |
 | Runtime Conformance | `scripts/run_conformance_suite.py`, `reports/conformance_matrix.md` | v0 landed |
 | Trust & Security | `scripts/trust_check.py`, `reports/security_trust_report.md`, `security/*.md` | v0 landed |
 | Review Studio 2.0 | `scripts/render_review_studio.py`, `reports/review-studio.html`, `reports/review-studio.json` with per-warning `review_actions` | v0 landed |
@@ -146,7 +146,7 @@ Next move: add real client or installer permission enforcement integration.
 | Benchmark Reproducibility | local reproducibility ready with `25` required artifacts, `0` missing artifacts, `23` reproduction commands, and `3` disclosed failure cases; provider and human evidence remain explicit limitations |
 | IR-first Packaging | `openai`, `claude`, `generic`, and `vscode` adapters include compiler contracts, permission contracts, target-native behavior contracts, IR provenance, semantic parity checks, and install-scope notes where applicable |
 | Context Budget | initial load `990/1000`, under the production budget |
-| CI | `make ci-test` target count is `80` after the Weekly SkillOps Curator gate update |
+| CI | `make ci-test` target count is `81` after the World-Class Submission Kit verifier split |
 
 ## Next Highest-Leverage Moves
 
