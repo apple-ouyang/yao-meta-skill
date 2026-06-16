@@ -71,6 +71,23 @@ REQUIRED_REAL_ARTIFACT_PATHS = {
         "reports/telemetry_hook_recipes.json",
     },
 }
+EXPECTED_REAL_ARTIFACT_KINDS = {
+    "provider-holdout": {
+        "reports/output_execution_runs.json": "aggregate-report",
+    },
+    "human-adjudication": {
+        "reports/output_review_adjudication.json": "adjudication-report",
+        "reports/output_review_decisions.json": "review-decisions",
+    },
+    "native-permission-enforcement": {
+        "reports/runtime_permission_probes.json": "runtime-probe-report",
+        "reports/install_simulation.json": "installer-enforcement-report",
+    },
+    "native-client-telemetry": {
+        "reports/adoption_drift_report.json": "adoption-drift-report",
+        "reports/telemetry_hook_recipes.json": "hook-recipes",
+    },
+}
 PLACEHOLDER_FRAGMENTS = (
     "YYYY-MM-DD",
     "name or team handle",
@@ -256,7 +273,9 @@ def validate_artifact_refs(
 ) -> dict[str, int]:
     refs = payload.get("artifact_refs")
     add_error(errors, isinstance(refs, list) and len(refs) > 0, "artifact_refs must contain at least one reference")
-    required_paths = REQUIRED_REAL_ARTIFACT_PATHS.get(str(payload.get("evidence_key", "")), set())
+    evidence_key = str(payload.get("evidence_key", ""))
+    required_paths = REQUIRED_REAL_ARTIFACT_PATHS.get(evidence_key, set())
+    expected_kinds = EXPECTED_REAL_ARTIFACT_KINDS.get(evidence_key, {})
     observed_paths: set[str] = set()
     seen_artifact_paths: set[str] = set()
     stats = {
@@ -296,6 +315,14 @@ def validate_artifact_refs(
         seen_artifact_paths.add(rel)
         if rel in DISALLOWED_REAL_ARTIFACTS:
             errors.append(f"artifact_refs[{index}].path must not reference raw local telemetry logs")
+        expected_kind = expected_kinds.get(rel)
+        if expected_kind:
+            observed_kind = str(ref.get("kind", "")).strip()
+            add_error(
+                errors,
+                observed_kind == expected_kind,
+                f"artifact_refs[{index}].kind must be {expected_kind} for {rel}",
+            )
         if not resolved.exists() or not resolved.is_file():
             errors.append(f"artifact_refs[{index}].path does not exist as a local file")
             continue

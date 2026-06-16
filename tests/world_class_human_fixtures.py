@@ -189,6 +189,18 @@ def assert_human_contract_artifact_validation() -> None:
     assert valid_result["status"] == "pass", valid_result
     assert valid_result["artifact_integrity"]["required_artifact_verified_count"] == 2, valid_result
 
+    wrong_kind_submission = human_submission(skill_root)
+    wrong_kind_submission["artifact_refs"][1]["kind"] = "aggregate-report"
+    wrong_kind_result = validate_payload(
+        wrong_kind_submission,
+        entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "human-adjudication.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert wrong_kind_result["status"] == "fail", wrong_kind_result
+    assert any("kind must be review-decisions" in error for error in wrong_kind_result["errors"]), wrong_kind_result["errors"]
+
     write_human_artifacts(skill_root, complete=False)
     pending_result = validate_payload(
         human_submission(skill_root),

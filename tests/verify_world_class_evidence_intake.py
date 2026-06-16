@@ -102,8 +102,10 @@ def external_submission(
     category: str = "external",
     submitted_by: str = "Yao external operator",
     artifact_paths: tuple[str, ...],
+    artifact_kinds: dict[str, str] | None = None,
     provenance: dict,
 ) -> dict:
+    artifact_kinds = artifact_kinds or {}
     return {
         "schema_version": "1.0",
         "evidence_key": evidence_key,
@@ -116,7 +118,7 @@ def external_submission(
         "artifact_refs": [
             {
                 "path": path,
-                "kind": "aggregate-report",
+                "kind": artifact_kinds.get(path, "aggregate-report"),
                 "contains_raw_content": False,
                 "sha256": sha256_file(skill_root / path),
             }
@@ -231,6 +233,10 @@ def native_permission_submission(skill_root: Path) -> dict:
         evidence_key="native-permission-enforcement",
         source_type="runtime-permission-guard",
         artifact_paths=("reports/runtime_permission_probes.json", "reports/install_simulation.json"),
+        artifact_kinds={
+            "reports/runtime_permission_probes.json": "runtime-probe-report",
+            "reports/install_simulation.json": "installer-enforcement-report",
+        },
         provenance={
             "target": "vscode",
             "guard_location": "VS Code extension runtime permission guard",
@@ -275,6 +281,10 @@ def native_telemetry_submission(skill_root: Path) -> dict:
         source_type="native-client-telemetry",
         submitted_by="Yao client integrator",
         artifact_paths=("reports/adoption_drift_report.json", "reports/telemetry_hook_recipes.json"),
+        artifact_kinds={
+            "reports/adoption_drift_report.json": "adoption-drift-report",
+            "reports/telemetry_hook_recipes.json": "hook-recipes",
+        },
         provenance={
             "client": "Chrome extension production build",
             "native_host_manifest": "/Users/laoyao/.config/chrome/native-hosts/yao-meta-skill.json",
@@ -287,6 +297,25 @@ def native_telemetry_submission(skill_root: Path) -> dict:
 def write_json(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def schema_contains_path_kind(schema: dict, path: str, kind: str) -> bool:
+    if isinstance(schema, dict):
+        properties = schema.get("properties", {})
+        if isinstance(properties, dict):
+            path_schema = properties.get("path", {})
+            kind_schema = properties.get("kind", {})
+            if (
+                isinstance(path_schema, dict)
+                and isinstance(kind_schema, dict)
+                and path_schema.get("const") == path
+                and kind_schema.get("const") == kind
+            ):
+                return True
+        return any(schema_contains_path_kind(value, path, kind) for value in schema.values())
+    if isinstance(schema, list):
+        return any(schema_contains_path_kind(value, path, kind) for value in schema)
+    return False
 
 
 def assert_external_contract_artifact_validation() -> None:
@@ -313,6 +342,19 @@ def assert_external_contract_artifact_validation() -> None:
     assert provider_duplicate_result["status"] == "fail", provider_duplicate_result
     assert any("must not duplicate another artifact reference" in error for error in provider_duplicate_result["errors"]), (
         provider_duplicate_result["errors"]
+    )
+    provider_wrong_kind = provider_artifact_submission(skill_root)
+    provider_wrong_kind["artifact_refs"][0]["kind"] = "supporting-evidence"
+    provider_wrong_kind_result = validate_payload(
+        provider_wrong_kind,
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_wrong_kind_result["status"] == "fail", provider_wrong_kind_result
+    assert any("kind must be aggregate-report" in error for error in provider_wrong_kind_result["errors"]), (
+        provider_wrong_kind_result["errors"]
     )
     provider_wrong_filename = validate_payload(
         provider_artifact_submission(skill_root),
@@ -482,6 +524,11 @@ def main() -> None:
     assert "Templates and planned work do not count as accepted evidence." in markdown, markdown
     assert "Real submissions must include the evidence-key critical artifact paths with verified SHA-256 digests." in markdown, markdown
     assert "Real submissions must replace template submitter, date, and provenance placeholders with concrete evidence metadata." in markdown, markdown
+    schema = json.loads((ROOT / "evidence" / "world_class" / "intake.schema.json").read_text(encoding="utf-8"))
+    assert schema_contains_path_kind(schema, "reports/output_execution_runs.json", "aggregate-report"), schema
+    assert schema_contains_path_kind(schema, "reports/output_review_decisions.json", "review-decisions"), schema
+    assert schema_contains_path_kind(schema, "reports/runtime_permission_probes.json", "runtime-probe-report"), schema
+    assert schema_contains_path_kind(schema, "reports/telemetry_hook_recipes.json", "hook-recipes"), schema
 
     valid_dir = TMP / "valid_submissions"
     valid_dir.mkdir()

@@ -44,6 +44,13 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
+      "path": "scripts/world_class_evidence_contract.py",
+      "lines": 654,
+      "kind": "internal-module",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
       "path": "scripts/render_skill_os2_coverage.py",
       "lines": 649,
       "kind": "cli-script",
@@ -86,22 +93,15 @@
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
-      "path": "scripts/world_class_evidence_contract.py",
-      "lines": 627,
-      "kind": "internal-module",
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 611,
+      "kind": "test",
       "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/render_benchmark_reproducibility.py",
       "lines": 595,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/optimize_description.py",
-      "lines": 585,
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."

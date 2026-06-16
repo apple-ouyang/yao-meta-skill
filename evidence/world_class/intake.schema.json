@@ -247,10 +247,14 @@
               "properties": {
                 "path": {
                   "const": "reports/output_execution_runs.json"
+                },
+                "kind": {
+                  "const": "aggregate-report"
                 }
               },
               "required": [
-                "path"
+                "path",
+                "kind"
               ]
             }
           }
@@ -282,10 +286,14 @@
                   "properties": {
                     "path": {
                       "const": "reports/output_review_adjudication.json"
+                    },
+                    "kind": {
+                      "const": "adjudication-report"
                     }
                   },
                   "required": [
-                    "path"
+                    "path",
+                    "kind"
                   ]
                 }
               },
@@ -295,10 +303,14 @@
                   "properties": {
                     "path": {
                       "const": "reports/output_review_decisions.json"
+                    },
+                    "kind": {
+                      "const": "review-decisions"
                     }
                   },
                   "required": [
-                    "path"
+                    "path",
+                    "kind"
                   ]
                 }
               }
@@ -332,10 +344,14 @@
                   "properties": {
                     "path": {
                       "const": "reports/runtime_permission_probes.json"
+                    },
+                    "kind": {
+                      "const": "runtime-probe-report"
                     }
                   },
                   "required": [
-                    "path"
+                    "path",
+                    "kind"
                   ]
                 }
               },
@@ -345,10 +361,14 @@
                   "properties": {
                     "path": {
                       "const": "reports/install_simulation.json"
+                    },
+                    "kind": {
+                      "const": "installer-enforcement-report"
                     }
                   },
                   "required": [
-                    "path"
+                    "path",
+                    "kind"
                   ]
                 }
               }
@@ -382,10 +402,14 @@
                   "properties": {
                     "path": {
                       "const": "reports/adoption_drift_report.json"
+                    },
+                    "kind": {
+                      "const": "adoption-drift-report"
                     }
                   },
                   "required": [
-                    "path"
+                    "path",
+                    "kind"
                   ]
                 }
               },
@@ -395,10 +419,14 @@
                   "properties": {
                     "path": {
                       "const": "reports/telemetry_hook_recipes.json"
+                    },
+                    "kind": {
+                      "const": "hook-recipes"
                     }
                   },
                   "required": [
-                    "path"
+                    "path",
+                    "kind"
                   ]
                 }
               }
