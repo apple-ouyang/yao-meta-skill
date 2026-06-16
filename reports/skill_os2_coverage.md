@@ -235,7 +235,7 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - objective: Daily operations layer summarizes explicit-source conversation patterns, proposal-only adaptation work, approval state, release locks, and world-class evidence gaps.
 - status: `covered`
-- existing evidence: `scripts/render_daily_skillops_report.py`, `tests/verify_daily_skillops.py`, `reports/skillops/daily/2026-06-16.json`, `reports/skillops/daily/2026-06-16.md`
+- existing evidence: `scripts/render_daily_skillops_report.py`, `tests/verify_daily_skillops.py`, `reports/skillops/daily/2026-06-17.json`, `reports/skillops/daily/2026-06-17.md`
 - next action: Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves.
 
 ### Weekly Curator Report

@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from output_review_privacy import BLOCKED_DECISION_FIELDS
 from world_class_human_evidence import validate_human_adjudication_report
 from world_class_native_permission_evidence import validate_native_permission_report
 from world_class_native_telemetry_evidence import validate_native_telemetry_report
@@ -102,36 +103,7 @@ PLACEHOLDER_FRAGMENTS = (
     "client or installer component",
     "/local/path/not/committed",
 )
-FORBIDDEN_REAL_SUBMISSION_FIELDS = {
-    "api_key",
-    "assistant_message",
-    "assistant_messages",
-    "baseline_output",
-    "credential",
-    "credentials",
-    "input",
-    "inputs",
-    "message",
-    "messages",
-    "model_output",
-    "output",
-    "outputs",
-    "prompt",
-    "prompts",
-    "raw_content",
-    "raw_output",
-    "raw_prompt",
-    "raw_provider_prompt",
-    "raw_user_content",
-    "secret",
-    "secrets",
-    "token",
-    "transcript",
-    "transcripts",
-    "user_message",
-    "user_messages",
-    "with_skill_output",
-}
+FORBIDDEN_REAL_SUBMISSION_FIELDS = BLOCKED_DECISION_FIELDS
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -236,7 +208,7 @@ def validate_real_submission_privacy_fields(
     add_error(
         errors,
         not blocked_paths,
-        "real submission must not include raw content, credential, secret, token, prompt, output, transcript, or message fields: "
+        "real submission must not include raw content, credential, secret, token, prompt, output, transcript, message, or answer-key fields: "
         + ", ".join(blocked_paths[:8]),
     )
 

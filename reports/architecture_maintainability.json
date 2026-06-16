@@ -87,7 +87,7 @@
     },
     {
       "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 610,
+      "lines": 628,
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."

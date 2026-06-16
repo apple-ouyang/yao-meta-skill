@@ -42,7 +42,7 @@ No near-threshold files found.
 | `scripts/review_studio_gates.py` | `643` | `internal-module` | `pass` |
 | `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `637` | `cli-script` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `610` | `test` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `628` | `test` | `pass` |
 | `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 

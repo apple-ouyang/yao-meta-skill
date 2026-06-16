@@ -381,6 +381,24 @@ def assert_external_contract_artifact_validation() -> None:
     assert provider_leak_result["status"] == "fail", provider_leak_result
     assert any("raw content, credential, secret" in error for error in provider_leak_result["errors"]), provider_leak_result["errors"]
     assert any("$.raw_prompt" in error and "$.provenance.messages" in error for error in provider_leak_result["errors"]), provider_leak_result["errors"]
+    provider_answer_key_leak = provider_artifact_submission(skill_root)
+    provider_answer_key_leak["provenance"]["Expected_Winner_Variant"] = "A"
+    provider_answer_key_leak["review_notes"] = [{"answer_key": "blind answer key must not be embedded"}]
+    provider_answer_key_leak_result = validate_payload(
+        provider_answer_key_leak,
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert provider_answer_key_leak_result["status"] == "fail", provider_answer_key_leak_result
+    assert any("answer-key fields" in error for error in provider_answer_key_leak_result["errors"]), (
+        provider_answer_key_leak_result["errors"]
+    )
+    assert any(
+        "$.provenance.Expected_Winner_Variant" in error and "$.review_notes[0].answer_key" in error
+        for error in provider_answer_key_leak_result["errors"]
+    ), provider_answer_key_leak_result["errors"]
     write_provider_artifact(skill_root, complete=False)
     provider_invalid = validate_payload(
         provider_artifact_submission(skill_root),
