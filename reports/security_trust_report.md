@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `217`
-- Scripts: `126`
-- Internal script modules: `40`
+- Scanned files: `218`
+- Scripts: `127`
+- Internal script modules: `41`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `217`
-- Package SHA256: `cadca277f4c73d1f726e2f791549ed61e8ab2673fc12ed401b664941eba578b5`
+- Package hash files: `218`
+- Package SHA256: `df05fea8b6a28254d298ab59d3f3858713196e88d582232c93c500b1fa94da8a`
 
 ## Failures
 
@@ -162,6 +162,7 @@
 | scripts/skill_report_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to keep overview report layout and CSS out of data rendering. |
 | scripts/skill_report_metrics.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to calculate overview report metrics. |
 | scripts/skill_report_model.py | internal-module | True | False | False | False | False | False | False | Imported by render_skill_overview.py to build the v2 report data model. |
+| scripts/skill_report_sources.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to load source files and scan overview package assets. |
 | scripts/skill_report_world_class.py | internal-module | True | False | False | False | False | False | False | Imported by skill_report_model.py to summarize world-class evidence readiness and roadmap actions. |
 | scripts/skillops_opportunity.py | internal-module | True | False | False | False | False | False | False | Imported by render_daily_skillops_report.py to score SkillOps opportunities without writing files. |
 | scripts/summarize_user_signals.py | cli | True | True | True | False | False | True | False | Scans an explicit local source file and summarizes redacted repeated user preference signals. |

@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 200,
+    "file_count": 201,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -636,6 +636,12 @@
     },
     {
       "path": "scripts/skill_report_model.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/skill_report_sources.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
