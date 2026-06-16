@@ -147,7 +147,7 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                 "success_checks": first_text_items(
                     must_collect.get("success_checks"),
                     entry.get("success_checks"),
-                    limit=5,
+                    limit=9,
                 ),
                 "evidence_artifacts": first_text_items(
                     must_collect.get("evidence_artifacts"),

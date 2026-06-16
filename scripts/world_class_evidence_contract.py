@@ -419,6 +419,16 @@ def validate_evidence_specific(payload: dict[str, Any], errors: list[str]) -> No
         )
         add_error(
             errors,
+            provenance.get("blind_review_completed_before_answer_key") is True,
+            "human-adjudication must attest blind_review_completed_before_answer_key is true",
+        )
+        add_error(
+            errors,
+            bool(str(provenance.get("blind_pack_sha256", "")).strip()),
+            "human-adjudication provenance.blind_pack_sha256 is required",
+        )
+        add_error(
+            errors,
             provenance.get("reviewer_reason_required") is True,
             "human-adjudication must attest reviewer_reason_required is true",
         )

@@ -118,6 +118,8 @@ def command_output_review_import(args: argparse.Namespace) -> int:
         cmd.extend(["--reviewer", args.reviewer])
     if args.reviewed_at:
         cmd.extend(["--reviewed-at", args.reviewed_at])
+    if args.blind_review_attested:
+        cmd.append("--blind-review-attested")
     if args.run_adjudication:
         cmd.append("--run-adjudication")
     if args.answer_key:

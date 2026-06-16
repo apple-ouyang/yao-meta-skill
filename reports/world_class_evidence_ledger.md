@@ -8,8 +8,8 @@ Generated at: `2026-06-17`
 - ready to claim world-class: `false`
 - entries: `4`
 - source accepted: `0`
-- source checks: `9` pass / `17` total
-- source blocked: `8`
+- source checks: `9` pass / `19` total
+- source blocked: `10`
 - accepted: `0`
 - pending: `4`
 - human pending: `1`
@@ -28,9 +28,9 @@ This ledger records the current evidence state. It requires both passing source 
 | Evidence | Status | Submission | Category | Current | Next action |
 | --- | --- | --- | --- | --- | --- |
 | `provider-holdout` | `pending` | `missing` | `external` | model-executed 0; token-observed 0 | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
-| `human-adjudication` | `pending` | `missing` | `human` | 0/5 decisions; pending 5 | Record real A/B choices in the decision template, then regenerate adjudication. |
+| `human-adjudication` | `pending` | `missing` | `human` | 0/5 decisions; pending 5 | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | `native-permission-enforcement` | `pending` | `missing` | `external` | native-enforced targets 0; installer-enforced targets 4 | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
-| `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 1 | Install a real client against the native host and import production metadata-only events. |
+| `native-client-telemetry` | `pending` | `missing` | `external` | external source events 0; adoption samples 0 | Install a real client against the native host and import production metadata-only events. |
 
 ## Provider Holdout
 
@@ -79,8 +79,8 @@ This ledger records the current evidence state. It requires both passing source 
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - source status: `human_required`
-- observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "reviewer_metadata_present": false, "reason_required": true, "ready_for_human_evidence": false, "raw_content_allowed": false, "raw_content_path_count": 0, "accepted": false}`
-- source checks: `4` pass / `8` total
+- observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "reviewer_metadata_present": false, "reason_required": true, "blind_review_attested": false, "raw_content_excluded_attested": true, "reviewer_reason_required_attested": true, "ready_for_human_evidence": false, "raw_content_allowed": false, "raw_content_path_count": 0, "accepted": false}`
+- source checks: `5` pass / `10` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/human-adjudication.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -94,8 +94,8 @@ This ledger records the current evidence state. It requires both passing source 
 - `python3 scripts/yao.py output-review-kit --write-template`
 - Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - `python3 scripts/adjudicate_output_review.py --write-template`
-- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.
-- `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, required reason, and truthful reviewer_attestation only.
+- `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - `python3 scripts/yao.py output-review`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
@@ -111,6 +111,8 @@ This ledger records the current evidence state. It requires both passing source 
 | No invalid decisions | `0` | `==0` | `pass` |
 | Reviewer metadata | `False` | `true` | `blocked` |
 | Reason required | `True` | `true` | `pass` |
+| Blind review attested | `False` | `true` | `blocked` |
+| Raw content attested | `True` | `true` | `pass` |
 | Raw content blocked | `False` | `false` | `pass` |
 | Human evidence ready | `False` | `true` | `blocked` |
 
@@ -120,6 +122,8 @@ This ledger records the current evidence state. It requires both passing source 
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
 - reports/output_review_adjudication.json summary.invalid_decision_count == 0
 - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+- reports/output_review_adjudication.json summary.blind_review_attested is true
+- reports/output_review_adjudication.json review_integrity.blind_pack_sha256 exists and matches reports/output_review_decisions.json
 - reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text
 - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
 - reports/skill_os2_audit.json item human-adjudication status becomes pass
@@ -130,6 +134,7 @@ This ledger records the current evidence state. It requires both passing source 
 - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
 - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
 - The adjudication evidence stores prompt_sha256 instead of raw prompt text.
+- The decision and adjudication artifacts preserve blind_pack_sha256 so reviewers can audit exactly which pack was judged.
 - Keep the answer key separate until after decisions are recorded.
 
 ## Native Permission Enforcement
@@ -181,8 +186,8 @@ This ledger records the current evidence state. It requires both passing source 
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - source status: `external_required`
-- observed state: `{"external_source_events": 0, "adoption_sample_count": 1, "raw_content_allowed": false, "risk_band": "low", "accepted": false}`
-- source checks: `2` pass / `3` total
+- observed state: `{"external_source_events": 0, "adoption_sample_count": 0, "raw_content_allowed": false, "risk_band": "low", "accepted": false}`
+- source checks: `1` pass / `3` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-client-telemetry.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -206,7 +211,7 @@ This ledger records the current evidence state. It requires both passing source 
 | Check | Current | Expected | Status |
 | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` |
-| Adoption sample | `1` | `>0` | `pass` |
+| Adoption sample | `0` | `>0` | `blocked` |
 | Raw content blocked | `False` | `false` | `pass` |
 
 ### Completion Assertions

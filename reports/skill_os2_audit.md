@@ -20,7 +20,7 @@ Generated at: `2026-06-17`
 | Target Compiler | pass | 5/5 targets pass | OpenAI, Claude, generic, Agent Skills compatible, and VS Code contracts generated from IR | Deepen target-native transforms when provider clients expose stronger runtime APIs. |
 | Output Eval Lab | pass | 5 cases; delta 100.0; exec 10; blind 5 | with-skill/baseline, assertions, execution evidence, blind A/B, failure taxonomy | Add more real-file and adversarial holdout cases as usage grows. |
 | Provider Holdout | external-required | model-executed 0; token-observed 0 | At least one real provider-backed holdout run with observed model/timing/token metadata | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
-| Human Adjudication | human-required | 0/5 decisions; pending 5 | Real reviewer decisions recorded before claiming output review completion | Record real A/B choices in the decision template, then regenerate adjudication. |
+| Human Adjudication | human-required | 0/5 decisions; pending 5 | Real reviewer decisions, blind-review attestation, and integrity fingerprints recorded before claiming output review completion | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | Benchmark Reproducibility | pass | artifacts 25; missing 0; failures 3 | Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable | Keep the manifest current with every benchmark, package, and release evidence change. |
 | Runtime Conformance | pass | 5/5 targets pass | Target package structure, metadata, relative paths, and degradation notes pass | Keep target conformance fixtures updated as platform contracts change. |
 | Trust Security | pass | secrets 0; scripts 147; help failures 0 | Secrets, scripts, dependencies, permissions, and package hash are reviewable | Keep high-permission approvals scoped, expiring, and target-mapped. |
@@ -30,12 +30,12 @@ Generated at: `2026-06-17`
 | Registry Distribution | pass | zip entries 685; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
 | Review Studio | pass | decision review; warnings 3; score 91 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
 | Telemetry Drift | pass | events 1; risk low; recipes 5 | Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path | Keep raw JSONL out of distributed packages and use aggregate reports for Atlas. |
-| Native Client Telemetry | external-required | external source events 0; adoption samples 1 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
+| Native Client Telemetry | external-required | external source events 0; adoption samples 0 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
 
 ## Open Highest-Leverage Gaps
 
 - `provider-holdout` (external-required): Run provider-backed holdout cases with real credentials and commit only aggregate evidence.
-- `human-adjudication` (human-required): Record real A/B choices in the decision template, then regenerate adjudication.
+- `human-adjudication` (human-required): Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication.
 - `native-permission-enforcement` (external-required): Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.
 - `native-client-telemetry` (external-required): Install a real client against the native host and import production metadata-only events.
 

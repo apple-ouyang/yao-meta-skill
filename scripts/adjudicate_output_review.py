@@ -64,6 +64,41 @@ def prompt_sha256(pair: dict[str, Any]) -> str:
     return hashlib.sha256(str(pair.get("prompt", "")).encode("utf-8")).hexdigest()
 
 
+def canonical_sha256(value: Any) -> str:
+    encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def review_integrity(blind_pack: dict[str, Any]) -> dict[str, Any]:
+    pairs = blind_pack.get("pairs", [])
+    case_ids: list[str] = []
+    prompt_hashes: dict[str, str] = {}
+    if isinstance(pairs, list):
+        for pair in pairs:
+            if not isinstance(pair, dict):
+                continue
+            case_id = str(pair.get("case_id", "")).strip()
+            if not case_id:
+                continue
+            case_ids.append(case_id)
+            prompt_hashes[case_id] = prompt_sha256(pair)
+    return {
+        "blind_pack_sha256": canonical_sha256(blind_pack),
+        "case_count": len(case_ids),
+        "case_ids": case_ids,
+        "prompt_sha256_by_case": prompt_hashes,
+    }
+
+
+def default_reviewer_attestation() -> dict[str, Any]:
+    return {
+        "blind_review_completed_before_answer_key": False,
+        "answer_key_not_opened_before_decisions": False,
+        "raw_content_excluded": True,
+        "reviewer_reason_required": True,
+    }
+
+
 def answer_index(answer_key: dict[str, Any]) -> dict[str, dict[str, Any]]:
     answers = answer_key.get("answers", [])
     if not isinstance(answers, list):
@@ -118,10 +153,13 @@ def build_decision_template(blind_pack: dict[str, Any]) -> dict[str, Any]:
         "schema_version": "1.0",
         "reviewer": "",
         "reviewed_at": "",
+        "review_integrity": review_integrity(blind_pack),
+        "reviewer_attestation": default_reviewer_attestation(),
         "decision_contract": {
             "winner_variant": "Use A or B after reading the blind review pack. Leave blank when pending.",
             "confidence": "Optional number from 0 to 1.",
             "reason": "Required reviewer rationale. Do not reveal baseline or with-skill labels before adjudication.",
+            "reviewer_attestation": "Set blind_review_completed_before_answer_key and answer_key_not_opened_before_decisions to true only after a real blind review.",
         },
         "decisions": template_decisions,
     }
@@ -204,7 +242,29 @@ def adjudicate_pair(
     )
 
 
-def build_summary(pairs: list[dict[str, Any]], failures: list[str], reviewer_metadata_present: bool) -> dict[str, Any]:
+def reviewer_attestation_state(decisions_payload: dict[str, Any]) -> dict[str, bool]:
+    attestation = decisions_payload.get("reviewer_attestation", {})
+    if not isinstance(attestation, dict):
+        attestation = {}
+    blind_review_completed = attestation.get("blind_review_completed_before_answer_key") is True
+    answer_key_not_opened = attestation.get("answer_key_not_opened_before_decisions") is True
+    raw_content_excluded = attestation.get("raw_content_excluded") is True
+    reviewer_reason_required = attestation.get("reviewer_reason_required") is True
+    return {
+        "blind_review_attested": blind_review_completed and answer_key_not_opened,
+        "blind_review_completed_before_answer_key": blind_review_completed,
+        "answer_key_not_opened_before_decisions": answer_key_not_opened,
+        "raw_content_excluded_attested": raw_content_excluded,
+        "reviewer_reason_required_attested": reviewer_reason_required,
+    }
+
+
+def build_summary(
+    pairs: list[dict[str, Any]],
+    failures: list[str],
+    reviewer_metadata_present: bool,
+    attestation_state: dict[str, bool],
+) -> dict[str, Any]:
     pair_count = len(pairs)
     judgment_count = sum(1 for item in pairs if item["status"] in {"match", "disagree"})
     pending_count = sum(1 for item in pairs if item["status"] == "pending")
@@ -226,11 +286,15 @@ def build_summary(pairs: list[dict[str, Any]], failures: list[str], reviewer_met
         "needs_review": pending_count > 0,
         "reviewer_metadata_present": reviewer_metadata_present,
         "reason_required": True,
+        **attestation_state,
         "ready_for_human_evidence": bool(pair_count)
         and judgment_count == pair_count
         and pending_count == 0
         and invalid_decision_count == 0
         and reviewer_metadata_present
+        and attestation_state["blind_review_attested"]
+        and attestation_state["raw_content_excluded_attested"]
+        and attestation_state["reviewer_reason_required_attested"]
         and len(failures) == 0,
         "failure_count": len(failures),
     }
@@ -267,7 +331,7 @@ def build_reviewer_checklist(
                 "commands": {
                     "prepare_review_kit": "python3 scripts/yao.py output-review-kit",
                     "write_template": "python3 scripts/adjudicate_output_review.py --write-template",
-                    "import_decisions": "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
+                    "import_decisions": "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication",
                     "adjudicate": "python3 scripts/yao.py output-review",
                     "refresh_review_studio": "python3 scripts/yao.py review-studio .",
                 },
@@ -277,6 +341,8 @@ def build_reviewer_checklist(
                     "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
                     "reviewer": "Human reviewer name or review group at the decision-file top level.",
                     "reviewed_at": "Review date or timestamp at the decision-file top level.",
+                    "reviewer_attestation.blind_review_completed_before_answer_key": "True only after the reviewer has completed choices before opening the answer key.",
+                    "reviewer_attestation.answer_key_not_opened_before_decisions": "True only when the answer key was not opened before decisions were recorded.",
                 },
                 "privacy_contract": [
                     "Do not paste raw private user data into the decision reason.",
@@ -346,6 +412,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Pending/invalid answers hidden: `{summary['pending_answer_hidden_count']}`",
         f"- Reviewer checklist: `{summary['reviewer_checklist_ready_count']}` ready / `{summary['reviewer_checklist_count']}` total",
         f"- Reviewer metadata present: `{str(summary['reviewer_metadata_present']).lower()}`",
+        f"- Blind review attested: `{str(summary['blind_review_attested']).lower()}`",
+        f"- Raw content excluded: `{str(summary['raw_content_excluded_attested']).lower()}`",
         f"- Ready for human evidence: `{str(summary['ready_for_human_evidence']).lower()}`",
         "",
     ]
@@ -424,6 +492,7 @@ def adjudicate_output_review(
         str(decisions_payload.get("reviewer", "")).strip()
         and str(decisions_payload.get("reviewed_at", "")).strip()
     )
+    attestation_state = reviewer_attestation_state(decisions_payload)
 
     for case_id in decisions_by_id:
         if case_id not in pairs_by_id:
@@ -441,7 +510,7 @@ def adjudicate_output_review(
         adjudicated_pairs.append(adjudicated)
         failures.extend(pair_failures)
 
-    summary = build_summary(adjudicated_pairs, failures, reviewer_metadata_present)
+    summary = build_summary(adjudicated_pairs, failures, reviewer_metadata_present, attestation_state)
     reviewer_checklist = build_reviewer_checklist(adjudicated_pairs, blind_pack_path, decisions_path)
     summary = add_checklist_summary(summary, reviewer_checklist)
     payload = {
@@ -450,6 +519,8 @@ def adjudicate_output_review(
         "summary": summary,
         "reviewer": decisions_payload.get("reviewer", ""),
         "reviewed_at": decisions_payload.get("reviewed_at", ""),
+        "review_integrity": review_integrity(blind_pack),
+        "reviewer_attestation": decisions_payload.get("reviewer_attestation", {}),
         "artifacts": {
             "blind_pack": display_path(blind_pack_path),
             "answer_key": display_path(answer_key_path),

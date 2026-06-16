@@ -15,9 +15,9 @@
   "reviewer_approved_submission_count": 0,
   "missing_submission_count": 4,
   "invalid_submission_count": 0,
-  "source_check_count": 17,
+  "source_check_count": 19,
   "source_pass_count": 9,
-  "source_blocked_count": 8,
+  "source_blocked_count": 10,
   "submitted_but_pending_count": 0,
   "source_accepted_without_valid_submission_count": 0,
   "overclaim_guard_active": true,
@@ -32,9 +32,9 @@
     "reviewer_approved_submission_count": 0,
     "missing_submission_count": 4,
     "invalid_submission_count": 0,
-    "source_check_count": 17,
+    "source_check_count": 19,
     "source_pass_count": 9,
-    "source_blocked_count": 8,
+    "source_blocked_count": 10,
     "submitted_but_pending_count": 0,
     "source_accepted_without_valid_submission_count": 0,
     "overclaim_guard_active": true,
@@ -184,8 +184,8 @@
         "python3 scripts/yao.py output-review-kit --write-template",
         "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
         "python3 scripts/adjudicate_output_review.py --write-template",
-        "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
-        "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
+        "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, required reason, and truthful reviewer_attestation only.",
+        "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication",
         "python3 scripts/yao.py output-review",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
@@ -201,6 +201,8 @@
         "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
         "reports/output_review_adjudication.json summary.invalid_decision_count == 0",
         "reports/output_review_adjudication.json summary.reviewer_metadata_present is true",
+        "reports/output_review_adjudication.json summary.blind_review_attested is true",
+        "reports/output_review_adjudication.json review_integrity.blind_pack_sha256 exists and matches reports/output_review_decisions.json",
         "reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text",
         "reports/output_review_adjudication.json summary.ready_for_human_evidence is true",
         "reports/skill_os2_audit.json item human-adjudication status becomes pass"
@@ -222,6 +224,7 @@
         "Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.",
         "The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.",
         "The adjudication evidence stores prompt_sha256 instead of raw prompt text.",
+        "The decision and adjudication artifacts preserve blind_pack_sha256 so reviewers can audit exactly which pack was judged.",
         "Keep the answer key separate until after decisions are recorded."
       ],
       "observed_state": {
@@ -232,6 +235,9 @@
         "answer_revealed_count": 0,
         "reviewer_metadata_present": false,
         "reason_required": true,
+        "blind_review_attested": false,
+        "raw_content_excluded_attested": true,
+        "reviewer_reason_required_attested": true,
         "ready_for_human_evidence": false,
         "raw_content_allowed": false,
         "raw_content_path_count": 0,
@@ -300,6 +306,26 @@
         },
         {
           "evidence_key": "human-adjudication",
+          "label": "Blind review attested",
+          "field": "blind_review_attested",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Raw content attested",
+          "field": "raw_content_excluded_attested",
+          "expected": "true",
+          "actual": true,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content."
+        },
+        {
+          "evidence_key": "human-adjudication",
           "label": "Raw content blocked",
           "field": "raw_content_allowed",
           "expected": "false",
@@ -316,12 +342,12 @@
           "actual": false,
           "status": "blocked",
           "source_accepted": false,
-          "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
+          "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints."
         }
       ],
-      "source_check_count": 8,
-      "source_pass_count": 4,
-      "source_blocked_count": 4,
+      "source_check_count": 10,
+      "source_pass_count": 5,
+      "source_blocked_count": 5,
       "submission_state": {
         "status": "missing",
         "path": "evidence/world_class/submissions/human-adjudication.json",
@@ -339,7 +365,7 @@
         "pending_review_counts_as_human_decision": false,
         "local_command_runner_counts_as_provider_model": false
       },
-      "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
+      "next_action": "Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication."
     },
     {
       "key": "native-permission-enforcement",
@@ -460,7 +486,7 @@
       "status": "pending",
       "source_status": "external_required",
       "source_accepted": false,
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "objective": "Import production metadata-only events from a real external client into the local drift loop.",
       "runbook": [
         "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -497,7 +523,7 @@
       ],
       "observed_state": {
         "external_source_events": 0,
-        "adoption_sample_count": 1,
+        "adoption_sample_count": 0,
         "raw_content_allowed": false,
         "risk_band": "low",
         "accepted": false
@@ -518,8 +544,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -535,8 +561,8 @@
         }
       ],
       "source_check_count": 3,
-      "source_pass_count": 2,
-      "source_blocked_count": 1,
+      "source_pass_count": 1,
+      "source_blocked_count": 2,
       "submission_state": {
         "status": "missing",
         "path": "evidence/world_class/submissions/native-client-telemetry.json",

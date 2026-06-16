@@ -26,9 +26,9 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |
 | --- | --- | --- | --- | ---: | --- | --- |
 | `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials. | operator with provider credentials |
-| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `4` | Record a reviewer choice and reason for every pair. | human reviewer |
+| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `5` | Record a reviewer choice and reason for every pair. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
-| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
+| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
 
 ## Provider Holdout
 
@@ -100,7 +100,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - blocking reason: No evidence packet has been submitted for review.
-- blocked source checks: `4`
+- blocked source checks: `5`
 - submission: `evidence/world_class/submissions/human-adjudication.json`
 - template: `evidence/world_class/templates/human-adjudication.intake.json`
 
@@ -109,8 +109,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 - python3 scripts/yao.py output-review-kit --write-template
 - Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - python3 scripts/adjudicate_output_review.py --write-template
-- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.
-- python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication
+- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, required reason, and truthful reviewer_attestation only.
+- python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication
 - python3 scripts/yao.py output-review
 - python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>
 - Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.
@@ -136,6 +136,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
 - reports/output_review_adjudication.json summary.invalid_decision_count == 0
 - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+- reports/output_review_adjudication.json summary.blind_review_attested is true
+- reports/output_review_adjudication.json review_integrity.blind_pack_sha256 exists and matches reports/output_review_decisions.json
 - reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text
 - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
 - reports/skill_os2_audit.json item human-adjudication status becomes pass
@@ -146,6 +148,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
 - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
 - The adjudication evidence stores prompt_sha256 instead of raw prompt text.
+- The decision and adjudication artifacts preserve blind_pack_sha256 so reviewers can audit exactly which pack was judged.
 - Keep the answer key separate until after decisions are recorded.
 
 ### Evidence Artifacts
@@ -166,7 +169,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 - Record a reviewer choice and reason for every pair.
 - Every pair needs one valid human judgment.
 - Record reviewer and reviewed_at before adjudication can count.
-- Complete all reviewer decisions with reviewer metadata and rationale.
+- Set reviewer_attestation only after choices are completed before opening the answer key.
+- Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.
 
 ### Source Evidence Snapshot
 
@@ -178,8 +182,10 @@ This runbook coordinates evidence collection only. It does not accept submission
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 | Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
 | Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
+| Blind review attested | `False` | `true` | `blocked` | Set reviewer_attestation only after choices are completed before opening the answer key. |
+| Raw content attested | `True` | `true` | `pass` | Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content. |
 | Raw content blocked | `False` | `false` | `pass` | Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages. |
-| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with reviewer metadata and rationale. |
+| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints. |
 
 ## Native Permission Enforcement
 
@@ -255,7 +261,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - blocking reason: No evidence packet has been submitted for review.
-- blocked source checks: `1`
+- blocked source checks: `2`
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - template: `evidence/world_class/templates/native-client-telemetry.intake.json`
 
@@ -308,13 +314,14 @@ This runbook coordinates evidence collection only. It does not accept submission
 ### Next Source Actions
 
 - Import at least one metadata-only event from a real client.
+- Telemetry must include adoption outcome evidence.
 
 ### Source Evidence Snapshot
 
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

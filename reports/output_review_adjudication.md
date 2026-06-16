@@ -11,6 +11,8 @@ This report adjudicates reviewer choices from the blind A/B output review pack a
 - Pending/invalid answers hidden: `5`
 - Reviewer checklist: `0` ready / `5` total
 - Reviewer metadata present: `false`
+- Blind review attested: `false`
+- Raw content excluded: `true`
 - Ready for human evidence: `false`
 
 No reviewer decisions recorded yet.
@@ -50,7 +52,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
-- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
 
@@ -61,6 +63,8 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 - reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
 - reviewer: Human reviewer name or review group at the decision-file top level.
 - reviewed_at: Review date or timestamp at the decision-file top level.
+- reviewer_attestation.blind_review_completed_before_answer_key: True only after the reviewer has completed choices before opening the answer key.
+- reviewer_attestation.answer_key_not_opened_before_decisions: True only when the answer key was not opened before decisions were recorded.
 
 #### Privacy Contract
 
@@ -80,7 +84,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
-- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
 
@@ -91,6 +95,8 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 - reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
 - reviewer: Human reviewer name or review group at the decision-file top level.
 - reviewed_at: Review date or timestamp at the decision-file top level.
+- reviewer_attestation.blind_review_completed_before_answer_key: True only after the reviewer has completed choices before opening the answer key.
+- reviewer_attestation.answer_key_not_opened_before_decisions: True only when the answer key was not opened before decisions were recorded.
 
 #### Privacy Contract
 
@@ -110,7 +116,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
-- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
 
@@ -121,6 +127,8 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 - reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
 - reviewer: Human reviewer name or review group at the decision-file top level.
 - reviewed_at: Review date or timestamp at the decision-file top level.
+- reviewer_attestation.blind_review_completed_before_answer_key: True only after the reviewer has completed choices before opening the answer key.
+- reviewer_attestation.answer_key_not_opened_before_decisions: True only when the answer key was not opened before decisions were recorded.
 
 #### Privacy Contract
 
@@ -140,7 +148,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
-- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
 
@@ -151,6 +159,8 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 - reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
 - reviewer: Human reviewer name or review group at the decision-file top level.
 - reviewed_at: Review date or timestamp at the decision-file top level.
+- reviewer_attestation.blind_review_completed_before_answer_key: True only after the reviewer has completed choices before opening the answer key.
+- reviewer_attestation.answer_key_not_opened_before_decisions: True only when the answer key was not opened before decisions were recorded.
 
 #### Privacy Contract
 
@@ -170,7 +180,7 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - prepare_review_kit: `python3 scripts/yao.py output-review-kit`
 - write_template: `python3 scripts/adjudicate_output_review.py --write-template`
-- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- import_decisions: `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - adjudicate: `python3 scripts/yao.py output-review`
 - refresh_review_studio: `python3 scripts/yao.py review-studio .`
 
@@ -181,6 +191,8 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 - reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
 - reviewer: Human reviewer name or review group at the decision-file top level.
 - reviewed_at: Review date or timestamp at the decision-file top level.
+- reviewer_attestation.blind_review_completed_before_answer_key: True only after the reviewer has completed choices before opening the answer key.
+- reviewer_attestation.answer_key_not_opened_before_decisions: True only when the answer key was not opened before decisions were recorded.
 
 #### Privacy Contract
 

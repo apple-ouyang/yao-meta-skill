@@ -14,8 +14,10 @@ from adjudicate_output_review import (
     DEFAULT_OUTPUT_MD,
     adjudicate_output_review,
     build_decision_template,
+    default_reviewer_attestation,
     normalize_variant,
     pair_index,
+    review_integrity,
 )
 from output_review_privacy import forbidden_decision_field_paths
 
@@ -161,13 +163,17 @@ def canonical_payload(
     reviewer: str,
     reviewed_at: str,
     decisions: list[dict[str, Any]],
+    reviewer_attestation: dict[str, Any],
 ) -> dict[str, Any]:
-    template = build_decision_template(json.loads(blind_pack_path.read_text(encoding="utf-8")))
+    blind_pack = json.loads(blind_pack_path.read_text(encoding="utf-8"))
+    template = build_decision_template(blind_pack)
     completed = sum(1 for item in decisions if item.get("winner_variant") in {"A", "B"})
     return {
         "schema_version": "1.0",
         "reviewer": reviewer,
         "reviewed_at": reviewed_at,
+        "review_integrity": review_integrity(blind_pack),
+        "reviewer_attestation": reviewer_attestation,
         "decision_contract": template["decision_contract"],
         "import_contract": {
             "schema_version": "1.0",
@@ -180,9 +186,27 @@ def canonical_payload(
             "decision_count": len(decisions),
             "completed_decision_count": completed,
             "pending_decision_count": len(decisions) - completed,
+            "blind_review_attestation_supported": True,
+            "blind_review_attested": reviewer_attestation.get("blind_review_completed_before_answer_key") is True
+            and reviewer_attestation.get("answer_key_not_opened_before_decisions") is True,
         },
         "decisions": decisions,
     }
+
+
+def normalize_reviewer_attestation(source_meta: dict[str, Any], blind_review_attested: bool) -> dict[str, Any]:
+    attestation = default_reviewer_attestation()
+    source_attestation = source_meta.get("reviewer_attestation", {})
+    if isinstance(source_attestation, dict):
+        for key in attestation:
+            if source_attestation.get(key) is True:
+                attestation[key] = True
+            elif source_attestation.get(key) is False:
+                attestation[key] = False
+    if blind_review_attested:
+        attestation["blind_review_completed_before_answer_key"] = True
+        attestation["answer_key_not_opened_before_decisions"] = True
+    return attestation
 
 
 def import_output_review_decisions(
@@ -196,6 +220,7 @@ def import_output_review_decisions(
     answer_key_path: Path = DEFAULT_ANSWER_KEY,
     adjudication_json: Path = DEFAULT_OUTPUT_JSON,
     adjudication_md: Path = DEFAULT_OUTPUT_MD,
+    blind_review_attested: bool = False,
 ) -> dict[str, Any]:
     detected_format = detect_format(source_path, source_format)
     source_meta, source_items, failures = read_decision_source(source_path, detected_format)
@@ -205,6 +230,7 @@ def import_output_review_decisions(
         failures.append("reviewer is required for imported human decisions")
     if not reviewed_at:
         failures.append("reviewed_at is required for imported human decisions")
+    reviewer_attestation = normalize_reviewer_attestation(source_meta, blind_review_attested)
     case_ids, case_failures = known_case_ids(blind_pack_path)
     failures.extend(case_failures)
     decisions, decision_failures = normalize_decisions(source_items, case_ids)
@@ -231,7 +257,15 @@ def import_output_review_decisions(
     }
     if failures:
         return payload
-    canonical = canonical_payload(blind_pack_path, source_path, detected_format, reviewer, reviewed_at, decisions)
+    canonical = canonical_payload(
+        blind_pack_path,
+        source_path,
+        detected_format,
+        reviewer,
+        reviewed_at,
+        decisions,
+        reviewer_attestation,
+    )
     output_json.parent.mkdir(parents=True, exist_ok=True)
     output_json.write_text(json.dumps(canonical, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     payload["summary"]["canonical_written"] = True
@@ -264,6 +298,11 @@ def main() -> None:
     parser.add_argument("--output-json", default=str(DEFAULT_DECISIONS))
     parser.add_argument("--reviewer")
     parser.add_argument("--reviewed-at", default=date.today().isoformat())
+    parser.add_argument(
+        "--blind-review-attested",
+        action="store_true",
+        help="Attest that reviewer choices were completed before the answer key was opened.",
+    )
     parser.add_argument("--run-adjudication", action="store_true")
     parser.add_argument("--answer-key", default=str(DEFAULT_ANSWER_KEY))
     parser.add_argument("--adjudication-json", default=str(DEFAULT_OUTPUT_JSON))
@@ -280,6 +319,7 @@ def main() -> None:
         answer_key_path=Path(args.answer_key).resolve(),
         adjudication_json=Path(args.adjudication_json).resolve(),
         adjudication_md=Path(args.adjudication_md).resolve(),
+        blind_review_attested=args.blind_review_attested,
     )
     print(json.dumps(payload, ensure_ascii=False, indent=2))
     raise SystemExit(0 if payload["ok"] else 2)

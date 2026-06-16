@@ -65,7 +65,7 @@
       <span class="eyebrow">Evidence Collection</span>
       <h1>World-Class Evidence Preflight</h1>
       <p class="lede">This operator view shows which external and human evidence is still blocked, which commands prepare editable submission drafts, and why preflight never counts as accepted evidence.</p>
-      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>9/17</strong></article></div>
+      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>9/19</strong></article></div>
     </section>
     <section class="section two-col" id="handoff">
       <article class="panel">
@@ -299,7 +299,7 @@
           <dl>
             <dt>Current</dt><dd><code>present</code></dd>
             <dt>Status</dt><dd>pass</dd>
-            <dt>Action</dt><dd>Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication`.</dd>
+            <dt>Action</dt><dd>Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, reason, and truthful blind-review attestation via `python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --blind-review-attested --run-adjudication`.</dd>
           </dl>
         </article>
 
@@ -409,6 +409,32 @@
           </dl>
         </article>
 
+        <article class="check-row blocked">
+          <div>
+            <span>blind_review_attested</span>
+            <strong>Blind review attested</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>False</code></dd>
+            <dt>Expected</dt><dd><code>true</code></dd>
+            <dt>Status</dt><dd>blocked</dd>
+            <dt>Action</dt><dd>Set reviewer_attestation only after choices are completed before opening the answer key.</dd>
+          </dl>
+        </article>
+
+        <article class="check-row pass">
+          <div>
+            <span>raw_content_excluded_attested</span>
+            <strong>Raw content attested</strong>
+          </div>
+          <dl>
+            <dt>Current</dt><dd><code>True</code></dd>
+            <dt>Expected</dt><dd><code>true</code></dd>
+            <dt>Status</dt><dd>pass</dd>
+            <dt>Action</dt><dd>Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content.</dd>
+          </dl>
+        </article>
+
         <article class="check-row pass">
           <div>
             <span>raw_content_allowed</span>
@@ -431,14 +457,14 @@
             <dt>Current</dt><dd><code>False</code></dd>
             <dt>Expected</dt><dd><code>true</code></dd>
             <dt>Status</dt><dd>blocked</dd>
-            <dt>Action</dt><dd>Complete all reviewer decisions with reviewer metadata and rationale.</dd>
+            <dt>Action</dt><dd>Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints.</dd>
           </dl>
         </article>
         </div>
         </section>
         <section class="runbook">
           <h4>Runbook</h4>
-          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.</li><li>python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --run-adjudication</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
+          <ul><li>python3 scripts/yao.py output-review-kit --write-template</li><li>Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.</li><li>python3 scripts/adjudicate_output_review.py --write-template</li><li>Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, required reason, and truthful reviewer_attestation only.</li><li>python3 scripts/yao.py output-review-import --input &lt;reviewer-decisions.json&gt; --blind-review-attested --run-adjudication</li><li>python3 scripts/yao.py output-review</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
 
@@ -663,15 +689,15 @@
           </dl>
         </article>
 
-        <article class="check-row pass">
+        <article class="check-row blocked">
           <div>
             <span>adoption_sample_count</span>
             <strong>Adoption sample</strong>
           </div>
           <dl>
-            <dt>Current</dt><dd><code>1</code></dd>
+            <dt>Current</dt><dd><code>0</code></dd>
             <dt>Expected</dt><dd><code>&gt;0</code></dd>
-            <dt>Status</dt><dd>pass</dd>
+            <dt>Status</dt><dd>blocked</dd>
             <dt>Action</dt><dd>Telemetry must include adoption outcome evidence.</dd>
           </dl>
         </article>

@@ -92,6 +92,74 @@ def validate_decision_rows(
         add_error(errors, bool(str(item.get("reason", "")).strip()), "human-adjudication decisions must include reviewer reason for every case")
 
 
+def validate_review_integrity(
+    adjudication: dict[str, Any],
+    decisions: dict[str, Any],
+    expected_case_ids: set[str],
+    errors: list[str],
+) -> None:
+    adjudication_integrity = adjudication.get("review_integrity", {})
+    decisions_integrity = decisions.get("review_integrity", {})
+    add_error(
+        errors,
+        isinstance(adjudication_integrity, dict) and bool(adjudication_integrity.get("blind_pack_sha256")),
+        "human-adjudication adjudication review_integrity.blind_pack_sha256 is required",
+    )
+    add_error(
+        errors,
+        isinstance(decisions_integrity, dict) and bool(decisions_integrity.get("blind_pack_sha256")),
+        "human-adjudication decisions review_integrity.blind_pack_sha256 is required",
+    )
+    if isinstance(adjudication_integrity, dict) and isinstance(decisions_integrity, dict):
+        add_error(
+            errors,
+            bool(adjudication_integrity.get("blind_pack_sha256"))
+            and adjudication_integrity.get("blind_pack_sha256") == decisions_integrity.get("blind_pack_sha256"),
+            "human-adjudication review_integrity.blind_pack_sha256 must match between decisions and adjudication",
+        )
+        decision_case_ids = {str(item) for item in decisions_integrity.get("case_ids", []) if str(item).strip()}
+        adjudication_case_ids = {str(item) for item in adjudication_integrity.get("case_ids", []) if str(item).strip()}
+        add_error(
+            errors,
+            decision_case_ids == expected_case_ids and adjudication_case_ids == expected_case_ids,
+            "human-adjudication review_integrity.case_ids must match adjudicated case ids",
+        )
+
+
+def validate_reviewer_attestation(
+    adjudication: dict[str, Any],
+    decisions: dict[str, Any],
+    errors: list[str],
+) -> None:
+    summary = adjudication.get("summary", {}) if isinstance(adjudication.get("summary", {}), dict) else {}
+    attestation = decisions.get("reviewer_attestation", {})
+    add_error(errors, isinstance(attestation, dict), "human-adjudication decisions.reviewer_attestation must be an object")
+    if not isinstance(attestation, dict):
+        attestation = {}
+    for key in [
+        "blind_review_completed_before_answer_key",
+        "answer_key_not_opened_before_decisions",
+        "raw_content_excluded",
+        "reviewer_reason_required",
+    ]:
+        add_error(errors, attestation.get(key) is True, f"human-adjudication decisions.reviewer_attestation.{key} must be true")
+    add_error(
+        errors,
+        summary.get("blind_review_attested") is True,
+        "human-adjudication adjudication summary.blind_review_attested must be true",
+    )
+    add_error(
+        errors,
+        summary.get("raw_content_excluded_attested") is True,
+        "human-adjudication adjudication summary.raw_content_excluded_attested must be true",
+    )
+    add_error(
+        errors,
+        summary.get("reviewer_reason_required_attested") is True,
+        "human-adjudication adjudication summary.reviewer_reason_required_attested must be true",
+    )
+
+
 def validate_adjudicated_pairs(
     pairs: list[dict[str, Any]],
     expected_count: int,
@@ -197,6 +265,8 @@ def validate_human_adjudication_report(
 
     expected_case_ids = validate_adjudicated_pairs(object_list(adjudication.get("pairs", [])), int(pair_count or 0), errors)
     validate_decision_rows(decision_rows, expected_case_ids, errors)
+    validate_review_integrity(adjudication, decisions, expected_case_ids, errors)
+    validate_reviewer_attestation(adjudication, decisions, errors)
 
     provenance_reviewer = str(provenance.get("reviewer", "")).strip()
     provenance_reviewed_at = str(provenance.get("reviewed_at", "")).strip()
@@ -217,8 +287,20 @@ def validate_human_adjudication_report(
     )
     add_error(
         errors,
+        provenance.get("blind_review_completed_before_answer_key") is True,
+        "human-adjudication provenance.blind_review_completed_before_answer_key must be true",
+    )
+    add_error(
+        errors,
         provenance.get("reviewer_reason_required") is True,
         "human-adjudication provenance.reviewer_reason_required must be true",
+    )
+    integrity = adjudication.get("review_integrity", {}) if isinstance(adjudication.get("review_integrity", {}), dict) else {}
+    add_error(
+        errors,
+        bool(provenance.get("blind_pack_sha256"))
+        and provenance.get("blind_pack_sha256") == integrity.get("blind_pack_sha256"),
+        "human-adjudication provenance.blind_pack_sha256 must match adjudication review_integrity.blind_pack_sha256",
     )
     decision_fields = provenance.get("decision_fields", [])
     required_decision_fields = {"case_id", "winner_variant", "reason"}

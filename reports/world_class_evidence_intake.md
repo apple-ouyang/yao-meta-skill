@@ -38,7 +38,7 @@ This report validates the intake contract for human and external evidence. A val
 | Evidence | Readiness | Submission | Next action |
 | --- | --- | --- | --- |
 | `provider-holdout` | `awaiting-submission` | `missing` | Run provider-backed holdout cases with real credentials and commit only aggregate evidence. |
-| `human-adjudication` | `awaiting-submission` | `missing` | Record real A/B choices in the decision template, then regenerate adjudication. |
+| `human-adjudication` | `awaiting-submission` | `missing` | Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication. |
 | `native-permission-enforcement` | `awaiting-submission` | `missing` | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
 | `native-client-telemetry` | `awaiting-submission` | `missing` | Install a real client against the native host and import production metadata-only events. |
 
@@ -117,6 +117,8 @@ This report validates the intake contract for human and external evidence. A val
   - reports/output_review_adjudication.json summary.judgment_count == summary.pair_count
   - reports/output_review_adjudication.json summary.invalid_decision_count == 0
   - reports/output_review_adjudication.json summary.reviewer_metadata_present is true
+  - reports/output_review_adjudication.json summary.blind_review_attested is true
+  - reports/output_review_adjudication.json review_integrity.blind_pack_sha256 exists and matches reports/output_review_decisions.json
   - reports/output_review_adjudication.json pairs and reviewer_checklist store prompt_sha256, not raw prompt text
   - reports/output_review_adjudication.json summary.ready_for_human_evidence is true
   - reports/skill_os2_audit.json item human-adjudication status becomes pass
@@ -136,6 +138,7 @@ This report validates the intake contract for human and external evidence. A val
   - Reviewer reasons must be rubric-based and must not include raw user data or private customer detail.
   - The decision importer rejects raw prompt, output, transcript, message, and answer-key fields.
   - The adjudication evidence stores prompt_sha256 instead of raw prompt text.
+  - The decision and adjudication artifacts preserve blind_pack_sha256 so reviewers can audit exactly which pack was judged.
   - Keep the answer key separate until after decisions are recorded.
 
 #### Source Runbook
@@ -143,8 +146,8 @@ This report validates the intake contract for human and external evidence. A val
 - `python3 scripts/yao.py output-review-kit --write-template`
 - Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.
 - `python3 scripts/adjudicate_output_review.py --write-template`
-- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.
-- `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`
+- Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, required reason, and truthful reviewer_attestation only.
+- `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`
 - `python3 scripts/yao.py output-review`
 - `python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>`
 - Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.

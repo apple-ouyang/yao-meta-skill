@@ -21,8 +21,10 @@ SOURCE_CHECK_SPECS = {
         ("No invalid decisions", "invalid_decision_count", "==0", "Fix malformed winner/confidence entries."),
         ("Reviewer metadata", "reviewer_metadata_present", "true", "Record reviewer and reviewed_at before adjudication can count."),
         ("Reason required", "reason_required", "true", "Keep reason mandatory for every imported or direct reviewer decision."),
+        ("Blind review attested", "blind_review_attested", "true", "Set reviewer_attestation only after choices are completed before opening the answer key."),
+        ("Raw content attested", "raw_content_excluded_attested", "true", "Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content."),
         ("Raw content blocked", "raw_content_allowed", "false", "Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages."),
-        ("Human evidence ready", "ready_for_human_evidence", "true", "Complete all reviewer decisions with reviewer metadata and rationale."),
+        ("Human evidence ready", "ready_for_human_evidence", "true", "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints."),
     ],
     "native-permission-enforcement": [
         ("Native enforcement", "native_enforcement_count", ">0", "Collect real target-client or external runtime guard proof."),

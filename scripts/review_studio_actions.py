@@ -98,9 +98,9 @@ ACTION_GUIDANCE: dict[str, dict[str, Any]] = {
         "verification": "python3 scripts/build_confusion_matrix.py",
     },
     "output-lab": {
-        "summary": "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。",
+        "summary": "补足 output eval 覆盖、execution evidence、blind A/B 和 reviewer adjudication。同步补足盲审声明。",
         "why": "没有输出质量和人工盲评证据时，Skill 只能证明会触发，不能证明输出真的更好且经得起审查。",
-        "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_kit.html + reports/output_review_adjudication.md",
+        "source_fix": "evals/output/cases.jsonl + reports/output_quality_scorecard.md + reports/output_review_kit.html + reports/output_review_adjudication.md + reports/output_review_decisions.json",
         "source_paths": [
             {"path": "evals/output/cases.jsonl", "label": "output eval cases", "kind": "eval", "patterns": ['"case_id"', '"id"']},
             {"path": "reports/output_quality_scorecard.md", "label": "output scorecard", "kind": "report", "patterns": ["# Output"]},

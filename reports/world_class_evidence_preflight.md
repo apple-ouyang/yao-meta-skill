@@ -10,7 +10,7 @@ Generated at: `2026-06-17`
 - credential value exposed: `false`
 - collection ready: `1`
 - collection blocked: `3`
-- source checks: `9` pass / `17` total
+- source checks: `9` pass / `19` total
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
@@ -88,7 +88,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 | Check | Kind | Current | Status | Next action |
 | --- | --- | --- | --- | --- |
 | Blind review kit | `file` | `present` | `pass` | Open the blind review kit and record real reviewer choices with required rationale. |
-| Decision template | `file` | `present` | `pass` | Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`. |
+| Decision template | `file` | `present` | `pass` | Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, reason, and truthful blind-review attestation via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`. |
 | Decision importer | `file` | `present` | `pass` | Use the importer to reject raw content fields and normalize reviewer decisions before adjudication. |
 | Human reviewer | `human` | `external-human-action` | `human-required` | Assign a real reviewer identity before claiming human adjudication. |
 
@@ -102,8 +102,10 @@ Generate the submission kit after the real provider, human, native-permission, o
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
 | Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
 | Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
+| Blind review attested | `False` | `true` | `blocked` | Set reviewer_attestation only after choices are completed before opening the answer key. |
+| Raw content attested | `True` | `true` | `pass` | Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content. |
 | Raw content blocked | `False` | `false` | `pass` | Adjudication evidence should store prompt hashes and reviewer metadata, not raw prompts, outputs, transcripts, or messages. |
-| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with reviewer metadata and rationale. |
+| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints. |
 
 ## Native Permission Enforcement
 
@@ -154,7 +156,7 @@ Generate the submission kit after the real provider, human, native-permission, o
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

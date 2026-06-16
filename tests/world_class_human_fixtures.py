@@ -23,7 +23,38 @@ def write_json(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def fixture_review_integrity() -> dict:
+    return {
+        "blind_pack_sha256": "f" * 64,
+        "case_count": 2,
+        "case_ids": ["case-a", "case-b"],
+        "prompt_sha256_by_case": {
+            "case-a": "a" * 64,
+            "case-b": "b" * 64,
+        },
+    }
+
+
+def fixture_reviewer_attestation() -> dict:
+    return {
+        "blind_review_completed_before_answer_key": True,
+        "answer_key_not_opened_before_decisions": True,
+        "raw_content_excluded": True,
+        "reviewer_reason_required": True,
+    }
+
+
+def artifact_blind_pack_sha256(skill_root: Path) -> str:
+    path = skill_root / "reports" / "output_review_adjudication.json"
+    if not path.exists():
+        return fixture_review_integrity()["blind_pack_sha256"]
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    integrity = payload.get("review_integrity", {}) if isinstance(payload, dict) else {}
+    return str(integrity.get("blind_pack_sha256", fixture_review_integrity()["blind_pack_sha256"]))
+
+
 def human_submission(skill_root: Path, *, reviewer: str = "Yao QA") -> dict:
+    blind_pack_sha256 = artifact_blind_pack_sha256(skill_root)
     return {
         "schema_version": "1.0",
         "evidence_key": "human-adjudication",
@@ -51,8 +82,10 @@ def human_submission(skill_root: Path, *, reviewer: str = "Yao QA") -> dict:
             "reviewer": reviewer,
             "reviewed_at": "2026-06-14",
             "blind_pack_path": "reports/output_blind_review_pack.md",
+            "blind_pack_sha256": blind_pack_sha256,
             "answer_key_opened_after_decisions": True,
-            "decision_fields": ["case_id", "winner_variant", "confidence", "reason"],
+            "blind_review_completed_before_answer_key": True,
+            "decision_fields": ["case_id", "winner_variant", "confidence", "reason", "reviewer_attestation", "review_integrity"],
             "reviewer_reason_required": True,
         },
         "privacy": {
@@ -135,6 +168,11 @@ def write_human_artifacts(skill_root: Path, *, complete: bool = True, reviewer: 
         "failure_count": 0,
         "reviewer_metadata_present": complete,
         "reason_required": True,
+        "blind_review_attested": complete,
+        "blind_review_completed_before_answer_key": complete,
+        "answer_key_not_opened_before_decisions": complete,
+        "raw_content_excluded_attested": complete,
+        "reviewer_reason_required_attested": complete,
         "ready_for_human_evidence": complete,
         "reviewer_checklist_count": 2,
         "reviewer_checklist_ready_count": 2 if complete else 1,
@@ -156,6 +194,8 @@ def write_human_artifacts(skill_root: Path, *, complete: bool = True, reviewer: 
             "summary": summary,
             "reviewer": reviewer,
             "reviewed_at": reviewed_at,
+            "review_integrity": fixture_review_integrity(),
+            "reviewer_attestation": fixture_reviewer_attestation() if complete else {},
             "pairs": human_pairs(complete=complete),
             "failures": [],
         },
@@ -166,6 +206,8 @@ def write_human_artifacts(skill_root: Path, *, complete: bool = True, reviewer: 
             "schema_version": "1.0",
             "reviewer": reviewer,
             "reviewed_at": reviewed_at,
+            "review_integrity": fixture_review_integrity(),
+            "reviewer_attestation": fixture_reviewer_attestation() if complete else {},
             "decisions": decisions,
         },
     )

@@ -167,11 +167,11 @@ def build_audit(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         audit_item(
             "human-adjudication",
             "Human Adjudication",
-            "pass" if review_summary.get("pair_count", 0) > 0 and review_summary.get("pending_count", 0) == 0 else "human_required",
+            "pass" if review_summary.get("ready_for_human_evidence") is True else "human_required",
             f"{review_summary.get('judgment_count', 0)}/{review_summary.get('pair_count', 0)} decisions; pending {review_summary.get('pending_count', 0)}",
-            "Real reviewer decisions recorded before claiming output review completion",
+            "Real reviewer decisions, blind-review attestation, and integrity fingerprints recorded before claiming output review completion",
             evidence(skill_dir, "reports/output_review_decisions.json", "reports/output_review_adjudication.json", "scripts/adjudicate_output_review.py"),
-            "Record real A/B choices in the decision template, then regenerate adjudication.",
+            "Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication.",
         ),
         audit_item(
             "benchmark-reproducibility",

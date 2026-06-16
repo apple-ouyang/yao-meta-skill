@@ -389,6 +389,7 @@ def build_parser(command_handlers: dict[str, Callable[[argparse.Namespace], int]
     output_review_import_cmd.add_argument("--output-json")
     output_review_import_cmd.add_argument("--reviewer")
     output_review_import_cmd.add_argument("--reviewed-at")
+    output_review_import_cmd.add_argument("--blind-review-attested", action="store_true")
     output_review_import_cmd.add_argument("--run-adjudication", action="store_true")
     output_review_import_cmd.add_argument("--answer-key")
     output_review_import_cmd.add_argument("--adjudication-json")

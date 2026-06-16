@@ -122,6 +122,8 @@ def main() -> None:
     assert pending_payload["summary"]["reviewer_checklist_ready_count"] == 0, pending_payload
     assert pending_payload["summary"]["reviewer_checklist_invalid_count"] == 0, pending_payload
     assert pending_payload["summary"]["reviewer_metadata_present"] is False, pending_payload
+    assert pending_payload["summary"]["blind_review_attested"] is False, pending_payload
+    assert pending_payload["summary"]["raw_content_excluded_attested"] is False, pending_payload
     assert pending_payload["summary"]["reason_required"] is True, pending_payload
     assert pending_payload["summary"]["ready_for_human_evidence"] is False, pending_payload
     assert all(not item["expected_winner_variant"] and not item["expected_revealed"] for item in pending_payload["pairs"]), pending_payload
@@ -169,12 +171,23 @@ def main() -> None:
     template = json.loads(template_path.read_text(encoding="utf-8"))
     assert len(template["decisions"]) == 5, template
     assert all(item["winner_variant"] == "" for item in template["decisions"]), template
+    assert len(template["review_integrity"]["blind_pack_sha256"]) == 64, template
+    assert template["review_integrity"]["case_count"] == 5, template
+    assert template["reviewer_attestation"]["blind_review_completed_before_answer_key"] is False, template
+    assert template["reviewer_attestation"]["answer_key_not_opened_before_decisions"] is False, template
 
     answer_key = json.loads(answer_key_json.read_text(encoding="utf-8"))
+    reviewer_attestation = {
+        "blind_review_completed_before_answer_key": True,
+        "answer_key_not_opened_before_decisions": True,
+        "raw_content_excluded": True,
+        "reviewer_reason_required": True,
+    }
     decisions = {
         "schema_version": "1.0",
         "reviewer": "Yao QA",
         "reviewed_at": "2026-06-13",
+        "reviewer_attestation": reviewer_attestation,
         "decisions": [
             {
                 "case_id": item["case_id"],
@@ -213,7 +226,10 @@ def main() -> None:
     assert filled_payload["summary"]["reviewer_checklist_ready_count"] == 5, filled_payload
     assert filled_payload["summary"]["reviewer_checklist_pending_count"] == 0, filled_payload
     assert filled_payload["summary"]["reviewer_metadata_present"] is True, filled_payload
+    assert filled_payload["summary"]["blind_review_attested"] is True, filled_payload
+    assert filled_payload["summary"]["raw_content_excluded_attested"] is True, filled_payload
     assert filled_payload["summary"]["ready_for_human_evidence"] is True, filled_payload
+    assert len(filled_payload["review_integrity"]["blind_pack_sha256"]) == 64, filled_payload
     assert all(item["status"] == "match" for item in filled_payload["pairs"]), filled_payload
     assert all(item["expected_winner_variant"] in {"A", "B"} and item["expected_revealed"] for item in filled_payload["pairs"]), filled_payload
     assert all("prompt" not in item and len(item["prompt_sha256"]) == 64 for item in filled_payload["pairs"]), filled_payload
@@ -250,6 +266,9 @@ def main() -> None:
     assert imported_decisions["import_contract"]["raw_content_allowed"] is False, imported_decisions
     assert imported_decisions["import_contract"]["answer_key_fields_allowed"] is False, imported_decisions
     assert imported_decisions["import_contract"]["answer_key_opened_by_importer"] is False, imported_decisions
+    assert imported_decisions["import_contract"]["blind_review_attested"] is True, imported_decisions
+    assert imported_decisions["reviewer_attestation"]["blind_review_completed_before_answer_key"] is True, imported_decisions
+    assert len(imported_decisions["review_integrity"]["blind_pack_sha256"]) == 64, imported_decisions
     assert imported_decisions["reviewer"] == "Yao QA", imported_decisions
 
     no_reason_source = tmp_root / "no_reason_source.json"
@@ -310,24 +329,16 @@ def main() -> None:
 
     jsonl_source = tmp_root / "reviewer_source.jsonl"
     jsonl_source.write_text("\n".join(json.dumps(item, ensure_ascii=False) for item in decisions["decisions"]) + "\n", encoding="utf-8")
-    jsonl_proc = run(
-        [
-            str(IMPORTER),
-            "--input",
-            str(jsonl_source),
-            "--blind-pack",
-            str(blind_pack_json),
-            "--output-json",
-            str(tmp_root / "jsonl_decisions.json"),
-            "--reviewer",
-            "Yao QA",
-            "--reviewed-at",
-            "2026-06-13",
-        ]
-    )
+    jsonl_proc = run([
+        str(IMPORTER), "--input", str(jsonl_source), "--blind-pack", str(blind_pack_json),
+        "--output-json", str(tmp_root / "jsonl_decisions.json"), "--reviewer", "Yao QA",
+        "--reviewed-at", "2026-06-13", "--blind-review-attested",
+    ])
     jsonl_payload = json.loads(jsonl_proc.stdout)
     assert jsonl_payload["ok"], jsonl_payload
     assert jsonl_payload["summary"]["completed_decision_count"] == 5, jsonl_payload
+    jsonl_decisions = json.loads((tmp_root / "jsonl_decisions.json").read_text(encoding="utf-8"))
+    assert jsonl_decisions["reviewer_attestation"]["blind_review_completed_before_answer_key"] is True, jsonl_decisions
 
     csv_source = tmp_root / "reviewer_source.csv"
     csv_source.write_text(
@@ -339,21 +350,11 @@ def main() -> None:
         + "\n",
         encoding="utf-8",
     )
-    csv_proc = run(
-        [
-            str(IMPORTER),
-            "--input",
-            str(csv_source),
-            "--blind-pack",
-            str(blind_pack_json),
-            "--output-json",
-            str(tmp_root / "csv_decisions.json"),
-            "--reviewer",
-            "Yao QA",
-            "--reviewed-at",
-            "2026-06-13",
-        ]
-    )
+    csv_proc = run([
+        str(IMPORTER), "--input", str(csv_source), "--blind-pack", str(blind_pack_json),
+        "--output-json", str(tmp_root / "csv_decisions.json"), "--reviewer", "Yao QA",
+        "--reviewed-at", "2026-06-13", "--blind-review-attested",
+    ])
     csv_payload = json.loads(csv_proc.stdout)
     assert csv_payload["ok"], csv_payload
     assert csv_payload["summary"]["completed_decision_count"] == 5, csv_payload

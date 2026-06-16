@@ -13,9 +13,9 @@
     "precheck_external_required_count": 2,
     "collection_ready_count": 1,
     "collection_blocked_count": 3,
-    "source_check_count": 17,
+    "source_check_count": 19,
     "source_pass_count": 9,
-    "source_blocked_count": 8,
+    "source_blocked_count": 10,
     "pending_count": 4,
     "ready_to_claim_world_class": false,
     "credential_value_exposed": false,
@@ -210,7 +210,7 @@
           "label": "Decision template",
           "kind": "file",
           "required": true,
-          "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+          "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, reason, and truthful blind-review attestation via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`.",
           "secret_value_redacted": false,
           "path": "reports/output_review_decisions.json",
           "status": "pass",
@@ -303,6 +303,26 @@
         },
         {
           "evidence_key": "human-adjudication",
+          "label": "Blind review attested",
+          "field": "blind_review_attested",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Raw content attested",
+          "field": "raw_content_excluded_attested",
+          "expected": "true",
+          "actual": true,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content."
+        },
+        {
+          "evidence_key": "human-adjudication",
           "label": "Raw content blocked",
           "field": "raw_content_allowed",
           "expected": "false",
@@ -319,7 +339,7 @@
           "actual": false,
           "status": "blocked",
           "source_accepted": false,
-          "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
+          "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints."
         }
       ],
       "next_action": "Assign a real reviewer identity before claiming human adjudication.",
@@ -370,8 +390,8 @@
         "python3 scripts/yao.py output-review-kit --write-template",
         "Open reports/output_review_kit.md and choose A or B for each pair without opening the answer key.",
         "python3 scripts/adjudicate_output_review.py --write-template",
-        "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, and required reason only.",
-        "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication",
+        "Record reviewer choices in a separate JSON, JSONL, or CSV decision source with reviewer, reviewed_at, case_id, winner_variant, confidence, required reason, and truthful reviewer_attestation only.",
+        "python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication",
         "python3 scripts/yao.py output-review",
         "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD>",
         "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
@@ -575,8 +595,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -715,7 +735,7 @@
       "label": "Decision template",
       "kind": "file",
       "required": true,
-      "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, and reason via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --run-adjudication`.",
+      "next_action": "Import real A/B decisions with reviewer, reviewed_at, winner_variant, confidence, reason, and truthful blind-review attestation via `python3 scripts/yao.py output-review-import --input <reviewer-decisions.json> --blind-review-attested --run-adjudication`.",
       "secret_value_redacted": false,
       "path": "reports/output_review_decisions.json",
       "status": "pass",
@@ -908,6 +928,26 @@
     },
     {
       "evidence_key": "human-adjudication",
+      "label": "Blind review attested",
+      "field": "blind_review_attested",
+      "expected": "true",
+      "actual": false,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Set reviewer_attestation only after choices are completed before opening the answer key."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Raw content attested",
+      "field": "raw_content_excluded_attested",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Attest that reviewer decisions exclude raw prompts, outputs, transcripts, messages, and private user content."
+    },
+    {
+      "evidence_key": "human-adjudication",
       "label": "Raw content blocked",
       "field": "raw_content_allowed",
       "expected": "false",
@@ -924,7 +964,7 @@
       "actual": false,
       "status": "blocked",
       "source_accepted": false,
-      "next_action": "Complete all reviewer decisions with reviewer metadata and rationale."
+      "next_action": "Complete all reviewer decisions with metadata and rationale, plus blind-review attestation and integrity fingerprints."
     },
     {
       "evidence_key": "native-permission-enforcement",
@@ -971,8 +1011,8 @@
       "label": "Adoption sample",
       "field": "adoption_sample_count",
       "expected": ">0",
-      "actual": 1,
-      "status": "pass",
+      "actual": 0,
+      "status": "blocked",
       "source_accepted": false,
       "next_action": "Telemetry must include adoption outcome evidence."
     },

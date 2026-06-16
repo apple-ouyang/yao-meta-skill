@@ -124,7 +124,7 @@
       "label": "Human Adjudication",
       "status": "human_required",
       "current": "0/5 decisions; pending 5",
-      "target": "Real reviewer decisions recorded before claiming output review completion",
+      "target": "Real reviewer decisions, blind-review attestation, and integrity fingerprints recorded before claiming output review completion",
       "evidence": [
         {
           "path": "reports/output_review_decisions.json",
@@ -139,7 +139,7 @@
           "exists": true
         }
       ],
-      "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
+      "next_action": "Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication."
     },
     {
       "key": "benchmark-reproducibility",
@@ -351,7 +351,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {
@@ -390,7 +390,7 @@
       "label": "Human Adjudication",
       "status": "human_required",
       "current": "0/5 decisions; pending 5",
-      "target": "Real reviewer decisions recorded before claiming output review completion",
+      "target": "Real reviewer decisions, blind-review attestation, and integrity fingerprints recorded before claiming output review completion",
       "evidence": [
         {
           "path": "reports/output_review_decisions.json",
@@ -405,7 +405,7 @@
           "exists": true
         }
       ],
-      "next_action": "Record real A/B choices in the decision template, then regenerate adjudication."
+      "next_action": "Record real A/B choices, reviewer metadata, and blind-review attestation, then regenerate adjudication."
     },
     {
       "key": "native-permission-enforcement",
@@ -433,7 +433,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {
