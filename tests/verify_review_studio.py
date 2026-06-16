@@ -236,8 +236,12 @@ def main() -> None:
     assert full_payload["data"]["python_compatibility"]["summary"]["issue_count"] == 0, full_payload["data"]["python_compatibility"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["hotspot_count"] == 0, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["watchlist_count"] == 0, full_payload["data"]["architecture_maintainability"]
-    assert full_payload["data"]["architecture_maintainability"]["summary"]["early_watchlist_count"] >= 3, full_payload["data"]["architecture_maintainability"]
+    assert full_payload["data"]["architecture_maintainability"]["summary"]["early_watchlist_count"] >= 2, full_payload["data"]["architecture_maintainability"]
     assert full_payload["data"]["architecture_maintainability"]["summary"]["blocker_count"] == 0, full_payload["data"]["architecture_maintainability"]
+    early_watch_paths = {
+        item["path"] for item in full_payload["data"]["architecture_maintainability"]["early_watchlist"]
+    }
+    assert "scripts/cross_packager.py" not in early_watch_paths, full_payload["data"]["architecture_maintainability"]
     action_keys = {item["gate_key"] for item in full_payload["review_actions"]}
     assert action_keys == {"output-lab", "review-waivers", "world-class-evidence"}, full_payload["review_actions"]
     world_class_action = next(item for item in full_payload["review_actions"] if item["gate_key"] == "world-class-evidence")

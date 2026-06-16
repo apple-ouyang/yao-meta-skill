@@ -1,6 +1,6 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-17`
+Generated at: `2026-06-13`
 
 ## Summary
 
@@ -48,8 +48,8 @@ No near-threshold files found.
 | `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/render_skill_overview.py` | `584` | `cli-script` | `pass` |
+| `tests/verify_review_studio.py` | `584` | `test` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |
-| `tests/verify_review_studio.py` | `580` | `test` | `pass` |
 | `scripts/render_evidence_consistency.py` | `568` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `568` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_ledger.py` | `567` | `test` | `pass` |

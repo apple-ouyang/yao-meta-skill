@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 11
+        "changed_file_count": 15
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
