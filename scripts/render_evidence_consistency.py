@@ -77,6 +77,9 @@ def build_review_studio_gate_action_mirror_check(review_studio: dict[str, Any]) 
             str(gate.get("key", "")): {
                 "review_action_id": f"review-action-{gate.get('key', '')}",
                 "review_action_status": gate.get("status", ""),
+                "title_present": True,
+                "next_step_present": True,
+                "reason_present": True,
                 "source_ref_present": True,
                 "verification_command_present": True,
             }
@@ -95,15 +98,24 @@ def build_review_studio_gate_action_mirror_check(review_studio: dict[str, Any]) 
         actual["gate_action_mirrors"][key] = {
             "review_action_id": gate.get("review_action_id", ""),
             "review_action_status": gate.get("review_action_status", ""),
+            "title_present": bool(gate.get("review_action_title")),
+            "next_step_present": bool(gate.get("review_action_next_step")),
+            "reason_present": bool(gate.get("review_action_reason")),
             "source_ref_present": bool(gate.get("review_action_source_ref_count")),
             "verification_command_present": bool(gate.get("review_action_verification_command")),
             "top_level_action_id": action.get("action_id", ""),
             "top_level_action_status": action.get("status", ""),
+            "top_level_title_present": bool(action.get("title")),
+            "top_level_next_step_present": bool(action.get("next_step")),
+            "top_level_reason_present": bool(action.get("reason")),
             "top_level_source_ref_present": bool(action.get("source_refs")),
             "top_level_verification_command_present": bool(action.get("verification_command")),
         }
         expected["gate_action_mirrors"][key]["top_level_action_id"] = f"review-action-{key}"
         expected["gate_action_mirrors"][key]["top_level_action_status"] = gate.get("status", "")
+        expected["gate_action_mirrors"][key]["top_level_title_present"] = True
+        expected["gate_action_mirrors"][key]["top_level_next_step_present"] = True
+        expected["gate_action_mirrors"][key]["top_level_reason_present"] = True
         expected["gate_action_mirrors"][key]["top_level_source_ref_present"] = True
         expected["gate_action_mirrors"][key]["top_level_verification_command_present"] = True
     return {

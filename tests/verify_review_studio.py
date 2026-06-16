@@ -41,12 +41,18 @@ def main() -> None:
     for gate in payload["gates"]:
         if gate["status"] == "pass":
             assert gate["review_action_id"] == "", gate
+            assert gate["review_action_title"] == "", gate
+            assert gate["review_action_next_step"] == "", gate
+            assert gate["review_action_reason"] == "", gate
             assert gate["review_action_source_ref_count"] == 0, gate
             assert gate["review_action_verification_command"] == "", gate
             continue
         action = action_by_gate[gate["key"]]
         assert gate["review_action_id"] == action["action_id"] == f"review-action-{gate['key']}", gate
         assert gate["review_action_status"] == action["status"] == gate["status"], gate
+        assert gate["review_action_title"] == action["title"] == action["label"], gate
+        assert gate["review_action_next_step"] == action["next_step"] == action["summary"], gate
+        assert gate["review_action_reason"] == action["reason"] == action["why"], gate
         assert gate["review_action_source_ref_count"] == len(action["source_refs"]) > 0, gate
         assert gate["review_action_verification_command"] == action["verification_command"], gate
     assert set(review_gates.GATE_WEIGHTS) == review_gates.REVIEW_STUDIO_GATE_KEYS, review_gates.GATE_WEIGHTS
@@ -308,6 +314,9 @@ def main() -> None:
         output_html,
     )
     assert len(synthetic_actions) == 1, synthetic_actions
+    assert synthetic_actions[0]["title"] == "输出实验", synthetic_actions
+    assert synthetic_actions[0]["next_step"] == synthetic_actions[0]["summary"], synthetic_actions
+    assert synthetic_actions[0]["reason"] == synthetic_actions[0]["why"], synthetic_actions
     assert synthetic_actions[0]["source_refs"], synthetic_actions
     assert {item["path"] for item in synthetic_actions[0]["source_refs"]} >= {
         "evals/output/cases.jsonl",

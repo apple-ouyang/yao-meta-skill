@@ -179,6 +179,15 @@ def main() -> None:
     assert gate_action_mirror["gate_action_mirrors"]["world-class-evidence"]["source_ref_present"] is True, (
         gate_action_mirror
     )
+    assert gate_action_mirror["gate_action_mirrors"]["world-class-evidence"]["title_present"] is True, (
+        gate_action_mirror
+    )
+    assert gate_action_mirror["gate_action_mirrors"]["world-class-evidence"]["next_step_present"] is True, (
+        gate_action_mirror
+    )
+    assert gate_action_mirror["gate_action_mirrors"]["world-class-evidence"]["reason_present"] is True, (
+        gate_action_mirror
+    )
     assert checks["overview-benchmark-summary"]["status"] == "pass", checks["overview-benchmark-summary"]
     assert checks["interpretation-adoption-summary"]["status"] == "pass", checks["interpretation-adoption-summary"]
     assert checks["coverage-world-class-boundary"]["status"] == "pass", checks["coverage-world-class-boundary"]
@@ -418,9 +427,15 @@ def main() -> None:
     for gate in gate_action_payload["gates"]:
         if gate["key"] == "world-class-evidence":
             gate["review_action_id"] = ""
+            gate["review_action_title"] = ""
+            gate["review_action_next_step"] = ""
+            gate["review_action_reason"] = ""
             gate["review_action_source_ref_count"] = 0
     for action in gate_action_payload["review_actions"]:
         if action["gate_key"] == "world-class-evidence":
+            action["title"] = ""
+            action["next_step"] = ""
+            action["reason"] = ""
             action["source_refs"] = []
     gate_action_path.write_text(json.dumps(gate_action_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     gate_action_drift_proc = run(

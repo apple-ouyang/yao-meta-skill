@@ -42,7 +42,7 @@
     },
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 671,
+      "lines": 686,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -50,7 +50,7 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 647,
+      "lines": 659,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,
@@ -105,20 +105,20 @@
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
+      "path": "scripts/render_review_studio.py",
+      "lines": 578,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+    },
+    {
       "path": "scripts/world_class_submission_kit_rendering.py",
       "lines": 576,
       "kind": "internal-module",
       "severity": "pass",
       "early_watch": false,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/render_review_studio.py",
-      "lines": 575,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
     }
   ],
   "watchlist": [],
@@ -141,7 +141,7 @@
     },
     {
       "path": "tests/verify_evidence_consistency.py",
-      "lines": 671,
+      "lines": 686,
       "kind": "test",
       "severity": "pass",
       "early_watch": true,
@@ -149,7 +149,7 @@
     },
     {
       "path": "scripts/render_evidence_consistency.py",
-      "lines": 647,
+      "lines": 659,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": true,

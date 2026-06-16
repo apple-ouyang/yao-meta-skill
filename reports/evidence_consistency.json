@@ -203,30 +203,48 @@
           "output-lab": {
             "review_action_id": "review-action-output-lab",
             "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-output-lab",
             "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
             "top_level_source_ref_present": true,
             "top_level_verification_command_present": true
           },
           "review-waivers": {
             "review_action_id": "review-action-review-waivers",
             "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-review-waivers",
             "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
             "top_level_source_ref_present": true,
             "top_level_verification_command_present": true
           },
           "world-class-evidence": {
             "review_action_id": "review-action-world-class-evidence",
             "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-world-class-evidence",
             "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
             "top_level_source_ref_present": true,
             "top_level_verification_command_present": true
           }
@@ -248,30 +266,48 @@
           "output-lab": {
             "review_action_id": "review-action-output-lab",
             "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-output-lab",
             "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
             "top_level_source_ref_present": true,
             "top_level_verification_command_present": true
           },
           "review-waivers": {
             "review_action_id": "review-action-review-waivers",
             "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-review-waivers",
             "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
             "top_level_source_ref_present": true,
             "top_level_verification_command_present": true
           },
           "world-class-evidence": {
             "review_action_id": "review-action-world-class-evidence",
             "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-world-class-evidence",
             "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
             "top_level_source_ref_present": true,
             "top_level_verification_command_present": true
           }
@@ -288,12 +324,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 515669/120000; top deferred scripts 454366; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 515966/120000; top deferred scripts 454663; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 515669/120000; top deferred scripts 454366; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 515966/120000; top deferred scripts 454663; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -306,8 +342,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches source dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -321,7 +357,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 12
+        "changed_file_count": 58
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -362,8 +398,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "cd71fd61e4d1c8db758ac0d2e9d1873a5a4ef547",
-      "actual": "cd71fd61e4d1c8db758ac0d2e9d1873a5a4ef547",
+      "expected": "10dd886ae711ea7edb426ecb7e8747cf38ac55a8",
+      "actual": "10dd886ae711ea7edb426ecb7e8747cf38ac55a8",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -375,30 +411,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a7c24fc193a5b24d2016ac6e6d49120e525f3ef8c266bf66a5894db2c3f99bba",
+        "source_contract_sha256": "fda25ac83d07a671d3789d6b10409bee61479200101c7e3c925df9a1998e412b",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 10,
-        "world_class_source_blocked_count": 9,
+        "world_class_source_pass_count": 9,
+        "world_class_source_blocked_count": 10,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a7c24fc193a5b24d2016ac6e6d49120e525f3ef8c266bf66a5894db2c3f99bba",
+        "source_contract_sha256": "fda25ac83d07a671d3789d6b10409bee61479200101c7e3c925df9a1998e412b",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 10,
-        "world_class_source_blocked_count": 9,
+        "world_class_source_pass_count": 9,
+        "world_class_source_blocked_count": 10,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -412,13 +448,13 @@
       "status": "pass",
       "expected": {
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "activation_count": 1,
-        "accepted_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
         "risk_band": "low",
         "event_types": {
-          "skill_activation": 1
+          "review_event": 1
         },
         "source_types": {
           "manual": 1
@@ -426,13 +462,13 @@
       },
       "actual": {
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "activation_count": 1,
-        "accepted_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
         "risk_band": "low",
         "event_types": {
-          "skill_activation": 1
+          "review_event": 1
         },
         "source_types": {
           "manual": 1
@@ -455,8 +491,8 @@
         "human_pending_count": 1,
         "external_pending_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -467,8 +503,8 @@
         "human_pending_count": 1,
         "external_pending_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -488,7 +524,7 @@
         "pending_count": 4,
         "accepted_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 10
+        "source_pass_count": 9
       },
       "actual": {
         "ready": false,
@@ -496,7 +532,7 @@
         "pending_count": 4,
         "accepted_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 10
+        "source_pass_count": 9
       },
       "paths": [
         "reports/world_class_evidence_ledger.json",
@@ -508,8 +544,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "cd71fd61e4d1c8db758ac0d2e9d1873a5a4ef547",
-      "actual": "cd71fd61e4d1c8db758ac0d2e9d1873a5a4ef547",
+      "expected": "10dd886ae711ea7edb426ecb7e8747cf38ac55a8",
+      "actual": "10dd886ae711ea7edb426ecb7e8747cf38ac55a8",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -521,30 +557,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a7c24fc193a5b24d2016ac6e6d49120e525f3ef8c266bf66a5894db2c3f99bba",
+        "source_contract_sha256": "fda25ac83d07a671d3789d6b10409bee61479200101c7e3c925df9a1998e412b",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 10,
-        "world_class_source_blocked_count": 9,
+        "world_class_source_pass_count": 9,
+        "world_class_source_blocked_count": 10,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "a7c24fc193a5b24d2016ac6e6d49120e525f3ef8c266bf66a5894db2c3f99bba",
+        "source_contract_sha256": "fda25ac83d07a671d3789d6b10409bee61479200101c7e3c925df9a1998e412b",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 10,
-        "world_class_source_blocked_count": 9,
+        "world_class_source_pass_count": 9,
+        "world_class_source_blocked_count": 10,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -558,13 +594,13 @@
       "status": "pass",
       "expected": {
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "activation_count": 1,
-        "accepted_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
         "risk_band": "low",
         "event_types": {
-          "skill_activation": 1
+          "review_event": 1
         },
         "source_types": {
           "manual": 1
@@ -572,13 +608,13 @@
       },
       "actual": {
         "event_count": 1,
-        "adoption_sample_count": 1,
-        "activation_count": 1,
-        "accepted_count": 1,
-        "adoption_rate": 100.0,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
+        "adoption_rate": 0,
         "risk_band": "low",
         "event_types": {
-          "skill_activation": 1
+          "review_event": 1
         },
         "source_types": {
           "manual": 1
@@ -601,8 +637,8 @@
         "human_pending_count": 1,
         "external_pending_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -613,8 +649,8 @@
         "human_pending_count": 1,
         "external_pending_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -634,7 +670,7 @@
         "pending_count": 4,
         "accepted_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 10
+        "source_pass_count": 9
       },
       "actual": {
         "ready": false,
@@ -642,7 +678,7 @@
         "pending_count": 4,
         "accepted_count": 0,
         "source_check_count": 19,
-        "source_pass_count": 10
+        "source_pass_count": 9
       },
       "paths": [
         "reports/world_class_evidence_ledger.json",
@@ -1441,7 +1477,7 @@
         "external_pending_count": 3,
         "human_pending_count": 1,
         "source_check_count": 19,
-        "source_pass_count": 10,
+        "source_pass_count": 9,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1501,7 +1537,8 @@
             "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
             "summary_en": "Real external-client metadata-only events have not been imported yet.",
             "blocked_checks": [
-              "External events"
+              "External events",
+              "Adoption sample"
             ]
           }
         ]
@@ -1515,7 +1552,7 @@
         "external_pending_count": 3,
         "human_pending_count": 1,
         "source_check_count": 19,
-        "source_pass_count": 10,
+        "source_pass_count": 9,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1575,7 +1612,8 @@
             "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
             "summary_en": "Real external-client metadata-only events have not been imported yet.",
             "blocked_checks": [
-              "External events"
+              "External events",
+              "Adoption sample"
             ]
           }
         ]
@@ -1925,15 +1963,15 @@
       "expected": {
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 10,
-        "world_class_source_blocked_count": 9,
+        "world_class_source_pass_count": 9,
+        "world_class_source_blocked_count": 10,
         "public_claim_ready": false
       },
       "actual": {
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 19,
-        "world_class_source_pass_count": 10,
-        "world_class_source_blocked_count": 9,
+        "world_class_source_pass_count": 9,
+        "world_class_source_blocked_count": 10,
         "public_claim_ready": false
       },
       "paths": [
@@ -1949,8 +1987,8 @@
       "expected": {
         "pending_count": 4,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "ready_to_claim_world_class": false,
         "preflight_counts_as_evidence": false,
         "credential_value_exposed": false
@@ -1958,8 +1996,8 @@
       "actual": {
         "pending_count": 4,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "ready_to_claim_world_class": false,
         "preflight_counts_as_evidence": false,
         "credential_value_exposed": false
@@ -2136,7 +2174,7 @@
         "summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 13,
+          "phase_queue_row_count": 14,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
@@ -2169,8 +2207,8 @@
             "phase": "collect-source",
             "priority": 40,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 10,
+            "row_count": 10,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2312,15 +2350,15 @@
               "phase": "collect-source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -2330,7 +2368,7 @@
         "operator_runbook_summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 13,
+          "phase_queue_row_count": 14,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
@@ -2363,8 +2401,8 @@
             "phase": "collect-source",
             "priority": 40,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 10,
+            "row_count": 10,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2506,15 +2544,15 @@
               "phase": "collect-source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -2644,15 +2682,15 @@
               "phase": "collect-source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -2663,7 +2701,7 @@
         "summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 13,
+          "phase_queue_row_count": 14,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
@@ -2696,8 +2734,8 @@
             "phase": "collect-source",
             "priority": 40,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 10,
+            "row_count": 10,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2718,7 +2756,7 @@
         "operator_runbook_summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 13,
+          "phase_queue_row_count": 14,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-human-reviewer",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
@@ -2751,8 +2789,8 @@
             "phase": "collect-source",
             "priority": 40,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 10,
+            "row_count": 10,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2894,15 +2932,15 @@
               "phase": "collect-source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -3032,15 +3070,15 @@
               "phase": "collect-source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -3170,15 +3208,15 @@
               "phase": "collect-source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions",
               "counts_as_completion": false
             }
@@ -3278,8 +3316,8 @@
         "human_pending_count": 1,
         "external_pending_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "plan_keys": [
           "human-adjudication",
           "native-client-telemetry",
@@ -3427,8 +3465,8 @@
         "human_pending_count": 1,
         "external_pending_count": 3,
         "source_check_count": 19,
-        "source_pass_count": 10,
-        "source_blocked_count": 9,
+        "source_pass_count": 9,
+        "source_blocked_count": 10,
         "plan_keys": [
           "human-adjudication",
           "native-client-telemetry",

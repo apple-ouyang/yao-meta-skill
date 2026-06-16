@@ -37,8 +37,8 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
 | `tests/verify_world_class_evidence_intake.py` | `690` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `tests/verify_evidence_consistency.py` | `671` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
-| `scripts/render_evidence_consistency.py` | `647` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
+| `tests/verify_evidence_consistency.py` | `686` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+| `scripts/render_evidence_consistency.py` | `659` | `cli-script` | Watch this file before adding new responsibilities; extract a helper module when one concern dominates. |
 
 ## Largest Files
 
@@ -46,16 +46,16 @@ No near-threshold files found.
 | --- | ---: | --- | --- |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `tests/verify_world_class_evidence_intake.py` | `690` | `test` | `pass` |
-| `tests/verify_evidence_consistency.py` | `671` | `test` | `pass` |
-| `scripts/render_evidence_consistency.py` | `647` | `cli-script` | `pass` |
+| `tests/verify_evidence_consistency.py` | `686` | `test` | `pass` |
+| `scripts/render_evidence_consistency.py` | `659` | `cli-script` | `pass` |
 | `tests/verify_output_review_adjudication.py` | `599` | `test` | `pass` |
 | `scripts/render_skill_overview.py` | `588` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `586` | `cli-script` | `pass` |
 | `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 | `scripts/trust_check.py` | `582` | `cli-script` | `pass` |
 | `tests/verify_world_class_evidence_ledger.py` | `579` | `test` | `pass` |
+| `scripts/render_review_studio.py` | `578` | `cli-script` | `pass` |
 | `scripts/world_class_submission_kit_rendering.py` | `576` | `internal-module` | `pass` |
-| `scripts/render_review_studio.py` | `575` | `cli-script` | `pass` |
 
 ## Release Rule
 

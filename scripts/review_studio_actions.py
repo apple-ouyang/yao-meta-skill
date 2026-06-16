@@ -299,10 +299,13 @@ def build_review_actions(
             {
                 "action_id": f"review-action-{gate_item['key']}",
                 "gate_key": gate_item["key"],
+                "title": gate_item["label"],
                 "label": gate_item["label"],
                 "status": gate_item["status"],
                 "priority": "blocker" if gate_item["status"] == "block" else "warning",
+                "next_step": guidance["summary"],
                 "summary": guidance["summary"],
+                "reason": guidance["why"],
                 "why": guidance["why"],
                 "source_fix": guidance["source_fix"],
                 "source_refs": refs,
