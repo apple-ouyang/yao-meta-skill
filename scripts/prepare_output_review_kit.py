@@ -153,7 +153,7 @@ def build_contract(blind_pack_md: Path, decisions_path: Path) -> dict[str, Any]:
             "reviewed_at": "Review date or timestamp.",
             "winner_variant": "A or B for every case.",
             "confidence": "Optional numeric confidence from 0 to 1.",
-            "reason": "Short rationale based on the rubric, not on hidden labels.",
+            "reason": "Required rationale based on the rubric, not on hidden labels.",
         },
         "privacy_contract": [
             "The answer key is intentionally withheld from this kit.",

@@ -116,7 +116,7 @@ def build_decision_template(blind_pack: dict[str, Any]) -> dict[str, Any]:
         "decision_contract": {
             "winner_variant": "Use A or B after reading the blind review pack. Leave blank when pending.",
             "confidence": "Optional number from 0 to 1.",
-            "reason": "Short reviewer rationale. Do not reveal baseline or with-skill labels before adjudication.",
+            "reason": "Required reviewer rationale. Do not reveal baseline or with-skill labels before adjudication.",
         },
         "decisions": template_decisions,
     }
@@ -127,6 +127,7 @@ def adjudicate_pair(
     pair: dict[str, Any],
     answer: dict[str, Any] | None,
     decision: dict[str, Any] | None,
+    reviewer_metadata_present: bool = True,
 ) -> tuple[dict[str, Any], list[str]]:
     failures: list[str] = []
     expected = normalize_variant(answer.get("expected_winner_variant", "") if answer else "")
@@ -174,6 +175,12 @@ def adjudicate_pair(
     elif confidence_failure:
         failures.append(f"{case_id}: {confidence_failure}")
         status = "invalid"
+    elif not reason:
+        failures.append(f"{case_id}: reason is required before answer key can be revealed")
+        status = "invalid"
+    elif not reviewer_metadata_present:
+        failures.append(f"{case_id}: reviewer and reviewed_at are required before answer key can be revealed")
+        status = "invalid"
     else:
         status = "match" if reviewer == expected else "disagree"
     expected_revealed = status in {"match", "disagree"}
@@ -192,7 +199,7 @@ def adjudicate_pair(
     )
 
 
-def build_summary(pairs: list[dict[str, Any]], failures: list[str]) -> dict[str, Any]:
+def build_summary(pairs: list[dict[str, Any]], failures: list[str], reviewer_metadata_present: bool) -> dict[str, Any]:
     pair_count = len(pairs)
     judgment_count = sum(1 for item in pairs if item["status"] in {"match", "disagree"})
     pending_count = sum(1 for item in pairs if item["status"] == "pending")
@@ -212,6 +219,14 @@ def build_summary(pairs: list[dict[str, Any]], failures: list[str]) -> dict[str,
         "pending_answer_hidden_count": sum(1 for item in pairs if item["status"] in {"pending", "invalid"} and not item.get("expected_revealed")),
         "agreement_rate": agreement_rate,
         "needs_review": pending_count > 0,
+        "reviewer_metadata_present": reviewer_metadata_present,
+        "reason_required": True,
+        "ready_for_human_evidence": bool(pair_count)
+        and judgment_count == pair_count
+        and pending_count == 0
+        and invalid_decision_count == 0
+        and reviewer_metadata_present
+        and len(failures) == 0,
         "failure_count": len(failures),
     }
 
@@ -254,7 +269,9 @@ def build_reviewer_checklist(
                 "required_fields": {
                     "winner_variant": "A or B after reading only the blind review pack.",
                     "confidence": "Optional number from 0 to 1.",
-                    "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication.",
+                    "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+                    "reviewer": "Human reviewer name or review group at the decision-file top level.",
+                    "reviewed_at": "Review date or timestamp at the decision-file top level.",
                 },
                 "privacy_contract": [
                     "Do not paste raw private user data into the decision reason.",
@@ -323,6 +340,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Answer keys revealed: `{summary['answer_revealed_count']}`",
         f"- Pending/invalid answers hidden: `{summary['pending_answer_hidden_count']}`",
         f"- Reviewer checklist: `{summary['reviewer_checklist_ready_count']}` ready / `{summary['reviewer_checklist_count']}` total",
+        f"- Reviewer metadata present: `{str(summary['reviewer_metadata_present']).lower()}`",
+        f"- Ready for human evidence: `{str(summary['ready_for_human_evidence']).lower()}`",
         "",
     ]
     if summary["judgment_count"] == 0:
@@ -396,6 +415,10 @@ def adjudicate_output_review(
     answers_by_id = answer_index(answer_key)
     decisions_by_id, index_failures = decision_index(decisions_payload)
     failures.extend(index_failures)
+    reviewer_metadata_present = bool(
+        str(decisions_payload.get("reviewer", "")).strip()
+        and str(decisions_payload.get("reviewed_at", "")).strip()
+    )
 
     for case_id in decisions_by_id:
         if case_id not in pairs_by_id:
@@ -403,11 +426,17 @@ def adjudicate_output_review(
 
     adjudicated_pairs: list[dict[str, Any]] = []
     for case_id, pair in pairs_by_id.items():
-        adjudicated, pair_failures = adjudicate_pair(case_id, pair, answers_by_id.get(case_id), decisions_by_id.get(case_id))
+        adjudicated, pair_failures = adjudicate_pair(
+            case_id,
+            pair,
+            answers_by_id.get(case_id),
+            decisions_by_id.get(case_id),
+            reviewer_metadata_present=reviewer_metadata_present,
+        )
         adjudicated_pairs.append(adjudicated)
         failures.extend(pair_failures)
 
-    summary = build_summary(adjudicated_pairs, failures)
+    summary = build_summary(adjudicated_pairs, failures, reviewer_metadata_present)
     reviewer_checklist = build_reviewer_checklist(adjudicated_pairs, blind_pack_path, decisions_path)
     summary = add_checklist_summary(summary, reviewer_checklist)
     payload = {

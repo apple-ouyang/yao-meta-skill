@@ -26,7 +26,7 @@ This reviewer-facing packet contains the blind A/B cases, decision fields, and c
 - `reviewed_at`: Review date or timestamp.
 - `winner_variant`: A or B for every case.
 - `confidence`: Optional numeric confidence from 0 to 1.
-- `reason`: Short rationale based on the rubric, not on hidden labels.
+- `reason`: Required rationale based on the rubric, not on hidden labels.
 
 ## Privacy Contract
 

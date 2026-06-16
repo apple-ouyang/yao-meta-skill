@@ -140,12 +140,15 @@ def normalize_decisions(
         confidence, confidence_failure = parse_confidence(item.get("confidence"), case_id)
         if confidence_failure:
             failures.append(confidence_failure)
+        reason = str(item.get("reason", "")).strip()
+        if winner in {"A", "B"} and not reason:
+            failures.append(f"{case_id}: reason is required for imported human decisions")
         normalized.append(
             {
                 "case_id": case_id,
                 "winner_variant": winner,
                 "confidence": confidence,
-                "reason": str(item.get("reason", "")).strip(),
+                "reason": reason,
             }
         )
     return normalized, failures

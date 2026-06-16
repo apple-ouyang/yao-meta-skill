@@ -44,7 +44,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 990/1000; deferred 496240/120000; top deferred scripts 435346; resource governance governed; quality density 131.3",
+      "detail": "initial load 990/1000; deferred 496936/120000; top deferred scripts 435950; resource governance governed; quality density 131.3",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md"
     },
@@ -124,7 +124,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 7/13 pass; 6 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 8/16 pass; 8 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md"
     },
@@ -212,7 +212,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 7/13 pass; 6 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 8/16 pass; 8 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md"
     }
@@ -604,8 +604,8 @@
           "next_action": "Record real A/B choices in the decision template, then regenerate adjudication.",
           "submission_path": "evidence/world_class/submissions/human-adjudication.json",
           "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
-          "source_pass_count": 2,
-          "source_blocked_count": 2,
+          "source_pass_count": 3,
+          "source_blocked_count": 4,
           "blocked_checks": [
             {
               "label": "No pending decisions",
@@ -622,6 +622,22 @@
               "expected": "==pair_count",
               "status": "blocked",
               "next_action": "Every pair needs one valid human judgment."
+            },
+            {
+              "label": "Reviewer metadata",
+              "field": "reviewer_metadata_present",
+              "actual": false,
+              "expected": "true",
+              "status": "blocked",
+              "next_action": "Record reviewer and reviewed_at before adjudication can count."
+            },
+            {
+              "label": "Human evidence ready",
+              "field": "ready_for_human_evidence",
+              "actual": false,
+              "expected": "true",
+              "status": "blocked",
+              "next_action": "Complete all reviewer decisions with metadata and rationale."
             }
           ],
           "commands": [
@@ -1374,8 +1390,8 @@
         "accepted_count": 0,
         "external_pending_count": 3,
         "human_pending_count": 1,
-        "source_check_count": 13,
-        "source_pass_count": 7,
+        "source_check_count": 16,
+        "source_pass_count": 8,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1406,7 +1422,8 @@
             "summary_en": "Blind-review pairs still need real reviewer decisions.",
             "blocked_checks": [
               "No pending decisions",
-              "Judgments complete"
+              "Judgments complete",
+              "Reviewer metadata"
             ]
           },
           {
@@ -1945,6 +1962,9 @@
           "pending_answer_hidden_count": 5,
           "agreement_rate": null,
           "needs_review": true,
+          "reviewer_metadata_present": false,
+          "reason_required": true,
+          "ready_for_human_evidence": false,
           "failure_count": 0,
           "reviewer_checklist_count": 5,
           "reviewer_checklist_pending_count": 5,
@@ -1959,12 +1979,12 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": true,
+          "release_lock_ready": false,
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "ab0eb24139e6364b5ad3a386889269a178f27977569488966ce5fa7c29c2c5f8",
-          "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
+          "evidence_bundle_sha256": "e18ed772426acaa5b677244a7f98cc2f89644fb5496973e44e80b8707848ce09",
+          "source_contract_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58",
           "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
           "output_case_count": 5,
           "failure_disclosure_count": 3,
@@ -1979,15 +1999,15 @@
           "world_class_open_gap_count": 4,
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
-          "world_class_source_check_count": 13,
-          "world_class_source_pass_count": 7,
-          "world_class_source_blocked_count": 6,
+          "world_class_source_check_count": 16,
+          "world_class_source_pass_count": 8,
+          "world_class_source_blocked_count": 8,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 4,
-          "working_tree_dirty": false,
-          "changed_file_count": 0
+          "public_claim_blocker_count": 5,
+          "working_tree_dirty": true,
+          "changed_file_count": 56
         },
-        "commit": "4047cfdb1a8303bce568af978fb8a5462856be43",
+        "commit": "f295fdf61001212b7984d9eb403bc80269f8699f",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -2092,7 +2112,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 239,
-        "package_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995"
+        "package_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58"
       },
       "skill_atlas": {
         "skill_count": 12,
@@ -2167,7 +2187,7 @@
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
           },
-          "generated_at": "2026-06-17"
+          "generated_at": "2026-06-13"
         },
         "failures": [],
         "warnings": []
@@ -2614,9 +2634,9 @@
           "reviewer_approved_submission_count": 0,
           "missing_submission_count": 4,
           "invalid_submission_count": 0,
-          "source_check_count": 13,
-          "source_pass_count": 7,
-          "source_blocked_count": 6,
+          "source_check_count": 16,
+          "source_pass_count": 8,
+          "source_blocked_count": 8,
           "submitted_but_pending_count": 0,
           "source_accepted_without_valid_submission_count": 0,
           "overclaim_guard_active": true,
@@ -2781,6 +2801,9 @@
               "pending_count": 5,
               "invalid_decision_count": 0,
               "answer_revealed_count": 0,
+              "reviewer_metadata_present": false,
+              "reason_required": true,
+              "ready_for_human_evidence": false,
               "accepted": false
             },
             "source_checklist": [
@@ -2823,11 +2846,41 @@
                 "status": "pass",
                 "source_accepted": false,
                 "next_action": "Fix malformed winner/confidence entries."
+              },
+              {
+                "evidence_key": "human-adjudication",
+                "label": "Reviewer metadata",
+                "field": "reviewer_metadata_present",
+                "expected": "true",
+                "actual": false,
+                "status": "blocked",
+                "source_accepted": false,
+                "next_action": "Record reviewer and reviewed_at before adjudication can count."
+              },
+              {
+                "evidence_key": "human-adjudication",
+                "label": "Reason required",
+                "field": "reason_required",
+                "expected": "true",
+                "actual": true,
+                "status": "pass",
+                "source_accepted": false,
+                "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+              },
+              {
+                "evidence_key": "human-adjudication",
+                "label": "Human evidence ready",
+                "field": "ready_for_human_evidence",
+                "expected": "true",
+                "actual": false,
+                "status": "blocked",
+                "source_accepted": false,
+                "next_action": "Complete all reviewer decisions with metadata and rationale."
               }
             ],
-            "source_check_count": 4,
-            "source_pass_count": 2,
-            "source_blocked_count": 2,
+            "source_check_count": 7,
+            "source_pass_count": 3,
+            "source_blocked_count": 4,
             "submission_state": {
               "status": "missing",
               "path": "evidence/world_class/submissions/human-adjudication.json",
@@ -4692,7 +4745,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.9,
+          "duration_ms": 28.09,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4720,7 +4773,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.49,
+          "duration_ms": 27.41,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4743,7 +4796,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.48,
+          "duration_ms": 26.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4771,7 +4824,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.61,
+          "duration_ms": 26.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4794,7 +4847,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.59,
+          "duration_ms": 30.15,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4822,7 +4875,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.16,
+          "duration_ms": 33.52,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4845,7 +4898,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.0,
+          "duration_ms": 29.21,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4872,7 +4925,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.3,
+          "duration_ms": 28.98,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4895,7 +4948,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.82,
+          "duration_ms": 28.08,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4924,7 +4977,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 25.81,
+          "duration_ms": 28.26,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5189,7 +5242,7 @@
           "reviewed_at": "Review date or timestamp.",
           "winner_variant": "A or B for every case.",
           "confidence": "Optional numeric confidence from 0 to 1.",
-          "reason": "Short rationale based on the rubric, not on hidden labels."
+          "reason": "Required rationale based on the rubric, not on hidden labels."
         },
         "privacy_contract": [
           "The answer key is intentionally withheld from this kit.",
@@ -5433,6 +5486,9 @@
         "pending_answer_hidden_count": 5,
         "agreement_rate": null,
         "needs_review": true,
+        "reviewer_metadata_present": false,
+        "reason_required": true,
+        "ready_for_human_evidence": false,
         "failure_count": 0,
         "reviewer_checklist_count": 5,
         "reviewer_checklist_pending_count": 5,
@@ -5522,7 +5578,9 @@
           "required_fields": {
             "winner_variant": "A or B after reading only the blind review pack.",
             "confidence": "Optional number from 0 to 1.",
-            "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+            "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+            "reviewer": "Human reviewer name or review group at the decision-file top level.",
+            "reviewed_at": "Review date or timestamp at the decision-file top level."
           },
           "privacy_contract": [
             "Do not paste raw private user data into the decision reason.",
@@ -5550,7 +5608,9 @@
           "required_fields": {
             "winner_variant": "A or B after reading only the blind review pack.",
             "confidence": "Optional number from 0 to 1.",
-            "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+            "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+            "reviewer": "Human reviewer name or review group at the decision-file top level.",
+            "reviewed_at": "Review date or timestamp at the decision-file top level."
           },
           "privacy_contract": [
             "Do not paste raw private user data into the decision reason.",
@@ -5578,7 +5638,9 @@
           "required_fields": {
             "winner_variant": "A or B after reading only the blind review pack.",
             "confidence": "Optional number from 0 to 1.",
-            "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+            "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+            "reviewer": "Human reviewer name or review group at the decision-file top level.",
+            "reviewed_at": "Review date or timestamp at the decision-file top level."
           },
           "privacy_contract": [
             "Do not paste raw private user data into the decision reason.",
@@ -5606,7 +5668,9 @@
           "required_fields": {
             "winner_variant": "A or B after reading only the blind review pack.",
             "confidence": "Optional number from 0 to 1.",
-            "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+            "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+            "reviewer": "Human reviewer name or review group at the decision-file top level.",
+            "reviewed_at": "Review date or timestamp at the decision-file top level."
           },
           "privacy_contract": [
             "Do not paste raw private user data into the decision reason.",
@@ -5634,7 +5698,9 @@
           "required_fields": {
             "winner_variant": "A or B after reading only the blind review pack.",
             "confidence": "Optional number from 0 to 1.",
-            "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+            "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+            "reviewer": "Human reviewer name or review group at the decision-file top level.",
+            "reviewed_at": "Review date or timestamp at the decision-file top level."
           },
           "privacy_contract": [
             "Do not paste raw private user data into the decision reason.",
@@ -5650,22 +5716,35 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "4047cfdb1a8303bce568af978fb8a5462856be43",
+      "commit": "f295fdf61001212b7984d9eb403bc80269f8699f",
       "git_status": {
         "available": true,
-        "dirty": false,
-        "changed_file_count": 0,
-        "sample": [],
+        "dirty": true,
+        "changed_file_count": 56,
+        "sample": [
+          " M registry/index.json",
+          " M registry/packages/yao-meta-skill.json",
+          " M reports/adoption_drift_report.json",
+          " M reports/architecture_maintainability.json",
+          " M reports/architecture_maintainability.md",
+          " M reports/benchmark_reproducibility.json",
+          " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
+          " M reports/context_budget.json",
+          " M reports/context_budget.md",
+          " M reports/context_budget_summary.json",
+          " M reports/evidence_consistency.json"
+        ],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "ab0eb24139e6364b5ad3a386889269a178f27977569488966ce5fa7c29c2c5f8",
-        "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
+        "evidence_bundle_sha256": "e18ed772426acaa5b677244a7f98cc2f89644fb5496973e44e80b8707848ce09",
+        "source_contract_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "output_case_count": 5,
         "failure_disclosure_count": 3,
@@ -5680,30 +5759,31 @@
         "world_class_open_gap_count": 4,
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4,
-        "working_tree_dirty": false,
-        "changed_file_count": 0
+        "public_claim_blocker_count": 5,
+        "working_tree_dirty": true,
+        "changed_file_count": 56
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
+          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
-          "world-class source checks are not all accepted (7/13 pass, 6 blocked)"
+          "world-class source checks are not all accepted (8/16 pass, 8 blocked)"
         ],
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": true,
-        "commit": "4047cfdb1a8303bce568af978fb8a5462856be43",
+        "ready": false,
+        "commit": "f295fdf61001212b7984d9eb403bc80269f8699f",
         "status_scope": "generation-time status before this report is written",
-        "reason": "clean generation-time HEAD"
+        "reason": "working tree was dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5711,7 +5791,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "ab0eb24139e6364b5ad3a386889269a178f27977569488966ce5fa7c29c2c5f8"
+        "sha256": "e18ed772426acaa5b677244a7f98cc2f89644fb5496973e44e80b8707848ce09"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5784,8 +5864,8 @@
           "label": "output_execution",
           "path": "reports/output_execution_runs.json",
           "exists": true,
-          "bytes": 7964,
-          "sha256": "282122e93b08d73b0c199715c51bc619a95af47d315047fc41dceb31f56a3293"
+          "bytes": 7967,
+          "sha256": "cd4a325d274901fcca7cb4753f62102f749903ef30e1098e349a46468457d8ec"
         },
         {
           "label": "blind_review",
@@ -5798,8 +5878,8 @@
           "label": "review_adjudication",
           "path": "reports/output_review_adjudication.json",
           "exists": true,
-          "bytes": 10135,
-          "sha256": "bb8c72a9291e329c83890884af9b73535a6cb86fa435afe2d6ba2ff07d88a02c"
+          "bytes": 11128,
+          "sha256": "4843590cec50718ca26b6d4817ba3b9cf89eb741bbac52472246224d045c4bde"
         },
         {
           "label": "trigger_scorecard",
@@ -5820,21 +5900,21 @@
           "path": "reports/security_trust_report.json",
           "exists": true,
           "bytes": 133860,
-          "sha256": "d865e5cc97a3b92e1332366c5c780354afb46038ba1c6ef152a61cc8407a19bc"
+          "sha256": "c87d9291a54c0444687886139d24e1daa689e45d899c8e12f9dc7c28f892e378"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
           "bytes": 29196,
-          "sha256": "f8e498d295db139c49e2ea51bd2cbdd52db61fa2b0bd008ef74135601d691895"
+          "sha256": "636583616dbcc15fe06d582ff0eda17c08a3d37eae618b03e1ca9c666c5276d2"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3183,
-          "sha256": "88c94a496b941ef0538a7bab550c85d2fc07487edf35e4cd39bde14b1475108c"
+          "sha256": "c28991bdf087bb31370774c1dcce9987ed41eac46b2415eecda092692b9dd915"
         },
         {
           "label": "package_verification",
@@ -5847,15 +5927,15 @@
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
-          "bytes": 8604,
-          "sha256": "044b2cf73dd4559a2a0b2f6cbb5560677d409d4716d135261fac6399012d1abb"
+          "bytes": 8758,
+          "sha256": "c91884a915384363d4ea0339de5c9a3e37ede4356ad1069edf0ae6f880366cc7"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
           "bytes": 14310,
-          "sha256": "e63bc60e69cdc0e613983edea2a66f6c80d0e4da92efd6f90203c390b813350d"
+          "sha256": "4f193d15332d6ae7c6df397b0c777219fc9627b61c176ca70f66e43b4e94d08e"
         },
         {
           "label": "world_class_evidence_plan",
@@ -5868,50 +5948,50 @@
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 22285,
-          "sha256": "f6e1a69b0359c28c88e9e9e69ff66763c721ac8a112a43a673ce98cd9d3bce41"
+          "bytes": 23509,
+          "sha256": "9e4c98e43356fdf891ad35fb220abee9f9688aa58c63da6513b057cf4da3dc3f"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
-          "bytes": 19319,
-          "sha256": "46f801051ec075725059e4e2682ef2162fd892b5e7255c8d5121d7b24dcc7f2c"
+          "bytes": 19439,
+          "sha256": "7674fec9a7ddce6e11932d9a6c6e2036be9d37b66a41bd2e68ba38c5259c2024"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 41202,
-          "sha256": "b7fd72d7e75486612f65a9bb73b1ab59106103ebf3ad10dd446cd80903088454"
+          "bytes": 43290,
+          "sha256": "ca5509a680f94deb6583fcbb1d4e0568d2632d4ff0656b89eddc048a589b275d"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 13655,
-          "sha256": "9fbd4cd437986fca9a043cbab24aec7d575aaf166a8d9365c79c56f093cab5b8"
+          "bytes": 14879,
+          "sha256": "95ccf9e35708a5c290a75734632d9f76ef3a4a668d8ed6d52d2c6dabf7a85a1f"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 24835,
-          "sha256": "2d32a2e917b7215afe7a7a93ca8bacffa540a245953aa39e2ee47eea1b169d17"
+          "bytes": 26205,
+          "sha256": "1bba953cccaed91f75e55a9f01c0877cfb3815646ea1a7d0a0e5d6e110cca9b1"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 15424,
-          "sha256": "00d8ebabb91e14a06cacdb212f448668aa1e47b72587448e30681fc53acaad9a"
+          "bytes": 15908,
+          "sha256": "e876eef61d56ab7d591b57372c75ab89a60bdfd6cb5a9bdeb845025fc1781659"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 21348,
-          "sha256": "ca72c65b437b2211d08b9d463c9a33a7993b4e388bb75f62757ead4dfcf81a49"
+          "bytes": 22070,
+          "sha256": "f448c426d9eae788c50a96ec88632be392c7de38199248cae28005d27a1b3fac"
         },
         {
           "label": "world_class_claim_guard",
@@ -6869,7 +6949,7 @@
     "compiled_targets": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "target_count": 5,
@@ -12240,7 +12320,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 239,
-        "package_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995"
+        "package_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58"
       },
       "failures": [],
       "warnings": [],
@@ -15657,7 +15737,7 @@
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "root": ".",
       "summary": {
         "target_python": "3.11",
@@ -17038,7 +17118,7 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
       "summary": {
         "python_file_count": 222,
@@ -17086,6 +17166,22 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "tests/verify_output_review_adjudication.py",
+          "lines": 595,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "scripts/render_skill_overview.py",
+          "lines": 588,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
           "path": "scripts/build_skill_atlas.py",
           "lines": 586,
           "kind": "cli-script",
@@ -17096,14 +17192,6 @@
         {
           "path": "scripts/optimize_description.py",
           "lines": 585,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
-          "path": "scripts/render_skill_overview.py",
-          "lines": 584,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -17126,6 +17214,14 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
+          "path": "tests/verify_world_class_evidence_ledger.py",
+          "lines": 574,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
           "path": "scripts/render_evidence_consistency.py",
           "lines": 568,
           "kind": "cli-script",
@@ -17140,22 +17236,6 @@
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
-        },
-        {
-          "path": "tests/verify_world_class_evidence_ledger.py",
-          "lines": 567,
-          "kind": "test",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-        },
-        {
-          "path": "scripts/render_world_class_preflight.py",
-          "lines": 562,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
       "watchlist": [],
@@ -17192,15 +17272,15 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1083667,
+        "other_text_tokens": 1087826,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1084464,
-        "deferred_resource_tokens": 496240,
+        "estimated_total_text_tokens": 1088623,
+        "deferred_resource_tokens": 496936,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 435346,
+            "estimated_tokens": 435950,
             "file_count": 147
           },
           {
@@ -17215,14 +17295,14 @@
           },
           {
             "path": "assets",
-            "estimated_tokens": 10811,
+            "estimated_tokens": 10903,
             "file_count": 4
           }
         ],
         "large_deferred_resource_dirs": [
           {
             "path": "scripts",
-            "estimated_tokens": 435346,
+            "estimated_tokens": 435950,
             "file_count": 147
           }
         ],
@@ -17245,7 +17325,7 @@
               ],
               "missing": [],
               "path": "scripts",
-              "estimated_tokens": 435346,
+              "estimated_tokens": 435950,
               "file_count": 147,
               "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
             }
@@ -18096,7 +18176,7 @@
       },
       "catalog": {
         "workspace_root": ".",
-        "generated_at": "2026-06-17",
+        "generated_at": "2026-06-13",
         "skills": [
           {
             "name": "yao-meta-skill",
@@ -18997,7 +19077,7 @@
           "name": "incident-command-governor",
           "path": "examples/governed-incident-command/generated-skill",
           "reason": "review overdue by cadence monthly",
-          "age_days": 78,
+          "age_days": 74,
           "allowed_days": 31,
           "actionable": false,
           "scope": "example"
@@ -19165,7 +19245,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-16T17:53:31Z",
+      "generated_at": "2026-06-16T18:19:37Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -20640,9 +20720,9 @@
       "reviewer_approved_submission_count": 0,
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
-      "source_check_count": 13,
-      "source_pass_count": 7,
-      "source_blocked_count": 6,
+      "source_check_count": 16,
+      "source_pass_count": 8,
+      "source_blocked_count": 8,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
@@ -20657,9 +20737,9 @@
         "reviewer_approved_submission_count": 0,
         "missing_submission_count": 4,
         "invalid_submission_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "submitted_but_pending_count": 0,
         "source_accepted_without_valid_submission_count": 0,
         "overclaim_guard_active": true,
@@ -20850,6 +20930,9 @@
             "pending_count": 5,
             "invalid_decision_count": 0,
             "answer_revealed_count": 0,
+            "reviewer_metadata_present": false,
+            "reason_required": true,
+            "ready_for_human_evidence": false,
             "accepted": false
           },
           "source_checklist": [
@@ -20892,11 +20975,41 @@
               "status": "pass",
               "source_accepted": false,
               "next_action": "Fix malformed winner/confidence entries."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reviewer metadata",
+              "field": "reviewer_metadata_present",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record reviewer and reviewed_at before adjudication can count."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reason required",
+              "field": "reason_required",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Human evidence ready",
+              "field": "ready_for_human_evidence",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Complete all reviewer decisions with metadata and rationale."
             }
           ],
-          "source_check_count": 4,
-          "source_pass_count": 2,
-          "source_blocked_count": 2,
+          "source_check_count": 7,
+          "source_pass_count": 3,
+          "source_blocked_count": 4,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/human-adjudication.json",
@@ -21315,6 +21428,9 @@
             "pending_count": 5,
             "invalid_decision_count": 0,
             "answer_revealed_count": 0,
+            "reviewer_metadata_present": false,
+            "reason_required": true,
+            "ready_for_human_evidence": false,
             "accepted": false
           },
           "template_path": "evidence/world_class/templates/human-adjudication.intake.json",
@@ -21546,9 +21662,9 @@
         "precheck_external_required_count": 2,
         "collection_ready_count": 1,
         "collection_blocked_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "pending_count": 4,
         "ready_to_claim_world_class": false,
         "credential_value_exposed": false,
@@ -21813,6 +21929,36 @@
               "status": "pass",
               "source_accepted": false,
               "next_action": "Fix malformed winner/confidence entries."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reviewer metadata",
+              "field": "reviewer_metadata_present",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record reviewer and reviewed_at before adjudication can count."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reason required",
+              "field": "reason_required",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Human evidence ready",
+              "field": "ready_for_human_evidence",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Complete all reviewer decisions with metadata and rationale."
             }
           ],
           "next_action": "Assign a real reviewer identity before claiming human adjudication.",
@@ -22380,6 +22526,36 @@
           "next_action": "Fix malformed winner/confidence entries."
         },
         {
+          "evidence_key": "human-adjudication",
+          "label": "Reviewer metadata",
+          "field": "reviewer_metadata_present",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Record reviewer and reviewed_at before adjudication can count."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Reason required",
+          "field": "reason_required",
+          "expected": "true",
+          "actual": true,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Human evidence ready",
+          "field": "ready_for_human_evidence",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Complete all reviewer decisions with metadata and rationale."
+        },
+        {
           "evidence_key": "native-permission-enforcement",
           "label": "Native enforcement",
           "field": "native_enforcement_count",
@@ -22507,9 +22683,9 @@
       "fix_submission_count": 0,
       "unmatched_submission_count": 0,
       "invalid_submission_count": 0,
-      "source_check_count": 13,
-      "source_pass_count": 7,
-      "source_blocked_count": 6,
+      "source_check_count": 16,
+      "source_pass_count": 8,
+      "source_blocked_count": 8,
       "review_counts_submission_as_completion": false,
       "summary": {
         "review_item_count": 4,
@@ -22520,9 +22696,9 @@
         "fix_submission_count": 0,
         "unmatched_submission_count": 0,
         "invalid_submission_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "review_counts_submission_as_completion": false,
         "decision": "awaiting-submissions"
@@ -22645,6 +22821,9 @@
             "pending_count": 5,
             "invalid_decision_count": 0,
             "answer_revealed_count": 0,
+            "reviewer_metadata_present": false,
+            "reason_required": true,
+            "ready_for_human_evidence": false,
             "accepted": false
           },
           "source_checklist": [
@@ -22687,11 +22866,41 @@
               "status": "pass",
               "source_accepted": false,
               "next_action": "Fix malformed winner/confidence entries."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reviewer metadata",
+              "field": "reviewer_metadata_present",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record reviewer and reviewed_at before adjudication can count."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reason required",
+              "field": "reason_required",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Human evidence ready",
+              "field": "ready_for_human_evidence",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Complete all reviewer decisions with metadata and rationale."
             }
           ],
-          "source_check_count": 4,
-          "source_pass_count": 2,
-          "source_blocked_count": 2,
+          "source_check_count": 7,
+          "source_pass_count": 3,
+          "source_blocked_count": 4,
           "success_checks": [
             "reports/output_review_adjudication.json summary.pending_count == 0",
             "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",
@@ -22871,9 +23080,9 @@
         "ready_for_ledger_review_count": 0,
         "valid_packet_source_incomplete_count": 0,
         "invalid_submission_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "runbook_counts_as_completion": false,
         "decision": "collect-evidence"
@@ -23067,6 +23276,9 @@
             "pending_count": 5,
             "invalid_decision_count": 0,
             "answer_revealed_count": 0,
+            "reviewer_metadata_present": false,
+            "reason_required": true,
+            "ready_for_human_evidence": false,
             "accepted": false
           },
           "source_checklist": [
@@ -23109,12 +23321,44 @@
               "status": "pass",
               "source_accepted": false,
               "next_action": "Fix malformed winner/confidence entries."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reviewer metadata",
+              "field": "reviewer_metadata_present",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Record reviewer and reviewed_at before adjudication can count."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Reason required",
+              "field": "reason_required",
+              "expected": "true",
+              "actual": true,
+              "status": "pass",
+              "source_accepted": false,
+              "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+            },
+            {
+              "evidence_key": "human-adjudication",
+              "label": "Human evidence ready",
+              "field": "ready_for_human_evidence",
+              "expected": "true",
+              "actual": false,
+              "status": "blocked",
+              "source_accepted": false,
+              "next_action": "Complete all reviewer decisions with metadata and rationale."
             }
           ],
-          "blocked_source_check_count": 2,
+          "blocked_source_check_count": 4,
           "next_source_actions": [
             "Record a reviewer choice for every pair.",
-            "Every pair needs one valid human judgment."
+            "Every pair needs one valid human judgment.",
+            "Record reviewer and reviewed_at before adjudication can count.",
+            "Complete all reviewer decisions with metadata and rationale."
           ],
           "submission_state": {
             "status": "missing",
@@ -24231,11 +24475,11 @@
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
         },
-        "generated_at": "2026-06-17"
+        "generated_at": "2026-06-13"
       },
       "index": {
         "schema_version": "2.0",
-        "generated_at": "2026-06-17",
+        "generated_at": "2026-06-13",
         "package_count": 1,
         "packages": [
           {
@@ -24933,11 +25177,11 @@
     "install_simulation": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "skill_dir": ".",
-      "package_dir": "dist",
-      "install_root": "dist/install-simulation/simulate-yao-meta-skill",
-      "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
+      "package_dir": "tests/tmp_review_studio/dist",
+      "install_root": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill",
+      "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
         "archive_entry_count": 685,
@@ -24958,7 +25202,7 @@
         {
           "id": "archive-present",
           "status": "pass",
-          "detail": "Package archive exists: dist/yao-meta-skill.zip"
+          "detail": "Package archive exists: tests/tmp_review_studio/dist/yao-meta-skill.zip"
         },
         {
           "id": "archive-safe-paths",
@@ -25204,16 +25448,16 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "archive": "dist/yao-meta-skill.zip",
-        "package_manifest": "dist/manifest.json",
-        "json": "reports/install_simulation.json",
-        "markdown": "reports/install_simulation.md"
+        "archive": "tests/tmp_review_studio/dist/yao-meta-skill.zip",
+        "package_manifest": "tests/tmp_review_studio/dist/manifest.json",
+        "json": "tests/tmp_review_studio/install_simulation.json",
+        "markdown": "tests/tmp_review_studio/install_simulation.md"
       }
     },
     "upgrade_check": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-17",
+      "generated_at": "2026-06-13",
       "previous": {
         "name": "yao-meta-skill",
         "version": "1.0.0",
@@ -25302,8 +25546,8 @@
       "artifacts": {
         "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
         "current_package": "reports/registry_audit.json",
-        "json": "reports/upgrade_check.json",
-        "markdown": "reports/upgrade_check.md"
+        "json": "tests/tmp_review_studio/upgrade_check.json",
+        "markdown": "tests/tmp_review_studio/upgrade_check.md"
       }
     },
     "manifest": {

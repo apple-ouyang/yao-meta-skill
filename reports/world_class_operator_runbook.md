@@ -26,7 +26,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Evidence | Ledger | Intake | Review | Blocked checks | Next source action | Owner |
 | --- | --- | --- | --- | ---: | --- | --- |
 | `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Run provider-backed output-exec with real credentials. | operator with provider credentials |
-| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Record a reviewer choice for every pair. | human reviewer |
+| `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `4` | Record a reviewer choice for every pair. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
 | `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
 
@@ -100,7 +100,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - blocking reason: No evidence packet has been submitted for review.
-- blocked source checks: `2`
+- blocked source checks: `4`
 - submission: `evidence/world_class/submissions/human-adjudication.json`
 - template: `evidence/world_class/templates/human-adjudication.intake.json`
 
@@ -160,6 +160,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - Record a reviewer choice for every pair.
 - Every pair needs one valid human judgment.
+- Record reviewer and reviewed_at before adjudication can count.
+- Complete all reviewer decisions with metadata and rationale.
 
 ### Source Evidence Snapshot
 
@@ -169,6 +171,9 @@ This runbook coordinates evidence collection only. It does not accept submission
 | No pending decisions | `5` | `==0` | `blocked` | Record a reviewer choice for every pair. |
 | Judgments complete | `0` | `==pair_count` | `blocked` | Every pair needs one valid human judgment. |
 | No invalid decisions | `0` | `==0` | `pass` | Fix malformed winner/confidence entries. |
+| Reviewer metadata | `False` | `true` | `blocked` | Record reviewer and reviewed_at before adjudication can count. |
+| Reason required | `True` | `true` | `pass` | Keep reason mandatory for every imported or direct reviewer decision. |
+| Human evidence ready | `False` | `true` | `blocked` | Complete all reviewer decisions with metadata and rationale. |
 
 ## Native Permission Enforcement
 

@@ -13,9 +13,9 @@
     "precheck_external_required_count": 2,
     "collection_ready_count": 1,
     "collection_blocked_count": 3,
-    "source_check_count": 13,
-    "source_pass_count": 7,
-    "source_blocked_count": 6,
+    "source_check_count": 16,
+    "source_pass_count": 8,
+    "source_blocked_count": 8,
     "pending_count": 4,
     "ready_to_claim_world_class": false,
     "credential_value_exposed": false,
@@ -280,6 +280,36 @@
           "status": "pass",
           "source_accepted": false,
           "next_action": "Fix malformed winner/confidence entries."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Reviewer metadata",
+          "field": "reviewer_metadata_present",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Record reviewer and reviewed_at before adjudication can count."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Reason required",
+          "field": "reason_required",
+          "expected": "true",
+          "actual": true,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Human evidence ready",
+          "field": "ready_for_human_evidence",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Complete all reviewer decisions with metadata and rationale."
         }
       ],
       "next_action": "Assign a real reviewer identity before claiming human adjudication.",
@@ -845,6 +875,36 @@
       "status": "pass",
       "source_accepted": false,
       "next_action": "Fix malformed winner/confidence entries."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Reviewer metadata",
+      "field": "reviewer_metadata_present",
+      "expected": "true",
+      "actual": false,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Record reviewer and reviewed_at before adjudication can count."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Reason required",
+      "field": "reason_required",
+      "expected": "true",
+      "actual": true,
+      "status": "pass",
+      "source_accepted": false,
+      "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Human evidence ready",
+      "field": "ready_for_human_evidence",
+      "expected": "true",
+      "actual": false,
+      "status": "blocked",
+      "source_accepted": false,
+      "next_action": "Complete all reviewer decisions with metadata and rationale."
     },
     {
       "evidence_key": "native-permission-enforcement",

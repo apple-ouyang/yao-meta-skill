@@ -76,6 +76,9 @@ This report is a read-only reviewer queue. It does not accept evidence or make w
 - No pending decisions: 5 / ==0 => blocked
 - Judgments complete: 0 / ==pair_count => blocked
 - No invalid decisions: 0 / ==0 => pass
+- Reviewer metadata: False / true => blocked
+- Reason required: True / true => pass
+- Human evidence ready: False / true => blocked
 
 #### Completion Assertions
 

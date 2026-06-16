@@ -13,9 +13,9 @@
   "fix_submission_count": 0,
   "unmatched_submission_count": 0,
   "invalid_submission_count": 0,
-  "source_check_count": 13,
-  "source_pass_count": 7,
-  "source_blocked_count": 6,
+  "source_check_count": 16,
+  "source_pass_count": 8,
+  "source_blocked_count": 8,
   "review_counts_submission_as_completion": false,
   "summary": {
     "review_item_count": 4,
@@ -26,9 +26,9 @@
     "fix_submission_count": 0,
     "unmatched_submission_count": 0,
     "invalid_submission_count": 0,
-    "source_check_count": 13,
-    "source_pass_count": 7,
-    "source_blocked_count": 6,
+    "source_check_count": 16,
+    "source_pass_count": 8,
+    "source_blocked_count": 8,
     "ready_to_claim_world_class": false,
     "review_counts_submission_as_completion": false,
     "decision": "awaiting-submissions"
@@ -151,6 +151,9 @@
         "pending_count": 5,
         "invalid_decision_count": 0,
         "answer_revealed_count": 0,
+        "reviewer_metadata_present": false,
+        "reason_required": true,
+        "ready_for_human_evidence": false,
         "accepted": false
       },
       "source_checklist": [
@@ -193,11 +196,41 @@
           "status": "pass",
           "source_accepted": false,
           "next_action": "Fix malformed winner/confidence entries."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Reviewer metadata",
+          "field": "reviewer_metadata_present",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Record reviewer and reviewed_at before adjudication can count."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Reason required",
+          "field": "reason_required",
+          "expected": "true",
+          "actual": true,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Human evidence ready",
+          "field": "ready_for_human_evidence",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Complete all reviewer decisions with metadata and rationale."
         }
       ],
-      "source_check_count": 4,
-      "source_pass_count": 2,
-      "source_blocked_count": 2,
+      "source_check_count": 7,
+      "source_pass_count": 3,
+      "source_blocked_count": 4,
       "success_checks": [
         "reports/output_review_adjudication.json summary.pending_count == 0",
         "reports/output_review_adjudication.json summary.judgment_count == summary.pair_count",

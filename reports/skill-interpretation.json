@@ -411,8 +411,8 @@
     "accepted_count": 0,
     "external_pending_count": 3,
     "human_pending_count": 1,
-    "source_check_count": 13,
-    "source_pass_count": 7,
+    "source_check_count": 16,
+    "source_pass_count": 8,
     "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
     "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
     "entries": [
@@ -443,7 +443,8 @@
         "summary_en": "Blind-review pairs still need real reviewer decisions.",
         "blocked_checks": [
           "No pending decisions",
-          "Judgments complete"
+          "Judgments complete",
+          "Reviewer metadata"
         ]
       },
       {
@@ -986,6 +987,9 @@
       "pending_answer_hidden_count": 5,
       "agreement_rate": null,
       "needs_review": true,
+      "reviewer_metadata_present": false,
+      "reason_required": true,
+      "ready_for_human_evidence": false,
       "failure_count": 0,
       "reviewer_checklist_count": 5,
       "reviewer_checklist_pending_count": 5,
@@ -1000,12 +1004,12 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "ab0eb24139e6364b5ad3a386889269a178f27977569488966ce5fa7c29c2c5f8",
-      "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
+      "evidence_bundle_sha256": "e18ed772426acaa5b677244a7f98cc2f89644fb5496973e44e80b8707848ce09",
+      "source_contract_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58",
       "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1020,15 +1024,15 @@
       "world_class_open_gap_count": 4,
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
-      "world_class_source_check_count": 13,
-      "world_class_source_pass_count": 7,
-      "world_class_source_blocked_count": 6,
+      "world_class_source_check_count": 16,
+      "world_class_source_pass_count": 8,
+      "world_class_source_blocked_count": 8,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
-      "working_tree_dirty": false,
-      "changed_file_count": 0
+      "public_claim_blocker_count": 5,
+      "working_tree_dirty": true,
+      "changed_file_count": 56
     },
-    "commit": "4047cfdb1a8303bce568af978fb8a5462856be43",
+    "commit": "f295fdf61001212b7984d9eb403bc80269f8699f",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -1133,7 +1137,7 @@
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
     "package_hash_file_count": 239,
-    "package_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995"
+    "package_sha256": "4726d412dc118af0638ff63eca824c0aece2d16d1c71eab8a84d247585aedc58"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1208,7 +1212,7 @@
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-06-17"
+      "generated_at": "2026-06-13"
     },
     "failures": [],
     "warnings": []
@@ -1655,9 +1659,9 @@
       "reviewer_approved_submission_count": 0,
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
-      "source_check_count": 13,
-      "source_pass_count": 7,
-      "source_blocked_count": 6,
+      "source_check_count": 16,
+      "source_pass_count": 8,
+      "source_blocked_count": 8,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
@@ -1822,6 +1826,9 @@
           "pending_count": 5,
           "invalid_decision_count": 0,
           "answer_revealed_count": 0,
+          "reviewer_metadata_present": false,
+          "reason_required": true,
+          "ready_for_human_evidence": false,
           "accepted": false
         },
         "source_checklist": [
@@ -1864,11 +1871,41 @@
             "status": "pass",
             "source_accepted": false,
             "next_action": "Fix malformed winner/confidence entries."
+          },
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Reviewer metadata",
+            "field": "reviewer_metadata_present",
+            "expected": "true",
+            "actual": false,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Record reviewer and reviewed_at before adjudication can count."
+          },
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Reason required",
+            "field": "reason_required",
+            "expected": "true",
+            "actual": true,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Keep reason mandatory for every imported or direct reviewer decision."
+          },
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Human evidence ready",
+            "field": "ready_for_human_evidence",
+            "expected": "true",
+            "actual": false,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Complete all reviewer decisions with metadata and rationale."
           }
         ],
-        "source_check_count": 4,
-        "source_pass_count": 2,
-        "source_blocked_count": 2,
+        "source_check_count": 7,
+        "source_pass_count": 3,
+        "source_blocked_count": 4,
         "submission_state": {
           "status": "missing",
           "path": "evidence/world_class/submissions/human-adjudication.json",

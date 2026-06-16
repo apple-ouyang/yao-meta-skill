@@ -10,6 +10,8 @@ This report adjudicates reviewer choices from the blind A/B output review pack a
 - Answer keys revealed: `0`
 - Pending/invalid answers hidden: `5`
 - Reviewer checklist: `0` ready / `5` total
+- Reviewer metadata present: `false`
+- Ready for human evidence: `false`
 
 No reviewer decisions recorded yet.
 
@@ -56,7 +58,9 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - winner_variant: A or B after reading only the blind review pack.
 - confidence: Optional number from 0 to 1.
-- reason: Short rationale; do not reveal baseline or with-skill labels before adjudication.
+- reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
+- reviewer: Human reviewer name or review group at the decision-file top level.
+- reviewed_at: Review date or timestamp at the decision-file top level.
 
 #### Privacy Contract
 
@@ -84,7 +88,9 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - winner_variant: A or B after reading only the blind review pack.
 - confidence: Optional number from 0 to 1.
-- reason: Short rationale; do not reveal baseline or with-skill labels before adjudication.
+- reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
+- reviewer: Human reviewer name or review group at the decision-file top level.
+- reviewed_at: Review date or timestamp at the decision-file top level.
 
 #### Privacy Contract
 
@@ -112,7 +118,9 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - winner_variant: A or B after reading only the blind review pack.
 - confidence: Optional number from 0 to 1.
-- reason: Short rationale; do not reveal baseline or with-skill labels before adjudication.
+- reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
+- reviewer: Human reviewer name or review group at the decision-file top level.
+- reviewed_at: Review date or timestamp at the decision-file top level.
 
 #### Privacy Contract
 
@@ -140,7 +148,9 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - winner_variant: A or B after reading only the blind review pack.
 - confidence: Optional number from 0 to 1.
-- reason: Short rationale; do not reveal baseline or with-skill labels before adjudication.
+- reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
+- reviewer: Human reviewer name or review group at the decision-file top level.
+- reviewed_at: Review date or timestamp at the decision-file top level.
 
 #### Privacy Contract
 
@@ -168,7 +178,9 @@ Expected winners stay hidden until a valid reviewer decision is recorded.
 
 - winner_variant: A or B after reading only the blind review pack.
 - confidence: Optional number from 0 to 1.
-- reason: Short rationale; do not reveal baseline or with-skill labels before adjudication.
+- reason: Required rationale; do not reveal baseline or with-skill labels before adjudication.
+- reviewer: Human reviewer name or review group at the decision-file top level.
+- reviewed_at: Review date or timestamp at the decision-file top level.
 
 #### Privacy Contract
 

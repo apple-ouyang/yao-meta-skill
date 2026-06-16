@@ -8,8 +8,8 @@ Generated at: `2026-06-17`
 - ready to claim world-class: `false`
 - entries: `4`
 - source accepted: `0`
-- source checks: `7` pass / `13` total
-- source blocked: `6`
+- source checks: `8` pass / `16` total
+- source blocked: `8`
 - accepted: `0`
 - pending: `4`
 - human pending: `1`
@@ -79,8 +79,8 @@ This ledger records the current evidence state. It requires both passing source 
 
 - objective: Record real blind A/B reviewer decisions before claiming human output review completion.
 - source status: `human_required`
-- observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "accepted": false}`
-- source checks: `2` pass / `4` total
+- observed state: `{"pair_count": 5, "judgment_count": 0, "pending_count": 5, "invalid_decision_count": 0, "answer_revealed_count": 0, "reviewer_metadata_present": false, "reason_required": true, "ready_for_human_evidence": false, "accepted": false}`
+- source checks: `3` pass / `7` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/human-adjudication.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "ledger_counts_as_completion": false}`
 
 ### Provenance Requirements
@@ -109,6 +109,9 @@ This ledger records the current evidence state. It requires both passing source 
 | No pending decisions | `5` | `==0` | `blocked` |
 | Judgments complete | `0` | `==pair_count` | `blocked` |
 | No invalid decisions | `0` | `==0` | `pass` |
+| Reviewer metadata | `False` | `true` | `blocked` |
+| Reason required | `True` | `true` | `pass` |
+| Human evidence ready | `False` | `true` | `blocked` |
 
 ### Completion Assertions
 

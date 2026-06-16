@@ -207,8 +207,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches git dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 11
+        "changed_file_count": 32
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -263,8 +263,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "4047cfdb1a8303bce568af978fb8a5462856be43",
-      "actual": "4047cfdb1a8303bce568af978fb8a5462856be43",
+      "expected": "f295fdf61001212b7984d9eb403bc80269f8699f",
+      "actual": "f295fdf61001212b7984d9eb403bc80269f8699f",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -276,30 +276,30 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -355,9 +355,9 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -367,9 +367,9 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -388,16 +388,16 @@
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7
+        "source_check_count": 16,
+        "source_pass_count": 8
       },
       "actual": {
         "ready": false,
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7
+        "source_check_count": 16,
+        "source_pass_count": 8
       },
       "paths": [
         "reports/world_class_evidence_ledger.json",
@@ -409,8 +409,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "4047cfdb1a8303bce568af978fb8a5462856be43",
-      "actual": "4047cfdb1a8303bce568af978fb8a5462856be43",
+      "expected": "f295fdf61001212b7984d9eb403bc80269f8699f",
+      "actual": "f295fdf61001212b7984d9eb403bc80269f8699f",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -422,30 +422,30 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
         "source_contract_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995",
         "archive_sha256": "563d37a1085a9b598bca7b132da6c50c1233864855591085b260d4d4bb312a3e",
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 4
+        "public_claim_blocker_count": 5
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -501,9 +501,9 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -513,9 +513,9 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "decision": "evidence-pending"
       },
@@ -534,16 +534,16 @@
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7
+        "source_check_count": 16,
+        "source_pass_count": 8
       },
       "actual": {
         "ready": false,
         "decision": "evidence-pending",
         "pending_count": 4,
         "accepted_count": 0,
-        "source_check_count": 13,
-        "source_pass_count": 7
+        "source_check_count": 16,
+        "source_pass_count": 8
       },
       "paths": [
         "reports/world_class_evidence_ledger.json",
@@ -1341,8 +1341,8 @@
         "accepted_count": 0,
         "external_pending_count": 3,
         "human_pending_count": 1,
-        "source_check_count": 13,
-        "source_pass_count": 7,
+        "source_check_count": 16,
+        "source_pass_count": 8,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1373,7 +1373,8 @@
             "summary_en": "Blind-review pairs still need real reviewer decisions.",
             "blocked_checks": [
               "No pending decisions",
-              "Judgments complete"
+              "Judgments complete",
+              "Reviewer metadata"
             ]
           },
           {
@@ -1414,8 +1415,8 @@
         "accepted_count": 0,
         "external_pending_count": 3,
         "human_pending_count": 1,
-        "source_check_count": 13,
-        "source_pass_count": 7,
+        "source_check_count": 16,
+        "source_pass_count": 8,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -1446,7 +1447,8 @@
             "summary_en": "Blind-review pairs still need real reviewer decisions.",
             "blocked_checks": [
               "No pending decisions",
-              "Judgments complete"
+              "Judgments complete",
+              "Reviewer metadata"
             ]
           },
           {
@@ -1823,16 +1825,16 @@
       "status": "pass",
       "expected": {
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false
       },
       "actual": {
         "world_class_ledger_pending_count": 4,
-        "world_class_source_check_count": 13,
-        "world_class_source_pass_count": 7,
-        "world_class_source_blocked_count": 6,
+        "world_class_source_check_count": 16,
+        "world_class_source_pass_count": 8,
+        "world_class_source_blocked_count": 8,
         "public_claim_ready": false
       },
       "paths": [
@@ -1847,18 +1849,18 @@
       "status": "pass",
       "expected": {
         "pending_count": 4,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "preflight_counts_as_evidence": false,
         "credential_value_exposed": false
       },
       "actual": {
         "pending_count": 4,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "ready_to_claim_world_class": false,
         "preflight_counts_as_evidence": false,
         "credential_value_exposed": false
@@ -2111,9 +2113,9 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "plan_keys": [
           "human-adjudication",
           "native-client-telemetry",
@@ -2260,9 +2262,9 @@
         "pending_count": 4,
         "human_pending_count": 1,
         "external_pending_count": 3,
-        "source_check_count": 13,
-        "source_pass_count": 7,
-        "source_blocked_count": 6,
+        "source_check_count": 16,
+        "source_pass_count": 8,
+        "source_blocked_count": 8,
         "plan_keys": [
           "human-adjudication",
           "native-client-telemetry",

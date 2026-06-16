@@ -12,6 +12,9 @@
     "pending_answer_hidden_count": 5,
     "agreement_rate": null,
     "needs_review": true,
+    "reviewer_metadata_present": false,
+    "reason_required": true,
+    "ready_for_human_evidence": false,
     "failure_count": 0,
     "reviewer_checklist_count": 5,
     "reviewer_checklist_pending_count": 5,
@@ -101,7 +104,9 @@
       "required_fields": {
         "winner_variant": "A or B after reading only the blind review pack.",
         "confidence": "Optional number from 0 to 1.",
-        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+        "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+        "reviewer": "Human reviewer name or review group at the decision-file top level.",
+        "reviewed_at": "Review date or timestamp at the decision-file top level."
       },
       "privacy_contract": [
         "Do not paste raw private user data into the decision reason.",
@@ -129,7 +134,9 @@
       "required_fields": {
         "winner_variant": "A or B after reading only the blind review pack.",
         "confidence": "Optional number from 0 to 1.",
-        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+        "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+        "reviewer": "Human reviewer name or review group at the decision-file top level.",
+        "reviewed_at": "Review date or timestamp at the decision-file top level."
       },
       "privacy_contract": [
         "Do not paste raw private user data into the decision reason.",
@@ -157,7 +164,9 @@
       "required_fields": {
         "winner_variant": "A or B after reading only the blind review pack.",
         "confidence": "Optional number from 0 to 1.",
-        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+        "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+        "reviewer": "Human reviewer name or review group at the decision-file top level.",
+        "reviewed_at": "Review date or timestamp at the decision-file top level."
       },
       "privacy_contract": [
         "Do not paste raw private user data into the decision reason.",
@@ -185,7 +194,9 @@
       "required_fields": {
         "winner_variant": "A or B after reading only the blind review pack.",
         "confidence": "Optional number from 0 to 1.",
-        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+        "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+        "reviewer": "Human reviewer name or review group at the decision-file top level.",
+        "reviewed_at": "Review date or timestamp at the decision-file top level."
       },
       "privacy_contract": [
         "Do not paste raw private user data into the decision reason.",
@@ -213,7 +224,9 @@
       "required_fields": {
         "winner_variant": "A or B after reading only the blind review pack.",
         "confidence": "Optional number from 0 to 1.",
-        "reason": "Short rationale; do not reveal baseline or with-skill labels before adjudication."
+        "reason": "Required rationale; do not reveal baseline or with-skill labels before adjudication.",
+        "reviewer": "Human reviewer name or review group at the decision-file top level.",
+        "reviewed_at": "Review date or timestamp at the decision-file top level."
       },
       "privacy_contract": [
         "Do not paste raw private user data into the decision reason.",

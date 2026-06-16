@@ -95,6 +95,7 @@ def main() -> None:
     assert pending_payload["summary"]["answer_key_hidden"] is True, pending_payload
     assert pending_payload["summary"]["answer_key_path_exposed"] is False, pending_payload
     assert pending_payload["summary"]["ready_to_run_adjudication"] is False, pending_payload
+    assert pending_payload["review_contract"]["required_fields"]["reason"].startswith("Required rationale"), pending_payload
     assert "answer_key" not in pending_payload["artifacts"], pending_payload["artifacts"]
     assert pending_payload["artifacts"]["reviewer_kit_html"].endswith("tests/tmp_output_review_kit/output_review_kit.html"), pending_payload["artifacts"]
     assert len(pending_payload["cases"]) == 5, pending_payload["cases"]

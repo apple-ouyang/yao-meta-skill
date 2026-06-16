@@ -37,11 +37,11 @@ def human_state(skill_dir: Path) -> dict[str, Any]:
         "pending_count": summary.get("pending_count", 0),
         "invalid_decision_count": summary.get("invalid_decision_count", 0),
         "answer_revealed_count": summary.get("answer_revealed_count", 0),
+        "reviewer_metadata_present": summary.get("reviewer_metadata_present", False),
+        "reason_required": summary.get("reason_required", False),
+        "ready_for_human_evidence": summary.get("ready_for_human_evidence", False),
         "accepted": (
-            summary.get("pair_count", 0) > 0
-            and summary.get("pending_count", 0) == 0
-            and summary.get("judgment_count", 0) == summary.get("pair_count", 0)
-            and summary.get("invalid_decision_count", 0) == 0
+            summary.get("ready_for_human_evidence") is True
         ),
     }
 

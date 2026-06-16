@@ -168,6 +168,13 @@ def main() -> None:
     assert entries["provider-holdout"]["submission_state"]["status"] == "missing", entries["provider-holdout"]
     assert entries["provider-holdout"]["submission_state"]["ledger_counts_as_completion"] is False, entries["provider-holdout"]
     assert entries["human-adjudication"]["observed_state"]["pending_count"] == 5, entries["human-adjudication"]
+    assert entries["human-adjudication"]["observed_state"]["reviewer_metadata_present"] is False, entries["human-adjudication"]
+    assert entries["human-adjudication"]["observed_state"]["reason_required"] is True, entries["human-adjudication"]
+    assert entries["human-adjudication"]["observed_state"]["ready_for_human_evidence"] is False, entries["human-adjudication"]
+    human_source = {item["field"]: item for item in entries["human-adjudication"]["source_checklist"]}
+    assert human_source["reviewer_metadata_present"]["status"] == "blocked", human_source
+    assert human_source["reason_required"]["status"] == "pass", human_source
+    assert human_source["ready_for_human_evidence"]["status"] == "blocked", human_source
     assert entries["native-permission-enforcement"]["observed_state"]["native_enforcement_count"] == 0, entries["native-permission-enforcement"]
     assert entries["native-permission-enforcement"]["observed_state"]["installer_enforcement_pass_count"] >= 0, entries["native-permission-enforcement"]
     assert any("summary.failure_count == 0" in check for check in entries["native-permission-enforcement"]["success_checks"]), entries["native-permission-enforcement"]

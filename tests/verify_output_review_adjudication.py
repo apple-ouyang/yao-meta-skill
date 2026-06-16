@@ -27,6 +27,38 @@ def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]
     )
 
 
+def write_json(path: Path, payload: dict) -> None:
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def adjudicate_payload(
+    tmp_root: Path,
+    blind_pack_json: Path,
+    answer_key_json: Path,
+    name: str,
+    decisions: dict,
+) -> tuple[subprocess.CompletedProcess[str], dict]:
+    decisions_path = tmp_root / f"{name}_decisions.json"
+    write_json(decisions_path, decisions)
+    proc = run(
+        [
+            str(ADJUDICATOR),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--answer-key",
+            str(answer_key_json),
+            "--decisions",
+            str(decisions_path),
+            "--output-json",
+            str(tmp_root / f"{name}_adjudication.json"),
+            "--output-md",
+            str(tmp_root / f"{name}_adjudication.md"),
+        ],
+        check=False,
+    )
+    return proc, json.loads(proc.stdout)
+
+
 def main() -> None:
     assert {"api_key", "raw_provider_prompt", "expected_winner_role"} <= BLOCKED_DECISION_FIELDS
 
@@ -89,6 +121,9 @@ def main() -> None:
     assert pending_payload["summary"]["reviewer_checklist_pending_count"] == 5, pending_payload
     assert pending_payload["summary"]["reviewer_checklist_ready_count"] == 0, pending_payload
     assert pending_payload["summary"]["reviewer_checklist_invalid_count"] == 0, pending_payload
+    assert pending_payload["summary"]["reviewer_metadata_present"] is False, pending_payload
+    assert pending_payload["summary"]["reason_required"] is True, pending_payload
+    assert pending_payload["summary"]["ready_for_human_evidence"] is False, pending_payload
     assert all(not item["expected_winner_variant"] and not item["expected_revealed"] for item in pending_payload["pairs"]), pending_payload
     checklist = {item["case_id"]: item for item in pending_payload["reviewer_checklist"]}
     assert checklist["skill-package-contract"]["readiness"] == "awaiting-decision", checklist["skill-package-contract"]
@@ -97,6 +132,9 @@ def main() -> None:
     assert checklist["skill-package-contract"]["commands"]["write_template"] == "python3 scripts/adjudicate_output_review.py --write-template", checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["commands"]["import_decisions"].startswith("python3 scripts/yao.py output-review-import"), checklist["skill-package-contract"]
     assert checklist["skill-package-contract"]["required_fields"]["winner_variant"].startswith("A or B"), checklist["skill-package-contract"]
+    assert checklist["skill-package-contract"]["required_fields"]["reason"].startswith("Required rationale"), checklist["skill-package-contract"]
+    assert "reviewer" in checklist["skill-package-contract"]["required_fields"], checklist["skill-package-contract"]
+    assert "reviewed_at" in checklist["skill-package-contract"]["required_fields"], checklist["skill-package-contract"]
     assert "No reviewer decisions recorded yet" in pending_md.read_text(encoding="utf-8"), pending_md
     pending_text = pending_md.read_text(encoding="utf-8")
     assert "| skill-package-contract | pending | hidden | pending |" in pending_text, pending_text
@@ -104,6 +142,7 @@ def main() -> None:
     assert "Reviewer Checklist" in pending_text, pending_text
     assert "Reviewer checklist: `0` ready / `5` total" in pending_text, pending_text
     assert "answer key visible: `false`" in pending_text, pending_text
+    assert "Ready for human evidence: `false`" in pending_text, pending_text
 
     template_path = tmp_root / "output_review_decisions.json"
     template_proc = run(
@@ -171,6 +210,8 @@ def main() -> None:
     assert filled_payload["summary"]["pending_answer_hidden_count"] == 0, filled_payload
     assert filled_payload["summary"]["reviewer_checklist_ready_count"] == 5, filled_payload
     assert filled_payload["summary"]["reviewer_checklist_pending_count"] == 0, filled_payload
+    assert filled_payload["summary"]["reviewer_metadata_present"] is True, filled_payload
+    assert filled_payload["summary"]["ready_for_human_evidence"] is True, filled_payload
     assert all(item["status"] == "match" for item in filled_payload["pairs"]), filled_payload
     assert all(item["expected_winner_variant"] in {"A", "B"} and item["expected_revealed"] for item in filled_payload["pairs"]), filled_payload
     filled_checklist = {item["case_id"]: item for item in filled_payload["reviewer_checklist"]}
@@ -207,6 +248,38 @@ def main() -> None:
     assert imported_decisions["import_contract"]["answer_key_fields_allowed"] is False, imported_decisions
     assert imported_decisions["import_contract"]["answer_key_opened_by_importer"] is False, imported_decisions
     assert imported_decisions["reviewer"] == "Yao QA", imported_decisions
+
+    no_reason_source = tmp_root / "no_reason_source.json"
+    write_json(
+        no_reason_source,
+        {
+            "reviewer": "Yao QA",
+            "reviewed_at": "2026-06-13",
+            "decisions": [
+                {
+                    "case_id": answer_key["answers"][0]["case_id"],
+                    "winner_variant": answer_key["answers"][0]["expected_winner_variant"],
+                    "confidence": 0.8,
+                }
+            ],
+        },
+    )
+    no_reason_import_proc = run(
+        [
+            str(IMPORTER),
+            "--input",
+            str(no_reason_source),
+            "--blind-pack",
+            str(blind_pack_json),
+            "--output-json",
+            str(tmp_root / "no_reason_decisions.json"),
+        ],
+        check=False,
+    )
+    no_reason_import_payload = json.loads(no_reason_import_proc.stdout)
+    assert no_reason_import_proc.returncode == 2, no_reason_import_payload
+    assert any("reason is required for imported human decisions" in failure for failure in no_reason_import_payload["failures"]), no_reason_import_payload
+    assert not (tmp_root / "no_reason_decisions.json").exists(), no_reason_import_payload
 
     cli_import_proc = run(
         [
@@ -469,6 +542,51 @@ def main() -> None:
     assert invalid_checklist[answer_key["answers"][0]["case_id"]]["readiness"] == "fix-decision", invalid_checklist
     assert invalid_checklist[answer_key["answers"][0]["case_id"]]["answer_key_visible"] is False, invalid_checklist
     assert invalid_payload["failures"], invalid_payload
+
+    no_reason_direct = {
+        "schema_version": "1.0",
+        "reviewer": "Yao QA",
+        "reviewed_at": "2026-06-13",
+        "decisions": [
+            {
+                "case_id": answer_key["answers"][0]["case_id"],
+                "winner_variant": answer_key["answers"][0]["expected_winner_variant"],
+                "confidence": 0.9,
+                "reason": "",
+            }
+        ],
+    }
+    no_reason_proc, no_reason_payload = adjudicate_payload(
+        tmp_root, blind_pack_json, answer_key_json, "no_reason", no_reason_direct
+    )
+    assert no_reason_proc.returncode == 2, no_reason_proc.stdout
+    assert no_reason_payload["summary"]["invalid_decision_count"] == 1, no_reason_payload
+    assert no_reason_payload["summary"]["answer_revealed_count"] == 0, no_reason_payload
+    assert no_reason_payload["summary"]["ready_for_human_evidence"] is False, no_reason_payload
+    assert no_reason_payload["pairs"][0]["expected_winner_variant"] == "", no_reason_payload
+    assert no_reason_payload["pairs"][0]["expected_revealed"] is False, no_reason_payload
+    assert any("reason is required before answer key can be revealed" in failure for failure in no_reason_payload["failures"]), no_reason_payload
+
+    missing_metadata = {
+        "schema_version": "1.0",
+        "decisions": [
+            {
+                "case_id": answer_key["answers"][0]["case_id"],
+                "winner_variant": answer_key["answers"][0]["expected_winner_variant"],
+                "confidence": 0.9,
+                "reason": "Visible rubric-based rationale.",
+            }
+        ],
+    }
+    missing_metadata_proc, missing_metadata_payload = adjudicate_payload(
+        tmp_root, blind_pack_json, answer_key_json, "missing_metadata", missing_metadata
+    )
+    assert missing_metadata_proc.returncode == 2, missing_metadata_proc.stdout
+    assert missing_metadata_payload["summary"]["reviewer_metadata_present"] is False, missing_metadata_payload
+    assert missing_metadata_payload["summary"]["invalid_decision_count"] == 1, missing_metadata_payload
+    assert missing_metadata_payload["summary"]["answer_revealed_count"] == 0, missing_metadata_payload
+    assert missing_metadata_payload["summary"]["ready_for_human_evidence"] is False, missing_metadata_payload
+    assert any("reviewer and reviewed_at are required" in failure for failure in missing_metadata_payload["failures"]), missing_metadata_payload
 
     print(json.dumps({"ok": True}, ensure_ascii=False, indent=2))
 
