@@ -5,15 +5,15 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `209`
-- scripts: `136`
-- tests: `73`
-- internal modules: `52`
+- python files: `211`
+- scripts: `137`
+- tests: `74`
+- internal modules: `53`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `704`
+- largest file lines: `696`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -33,8 +33,6 @@ No near-threshold files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_world_class_evidence_intake.py` | `704` | `test` | `pass` |
-| `scripts/world_class_evidence_contract.py` | `699` | `internal-module` | `pass` |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
 | `scripts/skill_report_model.py` | `665` | `internal-module` | `pass` |
@@ -44,7 +42,9 @@ No near-threshold files found.
 | `scripts/review_studio_gates.py` | `643` | `internal-module` | `pass` |
 | `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 | `scripts/build_skill_atlas.py` | `637` | `cli-script` | `pass` |
+| `scripts/world_class_evidence_contract.py` | `620` | `internal-module` | `pass` |
 | `scripts/render_benchmark_reproducibility.py` | `595` | `cli-script` | `pass` |
+| `scripts/optimize_description.py` | `585` | `cli-script` | `pass` |
 
 ## Release Rule
 

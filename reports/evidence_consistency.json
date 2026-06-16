@@ -189,12 +189,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 491281/120000; top deferred scripts 431183; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 492676/120000; top deferred scripts 432578; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 990/1000; deferred 491281/120000; top deferred scripts 431183; resource governance governed; quality density 131.3",
+        "detail": "initial load 990/1000; deferred 492676/120000; top deferred scripts 432578; resource governance governed; quality density 131.3",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -2404,8 +2404,8 @@
         "score `91`",
         "`16` gates",
         "`3` warnings",
-        "`50` declared internal modules",
-        "`86 / 86` CLI help smoke checks passing across `136` scripts",
+        "`51` declared internal modules",
+        "`86 / 86` CLI help smoke checks passing across `137` scripts",
         "`658` zip entries",
         "archive with `658` entries",
         "`12` installer permission checks enforced",
