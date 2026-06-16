@@ -8,12 +8,12 @@
       "budget_limit": 1000,
       "initial_tokens": 990,
       "skill_body_tokens": 797,
-      "deferred_resource_tokens": 487152,
+      "deferred_resource_tokens": 487219,
       "large_deferred_resource_dirs": [
         {
           "path": "scripts",
-          "estimated_tokens": 427054,
-          "file_count": 129
+          "estimated_tokens": 427121,
+          "file_count": 130
         }
       ],
       "deferred_resource_governance": {
@@ -35,8 +35,8 @@
             ],
             "missing": [],
             "path": "scripts",
-            "estimated_tokens": 427054,
-            "file_count": 129,
+            "estimated_tokens": 427121,
+            "file_count": 130,
             "rationale": "Script resources are deterministic deferred tools, not initial-load prompt context."
           }
         ],

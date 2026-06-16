@@ -96,6 +96,7 @@ def main() -> None:
     script_map = {item["path"]: item for item in payload["scripts"]}
     for internal_module in [
         "scripts/build_skill_atlas_layout.py",
+        "scripts/compile_skill_targets.py",
         "scripts/review_studio_formatting.py",
         "scripts/review_studio_gates.py",
         "scripts/review_studio_layout.py",
@@ -128,6 +129,7 @@ def main() -> None:
         assert script_map[internal_module]["interface_declared"], script_map[internal_module]
     warning_text = "\n".join(payload["warnings"])
     assert "build_skill_atlas_layout.py" not in warning_text, payload["warnings"]
+    assert "compile_skill_targets.py" not in warning_text, payload["warnings"]
     assert "review_studio_formatting.py" not in warning_text, payload["warnings"]
     assert "review_studio_gates.py" not in warning_text, payload["warnings"]
     assert "review_studio_layout.py" not in warning_text, payload["warnings"]

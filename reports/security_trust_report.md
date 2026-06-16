@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `220`
-- Scripts: `129`
-- Internal script modules: `43`
+- Scanned files: `221`
+- Scripts: `130`
+- Internal script modules: `44`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `220`
-- Package SHA256: `70e1edf36e5f4f18d60fedb0314a09e79ffdce2c6fd5fa7fb9f8968281f7d873`
+- Package hash files: `221`
+- Package SHA256: `e30f37d1ae301f3d696a70e1fed375ba2e0bb2cfc26a1484c202143842817565`
 
 ## Failures
 
@@ -71,6 +71,7 @@
 | scripts/ci_test.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/collect_feedback.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/compile_skill.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/compile_skill_targets.py | internal-module | True | False | False | False | False | False | False | Imported by compile_skill for target platform model and contract builders. |
 | scripts/context_sizer.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/create_iteration_snapshot.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/cross_packager.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

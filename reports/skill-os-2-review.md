@@ -59,7 +59,7 @@ This is still not the final world-class state. Target-native behavior contracts 
 | 2.0 Area | Current Evidence | Status |
 | --- | --- | --- |
 | Skill IR | `skill-ir/schema.json`, `skill-ir/examples/yao-meta-skill.json`, `scripts/export_skill_ir.py` | v0 landed |
-| Target Compiler | `scripts/compile_skill.py`, `reports/compiled_targets.md`, `tests/verify_compile_skill.py` | v0 landed |
+| Target Compiler | `scripts/compile_skill.py`, `scripts/compile_skill_targets.py`, `reports/compiled_targets.md`, `tests/verify_compile_skill.py` | v0 landed |
 | Output Eval Lab | `evals/output/cases.jsonl`, `scripts/run_output_eval.py`, `scripts/run_output_execution.py`, `scripts/local_output_eval_runner.py`, `scripts/provider_output_eval_runner.py`, `scripts/import_output_review_decisions.py`, `scripts/adjudicate_output_review.py`, `reports/output_quality_scorecard.md`, `reports/output_execution_runs.md`, `reports/output_blind_review_pack.md`, `reports/output_blind_answer_key.json`, `reports/output_review_decisions.json`, `reports/output_review_adjudication.md` | v0 landed |
 | Benchmark methodology | `reports/benchmark_methodology.md` | v0 landed |
 | Benchmark Reproducibility | `scripts/render_benchmark_reproducibility.py`, `reports/benchmark_reproducibility.md`, `tests/verify_benchmark_reproducibility.py` | v0 landed |
@@ -86,13 +86,13 @@ This is still not the final world-class state. Target-native behavior contracts 
 | Runtime Permission Probes | `scripts/probe_runtime_permissions.py`, `reports/runtime_permission_probes.md`, `tests/verify_runtime_permission_probes.py`, `tests/verify_review_studio.py` | v0 landed |
 | Atlas Scope Policy | `skill_atlas/policy.json`, `scripts/build_skill_atlas.py`, `tests/verify_skill_atlas.py` | v0 landed |
 | Compiler from IR | Packager consumes compiled target contracts for compiler provenance, generated files, adapter modes, permissions, preserved semantics, warnings, and unsupported features | v0 landed |
-| Target Native Contracts | `scripts/compile_skill.py`, `scripts/cross_packager.py`, `reports/compiled_targets.md`, adapter snapshots, and generated target outputs carry native surface, activation policy, resource/script strategy, permission enforcement, install scope, review artifacts, fallback behavior, and unsupported native features | v0 landed |
+| Target Native Contracts | `scripts/compile_skill.py`, `scripts/compile_skill_targets.py`, `scripts/cross_packager.py`, `reports/compiled_targets.md`, adapter snapshots, and generated target outputs carry native surface, activation policy, resource/script strategy, permission enforcement, install scope, review artifacts, fallback behavior, and unsupported native features | v0 landed |
 
 ## Top Findings
 
 ### 1. Target-native behavior contracts are landed, but provider execution is still shallow
 
-`scripts/compile_skill.py` now reads Skill IR and emits target-specific contracts for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs. The packager embeds `compiler`, `compiled_contract`, `permission_contract`, `target_permission_contract`, `target_native_contract`, `target_transform`, warnings, and unsupported-feature notes in each adapter. The native contract makes the target surface, activation policy, resource strategy, script strategy, permission enforcement mode, install scope, review artifacts, fallback behavior, and unsupported native features reviewable instead of implicit.
+`scripts/compile_skill.py` now reads Skill IR and emits target-specific contracts for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, with target platform models and contract builders isolated in `scripts/compile_skill_targets.py`. The packager embeds `compiler`, `compiled_contract`, `permission_contract`, `target_permission_contract`, `target_native_contract`, `target_transform`, warnings, and unsupported-feature notes in each adapter. The native contract makes the target surface, activation policy, resource strategy, script strategy, permission enforcement mode, install scope, review artifacts, fallback behavior, and unsupported native features reviewable instead of implicit.
 
 Next move: deepen provider-native execution transforms so OpenAI, Claude, VS Code/Copilot, and generic packages can express and verify behavior through real client or installer capabilities, not only auditable contracts and fallback notes.
 
@@ -127,13 +127,13 @@ Next move: add real client or installer permission enforcement integration.
 | Output Eval | `5` cases, with-skill pass rate `100`, baseline pass rate `0`, with file-backed, near-neighbor, boundary coverage, `10` local command-runner execution runs, `0` recorded fixture runs, `0` provider model-executed runs in root release evidence, `10` estimated token counts, provider runner v0 available, `5` blind A/B review pairs, a generated `reports/output_review_decisions.json` template, `0 / 5` reviewer decisions pending, `0` answer keys revealed, and `5` pending answers hidden |
 | Runtime Conformance | `5 / 5` targets passing |
 | Target Compiler | `5 / 5` compiled target contracts generated for OpenAI, Claude, generic, Agent Skills compatible, and VS Code / Copilot outputs, including target permission contracts and target-native behavior contracts |
-| Trust | `0` secret findings, `1` pinned dependency file, `43` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `86 / 86` CLI help smoke checks passing across `129` scripts, source-contract hash scope explicit |
+| Trust | `0` secret findings, `1` pinned dependency file, `44` declared internal modules, `3 / 3` network-capable scripts covered by bounded host policy, `86 / 86` CLI help smoke checks passing across `130` scripts, source-contract hash scope explicit |
 | Permission Governance | `3 / 3` required high-permission capabilities approved, `0` missing, `0` invalid, `0` expired |
 | Runtime Permission Probes | `4 / 4` target adapters probed, `0` native-enforcement adapters, `4` explicit metadata fallbacks, `4` residual risks retained for reviewer visibility |
 | Skill Atlas | `12` scanned skills, `1` actionable root skill, `1` telemetry report, `0` actionable route collisions, `0` actionable owner gaps, `0` actionable stale skills, `0` actionable drift signals, `24` scoped non-actionable issue signals retained for visibility |
 | Registry Audit | package metadata generated with version, owner, license, source checksum, archive checksum, Skill IR provenance, and compatibility matrix |
-| Package Verification | `4 / 4` target adapters present, archive verified, `656` zip entries, `0` failures, `0` warnings |
-| Install Simulation | archive with `656` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
+| Package Verification | `4 / 4` target adapters present, archive verified, `657` zip entries, `0` failures, `0` warnings |
+| Install Simulation | archive with `657` entries extracted into a local verification root, entrypoint/manifest/interface loaded, reports present, `4` adapters readable, `12` installer permission checks enforced, `0` permission failures, `0` failures, `0` warnings |
 | Local Install Sync Preflight | `make sync-local-install` and `make sync-active-install` rebuild the package first, then sync only after install simulation passes with `12` enforced installer permission checks and `0` permission failures |
 | Upgrade Check | current package declares `minor` over the 1.0.0 baseline, recommended bump is `minor`, and release notes include added targets plus checksum changes |
 | Adoption Drift | `1` metadata-only review event, `1` adoption sample, adoption `100`, risk band `low`; optional `yao.py` CLI capture, external client `telemetry-emit`, `5` `telemetry-hooks` recipes, Browser/Chrome native messaging host, and validated external JSONL import are available but off by default for reproducible release evidence; raw `reports/telemetry_events.jsonl` is gitignored and blocked from zip packages |

@@ -73,6 +73,7 @@
           "scripts/ci_test.py",
           "scripts/collect_feedback.py",
           "scripts/compile_skill.py",
+          "scripts/compile_skill_targets.py",
           "scripts/context_sizer.py",
           "scripts/create_iteration_snapshot.py",
           "scripts/cross_packager.py",
