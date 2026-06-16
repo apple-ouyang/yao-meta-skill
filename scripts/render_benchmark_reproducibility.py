@@ -7,6 +7,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
+from benchmark_release_lock import git_status, release_lock_status
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_INTERFACE = "cli"
@@ -207,27 +208,6 @@ def git_commit(skill_dir: Path) -> str:
     return proc.stdout.strip() or "unknown"
 
 
-def git_status(skill_dir: Path) -> dict[str, Any]:
-    try:
-        proc = subprocess.run(
-            ["git", "status", "--short", "--untracked-files=all"],
-            cwd=skill_dir,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-    except (OSError, subprocess.CalledProcessError):
-        return {"available": False, "dirty": None, "changed_file_count": None}
-    lines = [line for line in proc.stdout.splitlines() if line.strip()]
-    return {
-        "available": True,
-        "dirty": bool(lines),
-        "changed_file_count": len(lines),
-        "sample": lines[:12],
-        "scope": "generation-time status before this report is written",
-    }
-
-
 def count_jsonl(path: Path) -> int:
     if not path.exists():
         return 0
@@ -289,30 +269,6 @@ def evidence_bundle_fingerprint(artifacts: list[dict[str, Any]]) -> dict[str, An
         "missing_count": len(missing_paths),
         "missing_paths": missing_paths,
         "sha256": digest.hexdigest(),
-    }
-
-
-def release_lock_status(status: dict[str, Any], commit: str) -> dict[str, Any]:
-    available = status.get("available") is True
-    clean = status.get("dirty") is False
-    known_commit = bool(commit and commit != "unknown")
-    ready = available and clean and known_commit
-    reasons = []
-    if not available:
-        reasons.append("git status unavailable")
-    if not known_commit:
-        reasons.append("git commit unavailable")
-    if status.get("dirty") is True:
-        reasons.append("working tree was dirty at generation time")
-    if status.get("dirty") is None:
-        reasons.append("working tree cleanliness unknown")
-    if not reasons:
-        reasons.append("clean generation-time HEAD")
-    return {
-        "ready": ready,
-        "commit": commit,
-        "status_scope": status.get("scope", "generation-time status"),
-        "reason": "; ".join(reasons),
     }
 
 
@@ -444,6 +400,10 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "public_claim_blocker_count": len(claim_blockers),
             "working_tree_dirty": status.get("dirty"),
             "changed_file_count": status.get("changed_file_count"),
+            "source_tree_dirty": status.get("source_dirty"),
+            "source_changed_file_count": status.get("source_changed_file_count"),
+            "generated_tree_dirty": status.get("generated_dirty"),
+            "generated_changed_file_count": status.get("generated_changed_file_count"),
         },
         "public_claim": {
             "ready": public_claim_ready,
@@ -463,7 +423,7 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
             "policy": "Keep representative failures visible and tied to regression checks.",
         },
         "limitations": [
-            "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
+            "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
             "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
             "Pending blind-review decisions are visible but do not count as human adjudication.",
             "World-class readiness remains false until external and human evidence gaps close.",
@@ -483,6 +443,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"Generated at: `{report['generated_at']}`",
         f"Commit: `{report['commit']}`",
         f"Working tree dirty at generation: `{str(summary.get('working_tree_dirty')).lower()}`",
+        f"Source tree dirty at generation: `{str(summary.get('source_tree_dirty')).lower()}`",
+        f"Generated evidence dirty at generation: `{str(summary.get('generated_tree_dirty')).lower()}`",
         f"Evidence bundle SHA256: `{summary.get('evidence_bundle_sha256', '')}`",
         "",
         "## Summary",
@@ -504,8 +466,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- public claim ready: `{str(summary['public_claim_ready']).lower()}`",
         f"- public claim blockers: `{summary['public_claim_blocker_count']}`",
         f"- changed files at generation: `{summary.get('changed_file_count')}`",
+        f"- source changed files at generation: `{summary.get('source_changed_file_count')}`",
+        f"- generated changed files at generation: `{summary.get('generated_changed_file_count')}`",
         "",
-        "This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.",
+        "This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.",
         "",
         "## Public Claim Boundary",
         "",

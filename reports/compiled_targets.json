@@ -539,9 +539,10 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 11,
+              "script_count": 12,
               "scripts": [
                 "scripts/apply_adaptation.py",
+                "scripts/benchmark_release_lock.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -582,7 +583,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 11,
+            "subprocess_script_count": 12,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -604,7 +605,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 11,
+            "subprocess": 12,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -796,9 +797,10 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 11,
+            "script_count": 12,
             "scripts": [
               "scripts/apply_adaptation.py",
+              "scripts/benchmark_release_lock.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -839,7 +841,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 11,
+          "subprocess_script_count": 12,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -859,7 +861,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 11,
+          "subprocess": 12,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -1486,9 +1488,10 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 11,
+              "script_count": 12,
               "scripts": [
                 "scripts/apply_adaptation.py",
+                "scripts/benchmark_release_lock.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -1529,7 +1532,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 11,
+            "subprocess_script_count": 12,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -1551,7 +1554,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 11,
+            "subprocess": 12,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -1743,9 +1746,10 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 11,
+            "script_count": 12,
             "scripts": [
               "scripts/apply_adaptation.py",
+              "scripts/benchmark_release_lock.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -1786,7 +1790,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 11,
+          "subprocess_script_count": 12,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -1806,7 +1810,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 11,
+          "subprocess": 12,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2433,9 +2437,10 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 11,
+              "script_count": 12,
               "scripts": [
                 "scripts/apply_adaptation.py",
+                "scripts/benchmark_release_lock.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -2476,7 +2481,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 11,
+            "subprocess_script_count": 12,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -2498,7 +2503,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 11,
+            "subprocess": 12,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -2683,9 +2688,10 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 11,
+            "script_count": 12,
             "scripts": [
               "scripts/apply_adaptation.py",
+              "scripts/benchmark_release_lock.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -2726,7 +2732,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 11,
+          "subprocess_script_count": 12,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -2746,7 +2752,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 11,
+          "subprocess": 12,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -3364,9 +3370,10 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 11,
+              "script_count": 12,
               "scripts": [
                 "scripts/apply_adaptation.py",
+                "scripts/benchmark_release_lock.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -3407,7 +3414,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 11,
+            "subprocess_script_count": 12,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -3429,7 +3436,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 11,
+            "subprocess": 12,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -3614,9 +3621,10 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 11,
+            "script_count": 12,
             "scripts": [
               "scripts/apply_adaptation.py",
+              "scripts/benchmark_release_lock.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -3657,7 +3665,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 11,
+          "subprocess_script_count": 12,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -3677,7 +3685,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 11,
+          "subprocess": 12,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -4295,9 +4303,10 @@
             },
             "subprocess": {
               "required": true,
-              "script_count": 11,
+              "script_count": 12,
               "scripts": [
                 "scripts/apply_adaptation.py",
+                "scripts/benchmark_release_lock.py",
                 "scripts/ci_test.py",
                 "scripts/render_benchmark_reproducibility.py",
                 "scripts/render_eval_dashboard.py",
@@ -4338,7 +4347,7 @@
             "secret_findings": 0,
             "network_script_count": 3,
             "file_write_script_count": 73,
-            "subprocess_script_count": 11,
+            "subprocess_script_count": 12,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -4360,7 +4369,7 @@
           "capability_counts": {
             "network": 3,
             "file_write": 73,
-            "subprocess": 11,
+            "subprocess": 12,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -4549,9 +4558,10 @@
           },
           "subprocess": {
             "required": true,
-            "script_count": 11,
+            "script_count": 12,
             "scripts": [
               "scripts/apply_adaptation.py",
+              "scripts/benchmark_release_lock.py",
               "scripts/ci_test.py",
               "scripts/render_benchmark_reproducibility.py",
               "scripts/render_eval_dashboard.py",
@@ -4592,7 +4602,7 @@
           "secret_findings": 0,
           "network_script_count": 3,
           "file_write_script_count": 73,
-          "subprocess_script_count": 11,
+          "subprocess_script_count": 12,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -4612,7 +4622,7 @@
         "capability_counts": {
           "network": 3,
           "file_write": 73,
-          "subprocess": 11,
+          "subprocess": 12,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",

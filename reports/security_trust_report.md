@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `240`
-- Scripts: `148`
-- Internal script modules: `62`
+- Scanned files: `241`
+- Scripts: `149`
+- Internal script modules: `63`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `240`
-- Package SHA256: `7993d9f426409a0307d85fa6d9a4a9815a3cbe2faaa06cffff9deba813c4ef7e`
+- Package hash files: `241`
+- Package SHA256: `6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59`
 
 ## Failures
 
@@ -66,6 +66,7 @@
 | scripts/adaptation_report_contracts.py | internal-module | True | False | False | False | False | False | False | Shared adaptation approval and regression report contract decoration helpers. |
 | scripts/adjudicate_output_review.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/apply_adaptation.py | cli | True | True | True | False | False | True | True | Approval-gated adaptive patch application with dry-run, allowlist, regression, and rollback evidence. |
+| scripts/benchmark_release_lock.py | internal-module | True | False | False | False | False | False | True | Imported by render_benchmark_reproducibility.py to keep release-lock git status classification out of the report renderer. |
 | scripts/build_confusion_matrix.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/build_skill_atlas.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/build_skill_atlas_layout.py | internal-module | True | False | False | False | False | False | False | Imported by build_skill_atlas.py to render the static Skill Atlas HTML report. |

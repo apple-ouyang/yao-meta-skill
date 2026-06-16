@@ -24,6 +24,7 @@
         "scripts/adaptation_report_contracts.py",
         "scripts/adjudicate_output_review.py",
         "scripts/apply_adaptation.py",
+        "scripts/benchmark_release_lock.py",
         "scripts/build_confusion_matrix.py",
         "scripts/build_skill_atlas.py",
         "scripts/build_skill_atlas_layout.py",

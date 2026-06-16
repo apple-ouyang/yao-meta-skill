@@ -128,7 +128,7 @@ def main() -> None:
     assert payload["schema_version"] == "1.0", payload
     assert payload["ok"] is True, payload
     assert payload["summary"]["reproducibility_ready"] is True, payload
-    assert payload["summary"]["release_lock_ready"] == (payload["git_status"]["dirty"] is False), payload
+    assert payload["summary"]["release_lock_ready"] == (payload["git_status"]["source_dirty"] is False), payload
     assert payload["summary"]["methodology_complete"] is True, payload
     assert payload["summary"]["missing_artifact_count"] == 0, payload
     assert len(payload["summary"]["evidence_bundle_sha256"]) == 64, payload
@@ -139,10 +139,23 @@ def main() -> None:
     assert payload["summary"]["failure_disclosure_count"] >= 1, payload
     assert payload["summary"]["command_count"] >= 10, payload
     assert "working_tree_dirty" in payload["summary"], payload
+    assert "source_tree_dirty" in payload["summary"], payload
+    assert "generated_tree_dirty" in payload["summary"], payload
+    assert payload["summary"]["source_changed_file_count"] == payload["git_status"]["source_changed_file_count"], payload
+    assert payload["summary"]["generated_changed_file_count"] == payload["git_status"][
+        "generated_changed_file_count"
+    ], payload
     assert payload["git_status"]["available"] is True, payload
     assert payload["git_status"]["scope"] == "generation-time status before this report is written", payload
+    assert isinstance(payload["git_status"]["generated_dirty_prefixes"], list), payload
     assert payload["release_lock"]["status_scope"] == "generation-time status before this report is written", payload
     assert payload["release_lock"]["commit"] == payload["commit"], payload
+    assert payload["release_lock"]["source_changed_file_count"] == payload["git_status"][
+        "source_changed_file_count"
+    ], payload
+    assert payload["release_lock"]["generated_changed_file_count"] == payload["git_status"][
+        "generated_changed_file_count"
+    ], payload
     assert payload["evidence_bundle"]["algorithm"] == "sha256(path,label,exists,artifact_sha256)", payload
     assert payload["evidence_bundle"]["artifact_count"] == payload["summary"]["required_artifact_count"], payload
     assert payload["evidence_bundle"]["existing_count"] == payload["summary"]["required_artifact_count"], payload
@@ -197,6 +210,10 @@ def main() -> None:
     assert "Benchmark Reproducibility" in markdown, markdown
     assert "Evidence bundle SHA256" in markdown, markdown
     assert "release lock ready" in markdown, markdown
+    assert "Source tree dirty at generation" in markdown, markdown
+    assert "Generated evidence dirty at generation" in markdown, markdown
+    assert "source changed files at generation" in markdown, markdown
+    assert "generated changed files at generation" in markdown, markdown
     assert "world-class source checks" in markdown, markdown
     assert "public claim ready: `false`" in markdown, markdown
     assert "## Public Claim Boundary" in markdown, markdown

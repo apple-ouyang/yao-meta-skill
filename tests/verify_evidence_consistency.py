@@ -429,11 +429,19 @@ def main() -> None:
     benchmark = json.loads(benchmark_path.read_text(encoding="utf-8"))
     benchmark["git_status"]["dirty"] = True
     benchmark["git_status"]["changed_file_count"] = 3
+    benchmark["git_status"]["source_dirty"] = True
+    benchmark["git_status"]["source_changed_file_count"] = 1
+    benchmark["git_status"]["generated_dirty"] = True
+    benchmark["git_status"]["generated_changed_file_count"] = 2
     benchmark["summary"]["release_lock_ready"] = False
     benchmark["summary"]["working_tree_dirty"] = True
     benchmark["summary"]["changed_file_count"] = 3
+    benchmark["summary"]["source_tree_dirty"] = True
+    benchmark["summary"]["source_changed_file_count"] = 1
+    benchmark["summary"]["generated_tree_dirty"] = True
+    benchmark["summary"]["generated_changed_file_count"] = 2
     benchmark["release_lock"]["ready"] = False
-    benchmark["release_lock"]["reason"] = "working tree was dirty at generation time"
+    benchmark["release_lock"]["reason"] = "source files were dirty at generation time"
     benchmark_path.write_text(json.dumps(benchmark, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     for report_name in ["skill-overview", "skill-interpretation"]:
         report_path = stale_clean_lock_root / "reports" / f"{report_name}.json"
@@ -441,6 +449,10 @@ def main() -> None:
         report["benchmark_reproducibility"]["summary"]["release_lock_ready"] = False
         report["benchmark_reproducibility"]["summary"]["working_tree_dirty"] = True
         report["benchmark_reproducibility"]["summary"]["changed_file_count"] = 3
+        report["benchmark_reproducibility"]["summary"]["source_tree_dirty"] = True
+        report["benchmark_reproducibility"]["summary"]["source_changed_file_count"] = 1
+        report["benchmark_reproducibility"]["summary"]["generated_tree_dirty"] = True
+        report["benchmark_reproducibility"]["summary"]["generated_changed_file_count"] = 2
         report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     subprocess.run(["git", "init"], cwd=stale_clean_lock_root, capture_output=True, text=True, check=True)
     subprocess.run(["git", "add", "."], cwd=stale_clean_lock_root, capture_output=True, text=True, check=True)
@@ -472,6 +484,48 @@ def main() -> None:
     )
     assert stale_clean_lock_checks["benchmark-clean-worktree-release-lock"]["status"] == "fail", (
         stale_clean_lock_checks["benchmark-clean-worktree-release-lock"]
+    )
+
+    generated_only_lock_root = TMP / "generated-only-lock-skill"
+    copy_reports(generated_only_lock_root)
+    generated_benchmark_path = generated_only_lock_root / "reports" / "benchmark_reproducibility.json"
+    generated_benchmark = json.loads(generated_benchmark_path.read_text(encoding="utf-8"))
+    generated_benchmark["git_status"]["dirty"] = True
+    generated_benchmark["git_status"]["changed_file_count"] = 4
+    generated_benchmark["git_status"]["source_dirty"] = False
+    generated_benchmark["git_status"]["source_changed_file_count"] = 0
+    generated_benchmark["git_status"]["generated_dirty"] = True
+    generated_benchmark["git_status"]["generated_changed_file_count"] = 4
+    generated_benchmark["summary"]["release_lock_ready"] = True
+    generated_benchmark["summary"]["working_tree_dirty"] = True
+    generated_benchmark["summary"]["changed_file_count"] = 4
+    generated_benchmark["summary"]["source_tree_dirty"] = False
+    generated_benchmark["summary"]["source_changed_file_count"] = 0
+    generated_benchmark["summary"]["generated_tree_dirty"] = True
+    generated_benchmark["summary"]["generated_changed_file_count"] = 4
+    generated_benchmark["release_lock"]["ready"] = True
+    generated_benchmark["release_lock"]["reason"] = "only generated evidence artifacts were dirty at generation time"
+    generated_benchmark_path.write_text(
+        json.dumps(generated_benchmark, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    generated_only_proc = run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            str(generated_only_lock_root),
+            "--output-json",
+            str(TMP / "generated_only_lock.json"),
+            "--output-md",
+            str(TMP / "generated_only_lock.md"),
+            "--generated-at",
+            "2026-06-15",
+        ]
+    )
+    generated_only_payload = json.loads(generated_only_proc.stdout)
+    generated_only_checks = {item["key"]: item for item in generated_only_payload["checks"]}
+    assert generated_only_checks["benchmark-release-lock-self-consistency"]["status"] == "pass", (
+        generated_only_checks["benchmark-release-lock-self-consistency"]
     )
 
     workflow_drift_root = TMP / "workflow-drift-skill"

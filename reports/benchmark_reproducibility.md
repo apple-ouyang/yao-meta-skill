@@ -1,9 +1,11 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `f2cf8a9e53f02dbaf34bf1d0b874284d893ebc11`
+Commit: `4a1a5295708ba3570821583652ef91fda0f0874f`
 Working tree dirty at generation: `true`
-Evidence bundle SHA256: `55fc0caa28b80022bd16a0a84f77bb0040c4f6eee14fabb526f492ae7c962ef6`
+Source tree dirty at generation: `true`
+Generated evidence dirty at generation: `true`
+Evidence bundle SHA256: `e114eec2acbc1cbb7ac578dd4e5165c3ed2b88e4922ba3e64d2c6232a577fc6d`
 
 ## Summary
 
@@ -12,8 +14,8 @@ Evidence bundle SHA256: `55fc0caa28b80022bd16a0a84f77bb0040c4f6eee14fabb526f492a
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
-- source contract sha256: `7993d9f42640`
-- archive sha256: `e0d57b8bede6`
+- source contract sha256: `6fbdbed9dfdc`
+- archive sha256: `0db54f788046`
 - output cases: `5`
 - disclosed failure cases: `3`
 - reproduction commands: `23`
@@ -23,9 +25,11 @@ Evidence bundle SHA256: `55fc0caa28b80022bd16a0a84f77bb0040c4f6eee14fabb526f492a
 - world-class source checks: `9` pass / `19` total; `10` blocked
 - public claim ready: `false`
 - public claim blockers: `5`
-- changed files at generation: `67`
+- changed files at generation: `62`
+- source changed files at generation: `6`
+- generated changed files at generation: `56`
 
-This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
+This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
 ## Public Claim Boundary
 
@@ -44,14 +48,14 @@ This report proves local benchmark reproducibility only. It keeps external provi
 ## Release Lock
 
 - ready: `false`
-- reason: working tree was dirty at generation time
+- reason: source files were dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `55fc0caa28b80022bd16a0a84f77bb0040c4f6eee14fabb526f492ae7c962ef6`
+- sha256: `e114eec2acbc1cbb7ac578dd4e5165c3ed2b88e4922ba3e64d2c6232a577fc6d`
 
 ## Methodology Sections
 
@@ -73,17 +77,17 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | output_cases | `evals/output/cases.jsonl` | present | `a6ae96857116` |
 | output_schema | `evals/output/schema.json` | present | `8ee340c95064` |
 | output_scorecard | `reports/output_quality_scorecard.json` | present | `0806258a8e08` |
-| output_execution | `reports/output_execution_runs.json` | present | `5291115a0e13` |
+| output_execution | `reports/output_execution_runs.json` | present | `c9c054c2e0a7` |
 | blind_review | `reports/output_blind_review_pack.json` | present | `bbe2db8ec277` |
 | review_adjudication | `reports/output_review_adjudication.json` | present | `91fd88dd9b0f` |
 | trigger_scorecard | `reports/route_scorecard.json` | present | `c164e83e36d0` |
 | runtime_conformance | `reports/conformance_matrix.json` | present | `97f9ba949c23` |
-| trust_report | `reports/security_trust_report.json` | present | `596dafa18494` |
-| python_compatibility | `reports/python_compatibility.json` | present | `f53cce322cc3` |
-| registry_audit | `reports/registry_audit.json` | present | `79532bfc006c` |
-| package_verification | `reports/package_verification.json` | present | `df947ca7f0e5` |
-| install_simulation | `reports/install_simulation.json` | present | `08d96de4662c` |
-| skill_os2_audit | `reports/skill_os2_audit.json` | present | `7fc0b099204c` |
+| trust_report | `reports/security_trust_report.json` | present | `a18583795da7` |
+| python_compatibility | `reports/python_compatibility.json` | present | `364a150344f4` |
+| registry_audit | `reports/registry_audit.json` | present | `d0157e4c0242` |
+| package_verification | `reports/package_verification.json` | present | `755a9c6788cc` |
+| install_simulation | `reports/install_simulation.json` | present | `15b77ec2b473` |
+| skill_os2_audit | `reports/skill_os2_audit.json` | present | `16cbe378cc1a` |
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `2beb888d7992` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `22c85613d7be` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `d3f44570e605` |
@@ -151,7 +155,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Limits
 
-- The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.
+- The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.
 - Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.
 - Pending blind-review decisions are visible but do not count as human adjudication.
 - World-class readiness remains false until external and human evidence gaps close.

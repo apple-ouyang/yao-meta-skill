@@ -190,7 +190,8 @@ def main() -> None:
     assert all(not item["expected_revealed"] for item in full_payload["data"]["output_review_adjudication"]["pairs"]), full_payload["data"]["output_review_adjudication"]
     benchmark_summary = full_payload["data"]["benchmark_reproducibility"]["summary"]
     assert benchmark_summary["reproducibility_ready"] is True, benchmark_summary
-    assert benchmark_summary["release_lock_ready"] == (benchmark_summary["working_tree_dirty"] is False), benchmark_summary
+    assert benchmark_summary["release_lock_ready"] == (benchmark_summary["source_tree_dirty"] is False), benchmark_summary
+    assert "generated_tree_dirty" in benchmark_summary, benchmark_summary
     assert benchmark_summary["public_claim_ready"] is False, benchmark_summary
     assert benchmark_summary["public_claim_blocker_count"] >= 3, benchmark_summary
     public_claim = full_payload["data"]["benchmark_reproducibility"]["public_claim"]

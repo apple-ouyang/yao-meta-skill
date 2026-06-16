@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 240,
-    "script_count": 148,
-    "internal_module_count": 62,
+    "scanned_files": 241,
+    "script_count": 149,
+    "internal_module_count": 63,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 240,
-    "package_sha256": "7993d9f426409a0307d85fa6d9a4a9815a3cbe2faaa06cffff9deba813c4ef7e"
+    "package_hash_file_count": 241,
+    "package_sha256": "6fbdbed9dfdc8d272caa0a6596312fa524796132dfb3c9e9e1a9cbc801729f59"
   },
   "failures": [],
   "warnings": [],
@@ -81,6 +81,20 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": true,
+      "uses_subprocess": true,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/benchmark_release_lock.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_benchmark_reproducibility.py to keep release-lock git status classification out of the report renderer.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
       "uses_subprocess": true,
       "network_urls": [],
       "network_hosts": []
@@ -2153,7 +2167,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 62,
+    "skipped_count": 63,
     "failed_scripts": [],
     "results": [
       {
@@ -3027,6 +3041,10 @@
         "reason": "internal module"
       },
       {
+        "path": "scripts/benchmark_release_lock.py",
+        "reason": "internal module"
+      },
+      {
         "path": "scripts/build_skill_atlas_layout.py",
         "reason": "internal module"
       },
@@ -3416,6 +3434,7 @@
         "status": "approved",
         "scripts": [
           "scripts/apply_adaptation.py",
+          "scripts/benchmark_release_lock.py",
           "scripts/ci_test.py",
           "scripts/render_benchmark_reproducibility.py",
           "scripts/render_eval_dashboard.py",

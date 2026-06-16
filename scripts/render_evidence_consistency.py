@@ -156,11 +156,14 @@ def build_report(skill_dir: Path, generated_at: str) -> dict[str, Any]:
         compare_values(
             checks,
             key="benchmark-release-lock-self-consistency",
-            label="Benchmark release lock matches git dirty state",
-            expected=not bool(nested(benchmark, ["git_status", "dirty"], True)),
+            label="Benchmark release lock matches source dirty state",
+            expected=not bool(nested(benchmark, ["git_status", "source_dirty"], True)),
             actual=benchmark_summary.get("release_lock_ready"),
             paths=[REQUIRED_REPORTS["benchmark"]],
-            detail="The benchmark release lock must reflect the generation-time git dirty flag.",
+            detail=(
+                "The benchmark release lock must be blocked by source changes, while generated evidence artifacts are "
+                "tracked as generation context."
+            ),
         )
         current_git_status = git_worktree_status(skill_dir)
         if current_git_status.get("available") and current_git_status.get("clean") is True:
