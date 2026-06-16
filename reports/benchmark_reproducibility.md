@@ -1,7 +1,7 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-16`
-Commit: `129ab2a1c7b128a6a5393d7dc27eb00c0a171f52`
+Commit: `ca6afbde879ce04d768acca0023bf0baa7859006`
 Working tree dirty at generation: `true`
 Evidence bundle SHA256: `f34a437eecd06730398dd77ece23911dcfdf1a0b08bfd4b9dff17640a2fce5c7`
 
@@ -23,7 +23,7 @@ Evidence bundle SHA256: `f34a437eecd06730398dd77ece23911dcfdf1a0b08bfd4b9dff1764
 - world-class source checks: `6` pass / `13` total; `7` blocked
 - public claim ready: `false`
 - public claim blockers: `5`
-- changed files at generation: `43`
+- changed files at generation: `1`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit is generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
