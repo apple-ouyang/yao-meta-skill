@@ -1004,7 +1004,7 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": false,
+      "release_lock_ready": true,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
@@ -1028,15 +1028,15 @@
       "world_class_source_pass_count": 10,
       "world_class_source_blocked_count": 9,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 5,
+      "public_claim_blocker_count": 4,
       "working_tree_dirty": true,
-      "changed_file_count": 49,
-      "source_tree_dirty": true,
-      "source_changed_file_count": 5,
+      "changed_file_count": 13,
+      "source_tree_dirty": false,
+      "source_changed_file_count": 0,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 44
+      "generated_changed_file_count": 13
     },
-    "commit": "6ece6407e81e352af8dffbb0933d8ee5128a92c3",
+    "commit": "4309d9bbcd21ad8e068cfdad034cd9d5a9e3570f",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",

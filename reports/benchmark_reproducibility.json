@@ -3,49 +3,43 @@
   "ok": true,
   "generated_at": "2026-06-17",
   "skill_dir": ".",
-  "commit": "6ece6407e81e352af8dffbb0933d8ee5128a92c3",
+  "commit": "4309d9bbcd21ad8e068cfdad034cd9d5a9e3570f",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 49,
+    "changed_file_count": 13,
     "generated_dirty": true,
-    "generated_changed_file_count": 44,
-    "source_dirty": true,
-    "source_changed_file_count": 5,
+    "generated_changed_file_count": 13,
+    "source_dirty": false,
+    "source_changed_file_count": 0,
     "sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
       " M reports/adaptation_proposals.json",
       " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/adoption_drift_report.md",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
       " M reports/context_budget.json",
-      " M reports/context_budget.md"
+      " M reports/evidence_consistency.json",
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json",
+      " M reports/skill-overview.json",
+      " M reports/skillops/weekly/2026-W25.json"
     ],
-    "source_sample": [
-      " M scripts/evidence_consistency_phase_queue.py",
-      " M scripts/render_evidence_consistency.py",
-      " M scripts/render_world_class_operator_runbook.py",
-      " M tests/verify_evidence_consistency.py",
-      " M tests/verify_world_class_operator_runbook.py"
-    ],
+    "source_sample": [],
     "generated_sample": [
-      " M registry/index.json",
-      " M registry/packages/yao-meta-skill.json",
       " M reports/adaptation_proposals.json",
       " M reports/adaptation_proposals.md",
-      " M reports/adoption_drift_report.json",
-      " M reports/adoption_drift_report.md",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
       " M reports/benchmark_reproducibility.json",
       " M reports/benchmark_reproducibility.md",
       " M reports/context_budget.json",
-      " M reports/context_budget.md"
+      " M reports/evidence_consistency.json",
+      " M reports/review-studio.html",
+      " M reports/review-studio.json",
+      " M reports/review-viewer.json",
+      " M reports/skill-interpretation.json",
+      " M reports/skill-overview.json",
+      " M reports/skillops/weekly/2026-W25.json"
     ],
     "generated_dirty_prefixes": [
       "dist/",
@@ -59,7 +53,7 @@
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
@@ -83,19 +77,18 @@
     "world_class_source_pass_count": 10,
     "world_class_source_blocked_count": 9,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 5,
+    "public_claim_blocker_count": 4,
     "working_tree_dirty": true,
-    "changed_file_count": 49,
-    "source_tree_dirty": true,
-    "source_changed_file_count": 5,
+    "changed_file_count": 13,
+    "source_tree_dirty": false,
+    "source_changed_file_count": 0,
     "generated_tree_dirty": true,
-    "generated_changed_file_count": 44
+    "generated_changed_file_count": 13
   },
   "public_claim": {
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -104,12 +97,12 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "6ece6407e81e352af8dffbb0933d8ee5128a92c3",
+    "ready": true,
+    "commit": "4309d9bbcd21ad8e068cfdad034cd9d5a9e3570f",
     "status_scope": "generation-time status before this report is written",
-    "source_changed_file_count": 5,
-    "generated_changed_file_count": 44,
-    "reason": "source files were dirty at generation time"
+    "source_changed_file_count": 0,
+    "generated_changed_file_count": 13,
+    "reason": "only generated evidence artifacts were dirty at generation time"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",

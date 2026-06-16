@@ -1,16 +1,16 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `6ece6407e81e352af8dffbb0933d8ee5128a92c3`
+Commit: `4309d9bbcd21ad8e068cfdad034cd9d5a9e3570f`
 Working tree dirty at generation: `true`
-Source tree dirty at generation: `true`
+Source tree dirty at generation: `false`
 Generated evidence dirty at generation: `true`
 Evidence bundle SHA256: `48071ebca4a8bfc9b45e5d4194858870fd0e7f50faff88d4abb79308113126eb`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `false`
+- release lock ready: `true`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
@@ -24,10 +24,10 @@ Evidence bundle SHA256: `48071ebca4a8bfc9b45e5d4194858870fd0e7f50faff88d4abb7930
 - world-class ready: `false`
 - world-class source checks: `10` pass / `19` total; `9` blocked
 - public claim ready: `false`
-- public claim blockers: `5`
-- changed files at generation: `49`
-- source changed files at generation: `5`
-- generated changed files at generation: `44`
+- public claim blockers: `4`
+- changed files at generation: `13`
+- source changed files at generation: `0`
+- generated changed files at generation: `13`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -39,7 +39,6 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | world-class evidence is not accepted yet (4 open gaps, 4 ledger pending) |
@@ -47,8 +46,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `false`
-- reason: source files were dirty at generation time
+- ready: `true`
+- reason: only generated evidence artifacts were dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
