@@ -248,8 +248,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
-      "actual": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
+      "expected": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
+      "actual": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -394,8 +394,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
-      "actual": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
+      "expected": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
+      "actual": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -1524,10 +1524,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 233
+            "file_count": 235
           }
         ],
-        "file_count": 441,
+        "file_count": 443,
         "folder_count": 4,
         "distribution": [
           {
@@ -1560,7 +1560,7 @@
           },
           {
             "label": "reports",
-            "value": 233
+            "value": 235
           }
         ]
       },
@@ -1612,10 +1612,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 233
+            "file_count": 235
           }
         ],
-        "file_count": 441,
+        "file_count": 443,
         "folder_count": 4,
         "distribution": [
           {
@@ -1648,7 +1648,7 @@
           },
           {
             "label": "reports",
-            "value": 233
+            "value": 235
           }
         ]
       },

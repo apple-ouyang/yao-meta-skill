@@ -966,7 +966,7 @@
     "upgrade_check": "reports/upgrade_check.md",
     "migration": "docs/migration-v2.md",
     "skill_ir": "skill-ir/examples/yao-meta-skill.json",
-    "daily_skillops": "reports/skillops/daily/2026-06-16.md",
+    "daily_skillops": "reports/skillops/daily/2026-06-17.md",
     "weekly_curator": "reports/skillops/weekly/2026-W25.md"
   },
   "data": {
@@ -1496,10 +1496,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 233
+            "file_count": 235
           }
         ],
-        "file_count": 441,
+        "file_count": 443,
         "folder_count": 4,
         "distribution": [
           {
@@ -1532,7 +1532,7 @@
           },
           {
             "label": "reports",
-            "value": 233
+            "value": 235
           }
         ]
       },
@@ -1666,7 +1666,7 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 233
+          "file_count": 235
         }
       ],
       "strengths": [
@@ -1994,9 +1994,9 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 5,
           "working_tree_dirty": true,
-          "changed_file_count": 55
+          "changed_file_count": 1
         },
-        "commit": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
+        "commit": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5659,24 +5659,13 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
+      "commit": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 55,
+        "changed_file_count": 1,
         "sample": [
-          " M reports/adaptation_proposals.json",
-          " M reports/adaptation_proposals.md",
-          " M reports/adoption_drift_report.json",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json",
-          " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json",
-          " M reports/evidence_consistency.json"
+          " M reports/context_budget_summary.json"
         ],
         "scope": "generation-time status before this report is written"
       },
@@ -5708,7 +5697,7 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 5,
         "working_tree_dirty": true,
-        "changed_file_count": 55
+        "changed_file_count": 1
       },
       "public_claim": {
         "ready": false,
@@ -5724,7 +5713,7 @@
       },
       "release_lock": {
         "ready": false,
-        "commit": "190700c7d5c4ac04ebb71d1c376c1701f3ecc4da",
+        "commit": "a5810d90e553b5e4152c225aa6ebeb6743e65f12",
         "status_scope": "generation-time status before this report is written",
         "reason": "working tree was dirty at generation time"
       },
@@ -18909,7 +18898,7 @@
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T16:07:16Z",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "decision": "proposal-review",
       "source_supplied": false,
@@ -19415,20 +19404,20 @@
         "benchmark_reproducibility": "reports/benchmark_reproducibility.json"
       },
       "artifacts": {
-        "json": "reports/skillops/daily/2026-06-16.json",
-        "markdown": "reports/skillops/daily/2026-06-16.md"
+        "json": "reports/skillops/daily/2026-06-17.json",
+        "markdown": "reports/skillops/daily/2026-06-17.md"
       },
-      "source_path": "reports/skillops/daily/2026-06-16.json"
+      "source_path": "reports/skillops/daily/2026-06-17.json"
     },
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T16:07:16Z",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W25",
-      "daily_report_count": 1,
-      "opportunity_count": 5,
+      "daily_report_count": 2,
+      "opportunity_count": 10,
       "unique_opportunity_count": 5,
       "ready_for_approval_review_count": 1,
       "proposal_review_count": 4,
@@ -19447,8 +19436,8 @@
       "summary": {
         "decision": "curator-review",
         "week_id": "2026-W25",
-        "daily_report_count": 1,
-        "opportunity_count": 5,
+        "daily_report_count": 2,
+        "opportunity_count": 10,
         "unique_opportunity_count": 5,
         "ready_for_approval_review_count": 1,
         "proposal_review_count": 4,
@@ -19511,7 +19500,8 @@
         ]
       },
       "daily_reports": [
-        "reports/skillops/daily/2026-06-16.json"
+        "reports/skillops/daily/2026-06-16.json",
+        "reports/skillops/daily/2026-06-17.json"
       ],
       "opportunity_summary": {
         "action_type_counts": {
@@ -19887,7 +19877,7 @@
     "adaptation_proposals": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-16T16:07:16Z",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "source_patterns": "reports/user_patterns.json",
       "pattern_count": 5,
