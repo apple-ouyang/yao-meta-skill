@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 199,
-    "script_file_count": 128,
+    "python_file_count": 200,
+    "script_file_count": 129,
     "test_file_count": 71,
-    "internal_module_count": 45,
+    "internal_module_count": 46,
     "cli_script_count": 85,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
     "largest_file_lines": 852,
-    "watchlist_count": 5,
+    "watchlist_count": 4,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -35,13 +35,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 730,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/compile_skill.py",
@@ -105,6 +98,13 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
+      "path": "scripts/render_skill_os2_coverage.py",
+      "lines": 649,
+      "kind": "cli-script",
+      "severity": "pass",
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
   "watchlist": [
@@ -121,13 +121,6 @@
       "kind": "test",
       "severity": "pass",
       "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
-    {
-      "path": "scripts/build_skill_atlas.py",
-      "lines": 730,
-      "kind": "cli-script",
-      "severity": "pass",
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
       "path": "scripts/compile_skill.py",

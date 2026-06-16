@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 219,
-    "script_count": 128,
-    "internal_module_count": 42,
+    "scanned_files": 220,
+    "script_count": 129,
+    "internal_module_count": 43,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 219,
-    "package_sha256": "00293abe7aae6809f5e86917030c855e99318206ddac7f5a462742006ffaad97"
+    "package_hash_file_count": 220,
+    "package_sha256": "70e1edf36e5f4f18d60fedb0314a09e79ffdce2c6fd5fa7fb9f8968281f7d873"
   },
   "failures": [],
   "warnings": [],
@@ -81,6 +81,20 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/build_skill_atlas_layout.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by build_skill_atlas.py to render the static Skill Atlas HTML report.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
@@ -1873,7 +1887,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 42,
+    "skipped_count": 43,
     "failed_scripts": [],
     "results": [
       {
@@ -2738,6 +2752,10 @@
       }
     ],
     "skipped": [
+      {
+        "path": "scripts/build_skill_atlas_layout.py",
+        "reason": "internal module"
+      },
       {
         "path": "scripts/evidence_consistency_artifact_roles.py",
         "reason": "internal module"

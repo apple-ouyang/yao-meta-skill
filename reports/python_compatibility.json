@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 202,
+    "file_count": 203,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -60,6 +60,12 @@
     },
     {
       "path": "scripts/build_skill_atlas.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/build_skill_atlas_layout.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

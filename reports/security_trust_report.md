@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `219`
-- Scripts: `128`
-- Internal script modules: `42`
+- Scanned files: `220`
+- Scripts: `129`
+- Internal script modules: `43`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `219`
-- Package SHA256: `00293abe7aae6809f5e86917030c855e99318206ddac7f5a462742006ffaad97`
+- Package hash files: `220`
+- Package SHA256: `70e1edf36e5f4f18d60fedb0314a09e79ffdce2c6fd5fa7fb9f8968281f7d873`
 
 ## Failures
 
@@ -66,6 +66,7 @@
 | scripts/apply_adaptation.py | cli | True | True | True | False | False | True | True | Approval-gated adaptive patch application with dry-run, allowlist, regression, and rollback evidence. |
 | scripts/build_confusion_matrix.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/build_skill_atlas.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/build_skill_atlas_layout.py | internal-module | True | False | False | False | False | False | False | Imported by build_skill_atlas.py to render the static Skill Atlas HTML report. |
 | scripts/check_update.py | cli | False | True | True | False | True | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/ci_test.py | cli | False | True | True | False | False | True | True | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/collect_feedback.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
