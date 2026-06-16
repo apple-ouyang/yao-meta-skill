@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `226`
-- Scripts: `135`
-- Internal script modules: `49`
+- Scanned files: `227`
+- Scripts: `136`
+- Internal script modules: `50`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `226`
-- Package SHA256: `6149b95fa5fb9a93108ed5099f3f53e629fa6ac673e03206371d5837a31bae97`
+- Package hash files: `227`
+- Package SHA256: `01c09d5fa7c971a657e4d138499ac8d50095ae1a078c2bff1bd9b70657199c9f`
 
 ## Failures
 
@@ -182,6 +182,7 @@
 | scripts/verify_package.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/world_class_evidence_contract.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to share intake validation and artifact integrity checks. |
 | scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
+| scripts/world_class_provider_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |
 | scripts/world_class_submission_kit_rendering.py | internal-module | True | False | False | False | False | False | False | Shared renderer for world-class submission kit Markdown and HTML artifacts. |
 | scripts/world_class_submission_matrix.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit rendering to summarize draft, artifact, and source-check readiness. |

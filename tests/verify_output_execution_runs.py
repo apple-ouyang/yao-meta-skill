@@ -129,6 +129,48 @@ def main() -> None:
     assert all(item["duration_ms"] is not None for item in command["runs"]), command
     assert all(item["model"] == "fixture-model" for item in command["runs"]), command
 
+    metadata_only_runner = tmp_root / "metadata_only_runner.py"
+    metadata_only_runner.write_text(
+        "\n".join(
+            [
+                "import json, sys",
+                "request = json.loads(sys.stdin.read())",
+                "print(json.dumps({",
+                "  'output': request['fixture_output'],",
+                "  'provider': 'metadata-only-provider',",
+                "  'model': 'metadata-only-model',",
+                "  'usage': {'input_tokens': 11, 'output_tokens': 17, 'total_tokens': 28}",
+                "}))",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    metadata_only_proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--cases",
+            str(ROOT / "evals" / "output" / "cases.jsonl"),
+            "--output-json",
+            str(tmp_root / "metadata-only.json"),
+            "--output-md",
+            str(tmp_root / "metadata-only.md"),
+            "--runner-command",
+            json.dumps([sys.executable, str(metadata_only_runner)]),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    metadata_only = json.loads(metadata_only_proc.stdout)
+    assert metadata_only["ok"], metadata_only
+    assert metadata_only["summary"]["command_executed_count"] == 10, metadata_only
+    assert metadata_only["summary"]["model_executed_count"] == 0, metadata_only
+    assert metadata_only["summary"]["token_observed_count"] == 10, metadata_only
+    assert all(item["execution_mode"] == "command" for item in metadata_only["runs"]), metadata_only
+
     provider_request = {
         "case_id": "provider-contract",
         "variant": "with_skill",

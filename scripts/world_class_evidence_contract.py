@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from world_class_provider_evidence import validate_provider_execution_report
+
 
 SCRIPT_INTERFACE = "internal-module"
 SCRIPT_INTERFACE_REASON = "Imported by world-class evidence reports to share intake validation and artifact integrity checks."
@@ -355,28 +357,8 @@ def validate_provider_holdout_artifacts(payload: dict[str, Any], errors: list[st
     execution = load_json(paths.get("reports/output_execution_runs.json", root / "__missing__"))
     if not execution:
         return
-    execution_summary = summary(execution)
-    add_error(errors, execution.get("ok") is True, "provider-holdout output execution report ok must be true")
-    add_error(
-        errors,
-        bool(real_int(execution_summary.get("model_executed_count")) and execution_summary["model_executed_count"] > 0),
-        "provider-holdout output execution summary.model_executed_count must be >0",
-    )
-    add_error(
-        errors,
-        bool(real_int(execution_summary.get("timing_observed_count")) and execution_summary["timing_observed_count"] > 0),
-        "provider-holdout output execution summary.timing_observed_count must be >0",
-    )
-    add_error(
-        errors,
-        bool(real_int(execution_summary.get("token_observed_count")) and execution_summary["token_observed_count"] > 0),
-        "provider-holdout output execution summary.token_observed_count must be >0",
-    )
-    add_error(
-        errors,
-        execution_summary.get("failure_count") == 0,
-        "provider-holdout output execution summary.failure_count must be 0",
-    )
+    provenance = payload.get("provenance", {}) if isinstance(payload.get("provenance", {}), dict) else {}
+    validate_provider_execution_report(execution, provenance, errors)
 
 
 def validate_human_adjudication_artifacts(payload: dict[str, Any], errors: list[str], root: Path) -> None:

@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 226,
-    "script_count": 135,
-    "internal_module_count": 49,
+    "scanned_files": 227,
+    "script_count": 136,
+    "internal_module_count": 50,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 226,
-    "package_sha256": "6149b95fa5fb9a93108ed5099f3f53e629fa6ac673e03206371d5837a31bae97"
+    "package_hash_file_count": 227,
+    "package_sha256": "01c09d5fa7c971a657e4d138499ac8d50095ae1a078c2bff1bd9b70657199c9f"
   },
   "failures": [],
   "warnings": [],
@@ -1727,6 +1727,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/world_class_provider_evidence.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/world_class_source_checks.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -1971,7 +1985,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 49,
+    "skipped_count": 50,
     "failed_scripts": [],
     "results": [
       {
@@ -2974,6 +2988,10 @@
       },
       {
         "path": "scripts/world_class_preflight_layout.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/world_class_provider_evidence.py",
         "reason": "internal module"
       },
       {

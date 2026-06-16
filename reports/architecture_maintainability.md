@@ -5,15 +5,15 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `208`
-- scripts: `135`
+- python files: `209`
+- scripts: `136`
 - tests: `73`
-- internal modules: `51`
+- internal modules: `52`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `717`
+- largest file lines: `704`
 - watch threshold lines: `720`
 - watchlist: `0`
 - hotspots: `0`
@@ -33,10 +33,10 @@ No near-threshold files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/world_class_evidence_contract.py` | `717` | `internal-module` | `pass` |
+| `tests/verify_world_class_evidence_intake.py` | `704` | `test` | `pass` |
+| `scripts/world_class_evidence_contract.py` | `699` | `internal-module` | `pass` |
 | `tests/verify_yao_cli.py` | `696` | `test` | `pass` |
 | `scripts/render_review_viewer.py` | `685` | `cli-script` | `pass` |
-| `tests/verify_world_class_evidence_intake.py` | `669` | `test` | `pass` |
 | `scripts/skill_report_model.py` | `665` | `internal-module` | `pass` |
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |

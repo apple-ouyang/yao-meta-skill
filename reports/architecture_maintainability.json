@@ -4,10 +4,10 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 208,
-    "script_file_count": 135,
+    "python_file_count": 209,
+    "script_file_count": 136,
     "test_file_count": 73,
-    "internal_module_count": 51,
+    "internal_module_count": 52,
     "cli_script_count": 86,
     "command_handler_count": 68,
     "entrypoint_command_handler_count": 18,
@@ -15,7 +15,7 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 717,
+    "largest_file_lines": 704,
     "watchlist_count": 0,
     "hotspot_count": 0,
     "blocker_count": 0,
@@ -23,8 +23,15 @@
   },
   "largest_files": [
     {
+      "path": "tests/verify_world_class_evidence_intake.py",
+      "lines": 704,
+      "kind": "test",
+      "severity": "pass",
+      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+    },
+    {
       "path": "scripts/world_class_evidence_contract.py",
-      "lines": 717,
+      "lines": 699,
       "kind": "internal-module",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
@@ -42,13 +49,6 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Split viewer data assembly from HTML section rendering."
-    },
-    {
-      "path": "tests/verify_world_class_evidence_intake.py",
-      "lines": 669,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
     },
     {
       "path": "scripts/skill_report_model.py",

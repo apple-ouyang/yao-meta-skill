@@ -147,6 +147,25 @@ def external_submission(
 
 
 def write_provider_artifact(skill_root: Path, *, complete: bool) -> None:
+    run = {
+        "case_id": "provider-holdout",
+        "variant": "with_skill",
+        "status": "pass",
+        "execution_mode": "model" if complete else "command",
+        "model_executed": complete,
+        "command_executed": True,
+        "duration_ms": 1234.5,
+        "provider": "openai" if complete else "local-output-eval-runner",
+        "model": "gpt-4.1-mini" if complete else "",
+        "usage": {
+            "input_tokens": 20,
+            "output_tokens": 30,
+            "total_tokens": 50,
+            "estimated": not complete,
+        },
+        "output_sha256": "a" * 64,
+        "failure": "",
+    }
     write_json(
         skill_root / "reports" / "output_execution_runs.json",
         {
@@ -159,6 +178,7 @@ def write_provider_artifact(skill_root: Path, *, complete: bool) -> None:
                 "token_observed_count": 2 if complete else 0,
                 "failure_count": 0,
             },
+            "runs": [run, {**run, "case_id": "provider-holdout-2"}] if complete else [run],
         },
     )
 
@@ -467,6 +487,21 @@ def assert_external_contract_artifact_validation() -> None:
     assert provider_invalid["status"] == "fail", provider_invalid
     assert any("summary.model_executed_count must be >0" in error for error in provider_invalid["errors"]), provider_invalid["errors"]
     assert any("summary.token_observed_count must be >0" in error for error in provider_invalid["errors"]), provider_invalid["errors"]
+
+    write_provider_artifact(skill_root, complete=True)
+    forged = json.loads((skill_root / "reports" / "output_execution_runs.json").read_text(encoding="utf-8"))
+    for run in forged["runs"]:
+        run["provider"] = "local-output-eval-runner"
+    write_json(skill_root / "reports" / "output_execution_runs.json", forged)
+    forged_provider = validate_payload(
+        provider_artifact_submission(skill_root),
+        provider_entry,
+        path=skill_root / "evidence" / "world_class" / "submissions" / "provider-holdout.json",
+        root=skill_root,
+        template_expected=False,
+    )
+    assert forged_provider["status"] == "fail", forged_provider
+    assert any("matching provider, model, timing" in error for error in forged_provider["errors"]), forged_provider["errors"]
 
     permission_entry = {"key": "native-permission-enforcement", "category": "external"}
     write_native_permission_artifacts(skill_root, complete=True)

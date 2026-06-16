@@ -164,7 +164,7 @@ def command_run(
     execution_kind = str(payload.get("execution_kind", "command"))
     provider = str(payload.get("provider", ""))
     model = str(payload.get("model", ""))
-    model_executed = execution_kind == "model" or bool(model and provider)
+    model_executed = execution_kind == "model" and bool(model and provider)
     return {
         "case_id": request["case_id"],
         "variant": variant,

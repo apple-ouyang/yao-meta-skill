@@ -67,6 +67,41 @@ def provider_submission(artifact_root: Path = ROOT, artifact_path: str = "report
     }
 
 
+def accepted_provider_execution_report() -> dict:
+    return {
+        "schema_version": "1.0",
+        "ok": True,
+        "summary": {
+            "variant_run_count": 1,
+            "model_executed_count": 1,
+            "timing_observed_count": 1,
+            "token_observed_count": 1,
+            "failure_count": 0,
+        },
+        "runs": [
+            {
+                "case_id": "provider-holdout",
+                "variant": "with_skill",
+                "status": "pass",
+                "execution_mode": "model",
+                "model_executed": True,
+                "command_executed": True,
+                "duration_ms": 1234.5,
+                "provider": "openai",
+                "model": "gpt-4.1-mini",
+                "usage": {
+                    "input_tokens": 20,
+                    "output_tokens": 30,
+                    "total_tokens": 50,
+                    "estimated": False,
+                },
+                "output_sha256": "a" * 64,
+                "failure": "",
+            }
+        ],
+    }
+
+
 def main() -> None:
     shutil.rmtree(TMP, ignore_errors=True)
     TMP.mkdir(parents=True, exist_ok=True)
@@ -200,21 +235,7 @@ def main() -> None:
     accepted_source_skill = TMP / "accepted_source_skill"
     (accepted_source_skill / "reports").mkdir(parents=True)
     (accepted_source_skill / "reports" / "output_execution_runs.json").write_text(
-        json.dumps(
-            {
-                "schema_version": "1.0",
-                "ok": True,
-                "summary": {
-                    "variant_run_count": 1,
-                    "model_executed_count": 1,
-                    "timing_observed_count": 1,
-                    "token_observed_count": 1,
-                    "failure_count": 0,
-                }
-            },
-            ensure_ascii=False,
-            indent=2,
-        )
+        json.dumps(accepted_provider_execution_report(), ensure_ascii=False, indent=2)
         + "\n",
         encoding="utf-8",
     )
