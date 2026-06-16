@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 242,
-    "script_count": 150,
-    "internal_module_count": 64,
+    "scanned_files": 243,
+    "script_count": 151,
+    "internal_module_count": 65,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 242,
-    "package_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4"
+    "package_hash_file_count": 243,
+    "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
   },
   "failures": [],
   "warnings": [],
@@ -1909,6 +1909,20 @@
       "network_hosts": []
     },
     {
+      "path": "scripts/world_class_preflight_markdown.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by render_world_class_preflight.py to keep Markdown layout separate from preflight data assembly.",
+      "has_argparse": false,
+      "has_main_guard": false,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
       "path": "scripts/world_class_provider_evidence.py",
       "interface": "internal-module",
       "interface_declared": true,
@@ -2181,7 +2195,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 64,
+    "skipped_count": 65,
     "failed_scripts": [],
     "results": [
       {
@@ -3236,6 +3250,10 @@
       },
       {
         "path": "scripts/world_class_preflight_layout.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/world_class_preflight_markdown.py",
         "reason": "internal module"
       },
       {

@@ -334,6 +334,11 @@ def main() -> None:
     assert "证据采集" in html, html
     assert "action-evidence-grid" in html, html
     assert "action-evidence-checks" in html, html
+    assert "阶段队列" in html, html
+    assert "action-phase-list" in html, html
+    assert "action-phase-row blocked" in html, html
+    assert "#20 · unblock-access" in html, html
+    assert "#40 · collect-source" in html, html
     assert "action-repair-list" in html, html
     assert "action-repair-row blocked" in html, html
     assert "openai-api-key" in html, html

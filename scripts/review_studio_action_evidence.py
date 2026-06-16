@@ -73,6 +73,30 @@ def compact_artifact_role_contract(contract: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def compact_phase_queue(rows: list[Any]) -> list[dict[str, Any]]:
+    compact_rows: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        compact_rows.append(
+            {
+                "phase": str(row.get("phase", "")),
+                "label": str(row.get("label", "")),
+                "priority": int(row.get("priority", 90) or 90),
+                "status": str(row.get("status", "blocked")),
+                "blocked_count": int(row.get("blocked_count", 0) or 0),
+                "row_count": int(row.get("row_count", 0) or 0),
+                "owners": [str(item) for item in row.get("owners", []) if str(item).strip()],
+                "evidence_keys": [str(item) for item in row.get("evidence_keys", []) if str(item).strip()],
+                "next_action_id": str(row.get("next_action_id", "")),
+                "next_action": str(row.get("next_action", "")),
+                "verification_command": str(row.get("verification_command", "")),
+                "counts_as_completion": row.get("counts_as_completion") is True,
+            }
+        )
+    return compact_rows
+
+
 def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
     ledger = data.get("world_class_evidence_ledger", {}) if isinstance(data, dict) else {}
     entries = ledger.get("entries", []) if isinstance(ledger, dict) else []
@@ -142,6 +166,9 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
             if isinstance(preflight_item.get("submission_kit", {}), dict)
             else {}
         )
+        phase_queue = compact_phase_queue(
+            preflight_item.get("phase_queue", []) if isinstance(preflight_item.get("phase_queue", []), list) else []
+        )
         steps.append(
             {
                 "key": key,
@@ -159,6 +186,9 @@ def world_class_action_steps(data: dict[str, Any]) -> list[dict[str, Any]]:
                 "repair_rows": repair_rows,
                 "repair_blocked_count": sum(1 for row in repair_rows if row.get("status") != "ready"),
                 "repair_counts_as_completion": any(row.get("counts_as_completion") for row in repair_rows),
+                "phase_queue": phase_queue,
+                "phase_queue_blocked_count": sum(1 for row in phase_queue if row.get("status") != "ready"),
+                "phase_queue_counts_as_completion": any(row.get("counts_as_completion") for row in phase_queue),
                 "commands": action_command_rows(checklist.get("commands", {}) if isinstance(checklist.get("commands", {}), dict) else {}),
                 "runbook": [str(item) for item in runbook[:3]],
                 "provenance_requirements": first_text_items(
@@ -264,6 +294,21 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
                 f"<code>{html.escape(str(row.get('verification_command', '')))}</code>"
                 "</li>"
             )
+        phase_rows = []
+        for row in step.get("phase_queue", []):
+            phase_rows.append(
+                "<li class='action-phase-row "
+                + html.escape(str(row.get("status", "blocked")))
+                + "'>"
+                f"<span>#{html.escape(str(row.get('priority', '')))} · {html.escape(str(row.get('phase', '')))}</span>"
+                f"<strong>{html.escape(str(row.get('label', '')))}</strong>"
+                f"<em>{html.escape(str(row.get('blocked_count', 0)))} / {html.escape(str(row.get('row_count', 0)))} blocked</em>"
+                f"<code>owners: {html.escape(', '.join(str(item) for item in row.get('owners', [])) or 'n/a')}</code>"
+                f"<code>evidence: {html.escape(', '.join(str(item) for item in row.get('evidence_keys', [])) or 'n/a')}</code>"
+                f"<small>{html.escape(str(row.get('next_action', '')))}</small>"
+                f"<code>{html.escape(str(row.get('verification_command', '')))}</code>"
+                "</li>"
+            )
         cards.append(
             "<article class='action-evidence-item "
             + html.escape(str(step.get("status", "pending")))
@@ -275,6 +320,7 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
             f"<dt>模板</dt><dd><code>{html.escape(str(step.get('template_path', '')))}</code></dd>"
             f"<dt>阻断</dt><dd>{html.escape(str(step.get('source_blocked_count', 0)))} blocked / {html.escape(str(step.get('source_pass_count', 0)))} pass</dd>"
             f"<dt>修复</dt><dd>{html.escape(str(step.get('repair_blocked_count', 0)))} repair rows; counts as completion: {html.escape(str(step.get('repair_counts_as_completion') is True).lower())}</dd>"
+            f"<dt>阶段</dt><dd>{html.escape(str(step.get('phase_queue_blocked_count', 0)))} blocked phases; counts as completion: {html.escape(str(step.get('phase_queue_counts_as_completion') is True).lower())}</dd>"
             f"<dt>下一步</dt><dd>{html.escape(str(step.get('next_action', '')))}</dd></dl>"
             "<section><h5>阻断检查</h5>"
             + (
@@ -283,6 +329,13 @@ def render_action_evidence_steps(steps: list[dict[str, Any]]) -> str:
                 else "<p class='muted'>暂无阻断检查。</p>"
             )
             + "</section>"
+            "<details class='action-phase-details'><summary>阶段队列</summary>"
+            + (
+                "<ul class='action-phase-list'>" + "".join(phase_rows) + "</ul>"
+                if phase_rows
+                else "<p class='muted'>暂无阶段队列。</p>"
+            )
+            + "</details>"
             "<details class='action-repair-details'><summary>修复清单</summary>"
             + (
                 "<ul class='action-repair-list'>" + "".join(repair_rows) + "</ul>"

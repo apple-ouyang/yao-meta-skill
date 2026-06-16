@@ -89,6 +89,15 @@ def main() -> None:
     assert summary["repair_ready_count"] == 0, summary
     assert summary["repair_phase_counts"]["unblock-access"] >= 1, summary
     assert summary["repair_phase_counts"]["collect-source"] >= 1, summary
+    assert summary["phase_queue_count"] == 2, summary
+    assert summary["phase_queue_blocked_count"] == 2, summary
+    assert summary["phase_queue_row_count"] == summary["repair_checklist_count"], summary
+    assert summary["phase_queue_next_phase"] == "unblock-access", summary
+    assert summary["phase_queue_next_action_id"] == "human-adjudication-precheck-human-reviewer", summary
+    assert summary["phase_queue_next_command"] == (
+        "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions"
+    ), summary
+    assert summary["phase_queue_counts_as_completion"] is False, summary
     assert summary["next_repair_action_id"] == "human-adjudication-precheck-human-reviewer", summary
     assert summary["next_repair_phase"] == "unblock-access", summary
     assert summary["next_repair_owner"] == "human reviewer", summary
@@ -107,6 +116,19 @@ def main() -> None:
         "--output-dir evidence/world_class/submissions --prefill-artifacts"
     ), payload["submissions"]
     assert payload["submissions"]["artifact_prefill_counts_as_evidence"] is False, payload
+    phase_queue = payload["phase_queue"]
+    assert [item["phase"] for item in phase_queue] == ["unblock-access", "collect-source"], phase_queue
+    assert all(item["counts_as_completion"] is False for item in phase_queue), phase_queue
+    assert phase_queue[0]["status"] == "blocked", phase_queue
+    assert phase_queue[0]["blocked_count"] >= 1, phase_queue
+    assert phase_queue[0]["next_action_id"] == "human-adjudication-precheck-human-reviewer", phase_queue
+    assert phase_queue[0]["verification_command"] == (
+        "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions"
+    ), phase_queue
+    assert "human reviewer" in phase_queue[0]["owners"], phase_queue
+    assert "human-adjudication" in phase_queue[0]["evidence_keys"], phase_queue
+    assert phase_queue[1]["phase"] == "collect-source", phase_queue
+    assert phase_queue[1]["row_count"] == summary["source_blocked_count"], phase_queue
     role_contract = payload["submissions"]["artifact_role_contract"]
     assert role_contract["role_source"] == "world-class-submission-kit", role_contract
     assert role_contract["counts_as_evidence"] is False, role_contract
@@ -165,6 +187,11 @@ def main() -> None:
     assert "OPENAI_API_KEY" in proc.stdout, proc.stdout
     assert "set OPENAI_API_KEY" not in proc.stdout.lower(), proc.stdout
     provider_repairs = {item["target"]: item for item in provider["repair_checklist"]}
+    provider_phases = {item["phase"]: item for item in provider["phase_queue"]}
+    assert set(provider_phases) == {"unblock-access", "collect-source"}, provider_phases
+    assert provider_phases["unblock-access"]["next_action_id"] == "provider-holdout-precheck-openai-api-key", provider_phases
+    assert provider_phases["collect-source"]["row_count"] == 2, provider_phases
+    assert provider_phases["collect-source"]["counts_as_completion"] is False, provider_phases
     assert provider_repairs["openai-api-key"]["repair_type"] == "precheck", provider_repairs
     assert provider_repairs["openai-api-key"]["action_id"] == "provider-holdout-precheck-openai-api-key", provider_repairs
     assert provider_repairs["openai-api-key"]["phase"] == "unblock-access", provider_repairs
@@ -206,6 +233,11 @@ def main() -> None:
     assert "preflight counts as evidence: `false`" in markdown, markdown
     assert "credential value exposed: `false`" in markdown, markdown
     assert "Submission Kit Handoff" in markdown, markdown
+    assert "Phase Queue" in markdown, markdown
+    assert "Phase queue rows group the same repair checklist into operator execution phases" in markdown, markdown
+    assert "phase queue: `2` blocked / `2` phases" in markdown, markdown
+    assert "next phase action: `human-adjudication-precheck-human-reviewer`" in markdown, markdown
+    assert "| Priority | Phase | Status | Rows | Owners | Evidence | Verify | Next action |" in markdown, markdown
     assert "Repair Checklist" in markdown, markdown
     assert "Repair rows convert preflight and source blockers into a prioritized operator queue" in markdown, markdown
     assert "repair rows:" in markdown, markdown
@@ -229,6 +261,11 @@ def main() -> None:
     html = output_html.read_text(encoding="utf-8")
     assert "<title>World-Class Evidence Preflight</title>" in html, html
     assert "World-Class Evidence Preflight" in html, html
+    assert "Phase Queue" in html, html
+    assert "phase-row blocked" in html, html
+    assert "<dt>Rows</dt>" in html, html
+    assert "<dt>Counts</dt>" in html, html
+    assert "does not count as completion" in html, html
     assert "Evidence Queue" in html, html
     assert "Submission Kit" in html, html
     assert "Repair Rows" in html, html
@@ -274,6 +311,8 @@ def main() -> None:
     assert env_payload["summary"]["credential_value_exposed"] is False, env_payload
     assert env_payload["summary"]["ready_to_claim_world_class"] is False, env_payload
     assert env_payload["summary"]["repair_checklist_count"] == payload["summary"]["repair_checklist_count"] - 1, env_payload
+    assert env_payload["summary"]["phase_queue_row_count"] == payload["summary"]["phase_queue_row_count"] - 1, env_payload
+    assert env_payload["summary"]["phase_queue_count"] == 2, env_payload
 
     spaced_dir = TMP / "submission kit spaced"
     spaced_proc = run_preflight(

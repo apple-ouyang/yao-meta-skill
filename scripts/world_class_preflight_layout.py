@@ -115,6 +115,42 @@ def render_html_repair_rows(rows: list[dict[str, Any]]) -> str:
 	    )
 
 
+def render_html_phase_queue(rows: list[dict[str, Any]]) -> str:
+    if not rows:
+        return "<p class=\"muted\">No phase queue rows listed.</p>"
+    return "".join(
+        """
+        <article class="phase-row {status}">
+          <header>
+            <span>#{priority} · {status}</span>
+            <h3>{label}</h3>
+          </header>
+          <dl>
+            <dt>Phase</dt><dd><code>{phase}</code></dd>
+            <dt>Rows</dt><dd>{blocked} / {total} blocked</dd>
+            <dt>Owners</dt><dd>{owners}</dd>
+            <dt>Evidence</dt><dd>{evidence}</dd>
+            <dt>Next</dt><dd>{action}</dd>
+            <dt>Verify</dt><dd><code>{verify}</code></dd>
+            <dt>Counts</dt><dd>does not count as completion</dd>
+          </dl>
+        </article>
+        """.format(
+            status=html_text(row.get("status", "")),
+            priority=html_text(row.get("priority", "")),
+            label=html_text(row.get("label", "")),
+            phase=html_text(row.get("phase", "")),
+            blocked=html_text(row.get("blocked_count", 0)),
+            total=html_text(row.get("row_count", 0)),
+            owners=html_text(", ".join(str(owner) for owner in row.get("owners", [])) or "n/a"),
+            evidence=html_text(", ".join(str(key) for key in row.get("evidence_keys", [])) or "n/a"),
+            action=html_text(row.get("next_action", "")),
+            verify=html_text(row.get("verification_command", "")),
+        )
+        for row in rows
+    )
+
+
 def render_html_artifact_roles(contract: dict[str, Any]) -> str:
     cards = []
     for role in contract.get("roles", []):
@@ -200,6 +236,7 @@ def render_html(report: dict[str, Any]) -> str:
         ("Blocked", summary["collection_blocked_count"]),
         ("Source", f"{summary['source_pass_count']}/{summary['source_check_count']}"),
         ("Repairs", f"{summary.get('repair_blocked_count', 0)}/{summary.get('repair_checklist_count', 0)}"),
+        ("Phases", f"{summary.get('phase_queue_blocked_count', 0)}/{summary.get('phase_queue_count', 0)}"),
     ]
     stat_html = "".join(
         f"<article><span>{html_text(label)}</span><strong>{html_text(value)}</strong></article>"
@@ -207,6 +244,7 @@ def render_html(report: dict[str, Any]) -> str:
     )
     role_contract = report["submissions"]["artifact_role_contract"]
     item_cards = "".join(render_html_item(item) for item in report.get("items", []))
+    phase_queue_html = render_html_phase_queue(report.get("phase_queue", []))
     html = f"""<!doctype html>
 <html lang="en">
 <head>
@@ -230,10 +268,10 @@ def render_html(report: dict[str, Any]) -> str:
     h3 {{ margin:4px 0 10px; font-size:22px; letter-spacing:0; }}
     h4 {{ margin:0 0 8px; font-size:16px; letter-spacing:0; }}
     .lede {{ max-width:820px; color:var(--muted); font-size:20px; }}
-    .stats {{ display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
-    .stats article, .panel, .evidence-card, .check-row, .repair-row {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
+    .stats {{ display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:12px; margin:26px 0 0; }}
+    .stats article, .panel, .evidence-card, .check-row, .repair-row, .phase-row {{ border:1px solid var(--line); border-radius:8px; background:#fff; }}
     .stats article {{ padding:16px; }}
-    .stats span, .muted, .evidence-card header span, .check-row span, .repair-row span {{ color:var(--muted); }}
+    .stats span, .muted, .evidence-card header span, .check-row span, .repair-row span, .phase-row span {{ color:var(--muted); }}
     .stats strong {{ display:block; color:var(--ink); font-size:28px; line-height:1.15; overflow-wrap:anywhere; }}
     .section {{ padding:32px 0; border-bottom:1px solid var(--line); }}
     .two-col {{ display:grid; grid-template-columns:minmax(0,.45fr) minmax(0,1fr); gap:18px; align-items:start; }}
@@ -249,10 +287,12 @@ def render_html(report: dict[str, Any]) -> str:
     .role-card p {{ margin:0 0 8px; }}
     .evidence-grid {{ display:grid; gap:18px; }}
     .evidence-card {{ padding:20px; min-width:0; }}
+    .phase-grid {{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-bottom:24px; }}
+    .phase-row {{ padding:18px; min-width:0; }}
     .evidence-card.blocked {{ border-left:4px solid var(--block); }}
-    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked, .repair-row.blocked {{ border-left:4px solid var(--warn); }}
-    .evidence-card.ready-for-submission, .check-row.pass, .repair-row.ready {{ border-left:4px solid var(--pass); }}
-    .meta, .check-row dl, .repair-row dl {{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }}
+    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked, .repair-row.blocked, .phase-row.blocked {{ border-left:4px solid var(--warn); }}
+    .evidence-card.ready-for-submission, .check-row.pass, .repair-row.ready, .phase-row.ready {{ border-left:4px solid var(--pass); }}
+    .meta, .check-row dl, .repair-row dl, .phase-row dl {{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }}
     dt {{ color:var(--ink); }}
     dd {{ margin:0; min-width:0; overflow-wrap:anywhere; }}
     code {{ font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }}
@@ -265,7 +305,7 @@ def render_html(report: dict[str, Any]) -> str:
     .check-section {{ margin-top:16px; }}
     .notice {{ background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }}
     li {{ overflow-wrap:anywhere; }}
-    @media (max-width:820px) {{ .stats, .two-col, .check-grid, .repair-grid, .role-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
+    @media (max-width:820px) {{ .stats, .two-col, .check-grid, .repair-grid, .role-grid, .phase-grid {{ grid-template-columns:1fr; }} h1 {{ font-size:38px; }} .topbar-inner {{ align-items:flex-start; flex-direction:column; }} }}
   </style>
 </head>
 <body>
@@ -292,7 +332,13 @@ def render_html(report: dict[str, Any]) -> str:
       </article>
       <aside class="panel"><h2>Commands</h2><ul class="commands">{render_html_commands(report['submissions']['commands'])}</ul></aside>
     </section>
-    <section class="section" id="queue"><h2>Evidence Queue</h2><div class="evidence-grid">{item_cards}</div></section>
+    <section class="section" id="queue">
+      <h2>Phase Queue</h2>
+      <p class="muted">Repair rows are grouped into execution phases so operators can clear the first blocker before moving to later source collection. Phase queue rows remain procedural and never count as accepted evidence.</p>
+      <div class="phase-grid">{phase_queue_html}</div>
+      <h2>Evidence Queue</h2>
+      <div class="evidence-grid">{item_cards}</div>
+    </section>
     <section class="section" id="boundary">
       <h2>Safety Boundary</h2>
       <div class="notice"><ul><li>Environment variables are displayed only as set or not-set; secret values are never printed.</li><li>Human-required and external-required states are operator work, not accepted evidence.</li><li>The world-class ledger remains the only source of truth for ready_to_claim_world_class.</li></ul></div>

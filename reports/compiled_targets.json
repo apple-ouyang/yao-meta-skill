@@ -153,6 +153,7 @@
             "scripts/adaptation_report_contracts.py",
             "scripts/adjudicate_output_review.py",
             "scripts/apply_adaptation.py",
+            "scripts/benchmark_release_lock.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/build_skill_atlas_layout.py",
@@ -279,8 +280,11 @@
             "scripts/world_class_human_evidence.py",
             "scripts/world_class_native_permission_evidence.py",
             "scripts/world_class_native_telemetry_evidence.py",
+            "scripts/world_class_phase_queue.py",
             "scripts/world_class_preflight_layout.py",
+            "scripts/world_class_preflight_markdown.py",
             "scripts/world_class_provider_evidence.py",
+            "scripts/world_class_repair_checklist.py",
             "scripts/world_class_source_checks.py",
             "scripts/world_class_submission_kit_rendering.py",
             "scripts/world_class_submission_matrix.py",
@@ -352,7 +356,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           }
@@ -625,7 +629,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 35,
-              "scripts": 147,
+              "scripts": 151,
               "assets": 6,
               "reports": 43
             },
@@ -636,7 +640,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 147,
+            "script_count": 151,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -881,7 +885,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           },
@@ -892,7 +896,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 147,
+          "script_count": 151,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1102,6 +1106,7 @@
             "scripts/adaptation_report_contracts.py",
             "scripts/adjudicate_output_review.py",
             "scripts/apply_adaptation.py",
+            "scripts/benchmark_release_lock.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/build_skill_atlas_layout.py",
@@ -1228,8 +1233,11 @@
             "scripts/world_class_human_evidence.py",
             "scripts/world_class_native_permission_evidence.py",
             "scripts/world_class_native_telemetry_evidence.py",
+            "scripts/world_class_phase_queue.py",
             "scripts/world_class_preflight_layout.py",
+            "scripts/world_class_preflight_markdown.py",
             "scripts/world_class_provider_evidence.py",
+            "scripts/world_class_repair_checklist.py",
             "scripts/world_class_source_checks.py",
             "scripts/world_class_submission_kit_rendering.py",
             "scripts/world_class_submission_matrix.py",
@@ -1301,7 +1309,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           }
@@ -1574,7 +1582,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 35,
-              "scripts": 147,
+              "scripts": 151,
               "assets": 6,
               "reports": 43
             },
@@ -1585,7 +1593,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 147,
+            "script_count": 151,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1830,7 +1838,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           },
@@ -1841,7 +1849,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 147,
+          "script_count": 151,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2051,6 +2059,7 @@
             "scripts/adaptation_report_contracts.py",
             "scripts/adjudicate_output_review.py",
             "scripts/apply_adaptation.py",
+            "scripts/benchmark_release_lock.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/build_skill_atlas_layout.py",
@@ -2177,8 +2186,11 @@
             "scripts/world_class_human_evidence.py",
             "scripts/world_class_native_permission_evidence.py",
             "scripts/world_class_native_telemetry_evidence.py",
+            "scripts/world_class_phase_queue.py",
             "scripts/world_class_preflight_layout.py",
+            "scripts/world_class_preflight_markdown.py",
             "scripts/world_class_provider_evidence.py",
+            "scripts/world_class_repair_checklist.py",
             "scripts/world_class_source_checks.py",
             "scripts/world_class_submission_kit_rendering.py",
             "scripts/world_class_submission_matrix.py",
@@ -2250,7 +2262,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           }
@@ -2523,7 +2535,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 35,
-              "scripts": 147,
+              "scripts": 151,
               "assets": 6,
               "reports": 43
             },
@@ -2533,7 +2545,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 147,
+            "script_count": 151,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2772,7 +2784,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           },
@@ -2782,7 +2794,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 147,
+          "script_count": 151,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2984,6 +2996,7 @@
             "scripts/adaptation_report_contracts.py",
             "scripts/adjudicate_output_review.py",
             "scripts/apply_adaptation.py",
+            "scripts/benchmark_release_lock.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/build_skill_atlas_layout.py",
@@ -3110,8 +3123,11 @@
             "scripts/world_class_human_evidence.py",
             "scripts/world_class_native_permission_evidence.py",
             "scripts/world_class_native_telemetry_evidence.py",
+            "scripts/world_class_phase_queue.py",
             "scripts/world_class_preflight_layout.py",
+            "scripts/world_class_preflight_markdown.py",
             "scripts/world_class_provider_evidence.py",
+            "scripts/world_class_repair_checklist.py",
             "scripts/world_class_source_checks.py",
             "scripts/world_class_submission_kit_rendering.py",
             "scripts/world_class_submission_matrix.py",
@@ -3183,7 +3199,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           }
@@ -3456,7 +3472,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 35,
-              "scripts": 147,
+              "scripts": 151,
               "assets": 6,
               "reports": 43
             },
@@ -3467,7 +3483,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 147,
+            "script_count": 151,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -3705,7 +3721,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           },
@@ -3716,7 +3732,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 147,
+          "script_count": 151,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -3917,6 +3933,7 @@
             "scripts/adaptation_report_contracts.py",
             "scripts/adjudicate_output_review.py",
             "scripts/apply_adaptation.py",
+            "scripts/benchmark_release_lock.py",
             "scripts/build_confusion_matrix.py",
             "scripts/build_skill_atlas.py",
             "scripts/build_skill_atlas_layout.py",
@@ -4043,8 +4060,11 @@
             "scripts/world_class_human_evidence.py",
             "scripts/world_class_native_permission_evidence.py",
             "scripts/world_class_native_telemetry_evidence.py",
+            "scripts/world_class_phase_queue.py",
             "scripts/world_class_preflight_layout.py",
+            "scripts/world_class_preflight_markdown.py",
             "scripts/world_class_provider_evidence.py",
+            "scripts/world_class_repair_checklist.py",
             "scripts/world_class_source_checks.py",
             "scripts/world_class_submission_kit_rendering.py",
             "scripts/world_class_submission_matrix.py",
@@ -4116,7 +4136,7 @@
           ],
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           }
@@ -4389,7 +4409,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 35,
-              "scripts": 147,
+              "scripts": 151,
               "assets": 6,
               "reports": 43
             },
@@ -4400,7 +4420,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 147,
+            "script_count": 151,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -4642,7 +4662,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 35,
-            "scripts": 147,
+            "scripts": 151,
             "assets": 6,
             "reports": 43
           },
@@ -4653,7 +4673,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 147,
+          "script_count": 151,
           "help_smoke_failed_count": 0
         },
         "permissions": {

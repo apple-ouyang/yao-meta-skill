@@ -51,6 +51,15 @@ def assert_world_class_action(full_payload: dict) -> None:
     assert provider_action_step["source_blocked_count"] == 2, provider_action_step
     assert provider_action_step["repair_blocked_count"] == 3, provider_action_step
     assert provider_action_step["repair_counts_as_completion"] is False, provider_action_step
+    assert provider_action_step["phase_queue_blocked_count"] == 2, provider_action_step
+    assert provider_action_step["phase_queue_counts_as_completion"] is False, provider_action_step
+    provider_phase_queue = {item["phase"]: item for item in provider_action_step["phase_queue"]}
+    assert set(provider_phase_queue) == {"unblock-access", "collect-source"}, provider_phase_queue
+    assert provider_phase_queue["unblock-access"]["next_action_id"] == "provider-holdout-precheck-openai-api-key", provider_phase_queue
+    assert provider_phase_queue["unblock-access"]["row_count"] == 1, provider_phase_queue
+    assert provider_phase_queue["collect-source"]["row_count"] == 2, provider_phase_queue
+    assert provider_phase_queue["collect-source"]["counts_as_completion"] is False, provider_phase_queue
+    assert "operator with provider credentials" in provider_phase_queue["unblock-access"]["owners"], provider_phase_queue
     assert {item["label"] for item in provider_action_step["blocked_checks"]} == {
         "Provider model run",
         "Token usage observed",
@@ -91,6 +100,7 @@ def assert_world_class_action(full_payload: dict) -> None:
         item for item in world_class_action["evidence_steps"] if item["key"] == "human-adjudication"
     )
     assert human_action_step["repair_blocked_count"] >= 2, human_action_step
+    assert human_action_step["phase_queue_blocked_count"] == 2, human_action_step
     human_repair_rows = {item["target"]: item for item in human_action_step["repair_rows"]}
     assert human_repair_rows["human-reviewer"]["repair_type"] == "precheck", human_repair_rows
     assert human_repair_rows["human-reviewer"]["owner"] == "human reviewer", human_repair_rows

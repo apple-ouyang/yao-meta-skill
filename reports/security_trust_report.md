@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `242`
-- Scripts: `150`
-- Internal script modules: `64`
+- Scanned files: `243`
+- Scripts: `151`
+- Internal script modules: `65`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `242`
-- Package SHA256: `7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4`
+- Package hash files: `243`
+- Package SHA256: `453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc`
 
 ## Failures
 
@@ -195,6 +195,7 @@
 | scripts/world_class_native_telemetry_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate native client telemetry evidence from metadata event rows. |
 | scripts/world_class_phase_queue.py | internal-module | True | False | False | False | False | False | False | Imported by prepare_world_class_submission_kit.py to group repair rows into an operator execution queue. |
 | scripts/world_class_preflight_layout.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep preflight HTML layout out of data assembly. |
+| scripts/world_class_preflight_markdown.py | internal-module | True | False | False | False | False | False | False | Imported by render_world_class_preflight.py to keep Markdown layout separate from preflight data assembly. |
 | scripts/world_class_provider_evidence.py | internal-module | True | False | False | False | False | False | False | Imported by world_class_evidence_contract.py to validate provider-backed holdout execution evidence from run rows. |
 | scripts/world_class_repair_checklist.py | internal-module | True | False | False | False | False | False | False | Shared by submission kit generation to turn readiness blockers into actionable repair rows. |
 | scripts/world_class_source_checks.py | internal-module | True | False | False | False | False | False | False | Imported by world-class evidence reports to keep source-evidence readiness checks consistent. |

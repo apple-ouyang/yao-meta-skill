@@ -21,10 +21,10 @@
     h3 { margin:4px 0 10px; font-size:22px; letter-spacing:0; }
     h4 { margin:0 0 8px; font-size:16px; letter-spacing:0; }
     .lede { max-width:820px; color:var(--muted); font-size:20px; }
-    .stats { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; margin:26px 0 0; }
-    .stats article, .panel, .evidence-card, .check-row, .repair-row { border:1px solid var(--line); border-radius:8px; background:#fff; }
+    .stats { display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:12px; margin:26px 0 0; }
+    .stats article, .panel, .evidence-card, .check-row, .repair-row, .phase-row { border:1px solid var(--line); border-radius:8px; background:#fff; }
     .stats article { padding:16px; }
-    .stats span, .muted, .evidence-card header span, .check-row span, .repair-row span { color:var(--muted); }
+    .stats span, .muted, .evidence-card header span, .check-row span, .repair-row span, .phase-row span { color:var(--muted); }
     .stats strong { display:block; color:var(--ink); font-size:28px; line-height:1.15; overflow-wrap:anywhere; }
     .section { padding:32px 0; border-bottom:1px solid var(--line); }
     .two-col { display:grid; grid-template-columns:minmax(0,.45fr) minmax(0,1fr); gap:18px; align-items:start; }
@@ -40,10 +40,12 @@
     .role-card p { margin:0 0 8px; }
     .evidence-grid { display:grid; gap:18px; }
     .evidence-card { padding:20px; min-width:0; }
+    .phase-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-bottom:24px; }
+    .phase-row { padding:18px; min-width:0; }
     .evidence-card.blocked { border-left:4px solid var(--block); }
-    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked, .repair-row.blocked { border-left:4px solid var(--warn); }
-    .evidence-card.ready-for-submission, .check-row.pass, .repair-row.ready { border-left:4px solid var(--pass); }
-    .meta, .check-row dl, .repair-row dl { display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }
+    .evidence-card.ready-for-human-review, .evidence-card.ready-to-collect, .check-row.human-required, .check-row.external-required, .check-row.missing, .check-row.blocked, .repair-row.blocked, .phase-row.blocked { border-left:4px solid var(--warn); }
+    .evidence-card.ready-for-submission, .check-row.pass, .repair-row.ready, .phase-row.ready { border-left:4px solid var(--pass); }
+    .meta, .check-row dl, .repair-row dl, .phase-row dl { display:grid; grid-template-columns:96px minmax(0,1fr); gap:8px 12px; }
     dt { color:var(--ink); }
     dd { margin:0; min-width:0; overflow-wrap:anywhere; }
     code { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:13px; overflow-wrap:anywhere; }
@@ -56,7 +58,7 @@
     .check-section { margin-top:16px; }
     .notice { background:var(--soft); border-left:4px solid var(--ink); padding:16px; border-radius:8px; }
     li { overflow-wrap:anywhere; }
-    @media (max-width:820px) { .stats, .two-col, .check-grid, .repair-grid, .role-grid { grid-template-columns:1fr; } h1 { font-size:38px; } .topbar-inner { align-items:flex-start; flex-direction:column; } }
+    @media (max-width:820px) { .stats, .two-col, .check-grid, .repair-grid, .role-grid, .phase-grid { grid-template-columns:1fr; } h1 { font-size:38px; } .topbar-inner { align-items:flex-start; flex-direction:column; } }
   </style>
 </head>
 <body>
@@ -66,7 +68,7 @@
       <span class="eyebrow">Evidence Collection</span>
       <h1>World-Class Evidence Preflight</h1>
       <p class="lede">This operator view shows which external and human evidence is still blocked, which commands prepare editable submission drafts, and why preflight never counts as accepted evidence.</p>
-      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>10/19</strong></article><article><span>Repairs</span><strong>13/13</strong></article></div>
+      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>1</strong></article><article><span>Blocked</span><strong>3</strong></article><article><span>Source</span><strong>10/19</strong></article><article><span>Repairs</span><strong>13/13</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
     </section>
     <section class="section two-col" id="handoff">
       <article class="panel">
@@ -99,7 +101,44 @@
       </article>
       <aside class="panel"><h2>Commands</h2><ul class="commands"><li><span>prepare submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions</code></li><li><span>prepare prefilled submission</span><code>python3 scripts/yao.py world-class-submission-kit . --output-dir evidence/world_class/submissions --prefill-artifacts</code></li><li><span>validate intake</span><code>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</code></li><li><span>submission review</span><code>python3 scripts/yao.py world-class-submission-review . --submissions-dir evidence/world_class/submissions</code></li><li><span>refresh ledger</span><code>python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions</code></li><li><span>guard claim</span><code>python3 scripts/yao.py world-class-claim-guard .</code></li></ul></aside>
     </section>
-    <section class="section" id="queue"><h2>Evidence Queue</h2><div class="evidence-grid">
+    <section class="section" id="queue">
+      <h2>Phase Queue</h2>
+      <p class="muted">Repair rows are grouped into execution phases so operators can clear the first blocker before moving to later source collection. Phase queue rows remain procedural and never count as accepted evidence.</p>
+      <div class="phase-grid">
+        <article class="phase-row blocked">
+          <header>
+            <span>#20 · blocked</span>
+            <h3>Unblock access</h3>
+          </header>
+          <dl>
+            <dt>Phase</dt><dd><code>unblock-access</code></dd>
+            <dt>Rows</dt><dd>4 / 4 blocked</dd>
+            <dt>Owners</dt><dd>Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator</dd>
+            <dt>Evidence</dt><dd>human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout</dd>
+            <dt>Next</dt><dd>Assign a real reviewer identity before claiming human adjudication.</dd>
+            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+            <dt>Counts</dt><dd>does not count as completion</dd>
+          </dl>
+        </article>
+
+        <article class="phase-row blocked">
+          <header>
+            <span>#40 · blocked</span>
+            <h3>Collect source</h3>
+          </header>
+          <dl>
+            <dt>Phase</dt><dd><code>collect-source</code></dd>
+            <dt>Rows</dt><dd>9 / 9 blocked</dd>
+            <dt>Owners</dt><dd>Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator</dd>
+            <dt>Evidence</dt><dd>human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout</dd>
+            <dt>Next</dt><dd>Set reviewer_attestation only after choices are completed before opening the answer key.</dd>
+            <dt>Verify</dt><dd><code>python3 scripts/yao.py output-review &amp;&amp; python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions</code></dd>
+            <dt>Counts</dt><dd>does not count as completion</dd>
+          </dl>
+        </article>
+        </div>
+      <h2>Evidence Queue</h2>
+      <div class="evidence-grid">
       <article class="evidence-card blocked">
         <header>
           <span>external · blocked</span>
@@ -959,7 +998,8 @@
           <ul><li>python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://&lt;extension-id&gt;/</li><li>Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.</li><li>python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl</li><li>python3 scripts/yao.py skill-atlas --workspace-root .</li><li>python3 scripts/yao.py skill-os2-audit . --generated-at &lt;YYYY-MM-DD&gt;</li><li>Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.</li><li>python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions</li></ul>
         </section>
       </article>
-    </div></section>
+    </div>
+    </section>
     <section class="section" id="boundary">
       <h2>Safety Boundary</h2>
       <div class="notice"><ul><li>Environment variables are displayed only as set or not-set; secret values are never printed.</li><li>Human-required and external-required states are operator work, not accepted evidence.</li><li>The world-class ledger remains the only source of truth for ready_to_claim_world_class.</li></ul></div>

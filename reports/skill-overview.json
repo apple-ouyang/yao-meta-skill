@@ -512,7 +512,7 @@
         "path": "scripts",
         "label": "Deterministic helpers or local tooling",
         "kind": "folder",
-        "file_count": 150
+        "file_count": 151
       },
       {
         "path": "evals",
@@ -527,7 +527,7 @@
         "file_count": 235
       }
     ],
-    "file_count": 453,
+    "file_count": 454,
     "folder_count": 4,
     "distribution": [
       {
@@ -552,7 +552,7 @@
       },
       {
         "label": "scripts",
-        "value": 150
+        "value": 151
       },
       {
         "label": "evals",
@@ -682,7 +682,7 @@
       "path": "scripts",
       "label": "Deterministic helpers or local tooling",
       "kind": "folder",
-      "file_count": 150
+      "file_count": 151
     },
     {
       "path": "evals",
@@ -1004,12 +1004,12 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "3f56502035ddc8b26c0eca9e3e9d2e84013457336b16f4ce3d338b6b0cd96ef6",
-      "source_contract_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4",
+      "evidence_bundle_sha256": "3ccbc3258857a4494e846fe9e517e1af1b1db24e5e531dfab1eea80411e791ed",
+      "source_contract_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
       "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
       "output_case_count": 5,
       "failure_disclosure_count": 3,
@@ -1028,15 +1028,15 @@
       "world_class_source_pass_count": 10,
       "world_class_source_blocked_count": 9,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 4,
+      "public_claim_blocker_count": 5,
       "working_tree_dirty": true,
-      "changed_file_count": 2,
-      "source_tree_dirty": false,
-      "source_changed_file_count": 0,
+      "changed_file_count": 68,
+      "source_tree_dirty": true,
+      "source_changed_file_count": 8,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 2
+      "generated_changed_file_count": 60
     },
-    "commit": "7512dc3309bfa95d4fc7e1188d1d4a62bd7c460b",
+    "commit": "ca23db4296e0216acca9ede65f9b00c3380c1180",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1120,9 +1120,9 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 242,
-    "script_count": 150,
-    "internal_module_count": 64,
+    "scanned_files": 243,
+    "script_count": 151,
+    "internal_module_count": 65,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -1140,8 +1140,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 242,
-    "package_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4"
+    "package_hash_file_count": 243,
+    "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
   },
   "skill_atlas": {
     "skill_count": 12,
@@ -1179,7 +1179,7 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4",
+        "package_sha256": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2"
       },
       "compatibility": {
@@ -1239,7 +1239,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 689,
+      "archive_entry_count": 690,
       "archive_extracted": true,
       "entrypoint_loaded": true,
       "manifest_loaded": true,
@@ -1311,7 +1311,7 @@
         {
           "field": "package_sha256",
           "from": "0000000000000000000000000000000000000000000000000000000000000000",
-          "to": "7fa19df8aebad9a73567ce9519f2d391d3c8f8b9b5a248ee9bc75d5066e219e4"
+          "to": "453ca3f4c54651bc0edc917049ea0fa28064edca66083769bf11b13f01acb4fc"
         }
       ]
     },

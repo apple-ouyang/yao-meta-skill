@@ -12,8 +12,12 @@ Generated at: `2026-06-17`
 - collection blocked: `3`
 - source checks: `10` pass / `19` total
 - repair rows: `13` blocked / `13` total
+- phase queue: `2` blocked / `2` phases
+- phase queue rows: `13`
 - next repair action: `human-adjudication-precheck-human-reviewer`
 - next repair owner: `human reviewer`
+- next phase: `unblock-access`
+- next phase action: `human-adjudication-precheck-human-reviewer`
 
 This preflight report checks whether an operator can start collecting the remaining external or human evidence. It never accepts evidence, prints secret values, or changes the world-class ledger.
 
@@ -39,6 +43,15 @@ Generate the submission kit after the real provider, human, native-permission, o
 | `supporting-evidence` | `false` | `31 / 31` | Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs. |
 
 `submission-ref` rows are the only checklist rows expected in `artifact_refs`; `supporting-evidence` rows stay available for audit context and reviewer traceability.
+
+## Phase Queue
+
+Phase queue rows group the same repair checklist into operator execution phases. They are procedural guidance only and do not count as completion evidence.
+
+| Priority | Phase | Status | Rows | Owners | Evidence | Verify | Next action |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| `20` | `unblock-access` | `blocked` | 4 / 4 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Assign a real reviewer identity before claiming human adjudication. |
+| `40` | `collect-source` | `blocked` | 9 / 9 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py output-review && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions` | Set reviewer_attestation only after choices are completed before opening the answer key. |
 
 ## Evidence Items
 
