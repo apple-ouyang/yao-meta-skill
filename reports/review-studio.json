@@ -2389,7 +2389,7 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "2c4ae0e9054c4680f9239be6ec01010ee3f4e72d858c20823a45f6abdd969403",
+          "evidence_bundle_sha256": "9080619d1499c827ab337b9172cc889106cf64f8c5a8baa86badcc8fc42ecf1a",
           "source_contract_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
           "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
           "output_case_count": 5,
@@ -2410,14 +2410,14 @@
           "world_class_source_blocked_count": 10,
           "public_claim_ready": false,
           "public_claim_blocker_count": 4,
-          "working_tree_dirty": true,
-          "changed_file_count": 18,
+          "working_tree_dirty": false,
+          "changed_file_count": 0,
           "source_tree_dirty": false,
           "source_changed_file_count": 0,
-          "generated_tree_dirty": true,
-          "generated_changed_file_count": 18
+          "generated_tree_dirty": false,
+          "generated_changed_file_count": 0
         },
-        "commit": "28c48ec248807020a68b50e012d4419edafbb418",
+        "commit": "136654cda911836efd177294a17efc4e5bf08ae9",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -6219,44 +6219,18 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "28c48ec248807020a68b50e012d4419edafbb418",
+      "commit": "136654cda911836efd177294a17efc4e5bf08ae9",
       "git_status": {
         "available": true,
-        "dirty": true,
-        "changed_file_count": 18,
-        "generated_dirty": true,
-        "generated_changed_file_count": 18,
+        "dirty": false,
+        "changed_file_count": 0,
+        "generated_dirty": false,
+        "generated_changed_file_count": 0,
         "source_dirty": false,
         "source_changed_file_count": 0,
-        "sample": [
-          " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/context_budget.json",
-          " M reports/context_budget_summary.json",
-          " M reports/output_execution_runs.json",
-          " M reports/output_execution_runs.md",
-          " M reports/world_class_evidence_intake.json",
-          " M reports/world_class_evidence_ledger.json",
-          " M reports/world_class_evidence_ledger.md",
-          " M reports/world_class_evidence_plan.json",
-          " M reports/world_class_evidence_plan.md",
-          " M reports/world_class_evidence_preflight.json"
-        ],
+        "sample": [],
         "source_sample": [],
-        "generated_sample": [
-          " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/context_budget.json",
-          " M reports/context_budget_summary.json",
-          " M reports/output_execution_runs.json",
-          " M reports/output_execution_runs.md",
-          " M reports/world_class_evidence_intake.json",
-          " M reports/world_class_evidence_ledger.json",
-          " M reports/world_class_evidence_ledger.md",
-          " M reports/world_class_evidence_plan.json",
-          " M reports/world_class_evidence_plan.md",
-          " M reports/world_class_evidence_preflight.json"
-        ],
+        "generated_sample": [],
         "generated_dirty_prefixes": [
           "dist/",
           "registry/index.json",
@@ -6273,7 +6247,7 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "2c4ae0e9054c4680f9239be6ec01010ee3f4e72d858c20823a45f6abdd969403",
+        "evidence_bundle_sha256": "9080619d1499c827ab337b9172cc889106cf64f8c5a8baa86badcc8fc42ecf1a",
         "source_contract_sha256": "5533575c144fb56486ab7320bfbd9f6655a6360cc1c2fbab837c40a7bc57ca6d",
         "archive_sha256": "7db44f059844b71930ea8194a72ba1a316116ca970620de5550d60616e8f23c2",
         "output_case_count": 5,
@@ -6294,12 +6268,12 @@
         "world_class_source_blocked_count": 10,
         "public_claim_ready": false,
         "public_claim_blocker_count": 4,
-        "working_tree_dirty": true,
-        "changed_file_count": 18,
+        "working_tree_dirty": false,
+        "changed_file_count": 0,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
-        "generated_tree_dirty": true,
-        "generated_changed_file_count": 18
+        "generated_tree_dirty": false,
+        "generated_changed_file_count": 0
       },
       "public_claim": {
         "ready": false,
@@ -6314,11 +6288,11 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "28c48ec248807020a68b50e012d4419edafbb418",
+        "commit": "136654cda911836efd177294a17efc4e5bf08ae9",
         "status_scope": "generation-time status before this report is written",
         "source_changed_file_count": 0,
-        "generated_changed_file_count": 18,
-        "reason": "only generated evidence artifacts were dirty at generation time"
+        "generated_changed_file_count": 0,
+        "reason": "clean source tree at generation-time HEAD"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -6326,7 +6300,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "2c4ae0e9054c4680f9239be6ec01010ee3f4e72d858c20823a45f6abdd969403"
+        "sha256": "9080619d1499c827ab337b9172cc889106cf64f8c5a8baa86badcc8fc42ecf1a"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6497,8 +6471,8 @@
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 97462,
-          "sha256": "74c0cb843c38aa63434a1a9109e7bccccc60e675b8025183dd8a1b66a9def7b4"
+          "bytes": 100952,
+          "sha256": "7bbbf51cfbaffbe606566c1eebfd8b3927e75b33efeea5132e1bd03382c897f9"
         },
         {
           "label": "world_class_submission_review",

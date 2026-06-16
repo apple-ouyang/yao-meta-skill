@@ -222,7 +222,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 28
+        "changed_file_count": 6
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -263,8 +263,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "28c48ec248807020a68b50e012d4419edafbb418",
-      "actual": "28c48ec248807020a68b50e012d4419edafbb418",
+      "expected": "136654cda911836efd177294a17efc4e5bf08ae9",
+      "actual": "136654cda911836efd177294a17efc4e5bf08ae9",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -409,8 +409,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "28c48ec248807020a68b50e012d4419edafbb418",
-      "actual": "28c48ec248807020a68b50e012d4419edafbb418",
+      "expected": "136654cda911836efd177294a17efc4e5bf08ae9",
+      "actual": "136654cda911836efd177294a17efc4e5bf08ae9",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"

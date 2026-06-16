@@ -1,11 +1,11 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-06-17`
-Commit: `28c48ec248807020a68b50e012d4419edafbb418`
-Working tree dirty at generation: `true`
+Commit: `136654cda911836efd177294a17efc4e5bf08ae9`
+Working tree dirty at generation: `false`
 Source tree dirty at generation: `false`
-Generated evidence dirty at generation: `true`
-Evidence bundle SHA256: `2c4ae0e9054c4680f9239be6ec01010ee3f4e72d858c20823a45f6abdd969403`
+Generated evidence dirty at generation: `false`
+Evidence bundle SHA256: `9080619d1499c827ab337b9172cc889106cf64f8c5a8baa86badcc8fc42ecf1a`
 
 ## Summary
 
@@ -25,9 +25,9 @@ Evidence bundle SHA256: `2c4ae0e9054c4680f9239be6ec01010ee3f4e72d858c20823a45f6a
 - world-class source checks: `9` pass / `19` total; `10` blocked
 - public claim ready: `false`
 - public claim blockers: `4`
-- changed files at generation: `18`
+- changed files at generation: `0`
 - source changed files at generation: `0`
-- generated changed files at generation: `18`
+- generated changed files at generation: `0`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -47,14 +47,14 @@ This report proves local benchmark reproducibility only. It keeps external provi
 ## Release Lock
 
 - ready: `true`
-- reason: only generated evidence artifacts were dirty at generation time
+- reason: clean source tree at generation-time HEAD
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
 
 - algorithm: `sha256(path,label,exists,artifact_sha256)`
 - artifacts: `25` / `25`
-- sha256: `2c4ae0e9054c4680f9239be6ec01010ee3f4e72d858c20823a45f6abdd969403`
+- sha256: `9080619d1499c827ab337b9172cc889106cf64f8c5a8baa86badcc8fc42ecf1a`
 
 ## Methodology Sections
 
@@ -90,7 +90,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 | world_class_evidence_plan | `reports/world_class_evidence_plan.json` | present | `2beb888d7992` |
 | world_class_evidence_ledger | `reports/world_class_evidence_ledger.json` | present | `22c85613d7be` |
 | world_class_evidence_intake | `reports/world_class_evidence_intake.json` | present | `d3f44570e605` |
-| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `74c0cb843c38` |
+| world_class_evidence_preflight | `reports/world_class_evidence_preflight.json` | present | `7bbbf51cfbaf` |
 | world_class_submission_review | `reports/world_class_submission_review.json` | present | `96624a5b7f79` |
 | world_class_operator_runbook | `reports/world_class_operator_runbook.json` | present | `a7b7809d3b42` |
 | world_class_operator_runbook_markdown | `reports/world_class_operator_runbook.md` | present | `d72777b421b5` |
