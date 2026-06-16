@@ -1,9 +1,9 @@
 # Security Trust Report
 
 - OK: `True`
-- Scanned files: `230`
-- Scripts: `139`
-- Internal script modules: `53`
+- Scanned files: `231`
+- Scripts: `140`
+- Internal script modules: `54`
 - Secret findings: `0`
 - Network-capable scripts: `3`
 - Network policy covered scripts: `3`
@@ -15,8 +15,8 @@
 - CLI help smoke failures: `0`
 - Interactive scripts: `0`
 - Package hash scope: `source-contract-without-generated-reports`
-- Package hash files: `230`
-- Package SHA256: `e591effaea982d2b595058bbd03ada2e8fd57a0067f65aeb3fb38b5015bb5a16`
+- Package hash files: `231`
+- Package SHA256: `fcfe5f3c722285daf14b6f83118ad71bdca21694d86d870d234d9f5df2f4e627`
 
 ## Failures
 
@@ -96,6 +96,7 @@
 | scripts/lint_skill.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/local_output_eval_runner.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/optimize_description.py | cli | False | True | True | False | False | False | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
+| scripts/output_review_privacy.py | internal-module | True | False | False | False | False | False | False | Imported by output-review import and world-class human evidence validators to reject raw content, credential, secret, token, and answer-key fields recursively. |
 | scripts/prepare_output_review_kit.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |
 | scripts/prepare_world_class_submission_kit.py | cli | True | True | True | False | False | True | False | Prepares editable world-class evidence intake packets without counting drafts as accepted evidence. |
 | scripts/probe_runtime_permissions.py | cli | False | True | True | False | False | True | False | Default CLI classification; add SCRIPT_INTERFACE for internal modules. |

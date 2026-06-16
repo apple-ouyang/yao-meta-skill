@@ -17,54 +17,12 @@ from adjudicate_output_review import (
     normalize_variant,
     pair_index,
 )
+from output_review_privacy import forbidden_decision_field_paths
 
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Imports human blind A/B reviewer decisions into the canonical output-review decision file."
-
-RAW_CONTENT_FIELDS = {
-    "api_key",
-    "prompt",
-    "prompts",
-    "input",
-    "inputs",
-    "output",
-    "outputs",
-    "transcript",
-    "transcripts",
-    "message",
-    "messages",
-    "user_message",
-    "user_messages",
-    "assistant_message",
-    "assistant_messages",
-    "model_output",
-    "baseline_output",
-    "with_skill_output",
-    "raw_content",
-    "raw_prompt",
-    "raw_provider_prompt",
-    "raw_user_content",
-    "raw_output",
-    "credential",
-    "credentials",
-    "secret",
-    "secrets",
-    "token",
-}
-
-ANSWER_KEY_FIELDS = {
-    "expected",
-    "expected_winner",
-    "expected_winner_role",
-    "expected_winner_variant",
-    "answer_key",
-    "label",
-    "variant_label",
-    "baseline_label",
-    "with_skill_label",
-}
 
 
 def display_path(path: Path) -> str:
@@ -153,22 +111,6 @@ def parse_confidence(value: Any, case_id: str) -> tuple[float | None, str | None
     return round(parsed, 3), None
 
 
-def forbidden_field_paths(value: Any, prefix: str) -> list[str]:
-    found: list[str] = []
-    if isinstance(value, dict):
-        for key, child in value.items():
-            key_text = str(key).strip()
-            child_path = f"{prefix}.{key_text}"
-            normalized_key = key_text.casefold()
-            if normalized_key in RAW_CONTENT_FIELDS or normalized_key in ANSWER_KEY_FIELDS:
-                found.append(child_path)
-            found.extend(forbidden_field_paths(child, child_path))
-    elif isinstance(value, list):
-        for index, child in enumerate(value):
-            found.extend(forbidden_field_paths(child, f"{prefix}[{index}]"))
-    return found
-
-
 def normalize_decisions(
     source_items: list[dict[str, Any]],
     case_ids: set[str],
@@ -180,7 +122,7 @@ def normalize_decisions(
         if not isinstance(item, dict):
             failures.append(f"decision #{index} must be an object")
             continue
-        blocked_fields = forbidden_field_paths(item, f"decision #{index}")
+        blocked_fields = forbidden_decision_field_paths(item, f"decision #{index}")
         if blocked_fields:
             failures.append(f"decision #{index} contains forbidden raw or answer-key fields: {', '.join(blocked_fields)}")
         case_id = str(item.get("case_id", "")).strip()

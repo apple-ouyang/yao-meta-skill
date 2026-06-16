@@ -1,14 +1,14 @@
 # Architecture Maintainability
 
-Generated at: `2026-06-16`
+Generated at: `2026-06-17`
 
 ## Summary
 
 - decision: `pass`
-- python files: `214`
-- scripts: `139`
+- python files: `215`
+- scripts: `140`
 - tests: `75`
-- internal modules: `55`
+- internal modules: `56`
 - CLI scripts: `86`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`

@@ -2,9 +2,9 @@
   "ok": true,
   "skill_dir": ".",
   "summary": {
-    "scanned_files": 230,
-    "script_count": 139,
-    "internal_module_count": 53,
+    "scanned_files": 231,
+    "script_count": 140,
+    "internal_module_count": 54,
     "secret_findings": 0,
     "dependency_files": [
       "requirements-ci.txt"
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 230,
-    "package_sha256": "e591effaea982d2b595058bbd03ada2e8fd57a0067f65aeb3fb38b5015bb5a16"
+    "package_hash_file_count": 231,
+    "package_sha256": "fcfe5f3c722285daf14b6f83118ad71bdca21694d86d870d234d9f5df2f4e627"
   },
   "failures": [],
   "warnings": [],
@@ -507,6 +507,20 @@
       "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
       "has_argparse": true,
       "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/output_review_privacy.py",
+      "interface": "internal-module",
+      "interface_declared": true,
+      "interface_reason": "Imported by output-review import and world-class human evidence validators to reject raw content, credential, secret, token, and answer-key fields recursively.",
+      "has_argparse": false,
+      "has_main_guard": false,
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": false,
@@ -2027,7 +2041,7 @@
     "checked_count": 86,
     "passed_count": 86,
     "failed_count": 0,
-    "skipped_count": 53,
+    "skipped_count": 54,
     "failed_scripts": [],
     "results": [
       {
@@ -2934,6 +2948,10 @@
       },
       {
         "path": "scripts/html_rendering.py",
+        "reason": "internal module"
+      },
+      {
+        "path": "scripts/output_review_privacy.py",
         "reason": "internal module"
       },
       {

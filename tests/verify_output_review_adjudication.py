@@ -7,6 +7,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
+
+from output_review_privacy import BLOCKED_DECISION_FIELDS  # noqa: E402
+
 OUTPUT_EVAL = ROOT / "scripts" / "run_output_eval.py"
 ADJUDICATOR = ROOT / "scripts" / "adjudicate_output_review.py"
 IMPORTER = ROOT / "scripts" / "import_output_review_decisions.py"
@@ -24,6 +28,8 @@ def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]
 
 
 def main() -> None:
+    assert {"api_key", "raw_provider_prompt", "expected_winner_role"} <= BLOCKED_DECISION_FIELDS
+
     tmp_root = ROOT / "tests" / "tmp_output_review_adjudication"
     if tmp_root.exists():
         shutil.rmtree(tmp_root)
