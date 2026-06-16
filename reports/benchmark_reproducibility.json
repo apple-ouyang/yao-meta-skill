@@ -3,7 +3,7 @@
   "ok": true,
   "generated_at": "2026-06-16",
   "skill_dir": ".",
-  "commit": "bc2e300fe93d474a5952e423e97151613960a25d",
+  "commit": "c86602332da73a2986d44036698f433d60b23b0b",
   "git_status": {
     "available": true,
     "dirty": false,
@@ -17,7 +17,7 @@
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
-    "evidence_bundle_sha256": "e6bd4e91ae854686187353a438c569f380201ce20a686c232397070d777e5a3a",
+    "evidence_bundle_sha256": "a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c",
     "source_contract_sha256": "a163b6e288c5342e683875b47fdfe62989d3f09241c0c8fd86ae615c6d5da7ad",
     "archive_sha256": "5802e5f522558cf77666ae59390a28845cf3affd22fa1267b6629891ddeba76b",
     "output_case_count": 5,
@@ -54,7 +54,7 @@
   },
   "release_lock": {
     "ready": true,
-    "commit": "bc2e300fe93d474a5952e423e97151613960a25d",
+    "commit": "c86602332da73a2986d44036698f433d60b23b0b",
     "status_scope": "generation-time status before this report is written",
     "reason": "clean generation-time HEAD"
   },
@@ -64,7 +64,7 @@
     "existing_count": 25,
     "missing_count": 0,
     "missing_paths": [],
-    "sha256": "e6bd4e91ae854686187353a438c569f380201ce20a686c232397070d777e5a3a"
+    "sha256": "a7dabf174eba9fb3643089604948677be94b56c0894ccd70cc9f031de2c5c13c"
   },
   "methodology": {
     "path": "reports/benchmark_methodology.md",
@@ -179,8 +179,8 @@
       "label": "python_compatibility",
       "path": "reports/python_compatibility.json",
       "exists": true,
-      "bytes": 26621,
-      "sha256": "2858bfaffd071d838d01d615fb03009c1772bebadeb19f8a1747cb2d21277e80"
+      "bytes": 26737,
+      "sha256": "e81866a26985f05ba5b783a308be2f994871824f0c9abb60a8b04df7ea445d04"
     },
     {
       "label": "registry_audit",
