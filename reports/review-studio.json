@@ -108,7 +108,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock false; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock false",
+      "detail": "1 metadata events; adoption 0; missed 0; bad-output 0; risk low; daily proposals 5; daily decision proposal-review; daily release lock true; weekly queue 5 unique; weekly ready 1; weekly top 88; weekly release lock true",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md"
     },
@@ -1968,11 +1968,11 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": false,
+          "release_lock_ready": true,
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "c2aa2d58eed57d99a6bc182722fb4a982bf574052528f5b6af9b4368c6bc335d",
+          "evidence_bundle_sha256": "1c9687e0afca9424f76b235c655b215bc46869e15f78bfcd5926811e3f179f33",
           "source_contract_sha256": "393f0f14497572e7c2c91322745ed45c1961aa2bd12882428acc422766be739b",
           "archive_sha256": "44623ee91ba4bd57a9fe51a5fd6b35739a2e9d1e2fac0b8b4fc5c135db5b434d",
           "output_case_count": 5,
@@ -1992,11 +1992,11 @@
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 7,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 5,
-          "working_tree_dirty": true,
-          "changed_file_count": 41
+          "public_claim_blocker_count": 4,
+          "working_tree_dirty": false,
+          "changed_file_count": 0
         },
-        "commit": "59ec05a7753cc363ed304d3b7013da4c00881a2f",
+        "commit": "e4473fc852c7f22d318d9c9435cc869b8396242d",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flag are generation-time context; the evidence bundle hash is the durable artifact anchor inside a committed report.",
@@ -5659,34 +5659,21 @@
       "ok": true,
       "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "commit": "59ec05a7753cc363ed304d3b7013da4c00881a2f",
+      "commit": "e4473fc852c7f22d318d9c9435cc869b8396242d",
       "git_status": {
         "available": true,
-        "dirty": true,
-        "changed_file_count": 41,
-        "sample": [
-          " M registry/index.json",
-          " M registry/packages/yao-meta-skill.json",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/context_budget.json",
-          " M reports/context_budget.md",
-          " M reports/context_budget_summary.json",
-          " M reports/evidence_consistency.json",
-          " M reports/evidence_consistency.md",
-          " M reports/output_execution_runs.json"
-        ],
+        "dirty": false,
+        "changed_file_count": 0,
+        "sample": [],
         "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "c2aa2d58eed57d99a6bc182722fb4a982bf574052528f5b6af9b4368c6bc335d",
+        "evidence_bundle_sha256": "1c9687e0afca9424f76b235c655b215bc46869e15f78bfcd5926811e3f179f33",
         "source_contract_sha256": "393f0f14497572e7c2c91322745ed45c1961aa2bd12882428acc422766be739b",
         "archive_sha256": "44623ee91ba4bd57a9fe51a5fd6b35739a2e9d1e2fac0b8b4fc5c135db5b434d",
         "output_case_count": 5,
@@ -5706,15 +5693,14 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 7,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 5,
-        "working_tree_dirty": true,
-        "changed_file_count": 41
+        "public_claim_blocker_count": 4,
+        "working_tree_dirty": false,
+        "changed_file_count": 0
       },
       "public_claim": {
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
-          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
@@ -5723,10 +5709,10 @@
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": false,
-        "commit": "59ec05a7753cc363ed304d3b7013da4c00881a2f",
+        "ready": true,
+        "commit": "e4473fc852c7f22d318d9c9435cc869b8396242d",
         "status_scope": "generation-time status before this report is written",
-        "reason": "working tree was dirty at generation time"
+        "reason": "clean generation-time HEAD"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5734,7 +5720,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "c2aa2d58eed57d99a6bc182722fb4a982bf574052528f5b6af9b4368c6bc335d"
+        "sha256": "1c9687e0afca9424f76b235c655b215bc46869e15f78bfcd5926811e3f179f33"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -5905,8 +5891,8 @@
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 41202,
-          "sha256": "97924dd4be88bedd734bb0530765ce5ea6e10a92d2a17807c14b2aae5b66f960"
+          "bytes": 41208,
+          "sha256": "725d10a6f951ab1e64f4e6a1cfa907404b51f598a753b5a0351e1381fef7cd9e"
         },
         {
           "label": "world_class_submission_review",
@@ -6087,22 +6073,22 @@
         "item_count": 21,
         "module_count": 8,
         "recommended_pr_count": 13,
-        "pass_count": 20,
-        "warn_count": 1,
+        "pass_count": 21,
+        "warn_count": 0,
         "missing_count": 0,
         "extension_track_count": 4,
         "extension_partial_count": 0,
         "extension_planned_count": 0,
         "extension_covered_count": 4,
         "adaptive_extension_ready": true,
-        "local_blueprint_ready": false,
+        "local_blueprint_ready": true,
         "public_world_class_ready": false,
         "world_class_evidence_pending_count": 4,
-        "decision": "continue-implementation"
+        "decision": "local-blueprint-covered-evidence-pending"
       },
       "status_counts": {
-        "pass": 20,
-        "warn": 1,
+        "pass": 21,
+        "warn": 0,
         "missing": 0
       },
       "extension_status_counts": {
@@ -6691,7 +6677,7 @@
           "key": "evidence-consistency",
           "category": "recommended-pr",
           "label": "Evidence Consistency",
-          "status": "warn",
+          "status": "pass",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
           "current": "36 consistency checks",
           "command": "make ci-test",
@@ -19038,8 +19024,8 @@
       "local_blueprint_ready": false,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": false,
-      "evidence_consistency_ok": false,
+      "release_lock_ready": true,
+      "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
       "failure_count": 0,
@@ -19055,8 +19041,8 @@
         "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
         "failure_count": 0
@@ -19504,8 +19490,8 @@
         "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true
       },
       "actions": [
         {
@@ -19517,11 +19503,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence-consistency before using this report for release decisions."
         }
       ],
       "failures": [],
@@ -19558,8 +19539,8 @@
       "top_score": 88,
       "skill_count": 12,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": false,
-      "evidence_consistency_ok": false,
+      "release_lock_ready": true,
+      "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "writes_source_files": false,
@@ -19578,8 +19559,8 @@
         "top_score": 88,
         "skill_count": 12,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "writes_source_files": false,
@@ -19831,8 +19812,8 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
       },
@@ -19846,11 +19827,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence consistency before using this curator report for release decisions."
         }
       ],
       "failures": [],
