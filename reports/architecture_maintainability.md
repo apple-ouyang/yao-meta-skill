@@ -5,17 +5,17 @@ Generated at: `2026-06-16`
 ## Summary
 
 - decision: `pass`
-- python files: `203`
+- python files: `204`
 - scripts: `131`
-- tests: `72`
+- tests: `73`
 - internal modules: `48`
 - CLI scripts: `85`
 - Yao CLI command handlers: `68`
 - entrypoint command handlers: `18`
 - command modules: `6`
-- largest file lines: `852`
+- largest file lines: `714`
 - watch threshold lines: `720`
-- watchlist: `1`
+- watchlist: `0`
 - hotspots: `0`
 - blockers: `0`
 
@@ -27,15 +27,12 @@ No file-size hotspots found.
 
 ## Watchlist
 
-| File | Lines | Kind | Recommended next split |
-| --- | ---: | --- | --- |
-| `tests/verify_review_studio.py` | `852` | `test` | Break broad integration assertions into focused verifier helpers when the next behavior change lands. |
+No near-threshold files found.
 
 ## Largest Files
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `tests/verify_review_studio.py` | `852` | `test` | `pass` |
 | `scripts/trust_check.py` | `714` | `internal-module` | `pass` |
 | `scripts/review_studio_gates.py` | `707` | `internal-module` | `pass` |
 | `scripts/apply_adaptation.py` | `706` | `cli-script` | `pass` |
@@ -47,6 +44,7 @@ No file-size hotspots found.
 | `scripts/render_skill_os2_coverage.py` | `649` | `cli-script` | `pass` |
 | `scripts/render_review_studio.py` | `647` | `cli-script` | `pass` |
 | `scripts/render_reference_synthesis.py` | `644` | `cli-script` | `pass` |
+| `scripts/cross_packager.py` | `638` | `cli-script` | `pass` |
 
 ## Release Rule
 

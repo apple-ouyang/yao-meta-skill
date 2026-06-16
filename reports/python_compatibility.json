@@ -5,7 +5,7 @@
   "root": ".",
   "summary": {
     "target_python": "3.11",
-    "file_count": 206,
+    "file_count": 207,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -822,6 +822,12 @@
     },
     {
       "path": "scripts/yao_cli_telemetry.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "tests/review_studio_helpers.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

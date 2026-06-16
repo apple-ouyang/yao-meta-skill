@@ -4,9 +4,9 @@
   "generated_at": "2026-06-16",
   "skill_dir": ".",
   "summary": {
-    "python_file_count": 203,
+    "python_file_count": 204,
     "script_file_count": 131,
-    "test_file_count": 72,
+    "test_file_count": 73,
     "internal_module_count": 48,
     "cli_script_count": 85,
     "command_handler_count": 68,
@@ -15,20 +15,13 @@
     "warn_line_threshold": 900,
     "watch_line_threshold": 720,
     "block_line_threshold": 1500,
-    "largest_file_lines": 852,
-    "watchlist_count": 1,
+    "largest_file_lines": 714,
+    "watchlist_count": 0,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
   },
   "largest_files": [
-    {
-      "path": "tests/verify_review_studio.py",
-      "lines": 852,
-      "kind": "test",
-      "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-    },
     {
       "path": "scripts/trust_check.py",
       "lines": 714,
@@ -105,17 +98,16 @@
       "kind": "cli-script",
       "severity": "pass",
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    }
-  ],
-  "watchlist": [
+    },
     {
-      "path": "tests/verify_review_studio.py",
-      "lines": 852,
-      "kind": "test",
+      "path": "scripts/cross_packager.py",
+      "lines": 638,
+      "kind": "cli-script",
       "severity": "pass",
-      "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     }
   ],
+  "watchlist": [],
   "hotspots": [],
   "actions": [],
   "artifacts": {
