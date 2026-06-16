@@ -261,6 +261,7 @@ def main() -> None:
     assert all(item["exists"] for item in world_class_action["source_refs"]), world_class_action
     assert all("matched_pattern" in item for item in world_class_action["source_refs"]), world_class_action
     assert all("excerpt" in item for item in world_class_action["source_refs"]), world_class_action
+    assert all(isinstance(item["line"], int) and item["line"] >= 1 for item in world_class_action["source_refs"]), world_class_action
     assert any(
         item["path"] == "reports/world_class_evidence_ledger.md"
         and item["matched_pattern"] == "# World-Class Evidence Ledger"
@@ -313,11 +314,8 @@ def main() -> None:
     assert full_payload["data"]["world_class_submission_review"]["summary"]["awaiting_submission_count"] == 4, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["source_check_count"] >= 13, full_payload["data"]["world_class_submission_review"]
     assert full_payload["data"]["world_class_submission_review"]["summary"]["source_blocked_count"] >= 6, full_payload["data"]["world_class_submission_review"]
-    human_review_item = next(
-        item
-        for item in full_payload["data"]["world_class_submission_review"]["items"]
-        if item["evidence_key"] == "human-adjudication"
-    )
+    human_review_items = full_payload["data"]["world_class_submission_review"]["items"]
+    human_review_item = next(item for item in human_review_items if item["evidence_key"] == "human-adjudication")
     human_review_source = {item["field"]: item for item in human_review_item["source_checklist"]}
     assert human_review_item["observed_state"]["raw_content_allowed"] is False, human_review_item
     assert human_review_item["observed_state"]["raw_content_path_count"] == 0, human_review_item
@@ -405,12 +403,8 @@ def main() -> None:
     assert all(item["exists"] for item in synthetic_actions[0]["source_refs"]), synthetic_actions
     assert all(isinstance(item["line"], int) and item["line"] >= 1 for item in synthetic_actions[0]["source_refs"]), synthetic_actions
     assert all("excerpt" in item for item in synthetic_actions[0]["source_refs"]), synthetic_actions
-    assert any(
-        item["path"] == "reports/output_review_kit.html"
-        and item["matched_pattern"] == "Output Review Kit"
-        and "Output Review Kit" in item["excerpt"]
-        for item in synthetic_actions[0]["source_refs"]
-    ), synthetic_actions
+    assert any(item["path"] == "reports/output_review_kit.html" and item["matched_pattern"] == "Output Review Kit" and "Output Review Kit" in item["excerpt"] for item in synthetic_actions[0]["source_refs"]), synthetic_actions
+    assert any(item["path"] == "evals/output/cases.jsonl" and item["matched_pattern"] == '"id"' and '"id"' in item["excerpt"] for item in synthetic_actions[0]["source_refs"]), synthetic_actions
     synthetic_json = json.dumps(synthetic_actions, ensure_ascii=False)
     assert str(ROOT) not in synthetic_json, synthetic_json
     synthetic_html = review_studio.render_review_actions(synthetic_actions)

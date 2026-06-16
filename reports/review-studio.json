@@ -232,7 +232,7 @@
           "label": "output eval cases",
           "kind": "eval",
           "line": 1,
-          "matched_pattern": "",
+          "matched_pattern": "\"id\"",
           "excerpt": "{\"id\":\"skill-package-contract\",\"prompt\":\"Turn this repeated workflow into a reusable team skill package.\",\"baseline_output\":\"I can write a prompt for that workflow and include a s…",
           "exists": true,
           "link": "../evals/output/cases.jsonl"
@@ -4769,7 +4769,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.8,
+          "duration_ms": 26.9,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4797,7 +4797,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.3,
+          "duration_ms": 25.49,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4820,7 +4820,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 27.02,
+          "duration_ms": 25.48,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4848,7 +4848,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 26.2,
+          "duration_ms": 28.61,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4871,7 +4871,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.27,
+          "duration_ms": 28.59,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4899,7 +4899,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 31.59,
+          "duration_ms": 26.16,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4922,7 +4922,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 30.08,
+          "duration_ms": 26.0,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4949,7 +4949,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.0,
+          "duration_ms": 26.3,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -4972,7 +4972,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.31,
+          "duration_ms": 25.82,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -5001,7 +5001,7 @@
           "execution_mode": "command",
           "model_executed": false,
           "command_executed": true,
-          "duration_ms": 28.12,
+          "duration_ms": 25.81,
           "provider": "local-output-eval-runner",
           "model": "",
           "usage": {
@@ -6973,7 +6973,7 @@
     "compiled_targets": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "summary": {
         "target_count": 5,
@@ -12344,7 +12344,7 @@
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
         "package_hash_file_count": 239,
-        "package_sha256": "83ea6e60852fae9271eb72658d8b3c0268e6adb21d80b2fd0fd9438805481ca7"
+        "package_sha256": "e9d5b26e20c81f565271a1ecd793981ee1e56826313b160aebe776d2f89ca995"
       },
       "failures": [],
       "warnings": [],
@@ -15761,7 +15761,7 @@
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "root": ".",
       "summary": {
         "target_python": "3.11",
@@ -17142,7 +17142,7 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
       "summary": {
         "python_file_count": 222,
@@ -17175,39 +17175,15 @@
         },
         {
           "path": "tests/verify_world_class_evidence_intake.py",
-          "lines": 690,
+          "lines": 628,
           "kind": "test",
           "severity": "pass",
           "early_watch": true,
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
         },
         {
-          "path": "tests/verify_output_review_adjudication.py",
-          "lines": 598,
-          "kind": "test",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-        },
-        {
-          "path": "tests/verify_review_studio.py",
-          "lines": 596,
-          "kind": "test",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
-        },
-        {
           "path": "scripts/render_benchmark_reproducibility.py",
           "lines": 595,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
-          "path": "scripts/render_skill_overview.py",
-          "lines": 588,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -17230,20 +17206,28 @@
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
-          "path": "scripts/trust_check.py",
-          "lines": 582,
+          "path": "scripts/render_skill_overview.py",
+          "lines": 584,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
-          "path": "tests/verify_world_class_evidence_ledger.py",
-          "lines": 579,
+          "path": "tests/verify_review_studio.py",
+          "lines": 584,
           "kind": "test",
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "scripts/trust_check.py",
+          "lines": 582,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         },
         {
           "path": "scripts/render_evidence_consistency.py",
@@ -17260,6 +17244,22 @@
           "severity": "pass",
           "early_watch": false,
           "recommendation": "Move data loading and large section renderers into focused review_studio_* modules."
+        },
+        {
+          "path": "tests/verify_world_class_evidence_ledger.py",
+          "lines": 567,
+          "kind": "test",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Break broad integration assertions into focused verifier helpers when the next behavior change lands."
+        },
+        {
+          "path": "scripts/render_world_class_preflight.py",
+          "lines": 562,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
         }
       ],
       "watchlist": [],
@@ -17274,7 +17274,7 @@
         },
         {
           "path": "tests/verify_world_class_evidence_intake.py",
-          "lines": 690,
+          "lines": 628,
           "kind": "test",
           "severity": "pass",
           "early_watch": true,
@@ -17296,9 +17296,9 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 797,
-        "other_text_tokens": 1094768,
+        "other_text_tokens": 1094713,
         "estimated_initial_load_tokens": 990,
-        "estimated_total_text_tokens": 1095565,
+        "estimated_total_text_tokens": 1095510,
         "deferred_resource_tokens": 498644,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
@@ -18200,7 +18200,7 @@
       },
       "catalog": {
         "workspace_root": ".",
-        "generated_at": "2026-06-13",
+        "generated_at": "2026-06-17",
         "skills": [
           {
             "name": "yao-meta-skill",
@@ -19101,7 +19101,7 @@
           "name": "incident-command-governor",
           "path": "examples/governed-incident-command/generated-skill",
           "reason": "review overdue by cadence monthly",
-          "age_days": 74,
+          "age_days": 78,
           "allowed_days": 31,
           "actionable": false,
           "scope": "example"
@@ -19269,7 +19269,7 @@
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-16T19:04:13Z",
+      "generated_at": "2026-06-16T17:53:31Z",
       "skill_dir": ".",
       "privacy_contract": {
         "storage": "local-first",
@@ -24577,11 +24577,11 @@
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
         },
-        "generated_at": "2026-06-13"
+        "generated_at": "2026-06-17"
       },
       "index": {
         "schema_version": "2.0",
-        "generated_at": "2026-06-13",
+        "generated_at": "2026-06-17",
         "package_count": 1,
         "packages": [
           {
@@ -25279,11 +25279,11 @@
     "install_simulation": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "skill_dir": ".",
-      "package_dir": "tests/tmp_review_studio/dist",
-      "install_root": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill",
-      "installed_skill_dir": "tests/tmp_review_studio/install-root/simulate-yao-meta-skill/yao-meta-skill",
+      "package_dir": "dist",
+      "install_root": "dist/install-simulation/simulate-yao-meta-skill",
+      "installed_skill_dir": "dist/install-simulation/simulate-yao-meta-skill/yao-meta-skill",
       "summary": {
         "archive_present": true,
         "archive_entry_count": 685,
@@ -25304,7 +25304,7 @@
         {
           "id": "archive-present",
           "status": "pass",
-          "detail": "Package archive exists: tests/tmp_review_studio/dist/yao-meta-skill.zip"
+          "detail": "Package archive exists: dist/yao-meta-skill.zip"
         },
         {
           "id": "archive-safe-paths",
@@ -25550,16 +25550,16 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "archive": "tests/tmp_review_studio/dist/yao-meta-skill.zip",
-        "package_manifest": "tests/tmp_review_studio/dist/manifest.json",
-        "json": "tests/tmp_review_studio/install_simulation.json",
-        "markdown": "tests/tmp_review_studio/install_simulation.md"
+        "archive": "dist/yao-meta-skill.zip",
+        "package_manifest": "dist/manifest.json",
+        "json": "reports/install_simulation.json",
+        "markdown": "reports/install_simulation.md"
       }
     },
     "upgrade_check": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-06-13",
+      "generated_at": "2026-06-17",
       "previous": {
         "name": "yao-meta-skill",
         "version": "1.0.0",
@@ -25648,8 +25648,8 @@
       "artifacts": {
         "previous_package": "registry/examples/yao-meta-skill-1.0.0.json",
         "current_package": "reports/registry_audit.json",
-        "json": "tests/tmp_review_studio/upgrade_check.json",
-        "markdown": "tests/tmp_review_studio/upgrade_check.md"
+        "json": "reports/upgrade_check.json",
+        "markdown": "reports/upgrade_check.md"
       }
     },
     "manifest": {
