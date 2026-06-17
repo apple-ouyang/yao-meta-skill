@@ -7,11 +7,7 @@ metadata:
 
 # Yao Meta Skill
 
-## 默认语言
-
-默认用简体中文提出问题、解释取舍、输出报告、总结结果，并撰写生成 skill 的正文说明；除非用户明确要求其它语言。代码标识、文件路径、YAML keys、JSON fields、命令名、包名和 API 术语保持 English。
-
-当输入材料是英文时，名称和机器契约保持原样；决策、取舍、review notes 和 next steps 默认用中文表达。
+默认用简体中文提问、解释、报告和撰写 skill 正文；除非用户另有要求。代码标识、文件路径、YAML/JSON 字段、命令、包名、API 术语和输入材料里的名称保持 English。
 
 ## Router Rules
 
