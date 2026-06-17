@@ -7,7 +7,7 @@ metadata:
 
 # Yao Meta Skill
 
-默认用简体中文沟通和撰写正文；代码标识、路径、YAML/JSON 字段、命令、包名、API 术语和原文名称保持 English。
+默认中文沟通；代码标识、路径、字段、命令、包名和原文名称保持 English。
 
 ## Router Rules
 
