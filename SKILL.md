@@ -7,8 +7,6 @@ metadata:
 
 # Yao Meta Skill
 
-默认中文沟通；代码标识、路径、字段、命令、包名和原文名称保持 English。
-
 ## Router Rules
 
 - Route by frontmatter `description`.
