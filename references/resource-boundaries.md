@@ -8,6 +8,8 @@ Keep the main skill small enough to route and execute clearly. Move detail out o
 
 Do not add structure for imagined future needs. A folder, script, eval, or governance file belongs in the package only when it reduces current ambiguity, execution burden, route risk, or maintenance risk.
 
+`SKILL.md` should remain complete enough for the model to understand the recurring job, boundary, workflow skeleton, output contract, branch selection, and safe defaults before reading optional resources. A lean entrypoint is useful only when it still works as an entrypoint.
+
 ## Context Budget Tiers
 
 Use the lightest budget that still fits the package.
@@ -27,6 +29,7 @@ If `manifest.json` sets `context_budget_tier`, that tier overrides the default b
 - part of the core execution skeleton
 - part of the output contract
 - necessary for branch selection or safe defaults
+- short enough that missing it would change normal behavior
 
 ### Put content in `references/` when it is:
 
@@ -34,6 +37,7 @@ If `manifest.json` sets `context_budget_tier`, that tier overrides the default b
 - long examples
 - policy material
 - schemas or templates humans or agents may read on demand
+- independently maintained detail that earns a separate review surface
 
 ### Put content in `scripts/` when it is:
 
@@ -57,6 +61,7 @@ If `manifest.json` sets `context_budget_tier`, that tier overrides the default b
 Avoid these:
 
 - storing long policy text directly in `SKILL.md`
+- moving the normal workflow, safety defaults, or output contract into a reference that every run must read
 - adding `references/` with no files that are actually used
 - adding `scripts/` for logic that is still best expressed in prose
 - adding `evals/` for one-off or disposable skills
@@ -77,6 +82,27 @@ Avoid these:
 
 - should earn their keep
 - should usually be named and discoverable from `SKILL.md`
+- should be conditional, long, shared, independently maintained, or reviewer-facing
+
+## Always-Read References
+
+An always-read reference is not progressive disclosure. It may still be justified for maintenance, versioning, shared contracts, or reviewer evidence, but it does not reduce context cost when followed correctly.
+
+Before keeping an always-read reference, check whether the critical rules belong back in `SKILL.md`. This is usually true when the reference contains:
+
+- the normal execution workflow
+- irreversible-action guardrails
+- branch selection rules
+- output contracts
+- required package boundaries
+
+If the reference remains separate, `SKILL.md` must:
+
+- explicitly say to read it before acting
+- summarize the non-negotiable rules
+- explain why the separate file exists
+
+If every reference in a package is always read, consider whether the skill is over-split, the entrypoint is under-specified, or the skill should be split into smaller routeable skills.
 
 ### `scripts/`
 

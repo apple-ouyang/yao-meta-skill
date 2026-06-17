@@ -34,13 +34,36 @@ def run_case(name: str, cmd: list[str], expected_substring: str) -> dict:
 
 def main() -> None:
     TMP.mkdir(parents=True, exist_ok=True)
+    missing_interface_fixture = TMP / "package_missing_interface_field"
+    invalid_yaml_fixture = TMP / "package_invalid_yaml"
+    for source, target, skill_text in [
+        (
+            ROOT / "tests" / "fixtures" / "package_missing_interface_field",
+            missing_interface_fixture,
+            "---\nname: broken-skill\ndescription: Broken skill fixture.\n---\n\n# Broken Skill\n",
+        ),
+        (
+            ROOT / "tests" / "fixtures" / "package_invalid_yaml",
+            invalid_yaml_fixture,
+            "---\nname: broken-yaml\ndescription: Broken YAML fixture.\n---\n\n# Broken YAML\n",
+        ),
+    ]:
+        if target.exists():
+            import shutil
+
+            shutil.rmtree(target)
+        import shutil
+
+        shutil.copytree(source, target)
+        (target / "SKILL.md").write_text(skill_text, encoding="utf-8")
+
     cases = [
         run_case(
             "missing_interface_field",
             [
                 sys.executable,
                 str(SCRIPT),
-                str(ROOT / "tests" / "fixtures" / "package_missing_interface_field"),
+                str(missing_interface_fixture),
                 "--platform",
                 "openai",
                 "--expectations",
@@ -55,7 +78,7 @@ def main() -> None:
             [
                 sys.executable,
                 str(SCRIPT),
-                str(ROOT / "tests" / "fixtures" / "package_invalid_yaml"),
+                str(invalid_yaml_fixture),
                 "--platform",
                 "openai",
                 "--expectations",

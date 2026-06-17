@@ -13,6 +13,10 @@ metadata:
 - Keep `SKILL.md` lean; put guidance in `references/`, logic in `scripts/`, and evidence in `reports/`.
 - Use the lightest reliable process.
 
+## Entrypoint Contract
+
+`SKILL.md` is the cockpit, not the knowledge base. Keep job, boundary, workflow, output contract, branch selection, and safe defaults here. Move detail out only when the model can still choose the right path without it. If a reference is always read, compress critical rules back here or justify the required read in [Resource Boundaries](references/resource-boundaries.md).
+
 ## Modes
 
 - `Scaffold`: exploratory/personal. `Production`: team reuse. `Library`: shared infrastructure. `Governed`: high-trust, policy-sensitive, or release-critical.

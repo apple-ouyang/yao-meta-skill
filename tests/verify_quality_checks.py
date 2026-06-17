@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -200,14 +201,25 @@ def verify_volatile_report_outputs_ignored() -> dict:
     }
 
 
+def staged_skill(source: Path, target: Path, skill_name: str, description: str) -> Path:
+    if target.exists():
+        shutil.rmtree(target)
+    shutil.copytree(source, target)
+    (target / "SKILL.md").write_text(
+        f"---\nname: {skill_name}\ndescription: {description}\n---\n\n# {skill_name}\n\nDo not use for unrelated one-off requests.\n",
+        encoding="utf-8",
+    )
+    return target
+
+
 def main() -> None:
     python = sys.executable
     cases = []
 
     root_governance = run(
-            "root_governance",
-            [python, "scripts/governance_check.py", str(ROOT), "--require-manifest"],
-        )
+        "root_governance",
+        [python, "scripts/governance_check.py", str(ROOT), "--require-manifest"],
+    )
     require_min_score(root_governance, 90)
     cases.append(root_governance)
 
@@ -225,27 +237,50 @@ def main() -> None:
     )
     cases.append(root_resource)
 
+    tmp_root = ROOT / "tests" / "tmp"
+    complex_example_dir = staged_skill(
+        ROOT / "examples" / "complex-release-orchestrator" / "generated-skill",
+        tmp_root / "complex-release-orchestrator",
+        "release-orchestrator",
+        "Coordinate release readiness, migration risk, stakeholder communication, and release packet generation.",
+    )
+    governed_example_dir = staged_skill(
+        ROOT / "examples" / "governed-incident-command" / "generated-skill",
+        tmp_root / "governed-incident-command",
+        "incident-command-governor",
+        "Build governed incident command packets from alerts, notes, severity findings, and stakeholder communication needs.",
+    )
+    invalid_governance_fixture = ROOT / "tests" / "tmp" / "governance_invalid_manifest"
+    if invalid_governance_fixture.exists():
+        shutil.rmtree(invalid_governance_fixture)
+
+    shutil.copytree(ROOT / "tests" / "fixtures" / "governance_invalid_manifest", invalid_governance_fixture)
+    (invalid_governance_fixture / "SKILL.md").write_text(
+        "---\nname: invalid-governance\ndescription: Invalid governance fixture.\n---\n\n# Invalid Governance\n",
+        encoding="utf-8",
+    )
+
     complex_resource = run(
         "complex_example_resource_boundaries",
-        [python, "scripts/resource_boundary_check.py", str(ROOT / "examples" / "complex-release-orchestrator" / "generated-skill")],
+        [python, "scripts/resource_boundary_check.py", str(complex_example_dir)],
     )
     require_context_targets(complex_resource, 1000, 120.0)
 
     governed_resource = run(
         "governed_example_resource_boundaries",
-        [python, "scripts/resource_boundary_check.py", str(ROOT / "examples" / "governed-incident-command" / "generated-skill")],
+        [python, "scripts/resource_boundary_check.py", str(governed_example_dir)],
     )
     require_context_targets(governed_resource, 1000, 120.0)
 
     cases.extend([
         run(
             "complex_example_governance",
-            [python, "scripts/governance_check.py", str(ROOT / "examples" / "complex-release-orchestrator" / "generated-skill"), "--require-manifest"],
+            [python, "scripts/governance_check.py", str(complex_example_dir), "--require-manifest"],
         ),
         complex_resource,
         run(
             "invalid_governance_manifest",
-            [python, "scripts/governance_check.py", str(ROOT / "tests" / "fixtures" / "governance_invalid_manifest"), "--require-manifest"],
+            [python, "scripts/governance_check.py", str(invalid_governance_fixture), "--require-manifest"],
             expect_ok=False,
             expected_substrings=[
                 "Missing manifest fields",
@@ -258,7 +293,7 @@ def main() -> None:
 
     governed_example = run(
         "governed_example_governance",
-        [python, "scripts/governance_check.py", str(ROOT / "examples" / "governed-incident-command" / "generated-skill"), "--require-manifest"],
+        [python, "scripts/governance_check.py", str(governed_example_dir), "--require-manifest"],
     )
     require_min_score(governed_example, 90)
     cases.insert(4, governed_example)
